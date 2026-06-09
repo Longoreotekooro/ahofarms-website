@@ -1,2 +1,6 @@
-# ahofarms-website
-Aho Farms website — prototype build
+# Aho Farms Website
+
+Prototype build for ahofarms.co.nz
+
+Branch: prototype
+Status: In development
