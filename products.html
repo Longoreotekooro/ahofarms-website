@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products — Aho Farms</title>
+  <meta name="description" content="Aho Farms produces two lines of dried medicinal cannabis flower, grown on Māori freehold land in Raupunga, Hawke's Bay. Available by prescription only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────── */
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --night-soft:  #2f3d3f;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --card-border: rgba(115,168,165,0.15);
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--night);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Typography ────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    /* ─── Navigation ────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.1);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+    .nav-links a.active { color: var(--white); }
+    .nav-cta {
+      background: var(--teal-deep);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── Buttons ───────────────────────────────────────── */
+    .btn {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-teal {
+      background: var(--teal);
+      color: var(--night);
+    }
+    .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+    .btn-teal-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+    .btn-teal-outline:hover { background: rgba(115,168,165,0.08); }
+    .btn-dark-outline {
+      background: transparent;
+      color: var(--teal-light);
+      border: 1px solid rgba(115,168,165,0.4);
+    }
+    .btn-dark-outline:hover { border-color: var(--teal); color: var(--teal-light); }
+
+    /* ─── Sections ──────────────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-header { margin-bottom: 3rem; }
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      font-size: 1rem;
+      color: #5a6e70;
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hero {
+      background: var(--night);
+      padding: 9rem 2rem 5rem;
+    }
+    .hero-inner { max-width: 800px; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .rx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(115,168,165,0.12);
+      border: 1px solid rgba(115,168,165,0.3);
+      color: var(--teal-light);
+      padding: 0.45rem 1rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .rx-badge::before {
+      content: "℞";
+      font-size: 1rem;
+      color: var(--teal);
+    }
+
+    /* ─── Product Cards ─────────────────────────────────── */
+    .products-section { background: var(--white); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .product-card {
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 40px rgba(26,36,38,0.1);
+    }
+    .product-card-image {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+    }
+    .product-card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-card-image img {
+      transform: scale(1.03);
+    }
+    .product-card-cultivar {
+      position: absolute;
+      bottom: 1rem; left: 1rem;
+      background: rgba(26,36,38,0.85);
+      color: var(--teal-light);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+    .product-card-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 300;
+      color: var(--night);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .product-card-meta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--teal-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+    .product-card-desc {
+      font-size: 0.9rem;
+      color: #4a5e60;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .product-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      background: rgba(115,168,165,0.08);
+      border: 1px solid rgba(115,168,165,0.2);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+    }
+    .product-card-footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 1.25rem;
+      margin-top: auto;
+    }
+    .product-card-note {
+      font-size: 0.72rem;
+      color: #8a9e9f;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* ─── QA Testing ────────────────────────────────────── */
+    .qa-section { background: var(--off-white); }
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .qa-card {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.75rem 1.5rem;
+    }
+    .qa-icon {
+      width: 40px; height: 40px;
+      background: rgba(115,168,165,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .qa-icon svg { width: 20px; height: 20px; stroke: var(--teal-deep); }
+    .qa-card h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--night);
+      margin-bottom: 0.4rem;
+    }
+    .qa-card p {
+      font-size: 0.8rem;
+      color: #5a6e70;
+      line-height: 1.55;
+    }
+    .qa-partner {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: #5a6e70;
+    }
+    .qa-partner strong { color: var(--night); }
+    .ianz-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(115,168,165,0.1);
+      border: 1px solid rgba(115,168,165,0.2);
+      color: var(--teal-deep);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── Prescriber Access ─────────────────────────────── */
+    .prescriber-section {
+      background: var(--night);
+      text-align: center;
+    }
+    .prescriber-section h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .prescriber-section p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .prescriber-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Patient Section ───────────────────────────────── */
+    .patient-section { background: var(--white); }
+    .patient-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .patient-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--night);
+    }
+    .patient-info p {
+      font-size: 0.9rem;
+      color: #4a5e60;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .resource-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--night);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .resource-link:hover {
+      border-color: var(--teal);
+      background: rgba(115,168,165,0.04);
+    }
+    .resource-link-label {
+      font-weight: 500;
+      color: var(--night);
+    }
+    .resource-link-url {
+      font-size: 0.75rem;
+      color: var(--teal-deep);
+    }
+    .resource-link-arrow { margin-left: auto; color: var(--teal); font-size: 0.9rem; }
+
+    /* ─── Referral Form ─────────────────────────────────── */
+    .referral-form-wrap {
+      background: var(--off-white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .referral-form-wrap h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .referral-form-wrap > p {
+      font-size: 0.85rem;
+      color: #5a6e70;
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #5a6e70;
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid rgba(115,168,165,0.25);
+      border-radius: 4px;
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--night);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115,168,165,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-checkbox input[type="checkbox"] {
+      width: 16px; height: 16px; margin-top: 2px;
+      accent-color: var(--teal);
+      flex-shrink: 0;
+    }
+    .form-checkbox label {
+      font-size: 0.82rem;
+      color: #4a5e60;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .form-note {
+      font-size: 0.75rem;
+      color: #8a9e9f;
+      margin-top: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer {
+      background: var(--night);
+      border-top: 1px solid rgba(115,168,165,0.1);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand .nav-logo {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-brand p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul li a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal-light); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-disclaimer {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .qa-grid { grid-template-columns: repeat(2, 1fr); }
+      .patient-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--night-mid);
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid rgba(115,168,165,0.1);
+      }
+      .nav-hamburger { display: flex; }
+      .qa-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .prescriber-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <p class="caption">OUR PRODUCTS</p>
+        <h1>Premium medicinal cannabis flower.<br>Available by prescription.</h1>
+        <p>Aho Farms produces two lines of dried medicinal cannabis flower, grown on Māori freehold land in Raupunga, Hawke's Bay. Both products are available to patients through licensed prescribers only.</p>
+        <span class="rx-badge">Prescription Medicine — Not for general sale</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Product Lines ────────────────────────────────── -->
+  <section class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="caption">PRODUCT LINES</p>
+        <h2>Our medicinal flower range</h2>
+        <p>Full product specifications, cannabinoid profiles, and certificates of analysis are available to registered prescribers and pharmacists in the relevant portal.</p>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- Card 1: RĀ -->
+        <article class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://images.unsplash.com/photo-1611095962519-6e44e4998cfc?auto=format&fit=crop&w=600&q=80"
+              alt="RĀ medicinal flower — Aho Farms"
+              loading="lazy"
+            />
+            <span class="product-card-cultivar">Cultivar: Oreo</span>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-name">RĀ</div>
+            <div class="product-card-meta">Outdoor Sun-Grown · Raupunga, Hawke's Bay · Dried Medicinal Cannabis Flower</div>
+            <p class="product-card-desc">
+              RĀ is Aho Farms' flagship outdoor-grown medicinal flower. Cultivated from the Oreo cultivar under natural Hawke's Bay sunlight, it develops a full terpene profile and consistent cannabinoid expression across batches. Named for the sun — Rā in te reo Māori.
+            </p>
+            <div class="product-tags">
+              <span class="product-tag">Outdoor Sun-Grown</span>
+              <span class="product-tag">Dried Flower</span>
+              <span class="product-tag">Prescription Only</span>
+            </div>
+            <div class="product-card-footer">
+              <a href="prescribers.html" class="btn btn-teal">Prescriber Information →</a>
+              <p class="product-card-note">Full product specifications, CoA, and dosing guidance available in the Prescriber Portal</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: SOURCE -->
+        <article class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=600&q=80"
+              alt="SOURCE medicinal flower — Aho Farms"
+              loading="lazy"
+            />
+            <span class="product-card-cultivar">Cultivar: Wake &amp; Cake C30</span>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-name">SOURCE</div>
+            <div class="product-card-meta">Consistent Supply · Dried Medicinal Cannabis Flower</div>
+            <p class="product-card-desc">
+              SOURCE is Aho Farms' consistent-supply medicinal flower. Sourced from the Wake &amp; Cake C30 cultivar, it offers a reliable and well-documented product for patients established on medicinal cannabis therapy. Available alongside RĀ to give prescribers flexibility in product selection.
+            </p>
+            <div class="product-tags">
+              <span class="product-tag">Consistent Supply</span>
+              <span class="product-tag">Dried Flower</span>
+              <span class="product-tag">Prescription Only</span>
+            </div>
+            <div class="product-card-footer">
+              <a href="prescribers.html" class="btn btn-teal">Prescriber Information →</a>
+              <p class="product-card-note">Full product specifications, CoA, and dosing guidance available in the Prescriber Portal</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Quality Assurance ────────────────────────────── -->
+  <section class="qa-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="caption">EVERY BATCH TESTED</p>
+        <h2>What goes into every Certificate of Analysis</h2>
+        <p>Every batch of Aho Farms medicinal flower is independently tested by Hill Labs before supply to licensed prescribers and pharmacies.</p>
+      </div>
+
+      <div class="qa-grid">
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <h4>Cannabinoid Profile</h4>
+          <p>Quantification of key cannabinoids across the full batch spectrum for prescriber reference.</p>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+            </svg>
+          </div>
+          <h4>Terpene Analysis</h4>
+          <p>Identification and quantification of primary and secondary terpenes unique to each batch and cultivar.</p>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h4>Heavy Metals</h4>
+          <p>Screening for lead, mercury, arsenic, cadmium, and other regulated heavy metal contaminants.</p>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h4>Pesticide Residues</h4>
+          <p>Comprehensive multi-residue panel testing against New Zealand and international MRL standards.</p>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h4>Microbial Testing</h4>
+          <p>Testing for total aerobic count, E. coli, Salmonella, yeasts, moulds, and other microbial contaminants.</p>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h4>Moisture &amp; Foreign Matter</h4>
+          <p>Water activity and moisture content measurement, alongside physical inspection for foreign matter.</p>
+        </div>
+
+      </div>
+
+      <div class="qa-partner">
+        <span>Testing partner: <strong>Hill Labs, Hamilton</strong></span>
+        <span class="ianz-badge">IANZ Accredited</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Prescriber Access ─────────────────────────────── -->
+  <section class="prescriber-section">
+    <div class="container" style="text-align:center;">
+      <h2>Are you a prescriber or pharmacist?</h2>
+      <p>Full product specifications, batch certificates of analysis, dosing guidance, and the prescribing pathway are available in the Aho Farms Prescriber Portal.</p>
+      <div class="prescriber-btns">
+        <a href="prescribers.html" class="btn btn-teal">Access Prescriber Portal →</a>
+        <a href="pharmacies.html" class="btn btn-dark-outline">Access Pharmacy Portal →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Patient Section ───────────────────────────────── -->
+  <section class="patient-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="caption">FOR PATIENTS</p>
+        <h2>Talk to your doctor about medicinal cannabis</h2>
+      </div>
+
+      <div class="patient-grid">
+
+        <div class="patient-info">
+          <p>If you are a patient interested in medicinal cannabis, the right first step is a conversation with your doctor or a specialist cannabis clinic. Aho Farms products are prescription medicines — they are not available for purchase without a valid prescription from a registered prescriber.</p>
+          <p>The following organisations can help you access information and connect with prescribers experienced in medicinal cannabis.</p>
+
+          <div class="resource-links">
+            <a href="https://cannabisclinic.co.nz" target="_blank" rel="noopener noreferrer" class="resource-link">
+              <div>
+                <div class="resource-link-label">Cannabis Clinic NZ</div>
+                <div class="resource-link-url">cannabisclinic.co.nz</div>
+              </div>
+              <span class="resource-link-arrow">↗</span>
+            </a>
+            <a href="https://cannaplus.co.nz" target="_blank" rel="noopener noreferrer" class="resource-link">
+              <div>
+                <div class="resource-link-label">CannaPlus+</div>
+                <div class="resource-link-url">cannaplus.co.nz</div>
+              </div>
+              <span class="resource-link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="referral-form-wrap">
+          <h3>Refer your doctor to Aho Farms</h3>
+          <p>If your doctor is open to learning more about medicinal cannabis, submit their details below and we will send them information about our prescriber portal. (With your doctor's knowledge and consent.)</p>
+
+          <form id="referralForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="yourName">Your Name</label>
+                <input type="text" id="yourName" name="yourName" placeholder="Jane Smith" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="yourEmail">Your Email</label>
+                <input type="email" id="yourEmail" name="yourEmail" placeholder="jane@email.com" autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="doctorName">Doctor's Name</label>
+                <input type="text" id="doctorName" name="doctorName" placeholder="Dr. A. Patel" />
+              </div>
+              <div class="form-group">
+                <label for="doctorPractice">Doctor's Practice Name</label>
+                <input type="text" id="doctorPractice" name="doctorPractice" placeholder="Hawke's Bay Medical Centre" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="doctorContact">Doctor's Email (or Phone)</label>
+              <input type="text" id="doctorContact" name="doctorContact" placeholder="dr.patel@practice.co.nz or 027 000 0000" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message (optional)</label>
+              <textarea id="message" name="message" placeholder="Any additional context…"></textarea>
+            </div>
+            <div class="form-checkbox">
+              <input type="checkbox" id="consent" name="consent" required />
+              <label for="consent">I have my doctor's knowledge and consent to share their contact details</label>
+            </div>
+            <button type="submit" class="btn btn-teal" style="width:100%;">Submit Referral</button>
+          </form>
+
+          <p class="form-note">We will contact the doctor directly with prescriber information. We will not contact you as a patient about products.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────── -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">AHO <span>FARMS</span></span>
+        <p>Licensed medicinal cannabis cultivator. Grown on Māori freehold land in Raupunga, Hawke's Bay, Aotearoa New Zealand.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="cultivation.html">Cultivation</a></li>
+          <li><a href="kaupapa.html">Our Kaupapa</a></li>
+          <li><a href="news.html">News</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="products.html">Overview</a></li>
+          <li><a href="prescribers.html">Prescriber Portal</a></li>
+          <li><a href="pharmacies.html">Pharmacy Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="contact.html">Get in Touch</a></li>
+          <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
+          <li><a href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        Aho Farms products are prescription medicines regulated under the Misuse of Drugs Act 1975 and the Medicines Act 1981. Products are not available for general sale. All product information on this site is intended for licensed healthcare professionals only. This website does not constitute medical advice. If you are a patient, please consult your healthcare provider.
+      </p>
+      <p class="footer-copy">© 2026 Aho Farms Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Form submit
+    document.getElementById('referralForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const consent = document.getElementById('consent').checked;
+      if (!consent) {
+        alert('Please confirm you have your doctor\'s consent before submitting.');
+        return;
+      }
+      this.innerHTML = '<p style="color:var(--teal-deep);font-size:0.9rem;padding:1rem 0;">Thank you — your referral has been received. We will be in touch with the doctor directly.</p>';
+    });
+  </script>
+
+</body>
+</html>
