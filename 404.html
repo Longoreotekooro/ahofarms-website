@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Aho Farms</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --night-soft:  #2f3d3f;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --white:       #ffffff;
+      --card-border: rgba(115,168,165,0.15);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--night);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top logo bar */
+    .top-bar {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(115,168,165,0.1);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--white); text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    /* 404 number */
+    .error-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(7rem, 20vw, 14rem);
+      font-weight: 300;
+      color: rgba(115,168,165,0.18);
+      line-height: 1;
+      margin-bottom: -0.25em;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    /* Divider line */
+    .error-divider {
+      width: 60px; height: 1px;
+      background: rgba(115,168,165,0.3);
+      margin: 1.5rem auto;
+    }
+
+    .error-heading {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+    .error-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 400px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* Nav Cards */
+    .nav-cards {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .nav-card {
+      background: var(--night-mid);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      min-width: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .nav-card:hover {
+      border-color: rgba(115,168,165,0.4);
+      background: var(--night-soft);
+      transform: translateY(-2px);
+    }
+    .nav-card-icon {
+      width: 36px; height: 36px;
+      background: rgba(115,168,165,0.1);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-card-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--teal);
+      fill: none; stroke-width: 1.75;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .nav-card-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      white-space: nowrap;
+    }
+    .nav-card-sub {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+    }
+
+    /* Back button */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--teal-light);
+      background: transparent;
+      border: 1px solid rgba(115,168,165,0.3);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-back:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* Footer disclaimer line */
+    .footer-line {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(115,168,165,0.08);
+      text-align: center;
+    }
+    .footer-line p {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.55;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) {
+      .nav-cards { gap: 0.75rem; }
+      .nav-card { min-width: 120px; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- Logo -->
+    <div class="top-bar">
+      <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+    </div>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="error-number" aria-hidden="true">404</div>
+      <div class="error-divider"></div>
+      <h1 class="error-heading">This page doesn't exist</h1>
+      <p class="error-sub">The page you're looking for has moved or doesn't exist. Try one of these:</p>
+
+      <div class="nav-cards">
+        <a href="index.html" class="nav-card">
+          <div class="nav-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="nav-card-label">Homepage</span>
+          <span class="nav-card-sub">ahofarms.co.nz</span>
+        </a>
+
+        <a href="prescribers.html" class="nav-card">
+          <div class="nav-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="nav-card-label">Prescribers</span>
+          <span class="nav-card-sub">Prescriber portal</span>
+        </a>
+
+        <a href="pharmacies.html" class="nav-card">
+          <div class="nav-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v6M9 15h6"/></svg>
+          </div>
+          <span class="nav-card-label">Pharmacies</span>
+          <span class="nav-card-sub">Pharmacy portal</span>
+        </a>
+
+        <a href="contact.html" class="nav-card">
+          <div class="nav-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="nav-card-label">Contact</span>
+          <span class="nav-card-sub">Get in touch</span>
+        </a>
+      </div>
+
+      <button class="btn-back" onclick="history.back()">← Go Back</button>
+    </main>
+
+    <!-- Footer disclaimer only -->
+    <div class="footer-line">
+      <p>Aho Farms products are prescription medicines. Not for general sale. © 2026 Aho Farms Ltd.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
