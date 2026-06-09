@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Portal — Aho Farms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --night-soft:  #2f3d3f;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --card-border: rgba(115,168,165,0.15);
+      --card-border-strong: rgba(115,168,165,0.30);
+      --sidebar-w:   260px;
+      --header-h:    64px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--night);
+      background: var(--off-white);
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.15;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── FIXED HEADER ── */
+    .app-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--header-h);
+      background: var(--night);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      gap: 20px;
+    }
+
+    .header-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .header-logo span { color: var(--teal); }
+
+    .header-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--card-border-strong);
+    }
+
+    .portal-badge {
+      background: rgba(115,168,165,0.12);
+      border: 1px solid var(--card-border-strong);
+      color: var(--teal-light);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .header-spacer { flex: 1; }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-user-name {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      white-space: nowrap;
+    }
+
+    .header-user-name strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid var(--card-border-strong);
+      color: rgba(255,255,255,0.60);
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-logout:hover {
+      border-color: var(--teal);
+      color: var(--teal-light);
+    }
+
+    /* ── APP LAYOUT ── */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: var(--header-h);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--night-mid);
+      border-right: 1px solid var(--card-border);
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav {
+      padding: 24px 0 24px;
+      flex: 1;
+    }
+
+    .sidebar-nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      padding: 0 20px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+
+    .sidebar-nav ul {
+      list-style: none;
+    }
+
+    .sidebar-nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.60);
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-nav ul li a:hover {
+      background: rgba(115,168,165,0.06);
+      color: var(--teal-light);
+    }
+
+    .sidebar-nav ul li a.active {
+      background: rgba(115,168,165,0.10);
+      color: var(--teal-light);
+      border-left-color: var(--teal);
+    }
+
+    .sidebar-nav ul li a .nav-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .sidebar-footer p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.30);
+      line-height: 1.5;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 40px 48px;
+      min-width: 0;
+    }
+
+    /* ── SECTION SWITCHING ── */
+    .portal-section { display: none; }
+    .portal-section.active { display: block; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      margin-bottom: 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(26,36,38,0.10);
+    }
+
+    .page-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 8px;
+    }
+
+    .page-header h2 {
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 600;
+      color: var(--night);
+    }
+
+    .page-header p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: rgba(26,36,38,0.60);
+      max-width: 640px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 28px 28px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--night);
+      margin-bottom: 16px;
+    }
+
+    /* ── STATUS GRID ── */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .status-card {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 24px 20px;
+    }
+
+    .status-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(26,36,38,0.50);
+      margin-bottom: 8px;
+    }
+
+    .status-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--night);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3dba87;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── QUICK LINKS ── */
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .quick-link {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      text-align: left;
+    }
+
+    .quick-link:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 12px rgba(115,168,165,0.10);
+    }
+
+    .quick-link-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--night);
+      margin-bottom: 4px;
+    }
+
+    .quick-link-desc {
+      font-size: 12px;
+      color: rgba(26,36,38,0.55);
+      line-height: 1.4;
+    }
+
+    /* ── TABLES ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    table th {
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(26,36,38,0.50);
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(26,36,38,0.08);
+      background: var(--off-white);
+    }
+
+    table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(26,36,38,0.06);
+      color: var(--night);
+      line-height: 1.5;
+    }
+
+    table tr:last-child td { border-bottom: none; }
+
+    table td:first-child {
+      font-weight: 500;
+      color: rgba(26,36,38,0.70);
+      font-size: 13px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .tag-green {
+      background: rgba(61,186,135,0.10);
+      color: #1e8a5e;
+    }
+
+    .tag-teal {
+      background: rgba(115,168,165,0.12);
+      color: var(--teal-deep);
+    }
+
+    .tag-amber {
+      background: rgba(139,111,71,0.12);
+      color: var(--soil);
+    }
+
+    /* ── PRODUCT SPEC CARD ── */
+    .product-spec {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .product-spec-header {
+      background: var(--night);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-spec-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    .product-spec-header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 2px;
+    }
+
+    .product-spec-body {
+      padding: 0;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .spec-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(26,36,38,0.06);
+      border-right: 1px solid rgba(26,36,38,0.06);
+    }
+
+    .spec-item:nth-child(even) { border-right: none; }
+    .spec-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .spec-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(26,36,38,0.45);
+      margin-bottom: 4px;
+    }
+
+    .spec-item-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--night);
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 24px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(26,36,38,0.06);
+      position: relative;
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: rgba(115,168,165,0.10);
+      border: 1px solid var(--card-border-strong);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .step-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--night);
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: rgba(26,36,38,0.65);
+      line-height: 1.6;
+    }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: rgba(115,168,165,0.06);
+      border: 1px solid var(--card-border-strong);
+      border-radius: 4px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: rgba(26,36,38,0.72);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .info-box strong {
+      color: var(--teal-deep);
+    }
+
+    .warning-box {
+      background: rgba(139,111,71,0.06);
+      border: 1px solid rgba(139,111,71,0.20);
+      border-left: 3px solid var(--soil);
+      border-radius: 4px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: rgba(26,36,38,0.70);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* ── CONTACT CARDS ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 24px 22px;
+    }
+
+    .contact-card-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(115,168,165,0.10);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .contact-card-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--teal); fill: none; stroke-width: 1.5;
+    }
+
+    .contact-card h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(26,36,38,0.50);
+      margin-bottom: 6px;
+    }
+
+    .contact-card a {
+      font-size: 14px;
+      color: var(--teal-deep);
+      font-weight: 500;
+    }
+
+    .contact-card a:hover { color: var(--teal); }
+
+    /* ── FORM ── */
+    .portal-form { max-width: 640px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-row.single { grid-template-columns: 1fr; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(26,36,38,0.70);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 13px;
+      background: var(--white);
+      border: 1px solid rgba(26,36,38,0.18);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--night);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115,168,165,0.12);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal);
+      color: var(--night);
+      padding: 11px 24px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--teal-light); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-outline:hover { background: rgba(115,168,165,0.08); }
+
+    .btn-sm { padding: 8px 16px; font-size: 12px; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      margin: 32px 0;
+      border: none;
+      border-top: 1px solid rgba(26,36,38,0.08);
+    }
+
+    /* ── PRICING LIST ── */
+    .pricing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pricing-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(26,36,38,0.06);
+    }
+
+    .pricing-item:last-child { border-bottom: none; }
+
+    .pricing-item-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(26,36,38,0.60);
+      min-width: 200px;
+      flex-shrink: 0;
+    }
+
+    .pricing-item-value {
+      font-size: 13px;
+      color: var(--night);
+      line-height: 1.5;
+    }
+
+    /* ── COUNTRY NOTE ── */
+    .country-note {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .country-note h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 6px;
+    }
+
+    .country-note p {
+      font-size: 13px;
+      color: rgba(26,36,38,0.70);
+      line-height: 1.6;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .status-grid { grid-template-columns: repeat(2, 1fr); }
+      .quick-links { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .main-content { margin-left: 0; padding: 24px 20px; }
+      .sidebar { display: none; }
+      .status-grid { grid-template-columns: repeat(2, 1fr); }
+      .quick-links { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .spec-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── FIXED HEADER ── -->
+  <header class="app-header" role="banner">
+    <a href="export-partners.html" class="header-logo">Aho <span>Farms</span></a>
+    <div class="header-divider" aria-hidden="true"></div>
+    <span class="portal-badge">Partner Portal</span>
+    <div class="header-spacer"></div>
+    <div class="header-user">
+      <span class="header-user-name">Welcome, <strong>Health House International</strong></span>
+      <button class="btn-logout" type="button">Log Out</button>
+    </div>
+  </header>
+
+  <!-- ── APP LAYOUT ── -->
+  <div class="app-layout">
+
+    <!-- ── SIDEBAR ── -->
+    <nav class="sidebar" role="navigation" aria-label="Portal navigation">
+      <div class="sidebar-nav">
+        <p class="sidebar-nav-label">Navigation</p>
+        <ul>
+          <li>
+            <a href="#" class="active" onclick="showSection('overview', this); return false;" data-section="overview">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Overview
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('capability', this); return false;" data-section="capability">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              Capability Statement
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('compliance', this); return false;" data-section="compliance">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 2l8 4v6c0 5-3.8 9.3-8 10C3.8 21.3 4 17 4 12V6z"/></svg>
+              Compliance &amp; Licensing
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('products', this); return false;" data-section="products">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              Product Specifications
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('supply', this); return false;" data-section="supply">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Supply Volumes &amp; Schedule
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('pricing', this); return false;" data-section="pricing">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Pricing &amp; Terms
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('onboarding', this); return false;" data-section="onboarding">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Partner Onboarding
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('contact', this); return false;" data-section="contact">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <p>Aho Farms Limited<br>Licensed Medicinal Cannabis Cultivator<br>Raupunga, Hawke's Bay, NZ</p>
+      </div>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="main-content" role="main">
+
+      <!-- ── SECTION 1: OVERVIEW ── -->
+      <section id="sec-overview" class="portal-section active" aria-labelledby="heading-overview">
+        <div class="page-header">
+          <p class="page-caption">Partner Portal</p>
+          <h2 id="heading-overview">Welcome to the Aho Farms Partner Portal</h2>
+          <p>This portal contains the information you need to evaluate Aho Farms as a supply partner and progress through our partner onboarding process.</p>
+        </div>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <div class="status-label">Licence Status</div>
+            <div class="status-value"><span class="status-dot" aria-hidden="true"></span>Active</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">Export Ready</div>
+            <div class="status-value"><span class="status-dot" aria-hidden="true"></span>Yes</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">Current Products</div>
+            <div class="status-value">2</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">Testing</div>
+            <div class="status-value" style="font-size:18px;">IANZ Accredited</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Portal Sections</h3>
+          <div class="quick-links">
+            <button class="quick-link" onclick="showSection('capability', null)">
+              <div class="quick-link-title">Capability Statement</div>
+              <div class="quick-link-desc">Company profile, licences, capacity</div>
+            </button>
+            <button class="quick-link" onclick="showSection('compliance', null)">
+              <div class="quick-link-title">Compliance &amp; Licensing</div>
+              <div class="quick-link-desc">Licence status, import support</div>
+            </button>
+            <button class="quick-link" onclick="showSection('products', null)">
+              <div class="quick-link-title">Product Specifications</div>
+              <div class="quick-link-desc">RĀ and SOURCE product data</div>
+            </button>
+            <button class="quick-link" onclick="showSection('supply', null)">
+              <div class="quick-link-title">Supply &amp; Schedule</div>
+              <div class="quick-link-desc">Availability and forward volumes</div>
+            </button>
+            <button class="quick-link" onclick="showSection('pricing', null)">
+              <div class="quick-link-title">Pricing &amp; Terms</div>
+              <div class="quick-link-desc">Commercial structure</div>
+            </button>
+            <button class="quick-link" onclick="showSection('onboarding', null)">
+              <div class="quick-link-title">Partner Onboarding</div>
+              <div class="quick-link-desc">Step-by-step process</div>
+            </button>
+            <button class="quick-link" onclick="showSection('contact', null)">
+              <div class="quick-link-title">Contact</div>
+              <div class="quick-link-desc">Export team &amp; compliance</div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SECTION 2: CAPABILITY STATEMENT ── -->
+      <section id="sec-capability" class="portal-section" aria-labelledby="heading-capability">
+        <div class="page-header">
+          <p class="page-caption">Capability Statement</p>
+          <h2 id="heading-capability">Company Capability Statement</h2>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Company Overview</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Item</th><th>Detail</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Company</td><td>Aho Farms Limited</td></tr>
+                <tr><td>Registered</td><td>New Zealand</td></tr>
+                <tr><td>Location</td><td>Raupunga, Hawke's Bay, New Zealand</td></tr>
+                <tr><td>Ownership</td><td>Māori-owned and operated</td></tr>
+                <tr><td>Founded</td><td>2020</td></tr>
+                <tr><td>Licences held</td><td>Cultivation Licence (NZ Misuse of Drugs Act 1975)</td></tr>
+                <tr><td>Growing method</td><td>Outdoor sun-grown</td></tr>
+                <tr><td>Site</td><td>Raupunga, Hawke's Bay</td></tr>
+                <tr><td>Production capacity</td><td>Contact for current capacity data</td></tr>
+                <tr><td>Lab testing partner</td><td>Hill Labs, Hamilton (IANZ Accredited)</td></tr>
+                <tr><td>Quality standard</td><td>NZ Medicinal Cannabis Scheme compliant</td></tr>
+                <tr><td>Export capability</td><td><span class="tag tag-green">Yes — export licence held</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Quality Systems</h3>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+            <li style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(26,36,38,0.78);">
+              <span style="color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              Chain of custody documentation from seed to laboratory
+            </li>
+            <li style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(26,36,38,0.78);">
+              <span style="color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              Full batch traceability records maintained
+            </li>
+            <li style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(26,36,38,0.78);">
+              <span style="color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              Certificate of Analysis (CoA) issued for every batch
+            </li>
+            <li style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(26,36,38,0.78);">
+              <span style="color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              Secure storage and handling compliant with NZ Medicinal Cannabis Scheme
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Facility</h3>
+          <p style="font-size:14px;color:rgba(26,36,38,0.70);line-height:1.7;">Outdoor cultivation site located at Raupunga, Hawke's Bay. Secure perimeter and access controls in place. Full compliance infrastructure supporting NZ Medicinal Cannabis Scheme requirements. Hawke's Bay's climate provides consistent, high-quality sun-grown flower with strong cannabinoid profiles.</p>
+        </div>
+      </section>
+
+      <!-- ── SECTION 3: COMPLIANCE & LICENSING ── -->
+      <section id="sec-compliance" class="portal-section" aria-labelledby="heading-compliance">
+        <div class="page-header">
+          <p class="page-caption">Regulatory</p>
+          <h2 id="heading-compliance">Compliance &amp; Licensing</h2>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Licence &amp; Compliance Status</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Document</th><th>Status</th><th>Issuing Authority</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cultivation Licence</td>
+                  <td><span class="tag tag-green">Active</span></td>
+                  <td>NZ Ministry of Health</td>
+                </tr>
+                <tr>
+                  <td>Export Licence</td>
+                  <td><span class="tag tag-green">Active</span></td>
+                  <td>NZ Ministry of Health</td>
+                </tr>
+                <tr>
+                  <td>NZ Medicinal Cannabis Scheme</td>
+                  <td><span class="tag tag-green">Compliant</span></td>
+                  <td>Medsafe</td>
+                </tr>
+                <tr>
+                  <td>UN Convention compliance</td>
+                  <td><span class="tag tag-green">Yes</span></td>
+                  <td>Single Convention on Narcotic Drugs 1961</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Import Permit Support</h3>
+          <p style="font-size:14px;color:rgba(26,36,38,0.70);line-height:1.7;margin-bottom:20px;">We provide full documentation to support your import permit application, including Certificates of Analysis, phytosanitary certificates, and supply agreements. Our compliance team will work directly with your regulatory affairs staff to ensure documentation meets your in-country requirements.</p>
+
+          <div class="country-note">
+            <h4>Australia</h4>
+            <p>TGA import permit required. We provide all documentation required for your TGA import permit application, including product specifications, batch CoAs, and company compliance documentation.</p>
+          </div>
+          <div class="country-note">
+            <h4>United Kingdom</h4>
+            <p>MHRA import licence required. Full batch documentation provided. We can supply product information in formats compatible with UK regulatory requirements.</p>
+          </div>
+          <div class="country-note">
+            <h4>European Union</h4>
+            <p>Country-specific import requirements apply. Germany, Netherlands, and other EU markets each have distinct regulatory pathways. Contact us to discuss requirements specific to your market.</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Compliance Contact:</strong> For documentation requests and regulatory enquiries, contact <a href="mailto:compliance@ahofarms.co.nz" style="color:var(--teal-deep); font-weight:600;">compliance@ahofarms.co.nz</a>
+        </div>
+      </section>
+
+      <!-- ── SECTION 4: PRODUCT SPECIFICATIONS ── -->
+      <section id="sec-products" class="portal-section" aria-labelledby="heading-products">
+        <div class="page-header">
+          <p class="page-caption">Products</p>
+          <h2 id="heading-products">Product Specifications</h2>
+          <p>Export-relevant specifications for current Aho Farms product lines. Contact us for custom pack configurations and labelling requirements.</p>
+        </div>
+
+        <!-- RĀ -->
+        <div class="product-spec">
+          <div class="product-spec-header">
+            <div>
+              <h3>RĀ</h3>
+              <p>High-THC Medicinal Flower — Outdoor Sun-Grown, Hawke's Bay</p>
+            </div>
+            <span class="tag tag-teal">Available</span>
+          </div>
+          <div class="product-spec-body">
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="spec-item-label">Product Name</div>
+                <div class="spec-item-value">RĀ</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Category</div>
+                <div class="spec-item-value">Dried Medicinal Flower</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">THC Content</div>
+                <div class="spec-item-value">High-THC — Batch CoA on request</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">CBD Content</div>
+                <div class="spec-item-value">Low — Batch CoA on request</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Growing Method</div>
+                <div class="spec-item-value">Outdoor sun-grown</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Origin</div>
+                <div class="spec-item-value">Raupunga, Hawke's Bay, NZ</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Testing Laboratory</div>
+                <div class="spec-item-value">Hill Labs, Hamilton (IANZ Accredited)</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Standard Pack</div>
+                <div class="spec-item-value">10g</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Labelling</div>
+                <div class="spec-item-value">Custom export labelling available</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Documentation</div>
+                <div class="spec-item-value">CoA, phytosanitary cert, supply agreement</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Storage</div>
+                <div class="spec-item-value">Cool, dry, light-controlled environment</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Cold Chain</div>
+                <div class="spec-item-value">Cold chain-capable packaging available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOURCE -->
+        <div class="product-spec">
+          <div class="product-spec-header">
+            <div>
+              <h3>SOURCE</h3>
+              <p>Balanced Medicinal Flower — Outdoor Sun-Grown, Hawke's Bay</p>
+            </div>
+            <span class="tag tag-teal">Available</span>
+          </div>
+          <div class="product-spec-body">
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="spec-item-label">Product Name</div>
+                <div class="spec-item-value">SOURCE</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Category</div>
+                <div class="spec-item-value">Dried Medicinal Flower</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">THC Content</div>
+                <div class="spec-item-value">Moderate — Batch CoA on request</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">CBD Content</div>
+                <div class="spec-item-value">Moderate — Batch CoA on request</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Growing Method</div>
+                <div class="spec-item-value">Outdoor sun-grown</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Origin</div>
+                <div class="spec-item-value">Raupunga, Hawke's Bay, NZ</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Testing Laboratory</div>
+                <div class="spec-item-value">Hill Labs, Hamilton (IANZ Accredited)</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Standard Pack</div>
+                <div class="spec-item-value">10g</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Labelling</div>
+                <div class="spec-item-value">Custom export labelling available</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Documentation</div>
+                <div class="spec-item-value">CoA, phytosanitary cert, supply agreement</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Storage</div>
+                <div class="spec-item-value">Cool, dry, light-controlled environment</div>
+              </div>
+              <div class="spec-item">
+                <div class="spec-item-label">Cold Chain</div>
+                <div class="spec-item-value">Cold chain-capable packaging available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Export Packaging:</strong> Products available in standard 10g packs. Custom pack sizes and labelling for export markets — contact us to discuss your requirements.
+        </div>
+      </section>
+
+      <!-- ── SECTION 5: SUPPLY VOLUMES ── -->
+      <section id="sec-supply" class="portal-section" aria-labelledby="heading-supply">
+        <div class="page-header">
+          <p class="page-caption">Supply</p>
+          <h2 id="heading-supply">Supply Volumes &amp; Availability</h2>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Current Availability</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Product</th><th>Batch</th><th>Available Volume</th><th>Harvest</th><th>Expiry</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:700;font-size:15px;">RĀ</td>
+                  <td><span class="tag tag-teal">2026-003</span></td>
+                  <td>Contact for availability</td>
+                  <td>March 2026</td>
+                  <td>December 2027</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;font-size:15px;">SOURCE</td>
+                  <td><span class="tag tag-teal">2026-002</span></td>
+                  <td>Contact for availability</td>
+                  <td>February 2026</td>
+                  <td>November 2027</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Forward Supply</h3>
+          <p style="font-size:14px;color:rgba(26,36,38,0.70);line-height:1.7;margin-bottom:16px;">Next harvest is projected for Q4 2026. We encourage partners to discuss forward supply arrangements ahead of harvest to ensure allocation. Contact us to discuss forward supply agreements and volume commitments.</p>
+          <a href="#" onclick="showSection('contact', null); return false;" class="btn btn-sm">Discuss Forward Supply</a>
+        </div>
+
+        <div class="info-box">
+          <strong>Volume Commitments:</strong> We prioritise partners with annual volume commitments. Partners with confirmed purchase agreements receive priority allocation from each harvest. Contact our export team to discuss annual volumes and supply planning.
+        </div>
+      </section>
+
+      <!-- ── SECTION 6: PRICING ── -->
+      <section id="sec-pricing" class="portal-section" aria-labelledby="heading-pricing">
+        <div class="page-header">
+          <p class="page-caption">Commercial</p>
+          <h2 id="heading-pricing">Pricing &amp; Commercial Terms</h2>
+        </div>
+
+        <div class="warning-box">
+          Pricing information is confidential and not for distribution beyond your organisation.
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Pricing Structure Overview</h3>
+          <div class="pricing-list">
+            <div class="pricing-item">
+              <div class="pricing-item-label">Pricing basis</div>
+              <div class="pricing-item-value">Ex-works pricing available on application. Contact our export team for a formal pricing proposal.</div>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-item-label">Volume discounts</div>
+              <div class="pricing-item-value">Available for partners with annual volume commitments. Tiered pricing structure applies.</div>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-item-label">Incoterms</div>
+              <div class="pricing-item-value">EXW (Ex-Works) and FOB (Free on Board) available. Discuss with our export team.</div>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-item-label">Currency</div>
+              <div class="pricing-item-value">NZD, USD, and AUD available. Currency preference to be confirmed in supply agreement.</div>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-item-label">Payment terms</div>
+              <div class="pricing-item-value">Telegraphic transfer (TT) in advance for new partners. Credit terms negotiable for established partners with trading history.</div>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-item-label">Minimum order</div>
+              <div class="pricing-item-value">Contact for current minimum order quantities. Subject to change based on harvest volumes.</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" onclick="showSection('contact', null); return false;" class="btn">Request Pricing</a>
+      </section>
+
+      <!-- ── SECTION 7: ONBOARDING ── -->
+      <section id="sec-onboarding" class="portal-section" aria-labelledby="heading-onboarding">
+        <div class="page-header">
+          <p class="page-caption">Process</p>
+          <h2 id="heading-onboarding">Partner Onboarding Process</h2>
+          <p>Typical timeline: 4–8 weeks from initial enquiry to first order for new partners.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <div class="steps">
+            <div class="step">
+              <div class="step-num" aria-hidden="true">1</div>
+              <div class="step-content">
+                <h4>Initial Enquiry</h4>
+                <p>Submit the partner interest form on our website. We review all enquiries within 3 business days and respond to qualifying partners with next steps.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">2</div>
+              <div class="step-content">
+                <h4>Discovery Call</h4>
+                <p>30-minute call with our export team to discuss your market, regulatory environment, volume requirements, and distribution capability.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">3</div>
+              <div class="step-content">
+                <h4>Documentation Exchange</h4>
+                <p><strong>You provide:</strong> Company registration, import licence or application, regulatory approval in your market.<br>
+                <strong>We provide:</strong> Capability statement, product specifications, batch CoAs, full compliance documentation.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">4</div>
+              <div class="step-content">
+                <h4>Commercial Terms</h4>
+                <p>Pricing proposal issued. Commercial terms discussed and agreed, including volumes, incoterms, currency, and payment structure.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">5</div>
+              <div class="step-content">
+                <h4>Supply Agreement</h4>
+                <p>Formal supply agreement signed by both parties. Agreement covers volumes, pricing, delivery terms, documentation obligations, and compliance requirements.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">6</div>
+              <div class="step-content">
+                <h4>First Order</h4>
+                <p>Pilot order placed and fulfilled with full documentation support. Your import permit, phytosanitary certificates, and CoAs provided in advance of shipment.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num" aria-hidden="true">7</div>
+              <div class="step-content">
+                <h4>Ongoing Supply</h4>
+                <p>Regular orders under your supply agreement. Advance planning for each harvest. Dedicated export contact for your account.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Ready to start?</strong> If you haven't already submitted a partner enquiry, visit <a href="export-partners.html#register" style="color:var(--teal-deep);font-weight:600;">our partner registration page</a> to begin the process.
+        </div>
+      </section>
+
+      <!-- ── SECTION 8: CONTACT ── -->
+      <section id="sec-contact" class="portal-section" aria-labelledby="heading-contact">
+        <div class="page-header">
+          <p class="page-caption">Get in Touch</p>
+          <h2 id="heading-contact">Export &amp; Partnership Enquiries</h2>
+        </div>
+
+        <div class="contact-grid" style="margin-bottom:32px;">
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4>Export Team</h4>
+            <a href="mailto:partners@ahofarms.co.nz">partners@ahofarms.co.nz</a>
+            <p style="font-size:12px;color:rgba(26,36,38,0.50);margin-top:4px;line-height:1.5;">Commercial enquiries, pricing, supply agreements</p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 2l8 4v6c0 5-3.8 9.3-8 10C3.8 21.3 4 17 4 12V6z"/></svg>
+            </div>
+            <h4>Compliance</h4>
+            <a href="mailto:compliance@ahofarms.co.nz">compliance@ahofarms.co.nz</a>
+            <p style="font-size:12px;color:rgba(26,36,38,0.50);margin-top:4px;line-height:1.5;">Import permit support, regulatory documentation</p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h4>General</h4>
+            <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>
+            <p style="font-size:12px;color:rgba(26,36,38,0.50);margin-top:4px;line-height:1.5;">General enquiries and all other matters</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:20px;">Send a Message</h3>
+          <form class="portal-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-name">Your Name</label>
+                <input type="text" id="c-name" placeholder="Full name" />
+              </div>
+              <div class="form-group">
+                <label for="c-email">Email Address</label>
+                <input type="email" id="c-email" placeholder="you@company.com" />
+              </div>
+            </div>
+            <div class="form-row single">
+              <div class="form-group">
+                <label for="c-subject">Subject</label>
+                <input type="text" id="c-subject" placeholder="e.g. Pricing enquiry for Australia market" />
+              </div>
+            </div>
+            <div class="form-row single" style="margin-bottom:20px;">
+              <div class="form-group">
+                <label for="c-message">Message</label>
+                <textarea id="c-message" placeholder="Your message…"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    function showSection(name, clickedLink) {
+      // Hide all sections
+      document.querySelectorAll('.portal-section').forEach(s => s.classList.remove('active'));
+      // Show target
+      var target = document.getElementById('sec-' + name);
+      if (target) target.classList.add('active');
+
+      // Update sidebar active state
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      if (clickedLink) {
+        clickedLink.classList.add('active');
+      } else {
+        var link = document.querySelector('.sidebar-nav a[data-section="' + name + '"]');
+        if (link) link.classList.add('active');
+      }
+
+      // Scroll main content to top
+      document.querySelector('.main-content').scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+</body>
+</html>
