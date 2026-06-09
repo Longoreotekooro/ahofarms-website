@@ -1,6 +1,11 @@
-# Aho Farms Website
+# Aho Farms Website — Prototype
 
-Prototype build for ahofarms.co.nz
+**Status:** In review  
+**Branch:** main  
+**Preview:** Download `index.html` and open in browser, or use GitHub Pages.
 
-Branch: prototype
-Status: In development
+## Pages Built
+- [x] Homepage (`index.html`) — prototype for review
+
+## Review Notes
+Open `index.html` in any browser. No server required — self-contained file.
