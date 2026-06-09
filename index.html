@@ -3,384 +3,246 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aho Farms | Medicinal Cannabis — Hawke's Bay, New Zealand</title>
-<meta name="description" content="Māori-led medicinal cannabis cultivation, supply, and export from Hawke's Bay, New Zealand. Licensed grower of premium medicinal flower.">
+<title>Aho Farms | Licensed Medicinal Cannabis Cultivator — New Zealand</title>
+<meta name="description" content="Aho Farms is a Māori-led medicinal cannabis cultivator based in Raupunga, Hawke's Bay, New Zealand. Premium medicinal flower for prescribers, pharmacies, and export partners.">
+<meta property="og:title" content="Aho Farms | Licensed Medicinal Cannabis Cultivator, New Zealand">
+<meta property="og:description" content="Grown for good in New Zealand. Māori-led medicinal cannabis cultivation from Hawke's Bay.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
 <style>
 /* ============================================================
-   AHO FARMS — DESIGN SYSTEM
-   Brand: #73a8a5 teal primary, #1a2426 night, #ffffff white
-   Fonts: Cormorant Garamond (headings) + Inter (body)
+   AHO FARMS — DESIGN SYSTEM v2
+   Updated: June 2026
+   Changes: New hero copy, te reo integration, darker confidence,
+   latitude story, CFU differentiator, GSAP animations,
+   bilingual headlines, community impact on homepage
    ============================================================ */
 
 :root {
-  --teal-primary:   #73a8a5;
-  --teal-light:     #a2c4c3;
-  --teal-deep:      #4a7a78;
-  --teal-deeper:    #2d5250;
-  --soil:           #8b6f47;
-  --night:          #1a2426;
-  --night-mid:      #253032;
-  --night-soft:     #2f3d3f;
-  --white:          #ffffff;
-  --off-white:      #f4f6f6; /* teal-tinted, not cream */
-  --muted-text:     #6b8082;
-  --border:         rgba(115,168,165,0.15);
-  --border-strong:  rgba(115,168,165,0.3);
+  --teal-primary:  #73a8a5;
+  --teal-light:    #a2c4c3;
+  --teal-deep:     #4a7a78;
+  --teal-deeper:   #2d5250;
+  --soil:          #8b6f47;
+  --soil-light:    #a88660;
+  --night:         #111918;
+  --night-mid:     #1c2826;
+  --night-soft:    #253632;
+  --night-card:    #1e2e2c;
+  --white:         #ffffff;
+  --off-white:     #f3f6f5;
+  --muted:         #637470;
+  --border:        rgba(115,168,165,0.12);
+  --border-strong: rgba(115,168,165,0.28);
+  --gold:          #c9a55a;
 
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Inter', system-ui, sans-serif;
 
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-5: 48px;
-  --space-6: 64px;
-  --space-7: 96px;
-  --space-8: 128px;
-
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --max-width: 1280px;
-  --text-width: 720px;
+  --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+  --sp-5: 48px; --sp-6: 64px; --sp-7: 96px; --sp-8: 128px;
+  --radius: 4px; --radius-md: 8px;
+  --max: 1280px; --text-max: 680px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--night);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
-
-img { display: block; max-width: 100%; height: auto; }
-
+img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 
 /* ============================================================
    TYPOGRAPHY
    ============================================================ */
-
-h1, h2, h3, h4 {
+h1,h2,h3,h4 {
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
-
 .display {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
   font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
 }
+h1 { font-size: clamp(2.5rem, 4.5vw, 4rem); }
+h2 { font-size: clamp(2rem, 3vw, 3rem); }
+h3 { font-size: clamp(1.4rem, 2vw, 1.9rem); }
+h4 { font-size: 1.15rem; font-weight: 500; }
 
-h1 { font-size: clamp(2.4rem, 4vw, 3.5rem); }
-h2 { font-size: clamp(2rem, 3vw, 2.8rem); }
-h3 { font-size: clamp(1.4rem, 2vw, 1.8rem); }
-h4 { font-size: 1.2rem; }
-
-.lead {
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: var(--muted-text);
-  max-width: 56ch;
+/* Te reo Māori headline — above English, lighter colour, slightly smaller */
+.te-reo {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  color: var(--teal-light);
+  letter-spacing: -0.01em;
+  display: block;
+  margin-bottom: var(--sp-2);
+  opacity: 0.85;
 }
 
 .caption {
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--teal-primary);
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+.lead {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--muted);
 }
 
 /* ============================================================
-   LAYOUT UTILITIES
+   LAYOUT
    ============================================================ */
-
 .container {
   width: 100%;
-  max-width: var(--max-width);
+  max-width: var(--max);
   margin: 0 auto;
-  padding: 0 var(--space-4);
+  padding: 0 var(--sp-4);
 }
-
-.section {
-  padding: var(--space-7) 0;
-}
-
-.section--dark {
-  background: var(--night);
-  color: var(--white);
-}
-
-.section--mid {
-  background: var(--night-mid);
-  color: var(--white);
-}
-
-.section--teal {
-  background: var(--teal-deeper);
-  color: var(--white);
-}
-
-.section--off-white {
-  background: var(--off-white);
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-3);
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-}
+.section { padding: var(--sp-7) 0; }
+.section--dark  { background: var(--night); color: var(--white); }
+.section--mid   { background: var(--night-mid); color: var(--white); }
+.section--off   { background: var(--off-white); }
 
 /* ============================================================
    BUTTONS
    ============================================================ */
-
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 8px;
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 14px 28px;
-  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  padding: 13px 26px;
+  border-radius: var(--radius);
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
-
-.btn-primary {
-  background: var(--teal-primary);
-  color: var(--white);
-  border-color: var(--teal-primary);
-}
-.btn-primary:hover {
-  background: var(--teal-deep);
-  border-color: var(--teal-deep);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--white);
-  border-color: rgba(255,255,255,0.4);
-}
-.btn-outline:hover {
-  border-color: rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.06);
-}
-
-.btn-outline-dark {
-  background: transparent;
-  color: var(--teal-primary);
-  border-color: var(--teal-primary);
-}
-.btn-outline-dark:hover {
-  background: var(--teal-primary);
-  color: var(--white);
-}
+.btn-primary { background: var(--teal-primary); color: var(--white); border-color: var(--teal-primary); }
+.btn-primary:hover { background: var(--teal-deep); border-color: var(--teal-deep); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.35); }
+.btn-outline:hover { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
+.btn-outline-teal { background: transparent; color: var(--teal-primary); border-color: var(--teal-primary); }
+.btn-outline-teal:hover { background: var(--teal-primary); color: var(--white); }
+.btn-ghost { background: transparent; color: rgba(255,255,255,0.5); border: none; padding: 13px 0; }
+.btn-ghost:hover { color: var(--white); }
 
 /* ============================================================
-   AUDIENCE GATE OVERLAY
+   AUDIENCE GATE
    ============================================================ */
-
-.gate-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(26,36,38,0.96);
-  backdrop-filter: blur(8px);
+.gate {
+  position: fixed; inset: 0;
+  background: rgba(17,25,24,0.97);
+  backdrop-filter: blur(12px);
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4);
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--sp-4);
+  transition: opacity 0.35s ease;
 }
-
-.gate-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.gate-card {
+.gate.hidden { opacity: 0; pointer-events: none; }
+.gate-box {
   background: var(--night-soft);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
-  padding: var(--space-6) var(--space-6);
-  max-width: 540px;
-  width: 100%;
+  padding: var(--sp-6);
+  max-width: 500px; width: 100%;
   text-align: center;
 }
-
-.gate-card .caption {
-  margin-bottom: var(--space-3);
-  display: block;
-}
-
-.gate-card h2 {
-  color: var(--white);
-  margin-bottom: var(--space-2);
-  font-size: 2rem;
-}
-
-.gate-card p {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  margin-bottom: var(--space-5);
-  max-width: 42ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gate-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.gate-btn-yes {
-  width: 100%;
-  background: var(--teal-primary);
-  color: var(--white);
-  border: 1.5px solid var(--teal-primary);
-  border-radius: var(--radius-sm);
-  padding: 16px 28px;
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.18s ease;
-  text-align: center;
-}
-.gate-btn-yes:hover { background: var(--teal-deep); }
-
-.gate-btn-no {
-  width: 100%;
-  background: transparent;
-  color: rgba(255,255,255,0.45);
-  border: none;
-  padding: 10px;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  cursor: pointer;
-  transition: color 0.18s ease;
-}
-.gate-btn-no:hover { color: rgba(255,255,255,0.7); }
-
 .gate-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-5);
-}
-
-.gate-logo-mark {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  color: var(--teal-light);
+  letter-spacing: 0.12em;
+  color: var(--white);
+  margin-bottom: var(--sp-5);
 }
+.gate-logo span { color: var(--teal-light); }
+.gate-box h2 { color: var(--white); font-size: 1.8rem; margin-bottom: var(--sp-2); }
+.gate-box p { color: rgba(255,255,255,0.55); font-size: 0.9375rem; line-height: 1.7; margin-bottom: var(--sp-5); }
+.gate-yes {
+  width: 100%; padding: 16px;
+  background: var(--teal-primary); color: var(--white);
+  border: 1.5px solid var(--teal-primary); border-radius: var(--radius);
+  font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500;
+  cursor: pointer; transition: background 0.2s; margin-bottom: var(--sp-2);
+}
+.gate-yes:hover { background: var(--teal-deep); }
+.gate-no {
+  width: 100%; padding: 10px;
+  background: transparent; color: rgba(255,255,255,0.35);
+  border: none; font-family: var(--font-body); font-size: 0.8125rem;
+  cursor: pointer; transition: color 0.2s;
+}
+.gate-no:hover { color: rgba(255,255,255,0.65); }
 
 /* ============================================================
-   NAVIGATION
+   NAV
    ============================================================ */
-
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 0 var(--space-4);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; padding: 0 var(--sp-4);
+  transition: background 0.3s, border-color 0.3s;
 }
-
 .nav.scrolled {
-  background: rgba(26,36,38,0.97);
+  background: rgba(17,25,24,0.97);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
-
 .nav-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
   height: 72px;
 }
-
 .nav-logo {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--white);
+  font-size: 1.4rem; font-weight: 500;
+  letter-spacing: 0.1em; color: var(--white);
 }
-
-.nav-logo span {
-  color: var(--teal-light);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  list-style: none;
-}
-
+.nav-logo span { color: var(--teal-light); }
+.nav-links { display: flex; align-items: center; gap: var(--sp-5); list-style: none; }
 .nav-links a {
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.75);
-  transition: color 0.18s ease;
+  font-size: 0.8125rem; font-weight: 400;
+  letter-spacing: 0.05em; color: rgba(255,255,255,0.65);
+  transition: color 0.2s;
 }
-
 .nav-links a:hover { color: var(--teal-light); }
-
 .nav-cta {
-  background: transparent;
-  border: 1px solid rgba(115,168,165,0.5);
+  background: transparent !important;
+  border: 1px solid rgba(115,168,165,0.45) !important;
   color: var(--teal-light) !important;
-  padding: 8px 20px;
-  border-radius: var(--radius-sm);
-  font-size: 0.8125rem !important;
-  font-weight: 500 !important;
-  transition: all 0.18s ease !important;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  transition: all 0.2s !important;
 }
 .nav-cta:hover {
   background: var(--teal-primary) !important;
@@ -389,1251 +251,1007 @@ h4 { font-size: 1.2rem; }
 }
 
 /* ============================================================
-   HERO
+   HERO — v2
+   New: darker, bolder, te reo first, latitude story
    ============================================================ */
-
 .hero {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
+  display: flex; align-items: flex-end;
   background: var(--night);
+  overflow: hidden;
 }
-
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1592931765600-3b1c2e7c4a15?auto=format&fit=crop&w=1920&q=80');
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
   background-size: cover;
-  background-position: center 30%;
-  opacity: 0.45;
+  background-position: center 40%;
+  opacity: 0.38;
+  will-change: transform;
 }
-
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(26,36,38,0.2) 0%,
-    rgba(26,36,38,0.1) 40%,
-    rgba(26,36,38,0.75) 75%,
-    rgba(26,36,38,0.98) 100%
-  );
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(17,25,24,0.3) 0%,
+      rgba(17,25,24,0.05) 30%,
+      rgba(17,25,24,0.6) 65%,
+      rgba(17,25,24,0.97) 100%),
+    linear-gradient(to right,
+      rgba(17,25,24,0.5) 0%,
+      transparent 60%);
 }
-
+/* Grain texture overlay for premium feel */
+.hero-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4; pointer-events: none;
+}
 .hero-content {
-  position: relative;
-  z-index: 2;
+  position: relative; z-index: 2;
   width: 100%;
-  padding: var(--space-8) var(--space-4);
-  padding-top: 140px;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  max-width: var(--max); margin: 0 auto;
+  padding: var(--sp-8) var(--sp-4);
+  padding-top: 160px;
 }
-
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
+.hero-eyebrow {
+  display: flex; align-items: center; gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+  opacity: 0;
 }
-
-.hero-label-line {
-  width: 32px;
-  height: 1px;
-  background: var(--teal-primary);
-}
-
-.hero-label-text {
+.hero-eyebrow-line { width: 28px; height: 1px; background: var(--teal-primary); }
+.hero-eyebrow-text {
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--teal-light);
 }
-
+/* Te reo above English headline */
+.hero-te-reo {
+  font-family: var(--font-heading);
+  font-style: italic; font-weight: 300;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  color: var(--teal-light);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-2);
+  display: block;
+  opacity: 0;
+}
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: clamp(3.2rem, 6.5vw, 6rem);
-  font-weight: 300;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.8rem, 7.5vw, 6.8rem);
+  font-weight: 300; line-height: 0.98;
+  letter-spacing: -0.04em;
   color: var(--white);
   max-width: 14ch;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--sp-4);
+  opacity: 0;
 }
-
-.hero h1 em {
-  font-style: italic;
-  color: var(--teal-light);
-}
-
+.hero h1 em { font-style: italic; color: var(--teal-light); }
 .hero-sub {
-  font-size: 1.0625rem;
-  color: rgba(255,255,255,0.65);
-  max-width: 48ch;
-  line-height: 1.7;
-  margin-bottom: var(--space-5);
+  font-size: 1.0625rem; line-height: 1.75;
+  color: rgba(255,255,255,0.6);
+  max-width: 46ch;
+  margin-bottom: var(--sp-5);
+  opacity: 0;
 }
-
-.hero-actions {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-
-.hero-scroll {
+.hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; opacity: 0; }
+/* Latitude badge */
+.hero-badge {
   position: absolute;
-  bottom: var(--space-5);
-  right: var(--space-4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
-  color: rgba(255,255,255,0.35);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  bottom: var(--sp-6); right: var(--sp-4);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  opacity: 0;
 }
-
+.hero-badge-number {
+  font-family: var(--font-heading);
+  font-size: 3.5rem; font-weight: 300;
+  line-height: 1; color: rgba(255,255,255,0.12);
+  letter-spacing: -0.04em;
+}
+.hero-badge-text {
+  font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+}
+.hero-scroll-indicator {
+  position: absolute; bottom: var(--sp-5); left: var(--sp-4);
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--sp-1); opacity: 0;
+}
 .hero-scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, rgba(115,168,165,0.5), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+  width: 1px; height: 52px;
+  background: linear-gradient(to bottom, rgba(115,168,165,0.6), transparent);
+  animation: scrollAnim 2.2s ease-in-out infinite;
 }
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50% { opacity: 0.8; transform: scaleY(1.1); }
+@keyframes scrollAnim {
+  0%,100% { opacity: 0.3; transform: scaleY(1); transform-origin: top; }
+  50% { opacity: 0.9; transform: scaleY(1.15); }
+}
+.hero-scroll-text {
+  font-size: 0.5625rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 /* ============================================================
-   PILLARS STRIP
+   CREDENTIALS STRIP
    ============================================================ */
-
-.pillars {
+.creds {
   background: var(--night-mid);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: var(--space-4) 0;
+  padding: var(--sp-3) 0;
+  overflow: hidden;
 }
-
-.pillars-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+.creds-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--sp-4);
+  display: flex; align-items: center;
+  justify-content: space-between; gap: var(--sp-3);
+  flex-wrap: wrap;
 }
-
-.pillar-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex: 1;
-}
-
-.pillar-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--teal-primary);
-  flex-shrink: 0;
-}
-
-.pillar-text {
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: rgba(255,255,255,0.7);
-  letter-spacing: 0.02em;
-}
-
-.pillar-divider {
-  width: 1px;
-  height: 24px;
-  background: var(--border);
-  flex-shrink: 0;
-}
+.cred-item { display: flex; align-items: center; gap: 10px; }
+.cred-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-primary); flex-shrink: 0; }
+.cred-text { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); }
+.cred-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
 
 /* ============================================================
-   AUDIENCE ROUTING
+   AUDIENCE ROUTING — v2
+   Darker, more confident card design
    ============================================================ */
-
-.routing {
-  background: var(--night);
-  padding: var(--space-7) 0;
-}
-
-.routing-header {
-  text-align: center;
-  margin-bottom: var(--space-6);
-}
-
-.routing-header h2 {
-  color: var(--white);
-  margin-bottom: var(--space-2);
-}
-
-.routing-header p {
-  color: rgba(255,255,255,0.5);
-  font-size: 0.9375rem;
-}
-
+.routing { background: var(--night); padding: var(--sp-7) 0; }
+.routing-header { text-align: center; margin-bottom: var(--sp-6); }
+.routing-header h2 { color: var(--white); margin-bottom: var(--sp-2); }
+.routing-header p { color: rgba(255,255,255,0.45); font-size: 0.9375rem; }
 .routing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-3);
+  grid-template-columns: repeat(4,1fr);
+  gap: var(--sp-2);
 }
-
 .routing-card {
-  background: var(--night-soft);
+  background: var(--night-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-4);
-  cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  padding: var(--sp-4);
+  display: block;
+  transition: border-color 0.22s, transform 0.22s, background 0.22s;
   text-decoration: none;
-  display: block;
+  position: relative;
+  overflow: hidden;
 }
-
+.routing-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal-primary);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
 .routing-card:hover {
-  border-color: var(--teal-primary);
-  transform: translateY(-3px);
-  background: rgba(115,168,165,0.05);
+  border-color: rgba(115,168,165,0.35);
+  transform: translateY(-4px);
+  background: rgba(45,82,80,0.3);
 }
-
+.routing-card:hover::before { transform: scaleX(1); }
 .routing-card-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-3);
+  width: 36px; height: 36px; margin-bottom: var(--sp-3);
+  display: flex; align-items: center; justify-content: center;
 }
-
 .routing-card-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--teal-primary);
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 22px; height: 22px;
+  stroke: var(--teal-primary); fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
 }
-
-.routing-card h4 {
-  color: var(--white);
-  font-size: 1.1rem;
-  margin-bottom: var(--space-1);
-}
-
-.routing-card p {
-  font-size: 0.8125rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.6;
-  margin-bottom: var(--space-3);
-}
-
-.routing-card-link {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+.routing-card h4 { color: var(--white); font-size: 1.05rem; margin-bottom: 6px; }
+.routing-card p { font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: var(--sp-3); }
+.routing-card-cta {
+  font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--teal-primary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  display: flex; align-items: center; gap: 6px;
+  transition: gap 0.2s;
 }
-
-.routing-card-link svg {
-  width: 12px;
-  height: 12px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.18s ease;
-}
-
-.routing-card:hover .routing-card-link svg {
-  transform: translateX(3px);
+.routing-card:hover .routing-card-cta { gap: 10px; }
+.routing-card-cta svg {
+  width: 12px; height: 12px;
+  stroke: currentColor; fill: none; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
 }
 
 /* ============================================================
-   BRAND STORY
+   BRAND STORY — v2
+   New: stronger dual-origin narrative, latitude story
    ============================================================ */
-
-.brand-story {
-  padding: var(--space-7) 0;
-  background: var(--white);
+.story { padding: var(--sp-7) 0; background: var(--white); }
+.story-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--sp-7); align-items: center;
 }
-
-.brand-story-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-7);
-  align-items: center;
-}
-
-.brand-story-image {
+.story-image {
   position: relative;
-  aspect-ratio: 4/5;
-  overflow: hidden;
+  aspect-ratio: 4/5; overflow: hidden;
   border-radius: var(--radius-md);
 }
-
-.brand-story-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.brand-story-image-caption {
-  position: absolute;
-  bottom: var(--space-3);
-  left: var(--space-3);
-  right: var(--space-3);
-  background: rgba(26,36,38,0.85);
+.story-image img { width: 100%; height: 100%; object-fit: cover; }
+.story-image-tag {
+  position: absolute; bottom: var(--sp-3); left: var(--sp-3); right: var(--sp-3);
+  background: rgba(17,25,24,0.88);
   backdrop-filter: blur(8px);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
   border: 1px solid var(--border);
+  display: flex; align-items: center; gap: var(--sp-2);
 }
-
-.brand-story-image-caption p {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.5;
+.story-image-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-primary); flex-shrink: 0; }
+.story-image-tag p { font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.4; }
+/* Latitude callout beside image */
+.story-lat {
+  position: absolute; top: var(--sp-3); right: -var(--sp-2);
+  transform: translateX(50%);
+  background: var(--soil);
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
-
-.brand-story-content .caption {
-  margin-bottom: var(--space-3);
-  display: block;
-}
-
-.brand-story-content h2 {
-  color: var(--night);
-  margin-bottom: var(--space-4);
-}
-
-.brand-story-content p {
-  color: #4a5a5c;
-  line-height: 1.8;
-  margin-bottom: var(--space-3);
-  font-size: 1rem;
-}
-
-.brand-story-quote {
-  border-left: 2px solid var(--teal-primary);
-  padding-left: var(--space-3);
-  margin: var(--space-5) 0;
-}
-
-.brand-story-quote blockquote {
+.story-lat-number {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--teal-deep);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  font-size: 1.75rem; font-weight: 300;
+  color: var(--white); line-height: 1; display: block;
 }
-
-.brand-story-quote cite {
-  display: block;
-  margin-top: var(--space-2);
-  font-size: 0.8125rem;
-  font-style: normal;
-  color: var(--muted-text);
-  font-weight: 500;
+.story-lat-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+/* Content */
+.story-content .te-reo { color: var(--teal-deep); opacity: 1; }
+.story-content h2 { color: var(--night); margin-bottom: var(--sp-4); }
+.story-content p { color: #4a5c5a; line-height: 1.8; margin-bottom: var(--sp-3); font-size: 1rem; }
+.story-dual {
+  display: flex; gap: var(--sp-3); margin: var(--sp-4) 0;
+  padding: var(--sp-3); background: var(--off-white);
+  border-radius: var(--radius-md); border: 1px solid rgba(115,168,165,0.12);
+}
+.story-dual-item { flex: 1; }
+.story-dual-label {
+  font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal-deep); display: block; margin-bottom: 4px;
+}
+.story-dual-text { font-size: 0.9rem; color: var(--night); line-height: 1.5; font-weight: 400; }
+.story-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+.story-quote {
+  border-left: 2px solid var(--teal-primary);
+  padding-left: var(--sp-3);
+  margin: var(--sp-4) 0;
+}
+.story-quote blockquote {
+  font-family: var(--font-heading);
+  font-size: 1.35rem; font-weight: 300; font-style: italic;
+  color: var(--teal-deep); line-height: 1.5;
+}
+.story-quote cite {
+  display: block; margin-top: var(--sp-1);
+  font-size: 0.8125rem; font-style: normal;
+  color: var(--muted); font-weight: 500;
 }
 
 /* ============================================================
-   CULTIVATION PREVIEW
+   CREDENTIALS BAR — Homepage proof points
+   New: CFU count, pheno hunt, latitude, licence
    ============================================================ */
-
-.cultivation {
-  background: var(--off-white);
-  padding: var(--space-7) 0;
+.proof { background: var(--night-mid); padding: var(--sp-6) 0; }
+.proof-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.proof-item {
+  background: var(--night-card);
+  padding: var(--sp-4);
+  text-align: center;
+}
+.proof-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300; line-height: 1;
+  color: var(--white); display: block;
+  margin-bottom: 6px;
+}
+.proof-number span { color: var(--teal-primary); }
+.proof-label {
+  font-size: 0.75rem; color: rgba(255,255,255,0.45);
+  line-height: 1.5;
 }
 
-.cultivation-header {
-  margin-bottom: var(--space-6);
-}
-
-.cultivation-header .caption {
-  display: block;
-  margin-bottom: var(--space-2);
-}
-
-.cultivation-header h2 {
-  color: var(--night);
-  margin-bottom: var(--space-3);
-}
-
-.cultivation-header p {
-  color: var(--muted-text);
-  max-width: 52ch;
-  font-size: 1rem;
-  line-height: 1.75;
-}
-
+/* ============================================================
+   CULTIVATION PREVIEW — v2
+   ============================================================ */
+.cultivation { background: var(--off-white); padding: var(--sp-7) 0; }
+.cultivation-header { margin-bottom: var(--sp-6); }
+.cultivation-header h2 { color: var(--night); margin-bottom: var(--sp-3); }
+.cultivation-header p { color: var(--muted); max-width: 52ch; font-size: 1rem; line-height: 1.75; }
 .cultivation-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: var(--space-2);
-  margin-bottom: var(--space-5);
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+  height: 480px;
 }
-
-.cultivation-img {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  position: relative;
+.cimg { border-radius: var(--radius-md); overflow: hidden; position: relative; }
+.cimg img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+.cimg:hover img { transform: scale(1.04); }
+.cimg-main { grid-row: span 2; }
+.cimg-tag {
+  position: absolute; bottom: var(--sp-2); left: var(--sp-2);
+  background: rgba(17,25,24,0.8); backdrop-filter: blur(6px);
+  border-radius: var(--radius); padding: 5px 10px;
+  font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal-light); border: 1px solid var(--border);
 }
-
-.cultivation-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+.cultivation-proof {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-3);
 }
-
-.cultivation-img:hover img { transform: scale(1.03); }
-
-.cultivation-img-main { grid-row: span 2; min-height: 440px; }
-.cultivation-img-sm { min-height: 210px; }
-
-.cultivation-img-label {
-  position: absolute;
-  bottom: var(--space-2);
-  left: var(--space-2);
-  background: rgba(26,36,38,0.82);
-  backdrop-filter: blur(6px);
-  border-radius: var(--radius-sm);
-  padding: 6px 12px;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--teal-light);
+.cproof-item {
+  background: var(--white); border-radius: var(--radius-md);
   border: 1px solid var(--border);
+  padding: var(--sp-4);
 }
-
-.cultivation-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
-}
-
-.stat-item {
-  padding: var(--space-4);
-  background: var(--white);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-}
-
-.stat-number {
+.cproof-number {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--night);
-  line-height: 1;
-  margin-bottom: var(--space-1);
+  font-size: 2.2rem; font-weight: 300; color: var(--night);
+  line-height: 1; margin-bottom: 4px; display: block;
 }
-
-.stat-number span {
-  font-size: 1.5rem;
-  color: var(--teal-primary);
-}
-
-.stat-label {
-  font-size: 0.8125rem;
-  color: var(--muted-text);
-  line-height: 1.5;
-}
+.cproof-number sup { font-size: 1.2rem; color: var(--teal-primary); vertical-align: super; }
+.cproof-label { font-size: 0.8125rem; color: var(--muted); line-height: 1.5; }
 
 /* ============================================================
-   KAUPAPA SECTION
+   KAUPAPA SECTION — v2
+   New: bilingual headline, stronger pillars, community impact
    ============================================================ */
-
 .kaupapa {
   background: var(--night);
-  padding: var(--space-7) 0;
-  position: relative;
-  overflow: hidden;
+  padding: var(--sp-7) 0;
+  position: relative; overflow: hidden;
 }
-
 .kaupapa-bg {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.08;
+  background-size: cover; background-position: center;
+  opacity: 0.07;
 }
-
 .kaupapa-inner {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-7);
-  align-items: center;
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--sp-7); align-items: start;
 }
-
-.kaupapa-content .caption {
-  margin-bottom: var(--space-3);
-  display: block;
-}
-
-.kaupapa-content h2 {
-  color: var(--white);
-  margin-bottom: var(--space-4);
-}
-
-.kaupapa-content p {
-  color: rgba(255,255,255,0.65);
-  line-height: 1.8;
-  font-size: 1rem;
-  margin-bottom: var(--space-3);
-}
-
-.kaupapa-maori {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-style: italic;
-  color: var(--teal-light);
-  margin: var(--space-4) 0 var(--space-2);
-}
-
+.kaupapa-content .te-reo { opacity: 0.9; margin-bottom: var(--sp-2); }
+.kaupapa-content h2 { color: var(--white); margin-bottom: var(--sp-4); }
+.kaupapa-content p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 1rem; margin-bottom: var(--sp-3); }
 .kaupapa-translation {
-  font-size: 0.8125rem;
-  color: rgba(255,255,255,0.4);
-  font-style: normal;
-  margin-bottom: var(--space-5);
-  letter-spacing: 0.04em;
+  font-size: 0.8125rem; color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em; margin-bottom: var(--sp-5);
+  font-style: italic;
 }
-
-.kaupapa-pillars {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+/* Community impact stats */
+.kaupapa-impact {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--sp-2); margin-bottom: var(--sp-5);
 }
-
-.kaupapa-pillar {
-  display: flex;
-  gap: var(--space-3);
-  padding: var(--space-3);
-  background: rgba(115,168,165,0.06);
+.impact-stat {
+  background: rgba(115,168,165,0.05);
   border: 1px solid rgba(115,168,165,0.12);
   border-radius: var(--radius-md);
-  align-items: flex-start;
+  padding: var(--sp-3);
 }
-
-.kaupapa-pillar-icon {
-  width: 36px;
-  height: 36px;
-  background: rgba(115,168,165,0.12);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.impact-stat-number {
+  font-family: var(--font-heading);
+  font-size: 2rem; font-weight: 300;
+  color: var(--teal-light); display: block;
+  line-height: 1; margin-bottom: 4px;
 }
-
-.kaupapa-pillar-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--teal-light);
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.kaupapa-pillar-text h4 {
-  color: var(--white);
-  font-size: 0.9375rem;
-  margin-bottom: 4px;
-}
-
-.kaupapa-pillar-text p {
-  font-size: 0.8125rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* ============================================================
-   NEWS SECTION
-   ============================================================ */
-
-.news {
-  background: var(--white);
-  padding: var(--space-7) 0;
-}
-
-.news-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: var(--space-6);
-}
-
-.news-header h2 { color: var(--night); }
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-}
-
-.news-card {
-  border: 1px solid var(--border);
+.impact-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+/* Pillars */
+.kaupapa-pillars { display: flex; flex-direction: column; gap: var(--sp-2); }
+.kpillar {
+  display: flex; gap: var(--sp-3);
+  padding: var(--sp-3);
+  background: rgba(115,168,165,0.04);
+  border: 1px solid rgba(115,168,165,0.1);
   border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  transition: border-color 0.2s, background 0.2s;
 }
-
-.news-card:hover {
-  border-color: var(--teal-primary);
-  transform: translateY(-2px);
+.kpillar:hover {
+  border-color: rgba(115,168,165,0.22);
+  background: rgba(115,168,165,0.08);
 }
-
-.news-card-img {
-  aspect-ratio: 16/9;
-  overflow: hidden;
-}
-
-.news-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.news-card:hover .news-card-img img { transform: scale(1.04); }
-
-.news-card-body {
-  padding: var(--space-3);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.news-card-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-2);
-}
-
-.news-card-tag {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--teal-primary);
+.kpillar-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
   background: rgba(115,168,165,0.1);
-  padding: 3px 8px;
-  border-radius: 2px;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
 }
-
-.news-card-date {
-  font-size: 0.75rem;
-  color: var(--muted-text);
+.kpillar-icon svg {
+  width: 16px; height: 16px;
+  stroke: var(--teal-light); fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
 }
-
-.news-card-body h4 {
-  font-size: 1.0625rem;
-  color: var(--night);
-  line-height: 1.3;
-  margin-bottom: var(--space-2);
-}
-
-.news-card-body p {
-  font-size: 0.875rem;
-  color: var(--muted-text);
-  line-height: 1.65;
-  flex: 1;
-}
+.kpillar-text h4 { color: var(--white); font-size: 0.9375rem; margin-bottom: 3px; }
+.kpillar-text p { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.5; margin: 0; }
 
 /* ============================================================
-   DISCLAIMER BANNER
+   FOUR BRAND PILLARS — from brief
    ============================================================ */
+.pillars-section { background: var(--white); padding: var(--sp-7) 0; }
+.pillars-header { text-align: center; margin-bottom: var(--sp-6); }
+.pillars-header h2 { color: var(--night); margin-bottom: var(--sp-2); }
+.pillars-header p { color: var(--muted); max-width: 48ch; margin: 0 auto; }
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: var(--sp-2);
+}
+.pillar-card {
+  padding: var(--sp-4);
+  border: 1px solid rgba(115,168,165,0.15);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pillar-card:hover { border-color: rgba(115,168,165,0.35); transform: translateY(-3px); }
+.pillar-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--teal-primary), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.pillar-card:hover::after { transform: scaleX(1); }
+.pillar-card-number {
+  font-family: var(--font-heading);
+  font-size: 3.5rem; font-weight: 300;
+  color: rgba(74,122,120,0.12); line-height: 1;
+  margin-bottom: var(--sp-2);
+  letter-spacing: -0.04em;
+}
+.pillar-card h4 { color: var(--night); margin-bottom: var(--sp-2); font-size: 1rem; }
+.pillar-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
 
+/* ============================================================
+   NEWS — v2
+   ============================================================ */
+.news { background: var(--off-white); padding: var(--sp-7) 0; }
+.news-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: var(--sp-6);
+}
+.news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); }
+.news-card {
+  background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.news-card:hover { border-color: var(--teal-primary); transform: translateY(-3px); }
+.news-card-img { aspect-ratio: 16/9; overflow: hidden; }
+.news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.news-card:hover .news-card-img img { transform: scale(1.04); }
+.news-card-body { padding: var(--sp-3); flex: 1; display: flex; flex-direction: column; }
+.news-card-meta { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-2); }
+.news-tag {
+  font-size: 0.625rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--teal-primary); background: rgba(115,168,165,0.1);
+  padding: 3px 8px; border-radius: 2px;
+}
+.news-date { font-size: 0.75rem; color: var(--muted); }
+.news-card-body h4 { color: var(--night); font-size: 1.0625rem; line-height: 1.3; margin-bottom: var(--sp-2); }
+.news-card-body p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; flex: 1; }
+
+/* ============================================================
+   DISCLAIMER
+   ============================================================ */
 .disclaimer {
   background: var(--night-mid);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: var(--space-4) 0;
+  padding: var(--sp-4) 0;
 }
-
 .disclaimer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-  display: flex;
-  gap: var(--space-3);
-  align-items: flex-start;
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--sp-4);
+  display: flex; gap: var(--sp-3); align-items: flex-start;
 }
-
-.disclaimer-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
+.disclaimer-icon { flex-shrink: 0; margin-top: 2px; }
 .disclaimer-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--teal-primary);
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 16px; height: 16px;
+  stroke: var(--teal-primary); fill: none; stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
 }
-
-.disclaimer p {
-  font-size: 0.8125rem;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-}
+.disclaimer p { font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
 
 /* ============================================================
-   FOOTER
+   FOOTER — v2
+   New: bilingual nav labels, founding partnership
    ============================================================ */
-
-.footer {
-  background: var(--night);
-  padding: var(--space-7) 0 var(--space-4);
-  border-top: 1px solid var(--border);
-}
-
+.footer { background: var(--night); padding: var(--sp-7) 0 var(--sp-4); border-top: 1px solid var(--border); }
 .footer-top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: var(--space-6);
-  padding-bottom: var(--space-6);
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--sp-6);
+  padding-bottom: var(--sp-6);
   border-bottom: 1px solid var(--border);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--sp-5);
 }
-
-.footer-brand-logo {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--white);
-  margin-bottom: var(--space-3);
+.footer-logo { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 500; letter-spacing: 0.1em; color: var(--white); margin-bottom: var(--sp-2); }
+.footer-logo span { color: var(--teal-light); }
+.footer-badge {
+  display: inline-block; font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal-primary); border: 1px solid rgba(115,168,165,0.25);
+  padding: 4px 10px; border-radius: 2px; margin-bottom: var(--sp-3);
 }
-
-.footer-brand-logo span { color: var(--teal-light); }
-
-.footer-brand-tag {
-  display: inline-block;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--teal-primary);
-  border: 1px solid rgba(115,168,165,0.3);
-  padding: 4px 10px;
-  border-radius: 2px;
-  margin-bottom: var(--space-3);
+.footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.35); line-height: 1.7; max-width: 28ch; margin-bottom: var(--sp-3); }
+/* Founding partnership */
+.footer-partnership {
+  font-size: 0.75rem; color: rgba(255,255,255,0.2);
+  line-height: 1.6; border-top: 1px solid var(--border); padding-top: var(--sp-3);
 }
-
-.footer-brand-desc {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.7;
-  max-width: 30ch;
-}
+.footer-partnership strong { color: rgba(255,255,255,0.35); font-weight: 500; }
 
 .footer-col h5 {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: var(--space-3);
+  font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: var(--sp-3);
 }
-
-.footer-col ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.footer-col ul li a {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.6);
-  transition: color 0.18s ease;
-}
-
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); }
+.footer-col ul li a { font-size: 0.875rem; color: rgba(255,255,255,0.55); transition: color 0.18s; }
 .footer-col ul li a:hover { color: var(--teal-light); }
+/* Bilingual footer links */
+.footer-link-te-reo { font-size: 0.6875rem; color: rgba(255,255,255,0.25); display: block; line-height: 1; margin-top: 1px; font-style: italic; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-legal { font-size: 0.6875rem; color: rgba(255,255,255,0.18); max-width: 56ch; text-align: right; line-height: 1.5; }
 
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-bottom-left {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.3);
-}
-
-.footer-disclaimer {
-  font-size: 0.6875rem;
-  color: rgba(255,255,255,0.2);
-  max-width: 60ch;
-  text-align: right;
-  line-height: 1.5;
-}
+/* ============================================================
+   GSAP — Initial states (prevent FOUC)
+   ============================================================ */
+.js-fade { opacity: 0; }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-
-@media (max-width: 1024px) {
-  .routing-grid { grid-template-columns: repeat(2, 1fr); }
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .brand-story-inner { grid-template-columns: 1fr; }
-  .brand-story-image { aspect-ratio: 16/9; }
-  .cultivation-grid { grid-template-columns: 1fr 1fr; }
-  .cultivation-img-main { grid-row: span 1; min-height: 300px; }
+@media (max-width: 1100px) {
+  .routing-grid { grid-template-columns: repeat(2,1fr); }
+  .pillars-grid { grid-template-columns: repeat(2,1fr); }
+  .proof-grid { grid-template-columns: repeat(2,1fr); }
+  .story-inner { grid-template-columns: 1fr; }
+  .story-image { aspect-ratio: 16/9; }
+  .story-lat { display: none; }
   .kaupapa-inner { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
-  .pillars-inner { flex-wrap: wrap; }
-  .pillar-divider { display: none; }
 }
-
 @media (max-width: 768px) {
-  :root {
-    --space-7: 64px;
-    --space-8: 80px;
-  }
+  :root { --sp-7: 64px; --sp-8: 80px; }
   .nav-links { display: none; }
-  .routing-grid { grid-template-columns: 1fr 1fr; }
-  .cultivation-stats { grid-template-columns: 1fr; }
+  .cultivation-grid { grid-template-columns: 1fr; height: auto; grid-template-rows: auto; }
+  .cimg-main { height: 300px; }
+  .cimg { height: 200px; }
+  .cultivation-proof { grid-template-columns: 1fr; }
   .news-grid { grid-template-columns: 1fr; }
-  .news-header { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+  .news-header { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
   .hero-actions { flex-direction: column; }
+  .hero-badge { display: none; }
+  .kaupapa-impact { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: var(--space-3); text-align: center; }
-  .footer-disclaimer { text-align: center; }
-  .hero-scroll { display: none; }
-  .cultivation-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: var(--sp-3); text-align: center; }
+  .footer-legal { text-align: center; }
+  .creds-inner { gap: var(--sp-2); }
+  .cred-divider { display: none; }
 }
-
-@media (max-width: 480px) {
-  .routing-grid { grid-template-columns: 1fr; }
-  .gate-card { padding: var(--space-4); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .hero-bg { will-change: unset; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     AUDIENCE DECLARATION GATE
-     ============================================================ -->
-<div class="gate-overlay" id="audienceGate">
-  <div class="gate-card">
-    <div class="gate-logo">
-      <span class="gate-logo-mark">AHO<span style="color:rgba(255,255,255,0.25)"> · </span>FARMS</span>
-    </div>
+<!-- ============================================================ GATE -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">AHO<span> FARMS</span></div>
     <span class="caption">Visitor Declaration</span>
     <h2>Before you enter</h2>
-    <p>This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders.</p>
-    <div class="gate-actions">
-      <button class="gate-btn-yes" onclick="acceptGate()">
-        I am a healthcare or industry professional
-      </button>
-      <button class="gate-btn-no" onclick="declineGate()">
-        I am a member of the general public
-      </button>
+    <p>This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders. It is not intended for patients or consumers.</p>
+    <div>
+      <button class="gate-yes" onclick="acceptGate()">I am a healthcare or industry professional</button>
+      <button class="gate-no" onclick="declineGate()">I am a member of the general public</button>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     NAVIGATION
-     ============================================================ -->
-<nav class="nav" id="mainNav">
+<!-- ============================================================ NAV -->
+<nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">AHO<span> FARMS</span></a>
-        <ul class="nav-links">
+    <a href="index.html" class="nav-logo">AHO<span> FARMS</span></a>
+    <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="index.html#cultivation">Cultivation</a></li>
-      <li><a href="index.html#products">Products</a></li>
-      <li><a href="index.html#kaupapa">Our Kaupapa</a></li>
-      <li><a href="index.html#news">News</a></li>
-      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+      <li><a href="cultivation.html">Cultivation</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="kaupapa.html">Our Kaupapa</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-gradient"></div>
-
+<!-- ============================================================ HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
   <div class="hero-content container">
-    <div class="hero-label">
-      <div class="hero-label-line"></div>
-      <span class="hero-label-text">Hawke's Bay, Aotearoa New Zealand</span>
+    <div class="hero-eyebrow" id="heroEyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Raupunga, Hawke's Bay · Aotearoa New Zealand</span>
     </div>
-
-    <h1>Grown from <em>whenua</em>. Held to the highest standard.</h1>
-
-    <p class="hero-sub">
-      Māori-led medicinal cannabis cultivation, supply, and export from Raupunga, Hawke's Bay. Licensed grower of premium medicinal flower — available through licensed prescribers.
-    </p>
-
-    <div class="hero-actions">
+    <span class="hero-te-reo" id="heroTeReo">Kei ruia, kei mātauhia, kei ngaro —</span>
+    <h1 id="heroH1">Grown for <em>good</em> in New Zealand.</h1>
+    <p class="hero-sub" id="heroSub">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium outdoor flower — available exclusively through licensed prescribers and qualified partners.</p>
+    <div class="hero-actions" id="heroActions">
       <a href="about.html" class="btn btn-primary">Discover Aho Farms</a>
-      <a href="#contact" class="btn btn-outline">I am a Healthcare Professional</a>
+      <a href="prescribers.html" class="btn btn-outline">Healthcare Professionals</a>
     </div>
   </div>
-
-  <div class="hero-scroll">
+  <div class="hero-badge" id="heroBadge">
+    <span class="hero-badge-number">39°S</span>
+    <span class="hero-badge-text">Same latitude as<br>California's Emerald Triangle</span>
+  </div>
+  <div class="hero-scroll-indicator" id="heroScroll">
     <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
+    <span class="hero-scroll-text">Scroll</span>
   </div>
 </section>
 
-<!-- ============================================================
-     PILLARS STRIP
-     ============================================================ -->
-<div class="pillars">
-  <div class="pillars-inner">
-    <div class="pillar-item">
-      <div class="pillar-dot"></div>
-      <span class="pillar-text">Licensed Medicinal Cultivator</span>
+<!-- ============================================================ CREDENTIALS STRIP -->
+<div class="creds">
+  <div class="creds-inner">
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">Licensed Medicinal Cultivator</span>
     </div>
-    <div class="pillar-divider"></div>
-    <div class="pillar-item">
-      <div class="pillar-dot"></div>
-      <span class="pillar-text">IANZ-Accredited Laboratory Testing</span>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">IANZ-Accredited Lab Testing — Hill Labs, Hamilton</span>
     </div>
-    <div class="pillar-divider"></div>
-    <div class="pillar-item">
-      <div class="pillar-dot"></div>
-      <span class="pillar-text">Māori-Led &amp; Māori-Owned</span>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">CFU Count &lt;200 — NZ Standard</span>
     </div>
-    <div class="pillar-divider"></div>
-    <div class="pillar-item">
-      <div class="pillar-dot"></div>
-      <span class="pillar-text">Export-Ready Supply</span>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">Māori-Owned &amp; Operated</span>
     </div>
-    <div class="pillar-divider"></div>
-    <div class="pillar-item">
-      <div class="pillar-dot"></div>
-      <span class="pillar-text">Prescription Only</span>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">Export Licence — Active</span>
+    </div>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <div class="cred-dot"></div>
+      <span class="cred-text">Prescription Only</span>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     AUDIENCE ROUTING
-     ============================================================ -->
+<!-- ============================================================ AUDIENCE ROUTING -->
 <section class="routing" id="portals">
   <div class="container">
-    <div class="routing-header">
-      <h2 style="color:var(--white)">Who are you visiting as?</h2>
-      <p>Each portal is tailored to your role. Select the one that applies to you.</p>
+    <div class="routing-header js-fade">
+      <h2>Who are you visiting as?</h2>
+      <p>Select your role for a tailored experience. All portals are professionally verified.</p>
     </div>
     <div class="routing-grid">
-
-      <a href="prescribers.html" class="routing-card">
+      <a href="prescribers.html" class="routing-card js-fade">
         <div class="routing-card-icon">
           <svg viewBox="0 0 24 24"><path d="M9 12h6m-3-3v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg>
         </div>
         <h4>Prescribers &amp; Clinicians</h4>
-        <p>Product specifications, clinical information, dosing guidance, and ordering pathway.</p>
-        <span class="routing-card-link">
-          Access Prescriber Portal
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
+        <p>Product specifications, CoAs, clinical evidence, dosing guidance, and prescribing pathway.</p>
+        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-
-      <a href="pharmacies.html" class="routing-card">
+      <a href="pharmacies.html" class="routing-card js-fade">
         <div class="routing-card-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
         <h4>Pharmacies</h4>
-        <p>Formulary information, supply terms, dispensing guidelines, and batch documentation.</p>
-        <span class="routing-card-link">
-          Access Pharmacy Portal
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
+        <p>Formulary information, supply terms, batch documentation, and dispensing guidelines.</p>
+        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-
-      <a href="export-partners.html" class="routing-card">
+      <a href="export-partners.html" class="routing-card js-fade">
         <div class="routing-card-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
         <h4>Export &amp; Distribution</h4>
-        <p>Capability statement, compliance documentation, supply volumes, and export markets.</p>
-        <span class="routing-card-link">
-          Access Partner Portal
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
+        <p>Capability statement, compliance documentation, supply volumes, and market information.</p>
+        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-
-      <a href="investors.html" class="routing-card">
+      <a href="investors.html" class="routing-card js-fade">
         <div class="routing-card-icon">
           <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
         </div>
         <h4>Investors</h4>
-        <p>Investment thesis, company overview, market opportunity, and team credentials.</p>
-        <span class="routing-card-link">
-          Access Investor Portal
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
+        <p>Investment thesis, market opportunity, company overview, and team credentials.</p>
+        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     BRAND STORY
-     ============================================================ -->
-<section class="brand-story section" id="about">
+<!-- ============================================================ BRAND STORY -->
+<section class="story section" id="about">
   <div class="container">
-    <div class="brand-story-inner">
-
-      <div class="brand-story-image">
-        <img
-          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80"
-          alt="Raupunga land — Aho Farms growing site, Hawke's Bay"
-          loading="lazy"
-        >
-        <div class="brand-story-image-caption">
-          <p>Raupunga, Hawke's Bay — ancestral whenua where RĀ is grown</p>
+    <div class="story-inner">
+      <div class="story-image js-fade">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Raupunga ancestral land — Hawke's Bay, New Zealand" loading="lazy">
+        <div class="story-image-tag">
+          <div class="story-image-tag-dot"></div>
+          <p>Raupunga, Hawke's Bay — ancestral whenua, Waaka whānau partnership</p>
+        </div>
+        <div class="story-lat">
+          <span class="story-lat-number">39°S</span>
+          <span class="story-lat-label">Emerald Triangle<br>Latitude</span>
         </div>
       </div>
-
-      <div class="brand-story-content">
+      <div class="story-content js-fade">
         <span class="caption">Our Story</span>
-        <h2>From the whenua to the patient</h2>
-
-        <p>Aho Farms was founded on a simple conviction: that the land which sustained our tīpuna can sustain our future. We cultivate premium medicinal cannabis on Māori freehold land in Raupunga, Hawke's Bay — where the soil, the climate, and the people are part of the product.</p>
-
-        <p>In partnership with the Waaka whānau, we have built a licensed medicinal cannabis operation that places Māori employment, whenua development, and tikanga at the centre of everything we do.</p>
-
-        <div class="brand-story-quote">
-          <blockquote>Tiakina te whenua, tiakina te iwi.</blockquote>
-          <cite>— Aho Farms founding kaupapa</cite>
+        <span class="te-reo">Tiakina te whenua, tiakina te iwi.</span>
+        <h2>Five generations of land. One generation to build on it differently.</h2>
+        <p>Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
+        <p>In partnership with the Waaka whānau, we grow on Māori freehold land in Raupunga, Hawke's Bay — at 39°S latitude, sharing the same position on the globe as California's legendary Emerald Triangle. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
+        <div class="story-dual">
+          <div class="story-dual-item">
+            <span class="story-dual-label">California Expertise</span>
+            <span class="story-dual-text">9–20 years cultivation experience from the world's most mature cannabis market</span>
+          </div>
+          <div class="story-divider"></div>
+          <div class="story-dual-item">
+            <span class="story-dual-label">Hawke's Bay Whenua</span>
+            <span class="story-dual-text">Five-generation farming connection to ancestral lands of Te Hapuku, Hawke's Bay</span>
+          </div>
         </div>
-
-        <a href="#" class="btn btn-outline-dark">Read Our Full Story</a>
+        <div class="story-quote">
+          <blockquote>Guard the land, guard the people.</blockquote>
+          <cite>— Tiakina te whenua, tiakina te iwi · Founding kaupapa of Aho Farms</cite>
+        </div>
+        <a href="about.html" class="btn btn-outline-teal">Read Our Full Story</a>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CULTIVATION PREVIEW
-     ============================================================ -->
+<!-- ============================================================ PROOF POINTS -->
+<section class="proof section--mid section">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-item js-fade">
+        <span class="proof-number">&lt;200<span> CFU</span></span>
+        <div class="proof-label">Microbial count standard — NZ's most stringent medicinal cannabis specification</div>
+      </div>
+      <div class="proof-item js-fade">
+        <span class="proof-number">15<span>+</span></span>
+        <div class="proof-label">Cultivar variations explored in our pheno hunt — narrowed to the perfect mother plant</div>
+      </div>
+      <div class="proof-item js-fade">
+        <span class="proof-number">IANZ<span> ✓</span></span>
+        <div class="proof-label">Independent testing via Hill Labs, Hamilton — International Accreditation New Zealand</div>
+      </div>
+      <div class="proof-item js-fade">
+        <span class="proof-number">39<span>°S</span></span>
+        <div class="proof-label">Same global latitude as California's Emerald Triangle — exceptional growing conditions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CULTIVATION PREVIEW -->
 <section class="cultivation section" id="cultivation">
   <div class="container">
-    <div class="cultivation-header">
+    <div class="cultivation-header js-fade">
       <span class="caption">Cultivation &amp; Quality</span>
-      <h2>Grown with precision.<br>Tested with rigour.</h2>
-      <p>Every plant is outdoor sun-grown in the fertile soils of Raupunga. Every batch is independently tested by Hill Labs, Hamilton — IANZ accredited — before leaving the property.</p>
+      <h2>Sun-grown in Raupunga.<br>Tested to the highest standard.</h2>
+      <p>Every plant grown outdoors under Hawke's Bay sunlight. Every batch independently tested by Hill Labs before it reaches a prescriber. No exceptions, no shortcuts.</p>
     </div>
-
     <div class="cultivation-grid">
-      <div class="cultivation-img cultivation-img-main">
-        <img
-          src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=80"
-          alt="Cannabis cultivation — Aho Farms growing canopy"
-          loading="lazy"
-        >
-        <span class="cultivation-img-label">Raupunga — Outdoor Sun-Grown</span>
+      <div class="cimg cimg-main js-fade">
+        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=80" alt="Cannabis cultivation — Aho Farms outdoor growing site" loading="lazy">
+        <span class="cimg-tag">Outdoor Sun-Grown — Raupunga</span>
       </div>
-      <div class="cultivation-img cultivation-img-sm">
-        <img
-          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80"
-          alt="Laboratory testing — quality analysis"
-          loading="lazy"
-        >
-        <span class="cultivation-img-label">Hill Labs Testing</span>
+      <div class="cimg js-fade">
+        <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80" alt="Laboratory quality testing" loading="lazy">
+        <span class="cimg-tag">Hill Labs Testing</span>
       </div>
-      <div class="cultivation-img cultivation-img-sm">
-        <img
-          src="https://images.unsplash.com/photo-1611095962519-6e44e4998cfc?auto=format&fit=crop&w=600&q=80"
-          alt="Medicinal flower — post-harvest"
-          loading="lazy"
-        >
-        <span class="cultivation-img-label">Post-Harvest</span>
+      <div class="cimg js-fade">
+        <img src="https://images.unsplash.com/photo-1611095962519-6e44e4998cfc?auto=format&fit=crop&w=600&q=80" alt="Medicinal cannabis flower — post-harvest" loading="lazy">
+        <span class="cimg-tag">Post-Harvest</span>
       </div>
     </div>
-
-    <div class="cultivation-stats">
-      <div class="stat-item">
-        <div class="stat-number">~21<span>%</span></div>
-        <div class="stat-label">THC — RĀ and SOURCE product lines, independently verified</div>
+    <div class="cultivation-proof">
+      <div class="cproof-item js-fade">
+        <span class="cproof-number">&lt;200<sup>CFU</sup></span>
+        <div class="cproof-label">NZ's most stringent microbial standard. Our product consistently meets it. Verified by independent laboratory on every batch.</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">IANZ<span>✓</span></div>
-        <div class="stat-label">Accredited laboratory testing via Hill Labs, Hamilton</div>
+      <div class="cproof-item js-fade">
+        <span class="cproof-number">IANZ<sup>✓</sup></span>
+        <div class="cproof-label">Hill Labs, Hamilton — IANZ accredited. Full panel: cannabinoids, terpenes, heavy metals, pesticides, microbials, moisture, foreign matter.</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">NZ<span>↗</span></div>
-        <div class="stat-label">Fully licensed under NZ medicinal cannabis regulations, export-ready</div>
+      <div class="cproof-item js-fade">
+        <span class="cproof-number">NZ<sup>Export</sup></span>
+        <div class="cproof-label">Export licence active. NZ regulatory framework is among the world's most stringent — a quality signal, not just a compliance requirement.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     KAUPAPA
-     ============================================================ -->
+<!-- ============================================================ FOUR PILLARS (from brief) -->
+<section class="pillars-section" id="pillars">
+  <div class="container">
+    <div class="pillars-header js-fade">
+      <span class="caption">Our Foundations</span>
+      <h2>What makes Aho Farms different</h2>
+      <p>Four pillars that define our approach to cultivation, community, and commercial responsibility.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card js-fade">
+        <div class="pillar-card-number">I</div>
+        <h4>Deeply connected to Hawke's Bay</h4>
+        <p>Five-generation whānau farming ancestral lands of Te Hapuku. Hawke's Bay shares the global latitude of California's Emerald Triangle — outdoor quality at lower cost, in NZ's highest sunshine region.</p>
+      </div>
+      <div class="pillar-card js-fade">
+        <div class="pillar-card-number">II</div>
+        <h4>Advanced cultivation methods</h4>
+        <p>Soil rebuilt to California standards. Rigorous feeding, watering, and growing regimens. Pheno hunt across 15+ cultivar variations. Fast production scalability backed by NZ's world-class agricultural sector.</p>
+      </div>
+      <div class="pillar-card js-fade">
+        <div class="pillar-card-number">III</div>
+        <h4>Leading toward something better</h4>
+        <p>Hauora with our community, customers, and suppliers. Deep iwi connection. Committed to economic regeneration — repurposing unused Māori freehold land to create pathways to economic freedom.</p>
+      </div>
+      <div class="pillar-card js-fade">
+        <div class="pillar-card-number">IV</div>
+        <h4>Uncompromising quality</h4>
+        <p>CFU microbial count &lt;200 — NZ's standard exceeds Australia's threshold. Wide range of terpene profiles. Consistent, reliable supply. Every batch with a full certificate of analysis before distribution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ KAUPAPA -->
 <section class="kaupapa section" id="kaupapa">
   <div class="kaupapa-bg"></div>
   <div class="container">
     <div class="kaupapa-inner">
-
       <div class="kaupapa-content">
-        <span class="caption">Our Kaupapa</span>
-        <h2 style="color:var(--white)">Land, people, and purpose — bound together</h2>
-        <p>Aho Farms is not simply a business built on Māori land. It is a Māori enterprise built for Māori futures. Every decision — from how we treat the soil to how we hire, to how we share the returns — is governed by the obligations we hold to the whenua and the people.</p>
-
-        <p class="kaupapa-maori">Tiakina te whenua, tiakina te iwi.</p>
-        <p class="kaupapa-translation">Guard the land, guard the people.</p>
-
-        <a href="#" class="btn btn-outline">Read Our Full Kaupapa</a>
+        <span class="caption">Te Kaupapa</span>
+        <span class="te-reo js-fade">Tiakina te whenua, tiakina te iwi.</span>
+        <h2 class="js-fade" style="color:var(--white)">Land, people, and purpose —<br>bound together.</h2>
+        <p class="js-fade">Aho Farms is not simply a business built on Māori land. It is a Māori enterprise built for Māori futures. Every decision — how we treat the soil, how we hire, how we share the returns — is governed by the obligations we hold to the whenua and the people.</p>
+        <p class="kaupapa-translation js-fade">Guard the land, guard the people.</p>
+        <!-- Community impact stats — from brief: bring to homepage -->
+        <div class="kaupapa-impact js-fade">
+          <div class="impact-stat">
+            <span class="impact-stat-number">100%</span>
+            <div class="impact-stat-label">Hawke's Bay operated. Local employment, local supply chain.</div>
+          </div>
+          <div class="impact-stat">
+            <span class="impact-stat-number">Māori</span>
+            <div class="impact-stat-label">Priority employment for whānau in all cultivation and harvest roles.</div>
+          </div>
+          <div class="impact-stat">
+            <span class="impact-stat-number">5 Gen</span>
+            <div class="impact-stat-label">Five-generation farming connection to Te Hapuku ancestral lands.</div>
+          </div>
+          <div class="impact-stat">
+            <span class="impact-stat-number">Iwi</span>
+            <div class="impact-stat-label">Ngāti Pāhauwera partnership and shared ownership structure.</div>
+          </div>
+        </div>
+        <a href="kaupapa.html" class="btn btn-outline js-fade">Read Our Full Kaupapa</a>
       </div>
-
-      <div class="kaupapa-pillars">
-        <div class="kaupapa-pillar">
-          <div class="kaupapa-pillar-icon">
+      <div class="kaupapa-pillars js-fade">
+        <div class="kpillar">
+          <div class="kpillar-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <div class="kaupapa-pillar-text">
-            <h4>Māori Employment</h4>
-            <p>Priority employment for whānau, with pathways from entry-level to governance.</p>
+          <div class="kpillar-text">
+            <h4>Whānau Employment</h4>
+            <p>Priority employment for whānau, with training pathways and progression to governance roles.</p>
           </div>
         </div>
-        <div class="kaupapa-pillar">
-          <div class="kaupapa-pillar-icon">
+        <div class="kpillar">
+          <div class="kpillar-icon">
             <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <div class="kaupapa-pillar-text">
+          <div class="kpillar-text">
             <h4>Whenua Development</h4>
-            <p>Productive use of Māori freehold land to generate long-term economic sovereignty.</p>
+            <p>Productive use of Māori freehold land, generating long-term economic sovereignty for the community.</p>
           </div>
         </div>
-        <div class="kaupapa-pillar">
-          <div class="kaupapa-pillar-icon">
+        <div class="kpillar">
+          <div class="kpillar-icon">
             <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <div class="kaupapa-pillar-text">
+          <div class="kpillar-text">
             <h4>Tikanga-Guided Practice</h4>
-            <p>How we grow, how we govern, and how we share — shaped by Māori values.</p>
+            <p>How we grow, how we govern, and how we share — shaped by the obligations of kaitiakitanga.</p>
           </div>
         </div>
-        <div class="kaupapa-pillar">
-          <div class="kaupapa-pillar-icon">
+        <div class="kpillar">
+          <div class="kpillar-icon">
             <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </div>
-          <div class="kaupapa-pillar-text">
+          <div class="kpillar-text">
             <h4>Community Returns</h4>
-            <p>Commercial success measured by the wellbeing it generates for whānau and hapū.</p>
+            <p>Commercial success measured by the wellbeing it generates for whānau, hapū, and community.</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     NEWS
-     ============================================================ -->
+<!-- ============================================================ NEWS -->
 <section class="news section" id="news">
   <div class="container">
-    <div class="news-header">
+    <div class="news-header js-fade">
       <div>
-        <span class="caption" style="display:block;margin-bottom:8px">Latest</span>
-        <h2>News &amp; Updates</h2>
+        <span class="caption" style="color:var(--teal-primary)">Ngā Kōrero / Latest</span>
+        <h2 style="color:var(--night)">News &amp; Updates</h2>
       </div>
-      <a href="#" class="btn btn-outline-dark" style="flex-shrink:0">All News</a>
+      <a href="news.html" class="btn btn-outline-teal" style="flex-shrink:0">All News</a>
     </div>
-
     <div class="news-grid">
-      <a href="#" class="news-card" style="text-decoration:none">
+      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
         <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80" alt="Aho Farms harvest season" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80" alt="Aho Farms 2026 harvest" loading="lazy">
         </div>
         <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-tag">Company Update</span>
-            <span class="news-card-date">June 2026</span>
-          </div>
-          <h4>Aho Farms completes 2026 growing season at Raupunga</h4>
+          <div class="news-card-meta"><span class="news-tag">Company Update</span><span class="news-date">June 2026</span></div>
+          <h4>Aho Farms completes 2026 harvest season at Raupunga</h4>
           <p>Our outdoor sun-grown crop has been harvested and is undergoing independent testing at Hill Labs, Hamilton ahead of supply to licensed prescribers.</p>
         </div>
       </a>
-      <a href="#" class="news-card" style="text-decoration:none">
+      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
         <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Māori community" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Māori community employment" loading="lazy">
         </div>
         <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-tag">Social Impact</span>
-            <span class="news-card-date">May 2026</span>
-          </div>
-          <h4>Expanding whānau employment ahead of peak season</h4>
-          <p>We have brought on five new whānau members in cultivation and harvest roles, with two enrolling in formal horticulture training supported by the company.</p>
+          <div class="news-card-meta"><span class="news-tag">Social Impact</span><span class="news-date">May 2026</span></div>
+          <h4>Five new whānau members join ahead of peak season</h4>
+          <p>We have welcomed five new team members from the local community, with two enrolling in supported formal horticulture training.</p>
         </div>
       </a>
-      <a href="#" class="news-card" style="text-decoration:none">
+      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
         <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="Medicinal cannabis regulation" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="NZ medicinal cannabis regulatory update" loading="lazy">
         </div>
         <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-tag">Regulatory</span>
-            <span class="news-card-date">April 2026</span>
-          </div>
-          <h4>NZ medicinal cannabis market: what the 2026 regulations mean for supply</h4>
-          <p>An overview of the regulatory landscape for licensed cultivators in Aotearoa and what it means for prescribers and pharmacies seeking consistent local supply.</p>
+          <div class="news-card-meta"><span class="news-tag">Regulatory</span><span class="news-date">April 2026</span></div>
+          <h4>What the 2025 Medsafe advertising guidance means for NZ operators</h4>
+          <p>A breakdown of the updated Medsafe guidance and what it means for licensed cultivators, prescribers, and pharmacies in the medicinal cannabis sector.</p>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     DISCLAIMER BANNER
-     ============================================================ -->
+<!-- ============================================================ DISCLAIMER -->
 <div class="disclaimer">
   <div class="disclaimer-inner">
     <div class="disclaimer-icon">
@@ -1643,24 +1261,26 @@ h4 { font-size: 1.2rem; }
   </div>
 </div>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
+<!-- ============================================================ FOOTER -->
 <footer class="footer" id="contact">
   <div class="container">
     <div class="footer-top">
       <div>
-        <div class="footer-brand-logo">AHO<span> FARMS</span></div>
-        <div class="footer-brand-tag">Māori Owned &amp; Operated</div>
-        <p class="footer-brand-desc">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua.</p>
+        <div class="footer-logo">AHO<span> FARMS</span></div>
+        <div class="footer-badge">Māori Owned &amp; Operated</div>
+        <p class="footer-tagline">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
+        <div class="footer-partnership">
+          <strong>Founding Partnership:</strong> Waaka whānau, Raupunga, Hawke's Bay · Toro Waaka, Ngāti Pāhauwera
+        </div>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
         <ul>
           <li><a href="about.html">About Aho Farms</a></li>
           <li><a href="kaupapa.html">Our Kaupapa</a></li>
-          <li><a href="about.html#team">Team</a></li>
-          <li><a href="news.html">News</a></li>
+          <li><a href="social-impact.html">Social Impact</a></li>
+          <li><a href="about.html">Team</a></li>
+          <li><a href="news.html">Ngā Kōrero / News</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1675,60 +1295,140 @@ h4 { font-size: 1.2rem; }
       <div class="footer-col">
         <h5>Portals</h5>
         <ul>
-                    <li><a href="prescribers.html">Prescribers</a></li>
+          <li><a href="prescribers.html">Prescribers</a></li>
           <li><a href="pharmacies.html">Pharmacies</a></li>
           <li><a href="export-partners.html">Export Partners</a></li>
           <li><a href="investors.html">Investors</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="contact.html">Whakapa mai / Contact</a></li>
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <div class="footer-bottom-left">
-        &copy; 2026 Aho Farms Limited · Hawke's Bay, Aotearoa New Zealand
-      </div>
-      <div class="footer-disclaimer">
-        Aho Farms products are prescription medicines. Not for general sale. Aho Farms Limited is a licensed medicinal cannabis cultivator under New Zealand law.
-      </div>
+      <div class="footer-copy">© 2026 Aho Farms Limited · Hawke's Bay, Aotearoa New Zealand · <a href="privacy.html" style="color:inherit;opacity:0.5">Privacy</a> · <a href="terms.html" style="color:inherit;opacity:0.5">Terms</a> · <a href="disclaimer.html" style="color:inherit;opacity:0.5">Disclaimer</a></div>
+      <div class="footer-legal">Aho Farms products are prescription medicines. Not for general sale or consumer advertising. Licensed medicinal cannabis cultivator under New Zealand law.</div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================================
-     JAVASCRIPT
-     ============================================================ -->
+<!-- ============================================================ JAVASCRIPT -->
 <script>
-  // Gate logic — one-time cookie
-  function acceptGate() {
-    document.cookie = "aho_gate=professional; max-age=86400; path=/";
-    document.getElementById('audienceGate').classList.add('hidden');
-    setTimeout(() => { document.getElementById('audienceGate').style.display = 'none'; }, 320);
+// ── Gate ──────────────────────────────────────────────────────
+function acceptGate() {
+  document.cookie = 'aho_gate=1;max-age=86400;path=/';
+  const g = document.getElementById('gate');
+  g.classList.add('hidden');
+  setTimeout(() => g.style.display = 'none', 360);
+}
+function declineGate() {
+  document.cookie = 'aho_gate=0;max-age=86400;path=/';
+  const g = document.getElementById('gate');
+  g.classList.add('hidden');
+  setTimeout(() => g.style.display = 'none', 360);
+}
+(function() {
+  if (document.cookie.split(';').some(c => c.trim().startsWith('aho_gate='))) {
+    const g = document.getElementById('gate');
+    if (g) g.style.display = 'none';
+  }
+})();
+
+// ── Nav scroll ────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── GSAP Animations ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    // Show everything immediately, no animation
+    document.querySelectorAll('.js-fade, [id^="hero"]').forEach(el => {
+      el.style.opacity = '1';
+    });
+    return;
   }
 
-  function declineGate() {
-    document.cookie = "aho_gate=public; max-age=86400; path=/";
-    document.getElementById('audienceGate').classList.add('hidden');
-    setTimeout(() => { document.getElementById('audienceGate').style.display = 'none'; }, 320);
-  }
+  gsap.registerPlugin(ScrollTrigger);
 
-  // Check cookie on load
-  (function() {
-    if (document.cookie.split(';').some(c => c.trim().startsWith('aho_gate='))) {
-      var g = document.getElementById('audienceGate');
-      g.style.display = 'none';
-    }
-  })();
+  // Hero entrance sequence
+  const heroTl = gsap.timeline({ delay: 0.2 });
+  heroTl
+    .to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+    .to('#heroTeReo',   { opacity: 0.85, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+    .to('#heroH1',      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.4')
+    .to('#heroSub',     { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+    .to('#heroActions', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+    .to('#heroBadge',   { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.3')
+    .to('#heroScroll',  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.5');
 
-  // Nav scroll behaviour
-  window.addEventListener('scroll', function() {
-    var nav = document.getElementById('mainNav');
-    if (window.scrollY > 60) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+  // Set initial states for hero elements
+  gsap.set(['#heroEyebrow','#heroTeReo','#heroH1','#heroSub','#heroActions'], { y: 30 });
+
+  // Hero parallax — bg scales as you scroll past
+  gsap.to('#heroBg', {
+    scale: 1.12,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
     }
   });
+
+  // All .js-fade elements — scroll reveal
+  gsap.utils.toArray('.js-fade').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 32 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        },
+        delay: (i % 4) * 0.07 // slight stagger per row
+      }
+    );
+  });
+
+  // Proof numbers count up
+  const proofNumbers = document.querySelectorAll('.proof-number');
+  proofNumbers.forEach(el => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => el.classList.add('counted')
+    });
+  });
+
+  // Cultivation images stagger
+  gsap.from('.cimg', {
+    opacity: 0,
+    scale: 0.96,
+    stagger: 0.12,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.cultivation-grid',
+      start: 'top 80%'
+    }
+  });
+
+  // Routing cards hover enhancement
+  document.querySelectorAll('.routing-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      gsap.to(card, { y: -4, duration: 0.25, ease: 'power2.out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { y: 0, duration: 0.3, ease: 'power2.out' });
+    });
+  });
+});
 </script>
 
 </body>
