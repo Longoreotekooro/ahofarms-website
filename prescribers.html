@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prescriber Portal — Aho Farms</title>
+  <meta name="description" content="A dedicated portal for licensed prescribers and clinicians. Product specifications, certificates of analysis, dosing guidance, and prescribing pathway — all in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --night:      #1a2426;
+      --night-mid:  #253032;
+      --white:      #ffffff;
+      --off-white:  #f4f6f6;
+      --teal:       #73a8a5;
+      --teal-light: #a2c4c3;
+      --teal-deep:  #4a7a78;
+      --soil:       #8b6f47;
+      --text-dark:  #1a2426;
+      --text-mid:   #3d5254;
+      --text-muted: #6b8082;
+      --border-teal: rgba(115, 168, 165, 0.15);
+      --border-teal-strong: rgba(115, 168, 165, 0.35);
+      --font-head: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--night);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--border-teal);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .nav-logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.72);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+    }
+
+    .nav-links .nav-portal-link {
+      color: var(--teal-light);
+      font-weight: 500;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: rgba(255,255,255,0.8);
+      transition: all 0.25s ease;
+    }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: none;
+      background: var(--night-mid);
+      border-top: 1px solid var(--border-teal);
+      padding: 20px 32px 24px;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--teal-light);
+    }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .caption {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .caption--light {
+      color: var(--teal-light);
+    }
+
+    .caption--teal {
+      color: var(--teal-deep);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 13px 28px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, opacity 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-deep);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--teal-light);
+      border: 1px solid rgba(162, 196, 195, 0.45);
+    }
+
+    .btn-outline-light:hover {
+      background: rgba(115, 168, 165, 0.12);
+      border-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       SECTION 1: HERO
+    ============================================================ */
+    .hero {
+      background: var(--night);
+      padding: 148px 0 96px;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(42px, 5.5vw, 68px);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.68);
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      border-left: 2px solid var(--teal-deep);
+      padding-left: 20px;
+    }
+
+    .hero-stat-number {
+      font-family: var(--font-head);
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--teal-light);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .hero-stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.56);
+      line-height: 1.45;
+      max-width: 220px;
+    }
+
+    /* ============================================================
+       SECTION 2: PORTAL CONTENTS
+    ============================================================ */
+    .portal-contents {
+      background: var(--white);
+      padding: 100px 0 104px;
+    }
+
+    .portal-contents-header {
+      margin-bottom: 56px;
+      max-width: 560px;
+    }
+
+    .portal-contents h2 {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 3.8vw, 50px);
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 32px 28px 36px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(115, 168, 165, 0.4);
+      box-shadow: 0 4px 24px rgba(115, 168, 165, 0.1);
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--teal);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card h3 {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       SECTION 3: ACCESS FORM
+    ============================================================ */
+    .access-form-section {
+      background: var(--off-white);
+      padding: 100px 0 108px;
+    }
+
+    .access-form-section-header {
+      margin-bottom: 52px;
+      max-width: 600px;
+    }
+
+    .access-form-section h2 {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 3.8vw, 48px);
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.12;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .access-form-section .section-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    .form-wrapper {
+      background: var(--white);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 52px 52px 56px;
+      max-width: 780px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+
+    .form-group .field-hint {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 5px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-dark);
+      background: var(--white);
+      border: 1px solid rgba(61, 82, 84, 0.25);
+      border-radius: 4px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8082' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115, 168, 165, 0.14);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(107, 128, 130, 0.6);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .form-checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 1px solid rgba(61, 82, 84, 0.35);
+      border-radius: 3px;
+      background: var(--white);
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      margin-top: 2px;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .form-checkbox-group input[type="checkbox"]:checked {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .form-checkbox-group input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1.5px;
+      width: 7px;
+      height: 11px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(43deg);
+    }
+
+    .form-checkbox-group label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.55;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      justify-content: center;
+      padding: 15px 28px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(115, 168, 165, 0.1);
+      border: 1px solid rgba(115, 168, 165, 0.35);
+      border-radius: 4px;
+      padding: 18px 22px;
+      margin-top: 20px;
+    }
+
+    .form-success p {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--teal-deep);
+      line-height: 1.55;
+    }
+
+    .form-below {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-response-note {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    .form-signin-note {
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+
+    .form-signin-note a {
+      color: var(--teal-deep);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+
+    .form-signin-note a:hover {
+      color: var(--teal);
+    }
+
+    /* ============================================================
+       SECTION 4: COMPLIANCE NOTE
+    ============================================================ */
+    .compliance-note {
+      background: var(--night-mid);
+      padding: 40px 0;
+      border-top: 1px solid rgba(115, 168, 165, 0.1);
+    }
+
+    .compliance-note p {
+      font-size: 12.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 860px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--night);
+      padding: 72px 0 0;
+      border-top: 1px solid var(--border-teal);
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 60px;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand .footer-logo span {
+      color: var(--teal);
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .footer-col ul a {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.58);
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--teal-light);
+    }
+
+    .footer-col ul .active-link {
+      color: var(--teal-light);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-teal);
+      padding: 24px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-disclaimer {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.32);
+      line-height: 1.65;
+      max-width: 640px;
+    }
+
+    .footer-copy {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.28);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       RESPONSIVE — 768px BREAKPOINT
+    ============================================================ */
+    @media (max-width: 768px) {
+      .nav-inner {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-mobile {
+        padding: 20px 20px 24px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 120px 0 72px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+        margin-bottom: 40px;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 28px;
+        margin-bottom: 36px;
+      }
+
+      /* Portal cards */
+      .portal-contents {
+        padding: 72px 0 80px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .card {
+        padding: 28px 24px 30px;
+      }
+
+      /* Form */
+      .access-form-section {
+        padding: 72px 0 80px;
+      }
+
+      .form-wrapper {
+        padding: 32px 24px 36px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      /* Footer */
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .form-wrapper {
+        padding: 28px 18px 32px;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Aho Farms home">AHO <span>FARMS</span></a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Cultivation</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Our Kaupapa</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger-btn" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="nav-mobile" id="mobile-menu" role="menu">
+      <a href="#" role="menuitem">About</a>
+      <a href="#" role="menuitem">Cultivation</a>
+      <a href="#" role="menuitem">Products</a>
+      <a href="#" role="menuitem">Our Kaupapa</a>
+      <a href="#" role="menuitem">News</a>
+      <a href="#" role="menuitem">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         SECTION 1: HERO
+    ============================================================ -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="caption caption--light">Healthcare Professionals</span>
+          <h1 id="hero-heading">Clinical resources for prescribers</h1>
+          <p class="hero-sub">A dedicated portal for licensed prescribers and clinicians. Product specifications, certificates of analysis, dosing guidance, and prescribing pathway — all in one place.</p>
+
+          <div class="hero-stats" role="list" aria-label="Key statistics">
+            <div class="hero-stat" role="listitem">
+              <div class="hero-stat-number">1,250+</div>
+              <div class="hero-stat-label">registered HCPs on NZ prescriber platforms</div>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <div class="hero-stat-number">79%</div>
+              <div class="hero-stat-label">of NZ GPs cite lack of information as the primary barrier to prescribing</div>
+            </div>
+          </div>
+
+          <a href="#access-form" class="btn btn-primary">Request Portal Access</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: PORTAL CONTENTS
+    ============================================================ -->
+    <section class="portal-contents" aria-labelledby="portal-heading">
+      <div class="container">
+        <div class="portal-contents-header">
+          <span class="caption caption--teal">Portal Contents</span>
+          <h2 id="portal-heading">Everything you need to prescribe with confidence</h2>
+        </div>
+
+        <div class="cards-grid" role="list">
+
+          <!-- Card 1 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6M9 16h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/>
+              </svg>
+            </div>
+            <h3>Product Specifications</h3>
+            <p>Full cannabinoid profiles, terpene data, and formulation details for RĀ and SOURCE product lines.</p>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Certificates of Analysis</h3>
+            <p>Batch-specific CoAs from Hill Labs, Hamilton (IANZ accredited), available for download.</p>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6v6m0 0v6m0-6h6m-6 0H6M4 6h16M4 18h16"/>
+                <path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+              </svg>
+            </div>
+            <h3>Clinical Evidence</h3>
+            <p>Summaries of relevant clinical literature for key therapeutic areas including pain, sleep, and anxiety.</p>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+              </svg>
+            </div>
+            <h3>Dosing Guidance</h3>
+            <p>Starting dose recommendations, titration protocols, and patient monitoring guidance.</p>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h3>Prescribing Pathway</h3>
+            <p>Step-by-step guide to prescribing medicinal cannabis under NZ regulations, including Medsafe requirements.</p>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="card" role="listitem">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3>Prescriber FAQs</h3>
+            <p>Answers to the most common questions about prescribing medicinal cannabis, supply, and patient management.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: ACCESS REQUEST FORM
+    ============================================================ -->
+    <section class="access-form-section" id="access-form" aria-labelledby="form-heading">
+      <div class="container">
+        <div class="access-form-section-header">
+          <span class="caption caption--teal">Request Access</span>
+          <h2 id="form-heading">Apply for prescriber portal access</h2>
+          <p class="section-sub">Access is available to registered medical practitioners, nurses, and pharmacists in New Zealand. We verify all applications against the NZ Medical Council register.</p>
+        </div>
+
+        <div class="form-wrapper">
+          <form id="prescriber-form" novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name <span aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first_name"
+                  autocomplete="given-name"
+                  placeholder="e.g. Sarah"
+                  required
+                  aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name <span aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last_name"
+                  autocomplete="family-name"
+                  placeholder="e.g. Tane"
+                  required
+                  aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="work email"
+                placeholder="Use your professional or practice email"
+                required
+                aria-required="true"
+                aria-describedby="email-hint"
+              />
+              <span class="field-hint" id="email-hint">Use your professional or practice email address</span>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-number">Medical Council Registration Number <span aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="reg-number"
+                name="registration_number"
+                placeholder="e.g. 12345"
+                required
+                aria-required="true"
+                aria-describedby="reg-hint"
+              />
+              <span class="field-hint" id="reg-hint">Your NZ Medical Council or Nursing Council registration number</span>
+            </div>
+
+            <div class="form-group">
+              <label for="profession">Profession <span aria-hidden="true">*</span></label>
+              <select
+                id="profession"
+                name="profession"
+                required
+                aria-required="true"
+              >
+                <option value="" disabled selected>Select your profession</option>
+                <option value="gp">General Practitioner</option>
+                <option value="specialist">Specialist Physician</option>
+                <option value="np">Nurse Practitioner</option>
+                <option value="rn">Registered Nurse</option>
+                <option value="pharmacist">Pharmacist</option>
+                <option value="other">Other Healthcare Professional</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="practice-name">Practice / Clinic Name <span aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  id="practice-name"
+                  name="practice_name"
+                  placeholder="e.g. Tāmaki Medical Centre"
+                  required
+                  aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label for="city">City / Region <span aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="e.g. Auckland"
+                  required
+                  aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Any questions or specific information you need"
+                aria-describedby="message-hint"
+              ></textarea>
+              <span class="field-hint" id="message-hint">Any questions or specific information you need</span>
+            </div>
+
+            <div class="form-checkbox-group">
+              <input
+                type="checkbox"
+                id="confirm-hcp"
+                name="confirm_hcp"
+                required
+                aria-required="true"
+              />
+              <label for="confirm-hcp">I confirm I am a registered healthcare professional and my details are accurate</label>
+            </div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              class="btn btn-primary btn-submit"
+              aria-live="polite"
+            >
+              Submit Access Request
+            </button>
+
+            <div class="form-success" id="form-success" role="alert" aria-live="polite">
+              <p>Request Submitted — We will be in touch within 1 business day.</p>
+            </div>
+
+          </form>
+
+          <div class="form-below">
+            <p class="form-response-note">We aim to respond within 1 business day. Access credentials will be sent to your professional email address.</p>
+            <p class="form-signin-note">Already have access? <a href="#">Sign in to portal →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: COMPLIANCE NOTE
+    ============================================================ -->
+    <section class="compliance-note" aria-label="Compliance information">
+      <div class="container">
+        <p>Information in the Aho Farms prescriber portal is intended solely for registered healthcare professionals. Product information is provided to support clinical decision-making and does not constitute medical advice. All Aho Farms products are available by prescription only under the Medicines Act 1981. Portal access is subject to verification of professional registration.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-main">
+
+        <div class="footer-brand">
+          <div class="footer-logo">AHO <span>FARMS</span></div>
+          <p>Medicinal cannabis, grown with intention. Licensed cultivator and manufacturer, Aotearoa New Zealand.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul role="list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">News</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Cultivation</h4>
+          <ul role="list">
+            <li><a href="#">Facility</a></li>
+            <li><a href="#">Standards</a></li>
+            <li><a href="#">Quality</a></li>
+            <li><a href="#">Products</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Portals</h4>
+          <ul role="list">
+            <li><a href="#" class="active-link">Prescribers</a></li>
+            <li><a href="#">Pharmacies</a></li>
+            <li><a href="#">Export Partners</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Always consult a qualified healthcare professional.</p>
+        <span class="footer-copy">&copy; 2025 Aho Farms Ltd</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----- Nav scroll effect ----- */
+      var nav = document.getElementById('main-nav');
+
+      function onScroll () {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); // run on load in case page is pre-scrolled
+
+      /* ----- Mobile hamburger ----- */
+      var hamburger = document.getElementById('hamburger-btn');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      hamburger.addEventListener('click', function () {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      /* ----- Form submit ----- */
+      var form       = document.getElementById('prescriber-form');
+      var submitBtn  = document.getElementById('submit-btn');
+      var successMsg = document.getElementById('form-success');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        /* Basic HTML5 validation */
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        /* Checkbox guard */
+        var confirmBox = document.getElementById('confirm-hcp');
+        if (!confirmBox.checked) {
+          confirmBox.focus();
+          return;
+        }
+
+        /* Submitting state */
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting\u2026';
+
+        /* Simulate async submission (replace with real fetch/xhr call) */
+        setTimeout(function () {
+          submitBtn.style.display = 'none';
+          successMsg.style.display = 'block';
+
+          /* Scroll success into view */
+          successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 1400);
+      });
+
+    }());
+  </script>
+
+</body>
+</html>
