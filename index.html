@@ -5,864 +5,789 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aho Farms | Licensed Medicinal Cannabis Cultivator — New Zealand</title>
 <meta name="description" content="Aho Farms is a Māori-led medicinal cannabis cultivator based in Raupunga, Hawke's Bay, New Zealand. Premium medicinal flower for prescribers, pharmacies, and export partners.">
-<meta property="og:title" content="Aho Farms | Licensed Medicinal Cannabis Cultivator, New Zealand">
-<meta property="og:description" content="Grown for good in New Zealand. Māori-led medicinal cannabis cultivation from Hawke's Bay.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- GSAP + ScrollTrigger -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
 <style>
-/* ============================================================
-   AHO FARMS — DESIGN SYSTEM v2
-   Updated: June 2026
-   Changes: New hero copy, te reo integration, darker confidence,
-   latitude story, CFU differentiator, GSAP animations,
-   bilingual headlines, community impact on homepage
-   ============================================================ */
+/* ================================================================
+   AHO FARMS — DESIGN SYSTEM v3
+   Inspired by: tuatahi.art design principles
+   — Bilingual nav (te reo first)
+   — Tāniko texture on dark backgrounds
+   — Bilingual section eyebrows (TE REO · ENGLISH)
+   — Real Aho Farms photography (Cloudinary)
+   — Bold display type, dark luxury aesthetic
+   — Footer CTA banner with large te reo headline
+   ================================================================ */
 
 :root {
-  --teal-primary:  #73a8a5;
-  --teal-light:    #a2c4c3;
-  --teal-deep:     #4a7a78;
-  --teal-deeper:   #2d5250;
-  --soil:          #8b6f47;
-  --soil-light:    #a88660;
-  --night:         #111918;
-  --night-mid:     #1c2826;
-  --night-soft:    #253632;
-  --night-card:    #1e2e2c;
-  --white:         #ffffff;
-  --off-white:     #f3f6f5;
-  --muted:         #637470;
-  --border:        rgba(115,168,165,0.12);
-  --border-strong: rgba(115,168,165,0.28);
-  --gold:          #c9a55a;
+  --teal:       #73a8a5;
+  --teal-light: #a2c4c3;
+  --teal-deep:  #4a7a78;
+  --soil:       #8b6f47;
+  --night:      #0f1a18;
+  --night-2:    #182321;
+  --night-3:    #1e2e2c;
+  --night-4:    #243530;
+  --white:      #ffffff;
+  --off:        #f0f4f3;
+  --muted:      #627570;
+  --border:     rgba(115,168,165,0.1);
+  --border-2:   rgba(115,168,165,0.22);
 
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
-  --font-body:    'Inter', system-ui, sans-serif;
+  --font-h: 'Cormorant Garamond', Georgia, serif;
+  --font-b: 'Inter', system-ui, sans-serif;
 
-  --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
-  --sp-5: 48px; --sp-6: 64px; --sp-7: 96px; --sp-8: 128px;
-  --radius: 4px; --radius-md: 8px;
-  --max: 1280px; --text-max: 680px;
+  /* Spacing */
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px;
+  --s5:48px; --s6:64px; --s7:96px; --s8:128px;
+  --max:1280px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--night);
-  background: var(--white);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-b);
+  font-size:16px;line-height:1.65;
+  color:var(--night);background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-img { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
 
-/* ============================================================
+/* ================================================================
+   TĀNIKO TEXTURE — applied to all dark sections
+   Digitised abstraction of Māori weaving patterns
+   ================================================================ */
+.taniko {
+  background-color: var(--night);
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2373a8a5' stroke-opacity='0.045' stroke-width='0.5'%3E%3Cpath d='M0 15h60M0 30h60M0 45h60M15 0v60M30 0v60M45 0v60'/%3E%3Cpath d='M0 0l15 15M15 0l15 15M30 0l15 15M45 0l15 15M0 15l15 15M0 30l15 15M0 45l15 15M45 15l15 15M45 30l15 15M45 45l15 15'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ================================================================
    TYPOGRAPHY
-   ============================================================ */
-h1,h2,h3,h4 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+   ================================================================ */
+h1,h2,h3,h4{
+  font-family:var(--font-h);font-weight:400;
+  line-height:1.08;letter-spacing:-0.028em;text-wrap:balance;
 }
-.display {
-  font-family: var(--font-heading);
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
-  font-weight: 300;
-  line-height: 1.0;
-  letter-spacing: -0.035em;
+.display{
+  font-family:var(--font-h);
+  font-size:clamp(4rem,8vw,7.5rem);
+  font-weight:300;line-height:0.96;letter-spacing:-0.04em;
 }
-h1 { font-size: clamp(2.5rem, 4.5vw, 4rem); }
-h2 { font-size: clamp(2rem, 3vw, 3rem); }
-h3 { font-size: clamp(1.4rem, 2vw, 1.9rem); }
-h4 { font-size: 1.15rem; font-weight: 500; }
+h1{font-size:clamp(2.8rem,5vw,4.2rem);}
+h2{font-size:clamp(2rem,3.2vw,3.2rem);}
+h3{font-size:clamp(1.4rem,2vw,1.9rem);}
 
-/* Te reo Māori headline — above English, lighter colour, slightly smaller */
-.te-reo {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  color: var(--teal-light);
-  letter-spacing: -0.01em;
-  display: block;
-  margin-bottom: var(--sp-2);
-  opacity: 0.85;
+/* Bilingual section eyebrow — tuatahi.art pattern */
+.eyebrow {
+  font-family:var(--font-b);
+  font-size:0.625rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--teal);display:block;margin-bottom:var(--s3);
+}
+.eyebrow span{color:rgba(115,168,165,0.45);margin:0 6px;}
+
+/* Te reo line — above English headline */
+.te-reo-line{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(1.2rem,2.2vw,1.8rem);
+  color:var(--teal-light);letter-spacing:-0.01em;
+  display:block;margin-bottom:var(--s2);opacity:0.9;
 }
 
-.caption {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--teal-primary);
-  display: block;
-  margin-bottom: var(--sp-2);
-}
-
-.lead {
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  color: var(--muted);
-}
-
-/* ============================================================
+/* ================================================================
    LAYOUT
-   ============================================================ */
-.container {
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--sp-4);
-}
-.section { padding: var(--sp-7) 0; }
-.section--dark  { background: var(--night); color: var(--white); }
-.section--mid   { background: var(--night-mid); color: var(--white); }
-.section--off   { background: var(--off-white); }
+   ================================================================ */
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
+.section{padding:var(--s7) 0;}
 
-/* ============================================================
+/* ================================================================
    BUTTONS
-   ============================================================ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 13px 26px;
-  border-radius: var(--radius);
-  border: 1.5px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+   ================================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-b);font-size:0.8125rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:13px 26px;border-radius:3px;
+  border:1.5px solid transparent;cursor:pointer;
+  transition:all 0.2s ease;white-space:nowrap;
 }
-.btn-primary { background: var(--teal-primary); color: var(--white); border-color: var(--teal-primary); }
-.btn-primary:hover { background: var(--teal-deep); border-color: var(--teal-deep); transform: translateY(-1px); }
-.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.35); }
-.btn-outline:hover { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
-.btn-outline-teal { background: transparent; color: var(--teal-primary); border-color: var(--teal-primary); }
-.btn-outline-teal:hover { background: var(--teal-primary); color: var(--white); }
-.btn-ghost { background: transparent; color: rgba(255,255,255,0.5); border: none; padding: 13px 0; }
-.btn-ghost:hover { color: var(--white); }
+.btn-primary{background:var(--teal);color:var(--white);border-color:var(--teal);}
+.btn-primary:hover{background:var(--teal-deep);border-color:var(--teal-deep);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--white);border-color:rgba(255,255,255,0.3);}
+.btn-outline:hover{border-color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.06);}
+.btn-teal-outline{background:transparent;color:var(--teal);border-color:var(--teal);}
+.btn-teal-outline:hover{background:var(--teal);color:var(--white);}
+.btn-dark{background:var(--night);color:var(--white);border-color:var(--night);}
+.btn-dark:hover{background:var(--night-2);}
+.btn-sm{padding:10px 20px;font-size:0.75rem;}
 
-/* ============================================================
-   AUDIENCE GATE
-   ============================================================ */
-.gate {
-  position: fixed; inset: 0;
-  background: rgba(17,25,24,0.97);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  padding: var(--sp-4);
-  transition: opacity 0.35s ease;
+/* ================================================================
+   GATE
+   ================================================================ */
+.gate{
+  position:fixed;inset:0;
+  background:rgba(15,26,24,0.97);
+  backdrop-filter:blur(16px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;
+  padding:var(--s4);transition:opacity 0.35s ease;
 }
-.gate.hidden { opacity: 0; pointer-events: none; }
-.gate-box {
-  background: var(--night-soft);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  padding: var(--sp-6);
-  max-width: 500px; width: 100%;
-  text-align: center;
+.gate.hidden{opacity:0;pointer-events:none;}
+.gate-box{
+  background:var(--night-3);
+  border:1px solid var(--border-2);
+  border-radius:4px;padding:var(--s6);
+  max-width:480px;width:100%;text-align:center;
 }
-.gate-logo {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--white);
-  margin-bottom: var(--sp-5);
+.gate-logo{
+  font-family:var(--font-h);font-size:1.5rem;font-weight:500;
+  letter-spacing:0.14em;color:var(--white);margin-bottom:var(--s5);
 }
-.gate-logo span { color: var(--teal-light); }
-.gate-box h2 { color: var(--white); font-size: 1.8rem; margin-bottom: var(--sp-2); }
-.gate-box p { color: rgba(255,255,255,0.55); font-size: 0.9375rem; line-height: 1.7; margin-bottom: var(--sp-5); }
-.gate-yes {
-  width: 100%; padding: 16px;
-  background: var(--teal-primary); color: var(--white);
-  border: 1.5px solid var(--teal-primary); border-radius: var(--radius);
-  font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500;
-  cursor: pointer; transition: background 0.2s; margin-bottom: var(--sp-2);
+.gate-logo em{font-style:normal;color:var(--teal-light);}
+.gate-box h2{color:var(--white);font-size:1.9rem;margin-bottom:var(--s2);}
+.gate-box p{color:rgba(255,255,255,0.5);font-size:0.9375rem;line-height:1.7;margin-bottom:var(--s5);}
+.gate-yes{
+  width:100%;padding:15px;
+  background:var(--teal);color:var(--white);
+  border:1.5px solid var(--teal);border-radius:3px;
+  font-family:var(--font-b);font-size:0.9375rem;font-weight:600;
+  letter-spacing:0.04em;cursor:pointer;transition:background 0.2s;
+  margin-bottom:var(--s2);
 }
-.gate-yes:hover { background: var(--teal-deep); }
-.gate-no {
-  width: 100%; padding: 10px;
-  background: transparent; color: rgba(255,255,255,0.35);
-  border: none; font-family: var(--font-body); font-size: 0.8125rem;
-  cursor: pointer; transition: color 0.2s;
+.gate-yes:hover{background:var(--teal-deep);}
+.gate-no{
+  width:100%;padding:10px;background:transparent;
+  color:rgba(255,255,255,0.3);border:none;
+  font-family:var(--font-b);font-size:0.8125rem;
+  cursor:pointer;transition:color 0.2s;
 }
-.gate-no:hover { color: rgba(255,255,255,0.65); }
+.gate-no:hover{color:rgba(255,255,255,0.6);}
 
-/* ============================================================
-   NAV
-   ============================================================ */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100; padding: 0 var(--sp-4);
-  transition: background 0.3s, border-color 0.3s;
+/* ================================================================
+   NAV — bilingual links (tuatahi.art pattern)
+   ================================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;padding:0 var(--s4);
+  transition:background 0.3s,border-color 0.3s;
 }
-.nav.scrolled {
-  background: rgba(17,25,24,0.97);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(16px);
+.nav.scrolled{
+  background:rgba(15,26,24,0.97);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
 }
-.nav-inner {
-  max-width: var(--max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 72px;
+.nav-inner{
+  max-width:var(--max);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;
 }
-.nav-logo {
-  font-family: var(--font-heading);
-  font-size: 1.4rem; font-weight: 500;
-  letter-spacing: 0.1em; color: var(--white);
+.nav-logo{
+  font-family:var(--font-h);font-size:1.5rem;font-weight:500;
+  letter-spacing:0.12em;color:var(--white);flex-shrink:0;
 }
-.nav-logo span { color: var(--teal-light); }
-.nav-links { display: flex; align-items: center; gap: var(--sp-5); list-style: none; }
-.nav-links a {
-  font-size: 0.8125rem; font-weight: 400;
-  letter-spacing: 0.05em; color: rgba(255,255,255,0.65);
-  transition: color 0.2s;
+.nav-logo em{font-style:normal;color:var(--teal-light);}
+.nav-links{
+  display:flex;align-items:center;gap:var(--s4);list-style:none;
 }
-.nav-links a:hover { color: var(--teal-light); }
-.nav-cta {
-  background: transparent !important;
-  border: 1px solid rgba(115,168,165,0.45) !important;
-  color: var(--teal-light) !important;
-  padding: 8px 18px;
-  border-radius: var(--radius);
-  transition: all 0.2s !important;
+/* Bilingual nav item */
+.nav-links a{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;transition:opacity 0.2s;
 }
-.nav-cta:hover {
-  background: var(--teal-primary) !important;
-  color: var(--white) !important;
-  border-color: var(--teal-primary) !important;
+.nav-links a:hover{opacity:0.7;}
+.nav-en{
+  font-size:0.75rem;font-weight:500;
+  letter-spacing:0.06em;color:var(--white);
 }
+.nav-mi{
+  font-size:0.5625rem;font-weight:400;
+  letter-spacing:0.06em;color:rgba(115,168,165,0.6);
+  font-style:italic;
+}
+.nav-cta-wrap a{
+  flex-direction:row;
+  background:transparent;
+  border:1px solid rgba(115,168,165,0.4);
+  color:var(--teal-light) !important;
+  padding:8px 18px;border-radius:3px;
+  transition:all 0.2s !important;gap:0;
+}
+.nav-cta-wrap a:hover{
+  background:var(--teal) !important;
+  color:var(--white) !important;
+  border-color:var(--teal) !important;
+  opacity:1 !important;
+}
+.nav-cta-wrap .nav-en{color:inherit;}
+.nav-cta-wrap .nav-mi{display:none;}
 
-/* ============================================================
-   HERO — v2
-   New: darker, bolder, te reo first, latitude story
-   ============================================================ */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex; align-items: flex-end;
-  background: var(--night);
-  overflow: hidden;
+/* ================================================================
+   HERO v3
+   — Real Aho Farms photo
+   — Bolder headline
+   — Tuatahi-style bottom-left text positioning
+   ================================================================ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:flex-end;
+  background:var(--night);overflow:hidden;
 }
-.hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover;
-  background-position: center 40%;
-  opacity: 0.38;
-  will-change: transform;
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965787/aho_farms/raupunga/75978256265.jpg');
+  background-size:cover;background-position:center 45%;
+  opacity:0.5;will-change:transform;
+  transition:opacity 0.5s;
 }
-.hero-overlay {
-  position: absolute; inset: 0;
+.hero-overlay{
+  position:absolute;inset:0;
   background:
     linear-gradient(to bottom,
-      rgba(17,25,24,0.3) 0%,
-      rgba(17,25,24,0.05) 30%,
-      rgba(17,25,24,0.6) 65%,
-      rgba(17,25,24,0.97) 100%),
+      rgba(15,26,24,0.25) 0%,
+      rgba(15,26,24,0.1) 25%,
+      rgba(15,26,24,0.55) 60%,
+      rgba(15,26,24,0.97) 100%),
     linear-gradient(to right,
-      rgba(17,25,24,0.5) 0%,
-      transparent 60%);
+      rgba(15,26,24,0.6) 0%,
+      rgba(15,26,24,0.1) 55%,
+      transparent 100%);
 }
-/* Grain texture overlay for premium feel */
-.hero-grain {
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4; pointer-events: none;
+/* Tāniko grain on hero */
+.hero-grain{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:0.5;mix-blend-mode:screen;
 }
-.hero-content {
-  position: relative; z-index: 2;
-  width: 100%;
-  max-width: var(--max); margin: 0 auto;
-  padding: var(--sp-8) var(--sp-4);
-  padding-top: 160px;
+.hero-content{
+  position:relative;z-index:2;width:100%;
+  max-width:var(--max);margin:0 auto;
+  padding:var(--s8) var(--s4);padding-top:160px;
 }
-.hero-eyebrow {
-  display: flex; align-items: center; gap: var(--sp-2);
-  margin-bottom: var(--sp-4);
-  opacity: 0;
+.hero-eyebrow{
+  display:flex;align-items:center;gap:var(--s2);
+  margin-bottom:var(--s4);opacity:0;
 }
-.hero-eyebrow-line { width: 28px; height: 1px; background: var(--teal-primary); }
-.hero-eyebrow-text {
-  font-family: var(--font-body);
-  font-size: 0.6875rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--teal-light);
+.hero-line{width:24px;height:1px;background:var(--teal);}
+.hero-location{
+  font-size:0.625rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--teal-light);
 }
-/* Te reo above English headline */
-.hero-te-reo {
-  font-family: var(--font-heading);
-  font-style: italic; font-weight: 300;
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  color: var(--teal-light);
-  letter-spacing: -0.01em;
-  margin-bottom: var(--sp-2);
-  display: block;
-  opacity: 0;
+.hero-te-reo{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  color:var(--teal-light);letter-spacing:-0.01em;
+  display:block;margin-bottom:var(--s2);opacity:0;
 }
-.hero h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(3.8rem, 7.5vw, 6.8rem);
-  font-weight: 300; line-height: 0.98;
-  letter-spacing: -0.04em;
-  color: var(--white);
-  max-width: 14ch;
-  margin-bottom: var(--sp-4);
-  opacity: 0;
+.hero h1{
+  font-family:var(--font-h);
+  font-size:clamp(4rem,8.5vw,7.5rem);
+  font-weight:300;line-height:0.95;
+  letter-spacing:-0.045em;color:var(--white);
+  max-width:12ch;margin-bottom:var(--s4);opacity:0;
 }
-.hero h1 em { font-style: italic; color: var(--teal-light); }
-.hero-sub {
-  font-size: 1.0625rem; line-height: 1.75;
-  color: rgba(255,255,255,0.6);
-  max-width: 46ch;
-  margin-bottom: var(--sp-5);
-  opacity: 0;
+.hero h1 em{font-style:italic;color:var(--teal-light);}
+.hero-sub{
+  font-size:1rem;line-height:1.75;
+  color:rgba(255,255,255,0.55);
+  max-width:46ch;margin-bottom:var(--s5);opacity:0;
 }
-.hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; opacity: 0; }
+.hero-actions{display:flex;gap:var(--s2);flex-wrap:wrap;opacity:0;}
 /* Latitude badge */
-.hero-badge {
-  position: absolute;
-  bottom: var(--sp-6); right: var(--sp-4);
-  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
-  opacity: 0;
+.hero-lat{
+  position:absolute;bottom:var(--s6);right:var(--s4);
+  text-align:right;opacity:0;
 }
-.hero-badge-number {
-  font-family: var(--font-heading);
-  font-size: 3.5rem; font-weight: 300;
-  line-height: 1; color: rgba(255,255,255,0.12);
-  letter-spacing: -0.04em;
+.hero-lat-num{
+  font-family:var(--font-h);
+  font-size:4rem;font-weight:300;letter-spacing:-0.05em;
+  color:rgba(255,255,255,0.1);line-height:1;display:block;
 }
-.hero-badge-text {
-  font-size: 0.6875rem; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  text-align: right;
+.hero-lat-txt{
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(255,255,255,0.25);
 }
-.hero-scroll-indicator {
-  position: absolute; bottom: var(--sp-5); left: var(--sp-4);
-  display: flex; flex-direction: column; align-items: center;
-  gap: var(--sp-1); opacity: 0;
+/* Scroll indicator */
+.hero-scroll{
+  position:absolute;bottom:var(--s5);left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:var(--s1);
+  opacity:0;
 }
-.hero-scroll-line {
-  width: 1px; height: 52px;
-  background: linear-gradient(to bottom, rgba(115,168,165,0.6), transparent);
-  animation: scrollAnim 2.2s ease-in-out infinite;
+.hero-scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,rgba(115,168,165,0.7),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
 }
-@keyframes scrollAnim {
-  0%,100% { opacity: 0.3; transform: scaleY(1); transform-origin: top; }
-  50% { opacity: 0.9; transform: scaleY(1.15); }
+@keyframes scrollPulse{
+  0%,100%{opacity:0.4;transform:scaleY(1);transform-origin:top;}
+  50%{opacity:1;transform:scaleY(1.1);}
 }
-.hero-scroll-text {
-  font-size: 0.5625rem; font-weight: 600;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+.hero-scroll-txt{
+  font-size:0.5rem;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(255,255,255,0.2);
 }
 
-/* ============================================================
+/* ================================================================
    CREDENTIALS STRIP
-   ============================================================ */
-.creds {
-  background: var(--night-mid);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: var(--sp-3) 0;
-  overflow: hidden;
+   ================================================================ */
+.creds{
+  background:var(--night-2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:var(--s3) 0;overflow:hidden;
 }
-.creds-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 var(--sp-4);
-  display: flex; align-items: center;
-  justify-content: space-between; gap: var(--sp-3);
-  flex-wrap: wrap;
+.creds-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s3);flex-wrap:wrap;
 }
-.cred-item { display: flex; align-items: center; gap: 10px; }
-.cred-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-primary); flex-shrink: 0; }
-.cred-text { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); }
-.cred-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+.cred{display:flex;align-items:center;gap:10px;}
+.cred-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+.cred-txt{font-size:0.6875rem;font-weight:500;letter-spacing:0.05em;color:rgba(255,255,255,0.5);}
+.cred-div{width:1px;height:16px;background:var(--border);flex-shrink:0;}
 
-/* ============================================================
-   AUDIENCE ROUTING — v2
-   Darker, more confident card design
-   ============================================================ */
-.routing { background: var(--night); padding: var(--sp-7) 0; }
-.routing-header { text-align: center; margin-bottom: var(--sp-6); }
-.routing-header h2 { color: var(--white); margin-bottom: var(--sp-2); }
-.routing-header p { color: rgba(255,255,255,0.45); font-size: 0.9375rem; }
-.routing-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: var(--sp-2);
+/* ================================================================
+   AUDIENCE ROUTING
+   ================================================================ */
+.routing{background:var(--night);padding:var(--s7) 0;}
+.routing-hdr{text-align:center;margin-bottom:var(--s6);}
+.routing-hdr h2{color:var(--white);margin-bottom:var(--s2);}
+.routing-hdr p{color:rgba(255,255,255,0.4);font-size:0.9375rem;}
+.routing-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;
 }
-.routing-card {
-  background: var(--night-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--sp-4);
-  display: block;
-  transition: border-color 0.22s, transform 0.22s, background 0.22s;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
+.rcard{
+  background:var(--night-3);padding:var(--s4);
+  display:block;text-decoration:none;
+  transition:background 0.22s;
+  position:relative;overflow:hidden;
 }
-.routing-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--teal-primary);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.3s ease;
+.rcard::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--teal);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s ease;
 }
-.routing-card:hover {
-  border-color: rgba(115,168,165,0.35);
-  transform: translateY(-4px);
-  background: rgba(45,82,80,0.3);
+.rcard:hover{background:var(--night-4);}
+.rcard:hover::after{transform:scaleX(1);}
+.rcard-icon{
+  width:32px;height:32px;margin-bottom:var(--s3);
+  display:flex;align-items:center;justify-content:center;
 }
-.routing-card:hover::before { transform: scaleX(1); }
-.routing-card-icon {
-  width: 36px; height: 36px; margin-bottom: var(--sp-3);
-  display: flex; align-items: center; justify-content: center;
+.rcard-icon svg{
+  width:20px;height:20px;stroke:var(--teal);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
 }
-.routing-card-icon svg {
-  width: 22px; height: 22px;
-  stroke: var(--teal-primary); fill: none;
-  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+.rcard h4{color:var(--white);font-size:1rem;margin-bottom:6px;}
+.rcard p{font-size:0.8125rem;color:rgba(255,255,255,0.38);line-height:1.6;margin-bottom:var(--s3);}
+.rcard-cta{
+  font-size:0.625rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--teal);
+  display:flex;align-items:center;gap:6px;
+  transition:gap 0.2s;
 }
-.routing-card h4 { color: var(--white); font-size: 1.05rem; margin-bottom: 6px; }
-.routing-card p { font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: var(--sp-3); }
-.routing-card-cta {
-  font-size: 0.6875rem; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--teal-primary);
-  display: flex; align-items: center; gap: 6px;
-  transition: gap 0.2s;
-}
-.routing-card:hover .routing-card-cta { gap: 10px; }
-.routing-card-cta svg {
-  width: 12px; height: 12px;
-  stroke: currentColor; fill: none; stroke-width: 2;
-  stroke-linecap: round; stroke-linejoin: round;
-}
+.rcard:hover .rcard-cta{gap:10px;}
+.rcard-cta svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ============================================================
-   BRAND STORY — v2
-   New: stronger dual-origin narrative, latitude story
-   ============================================================ */
-.story { padding: var(--sp-7) 0; background: var(--white); }
-.story-inner {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--sp-7); align-items: center;
+/* ================================================================
+   BRAND STORY — Real photo, strong dual origin
+   ================================================================ */
+.story{padding:var(--s7) 0;background:var(--white);}
+.story-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--s7);align-items:center;
 }
-.story-image {
-  position: relative;
-  aspect-ratio: 4/5; overflow: hidden;
-  border-radius: var(--radius-md);
+.story-img{
+  position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:4px;
 }
-.story-image img { width: 100%; height: 100%; object-fit: cover; }
-.story-image-tag {
-  position: absolute; bottom: var(--sp-3); left: var(--sp-3); right: var(--sp-3);
-  background: rgba(17,25,24,0.88);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius);
-  padding: var(--sp-2) var(--sp-3);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; gap: var(--sp-2);
+.story-img img{width:100%;height:100%;object-fit:cover;}
+/* Latitude callout */
+.story-lat{
+  position:absolute;top:var(--s3);right:var(--s3);
+  background:var(--soil);border-radius:3px;
+  padding:var(--s2) var(--s3);text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.3);
 }
-.story-image-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-primary); flex-shrink: 0; }
-.story-image-tag p { font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.4; }
-/* Latitude callout beside image */
-.story-lat {
-  position: absolute; top: var(--sp-3); right: -var(--sp-2);
-  transform: translateX(50%);
-  background: var(--soil);
-  border-radius: var(--radius);
-  padding: var(--sp-2) var(--sp-3);
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+.story-lat-n{
+  font-family:var(--font-h);font-size:1.8rem;font-weight:300;
+  color:var(--white);line-height:1;display:block;
 }
-.story-lat-number {
-  font-family: var(--font-heading);
-  font-size: 1.75rem; font-weight: 300;
-  color: var(--white); line-height: 1; display: block;
+.story-lat-l{font-size:0.5625rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
+/* Image caption */
+.story-cap{
+  position:absolute;bottom:var(--s3);left:var(--s3);right:var(--s3);
+  background:rgba(15,26,24,0.88);backdrop-filter:blur(8px);
+  border-radius:3px;padding:var(--s2) var(--s3);
+  border:1px solid var(--border);
 }
-.story-lat-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+.story-cap p{font-size:0.6875rem;color:rgba(255,255,255,0.6);line-height:1.4;}
 /* Content */
-.story-content .te-reo { color: var(--teal-deep); opacity: 1; }
-.story-content h2 { color: var(--night); margin-bottom: var(--sp-4); }
-.story-content p { color: #4a5c5a; line-height: 1.8; margin-bottom: var(--sp-3); font-size: 1rem; }
-.story-dual {
-  display: flex; gap: var(--sp-3); margin: var(--sp-4) 0;
-  padding: var(--sp-3); background: var(--off-white);
-  border-radius: var(--radius-md); border: 1px solid rgba(115,168,165,0.12);
+.story-content h2{color:var(--night);margin-bottom:var(--s4);}
+.story-content p{color:#4a5c5a;line-height:1.8;margin-bottom:var(--s3);font-size:1rem;}
+/* Dual origin box — California + Hawke's Bay */
+.dual{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--s3);margin:var(--s4) 0;
+  padding:var(--s3);background:var(--off);
+  border-radius:4px;border:1px solid rgba(115,168,165,0.12);
 }
-.story-dual-item { flex: 1; }
-.story-dual-label {
-  font-size: 0.6875rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--teal-deep); display: block; margin-bottom: 4px;
+.dual-label{
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--teal-deep);display:block;margin-bottom:4px;
 }
-.story-dual-text { font-size: 0.9rem; color: var(--night); line-height: 1.5; font-weight: 400; }
-.story-divider { width: 1px; background: var(--border); flex-shrink: 0; }
-.story-quote {
-  border-left: 2px solid var(--teal-primary);
-  padding-left: var(--sp-3);
-  margin: var(--sp-4) 0;
+.dual-val{font-size:0.875rem;color:var(--night);line-height:1.5;font-weight:400;}
+.dual-div{width:1px;background:rgba(115,168,165,0.15);}
+/* Quote */
+.story-quote{border-left:2px solid var(--teal);padding-left:var(--s3);margin:var(--s4) 0;}
+.story-quote blockquote{
+  font-family:var(--font-h);font-size:1.3rem;font-weight:300;font-style:italic;
+  color:var(--teal-deep);line-height:1.5;
 }
-.story-quote blockquote {
-  font-family: var(--font-heading);
-  font-size: 1.35rem; font-weight: 300; font-style: italic;
-  color: var(--teal-deep); line-height: 1.5;
-}
-.story-quote cite {
-  display: block; margin-top: var(--sp-1);
-  font-size: 0.8125rem; font-style: normal;
-  color: var(--muted); font-weight: 500;
+.story-quote cite{
+  display:block;margin-top:var(--s1);font-size:0.75rem;
+  font-style:normal;color:var(--muted);font-weight:500;
 }
 
-/* ============================================================
-   CREDENTIALS BAR — Homepage proof points
-   New: CFU count, pheno hunt, latitude, licence
-   ============================================================ */
-.proof { background: var(--night-mid); padding: var(--sp-6) 0; }
-.proof-grid {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border); border-radius: var(--radius-md);
-  overflow: hidden;
+/* ================================================================
+   PROOF POINTS — CFU, pheno hunt, IANZ, latitude
+   ================================================================ */
+.proof{
+  padding:var(--s6) 0;
+  background:var(--night-2);
 }
-.proof-item {
-  background: var(--night-card);
-  padding: var(--sp-4);
-  text-align: center;
+.proof.taniko{} /* inherits from .taniko */
+.proof-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:4px;overflow:hidden;
 }
-.proof-number {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 300; line-height: 1;
-  color: var(--white); display: block;
-  margin-bottom: 6px;
+.proof-item{
+  background:var(--night-3);padding:var(--s4);text-align:center;
 }
-.proof-number span { color: var(--teal-primary); }
-.proof-label {
-  font-size: 0.75rem; color: rgba(255,255,255,0.45);
-  line-height: 1.5;
+.proof-num{
+  font-family:var(--font-h);
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:300;line-height:1;color:var(--white);
+  display:block;margin-bottom:6px;
 }
+.proof-num em{font-style:normal;color:var(--teal);font-size:0.7em;}
+.proof-lbl{font-size:0.6875rem;color:rgba(255,255,255,0.4);line-height:1.5;}
 
-/* ============================================================
-   CULTIVATION PREVIEW — v2
-   ============================================================ */
-.cultivation { background: var(--off-white); padding: var(--sp-7) 0; }
-.cultivation-header { margin-bottom: var(--sp-6); }
-.cultivation-header h2 { color: var(--night); margin-bottom: var(--sp-3); }
-.cultivation-header p { color: var(--muted); max-width: 52ch; font-size: 1rem; line-height: 1.75; }
-.cultivation-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-5);
-  height: 480px;
+/* ================================================================
+   CULTIVATION — Real photos
+   ================================================================ */
+.cult{background:var(--off);padding:var(--s7) 0;}
+.cult-hdr{margin-bottom:var(--s6);}
+.cult-hdr h2{color:var(--night);margin-bottom:var(--s3);}
+.cult-hdr p{color:var(--muted);max-width:52ch;font-size:1rem;line-height:1.75;}
+.cult-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:var(--s2);height:500px;
+  margin-bottom:var(--s5);
 }
-.cimg { border-radius: var(--radius-md); overflow: hidden; position: relative; }
-.cimg img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
-.cimg:hover img { transform: scale(1.04); }
-.cimg-main { grid-row: span 2; }
-.cimg-tag {
-  position: absolute; bottom: var(--sp-2); left: var(--sp-2);
-  background: rgba(17,25,24,0.8); backdrop-filter: blur(6px);
-  border-radius: var(--radius); padding: 5px 10px;
-  font-size: 0.625rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--teal-light); border: 1px solid var(--border);
+.cimg{border-radius:4px;overflow:hidden;position:relative;}
+.cimg img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;display:block;}
+.cimg:hover img{transform:scale(1.05);}
+.cimg-main{grid-row:span 2;}
+.cimg-tag{
+  position:absolute;bottom:var(--s2);left:var(--s2);
+  background:rgba(15,26,24,0.85);backdrop-filter:blur(6px);
+  border-radius:2px;padding:4px 10px;
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal-light);border:1px solid var(--border);
 }
-.cultivation-proof {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-3);
+/* Cultivation proof stats */
+.cult-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);
 }
-.cproof-item {
-  background: var(--white); border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  padding: var(--sp-4);
+.cstat{
+  background:var(--white);border-radius:4px;
+  border:1px solid rgba(115,168,165,0.12);padding:var(--s4);
 }
-.cproof-number {
-  font-family: var(--font-heading);
-  font-size: 2.2rem; font-weight: 300; color: var(--night);
-  line-height: 1; margin-bottom: 4px; display: block;
+.cstat-n{
+  font-family:var(--font-h);font-size:2.2rem;font-weight:300;
+  color:var(--night);line-height:1;margin-bottom:4px;display:block;
 }
-.cproof-number sup { font-size: 1.2rem; color: var(--teal-primary); vertical-align: super; }
-.cproof-label { font-size: 0.8125rem; color: var(--muted); line-height: 1.5; }
+.cstat-n sup{font-size:1rem;color:var(--teal);vertical-align:super;}
+.cstat-l{font-size:0.8125rem;color:var(--muted);line-height:1.5;}
 
-/* ============================================================
-   KAUPAPA SECTION — v2
-   New: bilingual headline, stronger pillars, community impact
-   ============================================================ */
-.kaupapa {
-  background: var(--night);
-  padding: var(--sp-7) 0;
-  position: relative; overflow: hidden;
+/* ================================================================
+   FOUR PILLARS (from brief)
+   ================================================================ */
+.pillars{background:var(--white);padding:var(--s7) 0;}
+.pillars-hdr{text-align:center;margin-bottom:var(--s6);}
+.pillars-hdr h2{color:var(--night);margin-bottom:var(--s2);}
+.pillars-hdr p{color:var(--muted);max-width:48ch;margin:0 auto;}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);}
+.pcard{
+  padding:var(--s4);border:1px solid rgba(115,168,165,0.13);
+  border-radius:4px;position:relative;overflow:hidden;
+  transition:border-color 0.2s,transform 0.2s;
 }
-.kaupapa-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover; background-position: center;
-  opacity: 0.07;
+.pcard:hover{border-color:rgba(115,168,165,0.3);transform:translateY(-3px);}
+.pcard::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--teal),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
 }
-.kaupapa-inner {
-  position: relative; z-index: 2;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--sp-7); align-items: start;
+.pcard:hover::after{transform:scaleX(1);}
+.pcard-n{
+  font-family:var(--font-h);font-size:4rem;font-weight:300;
+  color:rgba(74,122,120,0.1);line-height:1;margin-bottom:var(--s2);
+  letter-spacing:-0.05em;font-style:italic;
 }
-.kaupapa-content .te-reo { opacity: 0.9; margin-bottom: var(--sp-2); }
-.kaupapa-content h2 { color: var(--white); margin-bottom: var(--sp-4); }
-.kaupapa-content p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 1rem; margin-bottom: var(--sp-3); }
-.kaupapa-translation {
-  font-size: 0.8125rem; color: rgba(255,255,255,0.35);
-  letter-spacing: 0.04em; margin-bottom: var(--sp-5);
-  font-style: italic;
-}
-/* Community impact stats */
-.kaupapa-impact {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--sp-2); margin-bottom: var(--sp-5);
-}
-.impact-stat {
-  background: rgba(115,168,165,0.05);
-  border: 1px solid rgba(115,168,165,0.12);
-  border-radius: var(--radius-md);
-  padding: var(--sp-3);
-}
-.impact-stat-number {
-  font-family: var(--font-heading);
-  font-size: 2rem; font-weight: 300;
-  color: var(--teal-light); display: block;
-  line-height: 1; margin-bottom: 4px;
-}
-.impact-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
-/* Pillars */
-.kaupapa-pillars { display: flex; flex-direction: column; gap: var(--sp-2); }
-.kpillar {
-  display: flex; gap: var(--sp-3);
-  padding: var(--sp-3);
-  background: rgba(115,168,165,0.04);
-  border: 1px solid rgba(115,168,165,0.1);
-  border-radius: var(--radius-md);
-  align-items: flex-start;
-  transition: border-color 0.2s, background 0.2s;
-}
-.kpillar:hover {
-  border-color: rgba(115,168,165,0.22);
-  background: rgba(115,168,165,0.08);
-}
-.kpillar-icon {
-  width: 32px; height: 32px; flex-shrink: 0;
-  background: rgba(115,168,165,0.1);
-  border-radius: var(--radius);
-  display: flex; align-items: center; justify-content: center;
-}
-.kpillar-icon svg {
-  width: 16px; height: 16px;
-  stroke: var(--teal-light); fill: none;
-  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-}
-.kpillar-text h4 { color: var(--white); font-size: 0.9375rem; margin-bottom: 3px; }
-.kpillar-text p { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.5; margin: 0; }
+.pcard h4{color:var(--night);margin-bottom:var(--s2);font-size:0.9375rem;}
+.pcard p{font-size:0.875rem;color:var(--muted);line-height:1.65;}
 
-/* ============================================================
-   FOUR BRAND PILLARS — from brief
-   ============================================================ */
-.pillars-section { background: var(--white); padding: var(--sp-7) 0; }
-.pillars-header { text-align: center; margin-bottom: var(--sp-6); }
-.pillars-header h2 { color: var(--night); margin-bottom: var(--sp-2); }
-.pillars-header p { color: var(--muted); max-width: 48ch; margin: 0 auto; }
-.pillars-grid {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: var(--sp-2);
+/* ================================================================
+   KAUPAPA — People photo + impact stats
+   ================================================================ */
+.kaupapa{
+  position:relative;overflow:hidden;padding:var(--s7) 0;
 }
-.pillar-card {
-  padding: var(--sp-4);
-  border: 1px solid rgba(115,168,165,0.15);
-  border-radius: var(--radius-md);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s, transform 0.2s;
+.kaupapa-bg{
+  position:absolute;inset:0;
+  background-image:url('https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965795/aho_farms/raupunga/IMG_2854.jpg');
+  background-size:cover;background-position:center 30%;
+  opacity:0.2;
 }
-.pillar-card:hover { border-color: rgba(115,168,165,0.35); transform: translateY(-3px); }
-.pillar-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, var(--teal-primary), transparent);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+.kaupapa-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--night) 40%,rgba(15,26,24,0.88) 100%);
 }
-.pillar-card:hover::after { transform: scaleX(1); }
-.pillar-card-number {
-  font-family: var(--font-heading);
-  font-size: 3.5rem; font-weight: 300;
-  color: rgba(74,122,120,0.12); line-height: 1;
-  margin-bottom: var(--sp-2);
-  letter-spacing: -0.04em;
+.kaupapa-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--s7);align-items:start;
 }
-.pillar-card h4 { color: var(--night); margin-bottom: var(--sp-2); font-size: 1rem; }
-.pillar-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+.kap-left h2{color:var(--white);margin-bottom:var(--s4);}
+.kap-left p{color:rgba(255,255,255,0.6);line-height:1.8;font-size:1rem;margin-bottom:var(--s3);}
+.kap-translation{font-size:0.8rem;color:rgba(255,255,255,0.3);font-style:italic;margin-bottom:var(--s5);}
+/* Impact stats — on homepage, not buried */
+.kap-impact{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin-bottom:var(--s5);
+}
+.istat{
+  background:rgba(115,168,165,0.05);
+  border:1px solid rgba(115,168,165,0.1);
+  border-radius:4px;padding:var(--s3);
+}
+.istat-n{
+  font-family:var(--font-h);font-size:1.8rem;font-weight:300;
+  color:var(--teal-light);display:block;line-height:1;margin-bottom:4px;
+}
+.istat-l{font-size:0.6875rem;color:rgba(255,255,255,0.4);line-height:1.4;}
+/* Pillars right */
+.kap-pillars{display:flex;flex-direction:column;gap:var(--s2);}
+.kpillar{
+  display:flex;gap:var(--s3);padding:var(--s3);
+  background:rgba(115,168,165,0.04);
+  border:1px solid rgba(115,168,165,0.08);
+  border-radius:4px;align-items:flex-start;
+  transition:border-color 0.2s,background 0.2s;
+}
+.kpillar:hover{border-color:rgba(115,168,165,0.18);background:rgba(115,168,165,0.07);}
+.kpillar-ico{
+  width:30px;height:30px;flex-shrink:0;
+  background:rgba(115,168,165,0.08);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+}
+.kpillar-ico svg{
+  width:14px;height:14px;stroke:var(--teal-light);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+.kpillar h4{color:var(--white);font-size:0.9rem;margin-bottom:3px;}
+.kpillar p{font-size:0.75rem;color:rgba(255,255,255,0.38);line-height:1.5;margin:0;}
 
-/* ============================================================
-   NEWS — v2
-   ============================================================ */
-.news { background: var(--off-white); padding: var(--sp-7) 0; }
-.news-header {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  margin-bottom: var(--sp-6);
+/* ================================================================
+   NEWS
+   ================================================================ */
+.news{background:var(--off);padding:var(--s7) 0;}
+.news-hdr{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:var(--s6);
 }
-.news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); }
-.news-card {
-  background: var(--white);
-  border: 1px solid var(--border); border-radius: var(--radius-md);
-  overflow: hidden; display: flex; flex-direction: column;
-  transition: border-color 0.2s, transform 0.2s;
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);}
+.ncard{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;display:flex;flex-direction:column;
+  transition:border-color 0.2s,transform 0.2s;text-decoration:none;
 }
-.news-card:hover { border-color: var(--teal-primary); transform: translateY(-3px); }
-.news-card-img { aspect-ratio: 16/9; overflow: hidden; }
-.news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-.news-card:hover .news-card-img img { transform: scale(1.04); }
-.news-card-body { padding: var(--sp-3); flex: 1; display: flex; flex-direction: column; }
-.news-card-meta { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-2); }
-.news-tag {
-  font-size: 0.625rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--teal-primary); background: rgba(115,168,165,0.1);
-  padding: 3px 8px; border-radius: 2px;
+.ncard:hover{border-color:var(--teal);transform:translateY(-3px);}
+.ncard-img{aspect-ratio:16/9;overflow:hidden;}
+.ncard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block;}
+.ncard:hover .ncard-img img{transform:scale(1.05);}
+.ncard-body{padding:var(--s3);flex:1;display:flex;flex-direction:column;}
+.ncard-meta{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s2);}
+.ntag{
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--teal);background:rgba(115,168,165,0.1);padding:3px 8px;border-radius:2px;
 }
-.news-date { font-size: 0.75rem; color: var(--muted); }
-.news-card-body h4 { color: var(--night); font-size: 1.0625rem; line-height: 1.3; margin-bottom: var(--sp-2); }
-.news-card-body p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; flex: 1; }
+.ndate{font-size:0.6875rem;color:var(--muted);}
+.ncard h4{color:var(--night);font-size:1rem;line-height:1.3;margin-bottom:var(--s2);}
+.ncard p{font-size:0.875rem;color:var(--muted);line-height:1.65;flex:1;}
 
-/* ============================================================
+/* ================================================================
    DISCLAIMER
-   ============================================================ */
-.disclaimer {
-  background: var(--night-mid);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: var(--sp-4) 0;
+   ================================================================ */
+.disc{
+  background:var(--night-2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:var(--s3) 0;
 }
-.disclaimer-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 var(--sp-4);
-  display: flex; gap: var(--sp-3); align-items: flex-start;
+.disc-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:flex;gap:var(--s2);align-items:flex-start;
 }
-.disclaimer-icon { flex-shrink: 0; margin-top: 2px; }
-.disclaimer-icon svg {
-  width: 16px; height: 16px;
-  stroke: var(--teal-primary); fill: none; stroke-width: 1.5;
-  stroke-linecap: round; stroke-linejoin: round;
+.disc-ico{flex-shrink:0;margin-top:2px;}
+.disc-ico svg{
+  width:14px;height:14px;stroke:var(--teal);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
 }
-.disclaimer p { font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+.disc p{font-size:0.75rem;color:rgba(255,255,255,0.35);line-height:1.6;}
 
-/* ============================================================
-   FOOTER — v2
-   New: bilingual nav labels, founding partnership
-   ============================================================ */
-.footer { background: var(--night); padding: var(--sp-7) 0 var(--sp-4); border-top: 1px solid var(--border); }
-.footer-top {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: var(--sp-6);
-  padding-bottom: var(--sp-6);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: var(--sp-5);
+/* ================================================================
+   FOOTER CTA BANNER — tuatahi.art pattern
+   Full-width, dramatic, large te reo headline
+   ================================================================ */
+.footer-cta{
+  background:var(--teal-deep);
+  background-image:linear-gradient(135deg,var(--teal-deep) 0%,var(--night-2) 100%);
+  padding:var(--s7) 0;text-align:center;
+  border-top:1px solid rgba(115,168,165,0.2);
+  position:relative;overflow:hidden;
 }
-.footer-logo { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 500; letter-spacing: 0.1em; color: var(--white); margin-bottom: var(--sp-2); }
-.footer-logo span { color: var(--teal-light); }
-.footer-badge {
-  display: inline-block; font-size: 0.625rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--teal-primary); border: 1px solid rgba(115,168,165,0.25);
-  padding: 4px 10px; border-radius: 2px; margin-bottom: var(--sp-3);
+.footer-cta::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.03' stroke-width='0.5'%3E%3Cpath d='M0 15h60M0 30h60M0 45h60M15 0v60M30 0v60M45 0v60'/%3E%3C/g%3E%3C/svg%3E");
 }
-.footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.35); line-height: 1.7; max-width: 28ch; margin-bottom: var(--sp-3); }
+.footer-cta-inner{position:relative;z-index:2;}
+.footer-cta .eyebrow{justify-content:center;display:flex;margin-bottom:var(--s3);}
+.footer-cta-headline{
+  font-family:var(--font-h);
+  font-size:clamp(4rem,10vw,9rem);
+  font-weight:300;line-height:0.9;letter-spacing:-0.05em;
+  color:rgba(255,255,255,0.95);margin-bottom:var(--s3);
+  display:block;
+}
+.footer-cta-sub{
+  font-size:1rem;color:rgba(255,255,255,0.55);
+  margin-bottom:var(--s5);
+}
+.footer-cta-btns{display:flex;gap:var(--s2);justify-content:center;flex-wrap:wrap;}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer{
+  background:var(--night);padding:var(--s7) 0 var(--s4);
+  border-top:1px solid var(--border);
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:var(--s6);padding-bottom:var(--s6);
+  border-bottom:1px solid var(--border);margin-bottom:var(--s5);
+}
+.footer-logo{
+  font-family:var(--font-h);font-size:1.6rem;font-weight:500;
+  letter-spacing:0.12em;color:var(--white);margin-bottom:var(--s2);
+}
+.footer-logo em{font-style:normal;color:var(--teal-light);}
+.footer-badge{
+  display:inline-block;font-size:0.5625rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal);border:1px solid rgba(115,168,165,0.2);
+  padding:4px 10px;border-radius:2px;margin-bottom:var(--s3);
+}
+.footer-tagline{font-size:0.875rem;color:rgba(255,255,255,0.3);line-height:1.7;max-width:28ch;margin-bottom:var(--s3);}
 /* Founding partnership */
-.footer-partnership {
-  font-size: 0.75rem; color: rgba(255,255,255,0.2);
-  line-height: 1.6; border-top: 1px solid var(--border); padding-top: var(--sp-3);
+.footer-partner{
+  font-size:0.6875rem;color:rgba(255,255,255,0.2);
+  line-height:1.6;border-top:1px solid var(--border);padding-top:var(--s3);
 }
-.footer-partnership strong { color: rgba(255,255,255,0.35); font-weight: 500; }
-
-.footer-col h5 {
-  font-family: var(--font-body);
-  font-size: 0.625rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(255,255,255,0.3); margin-bottom: var(--sp-3);
+.footer-partner strong{color:rgba(255,255,255,0.32);font-weight:500;}
+/* Nav columns */
+.footer-col h5{
+  font-family:var(--font-b);font-size:0.5625rem;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:var(--s3);
 }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); }
-.footer-col ul li a { font-size: 0.875rem; color: rgba(255,255,255,0.55); transition: color 0.18s; }
-.footer-col ul li a:hover { color: var(--teal-light); }
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
 /* Bilingual footer links */
-.footer-link-te-reo { font-size: 0.6875rem; color: rgba(255,255,255,0.25); display: block; line-height: 1; margin-top: 1px; font-style: italic; }
-.footer-bottom { display: flex; align-items: center; justify-content: space-between; }
-.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
-.footer-legal { font-size: 0.6875rem; color: rgba(255,255,255,0.18); max-width: 56ch; text-align: right; line-height: 1.5; }
+.footer-col li a{
+  display:flex;flex-direction:column;gap:2px;
+  text-decoration:none;transition:opacity 0.2s;
+}
+.footer-col li a:hover{opacity:0.65;}
+.footer-link-en{font-size:0.875rem;color:rgba(255,255,255,0.55);}
+.footer-link-mi{font-size:0.5625rem;color:rgba(115,168,165,0.4);font-style:italic;}
+/* Bottom bar */
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-size:0.6875rem;color:rgba(255,255,255,0.2);}
+.footer-copy a{color:inherit;opacity:0.6;transition:opacity 0.2s;}
+.footer-copy a:hover{opacity:1;}
+.footer-legal{font-size:0.625rem;color:rgba(255,255,255,0.15);max-width:54ch;text-align:right;line-height:1.5;}
 
-/* ============================================================
-   GSAP — Initial states (prevent FOUC)
-   ============================================================ */
-.js-fade { opacity: 0; }
+/* ================================================================
+   SCROLL ANIMATIONS — initial states
+   ================================================================ */
+.js-up{opacity:0;transform:translateY(28px);}
 
-/* ============================================================
+/* ================================================================
    RESPONSIVE
-   ============================================================ */
-@media (max-width: 1100px) {
-  .routing-grid { grid-template-columns: repeat(2,1fr); }
-  .pillars-grid { grid-template-columns: repeat(2,1fr); }
-  .proof-grid { grid-template-columns: repeat(2,1fr); }
-  .story-inner { grid-template-columns: 1fr; }
-  .story-image { aspect-ratio: 16/9; }
-  .story-lat { display: none; }
-  .kaupapa-inner { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
+   ================================================================ */
+@media(max-width:1100px){
+  .routing-grid{grid-template-columns:repeat(2,1fr);}
+  .pillars-grid{grid-template-columns:repeat(2,1fr);}
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
+  .story-grid{grid-template-columns:1fr;}
+  .story-img{aspect-ratio:16/9;}
+  .story-lat{display:none;}
+  .kaupapa-inner{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
 }
-@media (max-width: 768px) {
-  :root { --sp-7: 64px; --sp-8: 80px; }
-  .nav-links { display: none; }
-  .cultivation-grid { grid-template-columns: 1fr; height: auto; grid-template-rows: auto; }
-  .cimg-main { height: 300px; }
-  .cimg { height: 200px; }
-  .cultivation-proof { grid-template-columns: 1fr; }
-  .news-grid { grid-template-columns: 1fr; }
-  .news-header { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
-  .hero-actions { flex-direction: column; }
-  .hero-badge { display: none; }
-  .kaupapa-impact { grid-template-columns: 1fr 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: var(--sp-3); text-align: center; }
-  .footer-legal { text-align: center; }
-  .creds-inner { gap: var(--sp-2); }
-  .cred-divider { display: none; }
+@media(max-width:768px){
+  :root{--s7:64px;--s8:80px;}
+  .nav-links{display:none;}
+  .cult-grid{grid-template-columns:1fr;height:auto;grid-template-rows:auto;}
+  .cimg-main{height:300px;}
+  .cimg{height:200px;}
+  .cult-stats{grid-template-columns:1fr;}
+  .news-grid{grid-template-columns:1fr;}
+  .news-hdr{flex-direction:column;align-items:flex-start;gap:var(--s3);}
+  .hero-actions{flex-direction:column;}
+  .hero-lat{display:none;}
+  .kap-impact{grid-template-columns:1fr 1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:var(--s3);text-align:center;}
+  .footer-legal{text-align:center;}
+  .creds-inner{gap:var(--s2);}
+  .cred-div{display:none;}
+  .footer-cta-headline{font-size:clamp(3rem,15vw,6rem);}
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .hero-bg { will-change: unset; }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}
+  .hero-bg,.js-up{will-change:unset;}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================ GATE -->
+<!-- GATE -->
 <div class="gate" id="gate">
   <div class="gate-box">
-    <div class="gate-logo">AHO<span> FARMS</span></div>
-    <span class="caption">Visitor Declaration</span>
+    <div class="gate-logo">AHO <em>FARMS</em></div>
+    <span class="eyebrow" style="justify-content:center;display:flex">TŪHONO MAI <span>·</span> VISITOR DECLARATION</span>
     <h2>Before you enter</h2>
     <p>This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders. It is not intended for patients or consumers.</p>
     <div>
@@ -872,564 +797,507 @@ h4 { font-size: 1.15rem; font-weight: 500; }
   </div>
 </div>
 
-<!-- ============================================================ NAV -->
+<!-- NAV — bilingual links -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">AHO<span> FARMS</span></a>
+    <a href="index.html" class="nav-logo">AHO <em>FARMS</em></a>
     <ul class="nav-links">
-      <li><a href="about.html">About</a></li>
-      <li><a href="cultivation.html">Cultivation</a></li>
-      <li><a href="products.html">Products</a></li>
-      <li><a href="kaupapa.html">Our Kaupapa</a></li>
-      <li><a href="news.html">News</a></li>
-      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      <li><a href="about.html"><span class="nav-en">About</span><span class="nav-mi">Mō Mātou</span></a></li>
+      <li><a href="cultivation.html"><span class="nav-en">Cultivation</span><span class="nav-mi">Māra Hua</span></a></li>
+      <li><a href="products.html"><span class="nav-en">Products</span><span class="nav-mi">Ngā Hua</span></a></li>
+      <li><a href="kaupapa.html"><span class="nav-en">Our Kaupapa</span><span class="nav-mi">Te Kaupapa</span></a></li>
+      <li><a href="news.html"><span class="nav-en">News</span><span class="nav-mi">Ngā Kōrero</span></a></li>
+      <li class="nav-cta-wrap"><a href="contact.html"><span class="nav-en">Contact</span></a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ============================================================ HERO -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
-  <div class="hero-content container">
-    <div class="hero-eyebrow" id="heroEyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span class="hero-eyebrow-text">Raupunga, Hawke's Bay · Aotearoa New Zealand</span>
+  <div class="hero-content wrap">
+    <div class="hero-eyebrow" id="hEye">
+      <div class="hero-line"></div>
+      <span class="hero-location">Raupunga, Hawke's Bay &middot; Aotearoa New Zealand</span>
     </div>
-    <span class="hero-te-reo" id="heroTeReo">Kei ruia, kei mātauhia, kei ngaro —</span>
-    <h1 id="heroH1">Grown for <em>good</em> in New Zealand.</h1>
-    <p class="hero-sub" id="heroSub">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium outdoor flower — available exclusively through licensed prescribers and qualified partners.</p>
-    <div class="hero-actions" id="heroActions">
+    <span class="hero-te-reo" id="hTeReo">Tiakina te whenua, tiakina te iwi —</span>
+    <h1 id="hH1">Grown for <em>good</em> in New Zealand.</h1>
+    <p class="hero-sub" id="hSub">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium outdoor flower — available exclusively through licensed prescribers and qualified partners.</p>
+    <div class="hero-actions" id="hAct">
       <a href="about.html" class="btn btn-primary">Discover Aho Farms</a>
       <a href="prescribers.html" class="btn btn-outline">Healthcare Professionals</a>
     </div>
   </div>
-  <div class="hero-badge" id="heroBadge">
-    <span class="hero-badge-number">39°S</span>
-    <span class="hero-badge-text">Same latitude as<br>California's Emerald Triangle</span>
+  <div class="hero-lat" id="hLat">
+    <span class="hero-lat-num">39°S</span>
+    <span class="hero-lat-txt">Same latitude as<br>California's Emerald Triangle</span>
   </div>
-  <div class="hero-scroll-indicator" id="heroScroll">
+  <div class="hero-scroll" id="hScroll">
     <div class="hero-scroll-line"></div>
-    <span class="hero-scroll-text">Scroll</span>
+    <span class="hero-scroll-txt">Scroll</span>
   </div>
 </section>
 
-<!-- ============================================================ CREDENTIALS STRIP -->
-<div class="creds">
+<!-- CREDENTIALS STRIP -->
+<div class="creds taniko">
   <div class="creds-inner">
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">Licensed Medicinal Cultivator</span>
-    </div>
-    <div class="cred-divider"></div>
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">IANZ-Accredited Lab Testing — Hill Labs, Hamilton</span>
-    </div>
-    <div class="cred-divider"></div>
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">CFU Count &lt;200 — NZ Standard</span>
-    </div>
-    <div class="cred-divider"></div>
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">Māori-Owned &amp; Operated</span>
-    </div>
-    <div class="cred-divider"></div>
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">Export Licence — Active</span>
-    </div>
-    <div class="cred-divider"></div>
-    <div class="cred-item">
-      <div class="cred-dot"></div>
-      <span class="cred-text">Prescription Only</span>
-    </div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Licensed Medicinal Cultivator</span></div>
+    <div class="cred-div"></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">IANZ-Accredited Testing — Hill Labs, Hamilton</span></div>
+    <div class="cred-div"></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">CFU Count &lt;200 — NZ Standard</span></div>
+    <div class="cred-div"></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Māori-Owned &amp; Operated</span></div>
+    <div class="cred-div"></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Export Licence Active</span></div>
+    <div class="cred-div"></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Prescription Only</span></div>
   </div>
 </div>
 
-<!-- ============================================================ AUDIENCE ROUTING -->
-<section class="routing" id="portals">
-  <div class="container">
-    <div class="routing-header js-fade">
-      <h2>Who are you visiting as?</h2>
-      <p>Select your role for a tailored experience. All portals are professionally verified.</p>
+<!-- AUDIENCE ROUTING -->
+<section class="routing taniko" id="portals">
+  <div class="wrap">
+    <div class="routing-hdr js-up">
+      <span class="eyebrow">TŪHONO MAI <span>·</span> WHO ARE YOU?</span>
+      <h2>Select your role for a tailored experience.</h2>
+      <p>All portals are professionally verified. Select the one that applies to you.</p>
     </div>
-    <div class="routing-grid">
-      <a href="prescribers.html" class="routing-card js-fade">
-        <div class="routing-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12h6m-3-3v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg>
-        </div>
+    <div class="routing-grid js-up">
+      <a href="prescribers.html" class="rcard">
+        <div class="rcard-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6m-3-3v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg></div>
         <h4>Prescribers &amp; Clinicians</h4>
-        <p>Product specifications, CoAs, clinical evidence, dosing guidance, and prescribing pathway.</p>
-        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <p>Product specs, CoAs, clinical evidence, dosing guidance, prescribing pathway.</p>
+        <span class="rcard-cta">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="pharmacies.html" class="routing-card js-fade">
-        <div class="routing-card-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
+      <a href="pharmacies.html" class="rcard">
+        <div class="rcard-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
         <h4>Pharmacies</h4>
-        <p>Formulary information, supply terms, batch documentation, and dispensing guidelines.</p>
-        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <p>Formulary information, supply terms, batch documentation, dispensing guidelines.</p>
+        <span class="rcard-cta">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="export-partners.html" class="routing-card js-fade">
-        <div class="routing-card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        </div>
+      <a href="export-partners.html" class="rcard">
+        <div class="rcard-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
         <h4>Export &amp; Distribution</h4>
-        <p>Capability statement, compliance documentation, supply volumes, and market information.</p>
-        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <p>Capability statement, compliance docs, supply volumes, market information.</p>
+        <span class="rcard-cta">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="investors.html" class="routing-card js-fade">
-        <div class="routing-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
-        </div>
+      <a href="investors.html" class="rcard">
+        <div class="rcard-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg></div>
         <h4>Investors</h4>
-        <p>Investment thesis, market opportunity, company overview, and team credentials.</p>
-        <span class="routing-card-cta">Access Portal <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <p>Investment thesis, market opportunity, company overview, team credentials.</p>
+        <span class="rcard-cta">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ BRAND STORY -->
+<!-- BRAND STORY — Real photo, dual origin -->
 <section class="story section" id="about">
-  <div class="container">
-    <div class="story-inner">
-      <div class="story-image js-fade">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Raupunga ancestral land — Hawke's Bay, New Zealand" loading="lazy">
-        <div class="story-image-tag">
-          <div class="story-image-tag-dot"></div>
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-img js-up">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965787/aho_farms/raupunga/75978256265.jpg"
+          alt="Aho Farms growing site — Raupunga, Hawke's Bay, Aotearoa New Zealand"
+          loading="lazy">
+        <div class="story-lat">
+          <span class="story-lat-n">39°S</span>
+          <span class="story-lat-l">Emerald Triangle<br>Latitude</span>
+        </div>
+        <div class="story-cap">
           <p>Raupunga, Hawke's Bay — ancestral whenua, Waaka whānau partnership</p>
         </div>
-        <div class="story-lat">
-          <span class="story-lat-number">39°S</span>
-          <span class="story-lat-label">Emerald Triangle<br>Latitude</span>
-        </div>
       </div>
-      <div class="story-content js-fade">
-        <span class="caption">Our Story</span>
-        <span class="te-reo">Tiakina te whenua, tiakina te iwi.</span>
+      <div class="story-content js-up">
+        <span class="eyebrow">MŌ MĀTOU <span>·</span> OUR STORY</span>
+        <span class="te-reo-line">Tiakina te whenua, tiakina te iwi.</span>
         <h2>Five generations of land. One generation to build on it differently.</h2>
         <p>Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
         <p>In partnership with the Waaka whānau, we grow on Māori freehold land in Raupunga, Hawke's Bay — at 39°S latitude, sharing the same position on the globe as California's legendary Emerald Triangle. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
-        <div class="story-dual">
-          <div class="story-dual-item">
-            <span class="story-dual-label">California Expertise</span>
-            <span class="story-dual-text">9–20 years cultivation experience from the world's most mature cannabis market</span>
+        <div class="dual">
+          <div>
+            <span class="dual-label">California Expertise</span>
+            <span class="dual-val">9–20 years cultivation experience from the world's most mature cannabis market</span>
           </div>
-          <div class="story-divider"></div>
-          <div class="story-dual-item">
-            <span class="story-dual-label">Hawke's Bay Whenua</span>
-            <span class="story-dual-text">Five-generation farming connection to ancestral lands of Te Hapuku, Hawke's Bay</span>
+          <div class="dual-div"></div>
+          <div>
+            <span class="dual-label">Hawke's Bay Whenua</span>
+            <span class="dual-val">Five-generation farming connection to ancestral lands of Te Hapuku</span>
           </div>
         </div>
         <div class="story-quote">
           <blockquote>Guard the land, guard the people.</blockquote>
           <cite>— Tiakina te whenua, tiakina te iwi · Founding kaupapa of Aho Farms</cite>
         </div>
-        <a href="about.html" class="btn btn-outline-teal">Read Our Full Story</a>
+        <a href="about.html" class="btn btn-teal-outline">Read Our Full Story</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ PROOF POINTS -->
-<section class="proof section--mid section">
-  <div class="container">
+<!-- PROOF POINTS -->
+<section class="proof taniko section">
+  <div class="wrap">
     <div class="proof-grid">
-      <div class="proof-item js-fade">
-        <span class="proof-number">&lt;200<span> CFU</span></span>
-        <div class="proof-label">Microbial count standard — NZ's most stringent medicinal cannabis specification</div>
+      <div class="proof-item js-up">
+        <span class="proof-num">&lt;200<em>CFU</em></span>
+        <div class="proof-lbl">NZ's most stringent microbial standard — verified independently on every batch</div>
       </div>
-      <div class="proof-item js-fade">
-        <span class="proof-number">15<span>+</span></span>
-        <div class="proof-label">Cultivar variations explored in our pheno hunt — narrowed to the perfect mother plant</div>
+      <div class="proof-item js-up">
+        <span class="proof-num">15<em>+</em></span>
+        <div class="proof-lbl">Cultivar variations explored in our pheno hunt — narrowed to the perfect mother plant</div>
       </div>
-      <div class="proof-item js-fade">
-        <span class="proof-number">IANZ<span> ✓</span></span>
-        <div class="proof-label">Independent testing via Hill Labs, Hamilton — International Accreditation New Zealand</div>
+      <div class="proof-item js-up">
+        <span class="proof-num">IANZ<em>✓</em></span>
+        <div class="proof-lbl">Hill Labs, Hamilton — International Accreditation NZ. Full panel every batch.</div>
       </div>
-      <div class="proof-item js-fade">
-        <span class="proof-number">39<span>°S</span></span>
-        <div class="proof-label">Same global latitude as California's Emerald Triangle — exceptional growing conditions</div>
+      <div class="proof-item js-up">
+        <span class="proof-num">39<em>°S</em></span>
+        <div class="proof-lbl">Same global latitude as California's Emerald Triangle — exceptional growing conditions</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ CULTIVATION PREVIEW -->
-<section class="cultivation section" id="cultivation">
-  <div class="container">
-    <div class="cultivation-header js-fade">
-      <span class="caption">Cultivation &amp; Quality</span>
+<!-- CULTIVATION — Real Aho Farms photos -->
+<section class="cult section" id="cultivation">
+  <div class="wrap">
+    <div class="cult-hdr js-up">
+      <span class="eyebrow">MĀ TE MĀRA <span>·</span> CULTIVATION &amp; QUALITY</span>
       <h2>Sun-grown in Raupunga.<br>Tested to the highest standard.</h2>
-      <p>Every plant grown outdoors under Hawke's Bay sunlight. Every batch independently tested by Hill Labs before it reaches a prescriber. No exceptions, no shortcuts.</p>
+      <p>Every plant grown outdoors under Hawke's Bay sunlight. Every batch independently tested by Hill Labs before reaching a prescriber. No exceptions, no shortcuts.</p>
     </div>
-    <div class="cultivation-grid">
-      <div class="cimg cimg-main js-fade">
-        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=80" alt="Cannabis cultivation — Aho Farms outdoor growing site" loading="lazy">
-        <span class="cimg-tag">Outdoor Sun-Grown — Raupunga</span>
+    <div class="cult-grid">
+      <div class="cimg cimg-main">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965789/aho_farms/raupunga/75978258454.jpg"
+          alt="Aho Farms polytunnel growing structures — Raupunga, Hawke's Bay"
+          loading="lazy">
+        <span class="cimg-tag">Raupunga — Outdoor Growing Structures</span>
       </div>
-      <div class="cimg js-fade">
-        <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80" alt="Laboratory quality testing" loading="lazy">
-        <span class="cimg-tag">Hill Labs Testing</span>
+      <div class="cimg">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965925/aho_farms/indoor/IMG_5111.jpg"
+          alt="Aho Farms medicinal cannabis flower — trichome close-up"
+          loading="lazy">
+        <span class="cimg-tag">Harvest-Ready Flower</span>
       </div>
-      <div class="cimg js-fade">
-        <img src="https://images.unsplash.com/photo-1611095962519-6e44e4998cfc?auto=format&fit=crop&w=600&q=80" alt="Medicinal cannabis flower — post-harvest" loading="lazy">
-        <span class="cimg-tag">Post-Harvest</span>
+      <div class="cimg">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965920/aho_farms/indoor/IMG_5084.jpg"
+          alt="Aho Farms indoor cultivation — cannabis cola"
+          loading="lazy">
+        <span class="cimg-tag">Indoor Cultivation</span>
       </div>
     </div>
-    <div class="cultivation-proof">
-      <div class="cproof-item js-fade">
-        <span class="cproof-number">&lt;200<sup>CFU</sup></span>
-        <div class="cproof-label">NZ's most stringent microbial standard. Our product consistently meets it. Verified by independent laboratory on every batch.</div>
+    <div class="cult-stats">
+      <div class="cstat js-up">
+        <span class="cstat-n">&lt;200<sup>CFU</sup></span>
+        <div class="cstat-l">NZ's most stringent microbial standard. Our product consistently meets it — independently verified on every batch by Hill Labs, Hamilton.</div>
       </div>
-      <div class="cproof-item js-fade">
-        <span class="cproof-number">IANZ<sup>✓</sup></span>
-        <div class="cproof-label">Hill Labs, Hamilton — IANZ accredited. Full panel: cannabinoids, terpenes, heavy metals, pesticides, microbials, moisture, foreign matter.</div>
+      <div class="cstat js-up">
+        <span class="cstat-n">IANZ<sup>✓</sup></span>
+        <div class="cstat-l">Full testing panel: cannabinoids, terpenes, heavy metals, pesticides, microbials, moisture, and foreign matter. Certificate of Analysis for every batch.</div>
       </div>
-      <div class="cproof-item js-fade">
-        <span class="cproof-number">NZ<sup>Export</sup></span>
-        <div class="cproof-label">Export licence active. NZ regulatory framework is among the world's most stringent — a quality signal, not just a compliance requirement.</div>
+      <div class="cstat js-up">
+        <span class="cstat-n">NZ<sup>Export</sup></span>
+        <div class="cstat-l">Export licence active. NZ's regulatory framework is among the world's most stringent — a quality signal for international buyers, not just a compliance box.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ FOUR PILLARS (from brief) -->
-<section class="pillars-section" id="pillars">
-  <div class="container">
-    <div class="pillars-header js-fade">
-      <span class="caption">Our Foundations</span>
+<!-- FOUR PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="wrap">
+    <div class="pillars-hdr js-up">
+      <span class="eyebrow">Ō MĀTOU UARA <span>·</span> OUR FOUNDATIONS</span>
       <h2>What makes Aho Farms different</h2>
       <p>Four pillars that define our approach to cultivation, community, and commercial responsibility.</p>
     </div>
     <div class="pillars-grid">
-      <div class="pillar-card js-fade">
-        <div class="pillar-card-number">I</div>
+      <div class="pcard js-up">
+        <div class="pcard-n">I</div>
         <h4>Deeply connected to Hawke's Bay</h4>
-        <p>Five-generation whānau farming ancestral lands of Te Hapuku. Hawke's Bay shares the global latitude of California's Emerald Triangle — outdoor quality at lower cost, in NZ's highest sunshine region.</p>
+        <p>Five-generation whānau farming ancestral lands of Te Hapuku. Hawke's Bay shares the global latitude of California's Emerald Triangle — outdoor quality in NZ's highest sunshine region.</p>
       </div>
-      <div class="pillar-card js-fade">
-        <div class="pillar-card-number">II</div>
+      <div class="pcard js-up">
+        <div class="pcard-n">II</div>
         <h4>Advanced cultivation methods</h4>
-        <p>Soil rebuilt to California standards. Rigorous feeding, watering, and growing regimens. Pheno hunt across 15+ cultivar variations. Fast production scalability backed by NZ's world-class agricultural sector.</p>
+        <p>Soil rebuilt to California standards. Rigorous feeding and growing regimens. Pheno hunt across 15+ cultivar variations. Fast production scalability backed by NZ's agricultural sector.</p>
       </div>
-      <div class="pillar-card js-fade">
-        <div class="pillar-card-number">III</div>
+      <div class="pcard js-up">
+        <div class="pcard-n">III</div>
         <h4>Leading toward something better</h4>
-        <p>Hauora with our community, customers, and suppliers. Deep iwi connection. Committed to economic regeneration — repurposing unused Māori freehold land to create pathways to economic freedom.</p>
+        <p>Hauora with our community, customers, and suppliers. Deep iwi connection. Committed to economic regeneration — repurposing unused Māori freehold land for whānau futures.</p>
       </div>
-      <div class="pillar-card js-fade">
-        <div class="pillar-card-number">IV</div>
+      <div class="pcard js-up">
+        <div class="pcard-n">IV</div>
         <h4>Uncompromising quality</h4>
-        <p>CFU microbial count &lt;200 — NZ's standard exceeds Australia's threshold. Wide range of terpene profiles. Consistent, reliable supply. Every batch with a full certificate of analysis before distribution.</p>
+        <p>CFU microbial count &lt;200 — NZ's standard exceeds Australia's. Wide terpene profiles. Consistent, reliable supply. Full certificate of analysis before every distribution.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ KAUPAPA -->
-<section class="kaupapa section" id="kaupapa">
+<!-- KAUPAPA — Real people photo as background -->
+<section class="kaupapa taniko section" id="kaupapa">
   <div class="kaupapa-bg"></div>
-  <div class="container">
+  <div class="kaupapa-overlay"></div>
+  <div class="wrap">
     <div class="kaupapa-inner">
-      <div class="kaupapa-content">
-        <span class="caption">Te Kaupapa</span>
-        <span class="te-reo js-fade">Tiakina te whenua, tiakina te iwi.</span>
-        <h2 class="js-fade" style="color:var(--white)">Land, people, and purpose —<br>bound together.</h2>
-        <p class="js-fade">Aho Farms is not simply a business built on Māori land. It is a Māori enterprise built for Māori futures. Every decision — how we treat the soil, how we hire, how we share the returns — is governed by the obligations we hold to the whenua and the people.</p>
-        <p class="kaupapa-translation js-fade">Guard the land, guard the people.</p>
-        <!-- Community impact stats — from brief: bring to homepage -->
-        <div class="kaupapa-impact js-fade">
-          <div class="impact-stat">
-            <span class="impact-stat-number">100%</span>
-            <div class="impact-stat-label">Hawke's Bay operated. Local employment, local supply chain.</div>
+      <div class="kap-left">
+        <span class="eyebrow">TE KAUPAPA <span>·</span> OUR KAUPAPA</span>
+        <span class="te-reo-line js-up">Tiakina te whenua, tiakina te iwi.</span>
+        <h2 class="js-up" style="color:var(--white)">Land, people,<br>and purpose —<br>bound together.</h2>
+        <p class="js-up">Aho Farms is not simply a business built on Māori land. It is a Māori enterprise built for Māori futures. Every decision — how we treat the soil, how we hire, how we share the returns — is governed by the obligations we hold to the whenua and the people.</p>
+        <p class="kap-translation js-up">Guard the land, guard the people.</p>
+        <!-- Community impact — brought to homepage (tuatahi.art lesson) -->
+        <div class="kap-impact js-up">
+          <div class="istat">
+            <span class="istat-n">100%</span>
+            <div class="istat-l">Hawke's Bay operated. Local employment, local supply chain.</div>
           </div>
-          <div class="impact-stat">
-            <span class="impact-stat-number">Māori</span>
-            <div class="impact-stat-label">Priority employment for whānau in all cultivation and harvest roles.</div>
+          <div class="istat">
+            <span class="istat-n">Māori</span>
+            <div class="istat-l">Priority employment for whānau in all cultivation and harvest roles.</div>
           </div>
-          <div class="impact-stat">
-            <span class="impact-stat-number">5 Gen</span>
-            <div class="impact-stat-label">Five-generation farming connection to Te Hapuku ancestral lands.</div>
+          <div class="istat">
+            <span class="istat-n">5 Gen</span>
+            <div class="istat-l">Five-generation farming connection to Te Hapuku ancestral lands.</div>
           </div>
-          <div class="impact-stat">
-            <span class="impact-stat-number">Iwi</span>
-            <div class="impact-stat-label">Ngāti Pāhauwera partnership and shared ownership structure.</div>
+          <div class="istat">
+            <span class="istat-n">Iwi</span>
+            <div class="istat-l">Ngāti Pāhauwera partnership and shared ownership structure.</div>
           </div>
         </div>
-        <a href="kaupapa.html" class="btn btn-outline js-fade">Read Our Full Kaupapa</a>
+        <a href="kaupapa.html" class="btn btn-outline js-up">Read Our Full Kaupapa</a>
       </div>
-      <div class="kaupapa-pillars js-fade">
+      <div class="kap-pillars js-up">
         <div class="kpillar">
-          <div class="kpillar-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="kpillar-text">
-            <h4>Whānau Employment</h4>
-            <p>Priority employment for whānau, with training pathways and progression to governance roles.</p>
-          </div>
+          <div class="kpillar-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div><h4>Kaitiakitanga — Guardianship</h4><p>We hold the land in trust for future generations. How we farm reflects that obligation.</p></div>
         </div>
         <div class="kpillar">
-          <div class="kpillar-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="kpillar-text">
-            <h4>Whenua Development</h4>
-            <p>Productive use of Māori freehold land, generating long-term economic sovereignty for the community.</p>
-          </div>
+          <div class="kpillar-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><h4>Oranga — Wellbeing</h4><p>Commercial success measured by the health and wellbeing it generates for whānau and hapū.</p></div>
         </div>
         <div class="kpillar">
-          <div class="kpillar-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="kpillar-text">
-            <h4>Tikanga-Guided Practice</h4>
-            <p>How we grow, how we govern, and how we share — shaped by the obligations of kaitiakitanga.</p>
-          </div>
+          <div class="kpillar-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><h4>Whanaungatanga — Relationships</h4><p>How we govern and how we share — shaped by deep, mutual obligations to community.</p></div>
         </div>
         <div class="kpillar">
-          <div class="kpillar-icon">
-            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <div class="kpillar-text">
-            <h4>Community Returns</h4>
-            <p>Commercial success measured by the wellbeing it generates for whānau, hapū, and community.</p>
-          </div>
+          <div class="kpillar-ico"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+          <div><h4>Mātauranga — Knowledge</h4><p>California expertise applied on whenua. The combination no competitor can replicate.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ NEWS -->
+<!-- NEWS -->
 <section class="news section" id="news">
-  <div class="container">
-    <div class="news-header js-fade">
+  <div class="wrap">
+    <div class="news-hdr js-up">
       <div>
-        <span class="caption" style="color:var(--teal-primary)">Ngā Kōrero / Latest</span>
+        <span class="eyebrow">NGĀ KŌRERO <span>·</span> LATEST</span>
         <h2 style="color:var(--night)">News &amp; Updates</h2>
       </div>
-      <a href="news.html" class="btn btn-outline-teal" style="flex-shrink:0">All News</a>
+      <a href="news.html" class="btn btn-teal-outline btn-sm" style="flex-shrink:0">All News</a>
     </div>
     <div class="news-grid">
-      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
-        <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80" alt="Aho Farms 2026 harvest" loading="lazy">
+      <a href="news.html" class="ncard">
+        <div class="ncard-img">
+          <img
+            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965785/aho_farms/raupunga/75978189862.jpg"
+            alt="Aho Farms Raupunga property — 2026 harvest season"
+            loading="lazy">
         </div>
-        <div class="news-card-body">
-          <div class="news-card-meta"><span class="news-tag">Company Update</span><span class="news-date">June 2026</span></div>
+        <div class="ncard-body">
+          <div class="ncard-meta"><span class="ntag">Company Update</span><span class="ndate">June 2026</span></div>
           <h4>Aho Farms completes 2026 harvest season at Raupunga</h4>
           <p>Our outdoor sun-grown crop has been harvested and is undergoing independent testing at Hill Labs, Hamilton ahead of supply to licensed prescribers.</p>
         </div>
       </a>
-      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
-        <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Māori community employment" loading="lazy">
+      <a href="news.html" class="ncard">
+        <div class="ncard-img">
+          <img
+            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965833/aho_farms/raupunga/IMG_3680.jpg"
+            alt="Aho Farms land development — Raupunga"
+            loading="lazy">
         </div>
-        <div class="news-card-body">
-          <div class="news-card-meta"><span class="news-tag">Social Impact</span><span class="news-date">May 2026</span></div>
+        <div class="ncard-body">
+          <div class="ncard-meta"><span class="ntag">Social Impact</span><span class="ndate">May 2026</span></div>
           <h4>Five new whānau members join ahead of peak season</h4>
           <p>We have welcomed five new team members from the local community, with two enrolling in supported formal horticulture training.</p>
         </div>
       </a>
-      <a href="news.html" class="news-card js-fade" style="text-decoration:none">
-        <div class="news-card-img">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="NZ medicinal cannabis regulatory update" loading="lazy">
+      <a href="news.html" class="ncard">
+        <div class="ncard-img">
+          <img
+            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965975/aho_farms/indoor/IMG_5376.jpg"
+            alt="Aho Farms indoor cultivation facility"
+            loading="lazy">
         </div>
-        <div class="news-card-body">
-          <div class="news-card-meta"><span class="news-tag">Regulatory</span><span class="news-date">April 2026</span></div>
-          <h4>What the 2025 Medsafe advertising guidance means for NZ operators</h4>
-          <p>A breakdown of the updated Medsafe guidance and what it means for licensed cultivators, prescribers, and pharmacies in the medicinal cannabis sector.</p>
+        <div class="ncard-body">
+          <div class="ncard-meta"><span class="ntag">Regulatory</span><span class="ndate">April 2026</span></div>
+          <h4>What the 2025 Medsafe guidance means for NZ operators</h4>
+          <p>A breakdown of the updated Medsafe advertising guidance and what it means for licensed cultivators, prescribers, and pharmacies.</p>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ DISCLAIMER -->
-<div class="disclaimer">
-  <div class="disclaimer-inner">
-    <div class="disclaimer-icon">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    </div>
-    <p>Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Product information is provided for healthcare and industry professionals. Always consult a qualified healthcare professional regarding medicinal cannabis.</p>
+<!-- DISCLAIMER -->
+<div class="disc taniko">
+  <div class="disc-inner">
+    <div class="disc-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <p>Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Product information is provided for healthcare and industry professionals only. Always consult a qualified healthcare professional regarding medicinal cannabis.</p>
   </div>
 </div>
 
-<!-- ============================================================ FOOTER -->
+<!-- FOOTER CTA BANNER — tuatahi.art pattern -->
+<div class="footer-cta taniko">
+  <div class="wrap footer-cta-inner">
+    <span class="eyebrow" style="justify-content:center;display:flex">TŪHONO MAI <span>·</span> WORK WITH US</span>
+    <span class="footer-cta-headline">Tūhono mai.</span>
+    <p class="footer-cta-sub">Prescribers, pharmacies, export partners, and investors — we'd like to hear from you.</p>
+    <div class="footer-cta-btns">
+      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+      <a href="prescribers.html" class="btn btn-outline">Prescriber Portal</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER — bilingual links, founding partnership -->
 <footer class="footer" id="contact">
-  <div class="container">
+  <div class="wrap">
     <div class="footer-top">
       <div>
-        <div class="footer-logo">AHO<span> FARMS</span></div>
+        <div class="footer-logo">AHO <em>FARMS</em></div>
         <div class="footer-badge">Māori Owned &amp; Operated</div>
         <p class="footer-tagline">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
-        <div class="footer-partnership">
+        <div class="footer-partner">
           <strong>Founding Partnership:</strong> Waaka whānau, Raupunga, Hawke's Bay · Toro Waaka, Ngāti Pāhauwera
         </div>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
         <ul>
-          <li><a href="about.html">About Aho Farms</a></li>
-          <li><a href="kaupapa.html">Our Kaupapa</a></li>
-          <li><a href="social-impact.html">Social Impact</a></li>
-          <li><a href="about.html">Team</a></li>
-          <li><a href="news.html">Ngā Kōrero / News</a></li>
+          <li><a href="about.html"><span class="footer-link-en">About Aho Farms</span><span class="footer-link-mi">Mō Mātou</span></a></li>
+          <li><a href="kaupapa.html"><span class="footer-link-en">Our Kaupapa</span><span class="footer-link-mi">Te Kaupapa</span></a></li>
+          <li><a href="social-impact.html"><span class="footer-link-en">Social Impact</span><span class="footer-link-mi">Oranga Tāngata</span></a></li>
+          <li><a href="news.html"><span class="footer-link-en">News</span><span class="footer-link-mi">Ngā Kōrero</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Cultivation</h5>
         <ul>
-          <li><a href="cultivation.html">Our Facility</a></li>
-          <li><a href="cultivation.html">Growing Standards</a></li>
-          <li><a href="cultivation.html">Quality &amp; Testing</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="cultivation.html"><span class="footer-link-en">Our Facility</span><span class="footer-link-mi">Tō Mātou Māra</span></a></li>
+          <li><a href="cultivation.html"><span class="footer-link-en">Growing Standards</span></a></li>
+          <li><a href="cultivation.html"><span class="footer-link-en">Quality &amp; Testing</span></a></li>
+          <li><a href="products.html"><span class="footer-link-en">Products</span><span class="footer-link-mi">Ngā Hua</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Portals</h5>
         <ul>
-          <li><a href="prescribers.html">Prescribers</a></li>
-          <li><a href="pharmacies.html">Pharmacies</a></li>
-          <li><a href="export-partners.html">Export Partners</a></li>
-          <li><a href="investors.html">Investors</a></li>
-          <li><a href="contact.html">Whakapa mai / Contact</a></li>
+          <li><a href="prescribers.html"><span class="footer-link-en">Prescribers</span></a></li>
+          <li><a href="pharmacies.html"><span class="footer-link-en">Pharmacies</span></a></li>
+          <li><a href="export-partners.html"><span class="footer-link-en">Export Partners</span></a></li>
+          <li><a href="investors.html"><span class="footer-link-en">Investors</span></a></li>
+          <li><a href="contact.html"><span class="footer-link-en">Contact</span><span class="footer-link-mi">Whakapa mai</span></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Aho Farms Limited · Hawke's Bay, Aotearoa New Zealand · <a href="privacy.html" style="color:inherit;opacity:0.5">Privacy</a> · <a href="terms.html" style="color:inherit;opacity:0.5">Terms</a> · <a href="disclaimer.html" style="color:inherit;opacity:0.5">Disclaimer</a></div>
-      <div class="footer-legal">Aho Farms products are prescription medicines. Not for general sale or consumer advertising. Licensed medicinal cannabis cultivator under New Zealand law.</div>
+      <div class="footer-copy">
+        © 2026 Aho Farms Limited · Hawke's Bay, Aotearoa New Zealand ·
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a> ·
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+      <div class="footer-legal">Aho Farms products are prescription medicines. Not for general sale. Licensed medicinal cannabis cultivator under New Zealand law.</div>
     </div>
   </div>
 </footer>
 
-<!-- ============================================================ JAVASCRIPT -->
+<!-- JAVASCRIPT -->
 <script>
-// ── Gate ──────────────────────────────────────────────────────
-function acceptGate() {
-  document.cookie = 'aho_gate=1;max-age=86400;path=/';
-  const g = document.getElementById('gate');
+// Gate
+function acceptGate(){
+  document.cookie='aho_gate=1;max-age=86400;path=/';
+  const g=document.getElementById('gate');
   g.classList.add('hidden');
-  setTimeout(() => g.style.display = 'none', 360);
+  setTimeout(()=>g.style.display='none',360);
 }
-function declineGate() {
-  document.cookie = 'aho_gate=0;max-age=86400;path=/';
-  const g = document.getElementById('gate');
+function declineGate(){
+  document.cookie='aho_gate=0;max-age=86400;path=/';
+  const g=document.getElementById('gate');
   g.classList.add('hidden');
-  setTimeout(() => g.style.display = 'none', 360);
+  setTimeout(()=>g.style.display='none',360);
 }
-(function() {
-  if (document.cookie.split(';').some(c => c.trim().startsWith('aho_gate='))) {
-    const g = document.getElementById('gate');
-    if (g) g.style.display = 'none';
+(function(){
+  if(document.cookie.split(';').some(c=>c.trim().startsWith('aho_gate='))){
+    const g=document.getElementById('gate');
+    if(g)g.style.display='none';
   }
 })();
 
-// ── Nav scroll ────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
 
-// ── GSAP Animations ───────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduced) {
-    // Show everything immediately, no animation
-    document.querySelectorAll('.js-fade, [id^="hero"]').forEach(el => {
-      el.style.opacity = '1';
-    });
+// GSAP
+document.addEventListener('DOMContentLoaded',()=>{
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduced){
+    document.querySelectorAll('.js-up,[id^="h"]').forEach(el=>el.style.opacity='1');
+    document.querySelectorAll('.js-up').forEach(el=>el.style.transform='none');
     return;
   }
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero entrance sequence
-  const heroTl = gsap.timeline({ delay: 0.2 });
-  heroTl
-    .to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
-    .to('#heroTeReo',   { opacity: 0.85, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
-    .to('#heroH1',      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.4')
-    .to('#heroSub',     { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-    .to('#heroActions', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-    .to('#heroBadge',   { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.3')
-    .to('#heroScroll',  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.5');
+  // Set initial states
+  gsap.set(['#hEye','#hTeReo','#hH1','#hSub','#hAct'],{y:30,opacity:0});
 
-  // Set initial states for hero elements
-  gsap.set(['#heroEyebrow','#heroTeReo','#heroH1','#heroSub','#heroActions'], { y: 30 });
+  // Hero entrance
+  const tl=gsap.timeline({delay:0.15});
+  tl.to('#hEye',   {opacity:1,y:0,duration:0.7,ease:'power3.out'})
+    .to('#hTeReo', {opacity:0.9,y:0,duration:0.7,ease:'power3.out'},'-=0.4')
+    .to('#hH1',    {opacity:1,y:0,duration:0.9,ease:'power3.out'},'-=0.45')
+    .to('#hSub',   {opacity:1,y:0,duration:0.7,ease:'power3.out'},'-=0.5')
+    .to('#hAct',   {opacity:1,y:0,duration:0.6,ease:'power3.out'},'-=0.4')
+    .to('#hLat',   {opacity:1,duration:1,ease:'power2.out'},'-=0.3')
+    .to('#hScroll',{opacity:1,duration:0.8,ease:'power2.out'},'-=0.5');
 
-  // Hero parallax — bg scales as you scroll past
-  gsap.to('#heroBg', {
-    scale: 1.12,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
+  // Hero parallax
+  gsap.to('#heroBg',{
+    scale:1.1,ease:'none',
+    scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}
   });
 
-  // All .js-fade elements — scroll reveal
-  gsap.utils.toArray('.js-fade').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 32 },
-      {
-        opacity: 1, y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none'
-        },
-        delay: (i % 4) * 0.07 // slight stagger per row
-      }
-    );
-  });
-
-  // Proof numbers count up
-  const proofNumbers = document.querySelectorAll('.proof-number');
-  proofNumbers.forEach(el => {
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => el.classList.add('counted')
+  // All .js-up scroll reveals
+  gsap.utils.toArray('.js-up').forEach((el,i)=>{
+    gsap.to(el,{
+      opacity:1,y:0,duration:0.8,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'},
+      delay:(i%3)*0.08
     });
   });
 
   // Cultivation images stagger
-  gsap.from('.cimg', {
-    opacity: 0,
-    scale: 0.96,
-    stagger: 0.12,
-    duration: 0.9,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.cultivation-grid',
-      start: 'top 80%'
-    }
-  });
-
-  // Routing cards hover enhancement
-  document.querySelectorAll('.routing-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      gsap.to(card, { y: -4, duration: 0.25, ease: 'power2.out' });
-    });
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { y: 0, duration: 0.3, ease: 'power2.out' });
-    });
+  gsap.from('.cimg',{
+    opacity:0,scale:0.97,stagger:0.1,duration:0.9,ease:'power3.out',
+    scrollTrigger:{trigger:'.cult-grid',start:'top 80%'}
   });
 });
 </script>
-
 </body>
 </html>
