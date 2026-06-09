@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Updates — Aho Farms</title>
+  <meta name="description" content="Company updates, industry news, regulatory developments, and social impact stories from the Aho Farms team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --night-soft:  #2f3d3f;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --card-border: rgba(115,168,165,0.15);
+
+      --cat-company:    #4a7a78;
+      --cat-social:     #8b6f47;
+      --cat-regulatory: #5a6e8a;
+      --cat-industry:   #6a7a5a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--night);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.1);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--white); text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 400; letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.75); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+    .nav-links a.active { color: var(--white); }
+    .nav-cta {
+      background: var(--teal-deep); color: var(--white) !important;
+      padding: 0.45rem 1.1rem; border-radius: 4px; font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal) !important; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.7rem 1.5rem; border-radius: 4px; border: none;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-teal { background: var(--teal); color: var(--night); }
+    .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+    /* Hero */
+    .hero {
+      background: var(--night); padding: 9rem 2rem 5rem;
+    }
+    .hero-inner { max-width: 700px; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      color: var(--white); margin-bottom: 1.25rem; font-weight: 300;
+    }
+    .hero p {
+      font-size: 1.05rem; color: rgba(255,255,255,0.65);
+      max-width: 580px; line-height: 1.75;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      position: sticky; top: 64px; z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid rgba(115,168,165,0.12);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 12px rgba(26,36,38,0.06);
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #8a9e9f; margin-right: 0.5rem;
+    }
+    .filter-pill {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.35rem 0.9rem; border-radius: 4px; cursor: pointer;
+      border: 1px solid var(--teal); color: var(--teal-deep);
+      background: transparent; transition: all 0.2s;
+    }
+    .filter-pill:hover { background: rgba(115,168,165,0.08); }
+    .filter-pill.active { background: var(--teal); color: var(--night); border-color: var(--teal); }
+
+    /* News Grid */
+    .news-section {
+      background: var(--white); padding: 3rem 2rem 5rem;
+    }
+    .news-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
+    }
+
+    /* News Card */
+    .news-card {
+      border: 1px solid var(--card-border); border-radius: 8px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .news-card:hover {
+      box-shadow: 0 8px 32px rgba(26,36,38,0.1);
+      transform: translateY(-2px);
+    }
+    .news-card-image {
+      height: 200px; overflow: hidden; position: relative;
+    }
+    .news-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .news-card:hover .news-card-image img { transform: scale(1.04); }
+    .news-card-body {
+      padding: 1.5rem; display: flex; flex-direction: column; flex: 1;
+    }
+    .news-card-meta {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem;
+    }
+    .cat-pill {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px;
+      color: var(--white);
+    }
+    .cat-company   { background: var(--cat-company); }
+    .cat-social    { background: var(--cat-social); }
+    .cat-regulatory { background: var(--cat-regulatory); }
+    .cat-industry  { background: var(--cat-industry); }
+
+    .news-date {
+      font-size: 0.72rem; color: #8a9e9f; font-weight: 400;
+    }
+    .news-card h3 {
+      font-size: 1.15rem; margin-bottom: 0.65rem; color: var(--night); line-height: 1.3;
+    }
+    .news-card p {
+      font-size: 0.83rem; color: #4a5e60; line-height: 1.65; flex: 1; margin-bottom: 1rem;
+    }
+    .news-read-more {
+      font-size: 0.78rem; font-weight: 500; color: var(--teal-deep);
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s; margin-top: auto;
+    }
+    .news-read-more:hover { color: var(--teal); }
+    .news-card.hidden { display: none; }
+
+    /* Newsletter */
+    .newsletter-section {
+      background: var(--off-white);
+      padding: 5rem 2rem;
+      border-top: 1px solid rgba(115,168,165,0.1);
+    }
+    .newsletter-inner {
+      max-width: 600px; margin: 0 auto; text-align: center;
+    }
+    .newsletter-inner h2 {
+      font-size: clamp(2rem, 4vw, 2.6rem); margin-bottom: 0.75rem;
+    }
+    .newsletter-inner > p {
+      font-size: 0.9rem; color: #5a6e70; margin-bottom: 2rem; line-height: 1.7;
+    }
+    .newsletter-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .newsletter-form input,
+    .newsletter-form select {
+      padding: 0.7rem 1rem;
+      border: 1px solid rgba(115,168,165,0.25);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif; font-size: 0.875rem;
+      background: var(--white); color: var(--night); outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input:focus,
+    .newsletter-form select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115,168,165,0.12);
+    }
+    .newsletter-form .btn-teal { width: 100%; justify-content: center; }
+    .newsletter-note {
+      font-size: 0.72rem; color: #8a9e9f; margin-top: 0.75rem; line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--night);
+      border-top: 1px solid rgba(115,168,165,0.1);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand .nav-logo { font-size: 1.1rem; margin-bottom: 1rem; display: block; }
+    .footer-brand p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.65; max-width: 280px; }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--teal-light); }
+    .footer-bottom {
+      max-width: 1200px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .footer-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.35); line-height: 1.6; max-width: 680px; }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.3); white-space: nowrap; }
+
+    @media (max-width: 960px) {
+      .news-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--night-mid); padding: 1.5rem 2rem; gap: 1.25rem;
+        border-bottom: 1px solid rgba(115,168,165,0.1);
+      }
+      .nav-hamburger { display: flex; }
+      .news-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html" class="active">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="caption">NEWS &amp; UPDATES</p>
+      <h1>Latest from Aho Farms</h1>
+      <p>Company updates, industry news, regulatory developments, and social impact stories from the Aho Farms team.</p>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-inner">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="company-update">Company Updates</button>
+      <button class="filter-pill" data-filter="social-impact">Social Impact</button>
+      <button class="filter-pill" data-filter="regulatory">Regulatory</button>
+      <button class="filter-pill" data-filter="industry-news">Industry News</button>
+    </div>
+  </div>
+
+  <!-- News Grid -->
+  <section class="news-section">
+    <div class="news-grid" id="newsGrid">
+
+      <!-- 1: Company Update -->
+      <article class="news-card" data-category="company-update">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80"
+               alt="Aho Farms harvest season 2026" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-company">Company Update</span>
+            <span class="news-date">June 2026</span>
+          </div>
+          <h3>Aho Farms completes 2026 harvest season at Raupunga</h3>
+          <p>Our outdoor sun-grown crop has been harvested and is currently undergoing independent laboratory testing at Hill Labs, Hamilton ahead of supply to licensed prescribers.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 2: Social Impact -->
+      <article class="news-card" data-category="social-impact">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
+               alt="Aho Farms team members" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-social">Social Impact</span>
+            <span class="news-date">May 2026</span>
+          </div>
+          <h3>Five new whānau members join the Aho Farms team ahead of peak season</h3>
+          <p>We have welcomed five new team members from the local community into cultivation and harvest roles, with two enrolling in supported horticulture training.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 3: Regulatory -->
+      <article class="news-card" data-category="regulatory">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80"
+               alt="Medsafe advertising guidance" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-regulatory">Regulatory</span>
+            <span class="news-date">April 2026</span>
+          </div>
+          <h3>What the 2025 Medsafe advertising guidance means for NZ medicinal cannabis operators</h3>
+          <p>Medsafe issued updated advertising guidance in July 2025. We break down what it means for cultivators, prescribers, and pharmacies operating in the medicinal cannabis sector.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 4: Industry News -->
+      <article class="news-card" data-category="industry-news">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80"
+               alt="Australia medicinal cannabis market" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-industry">Industry News</span>
+            <span class="news-date">March 2026</span>
+          </div>
+          <h3>Australia reaches one million medicinal cannabis patients</h3>
+          <p>The Australian medicinal cannabis market has surpassed one million active patients, with 80,000+ prescriptions issued monthly. What this means for NZ export-licensed cultivators.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 5: Company Update -->
+      <article class="news-card" data-category="company-update">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?auto=format&fit=crop&w=600&q=80"
+               alt="Export licence confirmed" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-company">Company Update</span>
+            <span class="news-date">February 2026</span>
+          </div>
+          <h3>Export licence confirmed — Aho Farms now authorised to supply international markets</h3>
+          <p>We are pleased to confirm that our export licence is active. Aho Farms is now authorised to supply medicinal cannabis to qualified distribution partners in approved international markets.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 6: Social Impact -->
+      <article class="news-card" data-category="social-impact">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80"
+               alt="Māori land and enterprise" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-social">Social Impact</span>
+            <span class="news-date">January 2026</span>
+          </div>
+          <h3>Māori land, Māori enterprise: the case for whenua-based cannabis cultivation</h3>
+          <p>Why growing medicinal cannabis on Māori freehold land is not just a commercial decision — it is an expression of economic sovereignty and kaitiakitanga in practice.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 7: Regulatory -->
+      <article class="news-card" data-category="regulatory">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80"
+               alt="NZ Medicinal Cannabis Scheme regulatory changes" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-regulatory">Regulatory</span>
+            <span class="news-date">December 2025</span>
+          </div>
+          <h3>NZ Medicinal Cannabis Scheme: key changes for 2026</h3>
+          <p>A summary of the regulatory updates affecting licensed cultivators, prescribers, and pharmacies in New Zealand's medicinal cannabis sector entering 2026.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 8: Company Update -->
+      <article class="news-card" data-category="company-update">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80"
+               alt="Aho Farms Board of Directors" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-company">Company Update</span>
+            <span class="news-date">November 2025</span>
+          </div>
+          <h3>Aho Farms Board of Directors formalised with appointment of independent chair</h3>
+          <p>Stephen McPhail joins as Chair of the Aho Farms Board of Directors, bringing 30 years of experience in angel investing, M&amp;A, and capital raising.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+      <!-- 9: Industry News -->
+      <article class="news-card" data-category="industry-news">
+        <div class="news-card-image">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80"
+               alt="Hawke's Bay medicinal cannabis growing region" loading="lazy" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="cat-pill cat-industry">Industry News</span>
+            <span class="news-date">October 2025</span>
+          </div>
+          <h3>Hawke's Bay as a medicinal cannabis growing region: climate, soil, and competitive advantage</h3>
+          <p>An assessment of why Hawke's Bay's climate — 2,200+ sunshine hours annually, fertile soils, and low rainfall — makes it one of New Zealand's best outdoor medicinal cannabis growing regions.</p>
+          <a href="#" class="news-read-more">Read more →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="newsletter-section">
+    <div class="newsletter-inner">
+      <h2>Stay informed</h2>
+      <p>Industry updates, company news, and regulatory developments. No product advertising. Unsubscribe anytime.</p>
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <input type="email" placeholder="Your email address" required autocomplete="email" />
+        <select>
+          <option value="" disabled selected>I am a…</option>
+          <option value="healthcare">Healthcare Professional</option>
+          <option value="pharmacist">Pharmacist</option>
+          <option value="industry">Industry Professional</option>
+          <option value="investor">Investor</option>
+          <option value="other">Other</option>
+        </select>
+        <button type="submit" class="btn btn-teal">Subscribe</button>
+      </form>
+      <p class="newsletter-note">We do not send product advertising to this list. This is an industry information newsletter.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">AHO <span>FARMS</span></span>
+        <p>Licensed medicinal cannabis cultivator. Grown on Māori freehold land in Raupunga, Hawke's Bay, Aotearoa New Zealand.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="cultivation.html">Cultivation</a></li>
+          <li><a href="kaupapa.html">Our Kaupapa</a></li>
+          <li><a href="news.html">News</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="products.html">Overview</a></li>
+          <li><a href="prescribers.html">Prescriber Portal</a></li>
+          <li><a href="pharmacies.html">Pharmacy Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="contact.html">Get in Touch</a></li>
+          <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
+          <li><a href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        Aho Farms products are prescription medicines regulated under the Misuse of Drugs Act 1975 and the Medicines Act 1981. Products are not available for general sale. All product information on this site is intended for licensed healthcare professionals only. This website does not constitute medical advice.
+      </p>
+      <p class="footer-copy">© 2026 Aho Farms Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+
+    // Filter pills
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.news-card');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Newsletter
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.innerHTML = '<p style="color:var(--teal-deep);font-size:0.9rem;padding:0.5rem 0;">Thank you — you have been subscribed to the Aho Farms industry newsletter.</p>';
+    });
+  </script>
+
+</body>
+</html>
