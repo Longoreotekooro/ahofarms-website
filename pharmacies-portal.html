@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aho Farms — Pharmacy Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night:       #1a2426;
+      --sidebar-bg:  #253032;
+      --card-bg:     #2f3d3f;
+      --content-bg:  #f4f6f6;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --text-light:  #e8eded;
+      --text-muted:  #8faaa8;
+      --text-dark:   #1e2e30;
+      --text-body:   #2e4042;
+      --border-teal: rgba(115,168,165,0.15);
+      --border-teal-strong: rgba(115,168,165,0.35);
+      --sidebar-w:   260px;
+      --header-h:    60px;
+      --amber:       #d4882a;
+      --amber-bg:    rgba(212,136,42,0.10);
+      --amber-border:rgba(212,136,42,0.30);
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--night);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { color: var(--teal-light); text-decoration: underline; }
+
+    /* ─── Header ─────────────────────────────────────────────────── */
+    .portal-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--night);
+      border-bottom: 1px solid var(--border-teal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 0 0;
+      z-index: 200;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 100%;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px;
+      height: 100%;
+      border-right: 1px solid var(--border-teal);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .logo-text .logo-farms {
+      color: var(--teal);
+    }
+
+    .logo-text span.logo-sub {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .header-portal-label {
+      padding: 0 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-greeting {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-greeting strong {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .btn-logout {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: 1px solid var(--border-teal-strong);
+      padding: 6px 14px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: all 0.18s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn-logout:hover {
+      color: var(--teal);
+      border-color: var(--teal);
+      text-decoration: none;
+    }
+
+    /* ─── Sidebar ─────────────────────────────────────────────────── */
+    .portal-sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-teal);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-nav-label {
+      padding: 24px 20px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      flex: 1;
+      padding-bottom: 16px;
+    }
+
+    .sidebar-nav li {
+      position: relative;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border-left: 3px solid transparent;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      color: var(--teal-light);
+      background: rgba(115,168,165,0.06);
+    }
+
+    .nav-item.active {
+      color: var(--teal);
+      border-left-color: var(--teal);
+      background: rgba(115,168,165,0.08);
+      font-weight: 500;
+    }
+
+    .nav-item svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .nav-item.active svg { opacity: 1; }
+
+    .sidebar-compliance {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--border-teal);
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    /* ─── Main Content ────────────────────────────────────────────── */
+    .portal-main {
+      margin-left: var(--sidebar-w);
+      margin-top: var(--header-h);
+      min-height: calc(100vh - var(--header-h));
+      background: var(--content-bg);
+      overflow-y: auto;
+    }
+
+    .section-panel {
+      display: none;
+      padding: 40px 44px;
+      max-width: 960px;
+      animation: fadeIn 0.22s ease;
+    }
+
+    .section-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Typography — Content Area ──────────────────────────────── */
+    .section-panel h1 {
+      font-size: 34px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .section-panel h2 {
+      font-size: 28px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .section-panel h3 {
+      font-size: 19px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    .section-panel p {
+      font-size: 14px;
+      color: var(--text-body);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .section-caption {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 6px;
+    }
+
+    .intro-text {
+      font-size: 14.5px;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(74,122,120,0.15);
+    }
+
+    /* ─── Buttons ─────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-deep);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-outline:hover {
+      background: rgba(115,168,165,0.10);
+      color: var(--teal-deep);
+      text-decoration: none;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* ─── Cards ───────────────────────────────────────────────────── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .card-dark {
+      background: var(--card-bg);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 24px;
+      color: var(--text-light);
+    }
+
+    /* ─── Stat Cards ──────────────────────────────────────────────── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 20px 22px;
+    }
+
+    .stat-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 8px;
+    }
+
+    .stat-card-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    /* ─── Overview Quick Access Grid ─────────────────────────────── */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .quick-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 20px 18px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .quick-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 12px rgba(115,168,165,0.12);
+      transform: translateY(-1px);
+    }
+
+    .quick-card-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(115,168,165,0.10);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .quick-card-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--teal-deep);
+    }
+
+    .quick-card-body h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+
+    .quick-card-body p {
+      font-size: 12px;
+      color: #6a8a8a;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* ─── Alert Box ───────────────────────────────────────────────── */
+    .alert-box {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .alert-box svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    .alert-box-content .alert-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8a5a10;
+      margin-bottom: 4px;
+    }
+
+    .alert-box-content p {
+      font-size: 13.5px;
+      color: #5a3e10;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ─── Update / Contact Strip ──────────────────────────────────── */
+    .contact-strip {
+      background: var(--night);
+      border-radius: 8px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-strip p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .contact-strip a {
+      color: var(--teal-light);
+      font-weight: 500;
+    }
+
+    .contact-strip strong {
+      color: var(--text-light);
+    }
+
+    /* ─── Data Tables ─────────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-teal);
+    }
+
+    .data-table thead tr {
+      background: var(--night);
+    }
+
+    .data-table thead th {
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .data-table tbody tr:nth-child(odd) td { background: #fff; }
+    .data-table tbody tr:nth-child(even) td { background: rgba(115,168,165,0.04); }
+
+    .data-table tbody td {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      border-bottom: 1px solid rgba(74,122,120,0.08);
+      vertical-align: middle;
+    }
+
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    .data-table tbody td:first-child {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-current {
+      background: rgba(115,168,165,0.15);
+      color: var(--teal-deep);
+    }
+
+    .badge-available {
+      background: rgba(115,168,165,0.15);
+      color: var(--teal-deep);
+    }
+
+    .badge-previous {
+      background: rgba(143,170,168,0.15);
+      color: #6a8a88;
+    }
+
+    .coa-download {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border: 1px solid rgba(115,168,165,0.3);
+      border-radius: 4px;
+      transition: all 0.16s;
+    }
+
+    .coa-download:hover {
+      background: rgba(115,168,165,0.08);
+      border-color: var(--teal);
+      text-decoration: none;
+    }
+
+    .ianz-note {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(115,168,165,0.05);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+
+    .ianz-badge {
+      background: var(--night);
+      border: 1px solid var(--border-teal-strong);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .ianz-note p {
+      font-size: 12.5px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ─── Info Box / Consideration ────────────────────────────────── */
+    .info-box {
+      background: rgba(115,168,165,0.06);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .info-box h3 { margin-top: 0; }
+
+    .info-box p {
+      font-size: 13.5px;
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    .note-text {
+      font-size: 13px;
+      color: var(--text-body);
+      background: rgba(115,168,165,0.05);
+      border: 1px solid var(--border-teal);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ─── Step List ───────────────────────────────────────────────── */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 28px;
+    }
+
+    .step-list li {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(74,122,120,0.10);
+      align-items: flex-start;
+    }
+
+    .step-list li:first-child {
+      border-top: 1px solid rgba(74,122,120,0.10);
+    }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--teal);
+      line-height: 1;
+      min-width: 44px;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      padding-top: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* ─── Bullet List ─────────────────────────────────────────────── */
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      border-bottom: 1px solid rgba(74,122,120,0.08);
+      line-height: 1.6;
+    }
+
+    .bullet-list li:first-child { border-top: 1px solid rgba(74,122,120,0.08); }
+
+    .bullet-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ─── Supply Info ─────────────────────────────────────────────── */
+    .supply-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .supply-detail-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 20px 22px;
+    }
+
+    .supply-detail-card h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 8px;
+    }
+
+    .supply-detail-card p {
+      font-size: 13.5px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ─── Contact Cards ───────────────────────────────────────────── */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 22px 22px 24px;
+    }
+
+    .contact-card-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(115,168,165,0.10);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .contact-card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--teal-deep);
+      fill: none;
+    }
+
+    .contact-card h3 {
+      font-size: 16px;
+      color: var(--text-dark);
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .contact-card .contact-email {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--teal-deep);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-card .contact-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ─── Contact Form ────────────────────────────────────────────── */
+    .contact-form-wrapper {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 32px 36px 36px;
+      max-width: 600px;
+      margin-top: 32px;
+    }
+
+    .contact-form-wrapper h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: var(--text-dark);
+    }
+
+    .cf-group {
+      margin-bottom: 20px;
+    }
+
+    .cf-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-mid, #3d5254);
+      margin-bottom: 7px;
+    }
+
+    .cf-group input,
+    .cf-group select,
+    .cf-group textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: #fff;
+      border: 1px solid rgba(61,82,84,0.25);
+      border-radius: 4px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .cf-group input:focus,
+    .cf-group select:focus,
+    .cf-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115,168,165,0.14);
+    }
+
+    .cf-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .cf-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8082' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    .form-success-banner {
+      display: none;
+      background: rgba(115,168,165,0.10);
+      border: 1px solid rgba(115,168,165,0.35);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--teal-deep);
+    }
+
+    .form-success-banner.visible { display: block; }
+
+    /* ─── Mobile Tabs ─────────────────────────────────────────────── */
+    .mobile-tabs {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid var(--border-teal);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      white-space: nowrap;
+      padding: 0 16px;
+    }
+
+    .mobile-tabs::-webkit-scrollbar { display: none; }
+
+    .mobile-tab {
+      display: inline-block;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.18s ease;
+    }
+
+    .mobile-tab.active,
+    .mobile-tab:hover {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
+
+    /* ─── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .portal-sidebar { display: none; }
+      .portal-main { margin-left: 0; }
+      .mobile-tabs { display: block; }
+      .portal-main { margin-top: calc(var(--header-h) + 45px); }
+      .section-panel { padding: 28px 20px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .quick-grid { grid-template-columns: 1fr 1fr; }
+      .contact-cards { grid-template-columns: 1fr; }
+      .supply-detail-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .portal-header { padding: 0 16px 0 0; }
+      .header-portal-label { display: none; }
+      .header-greeting { display: none; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .section-panel { padding: 24px 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="portal-header" role="banner">
+  <div class="header-left">
+    <a href="pharmacies.html" class="header-logo" aria-label="Aho Farms home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" stroke="#73a8a5" stroke-width="1.5" fill="none"/>
+        <path d="M20 32V18M20 18C20 18 14 15 12 8c5 .5 9 4 9.5 10M20 18c0 0 6-4 8-10-5 .5-9 4-9.5 10" stroke="#73a8a5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="logo-text">
+        AHO <span class="logo-farms">FARMS</span>
+        <span class="logo-sub">Medicinal Cannabis</span>
+      </div>
+    </a>
+    <span class="header-portal-label">Pharmacy Portal</span>
+  </div>
+
+  <div class="header-right">
+    <span class="header-greeting">Welcome, <strong>Auckland City Pharmacy</strong></span>
+    <a href="pharmacies.html" class="btn-logout">Logout</a>
+  </div>
+</header>
+
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<nav class="portal-sidebar" role="navigation" aria-label="Portal navigation">
+
+  <div class="sidebar-nav-label">Navigation</div>
+
+  <ul class="sidebar-nav" role="list">
+
+    <li>
+      <div class="nav-item active" data-section="overview" role="button" tabindex="0" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="formulary" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12h6M9 16h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+        Formulary &amp; Pricing
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="stock" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Current Stock &amp; Availability
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="batch" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Batch Documentation
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="dispensing" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        Dispensing Guidelines
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="ordering" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Ordering &amp; Supply
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="returns" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 109-9M3 12l4-4m-4 4l4 4"/></svg>
+        Returns &amp; Claims
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="contact" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Contact &amp; Support
+      </div>
+    </li>
+
+  </ul>
+
+  <div class="sidebar-compliance">
+    This portal is for registered pharmacists and pharmacy managers only. Content is confidential and not for onward distribution. All products are prescription medicines under the Medicines Act 1981.
+  </div>
+</nav>
+
+
+<!-- ══════════════════ MOBILE TABS ══════════════════ -->
+<div class="mobile-tabs" id="mobileTabs" role="tablist" aria-label="Portal sections">
+  <span class="mobile-tab active" data-section="overview">Overview</span>
+  <span class="mobile-tab" data-section="formulary">Formulary</span>
+  <span class="mobile-tab" data-section="stock">Stock</span>
+  <span class="mobile-tab" data-section="batch">Batch Docs</span>
+  <span class="mobile-tab" data-section="dispensing">Dispensing</span>
+  <span class="mobile-tab" data-section="ordering">Ordering</span>
+  <span class="mobile-tab" data-section="returns">Returns</span>
+  <span class="mobile-tab" data-section="contact">Support</span>
+</div>
+
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<main class="portal-main" id="portalMain">
+
+  <!-- ── SECTION 1: OVERVIEW ── -->
+  <section class="section-panel active" id="section-overview" aria-label="Overview">
+
+    <h1>Welcome to the Aho Farms<br>Pharmacy Portal</h1>
+    <p class="intro-text">This portal contains formulary, pricing, and dispensing information for Aho Farms medicinal cannabis products. For clinical and prescribing information, refer prescribers to our <a href="#">HCP portal</a>.</p>
+
+    <!-- Amber alert -->
+    <div class="alert-box" role="alert">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div class="alert-box-content">
+        <div class="alert-label">Stock Update</div>
+        <p>RĀ Batch #2026-003 and SOURCE Batch #2026-002 available now. Contact <a href="mailto:pharmacies@ahofarms.co.nz" style="color:#8a5a10;font-weight:500;">pharmacies@ahofarms.co.nz</a> to place orders.</p>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Products Available</div>
+        <div class="stat-card-value">2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Current Batches</div>
+        <div class="stat-card-value">2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Avg Lead Time</div>
+        <div class="stat-card-value" style="font-size:22px;">3–5 days</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Lab Testing</div>
+        <div class="stat-card-value" style="font-size:18px;">IANZ Accredited</div>
+      </div>
+    </div>
+
+    <!-- Quick access cards -->
+    <div class="quick-grid">
+
+      <div class="quick-card" data-goto="formulary" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Formulary &amp; Pricing</h4>
+          <p>SKUs, pack sizes, pricing schedule</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="stock" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Stock &amp; Availability</h4>
+          <p>Current stock status and expiry dates</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="batch" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Batch Documentation</h4>
+          <p>Certificates of analysis — Hill Labs IANZ</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="dispensing" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Dispensing Guidelines</h4>
+          <p>Storage, labelling, patient counselling</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="ordering" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Ordering &amp; Supply</h4>
+          <p>How to order, lead times, payment</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="returns" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9M3 12l4-4m-4 4l4 4"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Returns &amp; Claims</h4>
+          <p>Returns policy, damaged goods, complaints</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact strip -->
+    <div class="contact-strip">
+      <p><strong>Pharmacy orders &amp; enquiries:</strong></p>
+      <p><a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a></p>
+      <p>Response within 1 business day</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 2: FORMULARY & PRICING ── -->
+  <section class="section-panel" id="section-formulary" aria-label="Formulary and Pricing">
+
+    <h2>Formulary Information &amp; Pricing</h2>
+    <p class="intro-text">Pricing is ex-GST. Pricing is subject to change — contact us for current pricing confirmation before ordering. Products are not PHARMAC-subsidised.</p>
+
+    <table class="data-table" aria-label="Product formulary and pricing">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>SKU</th>
+          <th>Pack Size</th>
+          <th>THC</th>
+          <th>CBD</th>
+          <th>RRP (incl. GST)</th>
+          <th>Pharmacy Buy Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RĀ</td>
+          <td>AHO-RA-10</td>
+          <td>10g dried flower</td>
+          <td>~21%</td>
+          <td>&lt;1%</td>
+          <td>$69.00</td>
+          <td>Contact for pricing</td>
+          <td><span class="badge badge-available">Available</span></td>
+        </tr>
+        <tr>
+          <td>SOURCE</td>
+          <td>AHO-SRC-10</td>
+          <td>10g dried flower</td>
+          <td>~21%</td>
+          <td>&lt;1%</td>
+          <td>$69.00</td>
+          <td>Contact for pricing</td>
+          <td><span class="badge badge-available">Available</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-text">
+      <strong>Pharmacy buy price available on application.</strong> Contact <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a> for current trade pricing.
+    </div>
+
+    <div class="info-box">
+      <h3>Dispensing Fee</h3>
+      <p>Dispensing fees are not included in the above pricing. Standard pharmacy dispensing fees apply as per your pharmacy's schedule.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>PHARMAC Schedule Note</h3>
+      <p>These products are not on the Pharmaceutical Schedule and are not PHARMAC-subsidised. Patients pay the full cost. This should be communicated clearly at the point of dispensing.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 3: STOCK & AVAILABILITY ── -->
+  <section class="section-panel" id="section-stock" aria-label="Stock and Availability">
+
+    <h2>Stock &amp; Availability</h2>
+    <p class="intro-text">Current stock status for all Aho Farms products. Stock levels are updated weekly. For real-time availability, contact us directly.</p>
+
+    <table class="data-table" aria-label="Stock availability">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Batch</th>
+          <th>Availability</th>
+          <th>Expiry</th>
+          <th>Lead Time</th>
+          <th>Order</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RĀ</td>
+          <td>2026-003</td>
+          <td><span class="badge badge-available">In Stock</span></td>
+          <td>Dec 2027</td>
+          <td>3–5 business days</td>
+          <td><a href="mailto:pharmacies@ahofarms.co.nz?subject=Order%20Request%20-%20RA%202026-003" class="btn btn-primary" style="padding:7px 14px;font-size:12px;">Order</a></td>
+        </tr>
+        <tr>
+          <td>SOURCE</td>
+          <td>2026-002</td>
+          <td><span class="badge badge-available">In Stock</span></td>
+          <td>Nov 2027</td>
+          <td>3–5 business days</td>
+          <td><a href="mailto:pharmacies@ahofarms.co.nz?subject=Order%20Request%20-%20SOURCE%202026-002" class="btn btn-primary" style="padding:7px 14px;font-size:12px;">Order</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-text">
+      Stock levels updated weekly. For urgent orders or bulk requirements, contact <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a> directly.
+    </div>
+
+    <div class="info-box">
+      <h3>Cold Chain &amp; Storage</h3>
+      <p>These products do not require refrigeration. Store below 25°C, away from direct light and moisture. Maintain in original tamper-evident packaging until point of dispensing.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 4: BATCH DOCUMENTATION ── -->
+  <section class="section-panel" id="section-batch" aria-label="Batch Documentation">
+
+    <h2>Batch Documentation &amp; Certificates of Analysis</h2>
+    <p class="intro-text">All batches are independently tested by Hill Labs, Hamilton (IANZ accredited). CoAs include cannabinoid profile, terpene analysis, heavy metals, pesticides, microbials, moisture content, and foreign matter.</p>
+
+    <table class="data-table" aria-label="Batch certificates of analysis">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Batch</th>
+          <th>Manufacture Date</th>
+          <th>Test Date</th>
+          <th>THC</th>
+          <th>CBD</th>
+          <th>Expiry</th>
+          <th>Status</th>
+          <th>CoA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RĀ</td>
+          <td>2026-003</td>
+          <td>Apr 2026</td>
+          <td>May 2026</td>
+          <td>21.4%</td>
+          <td>0.3%</td>
+          <td>Dec 2027</td>
+          <td><span class="badge badge-current">Current</span></td>
+          <td>
+            <a href="#" class="coa-download">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>RĀ</td>
+          <td>2026-002</td>
+          <td>Jan 2026</td>
+          <td>Feb 2026</td>
+          <td>20.8%</td>
+          <td>0.4%</td>
+          <td>Sep 2027</td>
+          <td><span class="badge badge-previous">Previous</span></td>
+          <td>
+            <a href="#" class="coa-download">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>SOURCE</td>
+          <td>2026-002</td>
+          <td>Apr 2026</td>
+          <td>May 2026</td>
+          <td>21.1%</td>
+          <td>0.2%</td>
+          <td>Nov 2027</td>
+          <td><span class="badge badge-current">Current</span></td>
+          <td>
+            <a href="#" class="coa-download">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>SOURCE</td>
+          <td>2026-001</td>
+          <td>Nov 2025</td>
+          <td>Jan 2026</td>
+          <td>20.9%</td>
+          <td>0.3%</td>
+          <td>Jul 2027</td>
+          <td><span class="badge badge-previous">Previous</span></td>
+          <td>
+            <a href="#" class="coa-download">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ianz-note">
+      <div class="ianz-badge">IANZ</div>
+      <p>All Aho Farms products are tested by <strong>Hill Laboratories Ltd, Hamilton, New Zealand</strong> — accredited by International Accreditation New Zealand (IANZ). Testing scope covers cannabinoid profile (HPLC), terpene analysis (GC-MS), heavy metals (ICP-MS), pesticide residues, microbial limits, moisture content, and foreign matter.</p>
+    </div>
+
+    <div class="btn-row">
+      <a href="mailto:pharmacies@ahofarms.co.nz?subject=Previous%20Batch%20CoA%20Request" class="btn btn-outline">Request Previous Batch CoAs</a>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 5: DISPENSING GUIDELINES ── -->
+  <section class="section-panel" id="section-dispensing" aria-label="Dispensing Guidelines">
+
+    <h2>Dispensing Guidelines</h2>
+    <p class="intro-text">Guidelines for pharmacists dispensing Aho Farms medicinal cannabis products. All products are Schedule 8 Controlled Drugs under New Zealand law.</p>
+
+    <h3>Storage Requirements</h3>
+    <ul class="bullet-list">
+      <li>Store below 25°C away from direct sunlight and moisture</li>
+      <li>Keep in original tamper-evident packaging until dispensed</li>
+      <li>Dispense in original packaging where possible</li>
+      <li>Follow your pharmacy's controlled drug storage protocols (Schedule 8)</li>
+    </ul>
+
+    <h3>Labelling Requirements</h3>
+    <p>Standard NZ prescription labelling requirements apply. Labels must include:</p>
+    <ul class="bullet-list">
+      <li>Patient name</li>
+      <li>Prescriber name</li>
+      <li>Directions for use as prescribed</li>
+      <li>Date dispensed</li>
+      <li>Quantity dispensed</li>
+      <li>Batch number</li>
+      <li>Pharmacy name and contact details</li>
+    </ul>
+
+    <h3>Patient Counselling Points</h3>
+    <ul class="bullet-list">
+      <li>Explain vaporisation method — do not combust or smoke the product</li>
+      <li>Onset: 5–15 minutes for inhalation, 30–90 minutes for oral administration</li>
+      <li>Advise not to drive or operate machinery until individual response is established</li>
+      <li>Store away from children and in a secure location</li>
+      <li>Do not share prescription medicine with others</li>
+      <li>Common effects: relaxation, altered perception, dry mouth, increased appetite</li>
+      <li>Contact prescriber if experiencing adverse effects</li>
+    </ul>
+
+    <div class="info-box">
+      <h3>Controlled Drug Handling</h3>
+      <p>These products are Schedule 8 Controlled Drugs under the Misuse of Drugs Act 1975. Refer to your pharmacy's controlled drug protocols for storage, recording, and dispensing requirements. Controlled drug registers must be maintained as required by law.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Returns Note</h3>
+      <p>Dispensed product cannot be returned under any circumstances — this is a legal requirement. For undispensed stock returns, see the Returns &amp; Claims section.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 6: ORDERING & SUPPLY ── -->
+  <section class="section-panel" id="section-ordering" aria-label="Ordering and Supply">
+
+    <h2>Ordering Process</h2>
+    <p class="intro-text">How to place an order for Aho Farms medicinal cannabis products. Orders are fulfilled Monday to Friday.</p>
+
+    <ol class="step-list" aria-label="Ordering steps">
+      <li>
+        <span class="step-number">1</span>
+        <div class="step-content">
+          <p>Check stock availability in this portal or email <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a></p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">2</span>
+        <div class="step-content">
+          <p>Place order by email: include pharmacy name, registration number, product name, quantity, and required delivery date</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">3</span>
+        <div class="step-content">
+          <p>Receive order confirmation within 1 business day with estimated dispatch date</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">4</span>
+        <div class="step-content">
+          <p>Products dispatched via tracked courier with signature required on delivery</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">5</span>
+        <div class="step-content">
+          <p>Receive delivery and check against order confirmation and batch documentation</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">6</span>
+        <div class="step-content">
+          <p>Store per guidelines above and update your controlled drug dispensing records</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="supply-detail-grid">
+      <div class="supply-detail-card">
+        <h4>Lead Times</h4>
+        <p>Standard 3–5 business days. Urgent orders: contact us, we will accommodate where possible.</p>
+      </div>
+      <div class="supply-detail-card">
+        <h4>Minimum Order</h4>
+        <p>No minimum order quantity. We supply single units to accommodate patient-specific demand.</p>
+      </div>
+      <div class="supply-detail-card">
+        <h4>Payment Terms</h4>
+        <p>Invoice on dispatch, 20 days net. Credit card available on request.</p>
+      </div>
+      <div class="supply-detail-card">
+        <h4>Dispatch Schedule</h4>
+        <p>Monday–Friday. Orders placed before 12pm dispatched same day where possible.</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 7: RETURNS & CLAIMS ── -->
+  <section class="section-panel" id="section-returns" aria-label="Returns and Claims">
+
+    <h2>Returns &amp; Claims</h2>
+    <p class="intro-text">Returns and claims policy for Aho Farms pharmacy supply. Please read all sections carefully before initiating a return.</p>
+
+    <div class="info-box">
+      <h3>Returns Policy</h3>
+      <p>Undispensed stock may be returned within 30 days of delivery in original unopened packaging. Contact <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a> before returning. A credit note will be issued on receipt and inspection of returned stock.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Damaged Goods</h3>
+      <p>Report any damaged goods within 48 hours of delivery, including photos of the damage and packaging. A replacement will be dispatched or a credit note issued once the claim has been assessed.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Product Quality Complaints</h3>
+      <p>Report any quality concerns immediately to <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a>. Batch number is required. We take all quality complaints seriously and investigate within 5 business days. Quality complaints may trigger a formal product recall process in accordance with Medsafe requirements.</p>
+    </div>
+
+    <div class="alert-box" role="alert">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div class="alert-box-content">
+        <div class="alert-label">Legal Requirement</div>
+        <p>Dispensed product cannot be returned under any circumstances. This is a requirement under the Medicines Act 1981 and applies without exception.</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 8: CONTACT & SUPPORT ── -->
+  <section class="section-panel" id="section-contact" aria-label="Contact and Support">
+
+    <h2>Pharmacy Support</h2>
+    <p class="intro-text">Get in touch with the Aho Farms pharmacy team for orders, documentation, or general enquiries.</p>
+
+    <div class="contact-cards">
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <h3>Pharmacy Orders</h3>
+        <a href="mailto:pharmacies@ahofarms.co.nz" class="contact-email">pharmacies@ahofarms.co.nz</a>
+        <p class="contact-desc">Orders, stock queries, pricing, and supply documentation.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </div>
+        <h3>Prescriber Enquiries</h3>
+        <a href="mailto:prescribers@ahofarms.co.nz" class="contact-email">prescribers@ahofarms.co.nz</a>
+        <p class="contact-desc">For HCP and prescriber questions — refer prescribers here.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3>General Enquiries</h3>
+        <a href="mailto:hello@ahofarms.co.nz" class="contact-email">hello@ahofarms.co.nz</a>
+        <p class="contact-desc">General questions about Aho Farms products or company.</p>
+      </div>
+
+    </div>
+
+    <!-- Contact form -->
+    <div class="contact-form-wrapper">
+      <h3>Send a Message</h3>
+
+      <form id="contactForm" novalidate>
+
+        <div class="cf-group">
+          <label for="cf-name">Your Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="cf-name" name="name" placeholder="e.g. Sarah Tane" required aria-required="true" />
+        </div>
+
+        <div class="cf-group">
+          <label for="cf-email">Email Address <span aria-hidden="true">*</span></label>
+          <input type="email" id="cf-email" name="email" placeholder="your@pharmacy.co.nz" required aria-required="true" />
+        </div>
+
+        <div class="cf-group">
+          <label for="cf-subject">Subject</label>
+          <select id="cf-subject" name="subject">
+            <option value="" disabled selected>Select a subject</option>
+            <option value="order">Place / amend an order</option>
+            <option value="stock">Stock availability query</option>
+            <option value="coa">Request batch documentation</option>
+            <option value="pricing">Pricing enquiry</option>
+            <option value="returns">Returns or claims</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="cf-group">
+          <label for="cf-message">Message <span aria-hidden="true">*</span></label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Your message or question" required aria-required="true"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px 20px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+
+        <div class="form-success-banner" id="formSuccess" role="alert" aria-live="polite">
+          Message sent. We aim to respond within 1 business day.
+        </div>
+
+      </form>
+    </div>
+
+  </section>
+
+</main><!-- /portal-main -->
+
+
+<script>
+  // ─── Navigation controller ──────────────────────────────────────────────────
+  const navItems   = document.querySelectorAll('.nav-item[data-section]');
+  const mobileTabs = document.querySelectorAll('.mobile-tab[data-section]');
+  const panels     = document.querySelectorAll('.section-panel');
+
+  function activateSection(sectionId) {
+    // Update sidebar
+    navItems.forEach(item => {
+      const active = item.dataset.section === sectionId;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-current', active ? 'page' : 'false');
+    });
+
+    // Update mobile tabs
+    mobileTabs.forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.section === sectionId);
+    });
+
+    // Show/hide panels
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.id === 'section-' + sectionId);
+    });
+
+    // Scroll content to top
+    const main = document.getElementById('portalMain');
+    if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Sidebar nav clicks
+  navItems.forEach(item => {
+    item.addEventListener('click', () => activateSection(item.dataset.section));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateSection(item.dataset.section);
+      }
+    });
+  });
+
+  // Mobile tab clicks
+  mobileTabs.forEach(tab => {
+    tab.addEventListener('click', () => activateSection(tab.dataset.section));
+  });
+
+  // Quick card / button links to sections (data-goto)
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-goto]');
+    if (el) {
+      e.preventDefault();
+      activateSection(el.dataset.goto);
+    }
+  });
+
+  // ─── Contact Form ───────────────────────────────────────────────────────────
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+
+      if (!name || !email || !message) {
+        [
+          { id: 'cf-name',    val: name },
+          { id: 'cf-email',   val: email },
+          { id: 'cf-message', val: message }
+        ].forEach(({ id, val }) => {
+          const el = document.getElementById(id);
+          el.style.borderColor = val ? '' : '#c0392b';
+        });
+        return;
+      }
+
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        contactForm.reset();
+        formSuccess.classList.add('visible');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message`;
+
+        setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+      }, 900);
+    });
+
+    // Clear validation errors on input
+    contactForm.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', () => { el.style.borderColor = ''; });
+    });
+  }
+
+  // ─── Keyboard: Escape closes no active modals (placeholder) ────────────────
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      // Reserved for future modal/overlay use
+    }
+  });
+
+  // ─── Init ───────────────────────────────────────────────────────────────────
+  activateSection('overview');
+</script>
+
+</body>
+</html>
