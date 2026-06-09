@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use — Aho Farms</title>
+  <meta name="description" content="Terms of Use for the Aho Farms website — governing use of this site by healthcare professionals and industry partners." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --text-dark:   #1a2426;
+      --text-muted:  #4a5f62;
+      --radius-btn:  4px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ─── Navigation ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26,36,38,0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-links a.nav-cta {
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-btn);
+      transition: background 0.2s;
+    }
+
+    .nav-links a.nav-cta:hover { background: var(--teal-light); color: var(--night); }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    .legal-hero {
+      background: var(--night);
+      padding: 140px 2rem 80px;
+      text-align: center;
+    }
+
+    .legal-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+
+    .legal-hero p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--teal-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── Legal Content ─────────────────────────────────────────── */
+    .legal-body {
+      background: var(--white);
+      padding: 72px 2rem 96px;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--night);
+      margin: 2.8rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(115,168,165,0.3);
+    }
+
+    .legal-content h2:first-of-type { margin-top: 0; }
+
+    .legal-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--night);
+      margin: 1.8rem 0 0.4rem;
+    }
+
+    .legal-content p {
+      margin-bottom: 1rem;
+      color: #2e3f42;
+      line-height: 1.85;
+    }
+
+    .legal-content ul, .legal-content ol {
+      margin: 0.75rem 0 1rem 1.5rem;
+      color: #2e3f42;
+    }
+
+    .legal-content li {
+      margin-bottom: 0.45rem;
+      line-height: 1.75;
+    }
+
+    .legal-content a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .legal-content a:hover { color: var(--night); }
+
+    .legal-content strong { color: var(--night); font-weight: 600; }
+
+    .info-box {
+      background: var(--off-white);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-box p { margin: 0; font-size: 0.95rem; }
+
+    .warning-box {
+      background: #fdf6ec;
+      border-left: 3px solid #d4922a;
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box p { margin: 0; font-size: 0.95rem; color: #5a3e10; }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      background: var(--night);
+      color: rgba(255,255,255,0.65);
+      padding: 56px 2rem 32px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--teal-light); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-legal-links a:hover { color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Aho <span>Farms</span></a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────────── -->
+  <section class="legal-hero">
+    <h1>Terms of Use</h1>
+    <p>Last updated: June 2026</p>
+  </section>
+
+  <!-- ─── Content ────────────────────────────────────────── -->
+  <main class="legal-body">
+    <div class="legal-content">
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using the Aho Farms website at <strong>ahofarms.co.nz</strong> (the <strong>"Website"</strong>), you agree to be bound by these Terms of Use (<strong>"Terms"</strong>). These Terms constitute a binding agreement between you and <strong>Aho Farms Limited</strong>, a company registered in New Zealand (<strong>"Aho Farms"</strong>, <strong>"we"</strong>, <strong>"us"</strong>).</p>
+      <p>If you do not agree to these Terms in full, you must not access or use this Website. Continued use of the Website following any update to these Terms constitutes acceptance of the revised Terms.</p>
+
+      <h2>2. Who This Website Is For</h2>
+      <div class="warning-box">
+        <p><strong>Important:</strong> This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders. It is not intended for patients, consumers, or members of the general public seeking medical advice or product information for personal use.</p>
+      </div>
+      <p>The Aho Farms website provides factual information about our cultivation operations, product range, regulatory status, and business activities. Detailed product information — including formulations, dosing guidance, and Certificates of Analysis — is provided exclusively through our Prescriber Portal, which is accessible only to verified healthcare professionals.</p>
+      <p>If you are a patient or consumer seeking information about medicinal cannabis, please speak with your healthcare provider. Aho Farms does not provide direct-to-consumer information about its prescription products.</p>
+
+      <h2>3. No Medical Advice</h2>
+      <p>Nothing on this Website constitutes or should be construed as medical advice, clinical guidance, or a recommendation to use any particular treatment or product. Aho Farms is a licensed medicinal cannabis cultivator and supplier — we are <strong>not a healthcare provider</strong>.</p>
+      <p>We do not diagnose or treat medical conditions. We do not advise on the suitability of any product for any individual patient. Any references on this Website to conditions for which medicinal cannabis may be prescribed reflect general information about clinical practice, not clinical advice from Aho Farms.</p>
+      <p>Always consult a qualified and registered healthcare professional before making any clinical decision. Prescribers should refer to current product information, Medsafe guidance, and relevant clinical guidelines.</p>
+
+      <h2>4. Product Information</h2>
+      <p>Product-level information — including product specifications, cannabinoid profiles, Certificates of Analysis, and dosing guidance — is made available exclusively to <strong>verified healthcare professionals</strong> through the Aho Farms Prescriber Portal.</p>
+      <p>Public-facing product information on this Website is factual and limited in scope, consistent with our obligations under the <strong>Medicines Act 1981</strong>, the <strong>Misuse of Drugs (Medicinal Cannabis) Regulations 2019</strong>, and applicable Medsafe advertising guidance.</p>
+      <p>All product information is provided as a reference tool only. Aho Farms products are prescription medicines and are not available for purchase by consumers, directly from Aho Farms, or through retail channels. They must be prescribed by a registered prescriber and dispensed by a licensed pharmacy.</p>
+
+      <h2>5. Intellectual Property</h2>
+      <p>All content on this Website — including but not limited to text, articles, graphics, photography, logos, trademarks, layout, and design — is the property of <strong>Aho Farms Limited</strong> or its licensors, and is protected by New Zealand and international intellectual property law.</p>
+      <p>You may not, without our prior written permission:</p>
+      <ul>
+        <li>Reproduce, copy, or republish any content from this Website;</li>
+        <li>Distribute, sell, or sub-license any content from this Website;</li>
+        <li>Use our trademarks, logos, or trading names in any manner;</li>
+        <li>Scrape, mine, or extract data from this Website using automated tools;</li>
+        <li>Use content from this Website in a way that is misleading or that implies endorsement by Aho Farms.</li>
+      </ul>
+      <p>You may print or download content from this Website for your own personal, non-commercial reference. Any permitted use must retain all copyright and proprietary notices.</p>
+      <p>The Aho Farms name, logo, and associated marks are registered or unregistered trademarks of Aho Farms Limited. Nothing on this Website grants any licence to use these marks.</p>
+
+      <h2>6. Accuracy of Information</h2>
+      <p>Aho Farms takes reasonable care to ensure that the information on this Website is accurate, current, and not misleading. However, we do not warrant or represent that all information is complete, accurate, error-free, or up to date at the time you access it.</p>
+      <p>In particular:</p>
+      <ul>
+        <li>Product specifications and cannabinoid profiles are indicative and subject to normal batch-to-batch variation. You should refer to current <strong>Certificates of Analysis (CoAs)</strong> for precise batch-level data.</li>
+        <li>Regulatory information is current as of the date shown and may be subject to change as the New Zealand Medicinal Cannabis Scheme evolves.</li>
+        <li>Company and operational information is updated periodically and may not reflect the most recent developments at all times.</li>
+      </ul>
+      <p>We reserve the right to update, amend, or remove content at any time without notice.</p>
+
+      <h2>7. External Links</h2>
+      <p>This Website may contain links to third-party websites for informational convenience — for example, links to Medsafe, the Ministry of Health, professional registration bodies, or clinical resources. These links do not constitute endorsement, affiliation, or approval of those websites or their content by Aho Farms.</p>
+      <p>We have no control over the content, availability, or accuracy of external sites and accept no responsibility for them. Accessing linked websites is entirely at your own risk. We encourage you to review the terms and privacy policies of any external site you visit.</p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by the laws of New Zealand, including the Consumer Guarantees Act 1993 and the Fair Trading Act 1986 where applicable:</p>
+      <ul>
+        <li>Aho Farms is not liable for any direct, indirect, incidental, consequential, special, or punitive loss or damage arising from your use of, or inability to use, this Website;</li>
+        <li>Aho Farms is not liable for any loss or damage arising from reliance on any information published on this Website;</li>
+        <li>Aho Farms is not liable for any clinical, regulatory, or commercial decision made in reliance on Website content;</li>
+        <li>Aho Farms is not liable for any unauthorised access to, or alteration of, your transmissions or data.</li>
+      </ul>
+      <p>If you are using this Website in trade or in the course of a business, the Consumer Guarantees Act 1993 does not apply to your use of this Website.</p>
+      <p>Nothing in these Terms limits or excludes liability that cannot be lawfully excluded, including liability under the Consumer Guarantees Act 1993 where it applies.</p>
+
+      <h2>9. Website Access and Security</h2>
+      <p>Access to the Aho Farms Prescriber Portal and Investor Portal requires registration and identity verification. You are responsible for maintaining the confidentiality of your access credentials and for all activity conducted under your account.</p>
+      <p>You must not:</p>
+      <ul>
+        <li>Attempt to gain unauthorised access to any part of this Website or its underlying systems;</li>
+        <li>Use this Website in any way that is unlawful, fraudulent, or harmful;</li>
+        <li>Transmit any unsolicited communications, malware, or harmful code through this Website;</li>
+        <li>Impersonate any person or falsely represent your professional credentials to gain portal access.</li>
+      </ul>
+      <p>Aho Farms reserves the right to suspend or terminate portal access where we have reason to believe these Terms have been breached.</p>
+
+      <h2>10. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of <strong>New Zealand</strong>. You irrevocably submit to the exclusive jurisdiction of the courts of New Zealand in relation to any dispute arising out of or in connection with these Terms or your use of this Website.</p>
+      <p>If any provision of these Terms is found to be unlawful, void, or unenforceable, that provision shall be severed from these Terms and shall not affect the validity and enforceability of the remaining provisions.</p>
+
+      <h2>11. Changes to These Terms</h2>
+      <p>We may update these Terms at any time without prior notice. Changes take effect when posted to this page. The "Last updated" date at the top of this page will reflect when the Terms were most recently revised.</p>
+      <p>Your continued use of this Website after any change to the Terms constitutes acceptance of the revised Terms. If you do not agree to the revised Terms, you must stop using the Website.</p>
+
+      <h2>12. Contact</h2>
+      <p>If you have any questions about these Terms or your use of this Website, please contact us:</p>
+      <div class="info-box">
+        <p>
+          <strong>Aho Farms Limited</strong><br />
+          Hawke's Bay, New Zealand<br />
+          <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── Footer ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">Aho Farms</div>
+          <p>Licensed medicinal cannabis cultivator operating under the New Zealand Medicinal Cannabis Scheme. Cultivation Licence &amp; Export Licence holder. Hawke's Bay, New Zealand.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cultivation.html">Cultivation</a></li>
+            <li><a href="kaupapa.html">Our Kaupapa</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="products.html#portal">Prescriber Portal</a></li>
+            <li><a href="products.html#coa">Certificates of Analysis</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Aho Farms products are prescription medicines. They are not available without a valid prescription from a registered prescriber. This website is intended for healthcare professionals and industry partners, not for patients or consumers seeking medical advice. &copy; 2026 Aho Farms Limited. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
