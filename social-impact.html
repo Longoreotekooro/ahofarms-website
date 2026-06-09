@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Impact — Aho Farms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night: #1a2426;
+      --night-mid: #253032;
+      --night-soft: #2f3d3f;
+      --teal: #73a8a5;
+      --teal-light: #a2c4c3;
+      --teal-deep: #4a7a78;
+      --soil: #8b6f47;
+      --white: #ffffff;
+      --off-white: #f4f6f6;
+      --card-border: rgba(115,168,165,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--night);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      text-wrap: balance;
+      line-height: 1.2;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--night);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    .nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.nav-cta {
+      background: var(--teal);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-links a.nav-cta:hover { background: var(--teal-deep); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      background: var(--night);
+      overflow: hidden;
+      padding: 120px 40px 80px;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.68);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 40px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+    .section-caption.light { color: var(--teal-light); }
+
+    .section-white { background: var(--white); }
+    .section-offwhite { background: var(--off-white); }
+    .section-dark { background: var(--night); }
+    .section-teal-deep { background: var(--teal-deep); }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--night);
+      margin-top: 12px;
+    }
+    .section-header.on-dark h2 { color: var(--white); }
+
+    /* ── STAT CARDS ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat-card {
+      background: var(--off-white);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 40px 28px;
+      text-align: center;
+    }
+    .stat-card .stat-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--teal-deep);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .stat-card .stat-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--night);
+      margin-bottom: 8px;
+    }
+    .stat-card .stat-desc {
+      font-size: 0.875rem;
+      color: rgba(26,36,38,0.65);
+      line-height: 1.6;
+    }
+
+    /* ── BODY CONTENT ── */
+    .content-block {
+      max-width: 720px;
+    }
+    .content-block h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--night);
+      margin-bottom: 28px;
+      margin-top: 12px;
+    }
+    .content-block.on-dark h2 { color: var(--white); }
+    .content-block p {
+      font-size: 0.9375rem;
+      color: rgba(26,36,38,0.78);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .content-block.on-dark p { color: rgba(255,255,255,0.65); }
+    .content-block p:last-child { margin-bottom: 0; }
+
+    /* ── QUOTE BLOCK ── */
+    .quote-block {
+      border-left: 3px solid var(--teal);
+      padding: 24px 28px;
+      margin: 36px 0;
+      background: rgba(115,168,165,0.06);
+      border-radius: 0 4px 4px 0;
+    }
+    .quote-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--night);
+      line-height: 1.55;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── WHENUA SECTION (2-col with image) ── */
+    .two-col-image {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .col-content h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      margin-bottom: 28px;
+      margin-top: 12px;
+    }
+    .col-content.on-dark h2 { color: var(--white); }
+    .col-content p {
+      font-size: 0.9375rem;
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .col-content.on-dark p { color: rgba(255,255,255,0.65); }
+    .col-content p:last-child { margin-bottom: 0; }
+    .col-image img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      filter: brightness(0.85) saturate(0.9);
+    }
+
+    /* ── COMMUNITY ── */
+    .community-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── COMMITMENT CARDS ── */
+    .commitment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 0;
+    }
+    .commitment-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 36px 28px;
+    }
+    .commitment-card .commit-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .commitment-card h3 {
+      font-size: 1.1875rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .commitment-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+    .cta-section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .cta-section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--white);
+      margin-top: 12px;
+    }
+    .cta-section-header p {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--night);
+      padding: 72px 40px 40px;
+      border-top: 1px solid rgba(115,168,165,0.12);
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(115,168,165,0.1);
+    }
+    .footer-brand .nav-logo {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 1.125rem;
+    }
+    .footer-tagline {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--teal-light); }
+    .footer-bottom {
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-disclaimer {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.65;
+      max-width: 820px;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      section { padding: 72px 24px; }
+      .two-col-image { grid-template-columns: 1fr; }
+      .community-grid { grid-template-columns: 1fr; }
+      .commitment-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="caption">SOCIAL IMPACT</p>
+      <h1>What commercial success looks like when it belongs to the community</h1>
+      <p>Aho Farms measures success not only in revenue and product quality, but in jobs created, land developed, and whānau lifted. This is what that looks like in practice.</p>
+    </div>
+  </section>
+
+  <!-- IMPACT AT A GLANCE -->
+  <section class="section-white">
+    <div class="container">
+      <div class="section-header">
+        <p class="caption">IMPACT AT A GLANCE</p>
+        <h2>What we stand for, in practice</h2>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">Māori Employment<br>Priority</div>
+          <p class="stat-title">Whānau First Hiring</p>
+          <p class="stat-desc">All roles advertised internally to whānau and hapū before external recruitment begins.</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hawke's Bay</div>
+          <p class="stat-title">100% Local Operations</p>
+          <p class="stat-desc">Entirely locally operated and locally employed. Our economic footprint stays in the region.</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Training<br>Pathways</div>
+          <p class="stat-title">Workforce Development</p>
+          <p class="stat-desc">Formal horticulture training supported for whānau staff. Skills that last beyond this industry.</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">IANZ<br>Certified</div>
+          <p class="stat-title">Independent Testing</p>
+          <p class="stat-desc">Quality assurance that protects every patient downstream. No shortcuts, no exceptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAORI EMPLOYMENT -->
+  <section class="section-offwhite">
+    <div class="container">
+      <div class="section-caption">WHĀNAU EMPLOYMENT</div>
+      <div class="content-block" style="max-width: 800px;">
+        <h2>Bringing our people into the industry</h2>
+        <p>The medicinal cannabis industry in Aotearoa is a new one. It offers skilled, regulated, and well-remunerated work — exactly the kind of employment that regional communities need. At Aho Farms, we have made a deliberate choice to ensure that this opportunity flows first to the people whose land and community this enterprise depends on.</p>
+        <p>Our hiring process begins internally. When a role becomes available, we consult within whānau and hapū first. We provide supported training for those who want to build skills in horticulture, cultivation management, quality assurance, and operations. We do not expect people to arrive fully formed. We invest in capability development as a core function of the business.</p>
+        <p>We also think beyond the immediate employment relationship. Career pathways matter. As Aho Farms grows, the people who have grown with it should have genuine access to advancement — not just field roles, but team leadership, operations management, and in time, governance. We are building the structure for that now, not waiting until we are bigger.</p>
+        <div class="quote-block">
+          <p>"Our people are not a resource pool. They are partners in this enterprise — and the company should reflect that in how it pays, trains, and advances them."</p>
+        </div>
+        <p>This is not a perfected system. We are a young company. But the commitment is explicit and we hold ourselves accountable to it in every hiring decision we make.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHENUA DEVELOPMENT -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="two-col-image">
+        <div class="col-content on-dark">
+          <p class="section-caption light">WHENUA</p>
+          <h2>Productive use of Māori land</h2>
+          <p>The land at Raupunga is Māori freehold land. Under Te Ture Whenua Māori Act, it is held in collective ownership and cannot simply be sold or developed without regard for the interests of the owners and their descendants. It is a form of title that carries obligations as well as rights.</p>
+          <p>Aho Farms is one model for what productive use of Māori land can look like in the 21st century. Not farming for subsistence. Not leasing to outside operators for a fraction of its value. A licensed, compliant, commercially serious enterprise, operating on the land, employing the people whose land it is, and returning economic value to those owners.</p>
+          <p>Economic sovereignty for Māori communities requires that Māori land work for Māori. That means moving up the value chain — not just growing a commodity, but processing, quality-certifying, branding, and distributing a premium health product into a regulated market. Aho Farms is that step.</p>
+          <p>The Waaka whānau are not passive landowners in this model. They are partners. Their knowledge of this land, their commitment to seeing it used well, and their stake in the outcome is part of what makes this enterprise work.</p>
+        </div>
+        <div class="col-image">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Agricultural land at dawn, Hawke's Bay" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="section-white">
+    <div class="container">
+      <div class="community-grid">
+        <div>
+          <p class="section-caption">COMMUNITY</p>
+          <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 500; color: var(--night); margin-bottom: 28px; margin-top: 12px;">Investing in Hawke's Bay</h2>
+          <p style="font-size: 0.9375rem; color: rgba(26,36,38,0.78); line-height: 1.85; margin-bottom: 18px;">Aho Farms operates out of Raupunga in the Hawke's Bay region. Every role we create, every supplier relationship we form, and every dollar we spend is rooted in this region. We do not outsource our operations to cheaper alternatives elsewhere. We build here.</p>
+          <p style="font-size: 0.9375rem; color: rgba(26,36,38,0.78); line-height: 1.85; margin-bottom: 18px;">Our input suppliers, equipment contractors, and service providers are predominantly Hawke's Bay businesses. Where regional supply is not available, we work to develop it — creating relationships that benefit both parties and keep value circulating in the local economy.</p>
+          <p style="font-size: 0.9375rem; color: rgba(26,36,38,0.78); line-height: 1.85;">Hawke's Bay is a horticultural region with deep expertise in growing, quality management, and agricultural operations. We draw on that expertise. As we scale, we intend to formalise our community investment — establishing a fund from commercial returns that is directed back into community development priorities identified by the Waaka whānau and the broader hapū.</p>
+        </div>
+        <div>
+          <div style="background: var(--off-white); border: 1px solid var(--card-border); border-radius: 8px; padding: 36px;">
+            <p class="section-caption">LOCAL ANCHORS</p>
+            <ul style="list-style: none; margin-top: 8px;">
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--card-border); font-size: 0.9375rem; color: rgba(26,36,38,0.78);">
+                <strong style="display: block; color: var(--night); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Inter', sans-serif; margin-bottom: 4px;">Testing Partner</strong>
+                Hill Labs, Hamilton — IANZ-accredited independent laboratory
+              </li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--card-border); font-size: 0.9375rem; color: rgba(26,36,38,0.78);">
+                <strong style="display: block; color: var(--night); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Inter', sans-serif; margin-bottom: 4px;">Growing Region</strong>
+                Raupunga, Hawke's Bay — 2,200+ sunshine hours per year
+              </li>
+              <li style="padding: 16px 0; border-bottom: 1px solid var(--card-border); font-size: 0.9375rem; color: rgba(26,36,38,0.78);">
+                <strong style="display: block; color: var(--night); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Inter', sans-serif; margin-bottom: 4px;">Land Partner</strong>
+                Waaka whānau — Māori freehold landowners and founding partners
+              </li>
+              <li style="padding: 16px 0; font-size: 0.9375rem; color: rgba(26,36,38,0.78);">
+                <strong style="display: block; color: var(--night); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Inter', sans-serif; margin-bottom: 4px;">Employment Priority</strong>
+                Hawke's Bay whānau — first preference for all positions
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOKING FORWARD -->
+  <section class="section-teal-deep">
+    <div class="container">
+      <div class="cta-section-header">
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 16px;">LOOKING FORWARD</p>
+        <h2>Our commitments for the next three years</h2>
+      </div>
+      <div class="commitment-grid">
+        <div class="commitment-card">
+          <div class="commit-num">1</div>
+          <h3>Expand whānau employment</h3>
+          <p>As cultivation and operations scale, every new role will be offered to whānau first. We are committed to growing our workforce in step with the growth of the enterprise — not outsourcing what our people can do.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commit-num">2</div>
+          <h3>Formalise governance pathways</h3>
+          <p>Whānau who demonstrate capability and commitment will have access to defined pathways into senior operational and governance roles. We are building the structure for that now, not waiting until we have scaled.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commit-num">3</div>
+          <h3>Establish a community investment fund</h3>
+          <p>From commercial returns, we will establish a formal fund directed into community priorities identified by the Waaka whānau and hapū. The terms and governance of that fund will be set by the community, not by the company.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+          <p class="footer-tagline">Licensed medicinal cannabis cultivator. Raupunga, Hawke's Bay, Aotearoa New Zealand.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="kaupapa.html">Kaupapa</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="news.html">News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cultivation</h4>
+          <ul>
+            <li><a href="cultivation.html">Facility</a></li>
+            <li><a href="cultivation.html#standards">Standards</a></li>
+            <li><a href="cultivation.html#quality">Quality</a></li>
+            <li><a href="products.html">Products</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Portals</h4>
+          <ul>
+            <li><a href="prescribers.html">Prescribers</a></li>
+            <li><a href="pharmacies.html">Pharmacies</a></li>
+            <li><a href="export.html">Export Partners</a></li>
+            <li><a href="investors.html">Investors</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Always consult a qualified healthcare professional.</p>
+        <p class="footer-copy">&copy; 2025 Aho Farms Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  </script>
+
+</body>
+</html>
