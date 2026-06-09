@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aho Farms | Medicinal Cannabis — Hawke's Bay, New Zealand</title>
+<meta name="description" content="Māori-led medicinal cannabis cultivation, supply, and export from Hawke's Bay, New Zealand. Licensed grower of premium medicinal flower.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AHO FARMS — DESIGN SYSTEM
+   Brand: #73a8a5 teal primary, #1a2426 night, #ffffff white
+   Fonts: Cormorant Garamond (headings) + Inter (body)
+   ============================================================ */
+
+:root {
+  --teal-primary:   #73a8a5;
+  --teal-light:     #a2c4c3;
+  --teal-deep:      #4a7a78;
+  --teal-deeper:    #2d5250;
+  --soil:           #8b6f47;
+  --night:          #1a2426;
+  --night-mid:      #253032;
+  --night-soft:     #2f3d3f;
+  --white:          #ffffff;
+  --off-white:      #f4f6f6; /* teal-tinted, not cream */
+  --muted-text:     #6b8082;
+  --border:         rgba(115,168,165,0.15);
+  --border-strong:  rgba(115,168,165,0.3);
+
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --max-width: 1280px;
+  --text-width: 720px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--night);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.display {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(2.4rem, 4vw, 3.5rem); }
+h2 { font-size: clamp(2rem, 3vw, 2.8rem); }
+h3 { font-size: clamp(1.4rem, 2vw, 1.8rem); }
+h4 { font-size: 1.2rem; }
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--muted-text);
+  max-width: 56ch;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-primary);
+}
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.section {
+  padding: var(--space-7) 0;
+}
+
+.section--dark {
+  background: var(--night);
+  color: var(--white);
+}
+
+.section--mid {
+  background: var(--night-mid);
+  color: var(--white);
+}
+
+.section--teal {
+  background: var(--teal-deeper);
+  color: var(--white);
+}
+
+.section--off-white {
+  background: var(--off-white);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--teal-primary);
+  color: var(--white);
+  border-color: var(--teal-primary);
+}
+.btn-primary:hover {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.06);
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--teal-primary);
+  border-color: var(--teal-primary);
+}
+.btn-outline-dark:hover {
+  background: var(--teal-primary);
+  color: var(--white);
+}
+
+/* ============================================================
+   AUDIENCE GATE OVERLAY
+   ============================================================ */
+
+.gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,36,38,0.96);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.gate-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gate-card {
+  background: var(--night-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-6);
+  max-width: 540px;
+  width: 100%;
+  text-align: center;
+}
+
+.gate-card .caption {
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.gate-card h2 {
+  color: var(--white);
+  margin-bottom: var(--space-2);
+  font-size: 2rem;
+}
+
+.gate-card p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+  max-width: 42ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gate-btn-yes {
+  width: 100%;
+  background: var(--teal-primary);
+  color: var(--white);
+  border: 1.5px solid var(--teal-primary);
+  border-radius: var(--radius-sm);
+  padding: 16px 28px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  text-align: center;
+}
+.gate-btn-yes:hover { background: var(--teal-deep); }
+
+.gate-btn-no {
+  width: 100%;
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  border: none;
+  padding: 10px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+.gate-btn-no:hover { color: rgba(255,255,255,0.7); }
+
+.gate-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+}
+
+.gate-logo-mark {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--teal-light);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 var(--space-4);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.nav.scrolled {
+  background: rgba(26,36,38,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+
+.nav-logo span {
+  color: var(--teal-light);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.18s ease;
+}
+
+.nav-links a:hover { color: var(--teal-light); }
+
+.nav-cta {
+  background: transparent;
+  border: 1px solid rgba(115,168,165,0.5);
+  color: var(--teal-light) !important;
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  transition: all 0.18s ease !important;
+}
+.nav-cta:hover {
+  background: var(--teal-primary) !important;
+  color: var(--white) !important;
+  border-color: var(--teal-primary) !important;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--night);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1592931765600-3b1c2e7c4a15?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.45;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26,36,38,0.2) 0%,
+    rgba(26,36,38,0.1) 40%,
+    rgba(26,36,38,0.75) 75%,
+    rgba(26,36,38,0.98) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: var(--space-8) var(--space-4);
+  padding-top: 140px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.hero-label-line {
+  width: 32px;
+  height: 1px;
+  background: var(--teal-primary);
+}
+
+.hero-label-text {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  max-width: 14ch;
+  margin-bottom: var(--space-4);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal-light);
+}
+
+.hero-sub {
+  font-size: 1.0625rem;
+  color: rgba(255,255,255,0.65);
+  max-width: 48ch;
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: var(--space-5);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: rgba(255,255,255,0.35);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(115,168,165,0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.1); }
+}
+
+/* ============================================================
+   PILLARS STRIP
+   ============================================================ */
+
+.pillars {
+  background: var(--night-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-4) 0;
+}
+
+.pillars-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.pillar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.pillar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal-primary);
+  flex-shrink: 0;
+}
+
+.pillar-text {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.02em;
+}
+
+.pillar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   AUDIENCE ROUTING
+   ============================================================ */
+
+.routing {
+  background: var(--night);
+  padding: var(--space-7) 0;
+}
+
+.routing-header {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.routing-header h2 {
+  color: var(--white);
+  margin-bottom: var(--space-2);
+}
+
+.routing-header p {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9375rem;
+}
+
+.routing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.routing-card {
+  background: var(--night-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.routing-card:hover {
+  border-color: var(--teal-primary);
+  transform: translateY(-3px);
+  background: rgba(115,168,165,0.05);
+}
+
+.routing-card-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-3);
+}
+
+.routing-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--teal-primary);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.routing-card h4 {
+  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-1);
+}
+
+.routing-card p {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: var(--space-3);
+}
+
+.routing-card-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--teal-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.routing-card-link svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.18s ease;
+}
+
+.routing-card:hover .routing-card-link svg {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   BRAND STORY
+   ============================================================ */
+
+.brand-story {
+  padding: var(--space-7) 0;
+  background: var(--white);
+}
+
+.brand-story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+.brand-story-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.brand-story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-story-image-caption {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  right: var(--space-3);
+  background: rgba(26,36,38,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+}
+
+.brand-story-image-caption p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+.brand-story-content .caption {
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.brand-story-content h2 {
+  color: var(--night);
+  margin-bottom: var(--space-4);
+}
+
+.brand-story-content p {
+  color: #4a5a5c;
+  line-height: 1.8;
+  margin-bottom: var(--space-3);
+  font-size: 1rem;
+}
+
+.brand-story-quote {
+  border-left: 2px solid var(--teal-primary);
+  padding-left: var(--space-3);
+  margin: var(--space-5) 0;
+}
+
+.brand-story-quote blockquote {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--teal-deep);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.brand-story-quote cite {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: var(--muted-text);
+  font-weight: 500;
+}
+
+/* ============================================================
+   CULTIVATION PREVIEW
+   ============================================================ */
+
+.cultivation {
+  background: var(--off-white);
+  padding: var(--space-7) 0;
+}
+
+.cultivation-header {
+  margin-bottom: var(--space-6);
+}
+
+.cultivation-header .caption {
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.cultivation-header h2 {
+  color: var(--night);
+  margin-bottom: var(--space-3);
+}
+
+.cultivation-header p {
+  color: var(--muted-text);
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.cultivation-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.cultivation-img {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+}
+
+.cultivation-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cultivation-img:hover img { transform: scale(1.03); }
+
+.cultivation-img-main { grid-row: span 2; min-height: 440px; }
+.cultivation-img-sm { min-height: 210px; }
+
+.cultivation-img-label {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  background: rgba(26,36,38,0.82);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  border: 1px solid var(--border);
+}
+
+.cultivation-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.stat-item {
+  padding: var(--space-4);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--night);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.stat-number span {
+  font-size: 1.5rem;
+  color: var(--teal-primary);
+}
+
+.stat-label {
+  font-size: 0.8125rem;
+  color: var(--muted-text);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   KAUPAPA SECTION
+   ============================================================ */
+
+.kaupapa {
+  background: var(--night);
+  padding: var(--space-7) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.kaupapa-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+}
+
+.kaupapa-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+.kaupapa-content .caption {
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.kaupapa-content h2 {
+  color: var(--white);
+  margin-bottom: var(--space-4);
+}
+
+.kaupapa-content p {
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: var(--space-3);
+}
+
+.kaupapa-maori {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--teal-light);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.kaupapa-translation {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.4);
+  font-style: normal;
+  margin-bottom: var(--space-5);
+  letter-spacing: 0.04em;
+}
+
+.kaupapa-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.kaupapa-pillar {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: rgba(115,168,165,0.06);
+  border: 1px solid rgba(115,168,165,0.12);
+  border-radius: var(--radius-md);
+  align-items: flex-start;
+}
+
+.kaupapa-pillar-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(115,168,165,0.12);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kaupapa-pillar-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--teal-light);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kaupapa-pillar-text h4 {
+  color: var(--white);
+  font-size: 0.9375rem;
+  margin-bottom: 4px;
+}
+
+.kaupapa-pillar-text p {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================================
+   NEWS SECTION
+   ============================================================ */
+
+.news {
+  background: var(--white);
+  padding: var(--space-7) 0;
+}
+
+.news-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.news-header h2 { color: var(--night); }
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.news-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  border-color: var(--teal-primary);
+  transform: translateY(-2px);
+}
+
+.news-card-img {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.news-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.news-card:hover .news-card-img img { transform: scale(1.04); }
+
+.news-card-body {
+  padding: var(--space-3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.news-card-tag {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-primary);
+  background: rgba(115,168,165,0.1);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.news-card-date {
+  font-size: 0.75rem;
+  color: var(--muted-text);
+}
+
+.news-card-body h4 {
+  font-size: 1.0625rem;
+  color: var(--night);
+  line-height: 1.3;
+  margin-bottom: var(--space-2);
+}
+
+.news-card-body p {
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* ============================================================
+   DISCLAIMER BANNER
+   ============================================================ */
+
+.disclaimer {
+  background: var(--night-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-4) 0;
+}
+
+.disclaimer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.disclaimer-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.disclaimer-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--teal-primary);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.disclaimer p {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  background: var(--night);
+  padding: var(--space-7) 0 var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-5);
+}
+
+.footer-brand-logo {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  margin-bottom: var(--space-3);
+}
+
+.footer-brand-logo span { color: var(--teal-light); }
+
+.footer-brand-tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal-primary);
+  border: 1px solid rgba(115,168,165,0.3);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: var(--space-3);
+}
+
+.footer-brand-desc {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  max-width: 30ch;
+}
+
+.footer-col h5 {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: var(--space-3);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-col ul li a {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.18s ease;
+}
+
+.footer-col ul li a:hover { color: var(--teal-light); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-bottom-left {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer-disclaimer {
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.2);
+  max-width: 60ch;
+  text-align: right;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .routing-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .brand-story-inner { grid-template-columns: 1fr; }
+  .brand-story-image { aspect-ratio: 16/9; }
+  .cultivation-grid { grid-template-columns: 1fr 1fr; }
+  .cultivation-img-main { grid-row: span 1; min-height: 300px; }
+  .kaupapa-inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .pillars-inner { flex-wrap: wrap; }
+  .pillar-divider { display: none; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-7: 64px;
+    --space-8: 80px;
+  }
+  .nav-links { display: none; }
+  .routing-grid { grid-template-columns: 1fr 1fr; }
+  .cultivation-stats { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-header { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+  .hero-actions { flex-direction: column; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: var(--space-3); text-align: center; }
+  .footer-disclaimer { text-align: center; }
+  .hero-scroll { display: none; }
+  .cultivation-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .routing-grid { grid-template-columns: 1fr; }
+  .gate-card { padding: var(--space-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     AUDIENCE DECLARATION GATE
+     ============================================================ -->
+<div class="gate-overlay" id="audienceGate">
+  <div class="gate-card">
+    <div class="gate-logo">
+      <span class="gate-logo-mark">AHO<span style="color:rgba(255,255,255,0.25)"> · </span>FARMS</span>
+    </div>
+    <span class="caption">Visitor Declaration</span>
+    <h2>Before you enter</h2>
+    <p>This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders.</p>
+    <div class="gate-actions">
+      <button class="gate-btn-yes" onclick="acceptGate()">
+        I am a healthcare or industry professional
+      </button>
+      <button class="gate-btn-no" onclick="declineGate()">
+        I am a member of the general public
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">AHO<span> FARMS</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#cultivation">Cultivation</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#kaupapa">Our Kaupapa</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content container">
+    <div class="hero-label">
+      <div class="hero-label-line"></div>
+      <span class="hero-label-text">Hawke's Bay, Aotearoa New Zealand</span>
+    </div>
+
+    <h1>Grown from <em>whenua</em>. Held to the highest standard.</h1>
+
+    <p class="hero-sub">
+      Māori-led medicinal cannabis cultivation, supply, and export from Raupunga, Hawke's Bay. Licensed grower of premium medicinal flower — available through licensed prescribers.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#about" class="btn btn-primary">Discover Aho Farms</a>
+      <a href="#contact" class="btn btn-outline">I am a Healthcare Professional</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     PILLARS STRIP
+     ============================================================ -->
+<div class="pillars">
+  <div class="pillars-inner">
+    <div class="pillar-item">
+      <div class="pillar-dot"></div>
+      <span class="pillar-text">Licensed Medicinal Cultivator</span>
+    </div>
+    <div class="pillar-divider"></div>
+    <div class="pillar-item">
+      <div class="pillar-dot"></div>
+      <span class="pillar-text">IANZ-Accredited Laboratory Testing</span>
+    </div>
+    <div class="pillar-divider"></div>
+    <div class="pillar-item">
+      <div class="pillar-dot"></div>
+      <span class="pillar-text">Māori-Led &amp; Māori-Owned</span>
+    </div>
+    <div class="pillar-divider"></div>
+    <div class="pillar-item">
+      <div class="pillar-dot"></div>
+      <span class="pillar-text">Export-Ready Supply</span>
+    </div>
+    <div class="pillar-divider"></div>
+    <div class="pillar-item">
+      <div class="pillar-dot"></div>
+      <span class="pillar-text">Prescription Only</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AUDIENCE ROUTING
+     ============================================================ -->
+<section class="routing" id="portals">
+  <div class="container">
+    <div class="routing-header">
+      <h2 style="color:var(--white)">Who are you visiting as?</h2>
+      <p>Each portal is tailored to your role. Select the one that applies to you.</p>
+    </div>
+    <div class="routing-grid">
+
+      <a href="#prescribers" class="routing-card">
+        <div class="routing-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12h6m-3-3v6M12 3a9 9 0 100 18A9 9 0 0012 3z"/></svg>
+        </div>
+        <h4>Prescribers &amp; Clinicians</h4>
+        <p>Product specifications, clinical information, dosing guidance, and ordering pathway.</p>
+        <span class="routing-card-link">
+          Access Prescriber Portal
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="#pharmacies" class="routing-card">
+        <div class="routing-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h4>Pharmacies</h4>
+        <p>Formulary information, supply terms, dispensing guidelines, and batch documentation.</p>
+        <span class="routing-card-link">
+          Access Pharmacy Portal
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="#export" class="routing-card">
+        <div class="routing-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h4>Export &amp; Distribution</h4>
+        <p>Capability statement, compliance documentation, supply volumes, and export markets.</p>
+        <span class="routing-card-link">
+          Access Partner Portal
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="#investors" class="routing-card">
+        <div class="routing-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
+        </div>
+        <h4>Investors</h4>
+        <p>Investment thesis, company overview, market opportunity, and team credentials.</p>
+        <span class="routing-card-link">
+          Access Investor Portal
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BRAND STORY
+     ============================================================ -->
+<section class="brand-story section" id="about">
+  <div class="container">
+    <div class="brand-story-inner">
+
+      <div class="brand-story-image">
+        <img
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80"
+          alt="Raupunga land — Aho Farms growing site, Hawke's Bay"
+          loading="lazy"
+        >
+        <div class="brand-story-image-caption">
+          <p>Raupunga, Hawke's Bay — ancestral whenua where RĀ is grown</p>
+        </div>
+      </div>
+
+      <div class="brand-story-content">
+        <span class="caption">Our Story</span>
+        <h2>From the whenua to the patient</h2>
+
+        <p>Aho Farms was founded on a simple conviction: that the land which sustained our tīpuna can sustain our future. We cultivate premium medicinal cannabis on Māori freehold land in Raupunga, Hawke's Bay — where the soil, the climate, and the people are part of the product.</p>
+
+        <p>In partnership with the Waaka whānau, we have built a licensed medicinal cannabis operation that places Māori employment, whenua development, and tikanga at the centre of everything we do.</p>
+
+        <div class="brand-story-quote">
+          <blockquote>Tiakina te whenua, tiakina te iwi.</blockquote>
+          <cite>— Aho Farms founding kaupapa</cite>
+        </div>
+
+        <a href="#" class="btn btn-outline-dark">Read Our Full Story</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CULTIVATION PREVIEW
+     ============================================================ -->
+<section class="cultivation section" id="cultivation">
+  <div class="container">
+    <div class="cultivation-header">
+      <span class="caption">Cultivation &amp; Quality</span>
+      <h2>Grown with precision.<br>Tested with rigour.</h2>
+      <p>Every plant is outdoor sun-grown in the fertile soils of Raupunga. Every batch is independently tested by Hill Labs, Hamilton — IANZ accredited — before leaving the property.</p>
+    </div>
+
+    <div class="cultivation-grid">
+      <div class="cultivation-img cultivation-img-main">
+        <img
+          src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=80"
+          alt="Cannabis cultivation — Aho Farms growing canopy"
+          loading="lazy"
+        >
+        <span class="cultivation-img-label">Raupunga — Outdoor Sun-Grown</span>
+      </div>
+      <div class="cultivation-img cultivation-img-sm">
+        <img
+          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80"
+          alt="Laboratory testing — quality analysis"
+          loading="lazy"
+        >
+        <span class="cultivation-img-label">Hill Labs Testing</span>
+      </div>
+      <div class="cultivation-img cultivation-img-sm">
+        <img
+          src="https://images.unsplash.com/photo-1611095962519-6e44e4998cfc?auto=format&fit=crop&w=600&q=80"
+          alt="Medicinal flower — post-harvest"
+          loading="lazy"
+        >
+        <span class="cultivation-img-label">Post-Harvest</span>
+      </div>
+    </div>
+
+    <div class="cultivation-stats">
+      <div class="stat-item">
+        <div class="stat-number">~21<span>%</span></div>
+        <div class="stat-label">THC — RĀ and SOURCE product lines, independently verified</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">IANZ<span>✓</span></div>
+        <div class="stat-label">Accredited laboratory testing via Hill Labs, Hamilton</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">NZ<span>↗</span></div>
+        <div class="stat-label">Fully licensed under NZ medicinal cannabis regulations, export-ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     KAUPAPA
+     ============================================================ -->
+<section class="kaupapa section" id="kaupapa">
+  <div class="kaupapa-bg"></div>
+  <div class="container">
+    <div class="kaupapa-inner">
+
+      <div class="kaupapa-content">
+        <span class="caption">Our Kaupapa</span>
+        <h2 style="color:var(--white)">Land, people, and purpose — bound together</h2>
+        <p>Aho Farms is not simply a business built on Māori land. It is a Māori enterprise built for Māori futures. Every decision — from how we treat the soil to how we hire, to how we share the returns — is governed by the obligations we hold to the whenua and the people.</p>
+
+        <p class="kaupapa-maori">Tiakina te whenua, tiakina te iwi.</p>
+        <p class="kaupapa-translation">Guard the land, guard the people.</p>
+
+        <a href="#" class="btn btn-outline">Read Our Full Kaupapa</a>
+      </div>
+
+      <div class="kaupapa-pillars">
+        <div class="kaupapa-pillar">
+          <div class="kaupapa-pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="kaupapa-pillar-text">
+            <h4>Māori Employment</h4>
+            <p>Priority employment for whānau, with pathways from entry-level to governance.</p>
+          </div>
+        </div>
+        <div class="kaupapa-pillar">
+          <div class="kaupapa-pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="kaupapa-pillar-text">
+            <h4>Whenua Development</h4>
+            <p>Productive use of Māori freehold land to generate long-term economic sovereignty.</p>
+          </div>
+        </div>
+        <div class="kaupapa-pillar">
+          <div class="kaupapa-pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="kaupapa-pillar-text">
+            <h4>Tikanga-Guided Practice</h4>
+            <p>How we grow, how we govern, and how we share — shaped by Māori values.</p>
+          </div>
+        </div>
+        <div class="kaupapa-pillar">
+          <div class="kaupapa-pillar-icon">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="kaupapa-pillar-text">
+            <h4>Community Returns</h4>
+            <p>Commercial success measured by the wellbeing it generates for whānau and hapū.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWS
+     ============================================================ -->
+<section class="news section" id="news">
+  <div class="container">
+    <div class="news-header">
+      <div>
+        <span class="caption" style="display:block;margin-bottom:8px">Latest</span>
+        <h2>News &amp; Updates</h2>
+      </div>
+      <a href="#" class="btn btn-outline-dark" style="flex-shrink:0">All News</a>
+    </div>
+
+    <div class="news-grid">
+      <a href="#" class="news-card" style="text-decoration:none">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80" alt="Aho Farms harvest season" loading="lazy">
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-tag">Company Update</span>
+            <span class="news-card-date">June 2026</span>
+          </div>
+          <h4>Aho Farms completes 2026 growing season at Raupunga</h4>
+          <p>Our outdoor sun-grown crop has been harvested and is undergoing independent testing at Hill Labs, Hamilton ahead of supply to licensed prescribers.</p>
+        </div>
+      </a>
+      <a href="#" class="news-card" style="text-decoration:none">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Māori community" loading="lazy">
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-tag">Social Impact</span>
+            <span class="news-card-date">May 2026</span>
+          </div>
+          <h4>Expanding whānau employment ahead of peak season</h4>
+          <p>We have brought on five new whānau members in cultivation and harvest roles, with two enrolling in formal horticulture training supported by the company.</p>
+        </div>
+      </a>
+      <a href="#" class="news-card" style="text-decoration:none">
+        <div class="news-card-img">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="Medicinal cannabis regulation" loading="lazy">
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-tag">Regulatory</span>
+            <span class="news-card-date">April 2026</span>
+          </div>
+          <h4>NZ medicinal cannabis market: what the 2026 regulations mean for supply</h4>
+          <p>An overview of the regulatory landscape for licensed cultivators in Aotearoa and what it means for prescribers and pharmacies seeking consistent local supply.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DISCLAIMER BANNER
+     ============================================================ -->
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <p>Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Product information is provided for healthcare and industry professionals. Always consult a qualified healthcare professional regarding medicinal cannabis.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">AHO<span> FARMS</span></div>
+        <div class="footer-brand-tag">Māori Owned &amp; Operated</div>
+        <p class="footer-brand-desc">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Aho Farms</a></li>
+          <li><a href="#">Our Kaupapa</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">News</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Cultivation</h5>
+        <ul>
+          <li><a href="#">Our Facility</a></li>
+          <li><a href="#">Growing Standards</a></li>
+          <li><a href="#">Quality &amp; Testing</a></li>
+          <li><a href="#">Products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Portals</h5>
+        <ul>
+          <li><a href="#">Prescribers</a></li>
+          <li><a href="#">Pharmacies</a></li>
+          <li><a href="#">Export Partners</a></li>
+          <li><a href="#">Investors</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        &copy; 2026 Aho Farms Limited · Hawke's Bay, Aotearoa New Zealand
+      </div>
+      <div class="footer-disclaimer">
+        Aho Farms products are prescription medicines. Not for general sale. Aho Farms Limited is a licensed medicinal cannabis cultivator under New Zealand law.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+  // Gate logic — one-time cookie
+  function acceptGate() {
+    document.cookie = "aho_gate=professional; max-age=86400; path=/";
+    document.getElementById('audienceGate').classList.add('hidden');
+    setTimeout(() => { document.getElementById('audienceGate').style.display = 'none'; }, 320);
+  }
+
+  function declineGate() {
+    document.cookie = "aho_gate=public; max-age=86400; path=/";
+    document.getElementById('audienceGate').classList.add('hidden');
+    setTimeout(() => { document.getElementById('audienceGate').style.display = 'none'; }, 320);
+  }
+
+  // Check cookie on load
+  (function() {
+    if (document.cookie.split(';').some(c => c.trim().startsWith('aho_gate='))) {
+      var g = document.getElementById('audienceGate');
+      g.style.display = 'none';
+    }
+  })();
+
+  // Nav scroll behaviour
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('mainNav');
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>
