@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Aho Farms</title>
+  <meta name="description" content="Privacy Policy for Aho Farms Limited — how we collect, use, and protect your personal information in accordance with the NZ Privacy Act 2020." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --text-dark:   #1a2426;
+      --text-muted:  #4a5f62;
+      --radius-btn:  4px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ─── Navigation ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26,36,38,0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-links a.nav-cta {
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-btn);
+      transition: background 0.2s;
+    }
+
+    .nav-links a.nav-cta:hover { background: var(--teal-light); color: var(--night); }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    .legal-hero {
+      background: var(--night);
+      padding: 140px 2rem 80px;
+      text-align: center;
+    }
+
+    .legal-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+
+    .legal-hero p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--teal-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── Legal Content ─────────────────────────────────────────── */
+    .legal-body {
+      background: var(--white);
+      padding: 72px 2rem 96px;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--night);
+      margin: 2.8rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(115,168,165,0.3);
+    }
+
+    .legal-content h2:first-of-type { margin-top: 0; }
+
+    .legal-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--night);
+      margin: 1.8rem 0 0.4rem;
+    }
+
+    .legal-content p {
+      margin-bottom: 1rem;
+      color: #2e3f42;
+      line-height: 1.85;
+    }
+
+    .legal-content ul, .legal-content ol {
+      margin: 0.75rem 0 1rem 1.5rem;
+      color: #2e3f42;
+    }
+
+    .legal-content li {
+      margin-bottom: 0.45rem;
+      line-height: 1.75;
+    }
+
+    .legal-content a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .legal-content a:hover { color: var(--night); }
+
+    .legal-content strong { color: var(--night); font-weight: 600; }
+
+    .info-box {
+      background: var(--off-white);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-box p { margin: 0; font-size: 0.95rem; }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      background: var(--night);
+      color: rgba(255,255,255,0.65);
+      padding: 56px 2rem 32px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--teal-light); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-legal-links a:hover { color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Aho <span>Farms</span></a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────────── -->
+  <section class="legal-hero">
+    <h1>Privacy Policy</h1>
+    <p>Last updated: June 2026</p>
+  </section>
+
+  <!-- ─── Content ────────────────────────────────────────── -->
+  <main class="legal-body">
+    <div class="legal-content">
+
+      <h2>1. Who We Are</h2>
+      <p>Aho Farms Limited (<strong>"Aho Farms"</strong>, <strong>"we"</strong>, <strong>"us"</strong>, or <strong>"our"</strong>) is a New Zealand company registered under the Companies Act 1993, operating a licensed medicinal cannabis cultivation and supply business from Hawke's Bay, New Zealand.</p>
+      <p>We are committed to protecting the privacy of individuals who interact with our website, and we handle all personal information in accordance with the <strong>Privacy Act 2020</strong> (NZ) and the thirteen Information Privacy Principles (IPPs) it contains.</p>
+      <div class="info-box">
+        <p><strong>Privacy Officer:</strong> hello@ahofarms.co.nz &nbsp;|&nbsp; Aho Farms Limited, Hawke's Bay, New Zealand</p>
+      </div>
+
+      <h2>2. What Information We Collect</h2>
+      <p>We collect personal information only where it is necessary for a legitimate business purpose. The types of information we collect depend on how you interact with our website:</p>
+
+      <h3>Contact Form Submissions</h3>
+      <p>When you submit an enquiry through our website contact form, we collect: your <strong>name</strong>, <strong>email address</strong>, <strong>organisation or company name</strong>, and the <strong>content of your message</strong>. This is the minimum required to respond meaningfully to your enquiry.</p>
+
+      <h3>Prescriber Portal Access Requests</h3>
+      <p>To verify eligibility for access to our Prescriber Portal, we collect: your <strong>full name</strong>, <strong>professional registration number</strong> (e.g. MCNZ, Pharmacy Council), <strong>email address</strong>, and <strong>organisation name</strong>. This information is used solely for identity and eligibility verification in accordance with our regulatory obligations.</p>
+
+      <h3>Newsletter Subscriptions</h3>
+      <p>If you subscribe to our professional newsletter, we collect your <strong>email address</strong> and optionally your <strong>professional category</strong> (e.g. GP, pharmacist, nurse practitioner) so we can send relevant content.</p>
+
+      <h3>Website Analytics</h3>
+      <p>We collect anonymised analytics data through <strong>Google Analytics 4</strong>, including: page views, session duration, device and browser type, and referral source. IP addresses are anonymised before storage. This data does not identify you personally.</p>
+
+      <h3>Cookies</h3>
+      <p>Our website uses cookies — small text files stored on your device. See Section 7 for full details of our cookie use.</p>
+
+      <h2>3. Why We Collect It</h2>
+      <p>We collect and use personal information for the following purposes, each of which constitutes a lawful basis under the Privacy Act 2020:</p>
+      <ul>
+        <li><strong>To respond to enquiries</strong> — so we can provide timely and relevant responses to messages submitted via our contact form.</li>
+        <li><strong>To verify professional registration</strong> — to confirm that portal access requests are made by eligible healthcare professionals, as required by our licence conditions.</li>
+        <li><strong>To send newsletters</strong> — to deliver professional updates, product information, and regulatory news to opted-in subscribers only.</li>
+        <li><strong>To improve our website</strong> — anonymised analytics data helps us understand how our site is used and where we can make improvements.</li>
+        <li><strong>To comply with legal and regulatory obligations</strong> — we may be required by law to retain certain records or disclose information to regulators, including the Ministry of Health, Medsafe, or the New Zealand Police.</li>
+      </ul>
+      <p>We do not use your personal information for automated decision-making, profiling, or any purpose unrelated to the above.</p>
+
+      <h2>4. How We Store and Protect It</h2>
+      <p>We take reasonable technical and organisational measures to protect personal information against loss, unauthorised access, use, modification, or disclosure.</p>
+      <ul>
+        <li><strong>Contact form data</strong> is stored in <strong>HubSpot CRM</strong>, a US-based platform operating under an EU–US Data Privacy Framework and data processing agreements that provide equivalent protections to NZ law.</li>
+        <li><strong>Analytics data</strong> is processed by <strong>Google Analytics 4</strong> with IP anonymisation enabled. No personally identifiable information is stored in GA4.</li>
+        <li><strong>Newsletter subscriber data</strong> is stored in <strong>Mailchimp</strong> (Intuit Inc.), under data processing agreements consistent with our obligations under the Privacy Act 2020.</li>
+        <li><strong>Portal access credentials</strong> are managed with industry-standard security practices. Passwords are hashed and salted — they are never stored in plaintext.</li>
+        <li><strong>No sensitive health or patient data</strong> is collected or stored on our systems. We are not a healthcare provider and do not collect clinical information.</li>
+        <li><strong>Data retention:</strong> We retain personal information for a maximum of <strong>three years from the date of last interaction</strong>, after which it is securely deleted or anonymised. Portal access credentials are removed upon deactivation of the account.</li>
+      </ul>
+
+      <h2>5. Who We Share It With</h2>
+      <p><strong>We do not sell, rent, or trade your personal information.</strong> We share information only with the following third-party service providers, each under a data processing agreement:</p>
+      <ul>
+        <li><strong>HubSpot, Inc.</strong> — CRM and contact management (United States)</li>
+        <li><strong>Google LLC</strong> — Website analytics via Google Analytics 4 (United States)</li>
+        <li><strong>Mailchimp (Intuit Inc.)</strong> — Email newsletter distribution (United States)</li>
+      </ul>
+      <p>All third-party providers are contractually bound to use your information only for the purpose for which it was shared, and to maintain appropriate security standards.</p>
+      <p>We may also disclose personal information if required to do so by <strong>New Zealand law</strong>, or in response to a lawful request from a government agency or regulatory body (including the Ministry of Health, Medsafe, New Zealand Police, or the Office of the Privacy Commissioner).</p>
+      <p>We will not disclose personal information to overseas recipients beyond those listed above without first taking reasonable steps to ensure that the recipient provides comparable privacy safeguards.</p>
+
+      <h2>6. Your Rights Under the NZ Privacy Act 2020</h2>
+      <p>Under the Privacy Act 2020, you have the following rights in relation to personal information we hold about you:</p>
+      <ul>
+        <li><strong>Right of access (IPP 6):</strong> You may request a copy of personal information we hold about you.</li>
+        <li><strong>Right to correction (IPP 7):</strong> If you believe information we hold is inaccurate, incomplete, or misleading, you may request that we correct it.</li>
+        <li><strong>Right to request deletion:</strong> While not an absolute right under NZ law, we will consider requests to delete personal information where it is no longer needed for the purpose for which it was collected.</li>
+        <li><strong>Right to unsubscribe:</strong> You may opt out of newsletter communications at any time using the unsubscribe link in any email, or by contacting us directly.</li>
+      </ul>
+      <p>To exercise any of these rights, please contact our Privacy Officer at <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>. We will acknowledge your request and respond within <strong>20 working days</strong>, as required by the Privacy Act 2020. If we are unable to meet this timeframe, we will notify you and provide a revised date.</p>
+      <p>If you are not satisfied with our response, you have the right to complain to the <strong>Office of the Privacy Commissioner</strong>: <a href="https://www.privacy.org.nz" target="_blank" rel="noopener">www.privacy.org.nz</a>.</p>
+
+      <h2>7. Cookies</h2>
+      <p>Our website uses the following categories of cookies:</p>
+
+      <h3>Essential Cookies</h3>
+      <p>These cookies are necessary for the website to function. They manage your session, remember cookie consent preferences, and enable secure access to portals. You cannot disable essential cookies without affecting site functionality, and no consent is required to set them.</p>
+
+      <h3>Analytics Cookies</h3>
+      <p>We use <strong>Google Analytics 4</strong> cookies (_ga, _ga_*) to collect anonymised data about how visitors use our website. These cookies are only set with your consent. You can accept or decline analytics cookies via the <strong>CookieYes</strong> consent banner displayed on your first visit.</p>
+      <p>Declining analytics cookies will not affect your ability to browse the website or access any public-facing content.</p>
+      <p>You can manage or withdraw your cookie consent at any time by clicking the "Cookie Settings" link in the footer.</p>
+
+      <h2>8. Children</h2>
+      <p>This website is not intended for use by persons under the age of 18. We do not knowingly collect personal information from minors. If we become aware that we have inadvertently collected information from someone under 18, we will promptly delete it. If you believe a minor has submitted information to us, please contact us at <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>.</p>
+
+      <h2>9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or regulatory guidance. The "Last updated" date at the top of this page will reflect when the policy was most recently revised.</p>
+      <p>If we make <strong>material changes</strong> to how we collect or use personal information, we will notify users via a notice on our website homepage for a reasonable period. We encourage you to review this policy periodically.</p>
+
+      <h2>10. Contact Us</h2>
+      <p>For any questions, requests, or concerns relating to your privacy or this policy, please contact our Privacy Officer:</p>
+      <div class="info-box">
+        <p>
+          <strong>Privacy Officer</strong><br />
+          Aho Farms Limited<br />
+          Hawke's Bay, New Zealand<br />
+          <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>
+        </p>
+      </div>
+      <p>If you believe Aho Farms has interfered with your privacy in a way that breaches the Privacy Act 2020, you may make a complaint to the <strong>Office of the Privacy Commissioner</strong>:</p>
+      <ul>
+        <li>Website: <a href="https://www.privacy.org.nz" target="_blank" rel="noopener">www.privacy.org.nz</a></li>
+        <li>Phone: 0800 803 909</li>
+      </ul>
+      <p>We recommend contacting us first, as we are committed to resolving privacy concerns directly and promptly.</p>
+
+    </div>
+  </main>
+
+  <!-- ─── Footer ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">Aho Farms</div>
+          <p>Licensed medicinal cannabis cultivator operating under the New Zealand Medicinal Cannabis Scheme. Cultivation Licence &amp; Export Licence holder. Hawke's Bay, New Zealand.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cultivation.html">Cultivation</a></li>
+            <li><a href="kaupapa.html">Our Kaupapa</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="products.html#portal">Prescriber Portal</a></li>
+            <li><a href="products.html#coa">Certificates of Analysis</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Aho Farms products are prescription medicines. They are not available without a valid prescription from a registered prescriber. This website is intended for healthcare professionals and industry partners, not for patients or consumers seeking medical advice. &copy; 2026 Aho Farms Limited. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
