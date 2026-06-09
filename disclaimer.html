@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical &amp; Legal Disclaimer — Aho Farms</title>
+  <meta name="description" content="Medical and legal disclaimer for Aho Farms Limited — regulatory status, prescription medicine classification, advertising compliance, and investor information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --white:       #ffffff;
+      --off-white:   #f4f6f6;
+      --text-dark:   #1a2426;
+      --text-muted:  #4a5f62;
+      --radius-btn:  4px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ─── Navigation ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26,36,38,0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-links a.nav-cta {
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-btn);
+      transition: background 0.2s;
+    }
+
+    .nav-links a.nav-cta:hover { background: var(--teal-light); color: var(--night); }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    .legal-hero {
+      background: var(--night);
+      padding: 140px 2rem 80px;
+      text-align: center;
+    }
+
+    .legal-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+
+    .legal-hero p {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--teal-light);
+      letter-spacing: 0.04em;
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── Legal Content ─────────────────────────────────────────── */
+    .legal-body {
+      background: var(--white);
+      padding: 72px 2rem 96px;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--night);
+      margin: 2.8rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(115,168,165,0.3);
+    }
+
+    .legal-content h2:first-of-type { margin-top: 0; }
+
+    .legal-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--night);
+      margin: 1.8rem 0 0.4rem;
+    }
+
+    .legal-content p {
+      margin-bottom: 1rem;
+      color: #2e3f42;
+      line-height: 1.85;
+    }
+
+    .legal-content ul, .legal-content ol {
+      margin: 0.75rem 0 1rem 1.5rem;
+      color: #2e3f42;
+    }
+
+    .legal-content li {
+      margin-bottom: 0.45rem;
+      line-height: 1.75;
+    }
+
+    .legal-content a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .legal-content a:hover { color: var(--night); }
+
+    .legal-content strong { color: var(--night); font-weight: 600; }
+
+    .info-box {
+      background: var(--off-white);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-box p { margin: 0; font-size: 0.95rem; }
+
+    .warning-box {
+      background: #fdf6ec;
+      border-left: 3px solid #d4922a;
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box p { margin: 0; font-size: 0.95rem; color: #5a3e10; }
+
+    /* ─── Patient Callout ───────────────────────────────────────── */
+    .patient-callout {
+      background: var(--night-mid);
+      border: 1px solid rgba(115,168,165,0.3);
+      border-radius: var(--radius-btn);
+      padding: 2rem 2.25rem;
+      margin: 3.5rem 0 0;
+      text-align: center;
+    }
+
+    .patient-callout .callout-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .patient-callout h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      border: none;
+    }
+
+    .patient-callout p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .patient-callout a {
+      color: var(--teal-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .patient-callout a:hover { color: var(--white); }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      background: var(--night);
+      color: rgba(255,255,255,0.65);
+      padding: 56px 2rem 32px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--teal-light); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-legal-links a:hover { color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Aho <span>Farms</span></a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────────── -->
+  <section class="legal-hero">
+    <h1>Medical &amp; Legal Disclaimer</h1>
+    <p>Important information about this website and Aho Farms products</p>
+  </section>
+
+  <!-- ─── Content ────────────────────────────────────────── -->
+  <main class="legal-body">
+    <div class="legal-content">
+
+      <h2>1. Prescription Medicine</h2>
+      <p>All medicinal cannabis products cultivated and supplied by Aho Farms Limited are classified as <strong>prescription medicines</strong> under the <strong>Medicines Act 1981</strong> and the <strong>Misuse of Drugs (Medicinal Cannabis) Regulations 2019</strong>.</p>
+      <p>Aho Farms products:</p>
+      <ul>
+        <li>Are <strong>not available for purchase without a valid prescription</strong> from a registered medical practitioner or nurse practitioner authorised to prescribe;</li>
+        <li>Are <strong>not sold in retail outlets</strong>, pharmacies without prescription, online stores, or health food retailers;</li>
+        <li>Are <strong>not available for direct purchase from Aho Farms</strong> by consumers, patients, or caregivers;</li>
+        <li>Must be dispensed by a licensed pharmacy following a valid prescription.</li>
+      </ul>
+      <p>Any person or entity purporting to supply Aho Farms products outside these channels does not have our authorisation and may be acting unlawfully.</p>
+
+      <h2>2. Not Medical Advice</h2>
+      <div class="warning-box">
+        <p><strong>Nothing on this website is medical advice.</strong> Aho Farms is a licensed medicinal cannabis cultivator and supplier. We are not a healthcare provider, and we do not provide clinical services.</p>
+      </div>
+      <p>We do not diagnose medical conditions. We do not advise patients on whether medicinal cannabis is appropriate for their circumstances. We do not recommend specific products, doses, or treatment regimens.</p>
+      <p>Product information published in the Aho Farms Prescriber Portal — including formulation data, cannabinoid profiles, indicative dosing ranges, and clinical reference materials — is provided to support <strong>clinical decision-making by qualified healthcare professionals</strong>. It is a reference resource and is not intended to replace clinical judgement, patient assessment, or the prescriber's obligations under applicable professional and regulatory standards.</p>
+      <p>If you are a patient, please consult your doctor, specialist, or a registered cannabis clinic before making any decision about medicinal cannabis.</p>
+
+      <h2>3. No Therapeutic Claims</h2>
+      <p>Aho Farms makes <strong>no therapeutic claims</strong> about its products. We do not claim that our products treat, cure, prevent, or manage any medical condition or disease.</p>
+      <p>Where this website or our materials reference medical conditions — such as chronic pain, sleep disorders, nausea, spasticity, or anxiety — these references are factual statements about conditions for which medicinal cannabis is commonly prescribed by clinicians in New Zealand, based on published prescribing data and clinical guidance. Such references are informational and contextual only.</p>
+      <p>They do not constitute a representation that any Aho Farms product is approved, indicated, or proven effective for any condition. Prescribers should form their own clinical judgement based on the current evidence base, individual patient circumstances, and applicable clinical guidelines.</p>
+
+      <h2>4. Advertising Compliance</h2>
+      <p>This website is operated in compliance with:</p>
+      <ul>
+        <li>The <strong>Medicines Act 1981</strong> — including restrictions on advertising prescription medicines to the general public;</li>
+        <li>The <strong>Misuse of Drugs (Medicinal Cannabis) Regulations 2019</strong>;</li>
+        <li><strong>Medsafe advertising guidance for medicinal cannabis</strong> (current as of July 2025);</li>
+        <li>The <strong>Advertising Standards Authority (ASA) codes</strong> applicable to therapeutic and health advertising.</li>
+      </ul>
+      <p>Aho Farms does not advertise its prescription medicinal cannabis products to the general public, consumers, or patients. All product-level information — including product names, cannabinoid specifications, formulation details, and pricing — is restricted to verified healthcare professionals in our Prescriber Portal.</p>
+      <p>If you believe any content on this website may be inconsistent with our advertising obligations, please contact our compliance team at <a href="mailto:compliance@ahofarms.co.nz">compliance@ahofarms.co.nz</a>.</p>
+
+      <h2>5. Regulatory Status — New Zealand</h2>
+      <p>Aho Farms Limited holds licences issued by the <strong>Ministry of Health</strong> under the New Zealand Medicinal Cannabis Scheme, including:</p>
+      <ul>
+        <li>A <strong>Cultivation Licence</strong> authorising the cultivation of cannabis for medicinal purposes;</li>
+        <li>An <strong>Export Licence</strong> authorising the export of medicinal cannabis products to eligible overseas markets.</li>
+      </ul>
+      <p>Our products are cultivated, processed, and supplied in accordance with licence conditions, including compliance with the <strong>Medicinal Cannabis Agency's minimum quality standards</strong> as specified in the Misuse of Drugs (Medicinal Cannabis) Regulations 2019.</p>
+      <p>Regulatory status is current as of the date shown on this page and is subject to change. Licence details are publicly available on the Ministry of Health's Medicinal Cannabis Agency register. We encourage interested parties to verify our current licence status directly with the Agency.</p>
+
+      <h2>6. Regulatory Status — Australia</h2>
+      <p>Aho Farms products may be made available to Australian patients through export, subject to applicable regulatory requirements. Australian prescribers and pharmacists should be aware that:</p>
+      <ul>
+        <li>Importation of medicinal cannabis into Australia requires a valid <strong>import permit</strong> issued by the <strong>Therapeutic Goods Administration (TGA)</strong>;</li>
+        <li>Australian patients cannot access imported medicinal cannabis products without a valid prescription from an Australian-registered prescriber;</li>
+        <li>Products must be dispensed through a TGA-compliant pharmacy;</li>
+        <li>Prescribers must comply with TGA requirements for prescribing unapproved therapeutic goods, including the <strong>Special Access Scheme (SAS)</strong> or <strong>Authorised Prescriber (AP)</strong> pathway as applicable.</li>
+      </ul>
+      <p>Australian prescribers should refer to current TGA guidance on prescribing and importing medicinal cannabis. Aho Farms does not provide regulatory advice for Australian prescribers. For TGA guidance, visit <a href="https://www.tga.gov.au" target="_blank" rel="noopener">www.tga.gov.au</a>.</p>
+
+      <h2>7. Investment Information</h2>
+      <p>Any information provided through the Aho Farms Investor Portal or in investor-facing materials on this website is provided for <strong>informational purposes only</strong>. It is directed at sophisticated investors, institutional partners, and entities conducting due diligence.</p>
+      <p>Investor information published by Aho Farms:</p>
+      <ul>
+        <li>Does <strong>not constitute an offer to sell</strong>, or a solicitation of an offer to buy, any securities or financial products;</li>
+        <li>Does <strong>not constitute financial advice</strong> within the meaning of the <strong>Financial Markets Conduct Act 2013</strong> (NZ) or any equivalent legislation;</li>
+        <li>Is <strong>not regulated advice</strong> — Aho Farms is not a registered financial services provider under the Financial Markets Conduct Act 2013.</li>
+      </ul>
+      <p>Any person considering an investment decision in connection with Aho Farms should seek <strong>independent financial, legal, and taxation advice</strong> from a registered financial adviser before making any commitment. Past performance information, projections, or forward-looking statements are not guarantees of future results.</p>
+
+      <h2>8. Accuracy and Currency of Information</h2>
+      <p>Information published on this website is current as of the date indicated. Aho Farms operates in a rapidly evolving regulatory and commercial environment, and relevant information — including licence status, regulatory frameworks, product availability, pricing, and company structure — is subject to change without notice.</p>
+      <p>We review and update this website regularly, but we cannot guarantee that all information is current or accurate at the time of reading. In particular:</p>
+      <ul>
+        <li>Regulatory information reflects the framework as understood at the time of publication;</li>
+        <li>Product availability is subject to cultivation cycles, batch scheduling, and licensing;</li>
+        <li>Clinical or scientific references are indicative and should be verified against current literature.</li>
+      </ul>
+      <p>Aho Farms accepts no liability for decisions made in reliance on information that was accurate at the time of publication but has since changed.</p>
+
+      <h2>9. Contact for Compliance Enquiries</h2>
+      <p>For any compliance-related queries, concerns about the content of this website, or to report a potential breach of our advertising or regulatory obligations, please contact:</p>
+      <div class="info-box">
+        <p>
+          <strong>Compliance Team</strong><br />
+          Aho Farms Limited<br />
+          <a href="mailto:compliance@ahofarms.co.nz">compliance@ahofarms.co.nz</a>
+        </p>
+      </div>
+      <p>We are committed to operating transparently and in full compliance with our legal and regulatory obligations. All compliance enquiries are reviewed and responded to promptly.</p>
+
+      <!-- ─── Patient Callout ──────────────────────────────── -->
+      <div class="patient-callout">
+        <div class="callout-icon">🌿</div>
+        <h3>Are you a patient?</h3>
+        <p>
+          If you are a patient seeking information about medicinal cannabis, please speak to your doctor. Your GP or specialist can assess whether medicinal cannabis may be appropriate for your circumstances and refer you to a specialist if needed.
+          <br /><br />
+          You can also contact a licensed medicinal cannabis clinic:
+          <br /><br />
+          <a href="https://www.cannabisclinic.co.nz" target="_blank" rel="noopener">Cannabis Clinic NZ — cannabisclinic.co.nz</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="https://www.cannaplus.co.nz" target="_blank" rel="noopener">CannaPlus+ — cannaplus.co.nz</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── Footer ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">Aho Farms</div>
+          <p>Licensed medicinal cannabis cultivator operating under the New Zealand Medicinal Cannabis Scheme. Cultivation Licence &amp; Export Licence holder. Hawke's Bay, New Zealand.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cultivation.html">Cultivation</a></li>
+            <li><a href="kaupapa.html">Our Kaupapa</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="products.html#portal">Prescriber Portal</a></li>
+            <li><a href="products.html#coa">Certificates of Analysis</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Aho Farms products are prescription medicines. They are not available without a valid prescription from a registered prescriber. This website is intended for healthcare professionals and industry partners, not for patients or consumers seeking medical advice. &copy; 2026 Aho Farms Limited. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
