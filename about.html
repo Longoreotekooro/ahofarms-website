@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Aho Farms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night:       #1a2426;
+      --night-mid:   #253032;
+      --night-soft:  #2f3d3f;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --white:       #ffffff;
+      --offwhite:    #f4f6f6;
+      --card-border: rgba(115,168,165,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--night);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--night);
+      border-bottom: 1px solid rgba(115,168,165,0.12);
+      height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--white); text-decoration: none;
+    }
+    .logo span { color: var(--teal); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.72); text-decoration: none;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+    .nav-links a.active { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: var(--night) !important;
+      padding: 8px 20px; border-radius: 4px;
+      font-weight: 600 !important; transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-light) !important; color: var(--night) !important; }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: var(--night);
+      padding: 148px 32px 108px;
+      min-height: 72vh;
+      display: flex; align-items: center;
+    }
+    .hero-inner { max-width: 840px; margin: 0 auto; width: 100%; }
+    .caption {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 20px; display: block;
+    }
+    .hero .caption { color: var(--teal); }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600; line-height: 1.08;
+      color: var(--white); text-wrap: balance;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,0.68);
+      max-width: 640px; line-height: 1.7;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────── */
+    section { padding: 100px 32px; }
+    .section-inner { max-width: 1160px; margin: 0 auto; width: 100%; }
+
+    .sec-white  { background: var(--white); }
+    .sec-offwhite { background: var(--offwhite); }
+    .sec-dark   { background: var(--night); }
+
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 600; line-height: 1.12;
+      text-wrap: balance;
+      margin-bottom: 36px;
+    }
+    .sec-dark h2.section-title  { color: var(--white); }
+    .sec-white h2.section-title { color: var(--night); }
+    .sec-offwhite h2.section-title { color: var(--night); }
+
+    .section-header { margin-bottom: 56px; }
+    .section-header .caption { margin-bottom: 10px; }
+    .sec-dark .caption { color: var(--teal); }
+    .sec-white .caption { color: var(--teal-deep); }
+    .sec-offwhite .caption { color: var(--teal-deep); }
+
+    /* ── FOUNDING STORY ──────────────────────────────────── */
+    .founding-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .founding-img {
+      border-radius: 8px;
+      overflow: hidden;
+      position: sticky; top: 88px;
+    }
+    .founding-img img {
+      width: 100%; height: 480px;
+      object-fit: cover; display: block;
+    }
+    .founding-content .caption { margin-bottom: 10px; }
+    .founding-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 600; line-height: 1.15;
+      text-wrap: balance;
+      color: var(--night); margin-bottom: 28px;
+    }
+    .founding-content p {
+      font-size: 16px; color: #3a4d50;
+      line-height: 1.78; margin-bottom: 22px;
+    }
+    .pull-quote {
+      border-left: 3px solid var(--teal);
+      padding: 6px 0 6px 24px;
+      margin: 36px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic;
+      color: var(--teal-deep); line-height: 1.45;
+    }
+    .pull-quote cite {
+      display: block; margin-top: 10px;
+      font-style: normal; font-size: 13px;
+      color: #5a6f72; letter-spacing: 0.02em;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── TIMELINE ────────────────────────────────────────── */
+    .timeline { position: relative; max-width: 780px; margin: 0 auto; }
+    .timeline-item {
+      display: flex; gap: 32px;
+      position: relative;
+    }
+    .timeline-year-col {
+      width: 100px; flex-shrink: 0;
+      text-align: right; padding-top: 4px;
+    }
+    .timeline-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 600;
+      color: var(--teal-deep); line-height: 1;
+    }
+    .timeline-connector {
+      display: flex; flex-direction: column;
+      align-items: center; width: 28px; flex-shrink: 0;
+    }
+    .timeline-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0; margin-top: 8px;
+      border: 2px solid var(--offwhite);
+      box-shadow: 0 0 0 2px var(--teal);
+    }
+    .timeline-line {
+      width: 2px; background: rgba(115,168,165,0.25);
+      flex: 1; min-height: 20px;
+    }
+    .timeline-item:last-child .timeline-line { display: none; }
+    .timeline-content {
+      flex: 1; padding-bottom: 40px; padding-top: 4px;
+    }
+    .timeline-content p {
+      font-size: 15px; color: #3d5255;
+      line-height: 1.72; margin: 0;
+    }
+    .timeline-content strong { color: var(--night); }
+
+    /* ── FOUNDER BIO ─────────────────────────────────────── */
+    .founder-grid {
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 72px; align-items: start;
+    }
+    .founder-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 600; line-height: 1.1;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .founder-subtitle {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 28px; display: block;
+    }
+    .founder-content p {
+      font-size: 16px; color: rgba(255,255,255,0.72);
+      line-height: 1.78; margin-bottom: 20px;
+    }
+    .founder-content p:last-child { margin-bottom: 0; }
+    .founder-focus {
+      border-left: 3px solid var(--teal);
+      padding: 4px 0 4px 20px;
+      color: var(--teal-light) !important;
+      font-style: italic;
+    }
+    .founder-img {
+      position: sticky; top: 88px;
+    }
+    .founder-img img {
+      width: 100%; height: 520px;
+      object-fit: cover; object-position: top;
+      border-radius: 8px; display: block;
+      filter: grayscale(20%);
+      border: 1px solid rgba(115,168,165,0.15);
+    }
+
+    /* ── COMPANY DETAILS ─────────────────────────────────── */
+    .details-table {
+      width: 100%; max-width: 720px;
+      border-collapse: collapse;
+    }
+    .details-table tr {
+      border-bottom: 1px solid rgba(115,168,165,0.15);
+    }
+    .details-table tr:last-child { border-bottom: none; }
+    .details-table td {
+      padding: 18px 0;
+      font-size: 15px;
+      vertical-align: top;
+    }
+    .details-table td:first-child {
+      width: 220px;
+      font-weight: 600; color: #5a7275;
+      font-size: 13px; letter-spacing: 0.02em;
+      padding-right: 24px;
+    }
+    .details-table td:last-child { color: var(--night); }
+    .details-table a { color: var(--teal-deep); text-decoration: none; }
+    .details-table a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--night);
+      border-top: 1px solid rgba(115,168,165,0.1);
+      padding: 48px 32px;
+    }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--white); letter-spacing: 0.06em;
+    }
+    .footer-logo span { color: var(--teal); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal-light); }
+    .footer-legal {
+      width: 100%; padding-top: 28px;
+      border-top: 1px solid rgba(115,168,165,0.08);
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      line-height: 1.65;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .founding-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founding-img { position: static; }
+      .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founder-img { position: static; order: -1; }
+      .founder-img img { height: 320px; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .timeline-year-col { width: 64px; }
+      .timeline-year { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">AHO <span>FARMS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="prescribers.html">Prescribers</a></li>
+      <li><a href="investors.html">Investors</a></li>
+      <li><a href="investors.html#request-access" class="nav-cta">Investor Access</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="caption">OUR STORY</span>
+    <h1>Cultivating ancestral wisdom</h1>
+    <p class="hero-sub">A Māori-led enterprise rooted in Hawke's Bay land, guided by tikanga, and growing for the future of our whānau and our patients.</p>
+  </div>
+</section>
+
+<!-- FOUNDING STORY -->
+<section class="sec-white">
+  <div class="section-inner">
+    <div class="founding-grid">
+      <div class="founding-img">
+        <img
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80"
+          alt="Golden pastoral landscape — Hawke's Bay farmland"
+          loading="lazy"
+        />
+      </div>
+      <div class="founding-content">
+        <span class="caption">THE BEGINNING</span>
+        <h2>From California expertise to Hawke's Bay whenua</h2>
+        <p>Aho Farms was founded by Longo Reo Te Kooro, a Māori entrepreneur who spent years in California's medicinal and recreational cannabis industry — rising from the floor to managing 23+ staff and overseeing full harvest, manicuring, and packaging operations. He returned to Aotearoa with a clear conviction: that the knowledge and systems he had developed in the world's most mature cannabis market could be applied on ancestral land, for his own people.</p>
+        <p>In partnership with the Waaka whānau, Aho Farms was established on Māori freehold land in Raupunga, Hawke's Bay. The partnership was not simply commercial — it was an expression of what Māori land-based enterprise should look like: productive, compliant, and deeply connected to the obligations of kaitiakitanga.</p>
+        <p>Today, Aho Farms holds a cultivation licence under New Zealand's Medicinal Cannabis Scheme, grows two medicinal flower product lines, and is building the supply infrastructure to reach prescribers, pharmacies, and export markets. The foundation is the whenua. Everything else is built on top of it.</p>
+        <blockquote class="pull-quote">
+          "Tiakina te whenua, tiakina te iwi."
+          <cite>— Founding kaupapa of Aho Farms</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec-offwhite">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <span class="caption">MILESTONES</span>
+      <h2 class="section-title">Our journey</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2020</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>Company founded.</strong> Partnership formed with Waaka whānau on Māori freehold land, Raupunga, Hawke's Bay. The whenua provides the commercial and cultural foundation of the enterprise.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2021</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>Licence applications lodged.</strong> Site preparation and compliance infrastructure development begins. Ministry of Health engagement commenced.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2022</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>Cultivation licence granted</strong> under the NZ Medicinal Cannabis Scheme. A material milestone — one of 42 granted in New Zealand.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2023</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>First cultivation season.</strong> Michael Maclean joins as Cultivation Director, bringing 15+ years of California cannabis cultivation expertise to the Raupunga operation.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2024</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>First harvest completed.</strong> Laboratory testing partnership established with Hill Labs, Hamilton (IANZ accredited). Board of Directors formalised with independent chair Stephen McPhail.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2025</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>First supply to NZ prescribers.</strong> RĀ and SOURCE product lines launched. Prescriber portal established. Product available through pharmacy channel on prescription.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year-col"><div class="timeline-year">2026</div></div>
+        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <p><strong>Export licence active.</strong> Second successful harvest season. Distribution partnerships under development for Australian and international markets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER BIO -->
+<section class="sec-dark">
+  <div class="section-inner">
+    <div class="founder-grid">
+      <div class="founder-content">
+        <h2>Longo Reo Te Kooro</h2>
+        <span class="founder-subtitle">Managing Director &amp; Founder</span>
+        <p>Longo Reo Te Kooro is a Māori entrepreneur from Hawke's Bay with over a decade of experience in the cannabis industry, including several years in California's regulated recreational and medicinal market. He rose from entry-level cultivation to managing teams of 23+, overseeing harvest, manicuring, and packaging at scale.</p>
+        <p>Returning to Aotearoa, he recognised that the knowledge gap between California and New Zealand represented an opportunity — and that the land, the people, and the regulatory moment were aligned. Aho Farms is the result.</p>
+        <p class="founder-focus">His focus: bringing international cultivation expertise to bear on Māori land, under Māori governance, for Māori futures.</p>
+      </div>
+      <div class="founder-img">
+        <img
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+          alt="Longo Reo Te Kooro — Managing Director, Aho Farms"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY DETAILS -->
+<section class="sec-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="caption">COMPANY INFORMATION</span>
+      <h2 class="section-title">Company details</h2>
+    </div>
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <td>Registered Name</td>
+          <td>Aho Farms Limited</td>
+        </tr>
+        <tr>
+          <td>Incorporated</td>
+          <td>New Zealand</td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td>Raupunga, Hawke's Bay, New Zealand</td>
+        </tr>
+        <tr>
+          <td>Ownership</td>
+          <td>Māori-owned and operated</td>
+        </tr>
+        <tr>
+          <td>Licences</td>
+          <td>Cultivation Licence, Export Licence (NZ Medicinal Cannabis Scheme)</td>
+        </tr>
+        <tr>
+          <td>Lab Partner</td>
+          <td>Hill Labs, Hamilton (IANZ Accredited)</td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AHO <span>FARMS</span></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="prescribers.html">Prescribers</a>
+      <a href="investors.html">Investors</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="footer-inner" style="padding-top:0;">
+    <p class="footer-legal">
+      © 2026 Aho Farms Limited. All rights reserved. Registered in New Zealand.<br />
+      Aho Farms holds licences under the New Zealand Medicinal Cannabis Scheme. Medicinal cannabis products are prescription medicines available through registered healthcare providers only. This website does not constitute medical advice. Photography used for illustrative purposes.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
