@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aho Farms — Prescriber Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night:       #1a2426;
+      --sidebar-bg:  #253032;
+      --card-bg:     #2f3d3f;
+      --content-bg:  #f4f6f6;
+      --teal:        #73a8a5;
+      --teal-light:  #a2c4c3;
+      --teal-deep:   #4a7a78;
+      --soil:        #8b6f47;
+      --text-light:  #e8eded;
+      --text-muted:  #8faaa8;
+      --text-dark:   #1e2e30;
+      --text-body:   #2e4042;
+      --border-teal: rgba(115,168,165,0.15);
+      --border-teal-strong: rgba(115,168,165,0.35);
+      --sidebar-w:   260px;
+      --header-h:    60px;
+      --amber:       #d4882a;
+      --amber-bg:    rgba(212,136,42,0.10);
+      --amber-border:rgba(212,136,42,0.30);
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--night);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { color: var(--teal-light); text-decoration: underline; }
+
+    /* ─── Header ────────────────────────────────────────────── */
+    .portal-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--night);
+      border-bottom: 1px solid var(--border-teal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 0 0;
+      z-index: 200;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 100%;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px;
+      height: 100%;
+      border-right: 1px solid var(--border-teal);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .logo-text span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .header-portal-label {
+      padding: 0 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-greeting {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-greeting strong {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .btn-logout {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: 1px solid var(--border-teal-strong);
+      padding: 6px 14px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: all 0.18s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn-logout:hover {
+      color: var(--teal);
+      border-color: var(--teal);
+      text-decoration: none;
+    }
+
+    /* ─── Sidebar ───────────────────────────────────────────── */
+    .portal-sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-teal);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-nav-label {
+      padding: 24px 20px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      flex: 1;
+      padding-bottom: 16px;
+    }
+
+    .sidebar-nav li {
+      position: relative;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border-left: 3px solid transparent;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      color: var(--teal-light);
+      background: rgba(115,168,165,0.06);
+    }
+
+    .nav-item.active {
+      color: var(--teal);
+      border-left-color: var(--teal);
+      background: rgba(115,168,165,0.08);
+      font-weight: 500;
+    }
+
+    .nav-item svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .nav-item.active svg { opacity: 1; }
+
+    .sidebar-compliance {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--border-teal);
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    /* ─── Main Content ──────────────────────────────────────── */
+    .portal-main {
+      margin-left: var(--sidebar-w);
+      margin-top: var(--header-h);
+      min-height: calc(100vh - var(--header-h));
+      background: var(--content-bg);
+    }
+
+    .section-panel {
+      display: none;
+      padding: 40px 44px;
+      max-width: 960px;
+      animation: fadeIn 0.22s ease;
+    }
+
+    .section-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Typography — Content Area ────────────────────────── */
+    .section-panel h1 {
+      font-size: 34px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .section-panel h2 {
+      font-size: 28px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .section-panel h3 {
+      font-size: 19px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    .section-panel p {
+      font-size: 14px;
+      color: var(--text-body);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .section-caption {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 6px;
+    }
+
+    .intro-text {
+      font-size: 14.5px;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(74,122,120,0.15);
+    }
+
+    /* ─── Buttons ───────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-deep);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-outline:hover {
+      background: rgba(115,168,165,0.10);
+      color: var(--teal-deep);
+      text-decoration: none;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* ─── Cards ─────────────────────────────────────────────── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .card-dark {
+      background: var(--card-bg);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 24px;
+      color: var(--text-light);
+    }
+
+    /* ─── Overview Quick Access Grid ────────────────────────── */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .quick-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 20px 18px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .quick-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 12px rgba(115,168,165,0.12);
+      transform: translateY(-1px);
+    }
+
+    .quick-card-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(115,168,165,0.10);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .quick-card-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--teal-deep);
+    }
+
+    .quick-card-body h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+
+    .quick-card-body p {
+      font-size: 12px;
+      color: #6a8a8a;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* ─── Update Box ────────────────────────────────────────── */
+    .update-box {
+      background: rgba(115,168,165,0.07);
+      border: 1px solid rgba(115,168,165,0.25);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+    }
+
+    .update-box-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 6px;
+    }
+
+    .update-box p {
+      font-size: 13.5px;
+      color: var(--text-body);
+      margin: 0;
+    }
+
+    /* ─── Contact Strip ─────────────────────────────────────── */
+    .contact-strip {
+      background: var(--night);
+      border-radius: 8px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-strip p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .contact-strip a {
+      color: var(--teal-light);
+      font-weight: 500;
+    }
+
+    .contact-strip strong {
+      color: var(--text-light);
+    }
+
+    /* ─── Product Table ─────────────────────────────────────── */
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-teal);
+    }
+
+    .product-table tr:nth-child(odd) td {
+      background: #fff;
+    }
+
+    .product-table tr:nth-child(even) td {
+      background: rgba(115,168,165,0.04);
+    }
+
+    .product-table td {
+      padding: 11px 18px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      border-bottom: 1px solid rgba(74,122,120,0.08);
+    }
+
+    .product-table td:first-child {
+      font-weight: 600;
+      color: var(--text-dark);
+      width: 200px;
+      font-size: 12.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .product-table tr:last-child td { border-bottom: none; }
+
+    /* ─── Consideration Box ─────────────────────────────────── */
+    .consideration-box {
+      background: rgba(115,168,165,0.06);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+    }
+
+    .consideration-box h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .consideration-box p {
+      font-size: 13.5px;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* ─── CoA Table ─────────────────────────────────────────── */
+    .coa-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .coa-table thead tr {
+      background: var(--night);
+    }
+
+    .coa-table thead th {
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .coa-table tbody tr:nth-child(odd) td { background: #fff; }
+    .coa-table tbody tr:nth-child(even) td { background: rgba(115,168,165,0.04); }
+
+    .coa-table tbody td {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      border-bottom: 1px solid rgba(74,122,120,0.08);
+    }
+
+    .coa-table tbody tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-current {
+      background: rgba(115,168,165,0.15);
+      color: var(--teal-deep);
+    }
+
+    .badge-previous {
+      background: rgba(143,170,168,0.15);
+      color: #6a8a88;
+    }
+
+    .coa-download {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border: 1px solid rgba(115,168,165,0.3);
+      border-radius: 4px;
+      transition: all 0.16s;
+    }
+
+    .coa-download:hover {
+      background: rgba(115,168,165,0.08);
+      border-color: var(--teal);
+      text-decoration: none;
+    }
+
+    .ianz-note {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(115,168,165,0.05);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+
+    .ianz-badge {
+      background: var(--night);
+      border: 1px solid var(--border-teal-strong);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .ianz-note p {
+      font-size: 12.5px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ─── Evidence Cards ─────────────────────────────────────── */
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .evidence-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .evidence-card-header {
+      background: var(--night);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .evidence-card-header h3 {
+      font-size: 17px;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .evidence-card-body {
+      padding: 20px 22px;
+    }
+
+    .evidence-card-body p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: 12px;
+    }
+
+    .evidence-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(74,122,120,0.12);
+    }
+
+    .evidence-meta-item label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: 4px;
+    }
+
+    .evidence-meta-item p {
+      font-size: 12.5px;
+      color: #4a6466;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .evidence-footer {
+      background: rgba(115,168,165,0.06);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .evidence-footer p {
+      font-size: 13px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ─── Dosing ─────────────────────────────────────────────── */
+    .disclaimer-box {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .disclaimer-box svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    .disclaimer-box p {
+      font-size: 13.5px;
+      color: #5a3e10;
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .dosing-block {
+      margin-bottom: 24px;
+    }
+
+    .dosing-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .dosing-list li {
+      display: flex;
+      gap: 12px;
+      padding: 11px 16px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      border-bottom: 1px solid rgba(74,122,120,0.08);
+      line-height: 1.6;
+    }
+
+    .dosing-list li:first-child { border-top: 1px solid rgba(74,122,120,0.08); }
+
+    .dosing-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .dosing-list li strong {
+      color: var(--text-dark);
+    }
+
+    /* ─── Prescribing Pathway ───────────────────────────────── */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 28px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 22px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(74,122,120,0.12);
+    }
+
+    .step-item:first-child { padding-top: 0; }
+    .step-item:last-child { border-bottom: none; }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--teal);
+      opacity: 0.5;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 52px;
+      text-align: right;
+    }
+
+    .step-content h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .step-content p {
+      font-size: 13.5px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .reference-box {
+      background: rgba(115,168,165,0.06);
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 18px 22px;
+    }
+
+    .reference-box p {
+      font-size: 13px;
+      color: var(--text-body);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ─── FAQ Accordion ─────────────────────────────────────── */
+    .faq-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background 0.16s;
+    }
+
+    .faq-question:hover { background: rgba(115,168,165,0.05); }
+    .faq-item.open .faq-question { color: var(--teal-deep); }
+
+    .faq-chevron {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--teal);
+      transition: transform 0.22s ease;
+    }
+
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.22s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 400px; }
+
+    .faq-answer-inner {
+      padding: 0 20px 18px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      line-height: 1.7;
+      border-top: 1px solid rgba(74,122,120,0.10);
+      padding-top: 14px;
+    }
+
+    /* ─── Contact ───────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 22px 20px;
+    }
+
+    .contact-card-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(115,168,165,0.10);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .contact-card-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--teal-deep);
+    }
+
+    .contact-card h3 {
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      margin-top: 0;
+    }
+
+    .contact-card a {
+      font-size: 13px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      font-size: 12.5px;
+      color: #6a8a8a;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ─── Form ──────────────────────────────────────────────── */
+    .portal-form {
+      background: #fff;
+      border: 1px solid var(--border-teal);
+      border-radius: 8px;
+      padding: 28px 28px;
+      margin-bottom: 24px;
+    }
+
+    .portal-form h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-dark);
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      color: var(--text-body);
+      background: #f8fafa;
+      border: 1px solid rgba(74,122,120,0.25);
+      border-radius: 4px;
+      padding: 10px 14px;
+      transition: border-color 0.16s, box-shadow 0.16s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(115,168,165,0.12);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-note {
+      font-size: 11.5px;
+      color: #8aacaa;
+      margin-top: 3px;
+    }
+
+    .form-submit-row {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .form-success {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: rgba(115,168,165,0.10);
+      border: 1px solid rgba(115,168,165,0.3);
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: var(--teal-deep);
+      font-weight: 500;
+      margin-top: 16px;
+    }
+
+    .form-success.visible { display: flex; }
+
+    .urgent-note {
+      background: rgba(212,136,42,0.07);
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #5a3e10;
+      line-height: 1.6;
+    }
+
+    /* ─── Mobile Nav ────────────────────────────────────────── */
+    .mobile-nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: 1px solid var(--border-teal-strong);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .mobile-tabs {
+      display: none;
+      overflow-x: auto;
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid var(--border-teal);
+      padding: 0 16px;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-tab {
+      display: inline-block;
+      padding: 13px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.18s;
+    }
+
+    .mobile-tab.active {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .portal-sidebar { display: none; }
+      .portal-main { margin-left: 0; }
+      .mobile-tabs { display: block; }
+      .header-portal-label { display: none; }
+
+      .section-panel { padding: 28px 20px; }
+
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .evidence-meta { grid-template-columns: 1fr; }
+
+      .mobile-nav-toggle { display: flex; }
+    }
+
+    @media (max-width: 520px) {
+      .quick-grid { grid-template-columns: 1fr; }
+      .header-greeting { display: none; }
+    }
+
+    /* ─── Divider ───────────────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(74,122,120,0.12);
+      margin: 28px 0;
+    }
+
+    /* ─── Icon helper ───────────────────────────────────────── */
+    .icon-sm { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="portal-header">
+  <div class="header-left">
+    <a class="header-logo" href="#">
+      <!-- Wordmark SVG — geometric A mark -->
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="32" height="32" rx="4" fill="#253032"/>
+        <path d="M16 6 L26 24 H6 Z" fill="none" stroke="#73a8a5" stroke-width="1.6" stroke-linejoin="round"/>
+        <line x1="10" y1="18" x2="22" y2="18" stroke="#73a8a5" stroke-width="1.2"/>
+      </svg>
+      <div class="logo-text">
+        Aho Farms
+        <span>Hawke's Bay, New Zealand</span>
+      </div>
+    </a>
+    <span class="header-portal-label">Prescriber Portal</span>
+  </div>
+  <div class="header-right">
+    <p class="header-greeting">Welcome, <strong>Dr Smith</strong></p>
+    <a href="#" class="btn-logout">Log out</a>
+  </div>
+</header>
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<nav class="portal-sidebar" aria-label="Portal navigation">
+  <div class="sidebar-nav-label">Portal Navigation</div>
+  <ul class="sidebar-nav" role="list">
+
+    <li>
+      <div class="nav-item active" data-section="overview" role="button" tabindex="0" aria-current="page">
+        <!-- Home icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        Overview
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="product-ra" role="button" tabindex="0">
+        <!-- Leaf/plant icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12C12 12 7 9 5 4c4.5.5 8 3.5 8.5 8"/><path d="M12 12c0 0 5-3 7-8-4.5.5-8 3.5-8.5 8"/></svg>
+        Product: RĀ
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="product-source" role="button" tabindex="0">
+        <!-- Package icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Product: SOURCE
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="coa" role="button" tabindex="0">
+        <!-- Document icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Certificates of Analysis
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="clinical-evidence" role="button" tabindex="0">
+        <!-- Book icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="12" y1="6" x2="16" y2="6"/><line x1="12" y1="10" x2="16" y2="10"/></svg>
+        Clinical Evidence
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="dosing" role="button" tabindex="0">
+        <!-- Dropper icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 12.1 3 13.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/></svg>
+        Dosing Guidance
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="prescribing-pathway" role="button" tabindex="0">
+        <!-- Map/route icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        Prescribing Pathway
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="faqs" role="button" tabindex="0">
+        <!-- Question mark icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Prescriber FAQs
+      </div>
+    </li>
+
+    <li>
+      <div class="nav-item" data-section="contact" role="button" tabindex="0">
+        <!-- Message icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Contact Us
+      </div>
+    </li>
+
+  </ul>
+
+  <div class="sidebar-compliance">
+    This portal is for registered healthcare professionals only. Content is not for distribution to patients or the public. All prescribing is subject to NZ regulatory requirements.
+  </div>
+</nav>
+
+<!-- ══════════════════ MOBILE TABS ══════════════════ -->
+<div class="mobile-tabs" id="mobileTabs" role="tablist" aria-label="Portal sections">
+  <span class="mobile-tab active" data-section="overview">Overview</span>
+  <span class="mobile-tab" data-section="product-ra">RĀ</span>
+  <span class="mobile-tab" data-section="product-source">SOURCE</span>
+  <span class="mobile-tab" data-section="coa">CoAs</span>
+  <span class="mobile-tab" data-section="clinical-evidence">Evidence</span>
+  <span class="mobile-tab" data-section="dosing">Dosing</span>
+  <span class="mobile-tab" data-section="prescribing-pathway">Pathway</span>
+  <span class="mobile-tab" data-section="faqs">FAQs</span>
+  <span class="mobile-tab" data-section="contact">Contact</span>
+</div>
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<main class="portal-main" id="portalMain">
+
+  <!-- ── SECTION 1: OVERVIEW ── -->
+  <section class="section-panel active" id="section-overview" aria-label="Overview">
+
+    <h1>Welcome to the Aho Farms<br>Prescriber Portal</h1>
+    <p class="intro-text">This portal contains clinical and product information to support your prescribing decisions. All content is intended for registered healthcare professionals only.</p>
+
+    <!-- Quick Access Grid -->
+    <div class="quick-grid">
+
+      <div class="quick-card" data-goto="product-ra" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 9 5 4c4.5.5 8 3.5 8.5 8"/><path d="M12 12c0 0 5-3 7-8-4.5.5-8 3.5-8.5 8"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Product: RĀ</h4>
+          <p>Dried flower, Oreo cultivar, ~21% THC</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="product-source" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Product: SOURCE</h4>
+          <p>Dried flower, Wake &amp; Cake C30, ~21% THC</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="coa" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Certificates of Analysis</h4>
+          <p>Current and previous batch CoAs — Hill Labs, IANZ accredited</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="clinical-evidence" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Clinical Evidence</h4>
+          <p>Evidence summaries for pain, sleep, and anxiety</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="dosing" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 12.1 3 13.25c0 2.22 1.8 4.05 4 4.05z"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Dosing Guidance</h4>
+          <p>Starting doses, titration protocol, drug interactions</p>
+        </div>
+      </div>
+
+      <div class="quick-card" data-goto="prescribing-pathway" role="button" tabindex="0">
+        <div class="quick-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        </div>
+        <div class="quick-card-body">
+          <h4>Prescribing Pathway</h4>
+          <p>Step-by-step guide to prescribing in New Zealand</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recent Updates -->
+    <div class="update-box">
+      <div class="update-box-label">Recent Updates</div>
+      <p>Last updated: <strong>June 2026</strong> — New batch CoAs available for RĀ (Batch #2026-003) and SOURCE (Batch #2026-002). Download from the Certificates of Analysis section.</p>
+    </div>
+
+    <!-- Contact Strip -->
+    <div class="contact-strip">
+      <p><strong>Questions?</strong> Contact our prescriber support team:</p>
+      <p><a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a></p>
+      <p style="color:var(--text-muted);">Response within 1 business day</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 2: PRODUCT RĀ ── -->
+  <section class="section-panel" id="section-product-ra" aria-label="Product RĀ">
+
+    <span class="section-caption">Product Overview</span>
+    <h2>RĀ — Dried Medicinal Cannabis Flower</h2>
+    <p class="intro-text">Full product specifications for Aho Farms RĀ. Batch-specific cannabinoid data should always be confirmed against the current Certificate of Analysis.</p>
+
+    <table class="product-table">
+      <tbody>
+        <tr><td>Cultivar</td><td>Oreo</td></tr>
+        <tr><td>Form</td><td>Dried medicinal cannabis flower</td></tr>
+        <tr><td>Growing Method</td><td>Outdoor sun-grown, Raupunga, Hawke's Bay</td></tr>
+        <tr><td>THC</td><td>~21% (batch-specific — refer to CoA)</td></tr>
+        <tr><td>CBD</td><td>&lt;1% (batch-specific — refer to CoA)</td></tr>
+        <tr><td>Terpenes</td><td>Myrcene, Caryophyllene, Limonene (dominant — batch specific)</td></tr>
+        <tr><td>Pack Size</td><td>10g</td></tr>
+        <tr><td>Storage</td><td>Store below 25°C, away from direct light and moisture. Keep in original packaging.</td></tr>
+        <tr><td>Shelf Life</td><td>24 months from manufacture date when stored correctly</td></tr>
+        <tr><td>Regulatory Status</td><td>Prescription medicine — Schedule 8 Controlled Drug (NZ)</td></tr>
+        <tr><td>Manufacturer</td><td>Aho Farms Limited, Hawke's Bay, New Zealand</td></tr>
+        <tr><td>Lab Testing</td><td>Hill Labs, Hamilton — IANZ Accredited</td></tr>
+      </tbody>
+    </table>
+
+    <div class="consideration-box">
+      <h3>Clinical Considerations for RĀ</h3>
+      <p>This is a high-THC dried flower product. Appropriate for experienced cannabis users or patients where THC-dominant therapy is clinically indicated. Not recommended as a first-line product for cannabis-naive patients. Consider starting with a lower-THC product and titrating to effect before transitioning to RĀ.</p>
+    </div>
+
+    <div class="btn-row">
+      <a href="#" class="btn btn-primary">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Product Data Sheet (PDF)
+      </a>
+      <a href="#" class="btn btn-outline" data-goto="coa">
+        View Latest Certificate of Analysis
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 3: PRODUCT SOURCE ── -->
+  <section class="section-panel" id="section-product-source" aria-label="Product SOURCE">
+
+    <span class="section-caption">Product Overview</span>
+    <h2>SOURCE — Dried Medicinal Cannabis Flower</h2>
+    <p class="intro-text">Full product specifications for Aho Farms SOURCE. Batch-specific cannabinoid data should always be confirmed against the current Certificate of Analysis.</p>
+
+    <table class="product-table">
+      <tbody>
+        <tr><td>Cultivar</td><td>Wake &amp; Cake C30</td></tr>
+        <tr><td>Form</td><td>Dried medicinal cannabis flower</td></tr>
+        <tr><td>Growing Method</td><td>Sourced / white-label supply</td></tr>
+        <tr><td>THC</td><td>~21% (batch-specific — refer to CoA)</td></tr>
+        <tr><td>CBD</td><td>&lt;1% (batch-specific — refer to CoA)</td></tr>
+        <tr><td>Terpenes</td><td>Batch-specific — refer to CoA</td></tr>
+        <tr><td>Pack Size</td><td>10g</td></tr>
+        <tr><td>Storage</td><td>Store below 25°C, away from direct light and moisture. Keep in original packaging.</td></tr>
+        <tr><td>Shelf Life</td><td>24 months from manufacture date when stored correctly</td></tr>
+        <tr><td>Regulatory Status</td><td>Prescription medicine — Schedule 8 Controlled Drug (NZ)</td></tr>
+        <tr><td>Manufacturer</td><td>Aho Farms Limited, Hawke's Bay, New Zealand</td></tr>
+        <tr><td>Lab Testing</td><td>Hill Labs, Hamilton — IANZ Accredited</td></tr>
+      </tbody>
+    </table>
+
+    <div class="consideration-box">
+      <h3>Clinical Considerations for SOURCE</h3>
+      <p>Similar high-THC profile to RĀ. SOURCE provides consistent supply and is a suitable option for patients already established on THC-dominant therapy. As with all high-THC products, not recommended as a first-line choice for cannabis-naive patients. Standard titration protocols apply.</p>
+    </div>
+
+    <div class="btn-row">
+      <a href="#" class="btn btn-primary">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Product Data Sheet (PDF)
+      </a>
+      <a href="#" class="btn btn-outline" data-goto="coa">
+        View Latest Certificate of Analysis
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 4: CERTIFICATES OF ANALYSIS ── -->
+  <section class="section-panel" id="section-coa" aria-label="Certificates of Analysis">
+
+    <h2>Certificates of Analysis</h2>
+    <p class="intro-text">All Aho Farms products are independently tested by Hill Labs, Hamilton — an IANZ-accredited laboratory. Batch-specific CoAs are available below. Contact us for CoAs from previous batches.</p>
+
+    <table class="coa-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Batch</th>
+          <th>Test Date</th>
+          <th>THC</th>
+          <th>CBD</th>
+          <th>Status</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>RĀ</strong></td>
+          <td>2026-003</td>
+          <td>May 2026</td>
+          <td>21.4%</td>
+          <td>0.3%</td>
+          <td><span class="badge badge-current">Current</span></td>
+          <td><a href="#" class="coa-download">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a></td>
+        </tr>
+        <tr>
+          <td><strong>RĀ</strong></td>
+          <td>2026-002</td>
+          <td>Feb 2026</td>
+          <td>20.8%</td>
+          <td>0.4%</td>
+          <td><span class="badge badge-previous">Previous</span></td>
+          <td><a href="#" class="coa-download">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a></td>
+        </tr>
+        <tr>
+          <td><strong>SOURCE</strong></td>
+          <td>2026-002</td>
+          <td>May 2026</td>
+          <td>21.1%</td>
+          <td>0.2%</td>
+          <td><span class="badge badge-current">Current</span></td>
+          <td><a href="#" class="coa-download">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a></td>
+        </tr>
+        <tr>
+          <td><strong>SOURCE</strong></td>
+          <td>2026-001</td>
+          <td>Jan 2026</td>
+          <td>20.9%</td>
+          <td>0.3%</td>
+          <td><span class="badge badge-previous">Previous</span></td>
+          <td><a href="#" class="coa-download">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px;color:var(--text-body);margin-bottom:20px;">CoAs include cannabinoid profile, terpene analysis, heavy metals, pesticides, microbials, moisture content, and foreign matter. Contact <a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a> to request specific batch CoAs.</p>
+
+    <div class="ianz-note">
+      <div class="ianz-badge">IANZ</div>
+      <p>All Aho Farms products are tested by <strong>Hill Laboratories Ltd, Hamilton, New Zealand</strong> — accredited by International Accreditation New Zealand (IANZ). Accreditation number available on request. Testing scope covers cannabinoid profile (HPLC), terpene analysis (GC-MS), heavy metals (ICP-MS), pesticide residues, microbial limits, moisture content, and foreign matter.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 5: CLINICAL EVIDENCE ── -->
+  <section class="section-panel" id="section-clinical-evidence" aria-label="Clinical Evidence">
+
+    <h2>Clinical Evidence Summaries</h2>
+    <p class="intro-text">The following summaries are provided to support clinical decision-making. They are not exhaustive and do not constitute prescribing recommendations.</p>
+
+    <div class="evidence-grid">
+
+      <!-- Chronic Pain -->
+      <div class="evidence-card">
+        <div class="evidence-card-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <h3>Chronic Pain</h3>
+        </div>
+        <div class="evidence-card-body">
+          <p>Multiple RCTs demonstrate modest but consistent analgesic effects of THC-containing cannabis medicines in chronic non-cancer pain. Evidence is strongest for neuropathic pain subtypes. A 2021 Cochrane review found moderate-quality evidence for reduction in pain scores.</p>
+          <div class="evidence-meta">
+            <div class="evidence-meta-item">
+              <label>Key Studies</label>
+              <p>Aviram &amp; Samuelly-Leichtag (2017); Aviram (2021 Cochrane)</p>
+            </div>
+            <div class="evidence-meta-item">
+              <label>NZ Context</label>
+              <p>Chronic pain is the most common approved condition in NZ. Over 60% of TGA-approved indications in AU are for chronic pain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sleep Disorders -->
+      <div class="evidence-card">
+        <div class="evidence-card-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <h3>Sleep Disorders</h3>
+        </div>
+        <div class="evidence-card-body">
+          <p>Short-term evidence supports THC-containing preparations for sleep onset and duration in patients with comorbid conditions (pain, anxiety, PTSD). Long-term data limited. A 2023 systematic review found cannabinoids improved subjective sleep quality.</p>
+          <div class="evidence-meta">
+            <div class="evidence-meta-item">
+              <label>Key Studies</label>
+              <p>Bachhuber et al (2019); Suraev et al (2020)</p>
+            </div>
+            <div class="evidence-meta-item">
+              <label>NZ Context</label>
+              <p>Sleep is the second most common indication in NZ. Often comorbid with pain and anxiety.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anxiety -->
+      <div class="evidence-card">
+        <div class="evidence-card-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <h3>Anxiety</h3>
+        </div>
+        <div class="evidence-card-body">
+          <p>Preclinical evidence is strong; RCT evidence in humans is limited but emerging. CBD-dominant preparations show promise for anxiety disorders. High-THC products may exacerbate anxiety in some patients — patient selection is critical.</p>
+          <div class="evidence-meta">
+            <div class="evidence-meta-item">
+              <label>Key Studies</label>
+              <p>Blessing et al (2015); Kayser et al (2023)</p>
+            </div>
+            <div class="evidence-meta-item">
+              <label>NZ Context</label>
+              <p>Mental health is the third most common NZ indication. Particular attention to patient history of psychosis or THC sensitivity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="evidence-footer">
+      <p>For a comprehensive evidence database, see the <strong>New Zealand Medical Cannabis Council (NZMCC)</strong> clinical resources and the <strong>RACGP Medicinal Cannabis Clinical Guidance</strong>. Both are updated periodically as new evidence emerges.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 6: DOSING GUIDANCE ── -->
+  <section class="section-panel" id="section-dosing" aria-label="Dosing Guidance">
+
+    <h2>Dosing Guidance</h2>
+
+    <div class="disclaimer-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" color="#d4882a"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Clinical Disclaimer:</strong> The following guidance is indicative only and does not replace clinical judgement. Dosing should be individualised based on patient history, previous cannabis exposure, indication, and concurrent medications.</p>
+    </div>
+
+    <div class="dosing-block">
+      <h3>Starting Dose Recommendations</h3>
+      <ul class="dosing-list">
+        <li><div><strong>Cannabis-naive patients:</strong> Start low, go slow. Begin with CBD-dominant or balanced product where possible. If a THC product is clinically indicated, start at 1–2.5 mg THC per dose.</div></li>
+        <li><div><strong>Previous cannabis users:</strong> May tolerate higher starting doses. Still recommend conservative start with gradual titration.</div></li>
+        <li><div><strong>Elderly patients:</strong> Start at lowest dose. Higher sensitivity to psychoactive effects. Monitor closely and titrate slowly.</div></li>
+      </ul>
+    </div>
+
+    <div class="dosing-block">
+      <h3>Titration Protocol</h3>
+      <ul class="dosing-list">
+        <li><div>Increase dose no more than every 3–7 days</div></li>
+        <li><div>Titrate to effect or to tolerance limit</div></li>
+        <li><div>Document dose changes and patient response at each step</div></li>
+        <li><div>Regular review at 4 weeks and 12 weeks recommended</div></li>
+      </ul>
+    </div>
+
+    <div class="dosing-block">
+      <h3>Dried Flower — Inhalation Guidance</h3>
+      <ul class="dosing-list">
+        <li><div>Inhalation (vaporisation) has faster onset (<strong>5–15 minutes</strong>) and shorter duration (<strong>2–3 hours</strong>) than oil preparations</div></li>
+        <li><div>Combustion (smoking) is <strong>not recommended</strong> — advise patients to use a calibrated dry-herb vaporiser</div></li>
+        <li><div>Effects are variable between patients — advise patients to use in a safe environment and at home initially</div></li>
+        <li><div>Advise against driving or operating machinery until individual response is established</div></li>
+      </ul>
+    </div>
+
+    <div class="dosing-block">
+      <h3>Drug Interactions to Consider</h3>
+      <ul class="dosing-list">
+        <li><div><strong>CNS depressants:</strong> Additive sedation with benzodiazepines, opioids, and alcohol — monitor carefully</div></li>
+        <li><div><strong>Anticoagulants:</strong> Cannabis may affect warfarin metabolism — monitor INR more frequently on initiation</div></li>
+        <li><div><strong>Antiepileptics:</strong> Possible pharmacokinetic interactions — seek specialist advice before co-prescribing</div></li>
+        <li><div><strong>CYP450 interactions:</strong> CBD is a CYP3A4 and CYP2C19 inhibitor at higher doses — review concurrent medications</div></li>
+      </ul>
+    </div>
+
+    <div class="btn-row">
+      <a href="#" class="btn btn-primary">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Full Dosing Guide (PDF)
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 7: PRESCRIBING PATHWAY ── -->
+  <section class="section-panel" id="section-prescribing-pathway" aria-label="Prescribing Pathway">
+
+    <h2>How to Prescribe Medicinal Cannabis in New Zealand</h2>
+    <p class="intro-text">A step-by-step guide to initiating and managing medicinal cannabis prescribing under the New Zealand regulatory framework.</p>
+
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Patient Assessment</h3>
+          <p>Confirm the patient has a condition for which medicinal cannabis may be appropriate. Document diagnosis, previous treatments trialled, and your clinical rationale. Consider contraindications including personal or family history of psychosis, current substance use disorder, and pregnancy or breastfeeding.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Product Selection</h3>
+          <p>Select an appropriate product based on indication, required onset and duration, patient preference, and cost. Contact Aho Farms prescriber support for product information and current availability. Consider THC:CBD ratio, delivery route, and whether the patient has prior cannabis exposure.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Regulatory Requirements</h3>
+          <p>Medicinal cannabis products are prescription medicines in NZ — standard prescribing rules apply. Schedule 8 (Controlled Drug) products require specific prescribing authority. Confirm your prescribing rights and whether your DHB or organisation has any additional internal requirements.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Dispensing</h3>
+          <p>The patient takes their prescription to a pharmacy. Pharmacies must have the product in stock or order it. Aho Farms products are available through our pharmacy network — contact us for current stockist details. Dispensing fees and consultation fees are not subsidised by PHARMAC.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>Patient Monitoring</h3>
+          <p>Review at 4 weeks to assess efficacy, side effects, and dose appropriateness. Document outcomes in the patient record. Ongoing 3-monthly reviews are recommended for stable patients. Reassess the benefit/risk balance at each review.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>Ongoing Support</h3>
+          <p>Aho Farms prescriber support is available for product questions, CoA requests, and clinical queries. Contact: <a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a>. Our team can arrange calls for complex queries.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="reference-box">
+      <p><strong>NZ Prescribing Guidelines:</strong> Refer to Medsafe guidance on medicinal cannabis prescribing and the Ministry of Health Medicinal Cannabis Scheme resources at <a href="https://www.health.govt.nz" target="_blank" rel="noopener">health.govt.nz</a>. The NZMCC also publishes regularly updated prescriber resources.</p>
+    </div>
+
+  </section>
+
+
+  <!-- ── SECTION 8: FAQs ── -->
+  <section class="section-panel" id="section-faqs" aria-label="Prescriber FAQs">
+
+    <h2>Frequently Asked Questions</h2>
+    <p class="intro-text">Common questions from prescribers about medicinal cannabis, Aho Farms products, and the prescribing process in New Zealand.</p>
+
+    <ul class="faq-list">
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need special authority to prescribe medicinal cannabis?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">In most cases, no. Medicinal cannabis products classified as prescription medicines can be prescribed by any registered medical practitioner in New Zealand. However, some products are Schedule 8 Controlled Drugs — confirm your prescribing rights and whether your DHB or organisation has any additional requirements before prescribing.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is prescribing medicinal cannabis a risk to my registration?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No, provided you prescribe appropriately and within your scope of practice. The NZ Medical Council recognises medicinal cannabis as a legitimate therapeutic option when clinically indicated. Document your clinical reasoning clearly, as you would for any prescription.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What conditions is medicinal cannabis approved for?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">There is no approved list. Medicinal cannabis can be prescribed for any condition where you judge the potential benefits outweigh the risks. Common indications in NZ include chronic pain, sleep disorders, anxiety, nausea and vomiting (chemotherapy-induced), and palliative care.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is Aho Farms product covered by PHARMAC?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No. Medicinal cannabis products are not currently subsidised by PHARMAC. Patients pay the full cost. Aho Farms RĀ and SOURCE are priced at $69 / 10g RRP. We recommend discussing costs with patients prior to initiating treatment.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do patients access Aho Farms products?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Write a standard prescription. The patient takes it to a pharmacy that stocks or can order Aho Farms products. Contact us at <a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a> or <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a> for current pharmacy availability in your region.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I see a Certificate of Analysis before prescribing?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Yes — CoAs for all current batches are available in this portal under Certificates of Analysis. You can also request specific batch CoAs by emailing <a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a>.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I counsel patients about dried flower products?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Advise vaporisation rather than combustion (smoking). Onset is 5–15 minutes; duration 2–3 hours. Recommend patients use in a safe environment initially. Advise against driving or operating machinery until individual response is established. Discuss storage requirements and the importance of keeping product in original packaging away from children.</div>
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What support does Aho Farms provide to prescribers?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Product information, batch CoAs, clinical evidence summaries, and dosing guidance are all available in this portal. Our prescriber support team is available via email (<a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a>) and can arrange calls for complex queries. Response within 1 business day.</div>
+        </div>
+      </li>
+
+    </ul>
+
+  </section>
+
+
+  <!-- ── SECTION 9: CONTACT ── -->
+  <section class="section-panel" id="section-contact" aria-label="Contact">
+
+    <h2>Prescriber Support</h2>
+    <p class="intro-text">Our team is available to support your prescribing decisions. Response times and areas of responsibility are listed below.</p>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.83a16 16 0 006.29 6.29l1.09-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h3>Prescriber Enquiries</h3>
+        <a href="mailto:prescribers@ahofarms.co.nz">prescribers@ahofarms.co.nz</a>
+        <p>Product questions, CoA requests, clinical support. Response within 1 business day.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8l5 3-5 3V8z"/><line x1="5" y1="7" x2="10" y2="7"/><line x1="5" y1="11" x2="8" y2="11"/></svg>
+        </div>
+        <h3>Pharmacy &amp; Supply</h3>
+        <a href="mailto:pharmacies@ahofarms.co.nz">pharmacies@ahofarms.co.nz</a>
+        <p>Stock availability, ordering, supply terms, and pharmacy network enquiries.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>General</h3>
+        <a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a>
+        <p>All other enquiries.</p>
+      </div>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div class="portal-form">
+      <h3>Send a Message</h3>
+      <form id="contactForm" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="cf-name">Full Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Dr Jane Smith" required />
+          </div>
+
+          <div class="form-group">
+            <label for="cf-email">Email Address</label>
+            <input type="email" id="cf-email" name="email" placeholder="jane.smith@practice.nz" required />
+          </div>
+
+          <div class="form-group">
+            <label for="cf-reg">Registration Number</label>
+            <input type="text" id="cf-reg" name="registration" placeholder="MCNZ registration number" />
+            <span class="form-note">Pre-verified for portal users. Include if querying on behalf of another practitioner.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="cf-subject">Subject</label>
+            <select id="cf-subject" name="subject">
+              <option value="">Select a subject…</option>
+              <option value="product-information">Product Information</option>
+              <option value="coa-request">CoA Request</option>
+              <option value="clinical-query">Clinical Query</option>
+              <option value="ordering">Ordering</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" placeholder="Please describe your query…" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Message
+          </button>
+        </div>
+
+        <div class="form-success" id="formSuccess" role="alert">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Message sent. Our prescriber support team will respond within 1 business day.
+        </div>
+      </form>
+    </div>
+
+    <div class="urgent-note">
+      <strong>For urgent clinical queries,</strong> please contact your regional Poisons Centre or clinical pharmacologist. The National Poisons Centre (NZ) is available 24/7: <strong>0800 764 766</strong>.
+    </div>
+
+  </section>
+
+</main><!-- /portal-main -->
+
+
+<script>
+  // ─── Navigation controller ─────────────────────────────────────────────────
+  const navItems    = document.querySelectorAll('.nav-item[data-section]');
+  const mobileTabs  = document.querySelectorAll('.mobile-tab[data-section]');
+  const panels      = document.querySelectorAll('.section-panel');
+
+  function activateSection(sectionId) {
+    // Update sidebar
+    navItems.forEach(item => {
+      const active = item.dataset.section === sectionId;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-current', active ? 'page' : 'false');
+    });
+
+    // Update mobile tabs
+    mobileTabs.forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.section === sectionId);
+    });
+
+    // Show/hide panels
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.id === 'section-' + sectionId);
+    });
+
+    // Scroll content to top
+    document.querySelector('.portal-main').scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Sidebar nav clicks
+  navItems.forEach(item => {
+    item.addEventListener('click', () => activateSection(item.dataset.section));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateSection(item.dataset.section);
+      }
+    });
+  });
+
+  // Mobile tab clicks
+  mobileTabs.forEach(tab => {
+    tab.addEventListener('click', () => activateSection(tab.dataset.section));
+  });
+
+  // Quick card / button links to sections (data-goto)
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-goto]');
+    if (el) {
+      e.preventDefault();
+      activateSection(el.dataset.goto);
+    }
+  });
+
+  // ─── FAQ Accordion ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ─── Contact Form ──────────────────────────────────────────────────────────
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+
+      if (!name || !email || !message) {
+        // Simple inline validation
+        [
+          { id: 'cf-name',    val: name },
+          { id: 'cf-email',   val: email },
+          { id: 'cf-message', val: message }
+        ].forEach(({ id, val }) => {
+          const el = document.getElementById(id);
+          el.style.borderColor = val ? '' : '#c0392b';
+        });
+        return;
+      }
+
+      // Simulate success
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        contactForm.reset();
+        formSuccess.classList.add('visible');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message`;
+
+        setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+      }, 900);
+    });
+
+    // Clear validation error on input
+    contactForm.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', () => { el.style.borderColor = ''; });
+    });
+  }
+
+  // ─── Keyboard: reset active state on escape ────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.faq-item.open').forEach(item => {
+        item.classList.remove('open');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // ─── Init ──────────────────────────────────────────────────────────────────
+  activateSection('overview');
+</script>
+
+</body>
+</html>
