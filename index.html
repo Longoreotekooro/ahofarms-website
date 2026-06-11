@@ -739,6 +739,177 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
 .footer-legal{font-size:0.625rem;color:rgba(255,255,255,0.15);max-width:54ch;text-align:right;line-height:1.5;}
 
 /* ================================================================
+   PRODUCTS — Modern editorial layout
+   ================================================================ */
+.prods{
+  background:var(--night);
+  background-image:
+    radial-gradient(ellipse at top, rgba(115,168,165,0.08) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2373a8a5' stroke-opacity='0.035' stroke-width='0.5'%3E%3Cpath d='M0 15h60M0 30h60M0 45h60M15 0v60M30 0v60M45 0v60'/%3E%3C/g%3E%3C/svg%3E");
+  padding:var(--s8) 0;
+  position:relative;
+}
+.prods-hdr{text-align:center;margin-bottom:var(--s7);max-width:600px;margin-left:auto;margin-right:auto;}
+.prods-hdr h2{color:var(--white);margin-bottom:var(--s2);}
+.prods-hdr p{color:rgba(255,255,255,0.4);font-size:1rem;line-height:1.7;}
+.prods-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);
+  max-width:1100px;margin:0 auto;
+}
+.prod{
+  display:flex;flex-direction:column;
+  position:relative;
+}
+/* Image stage — clean, no card border, floating product */
+.prod-img{
+  position:relative;
+  aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--s5);
+  padding:var(--s6) var(--s4);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at center,
+      rgba(115,168,165,0.06) 0%,
+      rgba(115,168,165,0.02) 40%,
+      transparent 70%);
+}
+/* Glow behind product */
+.prod-glow{
+  position:absolute;
+  width:60%;height:60%;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.5;
+  z-index:0;
+  transition:transform 0.6s ease, opacity 0.6s ease;
+}
+.prod-glow--ra{
+  background:radial-gradient(circle,
+    rgba(201,165,90,0.5) 0%,
+    rgba(139,111,71,0.2) 40%,
+    transparent 70%);
+}
+.prod-glow--source{
+  background:radial-gradient(circle,
+    rgba(115,168,165,0.5) 0%,
+    rgba(74,122,120,0.2) 40%,
+    transparent 70%);
+}
+.prod:hover .prod-glow{
+  opacity:0.85;
+  transform:scale(1.08);
+}
+/* Package image — floats above the glow */
+.prod-pkg{
+  max-width:75%;
+  max-height:380px;
+  width:auto;height:auto;
+  object-fit:contain;
+  position:relative;z-index:2;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,0.55))
+         drop-shadow(0 12px 16px rgba(0,0,0,0.35));
+  transition:transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.prod:hover .prod-pkg{
+  transform:translateY(-8px) scale(1.02);
+}
+/* Floor shadow ellipse below the product */
+.prod-shadow{
+  position:absolute;
+  bottom:18%;left:50%;
+  transform:translateX(-50%);
+  width:60%;height:30px;
+  background:radial-gradient(ellipse at center,
+    rgba(0,0,0,0.5) 0%,
+    rgba(0,0,0,0.15) 50%,
+    transparent 80%);
+  filter:blur(8px);
+  z-index:1;
+}
+
+/* Product info */
+.prod-body{padding:0 var(--s2);}
+.prod-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:var(--s3);
+  padding-bottom:var(--s2);
+  border-bottom:1px solid var(--border);
+}
+.prod-tag{
+  font-size:0.625rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--teal-light);
+}
+.prod-rx{
+  font-size:0.5625rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal);
+  border:1px solid rgba(115,168,165,0.3);
+  padding:3px 8px;border-radius:2px;
+}
+.prod-name{
+  font-family:var(--font-h);
+  font-size:clamp(2.5rem,3.5vw,3.5rem);
+  font-weight:300;letter-spacing:-0.04em;
+  color:var(--white);line-height:1;
+  margin-bottom:var(--s2);
+}
+.prod-sub{
+  font-size:1rem;line-height:1.6;
+  color:rgba(255,255,255,0.55);
+  margin-bottom:var(--s4);
+  font-style:italic;
+  font-family:var(--font-h);
+  font-weight:400;
+}
+/* Specs as a clean editorial list */
+.prod-specs{
+  list-style:none;display:flex;flex-direction:column;gap:0;
+  margin-bottom:var(--s4);
+  border-top:1px solid var(--border);
+}
+.prod-specs li{
+  display:grid;grid-template-columns:120px 1fr;
+  padding:var(--s2) 0;
+  border-bottom:1px solid var(--border);
+  align-items:baseline;
+}
+.prod-spec-k{
+  font-size:0.6875rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(115,168,165,0.6);
+}
+.prod-spec-v{
+  font-size:0.875rem;
+  color:rgba(255,255,255,0.7);
+}
+/* CTA — minimal underline link */
+.prod-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--teal);
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(115,168,165,0.3);
+  transition:border-color 0.2s, gap 0.2s, color 0.2s;
+}
+.prod-cta:hover{
+  border-color:var(--teal);
+  gap:12px;
+  color:var(--teal-light);
+}
+.prods-disc{
+  text-align:center;
+  margin-top:var(--s6);
+  font-size:0.6875rem;
+  color:rgba(255,255,255,0.22);
+  max-width:60ch;
+  margin-left:auto;margin-right:auto;
+  line-height:1.6;
+}
+
+/* ================================================================
    SCROLL ANIMATIONS — initial states
    ================================================================ */
 .js-up{opacity:0;transform:translateY(28px);}
@@ -754,6 +925,7 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
   .story-img{aspect-ratio:16/9;}
   .story-lat{display:none;}
   .kaupapa-inner{grid-template-columns:1fr;}
+  .prods-grid{grid-template-columns:1fr;gap:var(--s7);}
   .footer-top{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
@@ -820,19 +992,15 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
   <div class="hero-content wrap">
     <div class="hero-eyebrow" id="hEye">
       <div class="hero-line"></div>
-      <span class="hero-location">Raupunga, Hawke's Bay &middot; Aotearoa New Zealand</span>
+      <span class="hero-location">Hawke's Bay &middot; Aotearoa New Zealand</span>
     </div>
     <span class="hero-te-reo" id="hTeReo">Tiakina te whenua, tiakina te iwi —</span>
     <h1 id="hH1">Grown for <em>good</em> in New Zealand.</h1>
-    <p class="hero-sub" id="hSub">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium outdoor flower — available exclusively through licensed prescribers and qualified partners.</p>
+    <p class="hero-sub" id="hSub">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium flower — available exclusively through licensed prescribers and qualified partners.</p>
     <div class="hero-actions" id="hAct">
       <a href="about.html" class="btn btn-primary">Discover Aho Farms</a>
       <a href="prescribers.html" class="btn btn-outline">Healthcare Professionals</a>
     </div>
-  </div>
-  <div class="hero-lat" id="hLat">
-    <span class="hero-lat-num">39°S</span>
-    <span class="hero-lat-txt">Same latitude as<br>California's Emerald Triangle</span>
   </div>
   <div class="hero-scroll" id="hScroll">
     <div class="hero-scroll-line"></div>
@@ -845,7 +1013,7 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
   <div class="creds-inner">
     <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Licensed Medicinal Cultivator</span></div>
     <div class="cred-div"></div>
-    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">IANZ-Accredited Testing — Hill Labs, Hamilton</span></div>
+    <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Independently Tested — Hill Labs, Hamilton</span></div>
     <div class="cred-div"></div>
     <div class="cred"><div class="cred-dot"></div><span class="cred-txt">CFU Count &lt;200 — NZ Standard</span></div>
     <div class="cred-div"></div>
@@ -901,14 +1069,10 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
       <div class="story-img js-up">
         <img
           src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965576/IMG_6092_talxyt.jpg"
-          alt="Aho Farms growing site — Raupunga, Hawke's Bay, Aotearoa New Zealand"
+          alt="Aho Farms growing site — Hawke's Bay, Aotearoa New Zealand"
           loading="lazy">
-        <div class="story-lat">
-          <span class="story-lat-n">39°S</span>
-          <span class="story-lat-l">Emerald Triangle<br>Latitude</span>
-        </div>
         <div class="story-cap">
-          <p>Raupunga, Hawke's Bay — ancestral whenua, Waaka whānau partnership</p>
+          <p>Hawke's Bay — ancestral whenua, Waaka whānau partnership</p>
         </div>
       </div>
       <div class="story-content js-up">
@@ -916,11 +1080,11 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <span class="te-reo-line">Tiakina te whenua, tiakina te iwi.</span>
         <h2>Five generations of land. One generation to build on it differently.</h2>
         <p>Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
-        <p>In partnership with the Waaka whānau, we grow on Māori freehold land in Raupunga, Hawke's Bay — at 39°S latitude, sharing the same position on the globe as California's legendary Emerald Triangle. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
+        <p>In partnership with the Waaka whānau, we grow on Māori freehold land in Hawke's Bay. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
         <div class="dual">
           <div>
             <span class="dual-label">California Expertise</span>
-            <span class="dual-val">9–20 years cultivation experience from the world's most mature cannabis market</span>
+            <span class="dual-val">20 years cultivation experience from the world's most mature cannabis market</span>
           </div>
           <div class="dual-div"></div>
           <div>
@@ -947,16 +1111,16 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <div class="proof-lbl">NZ's most stringent microbial standard — verified independently on every batch</div>
       </div>
       <div class="proof-item js-up">
-        <span class="proof-num">15<em>+</em></span>
-        <div class="proof-lbl">Cultivar variations explored in our pheno hunt — narrowed to the perfect mother plant</div>
+        <span class="proof-num">89<em>→</em>15</span>
+        <div class="proof-lbl">Cultivar variations explored in our pheno hunt — narrowed from 89 mothers down to 15</div>
       </div>
       <div class="proof-item js-up">
-        <span class="proof-num">IANZ<em>✓</em></span>
-        <div class="proof-lbl">Hill Labs, Hamilton — International Accreditation NZ. Full panel every batch.</div>
+        <span class="proof-num">Hill<em>Labs</em></span>
+        <div class="proof-lbl">Independently tested by Hill Labs, Hamilton — full panel on every batch</div>
       </div>
       <div class="proof-item js-up">
-        <span class="proof-num">39<em>°S</em></span>
-        <div class="proof-lbl">Same global latitude as California's Emerald Triangle — exceptional growing conditions</div>
+        <span class="proof-num">NZ<em>Export</em></span>
+        <div class="proof-lbl">Export licence active — supplying licensed prescribers and qualified partners</div>
       </div>
     </div>
   </div>
@@ -967,16 +1131,16 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
   <div class="wrap">
     <div class="cult-hdr js-up">
       <span class="eyebrow">MĀ TE MĀRA <span>·</span> CULTIVATION &amp; QUALITY</span>
-      <h2>Sun-grown in Raupunga.<br>Tested to the highest standard.</h2>
-      <p>Every plant grown outdoors under Hawke's Bay sunlight. Every batch independently tested by Hill Labs before reaching a prescriber. No exceptions, no shortcuts.</p>
+      <h2>Sun-grown in Hawke's Bay.<br>Tested to the highest standard.</h2>
+      <p>Every plant grown under natural Hawke's Bay sunlight. Every batch independently tested by Hill Labs before reaching a prescriber. No exceptions, no shortcuts.</p>
     </div>
     <div class="cult-grid">
       <div class="cimg cimg-main">
         <img
           src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965592/IMG_6096_d9zwee.jpg"
-          alt="Aho Farms polytunnel growing structures — Raupunga, Hawke's Bay"
+          alt="Aho Farms outdoor cultivation — Hawke's Bay"
           loading="lazy">
-        <span class="cimg-tag">Raupunga — Outdoor Growing Structures</span>
+        <span class="cimg-tag">Hawke's Bay — Outdoor Growing</span>
       </div>
       <div class="cimg">
         <img
@@ -987,8 +1151,8 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
       </div>
       <div class="cimg">
         <img
-          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781065720/d448dc71-4439-4c1d-ae9d-12325a8bf33b_k1yt45.jpg"
-          alt="Aho Farms indoor cultivation — cannabis cola"
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780972903/IMG_5306_vr0un7.heic"
+          alt="Aho Farms indoor cultivation"
           loading="lazy">
         <span class="cimg-tag">Indoor Cultivation</span>
       </div>
@@ -999,8 +1163,8 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <div class="cstat-l">NZ's most stringent microbial standard. Our product consistently meets it — independently verified on every batch by Hill Labs, Hamilton.</div>
       </div>
       <div class="cstat js-up">
-        <span class="cstat-n">IANZ<sup>✓</sup></span>
-        <div class="cstat-l">Full testing panel: cannabinoids, terpenes, heavy metals, pesticides, microbials, moisture, and foreign matter. Certificate of Analysis for every batch.</div>
+        <span class="cstat-n">89<sup>→15</sup></span>
+        <div class="cstat-l">Our pheno hunt evaluated 89 mother plants across multiple cultivars. We narrowed down to the 15 strongest expressions — selecting only the best for production.</div>
       </div>
       <div class="cstat js-up">
         <span class="cstat-n">NZ<sup>Export</sup></span>
@@ -1022,12 +1186,12 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
       <div class="pcard js-up">
         <div class="pcard-n">I</div>
         <h4>Deeply connected to Hawke's Bay</h4>
-        <p>Five-generation whānau farming ancestral lands of Te Hapuku. Hawke's Bay shares the global latitude of California's Emerald Triangle — outdoor quality in NZ's highest sunshine region.</p>
+        <p>Five-generation whānau farming ancestral lands of Te Hapuku. Hawke's Bay is one of New Zealand's sunniest, most fertile regions — exceptional outdoor growing conditions.</p>
       </div>
       <div class="pcard js-up">
         <div class="pcard-n">II</div>
         <h4>Advanced cultivation methods</h4>
-        <p>Soil rebuilt to California standards. Rigorous feeding and growing regimens. Pheno hunt across 15+ cultivar variations. Fast production scalability backed by NZ's agricultural sector.</p>
+        <p>Soil rebuilt to California standards. Rigorous feeding and growing regimens. Pheno hunt across 89 mother plants narrowed to 15 strongest. Fast production scalability backed by NZ's agricultural sector.</p>
       </div>
       <div class="pcard js-up">
         <div class="pcard-n">III</div>
@@ -1043,64 +1207,80 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
   </div>
 </section>
 
-<!-- PRODUCTS PREVIEW — RĀ & SOURCE pouches -->
-<section class="section" style="background:var(--night);padding:var(--s7) 0;" id="products">
+<!-- PRODUCTS PREVIEW — RĀ & SOURCE -->
+<section class="prods section" id="products">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:var(--s6)" class="js-up">
-      <span class="eyebrow" style="justify-content:center;display:flex">NGĀ HUA <span style="color:rgba(115,168,165,0.45);margin:0 6px">·</span> OUR PRODUCTS</span>
-      <h2 style="color:var(--white);margin-bottom:var(--s2)">Premium medicinal flower.<br>Available by prescription.</h2>
-      <p style="color:rgba(255,255,255,0.45);max-width:48ch;margin:0 auto;font-size:1rem">Full product specifications, certificates of analysis, and dosing guidance are available to registered prescribers in the portal.</p>
+    <div class="prods-hdr js-up">
+      <span class="eyebrow" style="justify-content:center;display:flex">NGĀ HUA <span>·</span> OUR PRODUCTS</span>
+      <h2>Premium medicinal flower.<br>Available by prescription.</h2>
+      <p>Full product specifications, certificates of analysis, and dosing guidance are available to registered prescribers in the portal.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)">
+
+    <div class="prods-grid">
 
       <!-- RĀ -->
-      <div class="js-up" style="background:var(--night-3);border:1px solid var(--border-2);border-radius:4px;overflow:hidden;display:flex;flex-direction:column">
-        <div style="aspect-ratio:4/3;overflow:hidden;background:var(--night-4);display:flex;align-items:center;justify-content:center;padding:var(--s5)">
+      <article class="prod js-up">
+        <div class="prod-img">
+          <div class="prod-glow prod-glow--ra"></div>
           <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781065977/image_meb1l3.png"
+            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781149002/ChatGPT_Image_Jun_11_2026_03_35_51_PM_g5rlm1.png"
             alt="RĀ — Aho Farms medicinal cannabis product"
-            style="max-height:280px;width:auto;object-fit:contain;filter:drop-shadow(0 16px 48px rgba(0,0,0,0.6))">
+            class="prod-pkg">
+          <div class="prod-shadow"></div>
         </div>
-        <div style="padding:var(--s4)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s2)">
-            <span style="font-family:var(--font-h);font-size:2.2rem;font-weight:300;color:var(--white);letter-spacing:-0.03em">RĀ</span>
-            <span style="font-size:0.5625rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(115,168,165,0.25);padding:4px 10px;border-radius:2px">Prescription Only</span>
+        <div class="prod-body">
+          <div class="prod-meta">
+            <span class="prod-tag">01 · Flagship</span>
+            <span class="prod-rx">Prescription Only</span>
           </div>
-          <div style="display:flex;gap:var(--s2);margin-bottom:var(--s3);flex-wrap:wrap">
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Cultivar: Oreo</span>
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Outdoor Sun-Grown</span>
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Dried Flower</span>
-          </div>
-          <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:var(--s4)">Our flagship outdoor-grown medicinal flower. Cultivated from the Oreo cultivar under natural Hawke's Bay sunlight, developing a full terpene profile and consistent cannabinoid expression. Named for the sun — Rā in te reo Māori.</p>
-          <a href="prescribers.html" class="btn btn-teal-outline btn-sm">Prescriber Information →</a>
+          <h3 class="prod-name">RĀ</h3>
+          <p class="prod-sub">Named for the sun. Cultivated outdoors under natural Hawke's Bay sunlight.</p>
+          <ul class="prod-specs">
+            <li><span class="prod-spec-k">Cultivar</span><span class="prod-spec-v">Oreo</span></li>
+            <li><span class="prod-spec-k">Method</span><span class="prod-spec-v">Outdoor sun-grown</span></li>
+            <li><span class="prod-spec-k">Form</span><span class="prod-spec-v">Dried medicinal flower</span></li>
+            <li><span class="prod-spec-k">Origin</span><span class="prod-spec-v">Hawke's Bay, Aotearoa</span></li>
+          </ul>
+          <a href="prescribers.html" class="prod-cta">
+            Prescriber Information
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
-      </div>
+      </article>
 
       <!-- SOURCE -->
-      <div class="js-up" style="background:var(--night-3);border:1px solid var(--border-2);border-radius:4px;overflow:hidden;display:flex;flex-direction:column">
-        <div style="aspect-ratio:4/3;overflow:hidden;background:var(--night-4);display:flex;align-items:center;justify-content:center;padding:var(--s5)">
+      <article class="prod js-up">
+        <div class="prod-img">
+          <div class="prod-glow prod-glow--source"></div>
           <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781065968/image_1_pw4ub4.png"
+            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781149945/ChatGPT_Image_Jun_11_2026_03_52_01_PM_gfza7m.png"
             alt="SOURCE — Aho Farms medicinal cannabis product"
-            style="max-height:280px;width:auto;object-fit:contain;filter:drop-shadow(0 16px 48px rgba(0,0,0,0.6))">
+            class="prod-pkg">
+          <div class="prod-shadow"></div>
         </div>
-        <div style="padding:var(--s4)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s2)">
-            <span style="font-family:var(--font-h);font-size:2.2rem;font-weight:300;color:var(--white);letter-spacing:-0.03em">SOURCE</span>
-            <span style="font-size:0.5625rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(115,168,165,0.25);padding:4px 10px;border-radius:2px">Prescription Only</span>
+        <div class="prod-body">
+          <div class="prod-meta">
+            <span class="prod-tag">02 · Consistent Supply</span>
+            <span class="prod-rx">Prescription Only</span>
           </div>
-          <div style="display:flex;gap:var(--s2);margin-bottom:var(--s3);flex-wrap:wrap">
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Cultivar: Wake &amp; Cake C30</span>
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Consistent Supply</span>
-            <span style="font-size:0.6875rem;color:rgba(255,255,255,0.45);background:rgba(115,168,165,0.07);padding:4px 10px;border-radius:2px;border:1px solid rgba(115,168,165,0.12)">Dried Flower</span>
-          </div>
-          <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:var(--s4)">Our consistent-supply medicinal flower. Sourced from the Wake &amp; Cake C30 cultivar, offering a reliable and well-documented product for patients established on medicinal cannabis therapy.</p>
-          <a href="prescribers.html" class="btn btn-teal-outline btn-sm">Prescriber Information →</a>
+          <h3 class="prod-name">SOURCE</h3>
+          <p class="prod-sub">A reliable, well-documented product for patients established on medicinal cannabis therapy.</p>
+          <ul class="prod-specs">
+            <li><span class="prod-spec-k">Cultivar</span><span class="prod-spec-v">Wake &amp; Cake C30</span></li>
+            <li><span class="prod-spec-k">Method</span><span class="prod-spec-v">Indoor / consistent supply</span></li>
+            <li><span class="prod-spec-k">Form</span><span class="prod-spec-v">Dried medicinal flower</span></li>
+            <li><span class="prod-spec-k">Origin</span><span class="prod-spec-v">Aotearoa New Zealand</span></li>
+          </ul>
+          <a href="prescribers.html" class="prod-cta">
+            Prescriber Information
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
-      </div>
+      </article>
 
     </div>
-    <p style="text-align:center;margin-top:var(--s4);font-size:0.75rem;color:rgba(255,255,255,0.25);max-width:60ch;margin-left:auto;margin-right:auto">Product information on this page is intended for licensed prescribers and healthcare professionals only. These products are not available for general purchase. Prescriptions are required.</p>
+
+    <p class="prods-disc">Product information on this page is intended for licensed prescribers and healthcare professionals only. These products are not available for general purchase. Prescriptions are required.</p>
   </div>
 </section>
 
@@ -1174,12 +1354,12 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <div class="ncard-img">
           <img
             src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965785/aho_farms/raupunga/75978189862.jpg"
-            alt="Aho Farms Raupunga property — 2026 harvest season"
+            alt="Aho Farms property — 2026 harvest season"
             loading="lazy">
         </div>
         <div class="ncard-body">
           <div class="ncard-meta"><span class="ntag">Company Update</span><span class="ndate">June 2026</span></div>
-          <h4>Aho Farms completes 2026 harvest season at Raupunga</h4>
+          <h4>Aho Farms completes 2026 harvest season</h4>
           <p>Our outdoor sun-grown crop has been harvested and is undergoing independent testing at Hill Labs, Hamilton ahead of supply to licensed prescribers.</p>
         </div>
       </a>
@@ -1187,7 +1367,7 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <div class="ncard-img">
           <img
             src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965833/aho_farms/raupunga/IMG_3680.jpg"
-            alt="Aho Farms land development — Raupunga"
+            alt="Aho Farms land development — Hawke's Bay"
             loading="lazy">
         </div>
         <div class="ncard-body">
@@ -1243,7 +1423,7 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
         <div class="footer-badge">Māori Owned &amp; Operated</div>
         <p class="footer-tagline">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
         <div class="footer-partner">
-          <strong>Founding Partnership:</strong> Waaka whānau, Raupunga, Hawke's Bay · Toro Waaka, Ngāti Pāhauwera
+          <strong>Founding Partnership:</strong> Waaka whānau, Hawke's Bay · Toro Waaka, Ngāti Pāhauwera
         </div>
       </div>
       <div class="footer-col">
