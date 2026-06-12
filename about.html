@@ -3,510 +3,1475 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Aho Farms</title>
+  <title>About Aho Farms — Māori-Led Medicinal Cannabis Cultivator, Hawke's Bay NZ</title>
+  <meta name="description" content="Aho Farms is a licensed Māori-led medicinal cannabis cultivator in Hawke's Bay, New Zealand. Discover our founding story, kaupapa, milestones, team, and vision." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --night:       #1a2426;
-      --night-mid:   #253032;
-      --night-soft:  #2f3d3f;
-      --teal:        #73a8a5;
-      --teal-light:  #a2c4c3;
-      --teal-deep:   #4a7a78;
-      --soil:        #8b6f47;
-      --white:       #ffffff;
-      --offwhite:    #f4f6f6;
-      --card-border: rgba(115,168,165,0.15);
+      --night:      #1a2426;
+      --night-mid:  #253032;
+      --night-soft: #2f3d3f;
+      --teal:       #73a8a5;
+      --teal-light: #a2c4c3;
+      --teal-deep:  #4a7a78;
+      --soil:       #8b6f47;
+      --soil-light: #b89060;
+      --white:      #ffffff;
+      --offwhite:   #f4f6f6;
+      --border:     rgba(115,168,165,0.15);
+      --font-h: 'Cormorant Garamond', Georgia, serif;
+      --font-b: 'Inter', system-ui, sans-serif;
+      --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;
+      --s6:48px;--s7:64px;--s8:96px;--s9:128px;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family:var(--font-b); background:var(--white); color:var(--night); font-size:16px; line-height:1.65; overflow-x:hidden; }
+    img { display:block; max-width:100%; }
+    a { color:inherit; text-decoration:none; }
+    button { font-family:var(--font-b); }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--night);
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    /* ── NAV ─────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--night);
-      border-bottom: 1px solid rgba(115,168,165,0.12);
-      height: 64px;
-      display: flex; align-items: center;
+    /* ============================================================
+       NAV
+    ============================================================ */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      height:64px; display:flex; align-items:center;
+      background:rgba(26,36,38,0.96);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(115,168,165,0.08);
     }
     .nav-inner {
-      max-width: 1200px; width: 100%; margin: 0 auto;
-      padding: 0 32px;
-      display: flex; align-items: center; justify-content: space-between;
+      max-width:1260px; width:100%; margin:0 auto;
+      padding:0 32px; display:flex; align-items:center; justify-content:space-between;
     }
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
-      color: var(--white); text-decoration: none;
-    }
-    .logo span { color: var(--teal); }
-    .nav-links {
-      display: flex; align-items: center; gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.72); text-decoration: none;
-      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
-      text-transform: uppercase; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--teal-light); }
-    .nav-links a.active { color: var(--teal); }
-    .nav-cta {
-      background: var(--teal); color: var(--night) !important;
-      padding: 8px 20px; border-radius: 4px;
-      font-weight: 600 !important; transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--teal-light) !important; color: var(--night) !important; }
+    .nav-logo { font-family:var(--font-h); font-size:22px; font-weight:600; letter-spacing:0.08em; color:var(--white); }
+    .nav-logo span { color:var(--teal); }
+    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+    .nav-links a { color:rgba(255,255,255,0.65); font-size:11.5px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--teal-light); }
+    .nav-links a.active { color:var(--teal); }
+    .nav-cta { background:var(--teal)!important; color:var(--night)!important; padding:8px 20px; border-radius:3px; font-weight:600!important; transition:background 0.2s!important; }
+    .nav-cta:hover { background:var(--teal-light)!important; }
 
-    /* ── HERO ────────────────────────────────────────────── */
+    /* ============================================================
+       HERO — full-viewport cinematic
+    ============================================================ */
     .hero {
-      background: var(--night);
-      padding: 148px 32px 108px;
-      min-height: 72vh;
-      display: flex; align-items: center;
+      position:relative; min-height:100vh; display:flex; align-items:flex-end;
+      overflow:hidden;
     }
-    .hero-inner { max-width: 840px; margin: 0 auto; width: 100%; }
-    .caption {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 20px; display: block;
+    .hero-bg { position:absolute; inset:0; }
+    .hero-bg img {
+      width:100%; height:100%; object-fit:cover; object-position:center 40%;
+      transform:scale(1.06);
+      animation:hero-drift 14s ease-out forwards;
     }
-    .hero .caption { color: var(--teal); }
+    @keyframes hero-drift { to { transform:scale(1); } }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top,
+        rgba(26,36,38,0.97) 0%,
+        rgba(26,36,38,0.7) 30%,
+        rgba(26,36,38,0.3) 60%,
+        rgba(26,36,38,0.15) 100%);
+    }
+    .hero-content {
+      position:relative; z-index:2;
+      max-width:1260px; width:100%; margin:0 auto;
+      padding:0 32px 88px;
+    }
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:12px;
+      font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--teal); margin-bottom:28px;
+    }
+    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--teal); }
     .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 600; line-height: 1.08;
-      color: var(--white); text-wrap: balance;
-      margin-bottom: 24px;
+      font-family:var(--font-h);
+      font-size:clamp(56px,8vw,108px);
+      font-weight:300; line-height:0.95; letter-spacing:-0.02em;
+      color:var(--white); margin-bottom:8px; text-wrap:balance;
     }
-    .hero-sub {
-      font-size: 18px; color: rgba(255,255,255,0.68);
-      max-width: 640px; line-height: 1.7;
+    .hero h1 em { font-style:italic; color:var(--teal-light); }
+    .hero-translate {
+      font-family:var(--font-h); font-style:italic;
+      font-size:clamp(14px,1.4vw,19px);
+      color:rgba(255,255,255,0.35); letter-spacing:0.04em;
+      margin-bottom:36px;
     }
-
-    /* ── SECTIONS ────────────────────────────────────────── */
-    section { padding: 100px 32px; }
-    .section-inner { max-width: 1160px; margin: 0 auto; width: 100%; }
-
-    .sec-white  { background: var(--white); }
-    .sec-offwhite { background: var(--offwhite); }
-    .sec-dark   { background: var(--night); }
-
-    h2.section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(30px, 4vw, 48px);
-      font-weight: 600; line-height: 1.12;
-      text-wrap: balance;
-      margin-bottom: 36px;
+    .hero-mission {
+      font-size:clamp(15px,1.3vw,18px); color:rgba(255,255,255,0.68);
+      max-width:540px; line-height:1.8; margin-bottom:48px;
     }
-    .sec-dark h2.section-title  { color: var(--white); }
-    .sec-white h2.section-title { color: var(--night); }
-    .sec-offwhite h2.section-title { color: var(--night); }
-
-    .section-header { margin-bottom: 56px; }
-    .section-header .caption { margin-bottom: 10px; }
-    .sec-dark .caption { color: var(--teal); }
-    .sec-white .caption { color: var(--teal-deep); }
-    .sec-offwhite .caption { color: var(--teal-deep); }
-
-    /* ── FOUNDING STORY ──────────────────────────────────── */
-    .founding-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: start;
+    .hero-stats {
+      display:flex; align-items:center; gap:0; flex-wrap:wrap;
+      padding-top:40px;
+      border-top:1px solid rgba(115,168,165,0.15);
     }
-    .founding-img {
-      border-radius: 8px;
-      overflow: hidden;
-      position: sticky; top: 88px;
+    .hero-stat {
+      display:flex; flex-direction:column;
+      padding:0 40px 0 0; margin:0 40px 0 0;
+      border-right:1px solid rgba(115,168,165,0.15);
     }
-    .founding-img img {
-      width: 100%; height: 480px;
-      object-fit: cover; display: block;
+    .hero-stat:last-child { border-right:none; }
+    .hero-stat-n { font-family:var(--font-h); font-size:36px; font-weight:500; color:var(--white); line-height:1; }
+    .hero-stat-l { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.38); margin-top:6px; }
+    .hero-scroll-cue {
+      position:absolute; bottom:40px; right:36px; z-index:2;
+      display:flex; flex-direction:column; align-items:center; gap:10px;
     }
-    .founding-content .caption { margin-bottom: 10px; }
-    .founding-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 3vw, 40px);
-      font-weight: 600; line-height: 1.15;
-      text-wrap: balance;
-      color: var(--night); margin-bottom: 28px;
+    .hero-scroll-cue span {
+      writing-mode:vertical-rl; font-size:9px; letter-spacing:0.2em;
+      text-transform:uppercase; color:rgba(255,255,255,0.25);
     }
-    .founding-content p {
-      font-size: 16px; color: #3a4d50;
-      line-height: 1.78; margin-bottom: 22px;
+    .hero-scroll-cue::after {
+      content:''; width:1px; height:56px;
+      background:linear-gradient(to bottom, rgba(115,168,165,0.6), transparent);
+      animation:scroll-breath 2.2s ease-in-out infinite;
     }
-    .pull-quote {
-      border-left: 3px solid var(--teal);
-      padding: 6px 0 6px 24px;
-      margin: 36px 0 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-style: italic;
-      color: var(--teal-deep); line-height: 1.45;
-    }
-    .pull-quote cite {
-      display: block; margin-top: 10px;
-      font-style: normal; font-size: 13px;
-      color: #5a6f72; letter-spacing: 0.02em;
-      font-family: 'Inter', sans-serif;
+    @keyframes scroll-breath {
+      0%,100%{ opacity:0.25; transform:scaleY(0.7) translateY(-8px); }
+      60%{ opacity:1; transform:scaleY(1) translateY(0); }
     }
 
-    /* ── TIMELINE ────────────────────────────────────────── */
-    .timeline { position: relative; max-width: 780px; margin: 0 auto; }
-    .timeline-item {
-      display: flex; gap: 32px;
-      position: relative;
+    /* ============================================================
+       MISSION STATEMENT — single full-width centred quote
+    ============================================================ */
+    .mission {
+      background:var(--offwhite);
+      padding:var(--s9) var(--s5);
     }
-    .timeline-year-col {
-      width: 100px; flex-shrink: 0;
-      text-align: right; padding-top: 4px;
+    .mission-inner { max-width:820px; margin:0 auto; text-align:center; }
+    .mission-rule {
+      display:flex; align-items:center; gap:20px; justify-content:center;
+      margin-bottom:32px;
     }
-    .timeline-year {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 36px; font-weight: 600;
-      color: var(--teal-deep); line-height: 1;
+    .mission-rule::before,.mission-rule::after {
+      content:''; flex:1; max-width:60px; height:1px; background:var(--teal);
     }
-    .timeline-connector {
-      display: flex; flex-direction: column;
-      align-items: center; width: 28px; flex-shrink: 0;
+    .mission-rule span { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; font-weight:700; color:var(--teal); }
+    .mission-q {
+      font-family:var(--font-h);
+      font-size:clamp(24px,3.2vw,42px);
+      font-weight:400; font-style:italic;
+      color:var(--night); line-height:1.45; text-wrap:balance;
     }
-    .timeline-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--teal); flex-shrink: 0; margin-top: 8px;
-      border: 2px solid var(--offwhite);
-      box-shadow: 0 0 0 2px var(--teal);
-    }
-    .timeline-line {
-      width: 2px; background: rgba(115,168,165,0.25);
-      flex: 1; min-height: 20px;
-    }
-    .timeline-item:last-child .timeline-line { display: none; }
-    .timeline-content {
-      flex: 1; padding-bottom: 40px; padding-top: 4px;
-    }
-    .timeline-content p {
-      font-size: 15px; color: #3d5255;
-      line-height: 1.72; margin: 0;
-    }
-    .timeline-content strong { color: var(--night); }
-
-    /* ── FOUNDER BIO ─────────────────────────────────────── */
-    .founder-grid {
-      display: grid; grid-template-columns: 1fr 420px;
-      gap: 72px; align-items: start;
-    }
-    .founder-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(30px, 4vw, 50px);
-      font-weight: 600; line-height: 1.1;
-      color: var(--white); margin-bottom: 6px;
-    }
-    .founder-subtitle {
-      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--teal);
-      margin-bottom: 28px; display: block;
-    }
-    .founder-content p {
-      font-size: 16px; color: rgba(255,255,255,0.72);
-      line-height: 1.78; margin-bottom: 20px;
-    }
-    .founder-content p:last-child { margin-bottom: 0; }
-    .founder-focus {
-      border-left: 3px solid var(--teal);
-      padding: 4px 0 4px 20px;
-      color: var(--teal-light) !important;
-      font-style: italic;
-    }
-    .founder-img {
-      position: sticky; top: 88px;
-    }
-    .founder-img img {
-      width: 100%; height: 520px;
-      object-fit: cover; object-position: top;
-      border-radius: 8px; display: block;
-      filter: grayscale(20%);
-      border: 1px solid rgba(115,168,165,0.15);
+    .mission-q strong { font-style:normal; color:var(--teal-deep); font-weight:500; }
+    .mission-attr {
+      margin-top:32px; font-size:11px; letter-spacing:0.14em;
+      text-transform:uppercase; color:rgba(26,36,38,0.35);
     }
 
-    /* ── COMPANY DETAILS ─────────────────────────────────── */
-    .details-table {
-      width: 100%; max-width: 720px;
-      border-collapse: collapse;
+    /* ============================================================
+       LOGO STORY
+    ============================================================ */
+    .logo-story {
+      background:var(--night); padding:var(--s9) var(--s5);
+      position:relative; overflow:hidden;
     }
-    .details-table tr {
-      border-bottom: 1px solid rgba(115,168,165,0.15);
+    .logo-story::before {
+      content:''; position:absolute;
+      top:-30%; left:30%; width:700px; height:700px;
+      background:radial-gradient(circle, rgba(115,168,165,0.07) 0%, transparent 65%);
+      border-radius:50%; pointer-events:none;
     }
-    .details-table tr:last-child { border-bottom: none; }
-    .details-table td {
-      padding: 18px 0;
-      font-size: 15px;
-      vertical-align: top;
+    .logo-story-inner {
+      max-width:1260px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:var(--s9); align-items:center;
     }
-    .details-table td:first-child {
-      width: 220px;
-      font-weight: 600; color: #5a7275;
-      font-size: 13px; letter-spacing: 0.02em;
-      padding-right: 24px;
+    /* Left: visual display */
+    .logo-visual {
+      display:flex; flex-direction:column; align-items:center;
+      position:relative; padding:var(--s7) var(--s5);
     }
-    .details-table td:last-child { color: var(--night); }
-    .details-table a { color: var(--teal-deep); text-decoration: none; }
-    .details-table a:hover { text-decoration: underline; }
+    /* Placeholder note - remove when real logo is supplied */
+    .logo-placeholder-banner {
+      width:100%; background:rgba(115,168,165,0.08);
+      border:1px dashed rgba(115,168,165,0.3);
+      border-radius:4px; padding:16px 20px;
+      margin-bottom:32px;
+      font-size:12px; color:var(--teal); line-height:1.6;
+    }
+    .logo-placeholder-banner strong { display:block; margin-bottom:4px; color:var(--teal); }
+    .logo-rings {
+      position:relative; width:280px; height:280px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .logo-ring {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(115,168,165,0.2);
+      animation:ring-spin 50s linear infinite;
+    }
+    .logo-ring:nth-child(1) { width:280px; height:280px; }
+    .logo-ring:nth-child(2) { width:220px; height:220px; border-style:dashed; animation-direction:reverse; animation-duration:35s; }
+    .logo-ring:nth-child(3) { width:160px; height:160px; border-color:rgba(115,168,165,0.12); }
+    @keyframes ring-spin { to { transform:rotate(360deg); } }
+    .logo-core {
+      position:relative; z-index:2; text-align:center;
+    }
+    .logo-aho {
+      font-family:var(--font-h); font-size:80px; font-weight:300;
+      letter-spacing:0.12em; color:var(--white); line-height:1;
+    }
+    .logo-farms {
+      font-family:var(--font-h); font-size:22px; font-weight:300;
+      letter-spacing:0.45em; color:var(--teal); text-transform:uppercase;
+      margin-top:6px;
+    }
+    .logo-glow {
+      position:absolute; inset:-60px;
+      background:radial-gradient(circle, rgba(115,168,165,0.12) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .logo-tag {
+      margin-top:28px; font-size:10px; letter-spacing:0.2em;
+      text-transform:uppercase; color:rgba(115,168,165,0.35);
+    }
+    /* Right: text content */
+    .logo-text .eyebrow-teal {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; color:var(--teal); margin-bottom:20px; display:flex;
+      align-items:center; gap:12px;
+    }
+    .logo-text .eyebrow-teal::before { content:''; width:32px; height:1px; background:var(--teal); flex-shrink:0; }
+    .logo-h2 {
+      font-family:var(--font-h); font-size:clamp(36px,4vw,60px);
+      font-weight:300; line-height:1.1; color:var(--white); margin-bottom:24px;
+      text-wrap:balance;
+    }
+    .logo-body { font-size:16px; line-height:1.82; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+    .logo-meanings {
+      margin-top:44px; border-top:1px solid var(--border);
+    }
+    .logo-meaning {
+      display:grid; grid-template-columns:72px 1fr;
+      gap:20px; padding:24px 0;
+      border-bottom:1px solid rgba(115,168,165,0.08);
+      align-items:start;
+    }
+    .lm-word {
+      font-family:var(--font-h); font-size:30px; font-style:italic;
+      font-weight:400; color:var(--teal); line-height:1; padding-top:2px;
+    }
+    .lm-title { font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.82); margin-bottom:6px; }
+    .lm-body { font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: var(--night);
-      border-top: 1px solid rgba(115,168,165,0.1);
-      padding: 48px 32px;
+    /* ============================================================
+       OUR STORY — three alternating chapters
+    ============================================================ */
+    .our-story { background:var(--white); }
+    .story-intro {
+      max-width:1260px; margin:0 auto; padding:var(--s9) var(--s5) var(--s7);
     }
-    .footer-inner {
-      max-width: 1160px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 40px; flex-wrap: wrap;
+    .story-intro-inner {
+      max-width:680px;
     }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 600;
-      color: var(--white); letter-spacing: 0.06em;
+    .story-intro .eyebrow-dark {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; color:var(--teal-deep); display:flex;
+      align-items:center; gap:12px; margin-bottom:20px;
     }
-    .footer-logo span { color: var(--teal); }
-    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
-    .footer-links a {
-      font-size: 13px; color: rgba(255,255,255,0.5);
-      text-decoration: none; transition: color 0.2s;
+    .story-intro .eyebrow-dark::before { content:''; width:32px; height:1px; background:var(--teal-deep); flex-shrink:0; }
+    .story-intro h2 {
+      font-family:var(--font-h); font-size:clamp(36px,4.5vw,64px);
+      font-weight:300; line-height:1.08; color:var(--night); margin-bottom:24px;
+      text-wrap:balance;
     }
-    .footer-links a:hover { color: var(--teal-light); }
-    .footer-legal {
-      width: 100%; padding-top: 28px;
-      border-top: 1px solid rgba(115,168,165,0.08);
-      font-size: 12px; color: rgba(255,255,255,0.35);
-      line-height: 1.65;
+    .story-intro p { font-size:17px; color:#3a4d50; line-height:1.82; }
+    /* Chapter: alternating full-height grid */
+    .story-ch {
+      display:grid; grid-template-columns:1fr 1fr;
+      min-height:75vh;
+    }
+    .story-ch--flip .story-ch-img { order:2; }
+    .story-ch--flip .story-ch-txt { order:1; }
+    .story-ch-img { position:relative; overflow:hidden; }
+    .story-ch-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .story-ch:hover .story-ch-img img { transform:scale(1.04); }
+    .story-ch-num {
+      position:absolute; bottom:24px; right:24px;
+      font-family:var(--font-h); font-size:160px; font-weight:300;
+      color:rgba(255,255,255,0.07); line-height:1; letter-spacing:-0.04em;
+      pointer-events:none; user-select:none;
+    }
+    .story-ch-txt {
+      padding:80px 72px;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .story-ch--1 .story-ch-txt { background:var(--white); }
+    .story-ch--2 .story-ch-txt { background:var(--offwhite); }
+    .story-ch--3 .story-ch-txt { background:var(--night); }
+    .story-ch-kicker {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; margin-bottom:20px;
+    }
+    .story-ch--1 .story-ch-kicker,
+    .story-ch--2 .story-ch-kicker { color:var(--teal-deep); }
+    .story-ch--3 .story-ch-kicker { color:var(--teal); }
+    .story-ch-h3 {
+      font-family:var(--font-h);
+      font-size:clamp(30px,3.2vw,50px);
+      font-weight:500; line-height:1.1; margin-bottom:24px; text-wrap:balance;
+    }
+    .story-ch--1 .story-ch-h3,
+    .story-ch--2 .story-ch-h3 { color:var(--night); }
+    .story-ch--3 .story-ch-h3 { color:var(--white); }
+    .story-ch-p { font-size:16px; line-height:1.82; margin-bottom:18px; }
+    .story-ch--1 .story-ch-p,
+    .story-ch--2 .story-ch-p { color:#3a4d50; }
+    .story-ch--3 .story-ch-p { color:rgba(255,255,255,0.62); }
+    .story-ch-pullq {
+      margin-top:28px; padding:16px 24px;
+      border-left:3px solid var(--teal);
+      font-family:var(--font-h); font-size:21px; font-style:italic;
+      line-height:1.5;
+    }
+    .story-ch--1 .story-ch-pullq,
+    .story-ch--2 .story-ch-pullq { color:var(--teal-deep); }
+    .story-ch--3 .story-ch-pullq { color:var(--teal-light); }
+
+    /* ============================================================
+       PHOTO MOSAIC
+    ============================================================ */
+    .mosaic { background:var(--night); padding-top:4px; }
+    .mosaic-grid {
+      display:grid;
+      grid-template-columns:5fr 4fr 3fr;
+      grid-template-rows:300px 300px;
+      gap:4px;
+    }
+    .m-cell { overflow:hidden; position:relative; }
+    .m-cell img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    .m-cell:hover img { transform:scale(1.06); }
+    .m-cell:nth-child(1) { grid-row:span 2; }
+    .m-cell:nth-child(4) { grid-column:span 2; }
+    .mosaic-foot {
+      padding:20px 32px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:var(--night-mid);
+    }
+    .mosaic-foot-txt { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+    .mosaic-foot-link {
+      font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+      font-weight:600; color:var(--teal); display:flex; align-items:center;
+      gap:8px; transition:gap 0.2s;
+    }
+    .mosaic-foot-link:hover { gap:14px; }
+    .mosaic-foot-link svg { width:14px; height:14px; }
+
+    /* ============================================================
+       TIMELINE
+    ============================================================ */
+    .timeline-sec {
+      background:var(--offwhite); padding:var(--s9) var(--s5);
+      position:relative; overflow:hidden;
+    }
+    .timeline-inner { max-width:1260px; margin:0 auto; }
+    .tl-hdr { text-align:center; margin-bottom:var(--s8); }
+    .tl-hdr .eyebrow {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; color:var(--teal-deep); display:block; margin-bottom:16px;
+    }
+    .tl-hdr h2 {
+      font-family:var(--font-h); font-size:clamp(40px,6vw,80px);
+      font-weight:300; line-height:1.05; color:var(--night);
+    }
+    .tl-hdr h2 em { font-style:italic; color:var(--teal-deep); }
+    /* Spine */
+    .tl { position:relative; max-width:1000px; margin:0 auto; }
+    .tl::before {
+      content:''; position:absolute; left:50%;
+      top:0; bottom:0; width:1px;
+      background:linear-gradient(to bottom,
+        transparent 0%, rgba(115,168,165,0.25) 4%,
+        rgba(115,168,165,0.25) 96%, transparent 100%);
+      transform:translateX(-50%);
+    }
+    .tl-row {
+      display:grid; grid-template-columns:1fr 80px 1fr;
+      margin-bottom:0;
+    }
+    .tl-side { padding:0 52px 64px; }
+    .tl-side--l { text-align:right; }
+    .tl-side--r { text-align:left; }
+    .tl-spine {
+      display:flex; flex-direction:column; align-items:center; padding-top:8px;
+    }
+    .tl-dot {
+      width:18px; height:18px; border-radius:50%;
+      background:var(--offwhite);
+      border:2px solid var(--teal);
+      box-shadow:0 0 0 5px rgba(115,168,165,0.12);
+      flex-shrink:0; z-index:1; position:relative;
+    }
+    /* Odd rows: content on LEFT, empty right */
+    .tl-row:nth-child(odd) .tl-side--r { visibility:hidden; }
+    /* Even rows: content on RIGHT, empty left */
+    .tl-row:nth-child(even) .tl-side--l { visibility:hidden; }
+    .tl-year {
+      font-family:var(--font-h);
+      font-size:clamp(52px,6vw,80px);
+      font-weight:300; line-height:1;
+      color:var(--teal-deep); opacity:0.85;
+      margin-bottom:16px;
+    }
+    .tl-tag { font-size:10px; letter-spacing:0.16em; text-transform:uppercase; font-weight:700; color:var(--teal-deep); margin-bottom:10px; }
+    .tl-title { font-family:var(--font-h); font-size:clamp(20px,2.2vw,30px); font-weight:500; color:var(--night); margin-bottom:10px; line-height:1.2; }
+    .tl-body { font-size:14px; line-height:1.78; color:#4a5c5a; }
+    .tl-badge {
+      display:inline-block; margin-top:12px;
+      background:rgba(115,168,165,0.12); border:1px solid rgba(115,168,165,0.25);
+      border-radius:2px; padding:4px 10px;
+      font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+      font-weight:600; color:var(--teal-deep);
+    }
+    /* Future rows */
+    .tl-row--future .tl-year { opacity:0.3; }
+    .tl-row--future .tl-dot { border-style:dashed; border-color:rgba(115,168,165,0.4); box-shadow:none; }
+    .tl-row--future .tl-tag { color:rgba(115,168,165,0.5); }
+    .tl-row--future .tl-title { color:rgba(26,36,38,0.4); }
+    .tl-row--future .tl-body { color:#9ab5b3; }
+    .tl-row--future .tl-badge { opacity:0.5; }
+
+    /* ============================================================
+       IMPACT
+    ============================================================ */
+    .impact {
+      background:var(--night); padding:var(--s9) var(--s5);
+      position:relative; overflow:hidden;
+    }
+    .impact-bg-img {
+      position:absolute; inset:0; pointer-events:none;
+    }
+    .impact-bg-img img { width:100%; height:100%; object-fit:cover; opacity:0.06; filter:grayscale(100%) contrast(1.2); }
+    .impact-inner { max-width:1260px; margin:0 auto; position:relative; z-index:1; }
+    .impact-hdr { margin-bottom:var(--s7); max-width:640px; }
+    .impact-hdr .eyebrow {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; color:var(--teal); display:block; margin-bottom:16px;
+    }
+    .impact-hdr h2 {
+      font-family:var(--font-h); font-size:clamp(36px,5.5vw,72px);
+      font-weight:300; line-height:1.06; color:var(--white);
+    }
+    .impact-hdr h2 em { font-style:italic; color:var(--teal-light); }
+    .impact-hdr p {
+      margin-top:20px; font-size:16px; color:rgba(255,255,255,0.48); line-height:1.78;
+    }
+    .impact-cells {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; background:rgba(115,168,165,0.1);
+    }
+    .impact-cell {
+      background:var(--night); padding:48px 40px;
+      position:relative; transition:background 0.3s;
+    }
+    .impact-cell:hover { background:var(--night-mid); }
+    .impact-icon {
+      width:36px; height:36px; color:var(--teal); margin-bottom:20px;
+    }
+    .impact-icon svg { width:100%; height:100%; }
+    .impact-num {
+      font-family:var(--font-h);
+      font-size:clamp(44px,5vw,72px);
+      font-weight:300; line-height:1; color:var(--white); margin-bottom:8px;
+    }
+    .impact-num sup { font-size:0.38em; vertical-align:super; color:var(--teal); }
+    .impact-label {
+      font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.3); font-weight:600; margin-bottom:12px;
+    }
+    .impact-desc { font-size:13px; color:rgba(255,255,255,0.4); line-height:1.65; }
+    .impact-note {
+      margin-top:var(--s6); padding-top:var(--s5);
+      border-top:1px solid rgba(115,168,165,0.1);
+      font-size:11px; color:rgba(255,255,255,0.2); line-height:1.6; text-align:center;
     }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .founding-grid { grid-template-columns: 1fr; gap: 40px; }
-      .founding-img { position: static; }
-      .founder-grid { grid-template-columns: 1fr; gap: 40px; }
-      .founder-img { position: static; order: -1; }
-      .founder-img img { height: 320px; }
+    /* ============================================================
+       LEADERSHIP
+    ============================================================ */
+    .leadership { background:var(--white); padding:var(--s9) var(--s5); }
+    .leadership-inner { max-width:1260px; margin:0 auto; }
+    .leadership-hdr { margin-bottom:var(--s8); }
+    .leadership-hdr .eyebrow {
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; color:var(--teal-deep); display:flex; align-items:center;
+      gap:12px; margin-bottom:16px;
     }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .timeline-year-col { width: 64px; }
-      .timeline-year { font-size: 26px; }
+    .leadership-hdr .eyebrow::before { content:''; width:32px; height:1px; background:var(--teal-deep); }
+    .leadership-hdr h2 {
+      font-family:var(--font-h); font-size:clamp(36px,5vw,68px);
+      font-weight:300; line-height:1.08; color:var(--night); text-wrap:balance;
+    }
+    /* Founder spotlight */
+    .founder-spot {
+      display:grid; grid-template-columns:420px 1fr;
+      gap:var(--s8); align-items:start;
+      padding-bottom:var(--s8); margin-bottom:var(--s8);
+      border-bottom:1px solid rgba(115,168,165,0.12);
+    }
+    .founder-img-wrap {
+      position:relative; aspect-ratio:3/4; overflow:hidden;
+      background:var(--offwhite);
+    }
+    .founder-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:top; }
+    /* Photo placeholder — remove when real photo supplied */
+    .photo-req {
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:12px;
+      background:var(--offwhite);
+    }
+    .photo-req-icon {
+      width:56px; height:56px; border-radius:50%;
+      background:rgba(115,168,165,0.1);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .photo-req-icon svg { width:28px; height:28px; color:var(--teal); }
+    .photo-req p { font-size:12px; color:var(--teal-deep); text-align:center; max-width:160px; line-height:1.5; }
+    .founder-text { padding-top:8px; }
+    .founder-text .kicker { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; color:var(--teal-deep); margin-bottom:16px; display:block; }
+    .founder-name { font-family:var(--font-h); font-size:clamp(40px,5vw,68px); font-weight:300; line-height:1.05; color:var(--night); margin-bottom:4px; }
+    .founder-role { font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-deep); font-weight:600; margin-bottom:36px; }
+    .founder-bio { font-size:16px; line-height:1.82; color:#3a4d50; margin-bottom:18px; }
+    .founder-creds {
+      margin-top:36px; border-top:1px solid rgba(115,168,165,0.12);
+    }
+    .founder-cred {
+      display:grid; grid-template-columns:160px 1fr;
+      padding:14px 0; border-bottom:1px solid rgba(115,168,165,0.08);
+    }
+    .fcred-k { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:#8a9ea0; }
+    .fcred-v { font-size:14px; color:var(--night); }
+    /* Team cards */
+    .team-subhdr {
+      font-family:var(--font-h); font-size:28px; font-weight:400;
+      color:var(--night); margin-bottom:32px;
+    }
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s4); margin-bottom:var(--s8); }
+    .team-card { background:var(--offwhite); }
+    .team-card-img { aspect-ratio:3/4; overflow:hidden; background:#dce6e5; position:relative; }
+    .team-card-img img { width:100%; height:100%; object-fit:cover; object-position:top; }
+    .team-card-body { padding:24px; }
+    .team-card-name { font-family:var(--font-h); font-size:26px; font-weight:500; color:var(--night); margin-bottom:2px; line-height:1.2; }
+    .team-card-role { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-deep); font-weight:600; margin-bottom:14px; }
+    .team-card-bio { font-size:13px; line-height:1.72; color:#5a7275; }
+    /* Board */
+    .board-hdr { margin-bottom:28px; }
+    .board-hdr h3 { font-family:var(--font-h); font-size:32px; font-weight:400; color:var(--night); margin-bottom:8px; }
+    .board-hdr p { font-size:14px; color:#5a7275; }
+    .board-table { width:100%; border-collapse:collapse; }
+    .board-table th { text-align:left; padding:0 0 14px; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a9ea0; font-weight:600; border-bottom:1px solid rgba(115,168,165,0.15); }
+    .board-table th:last-child { width:50%; }
+    .board-table td { padding:18px 0; border-bottom:1px solid rgba(115,168,165,0.08); font-size:14px; color:var(--night); vertical-align:top; }
+    .board-table td:first-child { font-weight:600; width:220px; padding-right:24px; }
+    .board-table td:nth-child(2) { color:var(--teal-deep); padding-right:24px; }
+    .board-table td:last-child { color:#5a7275; }
+
+    /* ============================================================
+       LOOKING FORWARD
+    ============================================================ */
+    .forward {
+      background:var(--night); padding:var(--s9) var(--s5);
+      position:relative; overflow:hidden;
+    }
+    .forward-bg { position:absolute; inset:0; pointer-events:none; }
+    .forward-bg img { width:100%; height:100%; object-fit:cover; opacity:0.1; filter:grayscale(80%); }
+    .forward-bg::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(160deg, rgba(26,36,38,0.95) 0%, rgba(26,36,38,0.65) 100%);
+    }
+    .forward-inner { max-width:1260px; margin:0 auto; position:relative; z-index:1; }
+    .forward-hdr { margin-bottom:var(--s8); }
+    .forward-hdr .eyebrow { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; font-weight:700; color:var(--teal); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .forward-hdr .eyebrow::before { content:''; width:32px; height:1px; background:var(--teal); }
+    .forward-hdr h2 { font-family:var(--font-h); font-size:clamp(44px,7vw,96px); font-weight:300; line-height:1; color:var(--white); }
+    .forward-hdr h2 em { font-style:italic; color:var(--teal-light); }
+    .forward-hdr p { margin-top:24px; font-size:17px; color:rgba(255,255,255,0.5); line-height:1.78; max-width:540px; }
+    .forward-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s4); margin-bottom:var(--s8); }
+    .fwd-pillar {
+      padding:40px; border:1px solid rgba(115,168,165,0.12);
+      position:relative; overflow:hidden;
+      transition:border-color 0.3s, background 0.3s;
+    }
+    .fwd-pillar:hover { border-color:rgba(115,168,165,0.3); background:rgba(115,168,165,0.03); }
+    .fwd-pillar-n {
+      font-family:var(--font-h); font-size:80px; font-weight:300;
+      color:rgba(115,168,165,0.08); line-height:1; margin-bottom:20px;
+    }
+    .fwd-pillar-icon { width:32px; height:32px; color:var(--teal); margin-bottom:18px; }
+    .fwd-pillar-icon svg { width:100%; height:100%; }
+    .fwd-pillar-h { font-family:var(--font-h); font-size:26px; font-weight:500; color:var(--white); margin-bottom:12px; line-height:1.2; }
+    .fwd-pillar-p { font-size:14px; color:rgba(255,255,255,0.45); line-height:1.72; }
+    .forward-endquote {
+      text-align:center; padding:var(--s8) 0 0;
+      border-top:1px solid rgba(115,168,165,0.1);
+    }
+    .forward-endquote p {
+      font-family:var(--font-h); font-size:clamp(28px,4vw,52px);
+      font-style:italic; color:rgba(255,255,255,0.8);
+      margin-bottom:36px; text-wrap:balance; line-height:1.3;
+    }
+    .fwd-btns { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; }
+    .btn-p {
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--teal); color:var(--night);
+      padding:14px 28px; border-radius:3px;
+      font-size:11.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+      transition:background 0.2s, transform 0.15s;
+    }
+    .btn-p:hover { background:var(--teal-light); transform:translateY(-1px); }
+    .btn-s {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.68);
+      padding:13px 28px; border-radius:3px;
+      font-size:11.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+      transition:border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-s:hover { border-color:var(--teal); color:var(--teal-light); transform:translateY(-1px); }
+
+    /* ============================================================
+       COMPANY DETAILS
+    ============================================================ */
+    .co-details { background:var(--offwhite); padding:var(--s8) var(--s5); }
+    .co-details-inner { max-width:1260px; margin:0 auto; display:grid; grid-template-columns:380px 1fr; gap:var(--s8); align-items:start; }
+    .co-details-left h2 { font-family:var(--font-h); font-size:clamp(28px,3.2vw,44px); font-weight:400; color:var(--night); margin-bottom:20px; }
+    .co-details-left p { font-size:15px; color:#3a4d50; line-height:1.82; }
+    .co-table { width:100%; border-collapse:collapse; }
+    .co-table tr { border-bottom:1px solid rgba(115,168,165,0.12); }
+    .co-table tr:last-child { border-bottom:none; }
+    .co-table td { padding:16px 0; font-size:14px; vertical-align:top; }
+    .co-table td:first-child { width:180px; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; font-weight:600; color:#7a9295; padding-right:24px; }
+    .co-table td:last-child { color:var(--night); }
+    .co-table a { color:var(--teal-deep); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer { background:var(--night); border-top:1px solid rgba(115,168,165,0.08); padding:var(--s7) var(--s5); }
+    .footer-top { max-width:1260px; margin:0 auto; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:var(--s5); padding-bottom:var(--s6); border-bottom:1px solid rgba(115,168,165,0.08); }
+    .footer-brand-nm { font-family:var(--font-h); font-size:22px; font-weight:600; letter-spacing:0.06em; color:var(--white); margin-bottom:12px; }
+    .footer-brand-nm span { color:var(--teal); }
+    .footer-tagline { font-size:13px; color:rgba(255,255,255,0.32); line-height:1.65; max-width:220px; }
+    .f-col-h { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:rgba(255,255,255,0.28); margin-bottom:16px; }
+    .f-col-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .f-col-links a { font-size:13px; color:rgba(255,255,255,0.48); transition:color 0.2s; }
+    .f-col-links a:hover { color:var(--teal-light); }
+    .footer-btm { max-width:1260px; margin:0 auto; padding-top:var(--s4); display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; }
+    .f-copy { font-size:12px; color:rgba(255,255,255,0.22); }
+    .f-legal { font-size:11px; color:rgba(255,255,255,0.14); max-width:480px; text-align:right; line-height:1.55; }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    .js-up { opacity:0; transform:translateY(28px); transition:opacity 0.75s ease, transform 0.75s ease; }
+    .js-up.visible { opacity:1; transform:translateY(0); }
+    .js-up-d1 { transition-delay:0.1s; }
+    .js-up-d2 { transition-delay:0.2s; }
+    .js-up-d3 { transition-delay:0.3s; }
+    .js-up-d4 { transition-delay:0.4s; }
+    .js-up-d5 { transition-delay:0.5s; }
+    @media (prefers-reduced-motion:reduce) {
+      .js-up { opacity:1; transform:none; transition:none; }
+      .hero-bg img { animation:none; transform:none; }
+      @keyframes hero-drift { to {} }
+      .logo-ring { animation:none; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width:1100px) {
+      .logo-story-inner { grid-template-columns:1fr; gap:var(--s7); }
+      .logo-visual { order:-1; }
+      .story-ch { grid-template-columns:1fr; min-height:auto; }
+      .story-ch--flip .story-ch-img,.story-ch--flip .story-ch-txt { order:unset; }
+      .story-ch-img { min-height:60vw; }
+      .story-ch-txt { padding:56px 40px; }
+      .founder-spot { grid-template-columns:1fr; gap:var(--s6); }
+      .founder-img-wrap { aspect-ratio:16/9; max-height:400px; }
+      .forward-pillars { grid-template-columns:1fr 1fr; }
+      .team-grid { grid-template-columns:1fr 1fr; }
+      .co-details-inner { grid-template-columns:1fr; gap:var(--s6); }
+    }
+    @media (max-width:768px) {
+      :root { --s8:72px; --s9:96px; }
+      .nav-links { display:none; }
+      .hero h1 { font-size:clamp(48px,12vw,72px); }
+      .hero-stats { flex-direction:column; gap:20px; }
+      .hero-stat { border-right:none; padding:0; margin:0; }
+      .mosaic-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+      .m-cell { grid-column:span 1!important; grid-row:span 1!important; min-height:200px; }
+      .tl::before { left:24px; }
+      .tl-row { grid-template-columns:48px 1fr; }
+      .tl-side--l { display:none; }
+      .tl-row:nth-child(even) .tl-side--r { visibility:visible!important; }
+      .tl-side--r { padding:0 16px 48px 24px; text-align:left; }
+      .impact-cells { grid-template-columns:1fr 1fr; }
+      .forward-pillars { grid-template-columns:1fr; }
+      .team-grid { grid-template-columns:1fr; }
+      .footer-top { grid-template-columns:1fr 1fr; }
+      .hero-scroll-cue { display:none; }
+    }
+    @media (max-width:480px) {
+      .impact-cells { grid-template-columns:1fr; }
+      .footer-top { grid-template-columns:1fr; }
+      .story-ch-txt { padding:40px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">AHO <span>FARMS</span></a>
-        <ul class="nav-links">
-      <li><a href="about.html">About</a></li>
-      <li><a href="index.html#cultivation">Cultivation</a></li>
-      <li><a href="index.html#products">Products</a></li>
-      <li><a href="index.html#kaupapa">Our Kaupapa</a></li>
-      <li><a href="index.html#news">News</a></li>
-      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    <a href="index.html" class="nav-logo">AHO <span>FARMS</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="cultivation.html">Cultivation</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="kaupapa.html">Our Kaupapa</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ============================================================
+     HERO
+============================================================ -->
 <section class="hero">
-  <div class="hero-inner">
-    <span class="caption">OUR STORY</span>
-    <h1>Cultivating ancestral wisdom</h1>
-    <p class="hero-sub">A Māori-led enterprise rooted in Hawke's Bay land, guided by tikanga, and growing for the future of our whānau and our patients.</p>
+  <div class="hero-bg">
+    <img
+      src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920/v1780965785/aho_farms/raupunga/75978189862.jpg"
+      alt="Aho Farms — Hawke's Bay, Aotearoa New Zealand"
+      fetchpriority="high"
+    />
   </div>
-</section>
-
-<!-- FOUNDING STORY -->
-<section class="sec-white">
-  <div class="section-inner">
-    <div class="founding-grid">
-      <div class="founding-img">
-        <img
-          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80"
-          alt="Golden pastoral landscape — Hawke's Bay farmland"
-          loading="lazy"
-        />
+  <div class="hero-content">
+    <div class="hero-eyebrow">MŌ MĀTOU · OUR STORY</div>
+    <h1>He aho.<br><em>He hononga.</em></h1>
+    <p class="hero-translate">The thread. The connection. Our purpose.</p>
+    <p class="hero-mission">
+      A licensed Māori-led medicinal cannabis cultivator. Founded on ancestral Hawke's Bay land. Built from 20 years of cultivation expertise. Growing for the future of our whānau, our communities, and the patients who depend on quality medicine.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-n">2022</span>
+        <span class="hero-stat-l">Cultivation Licence Granted</span>
       </div>
-      <div class="founding-content">
-        <span class="caption">THE BEGINNING</span>
-        <h2>From California expertise to Hawke's Bay whenua</h2>
-        <p>Aho Farms was founded by Longo Reo Te Kooro, a Māori entrepreneur who spent years in California's medicinal and recreational cannabis industry — rising from the floor to managing 23+ staff and overseeing full harvest, manicuring, and packaging operations. He returned to Aotearoa with a clear conviction: that the knowledge and systems he had developed in the world's most mature cannabis market could be applied on ancestral land, for his own people.</p>
-        <p>In partnership with the Waaka whānau, Aho Farms was established on Māori freehold land in Raupunga, Hawke's Bay. The partnership was not simply commercial — it was an expression of what Māori land-based enterprise should look like: productive, compliant, and deeply connected to the obligations of kaitiakitanga.</p>
-        <p>Today, Aho Farms holds a cultivation licence under New Zealand's Medicinal Cannabis Scheme, grows two medicinal flower product lines, and is building the supply infrastructure to reach prescribers, pharmacies, and export markets. The foundation is the whenua. Everything else is built on top of it.</p>
-        <blockquote class="pull-quote">
-          "Tiakina te whenua, tiakina te iwi."
-          <cite>— Founding kaupapa of Aho Farms</cite>
-        </blockquote>
+      <div class="hero-stat">
+        <span class="hero-stat-n">2</span>
+        <span class="hero-stat-l">Product Lines</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">NZ + AU</span>
+        <span class="hero-stat-l">Markets Active</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">Māori</span>
+        <span class="hero-stat-l">Owned &amp; Operated</span>
       </div>
     </div>
   </div>
+  <div class="hero-scroll-cue"><span>Scroll</span></div>
 </section>
 
-<!-- TIMELINE -->
-<section class="sec-offwhite">
-  <div class="section-inner">
-    <div class="section-header" style="text-align:center;">
-      <span class="caption">MILESTONES</span>
-      <h2 class="section-title">Our journey</h2>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2020</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>Company founded.</strong> Partnership formed with Waaka whānau on Māori freehold land, Raupunga, Hawke's Bay. The whenua provides the commercial and cultural foundation of the enterprise.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2021</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>Licence applications lodged.</strong> Site preparation and compliance infrastructure development begins. Ministry of Health engagement commenced.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2022</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>Cultivation licence granted</strong> under the NZ Medicinal Cannabis Scheme. A material milestone — one of 42 granted in New Zealand.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2023</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>First cultivation season.</strong> Michael Maclean joins as Cultivation Director, bringing 15+ years of California cannabis cultivation expertise to the Raupunga operation.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2024</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>First harvest completed.</strong> Laboratory testing partnership established with Hill Labs, Hamilton (IANZ accredited). Board of Directors formalised with independent chair Stephen McPhail.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2025</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>First supply to NZ prescribers.</strong> RĀ and SOURCE product lines launched. Prescriber portal established. Product available through pharmacy channel on prescription.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year-col"><div class="timeline-year">2026</div></div>
-        <div class="timeline-connector"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
-        <div class="timeline-content">
-          <p><strong>Export licence active.</strong> Second successful harvest season. Distribution partnerships under development for Australian and international markets.</p>
-        </div>
-      </div>
-    </div>
+<!-- ============================================================
+     MISSION STATEMENT
+============================================================ -->
+<section class="mission">
+  <div class="mission-inner">
+    <div class="mission-rule js-up"><span>Our Purpose</span></div>
+    <p class="mission-q js-up js-up-d1">
+      "We exist to build a <strong>sustainable Māori enterprise</strong> that creates lasting value — for our whānau, our community, and the patients who depend on quality medicinal cannabis."
+    </p>
+    <p class="mission-attr js-up js-up-d2">Tiakina te whenua, tiakina te iwi — Founding Kaupapa, Aho Farms</p>
   </div>
 </section>
 
-<!-- FOUNDER BIO -->
-<section class="sec-dark">
-  <div class="section-inner">
-    <div class="founder-grid">
-      <div class="founder-content">
-        <h2>Longo Reo Te Kooro</h2>
-        <span class="founder-subtitle">Managing Director &amp; Founder</span>
-        <p>Longo Reo Te Kooro is a Māori entrepreneur from Hawke's Bay with over a decade of experience in the cannabis industry, including several years in California's regulated recreational and medicinal market. He rose from entry-level cultivation to managing teams of 23+, overseeing harvest, manicuring, and packaging at scale.</p>
-        <p>Returning to Aotearoa, he recognised that the knowledge gap between California and New Zealand represented an opportunity — and that the land, the people, and the regulatory moment were aligned. Aho Farms is the result.</p>
-        <p class="founder-focus">His focus: bringing international cultivation expertise to bear on Māori land, under Māori governance, for Māori futures.</p>
+<!-- ============================================================
+     LOGO STORY
+============================================================ -->
+<section class="logo-story" id="logo">
+  <div class="logo-story-inner">
+    <!-- Visual display -->
+    <div class="logo-visual js-up">
+      <!-- PLACEHOLDER: Replace this text treatment with the actual Aho Farms logo SVG/PNG -->
+      <div class="logo-placeholder-banner">
+        <strong>Logo Asset Required</strong>
+        Please provide the Aho Farms logo SVG or PNG file, and the cultural story behind its specific design elements, to complete this section. The structure and layout are ready to receive it.
       </div>
-      <div class="founder-img">
-        <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
-          alt="Longo Reo Te Kooro — Managing Director, Aho Farms"
-          loading="lazy"
-        />
+      <div class="logo-rings">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <div class="logo-glow"></div>
+        <div class="logo-core">
+          <div class="logo-aho">AHO</div>
+          <div class="logo-farms">FARMS</div>
+        </div>
+      </div>
+      <p class="logo-tag">Hawke's Bay · Aotearoa New Zealand · Est. 2020</p>
+    </div>
+    <!-- Text content -->
+    <div class="logo-text js-up js-up-d2">
+      <div class="eyebrow-teal">INGOA · THE NAME</div>
+      <h2 class="logo-h2">More than a name.<br>A philosophy.</h2>
+      <p class="logo-body">
+        Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately — not as branding, but as belief.
+      </p>
+      <p class="logo-body">
+        Every decision we make, every relationship we build, and every product we grow is an expression of that thread. The aho between people and whenua. Between past and future. Between healing knowledge and those who need it.
+      </p>
+
+      <!-- PLACEHOLDER: Update these three meaning blocks once logo story details are confirmed -->
+      <div class="logo-meanings">
+        <div class="logo-meaning js-up">
+          <div class="lm-word">Aho</div>
+          <div class="lm-body">
+            <div class="lm-title">Thread / Connection</div>
+            <p class="lm-body">The horizontal threads of woven flax — the aho holds the structure together. Without the aho, there is no weaving. Without connection, there is no company.</p>
+          </div>
+        </div>
+        <div class="logo-meaning js-up js-up-d1">
+          <div class="lm-word">Whenua</div>
+          <div class="lm-body">
+            <div class="lm-title">Land / Placenta</div>
+            <p class="lm-body">Our operation is rooted in Hawke's Bay — ancestral land that gives identity, purpose, and sustenance. The whenua is not a resource. It is a responsibility.</p>
+          </div>
+        </div>
+        <div class="logo-meaning js-up js-up-d2">
+          <div class="lm-word">Māra</div>
+          <div class="lm-body">
+            <div class="lm-title">Garden / Cultivation</div>
+            <p class="lm-body">The māra is the place where knowledge meets earth — where the discipline of cultivation becomes an act of care. Aho Farms is a māra with purpose and precision.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPANY DETAILS -->
-<section class="sec-white">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="caption">COMPANY INFORMATION</span>
-      <h2 class="section-title">Company details</h2>
+<!-- ============================================================
+     OUR STORY — Three Chapters
+============================================================ -->
+<section class="our-story" id="story">
+  <div class="story-intro">
+    <div class="story-intro-inner">
+      <div class="eyebrow-dark js-up">HE KŌRERO · OUR STORY</div>
+      <h2 class="js-up js-up-d1">From the soil up.<br>Built to last.</h2>
+      <p class="js-up js-up-d2">
+        Aho Farms did not begin with a spreadsheet. It began with a conviction — that Māori land should produce Māori prosperity, and that the knowledge to make that happen already existed. It just needed to find its way home.
+      </p>
     </div>
-    <table class="details-table">
+  </div>
+
+  <!-- Chapter 1: The Return -->
+  <div class="story-ch story-ch--1">
+    <div class="story-ch-img">
+      <img
+        src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965845/aho_farms/raupunga/IMG_4143.jpg"
+        alt="Aho Farms cultivation operations — Hawke's Bay"
+        loading="lazy"
+      />
+      <div class="story-ch-num">1</div>
+    </div>
+    <div class="story-ch-txt">
+      <div class="story-ch-kicker">Chapter One</div>
+      <h3 class="story-ch-h3">The return.<br>From California to Hawke's Bay.</h3>
+      <p class="story-ch-p">
+        The founder of Aho Farms spent years inside California's regulated cannabis industry — rising from cultivation floors to overseeing teams of 23+, managing full harvest cycles, and building an understanding of what genuine quality control looks like at scale. It was not a detour. It was preparation.
+      </p>
+      <p class="story-ch-p">
+        Returning to Aotearoa, the conviction was clear: the knowledge gap between California and New Zealand represented an opportunity. Not an opportunity to import American culture, but to apply hard-earned expertise to Māori land, under Māori governance, for Māori futures. The expertise came from California. The purpose came from home.
+      </p>
+      <blockquote class="story-ch-pullq">
+        "The knowledge came from California. The purpose came from home."
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- Chapter 2: The Whenua -->
+  <div class="story-ch story-ch--2 story-ch--flip">
+    <div class="story-ch-img">
+      <img
+        src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965849/aho_farms/raupunga/IMG_4195.jpg"
+        alt="Aho Farms — Hawke's Bay whenua"
+        loading="lazy"
+      />
+      <div class="story-ch-num">2</div>
+    </div>
+    <div class="story-ch-txt">
+      <div class="story-ch-kicker">Chapter Two</div>
+      <h3 class="story-ch-h3">The whenua.<br>Land as the foundation.</h3>
+      <p class="story-ch-p">
+        Aho Farms was established on Māori freehold land in Hawke's Bay — a partnership built not simply on commercial terms, but on the obligations of kaitiakitanga. The land was not chosen for convenience. It was chosen because it was ours to care for, and because productive use of that land in Māori hands represents something far greater than any single harvest.
+      </p>
+      <p class="story-ch-p">
+        The partnership created employment pathways for local whānau, activated land that had not been in productive use, and demonstrated what Māori land-based enterprise can look like when it is done properly — compliant, commercially serious, and deeply connected to the people it belongs to.
+      </p>
+      <blockquote class="story-ch-pullq">
+        "Productive use of Māori land, in Māori hands — that is what this has always been about."
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- Chapter 3: The Licence -->
+  <div class="story-ch story-ch--3">
+    <div class="story-ch-img">
+      <img
+        src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965851/aho_farms/tangoio/D1F59027.jpg"
+        alt="Aho Farms licensed medicinal cannabis facility"
+        loading="lazy"
+      />
+      <div class="story-ch-num">3</div>
+    </div>
+    <div class="story-ch-txt">
+      <div class="story-ch-kicker">Chapter Three</div>
+      <h3 class="story-ch-h3">The licence.<br>Compliance as credibility.</h3>
+      <p class="story-ch-p">
+        New Zealand's Medicinal Cannabis Scheme has among the strictest quality standards in the world — a regulatory environment designed to protect patients and separate genuine operators from those who simply want proximity to a growing market. Earning a cultivation licence is not a formality. It is proof of intent.
+      </p>
+      <p class="story-ch-p">
+        Aho Farms is one of a limited number of licensed medicinal cannabis cultivators in New Zealand. Every batch is independently laboratory tested. Every product meets or exceeds the scheme's stringent microbial and cannabinoid requirements. That compliance is not a constraint we work around. It is the standard we hold ourselves to — and the guarantee we make to every prescriber, pharmacist, and patient in the supply chain.
+      </p>
+      <blockquote class="story-ch-pullq">
+        "Compliance is not a constraint. It is the commitment we make to every patient in our supply chain."
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PHOTO MOSAIC
+============================================================ -->
+<div class="mosaic">
+  <div class="mosaic-grid">
+    <div class="m-cell">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_900/v1780965833/aho_farms/raupunga/IMG_3680.jpg" alt="Aho Farms — Hawke's Bay growing site" loading="lazy" />
+    </div>
+    <div class="m-cell">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_700/v1780965918/aho_farms/indoor/IMG_5083.jpg" alt="Aho Farms indoor cultivation" loading="lazy" />
+    </div>
+    <div class="m-cell">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_600/v1780965864/aho_farms/tangoio/IMG_2981.jpg" alt="Aho Farms facility — Hawke's Bay" loading="lazy" />
+    </div>
+    <div class="m-cell">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_800/v1780965821/aho_farms/raupunga/IMG_3607.jpg" alt="Aho Farms cultivation — outdoor grow" loading="lazy" />
+    </div>
+    <div class="m-cell">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_600/v1780965925/aho_farms/indoor/IMG_5111.jpg" alt="Aho Farms medicinal cannabis cultivation" loading="lazy" />
+    </div>
+  </div>
+  <div class="mosaic-foot">
+    <span class="mosaic-foot-txt">Hawke's Bay, Aotearoa New Zealand</span>
+    <a href="cultivation.html" class="mosaic-foot-link">
+      View Cultivation
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     TIMELINE
+============================================================ -->
+<section class="timeline-sec" id="timeline">
+  <div class="timeline-inner">
+    <div class="tl-hdr js-up">
+      <span class="eyebrow">TE HAERENGA · THE JOURNEY</span>
+      <h2>Our <em>milestones.</em></h2>
+    </div>
+    <div class="tl">
+
+      <!-- 2020 — left -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l js-up">
+          <div class="tl-year">2020</div>
+          <div class="tl-tag">Formation</div>
+          <h3 class="tl-title">Company Founded</h3>
+          <p class="tl-body">Aho Farms Limited is established. A partnership is formed on Māori freehold land in Hawke's Bay, grounding the company in the obligations of kaitiakitanga from day one.</p>
+          <span class="tl-badge">Hawke's Bay</span>
+        </div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r"></div>
+      </div>
+
+      <!-- 2021 — right -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l"></div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r js-up">
+          <div class="tl-year">2021</div>
+          <div class="tl-tag">Infrastructure</div>
+          <h3 class="tl-title">Licence Applications &amp; Site Development</h3>
+          <p class="tl-body">Licence applications lodged with the Ministry of Health. Site preparation and compliance infrastructure development commences. Earthworks and facility construction begin.</p>
+          <span class="tl-badge">Ministry of Health</span>
+        </div>
+      </div>
+
+      <!-- 2022 — left -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l js-up">
+          <div class="tl-year">2022</div>
+          <div class="tl-tag">Licence Milestone</div>
+          <h3 class="tl-title">Cultivation Licence Granted</h3>
+          <p class="tl-body">A cultivation licence is granted under the New Zealand Medicinal Cannabis Scheme — one of a limited number granted nationally. A material milestone for the company and for Māori commercial enterprise in the sector.</p>
+          <span class="tl-badge">NZ Medicinal Cannabis Scheme</span>
+        </div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r"></div>
+      </div>
+
+      <!-- 2023 — right -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l"></div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r js-up">
+          <div class="tl-year">2023</div>
+          <div class="tl-tag">First Season</div>
+          <h3 class="tl-title">First Cultivation Season Commences</h3>
+          <p class="tl-body">Cultivation Director joins the team, bringing 20 years of cannabis cultivation expertise across international and domestic markets. First grow season begins at the Hawke's Bay site. Genetics programme established including pheno hunt across 89 mother plants.</p>
+          <span class="tl-badge">20 Years Expertise On-Site</span>
+        </div>
+      </div>
+
+      <!-- 2024 — left -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l js-up">
+          <div class="tl-year">2024</div>
+          <div class="tl-tag">First Harvest</div>
+          <h3 class="tl-title">First Harvest &amp; Board Formalised</h3>
+          <p class="tl-body">First harvest completed and submitted for independent laboratory testing. Genetics programme narrows from 89 mothers to 15 top-performing cultivar selections. Board of Directors formalised with independent governance structure.</p>
+          <span class="tl-badge">15 Cultivar Selections</span>
+        </div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r"></div>
+      </div>
+
+      <!-- 2025 — right -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l"></div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r js-up">
+          <div class="tl-year">2025</div>
+          <div class="tl-tag">Market Entry</div>
+          <h3 class="tl-title">First Supply to NZ Prescribers</h3>
+          <p class="tl-body">RĀ and SOURCE product lines launched and made available through the pharmacy channel on prescription. Prescriber portal established. Aho Farms becomes an active supplier in the New Zealand medicinal cannabis supply chain.</p>
+          <span class="tl-badge">RĀ + SOURCE Launched</span>
+        </div>
+      </div>
+
+      <!-- 2026 — left -->
+      <div class="tl-row">
+        <div class="tl-side tl-side--l js-up">
+          <div class="tl-year">2026</div>
+          <div class="tl-tag">Export</div>
+          <h3 class="tl-title">Export Licence Active</h3>
+          <p class="tl-body">Export licence secured. Second successful harvest season completed. Distribution partnerships in active development for Australian and international markets. Aho Farms enters phase two of its commercial growth strategy.</p>
+          <span class="tl-badge">NZ + Australia</span>
+        </div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r"></div>
+      </div>
+
+      <!-- Future — right -->
+      <div class="tl-row tl-row--future">
+        <div class="tl-side tl-side--l"></div>
+        <div class="tl-spine"><div class="tl-dot"></div></div>
+        <div class="tl-side tl-side--r js-up">
+          <div class="tl-year">Next</div>
+          <div class="tl-tag">The Road Ahead</div>
+          <h3 class="tl-title">Expansion &amp; Scale</h3>
+          <p class="tl-body">Indoor facility expansion. Processing capability development. Additional cultivar lines. Deeper Australian market penetration. Broader Māori employment and whānau whenua development. The foundation is built. The next chapter is growth.</p>
+          <span class="tl-badge">Looking Forward</span>
+        </div>
+      </div>
+
+    </div><!-- /tl -->
+  </div>
+</section>
+
+<!-- ============================================================
+     IMPACT
+============================================================ -->
+<section class="impact" id="impact">
+  <div class="impact-bg-img">
+    <img
+      src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920/v1780965918/aho_farms/indoor/IMG_5083.jpg"
+      alt=""
+      role="presentation"
+      loading="lazy"
+    />
+  </div>
+  <div class="impact-inner">
+    <div class="impact-hdr js-up">
+      <span class="eyebrow">TE PĀNGA · IMPACT</span>
+      <h2>Building more<br>than a <em>business.</em></h2>
+      <p>Aho Farms measures its success not only in revenue, but in the lives it touches — the whānau employed, the land activated, and the patients served through a compliant, high-quality supply chain.</p>
+    </div>
+    <div class="impact-cells">
+      <!-- Row 1 -->
+      <div class="impact-cell js-up">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="impact-num">[X]<sup>+</sup></div>
+        <div class="impact-label">Whānau Employed</div>
+        <p class="impact-desc">Local Māori community employment across cultivation, operations, and administration. Direct pathways from employment into training and career development.</p>
+      </div>
+      <div class="impact-cell js-up js-up-d1">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="impact-num">2</div>
+        <div class="impact-label">Licensed Sites</div>
+        <p class="impact-desc">Two operational sites in Hawke's Bay under licence — one outdoor sun-grown cultivation site, one processing and indoor facility. Both actively producing.</p>
+      </div>
+      <div class="impact-cell js-up js-up-d2">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="impact-num">100<sup>%</sup></div>
+        <div class="impact-label">Māori Owned</div>
+        <p class="impact-desc">Māori-owned and Māori-governed enterprise. Every commercial decision reflects the obligations of kaitiakitanga and the long-term wellbeing of whānau stakeholders.</p>
+      </div>
+      <!-- Row 2 -->
+      <div class="impact-cell js-up">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="impact-num">[X]<sup>ha</sup></div>
+        <div class="impact-label">Hectares Under Cultivation</div>
+        <p class="impact-desc">Productive activation of Māori freehold land previously out of productive use. Growing season after season, building the agricultural record that underpins long-term value.</p>
+      </div>
+      <div class="impact-cell js-up js-up-d1">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="impact-num">2</div>
+        <div class="impact-label">Successful Harvests</div>
+        <p class="impact-desc">Two completed harvest seasons. Every batch independently tested and verified to meet New Zealand's medicinal cannabis quality standard before entering the supply chain.</p>
+      </div>
+      <div class="impact-cell js-up js-up-d2">
+        <div class="impact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="impact-num">NZ+AU</div>
+        <div class="impact-label">Export Markets</div>
+        <p class="impact-desc">Export licence held. Active development of Australian market partnerships alongside the domestic NZ prescriber supply chain. Building the international presence of NZ-grown medicinal cannabis.</p>
+      </div>
+    </div>
+    <p class="impact-note">
+      [X] values indicate figures to be confirmed and updated. Please provide current employment, hectarage, and community investment numbers to complete this section.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEADERSHIP
+============================================================ -->
+<section class="leadership" id="team">
+  <div class="leadership-inner">
+    <div class="leadership-hdr js-up">
+      <div class="eyebrow">NGĀ KAIĀRAHI · LEADERSHIP</div>
+      <h2>The people<br>behind the purpose.</h2>
+    </div>
+
+    <!-- Founder Spotlight -->
+    <div class="founder-spot">
+      <div class="founder-img-wrap">
+        <!-- PLACEHOLDER: Replace with professional headshot of Longo Reo Te Kooro -->
+        <div class="photo-req">
+          <div class="photo-req-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <p>Founder photo required — please provide professional headshot for Longo Reo Te Kooro</p>
+        </div>
+      </div>
+      <div class="founder-text js-up">
+        <span class="kicker">Managing Director &amp; Founder</span>
+        <h2 class="founder-name">Longo Reo<br>Te Kooro</h2>
+        <p class="founder-role">Managing Director &amp; Founder · Aho Farms Limited</p>
+        <p class="founder-bio">
+          Longo Reo Te Kooro is a Māori entrepreneur from Hawke's Bay. He spent years inside California's regulated cannabis industry — rising from the cultivation floor to managing teams of 23+, overseeing full harvest cycles, manicuring, and packaging operations at scale. He built an understanding of quality control, compliance, and commercial discipline that few in New Zealand's emerging sector possess.
+        </p>
+        <p class="founder-bio">
+          Returning to Aotearoa, Longo recognised that the knowledge gap between California and New Zealand represented a genuine opportunity — and that the land, the people, and the regulatory moment were aligned. Aho Farms is the direct result of that conviction. It is not a company that happened to Māori land. It is a company built from it.
+        </p>
+        <p class="founder-bio">
+          His focus is building a sustainable, compliant, commercially serious medicinal cannabis enterprise that creates lasting value for whānau, for the patients it serves, and for Māori land-based enterprise in New Zealand.
+        </p>
+        <div class="founder-creds">
+          <div class="founder-cred">
+            <span class="fcred-k">Background</span>
+            <span class="fcred-v">20+ years cultivation industry experience, California and NZ</span>
+          </div>
+          <div class="founder-cred">
+            <span class="fcred-k">Role</span>
+            <span class="fcred-v">Managing Director — strategy, commercial development, stakeholder relationships</span>
+          </div>
+          <div class="founder-cred">
+            <span class="fcred-k">Iwi</span>
+            <span class="fcred-v">[PLACEHOLDER — please provide iwi affiliation if approved for public use]</span>
+          </div>
+          <div class="founder-cred">
+            <span class="fcred-k">Based</span>
+            <span class="fcred-v">Hawke's Bay, Aotearoa New Zealand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Grid -->
+    <h3 class="team-subhdr js-up">Key team</h3>
+    <div class="team-grid">
+      <div class="team-card js-up">
+        <div class="team-card-img">
+          <!-- PLACEHOLDER: Professional headshot for Cultivation Director -->
+          <div class="photo-req">
+            <div class="photo-req-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <p>Team photo required</p>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">Michael Maclean</div>
+          <div class="team-card-role">Cultivation Director</div>
+          <p class="team-card-bio">Brings 20+ years of cannabis cultivation expertise across international and domestic markets. Leads all cultivation operations including genetics programme, growing protocols, and quality systems.</p>
+        </div>
+      </div>
+      <div class="team-card js-up js-up-d1">
+        <div class="team-card-img">
+          <div class="photo-req">
+            <div class="photo-req-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <p>Team photo required</p>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name Placeholder]</div>
+          <div class="team-card-role">Operations / [Role]</div>
+          <p class="team-card-bio">Please provide the name, role, and a short bio for additional key team members. Photos can be supplied separately.</p>
+        </div>
+      </div>
+      <div class="team-card js-up js-up-d2">
+        <div class="team-card-img">
+          <div class="photo-req">
+            <div class="photo-req-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <p>Team photo required</p>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name Placeholder]</div>
+          <div class="team-card-role">[Role]</div>
+          <p class="team-card-bio">Please provide the name, role, and a short bio for additional key team members. Photos can be supplied separately.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Board -->
+    <div class="board-section js-up">
+      <div class="board-hdr">
+        <h3>Board of Directors</h3>
+        <p>Independent governance structure overseeing strategy, compliance, and long-term company direction.</p>
+      </div>
+      <table class="board-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Background</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stephen McPhail</td>
+            <td>Independent Chair</td>
+            <td>Experienced independent director. Provides governance leadership and oversight of company strategy and compliance obligations.</td>
+          </tr>
+          <tr>
+            <td>Toro Waaka</td>
+            <td>Director</td>
+            <td>Represents the whenua and whānau interests central to Aho Farms' founding partnership. Brings deep knowledge of Māori land and community.</td>
+          </tr>
+          <tr>
+            <td>David Steele</td>
+            <td>Director</td>
+            <td>[PLACEHOLDER — please provide brief background note for David Steele]</td>
+          </tr>
+          <tr>
+            <td>Sarah Reo</td>
+            <td>Governance</td>
+            <td>[PLACEHOLDER — please provide brief background note for Sarah Reo]</td>
+          </tr>
+          <tr>
+            <td>Russell Bell</td>
+            <td>Governance</td>
+            <td>[PLACEHOLDER — please provide brief background note for Russell Bell]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOOKING FORWARD
+============================================================ -->
+<section class="forward" id="forward">
+  <div class="forward-bg">
+    <img
+      src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920/v1780965837/aho_farms/raupunga/IMG_3682.jpg"
+      alt=""
+      role="presentation"
+      loading="lazy"
+    />
+  </div>
+  <div class="forward-inner">
+    <div class="forward-hdr js-up">
+      <div class="eyebrow">TE ANAMATA · LOOKING FORWARD</div>
+      <h2>The best<br>is yet to <em>grow.</em></h2>
+      <p>
+        Aho Farms is not a finished story. The foundation has been built — the licences held, the harvests completed, the supply chain activated, and the partnerships formed. What comes next is scale, depth, and impact at a level the first years were designed to make possible.
+      </p>
+    </div>
+    <div class="forward-pillars">
+      <div class="fwd-pillar js-up">
+        <div class="fwd-pillar-n">1</div>
+        <div class="fwd-pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="fwd-pillar-h">Cultivation Expansion</h3>
+        <p class="fwd-pillar-p">Indoor facility expansion to deliver year-round supply consistency. Increased outdoor capacity. Genetics programme delivering consistent top-tier cultivar performance across every batch.</p>
+      </div>
+      <div class="fwd-pillar js-up js-up-d1">
+        <div class="fwd-pillar-n">2</div>
+        <div class="fwd-pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3 class="fwd-pillar-h">Export Growth</h3>
+        <p class="fwd-pillar-p">Active development of Australian market distribution partnerships. NZ-grown medicinal cannabis, certified to the world's strictest standards, positioned for global supply. New markets as opportunities arise.</p>
+      </div>
+      <div class="fwd-pillar js-up js-up-d2">
+        <div class="fwd-pillar-n">3</div>
+        <div class="fwd-pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="fwd-pillar-h">Community Development</h3>
+        <p class="fwd-pillar-p">Deeper whānau employment. Formal training pathways. Land utilisation expanding on the Māori freehold model. Shareholders seeing genuine returns. A company that proves Māori land-based enterprise works — and works well.</p>
+      </div>
+    </div>
+    <div class="forward-endquote js-up">
+      <p>"Ko te aho tūhono tāngata — it is the thread that connects people."</p>
+      <div class="fwd-btns">
+        <a href="prescribers.html" class="btn-p">
+          Prescriber Access
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="investors.html" class="btn-s">
+          Investor Information
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPANY DETAILS
+============================================================ -->
+<section class="co-details">
+  <div class="co-details-inner">
+    <div class="co-details-left js-up">
+      <h2>Company information</h2>
+      <p>
+        Aho Farms Limited is registered in New Zealand and holds licences under the New Zealand Medicinal Cannabis Scheme. The company is Māori-owned and governed, operating from Hawke's Bay with an active cultivation and export licence.
+      </p>
+    </div>
+    <table class="co-table js-up js-up-d1">
       <tbody>
-        <tr>
-          <td>Registered Name</td>
-          <td>Aho Farms Limited</td>
-        </tr>
-        <tr>
-          <td>Incorporated</td>
-          <td>New Zealand</td>
-        </tr>
-        <tr>
-          <td>Location</td>
-          <td>Raupunga, Hawke's Bay, New Zealand</td>
-        </tr>
-        <tr>
-          <td>Ownership</td>
-          <td>Māori-owned and operated</td>
-        </tr>
-        <tr>
-          <td>Licences</td>
-          <td>Cultivation Licence, Export Licence (NZ Medicinal Cannabis Scheme)</td>
-        </tr>
-        <tr>
-          <td>Lab Partner</td>
-          <td>Hill Labs, Hamilton (IANZ Accredited)</td>
-        </tr>
-        <tr>
-          <td>Contact</td>
-          <td><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></td>
-        </tr>
+        <tr><td>Registered Name</td><td>Aho Farms Limited</td></tr>
+        <tr><td>Incorporated</td><td>New Zealand</td></tr>
+        <tr><td>Region</td><td>Hawke's Bay, Aotearoa New Zealand</td></tr>
+        <tr><td>Ownership</td><td>Māori-owned and operated</td></tr>
+        <tr><td>Licences</td><td>Cultivation Licence · Export Licence (NZ Medicinal Cannabis Scheme)</td></tr>
+        <tr><td>Products</td><td>RĀ (Oreo cultivar, outdoor sun-grown) · SOURCE (consistent supply)</td></tr>
+        <tr><td>Contact</td><td><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">AHO <span>FARMS</span></div>
-    <nav class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="prescribers.html">Prescribers</a>
-      <a href="investors.html">Investors</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-nm">AHO <span>FARMS</span></div>
+      <p class="footer-tagline">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
+    </div>
+    <div>
+      <div class="f-col-h">Company</div>
+      <ul class="f-col-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="kaupapa.html">Our Kaupapa</a></li>
+        <li><a href="cultivation.html">Cultivation</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-h">Healthcare</div>
+      <ul class="f-col-links">
+        <li><a href="prescribers.html">Prescribers</a></li>
+        <li><a href="pharmacies.html">Pharmacies</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-h">Partners</div>
+      <ul class="f-col-links">
+        <li><a href="export-partners.html">Export Partners</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-inner" style="padding-top:0;">
-    <p class="footer-legal">
-      © 2026 Aho Farms Limited. All rights reserved. Registered in New Zealand.<br />
-      Aho Farms holds licences under the New Zealand Medicinal Cannabis Scheme. Medicinal cannabis products are prescription medicines available through registered healthcare providers only. This website does not constitute medical advice. Photography used for illustrative purposes.
+  <div class="footer-btm">
+    <p class="f-copy">© 2026 Aho Farms Limited. All rights reserved.</p>
+    <p class="f-legal">
+      Aho Farms holds licences under the New Zealand Medicinal Cannabis Scheme. Medicinal cannabis products are prescription medicines available through registered healthcare providers only. This website does not constitute medical advice and is not intended for patients or consumers.
     </p>
   </div>
 </footer>
 
+<!-- ============================================================
+     SCROLL ANIMATION
+============================================================ -->
+<script>
+  (function(){
+    var els = document.querySelectorAll('.js-up');
+    if(!els.length) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    },{ threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
 </body>
 </html>
