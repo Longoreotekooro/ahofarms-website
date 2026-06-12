@@ -197,36 +197,20 @@
       font-size:12px; color:var(--teal); line-height:1.6;
     }
     .logo-placeholder-banner strong { display:block; margin-bottom:4px; color:var(--teal); }
-    .logo-rings {
-      position:relative; width:280px; height:280px;
+    .logo-img-wrap {
+      position:relative;
       display:flex; align-items:center; justify-content:center;
-      flex-shrink:0;
+      padding:var(--s7) var(--s5);
     }
-    .logo-ring {
-      position:absolute; border-radius:50%;
-      border:1px solid rgba(115,168,165,0.2);
-      animation:ring-spin 50s linear infinite;
+    .logo-img {
+      width:320px; height:auto; display:block; position:relative; z-index:2;
+      filter:drop-shadow(0 0 48px rgba(115,168,165,0.35))
+             drop-shadow(0 8px 24px rgba(0,0,0,0.5));
     }
-    .logo-ring:nth-child(1) { width:280px; height:280px; }
-    .logo-ring:nth-child(2) { width:220px; height:220px; border-style:dashed; animation-direction:reverse; animation-duration:35s; }
-    .logo-ring:nth-child(3) { width:160px; height:160px; border-color:rgba(115,168,165,0.12); }
-    @keyframes ring-spin { to { transform:rotate(360deg); } }
-    .logo-core {
-      position:relative; z-index:2; text-align:center;
-    }
-    .logo-aho {
-      font-family:var(--font-h); font-size:80px; font-weight:300;
-      letter-spacing:0.12em; color:var(--white); line-height:1;
-    }
-    .logo-farms {
-      font-family:var(--font-h); font-size:22px; font-weight:300;
-      letter-spacing:0.45em; color:var(--teal); text-transform:uppercase;
-      margin-top:6px;
-    }
-    .logo-glow {
-      position:absolute; inset:-60px;
-      background:radial-gradient(circle, rgba(115,168,165,0.12) 0%, transparent 65%);
-      pointer-events:none;
+    .logo-glow-outer {
+      position:absolute; inset:-40px;
+      background:radial-gradient(circle at center, rgba(115,168,165,0.12) 0%, transparent 65%);
+      pointer-events:none; z-index:1;
     }
     .logo-tag {
       margin-top:28px; font-size:10px; letter-spacing:0.2em;
@@ -816,34 +800,14 @@
   <div class="logo-story-inner">
     <!-- Visual display -->
     <div class="logo-visual js-up">
-      <div class="logo-rings">
-        <div class="logo-ring"></div>
-        <div class="logo-ring"></div>
-        <div class="logo-ring"></div>
-        <div class="logo-glow"></div>
-        <div class="logo-core">
-          <!-- Real Aho Farms logo SVG -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1490.18 1117.09" style="width:240px;height:auto;display:block;filter:drop-shadow(0 0 40px rgba(115,168,165,0.25));">
-            <defs><style>.sl0{fill:#73a8a5}.sl1{fill:#a2c4c3}</style></defs>
-            <polygon class="sl0" points="646.26 990.17 601.49 990.17 536.49 810.38 578.23 810.38 646.26 990.17"/>
-            <polygon class="sl1" points="468.93 990.17 513.7 990.17 578.7 810.38 536.96 810.38 468.93 990.17"/>
-            <path class="sl0" d="M705.02 825.99c-1.09-1.62-2.51-5.02-.33-10.08-.86-.69-1.73-1.37-2.59-2.04-1.78 2.78-4.54 4-7.27 4a9.4 9.4 0 0 1-3.64-.74c-4.44-1.87-7.63-7.1-5.14-14.67-1.13-.73-2.25-1.43-3.36-2.12-1.51 4.15-4.54 5.62-7.34 5.62-.65 0-1.28-.08-1.88-.22-2.99-.7-5.74-3-7.28-6.3v190.72h42.25V828.92a11.3 11.3 0 0 1-3.42-2.93Z"/>
-            <path class="sl0" d="M805.44 805.75c-.6.14-1.23.22-1.88.22-2.8 0-5.83-1.47-7.34-5.62-1.11.69-2.23 1.39-3.36 2.12 2.49 7.57-.71 12.8-5.14 14.67a9.4 9.4 0 0 1-3.64.74c-2.72 0-5.48-1.22-7.27-4-.86.67-1.72 1.35-2.59 2.04 2.18 5.06.76 8.46-.33 10.08a11.3 11.3 0 0 1-3.07 2.76v161.42h42.25V805.23c-1.45 3.73-4.41 6.34-7.63 7.1Z"/>
-            <polygon class="sl1" points="827.05 924.56 827.05 916.14 739.64 865.42 652.23 916.14 652.23 924.56 659.1 920.82 659.1 927.05 652.23 930.79 652.23 938.53 659.1 934.79 659.1 941.02 652.23 944.76 652.23 956.2 739.64 906.32 827.05 956.2 827.05 944.76 820.18 941.02 820.18 934.79 827.05 938.53 827.05 930.79 820.18 927.05 820.18 920.82 827.05 924.56"/>
-            <path class="sl1" d="M874.42 895.85c0-29.4 23.83-53.24 53.24-53.24v-40.36c-51.69 0-93.59 41.9-93.59 93.59s41.9 93.59 93.59 93.59v-40.36c-29.4 0-53.24-23.84-53.24-53.24Z"/>
-            <path class="sl0" d="M927.66 802.26v40.36c29.4 0 53.24 23.83 53.24 53.24s-23.84 53.24-53.24 53.24v40.36c51.69 0 93.59-41.9 93.59-93.59s-41.9-93.59-93.59-93.59Z"/>
-            <path class="sl0" d="M679.98 654.51c-23.48-11.28-48.66-12.33-71.27-3.09 23.64 4.51 49.36 20.47 71.08 44.25 9.86 10.79 18.37 22.54 25.21 34.61 9.36-6.71 15.28-17.18 18.88-29.06-4.68-17.83-21.87-36.14-43.89-46.71Z"/>
-            <path class="sl0" d="M712.63 745.45c4.3 9.77 7.42 19.55 9.19 29.02 3.45.18 7.12 1.27 10.41 3.25-3.93-7.83-9.28-23.58-3.87-44.96-4.07 4.6-9.26 9.17-15.73 12.69Z"/>
-            <path class="sl0" d="M750.57 732.76c5.41 21.38.06 37.13-3.87 44.96 3.29-1.97 6.96-3.07 10.41-3.25 1.77-9.47 4.89-19.25 9.19-29.02-6.47-3.53-11.66-8.09-15.73-12.69Z"/>
-            <path class="sl0" d="M773.93 730.28c6.83-12.06 15.35-23.82 25.21-34.61 21.72-23.78 47.44-39.74 71.08-44.25-22.61-9.25-47.79-8.19-71.27 3.09-22.03 10.57-39.22 28.88-43.89 46.71 3.6 11.88 9.51 22.34 18.88 29.06Z"/>
-            <path class="sl0" d="M762.27 790.68c-3.24-1.62-9.48.75-14.76 8.29v14.91c5.05-4.93 10.59-9.77 16.38-14.38 1.39-4.32.8-7.61-1.62-8.82Z"/>
-            <path class="sl0" d="M716.65 790.68c-2.42 1.21-3 4.49-1.62 8.82 5.79 4.61 11.33 9.46 16.38 14.38v-14.91c-5.28-7.54-11.52-9.91-14.76-8.29Z"/>
-            <path class="sl1" d="M746.96 728.33c-3.8-5.1-6.24-9.78-7.5-12.51-1.26 2.74-3.7 7.42-7.5 12.51-10.6 32.89 5.19 53.33 5.35 53.54l-.01.01c.78.86 1.51 1.77 2.15 2.77.64-1 1.37-1.91 2.15-2.77l-.01-.01c.16-.2 15.95-20.65 5.35-53.54Z"/>
-            <path class="sl1" d="M763.54 777.77c-6.76-3.15-18.31.37-23.08 9.63l-1 1.95-1-1.95c-4.76-9.26-16.31-12.79-23.08-9.63-5.76 2.69-6.92 9.56-3.27 18.92-.41-3.78.81-6.66 3.53-8.02 4.23-2.12 11.72.4 17.82 9.31l.2.29v17.84c2.02 2.04 3.96 4.09 5.8 6.14 1.83-2.05 3.77-4.1 5.8-6.14V796.1l.2-.29c6.11-8.91 13.59-11.43 17.82-9.31 2.71 1.36 3.93 4.24 3.53 8.02 3.65-9.36 2.5-16.23-3.27-18.92Z"/>
-            <path class="sl0" d="M739.46 317.19c22.31 0 40.99-12.61 51.24-34.61 10.65-22.84 16.04-50.6 16.04-82.49 0-30.11-7.85-49.41-11.23-56.31a11.5 11.5 0 0 0-4.8-4.97c-6.7-3.58-25.1-11.89-51.25-11.89s-44.55 8.31-51.25 11.89a11.5 11.5 0 0 0-4.8 4.97c-3.38 6.9-11.23 26.2-11.23 56.31 0 31.89 5.4 59.65 16.04 82.49 10.25 22 28.93 34.61 51.24 34.61Z"/>
-            <path class="sl1" d="M807.01 603.9c-4.29-4.65-21.88-19.93-67.55-19.93-45.79 0-63.29 15.28-67.56 19.93 6.5 1.41 13.21 3.47 20.11 6.19 24.36 9.61 43.55 24.5 47.45 27.63 3.9-3.14 23.08-18.02 47.45-27.63 6.89-2.72 13.6-4.78 20.1-6.19Z"/>
-          </svg>
-        </div>
+      <!-- Logo as external img — avoids inline CSS class conflicts -->
+      <div class="logo-img-wrap">
+        <img
+          src="logo.svg"
+          alt="Aho Farms logo"
+          class="logo-img"
+        />
+        <div class="logo-glow-outer"></div>
       </div>
       <p class="logo-tag">Hawke's Bay · Aotearoa New Zealand · Est. 2020</p>
     </div>
