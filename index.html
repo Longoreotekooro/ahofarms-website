@@ -246,6 +246,13 @@ h3{font-size:clamp(1.4rem,2vw,1.9rem);}
 }
 html.no-fx .hero-fallback{display:block;}
 html.no-fx #fibreCanvas{display:none;}
+/* Arrival photo — the real Raupunga site emerging beneath the final rows */
+.hero-photo{
+  position:absolute;inset:0;opacity:0;
+  background-image:url('https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965576/IMG_6092_talxyt.jpg');
+  background-size:cover;background-position:center 60%;
+}
+html.no-fx .hero-photo{display:none;}
 
 /* Text stages */
 .hstage{
@@ -255,8 +262,18 @@ html.no-fx #fibreCanvas{display:none;}
 }
 .hstage-inner{
   width:100%;max-width:var(--max);margin:0 auto;
-  padding:0 var(--s4) 15vh;
+  padding:0 var(--s4) 15vh;position:relative;
 }
+/* Cinematic scrim — keeps type readable over the fibre field */
+.hstage-inner::before{
+  content:'';position:absolute;left:-10vw;right:26%;top:-16vh;bottom:-5vh;
+  background:radial-gradient(80% 85% at 28% 72%, rgba(15,26,24,0.78), transparent 68%);
+  pointer-events:none;z-index:-1;
+}
+.hstage .h-tereo,.hstage .h-big,.hstage h1{
+  text-shadow:0 2px 30px rgba(15,26,24,0.85),0 1px 8px rgba(15,26,24,0.6);
+}
+.hstage .h-sub{text-shadow:0 1px 12px rgba(15,26,24,0.8);}
 .hstage .h-eyebrow{
   display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);
 }
@@ -327,14 +344,14 @@ html.no-fx .hstage-final{opacity:1 !important;}
 #threadLayer svg{display:block;width:100%;height:100%;}
 #threadPath{
   fill:none;stroke:var(--gold);stroke-width:1.5;
-  opacity:0.55;
-  filter:drop-shadow(0 0 6px rgba(201,160,106,0.35));
+  opacity:0.6;
 }
 .thread-node{
   fill:var(--gold);opacity:0;
   transition:opacity 0.6s;
 }
-.thread-node.lit{opacity:0.9;}
+.thread-node.lit{opacity:0.9;animation:nodeBreathe 3.5s ease-in-out infinite;}
+@keyframes nodeBreathe{0%,100%{opacity:0.55;}50%{opacity:1;}}
 html.no-fx #threadLayer{display:none;}
 
 /* ================================================================
@@ -800,6 +817,21 @@ html.no-fx #threadLayer{display:none;}
   .story-img img{height:400px;}
 }
 
+/* Section stitches — soft continuity between light and dark chapters */
+.stitch-dark{position:relative;}
+.stitch-dark::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:150px;
+  background:linear-gradient(to bottom,var(--night),transparent);
+  pointer-events:none;z-index:2;
+}
+.stitch-light{position:relative;}
+.stitch-light::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:150px;
+  background:linear-gradient(to bottom,rgba(240,244,243,0.12),transparent);
+  pointer-events:none;z-index:2;
+}
+.story-img{overflow:hidden;}
+
 /* Scroll-reveal helper */
 .js-up{opacity:0;transform:translateY(30px);}
 html.no-fx .js-up{opacity:1;transform:none;}
@@ -850,6 +882,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
      ============================================================ -->
 <section class="hero" id="hero">
   <div class="hero-fallback"></div>
+  <div class="hero-photo" id="heroPhoto"></div>
   <canvas id="fibreCanvas"></canvas>
   <div class="hero-vignette"></div>
   <div class="hero-grain"></div>
@@ -885,7 +918,16 @@ html.no-fx .js-up{opacity:1;transform:none;}
     </div>
   </div>
 
-  <!-- Stage 4 — the brand (final, persistent) -->
+  <!-- Stage 4 — the whenua: thread travels the land -->
+  <div class="hstage" id="hsLand">
+    <div class="hstage-inner">
+      <span class="h-tereo">Ka rere te aho mā te whenua.</span>
+      <div class="h-big">The thread runs through the <em>land.</em></div>
+      <p class="h-sub">Follow it across the contours of Raupunga — hill country shaped by five generations of the same whānau — down into the rows where the next harvest is already growing.</p>
+    </div>
+  </div>
+
+  <!-- Stage 5 — the brand (final, persistent) -->
   <div class="hstage hstage-final" id="hs4">
     <div class="hstage-inner">
       <div class="h-eyebrow">
@@ -904,6 +946,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
 
   <div class="hero-marks" id="heroMarks">
     <div class="hero-mark on"></div>
+    <div class="hero-mark"></div>
     <div class="hero-mark"></div>
     <div class="hero-mark"></div>
     <div class="hero-mark"></div>
@@ -939,7 +982,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
   </div>
 
   <!-- MANIFESTO — the meaning of Aho -->
-  <section class="manifesto" id="aho">
+  <section class="manifesto stitch-dark" id="aho">
     <div class="manifesto-inner">
       <span class="eyebrow gold js-up" data-aho style="display:flex;justify-content:center">TE TIKANGA O TE INGOA <span>·</span> THE MEANING OF AHO</span>
       <h2 class="js-up">We are not simply cultivating medicine.<br>We are cultivating <em>connection.</em></h2>
@@ -992,7 +1035,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
   </section>
 
   <!-- TERROIR — sense of place -->
-  <section class="terroir taniko" id="place">
+  <section class="terroir taniko stitch-light" id="place">
     <svg class="terroir-topo" id="topoSvg" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
     <div class="wrap">
       <div class="terroir-hdr js-up" data-aho>
@@ -1044,7 +1087,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
   </section>
 
   <!-- BRAID — science meets tradition -->
-  <section class="braid-sec" id="science">
+  <section class="braid-sec stitch-dark" id="science">
     <div class="wrap">
       <div class="braid-hdr js-up" data-aho>
         <span class="eyebrow" style="display:flex;justify-content:center">TE PŪTAIAO ME TE MĀTAURANGA <span>·</span> SCIENCE MEETS TRADITION</span>
@@ -1085,7 +1128,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
   </section>
 
   <!-- PRODUCTS — immersive stages -->
-  <section class="prods" id="products">
+  <section class="prods stitch-light" id="products">
     <div class="prods-hdr js-up" data-aho>
       <span class="eyebrow gold" style="display:flex;justify-content:center">NGĀ HUA <span>·</span> OUR PRODUCTS</span>
       <h2>Premium medicinal flower.<br>Available by prescription.</h2>
@@ -1270,7 +1313,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
   </section>
 
   <!-- NEWS -->
-  <section class="news section" id="news">
+  <section class="news section stitch-dark" id="news">
     <div class="wrap">
       <div class="news-hdr js-up" data-aho>
         <div>
@@ -1314,16 +1357,6 @@ html.no-fx .js-up{opacity:1;transform:none;}
     </div>
   </section>
 
-  <!-- THE LIVING THREAD -->
-  <div id="threadLayer" aria-hidden="true">
-    <svg id="threadSvg" preserveAspectRatio="none">
-      <path id="threadPath" d=""/>
-      <g id="threadNodes"></g>
-    </svg>
-  </div>
-
-</main>
-
 <!-- DISCLAIMER -->
 <div class="disc taniko">
   <div class="disc-inner">
@@ -1334,7 +1367,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
 
 <!-- FOOTER CTA -->
 <div class="footer-cta taniko">
-  <div class="wrap footer-cta-inner">
+  <div class="wrap footer-cta-inner" data-aho>
     <span class="eyebrow gold" style="justify-content:center;display:flex">TŪHONO MAI <span>·</span> WORK WITH US</span>
     <span class="footer-cta-headline">Tūhono mai.</span>
     <p class="footer-cta-sub">Join the thread. Prescribers, pharmacies, export partners, and investors — we'd like to hear from you.</p>
@@ -1344,6 +1377,16 @@ html.no-fx .js-up{opacity:1;transform:none;}
     </div>
   </div>
 </div>
+
+<!-- THE LIVING THREAD -->
+<div id="threadLayer" aria-hidden="true">
+  <svg id="threadSvg" preserveAspectRatio="none">
+    <path id="threadPath" d=""/>
+    <g id="threadNodes"></g>
+  </svg>
+</div>
+
+</main>
 
 <!-- FOOTER -->
 <footer class="footer" id="contact">
@@ -1528,19 +1571,25 @@ if(FX){
       blending:THREE.AdditiveBlending,
       vertexShader:`
         uniform float uTime;
-        uniform float uP;
+        uniform float uP; /* 0..4 : fan, drift, weave, whenua, rows */
         attribute float aT;
         attribute float aSeed;
         varying float vAlpha;
-        varying float vMix;
+        varying float vP;
+        varying float vT;
+        varying float vRand;
         float h(float n){ return fract(sin(n*127.1)*43758.5453); }
+        float ss(float a,float b,float x){ float t=clamp((x-a)/(b-a),0.0,1.0); return t*t*(3.0-2.0*t); }
         void main(){
           float s=aSeed;
           float h1=h(s+1.0),h2=h(s+2.0),h3=h(s+3.0),h4=h(s+4.0),h5=h(s+5.0);
 
-          float p=clamp(uP*1.3 - h1*0.6, 0.0, 2.0);
-          float k1=smoothstep(0.0,1.0,p);
-          float k2=smoothstep(1.0,2.0,p);
+          /* per-strand staggered transitions — each completes at the integer */
+          float p=uP;
+          float k1=ss(0.0,0.75,p-h1*0.25);
+          float k2=ss(1.0,1.75,p-h2*0.25);
+          float k3=ss(2.0,2.75,p-h3*0.25);
+          float k4=ss(3.0,3.75,p-h4*0.25);
 
           /* A — harakeke fan */
           float bladeId=floor(h1*26.0);
@@ -1548,28 +1597,60 @@ if(FX){
           float len=16.0+h2*11.0;
           float sway=sin(uTime*0.7+bladeId*1.7)*0.05*aT + sin(uTime*0.35+s*6.28)*0.02*aT;
           float a=ang+sway+(h3-0.5)*0.09;
-          vec2 dir=vec2(sin(a),cos(a));
-          vec3 posA=vec3(dir.x*aT*len+(h4-0.5)*0.8, -16.0+dir.y*aT*len, (h5-0.5)*5.0);
+          vec3 posA=vec3(sin(a)*aT*len+(h4-0.5)*0.8, -16.0+cos(a)*aT*len, (h5-0.5)*5.0);
           posA.x += ang*aT*aT*4.5;
 
           /* B — loose drifting fibres */
           vec3 baseB=vec3(mix(-23.0,23.0,h2), mix(-10.0,12.0,h3), mix(-7.0,7.0,h4));
-          float wave=sin(aT*6.283+uTime*0.8+s*10.0);
-          vec3 posB=baseB+vec3(aT*15.0-7.5, wave*1.3+sin(uTime*0.4+s*3.0)*1.6, cos(aT*4.0+uTime*0.5+s)*0.9);
+          vec3 posB=baseB+vec3(aT*15.0-7.5,
+            sin(aT*6.283+uTime*0.8+s*10.0)*1.3+sin(uTime*0.4+s*3.0)*1.6,
+            cos(aT*4.0+uTime*0.5+s)*0.9);
 
-          /* C — the woven aho (3-ply helix) */
+          /* C — the woven aho: three tributaries converging into one */
+          float trib=floor(h5*3.0)-1.0;
+          float conv=ss(0.0,0.7,aT);
           float x=mix(-27.0,27.0,aT);
-          float y=sin(aT*3.4+0.5)*2.6;
+          float baseY=sin(aT*3.4+0.5)*2.4;
           float ply=floor(h3*3.0)*2.0944;
-          float twist=aT*44.0+ply+uTime*0.4;
-          float rad=0.55+h4*0.22;
-          vec3 posC=vec3(x, y+sin(twist)*rad, cos(twist)*rad);
+          float twist=aT*40.0+ply+uTime*0.5;
+          float rad=(0.5+h4*0.2)*(1.0+(1.0-conv)*1.2);
+          vec3 posC=vec3(x,
+            baseY+trib*4.2*(1.0-conv)+sin(twist)*rad+sin(uTime*0.6+s)*0.15,
+            trib*2.4*(1.0-conv)+cos(twist)*rad);
 
-          vec3 posn=mix(mix(posA,posB,k1),posC,k2);
+          /* D — contour lines of the whenua */
+          float level=floor(h1*12.0);
+          float lx=mix(-32.0,32.0,aT);
+          float hill=sin(lx*0.11+level*1.9)*1.5+sin(lx*0.05+level*0.7)*2.6;
+          vec3 posD=vec3(lx,
+            -9.0+level*1.55+hill*0.6+sin(uTime*0.3+level)*0.12,
+            6.0-level*1.3);
 
-          vMix=k2;
+          /* E — cultivation rows: strands become plant tufts */
+          float row=floor(h1*9.0);
+          float rx=mix(-18.0,18.0,h2)*(1.0+row*0.10);
+          float tuftA=(h3-0.5)*1.7+sin(uTime*0.8+s*4.0)*0.06;
+          float th=2.4+h4*1.8;
+          vec3 posE=vec3(rx+sin(tuftA)*aT*th*0.7,
+            -8.0+aT*th+row*0.35,
+            9.0-row*3.2);
+
+          /* organic swirl during each morph — arcs, never straight lines */
+          float w1=k1*(1.0-k1),w2=k2*(1.0-k2),w3=k3*(1.0-k3),w4=k4*(1.0-k4);
+          vec3 swirl=vec3(sin(s*7.0+uTime*0.4),cos(s*5.0),sin(s*3.0))
+                     *(w1*5.0+w2*6.0+w3*5.0+w4*4.0);
+
+          vec3 posn=mix(posA,posB,k1);
+          posn=mix(posn,posC,k2);
+          posn=mix(posn,posD,k3);
+          posn=mix(posn,posE,k4);
+          posn+=swirl;
+
+          vP=p; vT=aT; vRand=h5;
           float taper=sin(aT*3.1416);
-          vAlpha=taper*(0.22+0.5*h5)*mix(1.0,1.5,k2);
+          float weaveBoost=0.55*ss(1.5,2.0,p)*(1.0-ss(2.2,3.0,p));
+          float rowBoost=0.3*ss(3.4,3.9,p);
+          vAlpha=taper*(0.22+0.5*h5)*(1.0+weaveBoost+rowBoost);
 
           gl_Position=projectionMatrix*modelViewMatrix*vec4(posn,1.0);
         }`,
@@ -1578,9 +1659,18 @@ if(FX){
         uniform vec3 uColTeal;
         uniform vec3 uColGold;
         varying float vAlpha;
-        varying float vMix;
+        varying float vP;
+        varying float vT;
+        varying float vRand;
         void main(){
-          vec3 col=mix(mix(uColGreen,uColTeal,clamp(vMix*2.0,0.0,1.0)),uColGold,clamp(vMix*1.4-0.3,0.0,1.0));
+          vec3 col=mix(uColGreen,uColTeal,clamp(vP,0.0,1.0)*0.6);
+          float gold=smoothstep(1.2,2.0,vP)*(1.0-smoothstep(2.3,3.1,vP));
+          col=mix(col,uColGold,gold);
+          float whenua=smoothstep(2.3,3.0,vP)*(1.0-smoothstep(3.2,3.9,vP));
+          col=mix(col,uColTeal*0.85,whenua);
+          float rows=smoothstep(3.2,3.9,vP);
+          vec3 plant=mix(uColGreen*1.1,uColGold,vT*0.55+vRand*0.1);
+          col=mix(col,plant,rows);
           gl_FragColor=vec4(col,vAlpha);
         }`
     });
@@ -1605,13 +1695,24 @@ if(FX){
     window.addEventListener('resize',resize);
 
     const clock=new THREE.Clock();
+    const lerp=(a,b,t)=>a+(b-a)*Math.min(Math.max(t,0),1);
+    let camX=0,camY=0;
     (function tick(){
       heroUniforms.uTime.value=clock.getElapsedTime();
-      const k=heroUniforms.uP.value/2;
-      camera.position.z=46-k*13;
-      camera.position.x+= (mouseX*3-camera.position.x)*0.04;
-      camera.position.y+= (-mouseY*2-camera.position.y)*0.04;
-      camera.lookAt(0,0,0);
+      const P=heroUniforms.uP.value; /* 0..4 */
+      /* cinematic camera path: push in to the weave, rise over the
+         whenua, then descend low into the cultivation rows */
+      let cz=lerp(46,33,P/2);
+      cz=lerp(cz,40,P-2);
+      cz=lerp(cz,30,P-3);
+      let cy=lerp(0,5,P-2);
+      cy=lerp(cy,1.2,P-3);
+      let ly=lerp(0,1.5,P-2);
+      ly=lerp(ly,2.6,P-3);
+      camX+=(mouseX*3-camX)*0.04;
+      camY+=(-mouseY*2-camY)*0.04;
+      camera.position.set(camX,cy+camY,cz);
+      camera.lookAt(0,ly,0);
       renderer.render(scene,camera);
       requestAnimationFrame(tick);
     })();
@@ -1635,23 +1736,40 @@ document.addEventListener('DOMContentLoaded',()=>{
     const setMark=i=>marks.forEach((m,j)=>m.classList.toggle('on',j===i));
     const heroTl=gsap.timeline({
       scrollTrigger:{
-        trigger:'#hero',start:'top top',end:'+=320%',
-        pin:true,scrub:0.7,
+        trigger:'#hero',start:'top top',end:'+=520%',
+        pin:true,scrub:0.9,anticipatePin:1,
         onUpdate(self){
           const p=self.progress;
-          setMark(p<0.24?0:p<0.5?1:p<0.76?2:3);
+          setMark(p<0.16?0:p<0.42?1:p<0.68?2:p<0.87?3:4);
         }
       }
     });
-    heroTl
-      .to(heroUniforms.uP,{value:2,ease:'none',duration:1},0)
-      .to('#hs1',{opacity:0,y:-40,ease:'power1.in',duration:0.08},0.10)
-      .fromTo('#hs2',{opacity:0,y:40},{opacity:1,y:0,ease:'power1.out',duration:0.08},0.22)
-      .to('#hs2',{opacity:0,y:-40,ease:'power1.in',duration:0.08},0.40)
-      .fromTo('#hs3',{opacity:0,y:40},{opacity:1,y:0,ease:'power1.out',duration:0.08},0.50)
-      .to('#hs3',{opacity:0,y:-40,ease:'power1.in',duration:0.08},0.68)
-      .fromTo('#hs4',{opacity:0,y:40},{opacity:1,y:0,ease:'power1.out',duration:0.1},0.80)
-      .to('#hScroll',{opacity:0,duration:0.06},0.06);
+    /* helper: staggered per-line reveals — text animates independently
+       of the fibre field, film-title style */
+    const stageIn=(sel,at,dur=0.06)=>{
+      heroTl.to(sel,{opacity:1,duration:0.01},at)
+            .fromTo(sel+' .hstage-inner > *',{opacity:0,y:44},
+              {opacity:1,y:0,duration:dur,stagger:0.014,ease:'power2.out'},at);
+    };
+    const stageOut=(sel,at)=>{
+      heroTl.to(sel+' .hstage-inner > *',{opacity:0,y:-36,duration:0.045,stagger:0.008,ease:'power2.in'},at)
+            .to(sel,{opacity:0,duration:0.02},at+0.05);
+    };
+    heroTl.to(heroUniforms.uP,{value:4,ease:'none',duration:0.92},0);
+    /* 1 · the fibre */
+    stageOut('#hs1',0.08);
+    /* 2 · the weave */
+    stageIn('#hs2',0.17); stageOut('#hs2',0.32);
+    /* 3 · the aho */
+    stageIn('#hs3',0.42); stageOut('#hs3',0.58);
+    /* 4 · the whenua */
+    stageIn('#hsLand',0.68); stageOut('#hsLand',0.80);
+    /* arrival — the real Raupunga site emerges beneath the rows */
+    heroTl.to('#heroPhoto',{opacity:0.5,duration:0.14,ease:'power2.inOut'},0.84)
+          .to('#fibreCanvas',{opacity:0.8,duration:0.12,ease:'none'},0.86);
+    /* 5 · grown for good — emerges from the environment */
+    stageIn('#hs4',0.87,0.08);
+    heroTl.to('#hScroll',{opacity:0,duration:0.05},0.05);
   }else{
     const f=document.getElementById('hs4');
     if(f){f.style.opacity='1';}
@@ -1695,7 +1813,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const tl=gsap.timeline({
       scrollTrigger:{
         trigger:'#processPin',start:'top top',end:`+=${n*55}%`,
-        pin:true,scrub:0.6,
+        pin:true,scrub:0.8,anticipatePin:1,
         onUpdate(self){
           const idx=Math.min(n-1,Math.floor(self.progress*n));
           num.textContent=String(idx+1).padStart(2,'0');
@@ -1765,6 +1883,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 
+  /* ----- Cinematic drift on the story photograph ----- */
+  gsap.utils.toArray('.story-img img').forEach(img=>{
+    gsap.fromTo(img,{scale:1.12,y:30},{
+      scale:1,y:-30,ease:'none',
+      scrollTrigger:{trigger:img.closest('.story'),start:'top bottom',end:'bottom top',scrub:true}
+    });
+  });
+
   /* ================================================================
      THE LIVING THREAD — built from data-aho anchors
      ================================================================ */
@@ -1773,7 +1899,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     const path=document.getElementById('threadPath');
     const nodesG=document.getElementById('threadNodes');
     const main=document.getElementById('journey');
-    let nodeEls=[],nodeFr=[];
+    let nodeEls=[],nodeYs=[];
+    let threadMap={L:0,ys:null};
 
     function buildThread(){
       const W=main.offsetWidth,H=main.offsetHeight;
@@ -1802,42 +1929,60 @@ document.addEventListener('DOMContentLoaded',()=>{
       path.setAttribute('d',d);
 
       nodesG.innerHTML='';
-      nodeEls=[];nodeFr=[];
-      const L=path.getTotalLength();
+      nodeEls=[];nodeYs=[];
       pts.slice(1,-1).forEach(p=>{
         const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
         c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',4);
         c.setAttribute('class','thread-node');
         nodesG.appendChild(c);
         nodeEls.push(c);
-        nodeFr.push(p.y/H);
+        nodeYs.push(p.y);
       });
 
+      /* sample the path so we can map a page Y to a length along the
+         thread — the drawn tip then always rides just below the fold,
+         so the aho is never out of sight, even through pinned scenes */
+      const L=path.getTotalLength();
+      const N=400, ys=new Float32Array(N+1);
+      for(let i=0;i<=N;i++) ys[i]=path.getPointAtLength(L*i/N).y;
+      threadMap={L,ys};
       path.style.strokeDasharray=L;
       path.style.strokeDashoffset=L;
-
-      const prev=ScrollTrigger.getById('aho-thread');
-      if(prev)prev.kill();
-      gsap.to(path,{
-        strokeDashoffset:0,ease:'none',
-        scrollTrigger:{
-          id:'aho-thread',
-          trigger:main,start:'top 60%',end:'bottom bottom',scrub:0.8,
-          onUpdate(self){
-            nodeEls.forEach((c,i)=>c.classList.toggle('lit',self.progress>=nodeFr[i]-0.02));
-          }
-        }
-      });
+      updateThread();
     }
+
+    function lenAtY(y){
+      const {L,ys}=threadMap;
+      let lo=0,hi=ys.length-1;
+      while(lo<hi){const mid=(lo+hi)>>1; if(ys[mid]<y)lo=mid+1;else hi=mid;}
+      return L*lo/(ys.length-1);
+    }
+
+    function updateThread(){
+      if(!threadMap.L)return;
+      const mainTop=main.getBoundingClientRect().top+window.scrollY;
+      const tipY=window.scrollY+window.innerHeight*0.92-mainTop;
+      const len=lenAtY(Math.max(0,Math.min(tipY,main.offsetHeight)));
+      path.style.strokeDashoffset=Math.max(0,threadMap.L-len);
+      nodeEls.forEach((c,i)=>c.classList.toggle('lit',nodeYs[i]<=tipY));
+    }
+
+    let ticking=false;
+    window.addEventListener('scroll',()=>{
+      if(ticking)return;
+      ticking=true;
+      requestAnimationFrame(()=>{updateThread();ticking=false;});
+    },{passive:true});
 
     window.addEventListener('load',()=>{
       buildThread();
       ScrollTrigger.refresh();
+      updateThread();
     });
     let rto;
     window.addEventListener('resize',()=>{
       clearTimeout(rto);
-      rto=setTimeout(()=>{buildThread();ScrollTrigger.refresh();},300);
+      rto=setTimeout(()=>{buildThread();ScrollTrigger.refresh();updateThread();},300);
     });
   }
 });
