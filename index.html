@@ -817,6 +817,21 @@ html.no-fx #threadLayer{display:none;}
   .story-img img{height:400px;}
 }
 
+/* Reduced-motion / small-screen story — narrative without the animation */
+.fx-story{display:none;padding:var(--s7) 0;border-top:1px solid var(--border);}
+html.no-fx .fx-story{display:block;}
+.fx-beat{
+  padding:var(--s4) 0 var(--s4) var(--s4);
+  border-left:1px solid var(--gold-border);
+  margin-bottom:var(--s3);
+}
+.fx-tereo{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:1.1rem;color:var(--teal-light);display:block;margin-bottom:6px;
+}
+.fx-beat h3{color:var(--white);margin-bottom:10px;}
+.fx-beat p{color:rgba(255,255,255,0.5);font-size:0.9375rem;line-height:1.75;max-width:52ch;}
+
 /* Section stitches — soft continuity between light and dark chapters */
 .stitch-dark{position:relative;}
 .stitch-dark::before{
@@ -905,7 +920,7 @@ html.no-fx .js-up{opacity:1;transform:none;}
     <div class="hstage-inner">
       <span class="h-tereo">Whiria te tangata.</span>
       <div class="h-big">Woven together, fibres become <em>unbreakable.</em></div>
-      <p class="h-sub">Raranga — the art of weaving — turns many fragile strands into one enduring thread. Strength was never a single strand. It is the weave.</p>
+      <p class="h-sub">Many people. Many stories. Many generations. One connection. Raranga — the art of weaving — turns fragile strands into one enduring whole.</p>
     </div>
   </div>
 
@@ -955,6 +970,33 @@ html.no-fx .js-up{opacity:1;transform:none;}
   <div class="hero-scroll" id="hScroll">
     <div class="hero-scroll-line"></div>
     <span class="hero-scroll-txt">Scroll to weave</span>
+  </div>
+</section>
+
+<!-- REDUCED-MOTION / SMALL-SCREEN STORY — the same narrative, told still.
+     Shown only when the animated hero is unavailable (html.no-fx). -->
+<section class="fx-story taniko" aria-label="Te Aho — the story of the thread">
+  <div class="wrap">
+    <div class="fx-beat">
+      <span class="fx-tereo">He aho tēnei.</span>
+      <h3>It begins with a single fibre.</h3>
+      <p>Harakeke — the flax our tūpuna wove into everything that mattered. Alone, one fibre is fragile. That was never the point.</p>
+    </div>
+    <div class="fx-beat">
+      <span class="fx-tereo">Whiria te tangata.</span>
+      <h3>Woven together, fibres become unbreakable.</h3>
+      <p>Many people. Many stories. Many generations. One connection.</p>
+    </div>
+    <div class="fx-beat">
+      <span class="fx-tereo">Te aho — te here o ngā mea katoa.</span>
+      <h3>Aho. The thread that connects.</h3>
+      <p>Ancestors to future generations. Whenua to cultivation. Mātauranga Māori to modern science. Nature to medicine.</p>
+    </div>
+    <div class="fx-beat">
+      <span class="fx-tereo">Ka rere te aho mā te whenua.</span>
+      <h3>The thread runs through the land.</h3>
+      <p>Across the contours of Raupunga, down into the rows where the next harvest is already growing.</p>
+    </div>
   </div>
 </section>
 
@@ -1539,7 +1581,7 @@ if(FX){
     const camera=new THREE.PerspectiveCamera(50,1,0.1,200);
     camera.position.set(0,0,46);
 
-    const STRANDS=850, SEG=16;
+    const STRANDS=1100, SEG=16;
     const verts=STRANDS*SEG*2;
     const aT=new Float32Array(verts);
     const aSeed=new Float32Array(verts);
@@ -1571,107 +1613,115 @@ if(FX){
       blending:THREE.AdditiveBlending,
       vertexShader:`
         uniform float uTime;
-        uniform float uP; /* 0..4 : fan, drift, weave, whenua, rows */
+        uniform float uP; /* 0..4 : fibres, gathering, weave, whenua, rows */
+        uniform vec3 uColGreen;
+        uniform vec3 uColTeal;
+        uniform vec3 uColGold;
         attribute float aT;
         attribute float aSeed;
         varying float vAlpha;
-        varying float vP;
-        varying float vT;
-        varying float vRand;
+        varying vec3 vCol;
         float h(float n){ return fract(sin(n*127.1)*43758.5453); }
         float ss(float a,float b,float x){ float t=clamp((x-a)/(b-a),0.0,1.0); return t*t*(3.0-2.0*t); }
         void main(){
           float s=aSeed;
           float h1=h(s+1.0),h2=h(s+2.0),h3=h(s+3.0),h4=h(s+4.0),h5=h(s+5.0);
 
-          /* per-strand staggered transitions — each completes at the integer */
           float p=uP;
-          float k1=ss(0.0,0.75,p-h1*0.25);
-          float k2=ss(1.0,1.75,p-h2*0.25);
-          float k3=ss(2.0,2.75,p-h3*0.25);
-          float k4=ss(3.0,3.75,p-h4*0.25);
+          float k1=ss(0.0,0.85,p-h1*0.15);
+          float k2=ss(1.0,1.85,p-h2*0.15);
+          float k3=ss(2.0,2.85,p-h3*0.15);
+          float k4=ss(3.0,3.85,p-h4*0.15);
 
-          /* A — harakeke fan */
-          float bladeId=floor(h1*26.0);
-          float ang=(h(bladeId+7.0)-0.5)*2.5;
-          float len=16.0+h2*11.0;
-          float sway=sin(uTime*0.7+bladeId*1.7)*0.05*aT + sin(uTime*0.35+s*6.28)*0.02*aT;
-          float a=ang+sway+(h3-0.5)*0.09;
-          vec3 posA=vec3(sin(a)*aT*len+(h4-0.5)*0.8, -16.0+cos(a)*aT*len, (h5-0.5)*5.0);
-          posA.x += ang*aT*aT*4.5;
+          /* S0 — individual fibres floating free across the screen,
+             each with its own length, depth, and drift */
+          float lenA=10.0+h1*14.0;
+          float xA=mix(-32.0,32.0,h4)+sin(uTime*0.12+s*2.1)*1.5+(aT-0.5)*lenA;
+          float yA=mix(-14.0,14.0,h2)
+                  +sin(aT*4.0+s*6.28+uTime*0.5)*1.4
+                  +sin(uTime*0.23+s)*0.8;
+          vec3 posA=vec3(xA,yA,mix(-10.0,6.0,h3));
 
-          /* B — loose drifting fibres */
-          vec3 baseB=vec3(mix(-23.0,23.0,h2), mix(-10.0,12.0,h3), mix(-7.0,7.0,h4));
-          vec3 posB=baseB+vec3(aT*15.0-7.5,
-            sin(aT*6.283+uTime*0.8+s*10.0)*1.3+sin(uTime*0.4+s*3.0)*1.6,
-            cos(aT*4.0+uTime*0.5+s)*0.9);
+          /* shared lane — the SAME strand keeps its lane through gathering,
+             weave, and contours, so every morph reads as one motion */
+          float lane=floor(h2*24.0);
+          float over=mod(lane,2.0)<1.0?1.0:-1.0;
+          float xW=mix(-32.0,30.0,aT);
+          float sag=sin(xW*0.08)*1.5;
 
-          /* C — the woven aho: three tributaries converging into one */
-          float trib=floor(h5*3.0)-1.0;
-          float conv=ss(0.0,0.7,aT);
-          float x=mix(-27.0,27.0,aT);
-          float baseY=sin(aT*3.4+0.5)*2.4;
-          float ply=floor(h3*3.0)*2.0944;
-          float twist=aT*40.0+ply+uTime*0.5;
-          float rad=(0.5+h4*0.2)*(1.0+(1.0-conv)*1.2);
-          vec3 posC=vec3(x,
-            baseY+trib*4.2*(1.0-conv)+sin(twist)*rad+sin(uTime*0.6+s)*0.15,
-            trib*2.4*(1.0-conv)+cos(twist)*rad);
+          /* S1 — drawn toward one another: a loose aligned band */
+          float env1=mix(1.0,0.35,ss(-4.0,24.0,xW));
+          vec3 posG=vec3(xW,
+            (lane/23.0-0.5)*16.0*env1+sag+sin(xW*0.5+lane*1.7+uTime*0.4)*0.7*env1,
+            cos(xW*0.5+lane*1.7)*0.7*env1+(h3-0.5)*3.0*env1);
 
-          /* D — contour lines of the whenua */
-          float level=floor(h1*12.0);
+          /* S2 — the weave: an interconnected surface of visible fibres
+             that tapers rightward into one bright thread */
+          float env2=mix(1.0,0.05,ss(-4.0,22.0,xW));
+          vec3 posW=vec3(xW,
+            (lane/23.0-0.5)*7.0*env2+sag
+              +sin(xW*0.55+lane*1.7)*0.9*over*env2
+              +sin(uTime*0.5+s)*0.08,
+            cos(xW*0.55+lane*1.7)*0.75*over*env2+(h3-0.5)*1.2*env2);
+
+          /* S3 — the weave relaxes into the whenua: lanes become
+             ridgelines, valleys, and pathways */
           float lx=mix(-32.0,32.0,aT);
-          float hill=sin(lx*0.11+level*1.9)*1.5+sin(lx*0.05+level*0.7)*2.6;
+          float hill=sin(lx*0.11+lane*0.55)*1.6+sin(lx*0.045+lane*0.23)*2.8;
           vec3 posD=vec3(lx,
-            -9.0+level*1.55+hill*0.6+sin(uTime*0.3+level)*0.12,
-            6.0-level*1.3);
+            -9.5+lane*1.05+hill*0.55+sin(uTime*0.3+lane)*0.1,
+            5.0-lane*0.9);
 
-          /* E — cultivation rows: strands become plant tufts */
+          /* S4 — cultivation rows; a few strands remain one golden aho
+             that keeps travelling through the land */
+          float isAho=step(0.965,h5);
           float row=floor(h1*9.0);
           float rx=mix(-18.0,18.0,h2)*(1.0+row*0.10);
           float tuftA=(h3-0.5)*1.7+sin(uTime*0.8+s*4.0)*0.06;
           float th=2.4+h4*1.8;
-          vec3 posE=vec3(rx+sin(tuftA)*aT*th*0.7,
+          vec3 tuft=vec3(rx+sin(tuftA)*aT*th*0.7,
             -8.0+aT*th+row*0.35,
             9.0-row*3.2);
+          float tw=aT*30.0+uTime*0.6+h3*6.28;
+          vec3 ahoPath=vec3(mix(-30.0,26.0,aT),
+            -6.3+sin(aT*6.0)*0.5+sin(tw)*0.35,
+            mix(-16.0,12.0,aT)+cos(tw)*0.35);
+          vec3 posE=mix(tuft,ahoPath,isAho);
 
-          /* organic swirl during each morph — arcs, never straight lines */
+          /* gentle settle arcs during each morph — calmer as land forms */
           float w1=k1*(1.0-k1),w2=k2*(1.0-k2),w3=k3*(1.0-k3),w4=k4*(1.0-k4);
           vec3 swirl=vec3(sin(s*7.0+uTime*0.4),cos(s*5.0),sin(s*3.0))
-                     *(w1*5.0+w2*6.0+w3*5.0+w4*4.0);
+                     *(w1*4.5+w2*3.5+w3*2.5+w4*2.0);
 
-          vec3 posn=mix(posA,posB,k1);
-          posn=mix(posn,posC,k2);
+          vec3 posn=mix(posA,posG,k1);
+          posn=mix(posn,posW,k2);
           posn=mix(posn,posD,k3);
           posn=mix(posn,posE,k4);
           posn+=swirl;
 
-          vP=p; vT=aT; vRand=h5;
+          /* colour — many distinct tones uniting into gold where the weave
+             converges, then whenua teal, then living green with gold */
+          vec3 base=mix(uColGreen,uColTeal,h2)*(0.75+0.5*h4);
+          float unite=max(k2*ss(-4.0,22.0,posn.x),0.0);
+          vec3 col=mix(base,uColGold,unite*(1.0-k3));
+          col=mix(col,uColTeal*0.9,k3*(1.0-k4));
+          vec3 plant=mix(uColGreen*1.15,uColGold,aT*0.5);
+          col=mix(col,plant,k4);
+          col=mix(col,uColGold*1.3,isAho*k4);
+          vCol=col;
+
           float taper=sin(aT*3.1416);
-          float weaveBoost=0.55*ss(1.5,2.0,p)*(1.0-ss(2.2,3.0,p));
-          float rowBoost=0.3*ss(3.4,3.9,p);
-          vAlpha=taper*(0.22+0.5*h5)*(1.0+weaveBoost+rowBoost);
+          float conv=1.0+unite*1.2;
+          float ahoBoost=1.0+isAho*k4*1.5;
+          vAlpha=taper*(0.2+0.5*h5)*conv*ahoBoost*(1.0-0.25*k3*(1.0-k4));
 
           gl_Position=projectionMatrix*modelViewMatrix*vec4(posn,1.0);
         }`,
       fragmentShader:`
-        uniform vec3 uColGreen;
-        uniform vec3 uColTeal;
-        uniform vec3 uColGold;
         varying float vAlpha;
-        varying float vP;
-        varying float vT;
-        varying float vRand;
+        varying vec3 vCol;
         void main(){
-          vec3 col=mix(uColGreen,uColTeal,clamp(vP,0.0,1.0)*0.6);
-          float gold=smoothstep(1.2,2.0,vP)*(1.0-smoothstep(2.3,3.1,vP));
-          col=mix(col,uColGold,gold);
-          float whenua=smoothstep(2.3,3.0,vP)*(1.0-smoothstep(3.2,3.9,vP));
-          col=mix(col,uColTeal*0.85,whenua);
-          float rows=smoothstep(3.2,3.9,vP);
-          vec3 plant=mix(uColGreen*1.1,uColGold,vT*0.55+vRand*0.1);
-          col=mix(col,plant,rows);
-          gl_FragColor=vec4(col,vAlpha);
+          gl_FragColor=vec4(vCol,vAlpha);
         }`
     });
 
@@ -1700,19 +1750,22 @@ if(FX){
     (function tick(){
       heroUniforms.uTime.value=clock.getElapsedTime();
       const P=heroUniforms.uP.value; /* 0..4 */
-      /* cinematic camera path: push in to the weave, rise over the
-         whenua, then descend low into the cultivation rows */
-      let cz=lerp(46,33,P/2);
-      cz=lerp(cz,40,P-2);
+      /* one continuous camera move: wide among the fibres, drift toward
+         the point where many become one, rise over the whenua, then
+         descend low into the cultivation rows */
+      let cz=lerp(50,38,P/2);
+      cz=lerp(cz,43,P-2);
       cz=lerp(cz,30,P-3);
+      let cxs=lerp(0,5,P-1);
+      cxs=lerp(cxs,0,P-2);
       let cy=lerp(0,5,P-2);
       cy=lerp(cy,1.2,P-3);
       let ly=lerp(0,1.5,P-2);
       ly=lerp(ly,2.6,P-3);
       camX+=(mouseX*3-camX)*0.04;
       camY+=(-mouseY*2-camY)*0.04;
-      camera.position.set(camX,cy+camY,cz);
-      camera.lookAt(0,ly,0);
+      camera.position.set(cxs+camX,cy+camY,cz);
+      camera.lookAt(cxs*0.6,ly,0);
       renderer.render(scene,camera);
       requestAnimationFrame(tick);
     })();
@@ -1736,39 +1789,44 @@ document.addEventListener('DOMContentLoaded',()=>{
     const setMark=i=>marks.forEach((m,j)=>m.classList.toggle('on',j===i));
     const heroTl=gsap.timeline({
       scrollTrigger:{
-        trigger:'#hero',start:'top top',end:'+=520%',
+        trigger:'#hero',start:'top top',end:'+=560%',
         pin:true,scrub:0.9,anticipatePin:1,
         onUpdate(self){
           const p=self.progress;
-          setMark(p<0.16?0:p<0.42?1:p<0.68?2:p<0.87?3:4);
+          setMark(p<0.15?0:p<0.43?1:p<0.63?2:p<0.85?3:4);
         }
       }
     });
     /* helper: staggered per-line reveals — text animates independently
        of the fibre field, film-title style */
-    const stageIn=(sel,at,dur=0.06)=>{
+    const stageIn=(sel,at,dur=0.05)=>{
       heroTl.to(sel,{opacity:1,duration:0.01},at)
             .fromTo(sel+' .hstage-inner > *',{opacity:0,y:44},
-              {opacity:1,y:0,duration:dur,stagger:0.014,ease:'power2.out'},at);
+              {opacity:1,y:0,duration:dur,stagger:0.012,ease:'power2.out'},at);
     };
     const stageOut=(sel,at)=>{
-      heroTl.to(sel+' .hstage-inner > *',{opacity:0,y:-36,duration:0.045,stagger:0.008,ease:'power2.in'},at)
-            .to(sel,{opacity:0,duration:0.02},at+0.05);
+      heroTl.to(sel+' .hstage-inner > *',{opacity:0,y:-36,duration:0.04,stagger:0.007,ease:'power2.in'},at)
+            .to(sel,{opacity:0,duration:0.02},at+0.045);
     };
-    heroTl.to(heroUniforms.uP,{value:4,ease:'none',duration:0.92},0);
-    /* 1 · the fibre */
-    stageOut('#hs1',0.08);
-    /* 2 · the weave */
-    stageIn('#hs2',0.17); stageOut('#hs2',0.32);
-    /* 3 · the aho */
-    stageIn('#hs3',0.42); stageOut('#hs3',0.58);
-    /* 4 · the whenua */
-    stageIn('#hsLand',0.68); stageOut('#hsLand',0.80);
+    /* the sequence advances in plateaus — the scene settles while each
+       message is on screen, and morphs happen between messages */
+    heroTl.to(heroUniforms.uP,{value:1,ease:'power1.inOut',duration:0.14},0.10)
+          .to(heroUniforms.uP,{value:2,ease:'power1.inOut',duration:0.14},0.24)
+          .to(heroUniforms.uP,{value:3,ease:'power1.inOut',duration:0.12},0.56)
+          .to(heroUniforms.uP,{value:4,ease:'power1.inOut',duration:0.12},0.76);
+    /* 1 · many individual fibres (scene holds until 0.10) */
+    stageOut('#hs1',0.07);
+    /* 2 · the weave forms, then settles for its message */
+    stageIn('#hs2',0.27); stageOut('#hs2',0.39);
+    /* 3 · the aho — many become one (weave still settled) */
+    stageIn('#hs3',0.44); stageOut('#hs3',0.52);
+    /* 4 · the whenua (contours settled 0.68–0.76) */
+    stageIn('#hsLand',0.685); stageOut('#hsLand',0.745);
     /* arrival — the real Raupunga site emerges beneath the rows */
-    heroTl.to('#heroPhoto',{opacity:0.5,duration:0.14,ease:'power2.inOut'},0.84)
-          .to('#fibreCanvas',{opacity:0.8,duration:0.12,ease:'none'},0.86);
-    /* 5 · grown for good — emerges from the environment */
-    stageIn('#hs4',0.87,0.08);
+    heroTl.to('#heroPhoto',{opacity:0.5,duration:0.10,ease:'power2.inOut'},0.87)
+          .to('#fibreCanvas',{opacity:0.8,duration:0.10,ease:'none'},0.89);
+    /* 5 · grown for good — rises from the environment and holds */
+    stageIn('#hs4',0.90,0.07);
     heroTl.to('#hScroll',{opacity:0,duration:0.05},0.05);
   }else{
     const f=document.getElementById('hs4');
@@ -1958,12 +2016,18 @@ document.addEventListener('DOMContentLoaded',()=>{
       return L*lo/(ys.length-1);
     }
 
+    let lastOff=-1;
     function updateThread(){
       if(!threadMap.L)return;
       const mainTop=main.getBoundingClientRect().top+window.scrollY;
       const tipY=window.scrollY+window.innerHeight*0.92-mainTop;
       const len=lenAtY(Math.max(0,Math.min(tipY,main.offsetHeight)));
-      path.style.strokeDashoffset=Math.max(0,threadMap.L-len);
+      const off=Math.max(0,threadMap.L-len);
+      /* only touch the DOM when the tip actually moved — avoids
+         repainting the full-page SVG needlessly */
+      if(Math.abs(off-lastOff)<0.5)return;
+      lastOff=off;
+      path.style.strokeDashoffset=off;
       nodeEls.forEach((c,i)=>c.classList.toggle('lit',nodeYs[i]<=tipY));
     }
 
