@@ -1,6 +1,6 @@
 const { NAV, CTA } = require('./nav-config');
 
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
 // Bilingual label: both languages in one grid cell, sized to the wider.
 // aria-label pins the accessible name to English so it never mutates.
@@ -15,10 +15,13 @@ function isActive(href, currentPage) {
 
 function renderNav(currentPage) {
   // Which parent owns the current page? Defaults to Learn (index 0).
+  // First match wins (not last) - e.g. on the homepage, Learn's and Buy's
+  // children both resolve to index.html, and Learn (index 0) must win.
   let activeIdx = 0;
-  NAV.forEach((p, i) => {
-    if (p.children.some(c => isActive(c.href, currentPage)) || isActive(p.href, currentPage)) activeIdx = i;
-  });
+  const foundIdx = NAV.findIndex((p) =>
+    p.children.some(c => isActive(c.href, currentPage)) || isActive(p.href, currentPage)
+  );
+  if (foundIdx !== -1) activeIdx = foundIdx;
   // A childless parent cannot populate the bar - fall back to Learn.
   if (!NAV[activeIdx].children.length) activeIdx = 0;
 
@@ -26,13 +29,13 @@ function renderNav(currentPage) {
     const caret = p.children.length ? '<span class="nav-caret" aria-hidden="true"></span>' : '';
     const hasKids = p.children.length ? ' data-haskids="1"' : '';
     return `<li class="nav-parent${i === activeIdx ? ' is-active' : ''}"${hasKids} data-idx="${i}">` +
-           `<a href="${p.href}" aria-label="${esc(p.en)}">${label(p)}${caret}</a></li>`;
+           `<a href="${esc(p.href)}" aria-label="${esc(p.en)}">${label(p)}${caret}</a></li>`;
   }).join('\n        ');
 
   const bars = NAV.map((p, i) => {
     if (!p.children.length) return '';
     const kids = p.children.map(c =>
-      `<li><a href="${c.href}" aria-label="${esc(c.en)}">${label(c)}</a></li>`
+      `<li><a href="${esc(c.href)}" aria-label="${esc(c.en)}">${label(c)}</a></li>`
     ).join('\n            ');
     return `<ul class="nav-sub" data-for="${i}"${i === activeIdx ? '' : ' hidden'}>\n            ${kids}\n          </ul>`;
   }).filter(Boolean).join('\n          ');
@@ -45,7 +48,7 @@ function renderNav(currentPage) {
       </button>
       <ul class="nav-links" id="navDrawer">
         ${parents}
-        <li class="nav-cta-wrap"><a href="${CTA.href}" aria-label="${esc(CTA.en)}">${label(CTA)}</a></li>
+        <li class="nav-cta-wrap"><a href="${esc(CTA.href)}" aria-label="${esc(CTA.en)}">${label(CTA)}</a></li>
       </ul>
     </div>
     <div class="nav-bar2">

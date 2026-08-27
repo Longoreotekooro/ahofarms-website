@@ -41,6 +41,26 @@ pages.forEach(p => {
   });
 });
 
+// 4. Active-parent selection: first matching parent must win (regression
+// guard for the last-match-wins bug that put Buy active on the homepage).
+const { renderNav } = require('./render-nav');
+const ACTIVE_PARENT_CASES = [
+  ['index.html', 'Learn'],
+  ['about.html', 'Learn'],
+  ['products.html', 'Buy'],
+  ['news.html', 'Learn'],
+  ['investors.html', 'Learn'],
+];
+ACTIVE_PARENT_CASES.forEach(([page, expected]) => {
+  const html = renderNav(page);
+  const activeMatch = html.match(/<li class="nav-parent is-active"[^>]*data-idx="(\d+)"/);
+  const activeIdx = activeMatch ? Number(activeMatch[1]) : -1;
+  const actual = activeIdx === -1 ? '(none)' : NAV[activeIdx].en;
+  if (actual !== expected) {
+    fail(`ACTIVE PARENT: renderNav('${page}') -> ${actual}, expected ${expected}`);
+  }
+});
+
 if (failures.length) {
   console.error(`FAIL (${failures.length}):`);
   failures.forEach(f => console.error('  ' + f));
