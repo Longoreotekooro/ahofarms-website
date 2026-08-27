@@ -13,14 +13,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ================================================================
-   AHO FARMS — DESIGN SYSTEM v5 · "AHO × MATARIKI"
-   Aho is the thread. Matariki is the light.
-   — Cinematic hero film: flower → trichome → droplet → cosmos → Matariki
-   — The film does not end: it becomes the page (deep night continues)
-   — A living gold thread (SVG) travels the page, connecting sections
-   — Points of light = Matariki · lines = Aho — the interface language
+   AHO FARMS — DESIGN SYSTEM v6 · "ONE CONTINUOUS THREAD"
+   The film does not end: it becomes the page.
+   One evolving background — void → deep night → living green →
+   earth → night again. No section boundaries. No colour blocks.
+   The aho (gold thread) is the only navigation between chapters.
+   Matariki is a feeling — points of light, never a theme.
    Brand colours (teal / gold / night greens) remain the identity.
-   The celestial palette (void, deep night, celestial blue) is atmosphere.
    ================================================================ */
 
 :root {
@@ -49,6 +48,7 @@
   --void:      #050505;
   --charcoal:  #101112;
   --deep:      #07101A;
+  --earth:     #120e09;
   --starlight: #F3F1EB;
   --silver:    #A8ADB3;
   --celestial: #8DAFC7;
@@ -59,6 +59,11 @@
   --gold-border: rgba(201,160,106,0.28);
   --hairline:    rgba(243,241,235,0.08);
 
+  /* glass — content floats inside space, never on rectangles */
+  --glass-bg:     rgba(18,24,24,0.38);
+  --glass-border: rgba(243,241,235,0.07);
+  --glass-shadow: 0 30px 80px rgba(0,0,0,0.45);
+
   --font-h: 'Cormorant Garamond', Georgia, serif;
   --font-b: 'Inter', system-ui, sans-serif;
 
@@ -66,6 +71,7 @@
 
   --s1:8px; --s2:16px; --s3:24px; --s4:32px;
   --s5:48px; --s6:64px; --s7:96px; --s8:128px;
+  --s9:clamp(80px, 10vh, 120px);
   --max:1280px;
 }
 
@@ -76,7 +82,7 @@ body{
   font-size:16px;line-height:1.65;
   color:var(--starlight);background:var(--void);
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  overflow-x:clip;
 }
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
@@ -93,7 +99,7 @@ h1,h2,h3,h4{
   color:var(--starlight);
 }
 h1{font-size:clamp(2.8rem,5.5vw,4.6rem);}
-h2{font-size:clamp(2.2rem,4.4vw,4rem);}
+h2{font-size:clamp(2.4rem,4.8vw,4.4rem);}
 h3{font-size:clamp(1.4rem,2vw,1.9rem);}
 h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 
@@ -114,21 +120,24 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   display:block;margin-bottom:var(--s2);opacity:0.9;
 }
 
-/* micro section labels — 01 / AHO etc. */
+/* chapter markers — a whisper, not a heading. The thread passes
+   through each of these (they are the data-aho anchors). */
 .mlab{
   display:flex;align-items:center;gap:14px;
-  font-size:0.625rem;font-weight:700;letter-spacing:0.24em;
-  text-transform:uppercase;color:var(--silver);
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.3em;
+  text-transform:uppercase;color:rgba(168,173,179,0.55);
   margin-bottom:var(--s5);
 }
 .mlab::before{
   content:'';width:40px;height:1px;
-  background:linear-gradient(to right,var(--gold),transparent);
+  background:linear-gradient(to right,rgba(201,160,106,0.7),transparent);
 }
-.mlab b{color:var(--gold);font-weight:700;}
+.mlab b{color:rgba(201,160,106,0.85);font-weight:700;}
 
 .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
-.section{padding:var(--s8) 0;position:relative;}
+/* editorial widths — different chapters breathe at different measures */
+.w-narrow{max-width:760px;margin-left:auto;margin-right:auto;padding:0 var(--s4);}
+.w-mid{max-width:1000px;margin-left:auto;margin-right:auto;padding:0 var(--s4);}
 
 /* ================================================================
    BUTTONS
@@ -152,16 +161,33 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .btn-sm{padding:10px 20px;font-size:0.75rem;}
 
 /* ================================================================
-   REVEALS — IntersectionObserver + CSS only
+   MOTION LANGUAGE — one vocabulary, everywhere.
+   Slow. Organic. Nothing bounces. Nothing rushes.
    ================================================================ */
 .reveal{
-  opacity:0;transform:translateY(22px);
-  transition:opacity 0.9s var(--ease),transform 0.9s var(--ease);
+  opacity:0;transform:translateY(26px);
+  transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);
 }
 .reveal.in{opacity:1;transform:none;}
-.reveal.d1{transition-delay:0.08s;}
-.reveal.d2{transition-delay:0.16s;}
-.reveal.d3{transition-delay:0.24s;}
+.reveal.d1{transition-delay:0.1s;}
+.reveal.d2{transition-delay:0.2s;}
+.reveal.d3{transition-delay:0.3s;}
+.reveal.d4{transition-delay:0.4s;}
+
+/* emerge — content condenses out of the atmosphere (adds blur) */
+.emerge{
+  opacity:0;transform:translateY(34px);
+  filter:blur(7px);
+  transition:opacity 1.5s var(--ease),transform 1.5s var(--ease),filter 1.5s var(--ease);
+}
+.emerge.in{opacity:1;transform:none;filter:blur(0);}
+
+/* mask reveal — imagery is unveiled, not pasted */
+.unveil{
+  clip-path:inset(8% 4% 8% 4% round 4px);
+  transition:clip-path 1.6s var(--ease);
+}
+.unveil.in{clip-path:inset(0 0 0 0 round 4px);}
 
 /* ================================================================
    STARS — points of light (no emoji, radial gradients only)
@@ -269,7 +295,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 
 /* ================================================================
-   01 · HERO — the film IS the opening experience
+   01 · HERO — the film IS the opening experience (preserved)
    flower & leaf → trichomes → droplet → cosmos → Matariki
    ================================================================ */
 .hero{
@@ -432,18 +458,75 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 html.no-video .hero-sound{display:none;}
 
 /* ================================================================
+   THE JOURNEY — one evolving environment.
+   A single background travels: void → celestial deep → living
+   green → charcoal → earth → deep night → void. No section owns
+   a colour. Chapters are positions in the journey, not blocks.
+   ================================================================ */
+#journey{
+  position:relative;
+  background:linear-gradient(to bottom,
+    var(--void)    0%,
+    #07101A        7%,
+    #0c1517       15%,
+    #0f1a18       24%,   /* the living green — cultivation */
+    #101817       33%,
+    #0b1113       42%,
+    #101112       52%,   /* charcoal — science */
+    #12100c       63%,   /* earth — people */
+    #0d0f10       73%,
+    #07101A       86%,   /* celestial deep — the return */
+    var(--void)  100%);
+}
+/* film grain continues over the whole journey — one material */
+.page-grain{
+  position:fixed;inset:0;pointer-events:none;z-index:50;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.35;mix-blend-mode:screen;
+}
+/* atmospheric drifts — soft light that crosses chapter boundaries,
+   so no chapter ever visibly starts or stops */
+.drift{
+  position:absolute;pointer-events:none;z-index:0;
+  border-radius:50%;filter:blur(90px);
+}
+.drift.teal{background:radial-gradient(circle,rgba(115,168,165,0.07),transparent 65%);}
+.drift.gold{background:radial-gradient(circle,rgba(201,160,106,0.06),transparent 65%);}
+.drift.blue{background:radial-gradient(circle,rgba(141,175,199,0.07),transparent 65%);}
+
+.chapter{position:relative;padding:var(--s9) 0;}
+.chapter > *:not(.drift):not(.starfield){position:relative;z-index:1;}
+
+/* ================================================================
    CREDENTIALS — a quiet thread of proof between film and story
    ================================================================ */
 .creds{
   background:transparent;
   padding:var(--s4) 0;position:relative;z-index:6;
 }
-.creds-inner{
-  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:var(--s3);flex-wrap:wrap;
+/* one-line marquee — the proof travels like the thread itself */
+.creds-viewport{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
 }
-.cred{display:flex;align-items:center;gap:10px;}
+.creds-viewport:hover .creds-track{animation-play-state:paused;}
+.creds-track{
+  display:flex;width:max-content;
+  animation:credsScroll 36s linear infinite;
+  will-change:transform;
+}
+.creds-group{
+  display:flex;align-items:center;gap:var(--s5);
+  padding-right:var(--s5);flex-shrink:0;
+}
+@keyframes credsScroll{
+  to{transform:translateX(-50%);}
+}
+@media (prefers-reduced-motion: reduce){
+  .creds-track{animation:none;}
+}
+.cred{display:flex;align-items:center;gap:10px;white-space:nowrap;}
 .cred-dot{
   width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;
   box-shadow:0 0 8px rgba(201,160,106,0.55);
@@ -452,123 +535,284 @@ html.no-video .hero-sound{display:none;}
 .cred-div{width:24px;height:1px;background:var(--hairline);flex-shrink:0;}
 
 /* ================================================================
-   02 · AHO — the meaning of the name (night continues from the film)
+   02 · WHY AHO EXISTS — the meaning of the name
    ================================================================ */
-.aho-sec{
+.why-inner{max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
+.why-inner h2{
+  font-size:clamp(2.4rem,4.6vw,4.2rem);font-weight:300;
+  margin:var(--s3) 0 0;max-width:16ch;
+}
+/* the bleed is clipped at the chapter, not the page — overflow-x
+   clip does not create a scroll container, so sticky still works */
+#aho{overflow-x:clip;}
+/* editorial layout — copy runs down the left; the weave is a tall
+   panel on the right that bleeds off the edge of the screen */
+.why-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);
+  grid-template-rows:auto 1fr;
+  column-gap:clamp(var(--s5),6vw,var(--s7));
+  align-items:start;
+}
+.why-head{grid-column:1;grid-row:1;}
+.why-copy{grid-column:1;grid-row:2;}
+.why-copy .why-def{margin:var(--s6) 0 var(--s6) 0;}
+/* the aho itself — woven muka fibre, catching the light */
+.why-visual{
+  grid-column:2;grid-row:1 / span 2;
+  position:sticky;top:96px;
+  border-radius:6px 0 0 6px;overflow:hidden;
+  box-shadow:var(--glass-shadow);
+  margin-right:calc(-1 * max((100vw - 1280px) / 2 + 32px, 32px));
+}
+.why-visual::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(5,5,5,0.35),transparent 45%),
+             linear-gradient(to top,rgba(5,5,5,0.4),transparent 30%);
+}
+.why-visual img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  transform:scale(1.06);transition:transform 8s var(--ease);
+}
+.why-visual.in img{transform:scale(1);}
+/* the definition — a quiet dictionary entry, pinned to a thread */
+.why-def{
   position:relative;
-  background:linear-gradient(to bottom,var(--void) 0%,var(--deep) 55%,var(--void) 100%);
-  padding:var(--s8) 0;
+  padding:var(--s2) 0 var(--s2) var(--s4);
 }
-.aho-inner{max-width:960px;margin:0 auto;padding:0 var(--s4);position:relative;z-index:1;}
-.aho-sec h2{
-  font-size:clamp(2.6rem,5.4vw,4.8rem);font-weight:300;
-  margin:var(--s3) 0 var(--s6);max-width:18ch;
+.why-def::before{
+  content:'';position:absolute;left:0;top:4px;bottom:4px;width:1px;
+  background:linear-gradient(to bottom,var(--gold),rgba(201,160,106,0.05));
 }
-.mani-lines{max-width:680px;}
+.why-def::after{
+  content:'';position:absolute;left:-2px;top:2px;width:5px;height:5px;
+  border-radius:50%;background:var(--gold);
+  box-shadow:0 0 10px rgba(201,160,106,0.8);
+}
+.why-def-type{
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.26em;
+  text-transform:uppercase;color:rgba(168,173,179,0.6);
+  display:block;margin-bottom:var(--s2);
+}
+.why-def-word{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(3.2rem,6vw,5.2rem);color:var(--gold-light);
+  line-height:1;display:block;margin-bottom:var(--s4);
+}
+.why-sense{display:flex;gap:14px;padding:10px 0;}
+.why-sense-num{
+  font-family:var(--font-h);font-style:italic;font-size:0.9rem;
+  color:rgba(201,160,106,0.75);flex-shrink:0;line-height:1.8;
+}
+.why-sense p{font-size:0.9375rem;color:var(--silver);line-height:1.75;max-width:34ch;}
+.why-sense b{color:var(--starlight);font-weight:500;}
+.why-def-note{
+  margin-top:var(--s3);
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:1.2rem;color:var(--starlight);line-height:1.6;max-width:28ch;
+}
+/* the connections — numbered rows, each thread draws itself in */
+.mani-lines{border-top:1px solid var(--hairline);}
 .mani-line{
+  position:relative;
+  display:flex;align-items:baseline;gap:18px;
   font-family:var(--font-h);
-  font-size:clamp(1.25rem,2.3vw,1.9rem);font-weight:300;
-  color:var(--silver);line-height:1.5;
-  display:block;padding:14px 0;
+  font-size:clamp(1.35rem,2.4vw,2rem);font-weight:300;
+  color:var(--silver);line-height:1.4;
+  padding:26px 0;
   border-bottom:1px solid var(--hairline);
+  transition:padding-left 0.45s var(--ease);
+}
+.mani-line:hover{padding-left:12px;}
+.mani-num{
+  font-size:0.85rem;font-style:italic;
+  color:rgba(201,160,106,0.7);flex-shrink:0;
 }
 .mani-line strong{font-weight:500;color:var(--starlight);}
 .mani-line .mani-thread{
-  display:inline-block;width:44px;height:1px;vertical-align:middle;
+  display:inline-block;width:clamp(32px,5vw,60px);height:1px;vertical-align:middle;
   background:linear-gradient(to right,var(--gold),rgba(141,175,199,0.7));
-  margin:0 16px;position:relative;top:-4px;
+  margin:0 16px;position:relative;top:-5px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 1.3s var(--ease) 0.35s;
 }
+.mani-line.in .mani-thread{transform:scaleX(1);}
 .mani-line .mani-thread::after{
   content:'';position:absolute;right:-2px;top:-1.5px;width:4px;height:4px;
   border-radius:50%;background:var(--celestial);
   box-shadow:0 0 7px rgba(141,175,199,0.8);
+  opacity:0;transition:opacity 0.5s ease 1.5s;
 }
-.manifesto-note{
-  margin-top:var(--s6);font-size:0.9375rem;color:var(--silver);
-  max-width:56ch;line-height:1.8;
-}
-
-/* ================================================================
-   03 · MATARIKI — the light (celestial deep)
-   ================================================================ */
-.matariki-sec{
-  position:relative;
-  background:
-    radial-gradient(130% 90% at 50% 30%, #0a1626 0%, var(--deep) 45%, var(--void) 100%);
-  padding:var(--s8) 0 var(--s7);
-  overflow:hidden;
-}
-.matariki-hdr{max-width:760px;position:relative;z-index:2;}
-.matariki-hdr p{color:var(--silver);max-width:58ch;}
-.matariki-sky{
-  position:relative;margin:var(--s6) auto 0;max-width:1100px;z-index:1;
-}
-.matariki-sky svg{display:block;width:100%;height:auto;}
-.m-halo{fill:rgba(141,175,199,0.14);transition:fill 0.6s var(--ease);}
-.m-core{fill:#dfe9f3;}
-.m-spike{stroke:rgba(223,233,243,0.55);stroke-width:1;stroke-linecap:round;}
-.mstar{transition:opacity 0.6s;}
-.mstar .m-core{
-  animation:starPulse var(--sp,6s) ease-in-out infinite;
-  animation-delay:var(--sd,0s);
-}
-@keyframes starPulse{
-  0%,100%{opacity:0.75;}
-  50%{opacity:1;}
-}
-.mstar.near .m-halo{fill:rgba(141,175,199,0.4);}
-.matariki-note{
-  text-align:center;
-  font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:rgba(168,173,179,0.5);margin-top:var(--s3);
-}
-.impact-facts{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s4);
-  margin-top:var(--s7);position:relative;z-index:2;
-}
-.ifact{border-top:1px solid var(--hairline);padding-top:var(--s3);position:relative;}
-.ifact::before{
-  content:'';position:absolute;top:-2.5px;left:0;width:4px;height:4px;
-  border-radius:50%;background:var(--gold);
-  box-shadow:0 0 8px rgba(201,160,106,0.6);
-}
-.ifact-n{
-  font-family:var(--font-h);font-size:2.6rem;font-weight:300;
-  color:var(--starlight);display:block;line-height:1;margin-bottom:10px;
-}
-.ifact-l{font-size:0.8125rem;color:var(--silver);line-height:1.6;}
-.impact-cta{margin-top:var(--s6);display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2;}
+.mani-line.in .mani-thread::after{opacity:1;}
 @media(max-width:900px){
-  .impact-facts{grid-template-columns:repeat(2,1fr);}
+  .why-layout{grid-template-columns:1fr;grid-template-rows:none;row-gap:var(--s6);}
+  .why-head,.why-copy,.why-visual{grid-column:auto;grid-row:auto;}
+  .why-visual{position:static;}
+  .why-visual img{aspect-ratio:4/3;}
 }
 
 /* ================================================================
-   04 · DISCOVER — real offerings, editorial (no cards)
+   03 · THE LAND — full-bleed cinema + floating numbers
    ================================================================ */
-.discover-sec{
-  position:relative;background:var(--void);padding:var(--s8) 0 0;
+.cine{
+  position:relative;height:min(78vh,760px);overflow:hidden;
+  margin:var(--s5) 0;
 }
-.discover-hdr{max-width:820px;margin-bottom:var(--s7);}
-.discover-hdr p{color:var(--silver);max-width:58ch;}
+.cine-img{
+  position:absolute;left:0;right:0;top:-14%;height:128%;
+  object-fit:cover;width:100%;
+  will-change:transform;
+}
+/* the image bleeds into the environment — never a framed rectangle */
+.cine::before,.cine::after{
+  content:'';position:absolute;left:0;right:0;height:26%;z-index:2;pointer-events:none;
+}
+.cine::before{top:0;background:linear-gradient(to bottom,rgba(5,5,5,0.92),transparent);}
+.cine::after{bottom:0;background:linear-gradient(to top,rgba(10,15,14,0.94),transparent);}
+.cine-veil{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(110% 90% at 50% 55%, transparent 40%, rgba(5,8,8,0.55) 100%);
+}
+.cine-caption{
+  position:absolute;left:0;right:0;bottom:clamp(24px,6vh,64px);z-index:3;
+}
+.cine-caption-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+}
+.cine-caption .te-reo-line{margin-bottom:6px;}
+.cine-caption h2{
+  font-size:clamp(2.6rem,6vw,5.4rem);
+  text-shadow:0 2px 40px rgba(2,4,6,0.9);
+}
 
-.pstage{position:relative;padding:var(--s7) 0;}
-.pstage + .pstage{border-top:1px solid var(--hairline);}
+/* floating numbers — large typography, minimal labels, no cards */
+.num-field{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:repeat(12,1fr);
+  row-gap:var(--s6);align-items:start;
+}
+.num{position:relative;}
+.num-n{
+  font-family:var(--font-h);font-weight:300;line-height:0.9;
+  font-size:clamp(4rem,8vw,7rem);letter-spacing:-0.04em;
+  color:var(--starlight);display:block;margin-bottom:14px;
+  white-space:nowrap;
+}
+.num-n sup{font-size:0.32em;color:var(--gold);letter-spacing:0.04em;vertical-align:super;}
+.num-n .plus{color:var(--gold);font-size:0.55em;vertical-align:14%;}
+.num-l{
+  font-size:0.8125rem;color:var(--silver);line-height:1.65;
+  max-width:30ch;display:block;
+}
+.num-l::before{
+  content:'';display:block;width:32px;height:1px;margin-bottom:12px;
+  background:linear-gradient(to right,var(--gold),transparent);
+}
+/* asymmetric drift — the numbers float at different depths */
+.num:nth-child(1){grid-column:1/5;}
+.num:nth-child(2){grid-column:6/9;margin-top:var(--s7);}
+.num:nth-child(3){grid-column:10/13;margin-top:var(--s3);}
+.num:nth-child(4){grid-column:3/7;margin-top:var(--s6);}
+.land-copy{
+  max-width:var(--max);margin:0 auto var(--s6);padding:0 var(--s4);
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:var(--s7);
+}
+.land-copy p{color:var(--silver);max-width:54ch;}
+.land-place{
+  display:flex;align-items:center;gap:var(--s3);margin-top:var(--s5);
+  font-size:0.6875rem;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(168,173,179,0.55);flex-wrap:wrap;
+}
+.land-place .sep{width:32px;height:1px;background:var(--gold-border);}
+@media(max-width:900px){
+  .land-copy{grid-template-columns:1fr;gap:var(--s4);}
+  .num:nth-child(n){grid-column:span 6;margin-top:0;}
+  .num-n{font-size:clamp(3rem,11vw,4.4rem);}
+}
+
+/* ================================================================
+   04 · CULTIVATION — seed to patient along the thread
+   ================================================================ */
+.cult-grid{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:0.8fr 1.2fr;gap:var(--s7);
+}
+.cult-left{position:sticky;top:110px;align-self:start;}
+.cult-left p{color:var(--silver);max-width:40ch;}
+.cult-photo{
+  margin-top:var(--s5);border-radius:6px;overflow:hidden;position:relative;
+  box-shadow:var(--glass-shadow);
+}
+.cult-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(200deg,rgba(5,5,5,0.3),transparent 50%);
+}
+.cult-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;
+  transform:scale(1.08);transition:transform 7s var(--ease);}
+.cult-photo.in img{transform:scale(1);}
+.jlist{list-style:none;position:relative;padding-left:var(--s4);}
+.jlist::before{
+  content:'';position:absolute;left:2px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(to bottom,var(--gold),rgba(201,160,106,0.1));
+}
+.jitem{position:relative;padding:0 0 var(--s5);}
+.jitem::before{
+  content:'';position:absolute;left:calc(-1 * var(--s4) + 0px);top:7px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 9px rgba(201,160,106,0.7);
+}
+.jitem-num{
+  font-family:var(--font-h);font-style:italic;font-size:0.9rem;
+  color:rgba(201,160,106,0.8);display:block;margin-bottom:4px;
+}
+.jitem h4{
+  font-family:var(--font-h);font-size:1.5rem;font-weight:400;
+  color:var(--starlight);margin-bottom:8px;
+}
+.jitem h4 em{font-style:italic;color:var(--teal-light);font-size:0.85em;}
+.jitem p{font-size:0.875rem;color:var(--silver);line-height:1.7;max-width:56ch;}
+@media(max-width:900px){
+  .cult-grid{grid-template-columns:1fr;gap:var(--s5);}
+  .cult-left{position:static;}
+}
+
+/* ================================================================
+   05 · OUR FLOWER — each product presented like an object of care
+   ================================================================ */
+.flower-hdr{max-width:820px;margin:0 auto var(--s6);padding:0 var(--s4);}
+.flower-hdr p{color:var(--silver);max-width:58ch;}
+.pstage{position:relative;padding:var(--s5) 0;}
 .pstage-inner{
   max-width:var(--max);margin:0 auto;padding:0 var(--s4);
   display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:center;
 }
 .pstage-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+/* the product name whispers behind the object — editorial depth */
+.prod-ghost{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);
+  font-family:var(--font-h);font-weight:300;font-style:italic;
+  font-size:clamp(7rem,16vw,15rem);letter-spacing:0.06em;
+  color:rgba(243,241,235,0.035);pointer-events:none;user-select:none;
+  white-space:nowrap;z-index:0;
+}
 .prod-glow{
   position:absolute;inset:-10%;border-radius:50%;filter:blur(60px);opacity:0.5;
 }
 .prod-glow--ra{background:radial-gradient(circle,rgba(201,160,106,0.28),transparent 65%);}
 .prod-glow--source{background:radial-gradient(circle,rgba(115,168,165,0.22),transparent 65%);}
 .prod-tilt{position:relative;transition:transform 0.4s var(--ease);transform-style:preserve-3d;will-change:transform;}
+.prod-float{animation:prodFloat 9s ease-in-out infinite;}
+@keyframes prodFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
 .prod-ring{
   position:absolute;inset:-6%;border:1px solid var(--hairline);border-radius:50%;
 }
 .prod-pkg{max-height:440px;width:auto;position:relative;z-index:1;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.6));}
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+  -webkit-box-reflect:below 10px linear-gradient(transparent 68%, rgba(255,255,255,0.10));
+}
 .prod-meta{display:flex;gap:14px;align-items:center;margin-bottom:var(--s3);}
 .prod-tag{
   font-size:0.625rem;font-weight:700;letter-spacing:0.18em;
@@ -600,8 +844,8 @@ html.no-video .hero-sound{display:none;}
 }
 .prod-cta:hover{gap:14px;color:var(--gold);}
 .prods-disc{
-  max-width:var(--max);margin:0 auto;padding:var(--s5) var(--s4);
-  font-size:0.75rem;color:rgba(168,173,179,0.55);border-top:1px solid var(--hairline);
+  max-width:var(--max);margin:0 auto;padding:var(--s5) var(--s4) 0;
+  font-size:0.75rem;color:rgba(168,173,179,0.55);
 }
 @media(max-width:900px){
   .pstage-inner{grid-template-columns:1fr;gap:var(--s5);}
@@ -609,128 +853,36 @@ html.no-video .hero-sound{display:none;}
   .prod-pkg{max-height:320px;}
 }
 
-/* portals — pick up the thread (numbered editorial rows, node per row) */
-.portals-sec{
-  position:relative;background:var(--void);
-  border-top:1px solid var(--hairline);
-  padding:var(--s7) 0;
-}
-.portals-hdr{max-width:720px;margin-bottom:var(--s6);}
-.portals-hdr p{color:var(--silver);}
-.portal-list{list-style:none;border-top:1px solid var(--hairline);}
-.portal-row{
-  display:grid;grid-template-columns:64px 1fr 1.4fr auto;gap:var(--s4);
-  align-items:center;
-  padding:var(--s4) 0;border-bottom:1px solid var(--hairline);
-  position:relative;transition:padding 0.35s var(--ease);
-}
-.portal-row:hover{padding-left:14px;}
-.portal-num{
-  font-family:var(--font-h);font-style:italic;
-  font-size:1rem;color:rgba(168,173,179,0.5);
-  display:flex;align-items:center;gap:14px;
-}
-.portal-node{
-  width:5px;height:5px;border-radius:50%;flex-shrink:0;
-  background:rgba(243,241,235,0.25);
-  transition:background 0.35s,box-shadow 0.35s;
-}
-.portal-row:hover .portal-node,.portal-row:focus-visible .portal-node{
-  background:var(--gold);box-shadow:0 0 12px rgba(201,160,106,0.8);
-}
-.portal-row h4{
-  font-family:var(--font-b);font-size:1rem;font-weight:600;
-  letter-spacing:0.01em;color:var(--starlight);
-}
-.portal-row p{font-size:0.8125rem;color:var(--silver);line-height:1.6;}
-.portal-go{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:0.6875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--teal-light);white-space:nowrap;transition:gap 0.3s var(--ease);
-}
-.portal-row:hover .portal-go{gap:13px;}
-.portal-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
-@media(max-width:900px){
-  .portal-row{grid-template-columns:44px 1fr auto;}
-  .portal-row p{display:none;}
-}
-
 /* ================================================================
-   05 · STORY — whenua, terroir, the two strands, seed to patient
+   06 · SCIENCE — two strands, one weave · glass
    ================================================================ */
-.story-sec{
-  position:relative;
-  background:linear-gradient(to bottom,var(--void),var(--night) 30%,var(--night) 70%,var(--void));
-  padding:var(--s8) 0;
-}
-.story-grid{
-  display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s7);align-items:center;
-}
-.story-img{position:relative;overflow:hidden;border-radius:3px;}
-.story-img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(200deg,rgba(5,5,5,0.35),transparent 45%);
-}
-.story-img img{transform:scale(1.05);transition:transform 8s var(--ease);}
-.story-img.in img{transform:scale(1);}
-.story-content .dual{
-  display:flex;gap:var(--s4);margin:var(--s5) 0;
-}
-.dual-label{
-  display:block;font-size:0.625rem;font-weight:700;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:8px;
-}
-.dual-val{font-size:0.875rem;color:var(--silver);line-height:1.6;}
-.dual-div{width:1px;background:var(--hairline);flex-shrink:0;}
-.story-quote{margin:var(--s5) 0;padding-left:var(--s3);border-left:2px solid var(--gold);}
-.story-quote blockquote{
-  font-family:var(--font-h);font-style:italic;font-weight:300;
-  font-size:1.4rem;color:var(--starlight);margin-bottom:6px;
-}
-.story-quote cite{font-size:0.75rem;color:var(--silver);font-style:normal;}
-.story-content > p{color:var(--silver);margin-bottom:var(--s3);max-width:56ch;}
-@media(max-width:900px){
-  .story-grid{grid-template-columns:1fr;gap:var(--s5);}
-}
-
-/* terroir stats */
-.terroir-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s5);
-  margin-top:var(--s7);
-}
-.tstat{border-top:1px solid var(--hairline);padding-top:var(--s3);position:relative;}
-.tstat::before{
-  content:'';position:absolute;top:-2.5px;left:0;width:4px;height:4px;
-  border-radius:50%;background:var(--celestial);
-  box-shadow:0 0 8px rgba(141,175,199,0.6);
-}
-.tstat-n{
-  font-family:var(--font-h);font-size:clamp(2.4rem,3.6vw,3.4rem);
-  font-weight:300;color:var(--starlight);line-height:1;display:block;margin-bottom:10px;
-}
-.tstat-n sup{font-size:0.45em;color:var(--gold);letter-spacing:0.06em;}
-.tstat-l{font-size:0.8125rem;color:var(--silver);line-height:1.65;}
-.terroir-hdr{max-width:760px;margin-top:var(--s8);}
-.terroir-hdr p{color:var(--silver);max-width:58ch;}
-.terroir-place{
-  display:flex;align-items:center;gap:var(--s3);margin-top:var(--s6);
-  font-size:0.6875rem;font-weight:600;letter-spacing:0.14em;
-  text-transform:uppercase;color:rgba(168,173,179,0.55);flex-wrap:wrap;
-}
-.terroir-place .sep{width:32px;height:1px;background:var(--gold-border);}
-@media(max-width:900px){
-  .terroir-grid{grid-template-columns:repeat(2,1fr);gap:var(--s4);}
-}
-
-/* braid — two strands, one weave */
-.braid-wrap{margin-top:var(--s8);}
-.braid-hdr{max-width:720px;}
+.braid-hdr{max-width:720px;margin:0 auto;padding:0 var(--s4);}
 .braid-hdr p{color:var(--silver);}
-.braid-svg{display:block;width:100%;max-width:1000px;margin:var(--s5) auto;height:auto;}
+.braid-svg{display:block;width:100%;max-width:1000px;margin:var(--s5) auto;height:auto;padding:0 var(--s4);}
 .braid-svg path{transition:stroke-dashoffset 2.4s var(--ease);}
 .braid-cols{
-  display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);margin-top:var(--s4);
+  max-width:var(--max);margin:var(--s4) auto 0;padding:0 var(--s4);
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);
+}
+/* glass — the content floats inside the night */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  box-shadow:var(--glass-shadow);
+  padding:var(--s5);
+  position:relative;overflow:hidden;
+  transition:transform 0.5s var(--ease),border-color 0.5s var(--ease),box-shadow 0.5s var(--ease);
+}
+.glass::before{ /* soft top light — glass catches the starlight */
+  content:'';position:absolute;top:0;left:8%;right:8%;height:1px;
+  background:linear-gradient(to right,transparent,rgba(243,241,235,0.22),transparent);
+}
+.glass:hover{
+  transform:translateY(-4px);
+  border-color:rgba(243,241,235,0.13);
+  box-shadow:0 40px 90px rgba(0,0,0,0.55);
 }
 .braid-col h4{
   font-family:var(--font-b);font-size:0.75rem;font-weight:700;
@@ -754,49 +906,179 @@ html.no-video .hero-sound{display:none;}
 .braid-col b{color:var(--starlight);font-weight:600;}
 .braid-col span{color:var(--silver);}
 @media(max-width:900px){
-  .braid-cols{grid-template-columns:1fr;gap:var(--s5);}
+  .braid-cols{grid-template-columns:1fr;gap:var(--s4);}
 }
 
-/* seed to patient — the unbroken thread, told still */
-.journey-wrap{margin-top:var(--s8);display:grid;grid-template-columns:0.8fr 1.2fr;gap:var(--s7);}
-.journey-left{position:sticky;top:110px;align-self:start;}
-.journey-left p{color:var(--silver);max-width:40ch;}
-.jlist{list-style:none;position:relative;padding-left:var(--s4);}
-.jlist::before{
-  content:'';position:absolute;left:2px;top:8px;bottom:8px;width:1px;
-  background:linear-gradient(to bottom,var(--gold),rgba(201,160,106,0.1));
+/* ================================================================
+   07 · OUR PEOPLE — whānau, whenua, community
+   ================================================================ */
+.people-grid{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s7);align-items:center;
 }
-.jitem{position:relative;padding:0 0 var(--s5);}
-.jitem::before{
-  content:'';position:absolute;left:calc(-1 * var(--s4) + 0px);top:7px;
-  width:5px;height:5px;border-radius:50%;
-  background:var(--gold);box-shadow:0 0 9px rgba(201,160,106,0.7);
+.people-img{position:relative;overflow:hidden;border-radius:6px;box-shadow:var(--glass-shadow);}
+.people-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(200deg,rgba(5,5,5,0.35),transparent 45%);
 }
-.jitem-num{
-  font-family:var(--font-h);font-style:italic;font-size:0.9rem;
-  color:rgba(201,160,106,0.8);display:block;margin-bottom:4px;
+.people-img img{transform:scale(1.05);transition:transform 8s var(--ease);}
+.people-img.in img{transform:scale(1);}
+.people-content .dual{
+  display:flex;gap:var(--s4);margin:var(--s5) 0;
 }
-.jitem h4{
-  font-family:var(--font-h);font-size:1.5rem;font-weight:400;
-  color:var(--starlight);margin-bottom:8px;
+.dual-label{
+  display:block;font-size:0.625rem;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:8px;
 }
-.jitem h4 em{font-style:italic;color:var(--teal-light);font-size:0.85em;}
-.jitem p{font-size:0.875rem;color:var(--silver);line-height:1.7;max-width:56ch;}
+.dual-val{font-size:0.875rem;color:var(--silver);line-height:1.6;}
+.dual-div{width:1px;background:var(--hairline);flex-shrink:0;}
+.people-quote{margin:var(--s5) 0;padding-left:var(--s3);border-left:2px solid var(--gold);}
+.people-quote blockquote{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:1.4rem;color:var(--starlight);margin-bottom:6px;
+}
+.people-quote cite{font-size:0.75rem;color:var(--silver);font-style:normal;}
+.people-content > p{color:var(--silver);margin-bottom:var(--s3);max-width:56ch;}
 @media(max-width:900px){
-  .journey-wrap{grid-template-columns:1fr;gap:var(--s5);}
-  .journey-left{position:static;}
+  .people-grid{grid-template-columns:1fr;gap:var(--s5);}
 }
 
-/* news — compact editorial row */
-.news-sec{background:var(--void);padding:var(--s7) 0;border-top:1px solid var(--hairline);}
-.news-hdr{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:var(--s4);margin-bottom:var(--s6);flex-wrap:wrap;
+/* community impact — each outcome a point of light, held together
+   like the stars of Matariki: alone, and more together.
+   PLACEHOLDER — culturally specific Matariki narrative: no
+   approved copy exists in the project beyond the lines reused
+   below. Additional kōrero requires cultural review before
+   publication. Do not invent content here. */
+.impact-wrap{
+  max-width:var(--max);margin:var(--s6) auto 0;padding:0 var(--s4);
+  position:relative;
 }
-.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);}
+.impact-hdr{max-width:640px;margin-bottom:var(--s6);}
+.impact-hdr p{color:var(--silver);}
+.impact-facts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s5);
+}
+.ifact{border-top:1px solid var(--hairline);padding-top:var(--s3);position:relative;}
+.ifact::before{
+  content:'';position:absolute;top:-2.5px;left:0;width:4px;height:4px;
+  border-radius:50%;background:var(--gold);
+  box-shadow:0 0 8px rgba(201,160,106,0.6);
+}
+.ifact-n{
+  font-family:var(--font-h);font-size:clamp(2.6rem,4vw,3.6rem);font-weight:300;
+  color:var(--starlight);display:block;line-height:1;margin-bottom:10px;
+}
+.ifact-l{font-size:0.8125rem;color:var(--silver);line-height:1.6;}
+.impact-cta{margin-top:var(--s6);display:flex;gap:12px;flex-wrap:wrap;}
+@media(max-width:900px){
+  .impact-facts{grid-template-columns:repeat(2,1fr);gap:var(--s4);}
+}
+
+/* ================================================================
+   08 · TRUST — proven, quietly
+   ================================================================ */
+.trust-hdr{max-width:720px;margin:0 auto var(--s6);padding:0 var(--s4);text-align:center;}
+.trust-hdr p{color:var(--silver);max-width:54ch;margin:0 auto;}
+.trust-grid{
+  max-width:1100px;margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--hairline);
+  border-top:1px solid var(--hairline);
+  border-bottom:1px solid var(--hairline);
+}
+.titem{
+  background:rgba(5,6,6,0.55);
+  backdrop-filter:blur(10px);
+  padding:var(--s5) var(--s4);
+  transition:background 0.5s var(--ease);
+  position:relative;
+}
+.titem:hover{background:rgba(14,18,18,0.72);}
+.titem-ico{
+  width:26px;height:26px;margin-bottom:var(--s3);color:var(--gold);opacity:0.85;
+}
+.titem-ico svg{width:100%;height:100%;stroke:currentColor;fill:none;
+  stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;}
+.titem h4{
+  font-family:var(--font-b);font-size:0.8125rem;font-weight:600;
+  letter-spacing:0.04em;color:var(--starlight);margin-bottom:8px;
+}
+.titem p{font-size:0.78125rem;color:var(--silver);line-height:1.65;}
+.trust-partner{
+  max-width:1100px;margin:var(--s6) auto 0;padding:0 var(--s4);
+  display:flex;align-items:center;justify-content:center;gap:var(--s3);
+  font-size:0.6875rem;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(168,173,179,0.55);
+  flex-wrap:wrap;text-align:center;
+}
+.trust-partner .sep{width:32px;height:1px;background:var(--gold-border);}
+@media(max-width:900px){
+  .trust-grid{grid-template-columns:1fr;}
+}
+
+/* ================================================================
+   09 · PORTALS — pick up the thread · floating glass
+   ================================================================ */
+.portals-hdr{max-width:720px;margin:0 auto var(--s6);padding:0 var(--s4);}
+.portals-hdr p{color:var(--silver);}
+.portal-grid{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);
+  list-style:none;
+}
+.portal-card{
+  display:flex;flex-direction:column;gap:var(--s2);
+  min-height:230px;padding:var(--s4);
+}
+.portal-card .portal-num{
+  font-family:var(--font-h);font-style:italic;
+  font-size:0.9rem;color:rgba(201,160,106,0.7);
+  display:flex;align-items:center;gap:12px;margin-bottom:var(--s2);
+}
+.portal-node{
+  width:5px;height:5px;border-radius:50%;flex-shrink:0;
+  background:rgba(243,241,235,0.25);
+  transition:background 0.35s,box-shadow 0.35s;
+}
+.portal-card:hover .portal-node,.portal-card:focus-visible .portal-node{
+  background:var(--gold);box-shadow:0 0 12px rgba(201,160,106,0.8);
+}
+.portal-card h4{
+  font-family:var(--font-b);font-size:1rem;font-weight:600;
+  letter-spacing:0.01em;color:var(--starlight);
+}
+.portal-card p{font-size:0.8125rem;color:var(--silver);line-height:1.6;flex-grow:1;}
+.portal-go{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.6875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--teal-light);white-space:nowrap;transition:gap 0.3s var(--ease);
+}
+.portal-card:hover .portal-go{gap:13px;}
+.portal-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+@media(max-width:1100px){
+  .portal-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .portal-grid{grid-template-columns:1fr;}
+  .portal-card{min-height:0;}
+}
+
+/* ================================================================
+   10 · NEWS — a quiet editorial coda
+   ================================================================ */
+.news-hdr{
+  max-width:var(--max);margin:0 auto var(--s6);padding:0 var(--s4);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:var(--s4);flex-wrap:wrap;
+}
+.news-grid{
+  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);
+}
 .ncard{display:block;}
 .ncard-img{
-  overflow:hidden;border-radius:3px;aspect-ratio:16/10;margin-bottom:var(--s3);
+  overflow:hidden;border-radius:5px;aspect-ratio:16/10;margin-bottom:var(--s3);
   position:relative;
 }
 .ncard-img::after{
@@ -823,13 +1105,23 @@ html.no-video .hero-sound{display:none;}
 }
 
 /* ================================================================
-   06 · FINAL CONNECTION — the thread reaches its last light
+   11 · FINAL CONNECTION — the thread reaches its last light
    ================================================================ */
 .connect-sec{
   position:relative;text-align:center;
-  background:
-    radial-gradient(90% 80% at 50% 100%, #0a1626 0%, var(--deep) 45%, var(--void) 100%);
-  padding:calc(var(--s8) + 40px) 0;overflow:hidden;
+  padding:var(--s9) 0;overflow:hidden;
+}
+.connect-const{
+  position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  width:min(720px,86vw);opacity:0.6;pointer-events:none;z-index:0;
+}
+.connect-const svg{display:block;width:100%;height:auto;}
+.cc-line{stroke:rgba(141,175,199,0.14);stroke-width:0.8;}
+.cc-star{fill:#dfe9f3;animation:starPulse var(--sp,6s) ease-in-out infinite;animation-delay:var(--sd,0s);}
+.cc-halo{fill:rgba(141,175,199,0.12);}
+@keyframes starPulse{
+  0%,100%{opacity:0.55;}
+  50%{opacity:1;}
 }
 .connect-node{
   width:7px;height:7px;border-radius:50%;margin:0 auto var(--s5);
@@ -849,7 +1141,7 @@ html.no-video .hero-sound{display:none;}
 .connect-btns{display:flex;gap:var(--s2);justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
 
 /* disclaimer band */
-.disc{background:var(--void);border-top:1px solid var(--hairline);}
+.disc{background:transparent;}
 .disc-inner{
   max-width:var(--max);margin:0 auto;padding:var(--s4);
   display:flex;gap:var(--s3);align-items:flex-start;
@@ -863,8 +1155,11 @@ html.no-video .hero-sound{display:none;}
    ================================================================ */
 .footer{
   background:var(--void);position:relative;
-  border-top:1px solid var(--hairline);
   padding:var(--s7) 0 var(--s5);overflow:hidden;
+}
+.footer::before{ /* soft fade in, not a hard rule */
+  content:'';position:absolute;top:0;left:15%;right:15%;height:1px;
+  background:linear-gradient(to right,transparent,rgba(243,241,235,0.1),transparent);
 }
 .footer-top{
   display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--s6);
@@ -918,7 +1213,7 @@ html.no-video .hero-sound{display:none;}
 #threadLayer svg{display:block;width:100%;height:100%;}
 #threadPath{
   fill:none;stroke:var(--gold);stroke-width:1;
-  opacity:0.5;
+  opacity:0.4;
 }
 .thread-node{
   fill:var(--gold);opacity:0;
@@ -926,7 +1221,6 @@ html.no-video .hero-sound{display:none;}
 }
 .thread-node.lit{opacity:0.9;animation:nodeBreathe 3.5s ease-in-out infinite;}
 @keyframes nodeBreathe{0%,100%{opacity:0.5;}50%{opacity:1;}}
-#journey{position:relative;}
 @media(max-width:900px){
   #threadLayer{display:none;}
 }
@@ -941,9 +1235,12 @@ html.no-video .hero-sound{display:none;}
   .hero [data-ph]{opacity:1 !important;transform:none !important;transition:none !important;}
   .hero-spark::after{transform:scaleY(1) !important;transition:none !important;}
   .hero-scroll{opacity:1;}
-  .hero-scroll-line::after,.st,.mstar .m-core,.thread-node.lit{animation:none !important;}
-  .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
-  .story-img img{transform:none !important;transition:none !important;}
+  .hero-scroll-line::after,.st,.cc-star,.thread-node.lit,.prod-float{animation:none !important;}
+  .reveal,.emerge,.unveil{opacity:1 !important;transform:none !important;transition:none !important;filter:none !important;clip-path:none !important;}
+  .mani-line .mani-thread{transform:scaleX(1) !important;transition:none !important;}
+  .mani-line .mani-thread::after{opacity:1 !important;transition:none !important;}
+  .cult-photo img,.people-img img,.why-visual img{transform:none !important;transition:none !important;}
+  .cine-img{transform:none !important;}
   #threadPath{stroke-dashoffset:0 !important;}
 }
 html.no-video .hero-film{display:none;}
@@ -987,8 +1284,6 @@ html.no-video .hero-scroll{opacity:1;}
 <!-- ============================================================
      01 · HERO — the cinematic film is the opening experience.
      Flower & leaf → trichomes → droplet → cosmos → Matariki.
-     The interface answers the film: darkness first, a point of
-     light at the droplet, the message lands with Matariki.
      ============================================================ -->
 <section class="hero" id="hero" aria-label="Aho Farms — from a single flower to the stars of Matariki">
   <video class="hero-film" id="heroFilm"
@@ -1034,113 +1329,194 @@ html.no-video .hero-scroll{opacity:1;}
 
 <!-- ============================================================
      THE JOURNEY — the film does not end; it becomes the page.
-     Everything below is stitched together by the living thread.
+     One evolving environment, stitched by the living thread.
+     Hero → Why Aho exists → The land → Cultivation → Flower →
+     Science → People → Trust → Portals → News → Connection.
      ============================================================ -->
+<div class="page-grain" aria-hidden="true"></div>
 <main id="journey">
 
-  <!-- credentials — a quiet thread of proof -->
+  <!-- credentials — a quiet thread of proof, travelling on one line -->
   <div class="creds">
-    <div class="creds-inner reveal">
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Licensed Medicinal Cultivator</span></div>
-      <div class="cred-div"></div>
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Independently Lab Tested</span></div>
-      <div class="cred-div"></div>
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">CFU Count &lt;200 — NZ Standard</span></div>
-      <div class="cred-div"></div>
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Māori-Owned &amp; Operated</span></div>
-      <div class="cred-div"></div>
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Export Licence Active</span></div>
-      <div class="cred-div"></div>
-      <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Prescription Only</span></div>
+    <div class="creds-viewport reveal" aria-label="Aho Farms credentials">
+      <div class="creds-track">
+        <div class="creds-group">
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Licensed Medicinal Cultivator</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Independently Lab Tested</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">CFU Count &lt;200 — NZ Standard</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Māori-Owned &amp; Operated</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Export Licence Active</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Prescription Only</span></div>
+          <div class="cred-div"></div>
+        </div>
+        <div class="creds-group" aria-hidden="true">
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Licensed Medicinal Cultivator</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Independently Lab Tested</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">CFU Count &lt;200 — NZ Standard</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Māori-Owned &amp; Operated</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Export Licence Active</span></div>
+          <div class="cred-div"></div>
+          <div class="cred"><div class="cred-dot"></div><span class="cred-txt">Prescription Only</span></div>
+          <div class="cred-div"></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ========================================================
-       02 · AHO — the meaning of the name
+       02 · WHY AHO EXISTS — the meaning of the name
        ======================================================== -->
-  <section class="aho-sec" id="aho">
-    <div class="starfield" data-stars="26" aria-hidden="true"></div>
-    <div class="aho-inner">
-      <div class="mlab reveal" data-aho><b>01</b>&nbsp;/&nbsp;AHO</div>
-      <span class="eyebrow gold reveal">TE TIKANGA O TE INGOA <span>·</span> THE MEANING OF AHO</span>
-      <h2 class="reveal d1">We are not simply cultivating medicine.<br>We are cultivating <em>connection.</em></h2>
-      <div class="mani-lines">
-        <span class="mani-line reveal"><strong>Ancestors</strong><span class="mani-thread"></span>future generations</span>
-        <span class="mani-line reveal"><strong>Whenua</strong><span class="mani-thread"></span>cultivation</span>
-        <span class="mani-line reveal"><strong>Nature</strong><span class="mani-thread"></span>medicine</span>
-        <span class="mani-line reveal"><strong>Mātauranga Māori</strong><span class="mani-thread"></span>modern science</span>
-        <span class="mani-line reveal"><strong>People</strong><span class="mani-thread"></span>one another</span>
-      </div>
-      <p class="manifesto-note reveal">An aho is a thread. In weaving, it is the weft that binds the whole together. In whakapapa, it is the line of descent. At Aho Farms, it is both — and it runs through every plant we grow.</p>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       03 · MATARIKI — the light
-       Star arrangement follows the hero film's own Matariki
-       composition (supplied reference) — not an invented
-       constellation. No connecting lines. No invented names.
-       PLACEHOLDER — culturally specific Matariki narrative:
-       no approved copy exists in the project beyond the lines
-       reused below. Additional kōrero requires cultural review
-       before publication. Do not invent content here.
-       ======================================================== -->
-  <section class="matariki-sec" id="matariki">
-    <div class="starfield" data-stars="60" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="matariki-hdr" data-aho>
-        <div class="mlab reveal"><b>02</b>&nbsp;/&nbsp;MATARIKI</div>
-        <span class="eyebrow gold reveal">ORANGA TĀNGATA <span>·</span> COMMUNITY IMPACT</span>
-        <span class="te-reo-line reveal d1">Ehara taku toa i te toa takitahi, engari he toa takitini.</span>
-        <h2 class="reveal d1">The thread does not end at the farm gate.</h2>
-        <p class="reveal d2">Like the stars of Matariki, each outcome stands alone — and means more together. Every connection below is held by the same aho that runs through our cultivation.</p>
-      </div>
-
-      <div class="matariki-sky reveal" id="mSky">
-        <svg viewBox="0 0 1000 430" role="img" aria-labelledby="mSkyTitle">
-          <title id="mSkyTitle">The Matariki star cluster above Hawke's Bay</title>
-          <g id="mCluster"></g>
-        </svg>
-      </div>
-      <p class="matariki-note reveal">Matariki · as it appears above Hawke's Bay in the depth of winter</p>
-
-      <div class="impact-facts">
-        <div class="ifact reveal"><span class="ifact-n">5</span><div class="ifact-l">New whānau team members welcomed from the local community ahead of peak season.</div></div>
-        <div class="ifact reveal d1"><span class="ifact-n">2</span><div class="ifact-l">Team members enrolled in supported formal horticulture training.</div></div>
-        <div class="ifact reveal d2"><span class="ifact-n">100%</span><div class="ifact-l">Hawke's Bay operated — local employment, local supply chain.</div></div>
-        <div class="ifact reveal d3"><span class="ifact-n">Iwi</span><div class="ifact-l">Ngāti Pāhauwera partnership and shared ownership structure.</div></div>
-      </div>
-      <div class="impact-cta reveal">
-        <a href="social-impact.html" class="btn btn-gold">Read Our Social Impact</a>
-        <a href="kaupapa.html" class="btn btn-outline">Our Kaupapa</a>
+  <section class="chapter" id="aho">
+    <div class="starfield" data-stars="20" aria-hidden="true"></div>
+    <div class="drift blue" style="top:-10%;right:-10%;width:55vw;height:55vw;" aria-hidden="true"></div>
+    <div class="why-inner">
+      <div class="why-layout">
+        <header class="why-head">
+          <div class="mlab reveal" data-aho><b>01</b>&nbsp;/&nbsp;WHY AHO EXISTS</div>
+          <span class="eyebrow gold reveal">TE TIKANGA O TE INGOA <span>·</span> THE MEANING OF AHO</span>
+          <h2 class="emerge">We are not simply cultivating medicine.<br>We are cultivating <em>connection.</em></h2>
+        </header>
+        <div class="why-visual unveil reveal d1">
+          <img src="assets/aho-weave-macro.jpg"
+            alt="Woven muka fibre — the aho, a single thread bound into many" loading="lazy">
+        </div>
+        <div class="why-copy">
+          <aside class="why-def reveal d1">
+            <span class="why-def-type">Aho · Te Reo Māori</span>
+            <span class="why-def-word">aho</span>
+            <div class="why-sense">
+              <span class="why-sense-num">01</span>
+              <p><b>In weaving</b> — a thread. The weft that binds the whole together.</p>
+            </div>
+            <div class="why-sense">
+              <span class="why-sense-num">02</span>
+              <p><b>In whakapapa</b> — the line of descent.</p>
+            </div>
+            <p class="why-def-note">At Aho Farms, it is both — and it runs through every plant we grow.</p>
+          </aside>
+          <div class="mani-lines">
+            <span class="mani-line reveal"><span class="mani-num">01</span><span><strong>Ancestors</strong><span class="mani-thread"></span>future generations</span></span>
+            <span class="mani-line reveal"><span class="mani-num">02</span><span><strong>Whenua</strong><span class="mani-thread"></span>cultivation</span></span>
+            <span class="mani-line reveal"><span class="mani-num">03</span><span><strong>Nature</strong><span class="mani-thread"></span>medicine</span></span>
+            <span class="mani-line reveal"><span class="mani-num">04</span><span><strong>Mātauranga Māori</strong><span class="mani-thread"></span>modern science</span></span>
+            <span class="mani-line reveal"><span class="mani-num">05</span><span><strong>People</strong><span class="mani-thread"></span>one another</span></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       04 · DISCOVER — what Aho Farms actually offers
+       03 · THE LAND — terroir at 39° south
        ======================================================== -->
-  <section class="discover-sec" id="products">
-    <div class="wrap">
-      <div class="discover-hdr" data-aho>
-        <div class="mlab reveal"><b>03</b>&nbsp;/&nbsp;DISCOVER</div>
-        <span class="eyebrow gold reveal">NGĀ HUA <span>·</span> OUR PRODUCTS</span>
-        <h2 class="reveal d1">Premium medicinal flower.<br>Available by prescription.</h2>
-        <p class="reveal d2">Full product specifications, certificates of analysis, and dosing guidance are available to registered prescribers in the portal.</p>
+  <section class="chapter" id="land" style="padding-top:var(--s6);">
+    <div class="w-narrow" style="text-align:left;">
+      <div class="mlab reveal" data-aho><b>02</b>&nbsp;/&nbsp;THE LAND</div>
+      <span class="eyebrow gold reveal">TE WĀHI <span>·</span> SENSE OF PLACE</span>
+    </div>
+
+    <!-- the land itself — full-bleed, breathing -->
+    <div class="cine" aria-label="The Aho Farms growing site in northern Hawke's Bay">
+      <img class="cine-img" data-plx="0.16"
+        src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920/v1780965789/aho_farms/raupunga/75978258454.jpg"
+        alt="Aho Farms whenua — northern Hawke's Bay" loading="lazy">
+      <div class="cine-veil"></div>
+      <div class="cine-caption">
+        <div class="cine-caption-inner">
+          <span class="te-reo-line emerge">Ko te whenua te waiū mō ngā uri whakatipu.</span>
+          <h2 class="emerge">Terroir, at 39° south.</h2>
+        </div>
       </div>
+    </div>
+
+    <div class="land-copy">
+      <div class="reveal">
+        <p>Our growing site sits in northern Hawke's Bay — one of the sunniest regions in Aotearoa, shaped by coastal air off Te Matau-a-Māui and soil farmed by the same whānau for five generations.</p>
+      </div>
+      <div class="reveal d1">
+        <p>Wine has a word for what place does to a plant. So does medicinal cannabis: everything our flower is begins with where it grows.</p>
+        <div class="land-place">
+          <span>Te Matau-a-Māui · Hawke's Bay</span><div class="sep"></div>
+          <span>Aotearoa New Zealand</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- the numbers float in the landscape — no cards, no boxes -->
+    <div class="num-field">
+      <div class="num reveal">
+        <span class="num-n"><span class="count" data-to="2200">0</span><span class="plus">+</span></span>
+        <span class="num-l">Sunshine hours per year in Hawke's Bay — natural photoperiod, no artificial light cycles.</span>
+      </div>
+      <div class="num reveal d1">
+        <span class="num-n">39<sup>°S</sup></span>
+        <span class="num-l">Latitude of our growing site — long summer days at harvest-critical months.</span>
+      </div>
+      <div class="num reveal d2">
+        <span class="num-n">5<sup>GEN</sup></span>
+        <span class="num-l">Generations of whānau farming this soil before a single cannabis seed was planted.</span>
+      </div>
+      <div class="num reveal d3">
+        <span class="num-n">100<sup>%</sup></span>
+        <span class="num-l">Sun-grown outdoors on Māori freehold whenua — richer terpene and cannabinoid expression.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       04 · CULTIVATION — one unbroken thread, seed to patient
+       ======================================================== -->
+  <section class="chapter" id="process">
+    <div class="drift teal" style="top:0;left:-15%;width:60vw;height:60vw;" aria-hidden="true"></div>
+    <div class="cult-grid">
+      <div class="cult-left" data-aho>
+        <div class="mlab reveal"><b>03</b>&nbsp;/&nbsp;CULTIVATION</div>
+        <span class="eyebrow gold reveal">MAI I TE WHENUA KI TE RONGOĀ <span>·</span> FROM LAND TO MEDICINE</span>
+        <h2 class="emerge">One unbroken thread,<br>from seed to patient.</h2>
+        <p class="reveal d2" style="margin-top:var(--s3)">Ten moments. One line. The same aho that begins in the seed ends in a patient's hand — and never breaks in between.</p>
+        <div class="cult-photo unveil reveal d2">
+          <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965845/aho_farms/raupunga/IMG_4143.jpg"
+            alt="Cultivation at Aho Farms — Hawke's Bay" loading="lazy">
+        </div>
+      </div>
+      <ol class="jlist" id="jList"></ol>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       05 · OUR FLOWER — what the land and the thread produce
+       ======================================================== -->
+  <section class="chapter" id="products" style="padding-bottom:var(--s7);">
+    <div class="flower-hdr" data-aho>
+      <div class="mlab reveal"><b>04</b>&nbsp;/&nbsp;OUR FLOWER</div>
+      <span class="eyebrow gold reveal">NGĀ HUA <span>·</span> OUR PRODUCTS</span>
+      <h2 class="emerge">Premium medicinal flower.<br>Available by prescription.</h2>
+      <p class="reveal d2">Full product specifications, certificates of analysis, and dosing guidance are available to registered prescribers in the portal.</p>
     </div>
 
     <!-- RĀ -->
     <article class="pstage" id="pRa">
       <div class="pstage-inner">
         <div class="pstage-visual reveal">
+          <span class="prod-ghost" aria-hidden="true">Rā</span>
           <div class="prod-glow prod-glow--ra"></div>
-          <div class="prod-tilt">
-            <div class="prod-ring"></div>
-            <img
-              src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781149945/ChatGPT_Image_Jun_11_2026_03_52_01_PM_gfza7m.png"
-              alt="RĀ — Aho Farms medicinal cannabis product"
-              class="prod-pkg" loading="lazy">
+          <div class="prod-float">
+            <div class="prod-tilt">
+              <div class="prod-ring"></div>
+              <img
+                src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto/v1781149945/ChatGPT_Image_Jun_11_2026_03_52_01_PM_gfza7m.png"
+                alt="RĀ — Aho Farms medicinal cannabis product"
+                class="prod-pkg" loading="lazy">
+            </div>
           </div>
         </div>
         <div class="pstage-body">
@@ -1188,13 +1564,16 @@ html.no-video .hero-scroll{opacity:1;}
           </a>
         </div>
         <div class="pstage-visual reveal">
+          <span class="prod-ghost" aria-hidden="true">Source</span>
           <div class="prod-glow prod-glow--source"></div>
-          <div class="prod-tilt">
-            <div class="prod-ring"></div>
-            <img
-              src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1781149002/ChatGPT_Image_Jun_11_2026_03_35_51_PM_g5rlm1.png"
-              alt="SOURCE — Aho Farms medicinal cannabis product"
-              class="prod-pkg" loading="lazy">
+          <div class="prod-float" style="animation-delay:-4.5s;">
+            <div class="prod-tilt">
+              <div class="prod-ring"></div>
+              <img
+                src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto/v1781149002/ChatGPT_Image_Jun_11_2026_03_35_51_PM_g5rlm1.png"
+                alt="SOURCE — Aho Farms medicinal cannabis product"
+                class="prod-pkg" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -1203,196 +1582,262 @@ html.no-video .hero-scroll{opacity:1;}
     <p class="prods-disc">Product information on this page is intended for licensed prescribers and healthcare professionals only. These products are not available for general purchase. Prescriptions are required.</p>
   </section>
 
-  <!-- portals — pick up the thread -->
-  <section class="portals-sec" id="portals">
-    <div class="wrap">
-      <div class="portals-hdr" data-aho>
-        <span class="eyebrow reveal">TŪHONO MAI <span>·</span> WHO ARE YOU?</span>
-        <h2 class="reveal d1">Pick up the thread.</h2>
-        <p class="reveal d2">All portals are professionally verified. Select the one that applies to you.</p>
+  <!-- ========================================================
+       06 · SCIENCE — two strands, one weave
+       ======================================================== -->
+  <section class="chapter" id="science">
+    <div class="drift gold" style="top:-6%;right:-12%;width:50vw;height:50vw;" aria-hidden="true"></div>
+    <div class="braid-hdr" data-aho>
+      <div class="mlab reveal"><b>05</b>&nbsp;/&nbsp;OUR SCIENCE</div>
+      <span class="eyebrow reveal">TE PŪTAIAO ME TE MĀTAURANGA <span>·</span> SCIENCE MEETS TRADITION</span>
+      <h2 class="emerge">Two strands. One weave.</h2>
+      <p class="reveal d2">Pharmaceutical-grade cultivation and mātauranga Māori are not in tension at Aho Farms. Like the two strands of a woven cord, each holds the other in place.</p>
+    </div>
+    <svg class="braid-svg reveal" id="braidSvg" viewBox="0 0 1000 200" aria-hidden="true">
+      <path id="braidGold" d="M0,100 C 60,30 110,30 165,100 S 275,170 330,100 S 440,30 495,100 S 605,170 660,100 S 770,30 825,100 S 935,170 1000,100"
+            fill="none" stroke="#c9a06a" stroke-width="1.5" opacity="0.9"/>
+      <path id="braidTeal" d="M0,100 C 60,170 110,170 165,100 S 275,30 330,100 S 440,170 495,100 S 605,30 660,100 S 770,170 825,100 S 935,30 1000,100"
+            fill="none" stroke="#73a8a5" stroke-width="1.5" opacity="0.9"/>
+      <text x="8" y="82" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#c9a06a">MĀTAURANGA</text>
+      <text x="920" y="82" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#73a8a5">SCIENCE</text>
+    </svg>
+    <div class="braid-cols">
+      <div class="braid-col mataur glass reveal">
+        <h4>Te Taha Māori — the inherited strand</h4>
+        <ul>
+          <li><div><b>Kaitiakitanga.</b> <span>The land is held in trust for future generations — soil decisions are made for the long term, never for a single season's yield.</span></div></li>
+          <li><div><b>Whenua knowledge.</b> <span>Five generations of farming this specific land — its winds, its frosts, its seasons — guides when and where we plant.</span></div></li>
+          <li><div><b>Natural cycles.</b> <span>Our plants follow the sun and the seasons, not a timer. Outdoor photoperiod cultivation is tikanga and technique at once.</span></div></li>
+          <li><div><b>He tangata.</b> <span>Whānau hands plant, tend, and harvest every crop. Care is a cultivation input.</span></div></li>
+        </ul>
       </div>
-      <ul class="portal-list">
-        <li class="reveal"><a class="portal-row" href="prescribers.html">
-          <span class="portal-num"><span class="portal-node"></span>01</span>
-          <h4>Prescribers &amp; Clinicians</h4>
-          <p>Product specs, CoAs, clinical evidence, dosing guidance, prescribing pathway.</p>
-          <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a></li>
-        <li class="reveal"><a class="portal-row" href="pharmacies.html">
-          <span class="portal-num"><span class="portal-node"></span>02</span>
-          <h4>Pharmacies</h4>
-          <p>Formulary information, supply terms, batch documentation, dispensing guidelines.</p>
-          <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a></li>
-        <li class="reveal"><a class="portal-row" href="export-partners.html">
-          <span class="portal-num"><span class="portal-node"></span>03</span>
-          <h4>Export &amp; Distribution</h4>
-          <p>Capability statement, compliance docs, supply volumes, market information.</p>
-          <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a></li>
-        <li class="reveal"><a class="portal-row" href="investors.html">
-          <span class="portal-num"><span class="portal-node"></span>04</span>
-          <h4>Investors</h4>
-          <p>Investment thesis, market opportunity, company overview, team credentials.</p>
-          <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a></li>
-      </ul>
+      <div class="braid-col sci glass reveal d1">
+        <h4>Te Taha Pūtaiao — the measured strand</h4>
+        <ul>
+          <li><div><b>Pheno-hunting.</b> <span>89 mother plants evaluated across cultivars, narrowed to the 15 strongest expressions for production.</span></div></li>
+          <li><div><b>Integrated pest management.</b> <span>No synthetic pesticides, herbicides, or artificial growth enhancers — pressure managed with natural inputs.</span></div></li>
+          <li><div><b>Independent verification.</b> <span>Every batch tested by Hill Labs (IANZ-accredited): cannabinoids, terpenes, heavy metals, pesticides, microbials.</span></div></li>
+          <li><div><b>&lt;200 CFU.</b> <span>New Zealand's microbial standard is stricter than Australia's. Our flower consistently meets it.</span></div></li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- ========================================================
-       05 · STORY — whenua, terroir, two strands, seed to patient
+       07 · OUR PEOPLE — whānau, whenua, community
        ======================================================== -->
-  <section class="story-sec" id="about">
-    <div class="wrap">
-      <div class="mlab reveal"><b>04</b>&nbsp;/&nbsp;STORY</div>
-      <div class="story-grid">
-        <div class="story-img reveal">
-          <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965576/IMG_6092_talxyt.jpg"
-            alt="Aho Farms growing site — Hawke's Bay, Aotearoa New Zealand"
-            loading="lazy">
-        </div>
-        <div class="story-content" data-aho>
-          <span class="eyebrow reveal">MŌ MĀTOU <span>·</span> OUR STORY</span>
-          <span class="te-reo-line reveal" style="color:var(--teal-light)">Tiakina te whenua, tiakina te iwi.</span>
-          <h2 class="reveal d1">Five generations of land. One generation to build on it differently.</h2>
-          <p class="reveal d2">Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
-          <p class="reveal d2">In partnership with the Waaka whānau, we grow on Māori freehold land in Hawke's Bay. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
-          <div class="dual reveal d3">
-            <div>
-              <span class="dual-label">California Expertise</span>
-              <span class="dual-val">20 years cultivation experience from the world's most mature cannabis market</span>
-            </div>
-            <div class="dual-div"></div>
-            <div>
-              <span class="dual-label">Hawke's Bay Whenua</span>
-              <span class="dual-val">Five-generation farming connection to ancestral lands of Te Hapuku</span>
-            </div>
-          </div>
-          <div class="story-quote reveal d3">
-            <blockquote>Guard the land, guard the people.</blockquote>
-            <cite>— Tiakina te whenua, tiakina te iwi · Founding kaupapa of Aho Farms</cite>
-          </div>
-          <a href="about.html" class="btn btn-teal-outline reveal d3">Read Our Full Story</a>
-        </div>
+  <section class="chapter" id="about">
+    <div class="starfield" data-stars="16" aria-hidden="true"></div>
+    <div class="people-grid">
+      <div class="people-img unveil reveal">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965576/IMG_6092_talxyt.jpg"
+          alt="Aho Farms growing site — Hawke's Bay, Aotearoa New Zealand"
+          loading="lazy">
       </div>
+      <div class="people-content" data-aho>
+        <div class="mlab reveal"><b>06</b>&nbsp;/&nbsp;OUR PEOPLE</div>
+        <span class="eyebrow reveal">MŌ MĀTOU <span>·</span> OUR STORY</span>
+        <span class="te-reo-line reveal" style="color:var(--teal-light)">Tiakina te whenua, tiakina te iwi.</span>
+        <h2 class="emerge">Five generations of land. One generation to build on it differently.</h2>
+        <p class="reveal d2">Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
+        <p class="reveal d2">In partnership with the Waaka whānau, we grow on Māori freehold land in Hawke's Bay. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
+        <div class="dual reveal d3">
+          <div>
+            <span class="dual-label">California Expertise</span>
+            <span class="dual-val">20 years cultivation experience from the world's most mature cannabis market</span>
+          </div>
+          <div class="dual-div"></div>
+          <div>
+            <span class="dual-label">Hawke's Bay Whenua</span>
+            <span class="dual-val">Five-generation farming connection to ancestral lands of Te Hapuku</span>
+          </div>
+        </div>
+        <div class="people-quote reveal d3">
+          <blockquote>Guard the land, guard the people.</blockquote>
+          <cite>— Tiakina te whenua, tiakina te iwi · Founding kaupapa of Aho Farms</cite>
+        </div>
+        <a href="about.html" class="btn btn-teal-outline reveal d3">Read Our Full Story</a>
+      </div>
+    </div>
 
-      <!-- terroir -->
-      <div class="terroir-hdr" data-aho>
-        <span class="eyebrow gold reveal">TE WĀHI <span>·</span> SENSE OF PLACE</span>
-        <span class="te-reo-line reveal d1">Ko te whenua te waiū mō ngā uri whakatipu.</span>
-        <h2 class="reveal d1">Terroir, at 39° south.</h2>
-        <p class="reveal d2">Our growing site sits in northern Hawke's Bay — one of the sunniest regions in Aotearoa, shaped by coastal air off Te Matau-a-Māui and soil farmed by the same whānau for five generations. Wine has a word for what place does to a plant. So does medicinal cannabis: everything our flower is begins with where it grows.</p>
+    <!-- community impact — like the stars of Matariki: each outcome
+         stands alone, and means more together -->
+    <div class="impact-wrap">
+      <div class="impact-hdr" data-aho>
+        <span class="eyebrow gold reveal">ORANGA TĀNGATA <span>·</span> COMMUNITY IMPACT</span>
+        <span class="te-reo-line reveal d1">Ehara taku toa i te toa takitahi, engari he toa takitini.</span>
+        <h2 class="emerge">The thread does not end at the farm gate.</h2>
+        <p class="reveal d2">Like the stars of Matariki, each outcome stands alone — and means more together. Every connection below is held by the same aho that runs through our cultivation.</p>
       </div>
-      <div class="terroir-grid">
-        <div class="tstat reveal">
-          <span class="tstat-n"><span class="count" data-to="2200">0</span>+</span>
-          <div class="tstat-l">Sunshine hours per year in Hawke's Bay — natural photoperiod, no artificial light cycles.</div>
-        </div>
-        <div class="tstat reveal d1">
-          <span class="tstat-n">39<sup>°S</sup></span>
-          <div class="tstat-l">Latitude of our growing site — long summer days at harvest-critical months.</div>
-        </div>
-        <div class="tstat reveal d2">
-          <span class="tstat-n">5<sup>GEN</sup></span>
-          <div class="tstat-l">Generations of whānau farming this soil before a single cannabis seed was planted.</div>
-        </div>
-        <div class="tstat reveal d3">
-          <span class="tstat-n">100<sup>%</sup></span>
-          <div class="tstat-l">Sun-grown outdoors on Māori freehold whenua — richer terpene and cannabinoid expression.</div>
-        </div>
+      <div class="impact-facts">
+        <div class="ifact reveal"><span class="ifact-n">5</span><div class="ifact-l">New whānau team members welcomed from the local community ahead of peak season.</div></div>
+        <div class="ifact reveal d1"><span class="ifact-n">2</span><div class="ifact-l">Team members enrolled in supported formal horticulture training.</div></div>
+        <div class="ifact reveal d2"><span class="ifact-n">100%</span><div class="ifact-l">Hawke's Bay operated — local employment, local supply chain.</div></div>
+        <div class="ifact reveal d3"><span class="ifact-n">Iwi</span><div class="ifact-l">Ngāti Pāhauwera partnership and shared ownership structure.</div></div>
       </div>
-      <div class="terroir-place reveal">
-        
-        <span>Te Matau-a-Māui · Hawke's Bay</span><div class="sep"></div>
-        <span>Aotearoa New Zealand</span>
-      </div>
-
-      <!-- braid — science meets tradition -->
-      <div class="braid-wrap" data-aho>
-        <div class="braid-hdr">
-          <span class="eyebrow reveal">TE PŪTAIAO ME TE MĀTAURANGA <span>·</span> SCIENCE MEETS TRADITION</span>
-          <h2 class="reveal d1">Two strands. One weave.</h2>
-          <p class="reveal d2">Pharmaceutical-grade cultivation and mātauranga Māori are not in tension at Aho Farms. Like the two strands of a woven cord, each holds the other in place.</p>
-        </div>
-        <svg class="braid-svg reveal" id="braidSvg" viewBox="0 0 1000 200" aria-hidden="true">
-          <path id="braidGold" d="M0,100 C 60,30 110,30 165,100 S 275,170 330,100 S 440,30 495,100 S 605,170 660,100 S 770,30 825,100 S 935,170 1000,100"
-                fill="none" stroke="#c9a06a" stroke-width="1.5" opacity="0.9"/>
-          <path id="braidTeal" d="M0,100 C 60,170 110,170 165,100 S 275,30 330,100 S 440,170 495,100 S 605,30 660,100 S 770,170 825,100 S 935,30 1000,100"
-                fill="none" stroke="#73a8a5" stroke-width="1.5" opacity="0.9"/>
-          <text x="8" y="82" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#c9a06a">MĀTAURANGA</text>
-          <text x="920" y="82" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#73a8a5">SCIENCE</text>
-        </svg>
-        <div class="braid-cols">
-          <div class="braid-col mataur reveal">
-            <h4>Te Taha Māori — the inherited strand</h4>
-            <ul>
-              <li><div><b>Kaitiakitanga.</b> <span>The land is held in trust for future generations — soil decisions are made for the long term, never for a single season's yield.</span></div></li>
-              <li><div><b>Whenua knowledge.</b> <span>Five generations of farming this specific land — its winds, its frosts, its seasons — guides when and where we plant.</span></div></li>
-              <li><div><b>Natural cycles.</b> <span>Our plants follow the sun and the seasons, not a timer. Outdoor photoperiod cultivation is tikanga and technique at once.</span></div></li>
-              <li><div><b>He tangata.</b> <span>Whānau hands plant, tend, and harvest every crop. Care is a cultivation input.</span></div></li>
-            </ul>
-          </div>
-          <div class="braid-col sci reveal d1">
-            <h4>Te Taha Pūtaiao — the measured strand</h4>
-            <ul>
-              <li><div><b>Pheno-hunting.</b> <span>89 mother plants evaluated across cultivars, narrowed to the 15 strongest expressions for production.</span></div></li>
-              <li><div><b>Integrated pest management.</b> <span>No synthetic pesticides, herbicides, or artificial growth enhancers — pressure managed with natural inputs.</span></div></li>
-              <li><div><b>Independent verification.</b> <span>Every batch tested by Hill Labs (IANZ-accredited): cannabinoids, terpenes, heavy metals, pesticides, microbials.</span></div></li>
-              <li><div><b>&lt;200 CFU.</b> <span>New Zealand's microbial standard is stricter than Australia's. Our flower consistently meets it.</span></div></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- seed to patient — one unbroken thread -->
-      <div class="journey-wrap" id="process">
-        <div class="journey-left" data-aho>
-          <span class="eyebrow gold reveal">MAI I TE WHENUA KI TE RONGOĀ <span>·</span> FROM LAND TO MEDICINE</span>
-          <h2 class="reveal d1">One unbroken thread,<br>from seed to patient.</h2>
-          <p class="reveal d2" style="margin-top:var(--s3)">Ten moments. One line. The same aho that begins in the seed ends in a patient's hand — and never breaks in between.</p>
-        </div>
-        <ol class="jlist" id="jList"></ol>
+      <div class="impact-cta reveal">
+        <a href="social-impact.html" class="btn btn-gold">Read Our Social Impact</a>
+        <a href="kaupapa.html" class="btn btn-outline">Our Kaupapa</a>
       </div>
     </div>
   </section>
 
-  <!-- news — compact -->
-  <section class="news-sec" id="news">
-    <div class="wrap">
-      <div class="news-hdr" data-aho>
-        <div>
-          <span class="eyebrow reveal">NGĀ KŌRERO <span>·</span> LATEST</span>
-          <h2 class="reveal d1">News &amp; Updates</h2>
-        </div>
-        <a href="news.html" class="btn btn-teal-outline btn-sm reveal" style="flex-shrink:0">All News</a>
+  <!-- ========================================================
+       08 · TRUST — proven, quietly
+       ======================================================== -->
+  <section class="chapter" id="trust">
+    <div class="trust-hdr" data-aho>
+      <div class="mlab reveal" style="justify-content:center;"><b>07</b>&nbsp;/&nbsp;TRUST</div>
+      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TE WHAKAMĀTAU <span>·</span> PROVEN QUALITY</span>
+      <h2 class="emerge">Trust is grown here too.</h2>
+      <p class="reveal d2">Every claim we make is licensed, tested, or documented — and available to verified partners.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="titem reveal">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></div>
+        <h4>Licensed Cultivation</h4>
+        <p>Licensed medicinal cannabis cultivator under New Zealand's Medicinal Cannabis Scheme — grown, dried, and processed in Aotearoa.</p>
       </div>
-      <div class="news-grid">
-        <a href="news.html" class="ncard reveal">
-          <div class="ncard-img">
-            <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965785/aho_farms/raupunga/75978189862.jpg" alt="Aho Farms property — 2026 harvest season" loading="lazy">
-          </div>
-          <div class="ncard-meta"><span class="ntag">Company Update</span><span class="ndate">June 2026</span></div>
-          <h4>Aho Farms completes 2026 harvest season</h4>
-          <p>Our outdoor sun-grown crop has been harvested and is undergoing independent laboratory testing ahead of supply to licensed prescribers.</p>
-        </a>
-        <a href="news.html" class="ncard reveal d1">
-          <div class="ncard-img">
-            <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965833/aho_farms/raupunga/IMG_3680.jpg" alt="Aho Farms land development — Hawke's Bay" loading="lazy">
-          </div>
-          <div class="ncard-meta"><span class="ntag">Social Impact</span><span class="ndate">May 2026</span></div>
-          <h4>Five new whānau members join ahead of peak season</h4>
-          <p>We have welcomed five new team members from the local community, with two enrolling in supported formal horticulture training.</p>
-        </a>
-        <a href="news.html" class="ncard reveal d2">
-          <div class="ncard-img">
-            <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/v1780965975/aho_farms/indoor/IMG_5376.jpg" alt="Aho Farms indoor cultivation facility" loading="lazy">
-          </div>
-          <div class="ncard-meta"><span class="ntag">Regulatory</span><span class="ndate">April 2026</span></div>
-          <h4>What the 2025 Medsafe guidance means for NZ operators</h4>
-          <p>A breakdown of the updated Medsafe advertising guidance and what it means for licensed cultivators, prescribers, and pharmacies.</p>
-        </a>
+      <div class="titem reveal d1">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 3v6.2L5 18a2.4 2.4 0 0 0 2.2 3.4h9.6A2.4 2.4 0 0 0 19 18l-5-8.8V3"/><path d="M8.5 3h7"/><path d="M8 15.5h8"/></svg></div>
+        <h4>Independent Testing</h4>
+        <p>Every batch analysed by Hill Labs, Hamilton — IANZ accredited. Cannabinoids, terpenes, heavy metals, pesticides, microbials.</p>
+      </div>
+      <div class="titem reveal d2">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21c-1-6 1-11 8-14-1 7-3 12-8 14z"/><path d="M12 21c1-4-1-8-6-10 .7 5 2.5 8.5 6 10z"/></svg></div>
+        <h4>NZ Microbial Standard</h4>
+        <p>CFU count below 200 — New Zealand's standard, stricter than Australia's. Our sun-grown flower consistently meets it.</p>
+      </div>
+      <div class="titem reveal">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.8 2.6 4 5.6 4 9s-1.2 6.4-4 9c-2.8-2.6-4-5.6-4-9s1.2-6.4 4-9z"/></svg></div>
+        <h4>Export Pathway</h4>
+        <p>Export licence active — documented supply pathway for qualified international partners, beginning with Australia.</p>
+      </div>
+      <div class="titem reveal d1">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M10 8h6M10 12h6M10 16h4"/></svg></div>
+        <h4>Batch Documentation</h4>
+        <p>Full chain-of-custody from plant to pack. Certificates of analysis accompany every batch released to prescribers and pharmacies.</p>
+      </div>
+      <div class="titem reveal d2">
+        <div class="titem-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4l1.8 4.6L18 10l-4.2 1.4L12 16l-1.8-4.6L6 10l4.2-1.4L12 4z"/><path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z"/></svg></div>
+        <h4>Prescription Medicine</h4>
+        <p>Dispensed only through licensed prescribers and pharmacies. Never sold direct. Never marketed to patients or consumers.</p>
+      </div>
+    </div>
+    <div class="trust-partner reveal">
+      <span>Ngāti Pāhauwera Partnership</span><div class="sep"></div>
+      <span>Waaka Whānau · Hawke's Bay</span><div class="sep"></div>
+      <span>Hill Labs · IANZ Accredited</span>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       09 · PORTALS — pick up the thread
+       ======================================================== -->
+  <section class="chapter" id="portals" style="padding-top:var(--s7);">
+    <div class="portals-hdr" data-aho>
+      <span class="eyebrow reveal">TŪHONO MAI <span>·</span> WHO ARE YOU?</span>
+      <h2 class="emerge">Pick up the thread.</h2>
+      <p class="reveal d2">All portals are professionally verified. Select the one that applies to you.</p>
+    </div>
+    <ul class="portal-grid">
+      <li class="reveal"><a class="portal-card glass" href="prescribers.html">
+        <span class="portal-num"><span class="portal-node"></span>01</span>
+        <h4>Prescribers &amp; Clinicians</h4>
+        <p>Product specs, CoAs, clinical evidence, dosing guidance, prescribing pathway.</p>
+        <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a></li>
+      <li class="reveal d1"><a class="portal-card glass" href="pharmacies.html">
+        <span class="portal-num"><span class="portal-node"></span>02</span>
+        <h4>Pharmacies</h4>
+        <p>Formulary information, supply terms, batch documentation, dispensing guidelines.</p>
+        <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a></li>
+      <li class="reveal d2"><a class="portal-card glass" href="export-partners.html">
+        <span class="portal-num"><span class="portal-node"></span>03</span>
+        <h4>Export &amp; Distribution</h4>
+        <p>Capability statement, compliance docs, supply volumes, market information.</p>
+        <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a></li>
+      <li class="reveal d3"><a class="portal-card glass" href="investors.html">
+        <span class="portal-num"><span class="portal-node"></span>04</span>
+        <h4>Investors</h4>
+        <p>Investment thesis, market opportunity, company overview, team credentials.</p>
+        <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ========================================================
+       10 · NEWS — a quiet editorial coda
+       ======================================================== -->
+  <section class="chapter" id="news" style="padding-top:var(--s7);">
+    <div class="news-hdr" data-aho>
+      <div>
+        <span class="eyebrow reveal">NGĀ KŌRERO <span>·</span> LATEST</span>
+        <h2 class="reveal d1">News &amp; Updates</h2>
+      </div>
+      <a href="news.html" class="btn btn-teal-outline btn-sm reveal" style="flex-shrink:0">All News</a>
+    </div>
+    <div class="news-grid">
+      <a href="news.html" class="ncard reveal">
+        <div class="ncard-img">
+          <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965785/aho_farms/raupunga/75978189862.jpg" alt="Aho Farms property — 2026 harvest season" loading="lazy">
+        </div>
+        <div class="ncard-meta"><span class="ntag">Company Update</span><span class="ndate">June 2026</span></div>
+        <h4>Aho Farms completes 2026 harvest season</h4>
+        <p>Our outdoor sun-grown crop has been harvested and is undergoing independent laboratory testing ahead of supply to licensed prescribers.</p>
+      </a>
+      <a href="news.html" class="ncard reveal d1">
+        <div class="ncard-img">
+          <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965833/aho_farms/raupunga/IMG_3680.jpg" alt="Aho Farms land development — Hawke's Bay" loading="lazy">
+        </div>
+        <div class="ncard-meta"><span class="ntag">Social Impact</span><span class="ndate">May 2026</span></div>
+        <h4>Five new whānau members join ahead of peak season</h4>
+        <p>We have welcomed five new team members from the local community, with two enrolling in supported formal horticulture training.</p>
+      </a>
+      <a href="news.html" class="ncard reveal d2">
+        <div class="ncard-img">
+          <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965975/aho_farms/indoor/IMG_5376.jpg" alt="Aho Farms indoor cultivation facility" loading="lazy">
+        </div>
+        <div class="ncard-meta"><span class="ntag">Regulatory</span><span class="ndate">April 2026</span></div>
+        <h4>What the 2025 Medsafe guidance means for NZ operators</h4>
+        <p>A breakdown of the updated Medsafe advertising guidance and what it means for licensed cultivators, prescribers, and pharmacies.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       11 · FINAL CONNECTION — the thread reaches its last light
+       ======================================================== -->
+  <section class="connect-sec" id="connect">
+    <div class="starfield" data-stars="46" aria-hidden="true"></div>
+    <!-- a faint gathering of lights — felt, not read -->
+    <div class="connect-const" id="ccWrap" aria-hidden="true">
+      <svg viewBox="0 0 720 300">
+        <g id="ccGroup">
+          <line class="cc-line" x1="150" y1="180" x2="255" y2="120"/>
+          <line class="cc-line" x1="255" y1="120" x2="360" y2="150"/>
+          <line class="cc-line" x1="360" y1="150" x2="470" y2="95"/>
+          <line class="cc-line" x1="470" y1="95" x2="565" y2="160"/>
+          <g style="--sp:5.5s;--sd:0s"><circle class="cc-halo" cx="150" cy="180" r="9"/><circle class="cc-star" cx="150" cy="180" r="2.2"/></g>
+          <g style="--sp:6.5s;--sd:1.2s"><circle class="cc-halo" cx="255" cy="120" r="7"/><circle class="cc-star" cx="255" cy="120" r="1.8"/></g>
+          <g style="--sp:7s;--sd:2.4s"><circle class="cc-halo" cx="360" cy="150" r="8"/><circle class="cc-star" cx="360" cy="150" r="2"/></g>
+          <g style="--sp:5.8s;--sd:0.8s"><circle class="cc-halo" cx="470" cy="95" r="10"/><circle class="cc-star" cx="470" cy="95" r="2.4"/></g>
+          <g style="--sp:6.2s;--sd:1.8s"><circle class="cc-halo" cx="565" cy="160" r="7"/><circle class="cc-star" cx="565" cy="160" r="1.8"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="wrap" data-aho>
+      <div class="connect-node reveal" aria-hidden="true"></div>
+      <span class="eyebrow gold reveal" style="justify-content:center;display:flex"><b style="color:var(--gold);margin-right:10px">08</b> TŪHONO MAI <span>·</span> WORK WITH US</span>
+      <span class="connect-headline emerge">Tūhono mai.</span>
+      <p class="connect-sub reveal d2">Join the thread. Prescribers, pharmacies, export partners, and investors — we'd like to hear from you.</p>
+      <div class="connect-btns reveal d3">
+        <a href="contact.html" class="btn btn-primary">Become a Partner</a>
+        <a href="prescribers.html" class="btn btn-outline">Request Access</a>
+        <a href="products.html" class="btn btn-gold">View Our Flower</a>
       </div>
     </div>
   </section>
@@ -1404,23 +1849,6 @@ html.no-video .hero-scroll{opacity:1;}
       <p>Aho Farms products are prescription medicines available through licensed healthcare providers only. This website is not intended for patients or consumers. Product information is provided for healthcare and industry professionals only. Always consult a qualified healthcare professional regarding medicinal cannabis.</p>
     </div>
   </div>
-
-  <!-- ========================================================
-       06 · FINAL CONNECTION — the thread reaches its last light
-       ======================================================== -->
-  <section class="connect-sec" id="connect">
-    <div class="starfield" data-stars="46" aria-hidden="true"></div>
-    <div class="wrap" data-aho>
-      <div class="connect-node reveal" aria-hidden="true"></div>
-      <span class="eyebrow gold reveal" style="justify-content:center;display:flex"><b style="color:var(--gold);margin-right:10px">05</b> TŪHONO MAI <span>·</span> WORK WITH US</span>
-      <span class="connect-headline reveal d1">Tūhono mai.</span>
-      <p class="connect-sub reveal d2">Join the thread. Prescribers, pharmacies, export partners, and investors — we'd like to hear from you.</p>
-      <div class="connect-btns reveal d3">
-        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-        <a href="prescribers.html" class="btn btn-outline">Prescriber Portal</a>
-      </div>
-    </div>
-  </section>
 
   <!-- THE LIVING THREAD -->
   <div id="threadLayer" aria-hidden="true">
@@ -1524,7 +1952,7 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ================================================================
-   HERO FILM — the interface answers the film.
+   HERO FILM — the interface answers the film. (preserved)
    Storyboard beats: 0–2 darkness · 2–7 botanical / trichome ·
    7–9 droplet · 9–11 into the droplet · 11–13 cosmic expansion ·
    13–15 Matariki settles. The film holds on its final frame.
@@ -1669,81 +2097,12 @@ window.addEventListener('scroll',()=>{
 })();
 
 /* ================================================================
-   MATARIKI — star cluster placed to match the hero film's own
-   final composition (the supplied reference). No lines, no
-   invented names, no invented arrangement.
-   ================================================================ */
-(function(){
-  const g=document.getElementById('mCluster');
-  if(!g)return;
-  /* [x, y, core radius] — positions traced from the film's final frame */
-  const STARS=[
-    [320,211,5.2],[425,214,5.0],[524,180,4.6],[582,197,4.2],
-    [497,105,3.6],[558,139,3.4],[585,224,3.2],[333,146,2.6],
-    [306,257,2.4],[427,275,2.6],[456,309,3.0],[418,316,2.2]
-  ];
-  const NS='http://www.w3.org/2000/svg';
-  STARS.forEach((s,i)=>{
-    const[x,y,r]=s;
-    const grp=document.createElementNS(NS,'g');
-    grp.setAttribute('class','mstar');
-    grp.style.setProperty('--sp',(4.5+(i%5)*1.3)+'s');
-    grp.style.setProperty('--sd',(i*0.55)+'s');
-    const halo=document.createElementNS(NS,'circle');
-    halo.setAttribute('cx',x);halo.setAttribute('cy',y);
-    halo.setAttribute('r',r*3.6);
-    halo.setAttribute('class','m-halo');
-    grp.appendChild(halo);
-    if(r>=4.2){ /* diffraction spikes on the brightest stars only */
-      const v=document.createElementNS(NS,'line');
-      v.setAttribute('x1',x);v.setAttribute('x2',x);
-      v.setAttribute('y1',y-r*4.4);v.setAttribute('y2',y+r*4.4);
-      v.setAttribute('class','m-spike');
-      const h=document.createElementNS(NS,'line');
-      h.setAttribute('y1',y);h.setAttribute('y2',y);
-      h.setAttribute('x1',x-r*4.4);h.setAttribute('x2',x+r*4.4);
-      h.setAttribute('class','m-spike');
-      grp.appendChild(v);grp.appendChild(h);
-    }
-    const core=document.createElementNS(NS,'circle');
-    core.setAttribute('cx',x);core.setAttribute('cy',y);
-    core.setAttribute('r',r*0.62);
-    core.setAttribute('class','m-core');
-    grp.appendChild(core);
-    g.appendChild(grp);
-  });
-
-  /* desktop only: gentle proximity + ≤12px parallax — never a game */
-  if(SMALL||REDUCED)return;
-  const sky=document.getElementById('mSky');
-  const svg=sky.querySelector('svg');
-  const stars=[...g.querySelectorAll('.mstar')];
-  sky.addEventListener('pointermove',e=>{
-    const rc=svg.getBoundingClientRect();
-    const mx=(e.clientX-rc.left)/rc.width*1000;
-    const my=(e.clientY-rc.top)/rc.height*430;
-    stars.forEach((st,i)=>{
-      const[x,y]=STARS[i];
-      const d=Math.hypot(mx-x,my-y);
-      st.classList.toggle('near',d<90);
-    });
-    const px=((e.clientX-rc.left)/rc.width-0.5)*12;
-    const py=((e.clientY-rc.top)/rc.height-0.5)*7;
-    g.style.transform=`translate(${px.toFixed(1)}px,${py.toFixed(1)}px)`;
-  });
-  sky.addEventListener('pointerleave',()=>{
-    stars.forEach(st=>st.classList.remove('near'));
-    g.style.transform='';
-  });
-})();
-
-/* ================================================================
    SEED TO PATIENT — one unbroken thread (content preserved)
    ================================================================ */
 const J_STAGES=[
   {mi:'Te kākano',    en:'Seed',            d:'Cultivars selected for outdoor performance in Hawke’s Bay conditions — Oreo and Wake & Cake C30, both proven for the New Zealand climate. From 89 mother plants, only the 15 strongest expressions made it here.'},
   {mi:'Te whakatipu', en:'Propagation',     d:'Seedlings are established under careful watch, then hardened for life outdoors. Weak plants never leave the nursery — the thread starts strong or not at all.'},
-  {mi:'Te māra',      en:'Cultivation',     d:'Transplanted to Māori freehold whenua in Hawke's Bay. Natural light, living soil, coastal air. No synthetic pesticides, herbicides, or artificial growth enhancers — pest pressure is managed with integrated pest management.'},
+  {mi:'Te māra',      en:'Cultivation',     d:'Transplanted to Māori freehold whenua in Hawke’s Bay. Natural light, living soil, coastal air. No synthetic pesticides, herbicides, or artificial growth enhancers — pest pressure is managed with integrated pest management.'},
   {mi:'Te puāwai',    en:'Flowering',       d:'Plants follow the natural photoperiod through Hawke’s Bay’s 2,200+ sunshine hours. The sun’s full spectrum drives a richer terpene profile and more complex cannabinoid expression than indoor lighting can achieve.'},
   {mi:'Te hauhake',   en:'Harvest',         d:'Hand-harvested at peak cannabinoid and terpene development. Timing is set by trichome examination — whānau hands, expert eyes, no machines.'},
   {mi:'Te whakamaroke', en:'Drying',        d:'Slow-dried in controlled conditions with moisture monitored throughout. Patience here protects everything the season built.'},
@@ -1766,10 +2125,10 @@ const J_STAGES=[
 })();
 
 /* ================================================================
-   REVEALS — IntersectionObserver + CSS
+   REVEALS — IntersectionObserver + CSS (one motion language)
    ================================================================ */
 (function(){
-  const els=document.querySelectorAll('.reveal,.story-img');
+  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.cult-photo,.people-img');
   if(REDUCED){els.forEach(el=>el.classList.add('in'));return;}
   const io=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
@@ -1798,6 +2157,35 @@ const J_STAGES=[
     });
   },{threshold:0.4});
   els.forEach(el=>io.observe(el));
+})();
+
+/* ================================================================
+   PARALLAX — imagery drifts at a different depth than the page.
+   One rAF loop; transforms only; no layout work.
+   ================================================================ */
+(function(){
+  if(REDUCED)return;
+  const els=[...document.querySelectorAll('[data-plx]')];
+  if(!els.length)return;
+  let ticking=false;
+  function update(){
+    const vh=window.innerHeight;
+    els.forEach(el=>{
+      const host=el.parentElement.getBoundingClientRect();
+      /* -1 (below viewport) … +1 (above viewport) */
+      const p=(host.top+host.height/2-vh/2)/(vh/2+host.height/2);
+      const f=parseFloat(el.dataset.plx)||0.12;
+      el.style.transform=`translateY(${(p*f*host.height).toFixed(1)}px)`;
+    });
+    ticking=false;
+  }
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(update);
+  },{passive:true});
+  window.addEventListener('resize',update);
+  update();
 })();
 
 /* ---------- Braid draw ---------- */
@@ -1837,6 +2225,23 @@ if(!SMALL&&!REDUCED){
     });
   });
 }
+
+/* ---------- Final constellation — breathes with the cursor,
+   never more than a few pixels. A luxury-watch shimmer. ---------- */
+(function(){
+  if(SMALL||REDUCED)return;
+  const wrap=document.getElementById('ccWrap');
+  const grp=document.getElementById('ccGroup');
+  if(!wrap||!grp)return;
+  const sec=document.getElementById('connect');
+  sec.addEventListener('pointermove',e=>{
+    const r=sec.getBoundingClientRect();
+    const px=((e.clientX-r.left)/r.width-0.5)*10;
+    const py=((e.clientY-r.top)/r.height-0.5)*6;
+    grp.style.transform=`translate(${px.toFixed(1)}px,${py.toFixed(1)}px)`;
+  });
+  sec.addEventListener('pointerleave',()=>{grp.style.transform='';});
+})();
 
 /* ================================================================
    THE LIVING THREAD — built from data-aho anchors (preserved
