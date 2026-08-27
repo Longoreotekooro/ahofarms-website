@@ -261,16 +261,19 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .nav-inner{
   max-width:var(--max);margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  column-gap:var(--s3);
   height:72px;
 }
 .nav-logo{
+  grid-column:1;justify-self:start;
   font-family:var(--font-h);font-size:1.5rem;font-weight:500;
   letter-spacing:0.12em;color:var(--white);flex-shrink:0;
 }
 .nav-logo em{font-style:normal;color:var(--teal-light);}
-.nav-links{display:flex;align-items:center;gap:var(--s4);list-style:none;margin:0;padding:0;}
-.nav-parent > a,.nav-cta-wrap > a{
+.nav-links{grid-column:2;justify-self:center;display:flex;align-items:center;gap:var(--s4);list-style:none;margin:0;padding:0;}
+.nav-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:var(--s3);}
+.nav-parent > a,.nav-cta-wrap{
   display:inline-flex;align-items:center;gap:6px;
   text-decoration:none;transition:opacity 0.2s;
 }
@@ -287,31 +290,37 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .nav-parent:hover .bil-mi,.nav-sub a:hover .bil-mi{opacity:1;}
 
 .nav-caret{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;
-           border-top:4px solid currentColor;opacity:.55;}
+           border-top:4px solid currentColor;opacity:.55;transition:transform .2s;}
 
-/* second bar */
-.nav-bar2{border-top:1px solid rgba(255,255,255,0.08);background:rgba(0,0,0,0.55);}
-.nav-bar2-inner{max-width:var(--max);margin:0 auto;padding:0 var(--s3);}
-.nav-sub{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s3);
-         list-style:none;margin:0;padding:10px 0;}
-.nav-sub[hidden]{display:none;}
-.nav-sub a{text-decoration:none;}
+/* click-to-open children panel. Children live inside their own parent's
+   <li> (single source, emitted once by renderNav - no second bar, no
+   cloning). Closed by default via [hidden]; JS toggles it on click.
+   Positioned absolutely so opening a panel never changes .nav-inner's
+   height - nothing below the header ever shifts. */
+.nav-parent{position:relative;}
+.nav-parent .nav-sub{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  margin:10px 0 0;padding:10px 0;min-width:220px;
+  background:rgba(5,8,12,0.95);border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;box-shadow:0 14px 34px rgba(0,0,0,0.45);
+  display:flex;flex-direction:column;gap:2px;
+  list-style:none;z-index:110;
+}
+.nav-parent .nav-sub[hidden]{display:none;}
+.nav-parent .nav-sub a{display:block;padding:8px 20px;text-decoration:none;white-space:nowrap;}
 .nav-parent.is-active > a .bil-en{color:var(--gold);}
-/* Cloned accordion sub-lists (mobile drawer only) are hidden at every width
-   by default; the mobile media query below reveals them only when expanded.
-   Scoped to .nav-parent so it never touches the real .nav-bar2 lists. */
-.nav-parent .nav-sub{display:none;}
+.nav-parent.is-expanded .nav-caret{transform:rotate(180deg);}
 
 @media(prefers-reduced-motion:reduce){.bil-en,.bil-mi{transition:none;}}
 
-.nav-cta-wrap a{
+.nav-cta-wrap{
   background:transparent;
   border:1px solid rgba(115,168,165,0.4);
   color:var(--teal-light) !important;
   padding:8px 18px;border-radius:3px;
   transition:all 0.2s !important;gap:0;
 }
-.nav-cta-wrap a:hover{
+.nav-cta-wrap:hover{
   background:var(--teal) !important;color:var(--white) !important;
   border-color:var(--teal) !important;opacity:1 !important;
 }
@@ -332,11 +341,12 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   /* No hover on touch - show BOTH languages stacked instead of swapping. */
   .bil{display:block;}
   .bil-mi{opacity:1;display:block;font-size:0.625rem;color:rgba(115,168,165,0.7);}
-  .nav-bar2{display:none;}
-  .nav-parent .nav-sub{position:static;display:none;flex-direction:column;
-                       align-items:flex-start;gap:0;padding:0 0 12px 12px;}
-  .nav-parent.is-expanded .nav-sub{display:flex;}
-  .nav-parent.is-expanded .nav-caret{transform:rotate(180deg);}
+  /* Same nav-sub element as desktop, now laid out inline as the accordion
+     panel instead of an absolutely-positioned overlay. */
+  .nav-parent .nav-sub{position:static;transform:none;margin:0;min-width:0;
+                       background:none;border:0;box-shadow:none;
+                       align-items:flex-start;padding:0 0 12px 12px;}
+  .nav-parent .nav-sub a{padding:8px 0;}
 }
 
 /* ================================================================
@@ -1316,19 +1326,9 @@ html.no-video .hero-scroll{opacity:1;}
 <nav class="nav" id="nav" aria-label="Main">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">AHO <em>FARMS</em></a>
-      <button class="nav-burger" aria-expanded="false" aria-controls="navDrawer" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
       <ul class="nav-links" id="navDrawer">
-        <li class="nav-parent is-active" data-haskids="1" data-idx="0"><a href="about.html" aria-label="Learn"><span class="bil"><span class="bil-en">Learn</span><span class="bil-mi" aria-hidden="true">Ako</span></span><span class="nav-caret" aria-hidden="true"></span></a></li>
-        <li class="nav-parent" data-haskids="1" data-idx="1"><a href="products.html" aria-label="Buy"><span class="bil"><span class="bil-en">Buy</span><span class="bil-mi" aria-hidden="true">Hoko</span></span><span class="nav-caret" aria-hidden="true"></span></a></li>
-        <li class="nav-parent" data-idx="2"><a href="investors.html" aria-label="Invest"><span class="bil"><span class="bil-en">Invest</span><span class="bil-mi" aria-hidden="true">Haumi</span></span></a></li>
-        <li class="nav-cta-wrap"><a href="contact.html" aria-label="Contact"><span class="bil"><span class="bil-en">Contact</span><span class="bil-mi" aria-hidden="true">Whakapā Mai</span></span></a></li>
-      </ul>
-    </div>
-    <div class="nav-bar2">
-      <div class="nav-bar2-inner">
-          <ul class="nav-sub" data-for="0">
+        <li class="nav-parent is-active" data-haskids="1" data-idx="0"><a href="about.html" aria-label="Learn" aria-expanded="false" aria-controls="navSub0"><span class="bil"><span class="bil-en">Learn</span><span class="bil-mi" aria-hidden="true">Ako</span></span><span class="nav-caret" aria-hidden="true"></span></a>
+          <ul class="nav-sub" id="navSub0" hidden>
             <li><a href="about.html" aria-label="About"><span class="bil"><span class="bil-en">About</span><span class="bil-mi" aria-hidden="true">Mō Mātou</span></span></a></li>
             <li><a href="origins.html" aria-label="Our Origins"><span class="bil"><span class="bil-en">Our Origins</span><span class="bil-mi" aria-hidden="true">Ō Mātou Takenga</span></span></a></li>
             <li><a href="team.html" aria-label="Our Team"><span class="bil"><span class="bil-en">Our Team</span><span class="bil-mi" aria-hidden="true">Tō Mātou Tīma</span></span></a></li>
@@ -1340,11 +1340,19 @@ html.no-video .hero-scroll{opacity:1;}
             <li><a href="index.html#trust" aria-label="Quality"><span class="bil"><span class="bil-en">Quality</span><span class="bil-mi" aria-hidden="true">Te Whakamātau</span></span></a></li>
             <li><a href="kaupapa.html" aria-label="Our Kaupapa"><span class="bil"><span class="bil-en">Our Kaupapa</span><span class="bil-mi" aria-hidden="true">Te Kaupapa</span></span></a></li>
             <li><a href="news.html" aria-label="News"><span class="bil"><span class="bil-en">News</span><span class="bil-mi" aria-hidden="true">Ngā Kōrero</span></span></a></li>
-          </ul>
-          <ul class="nav-sub" data-for="1" hidden>
+          </ul></li>
+        <li class="nav-parent" data-haskids="1" data-idx="1"><a href="products.html" aria-label="Buy" aria-expanded="false" aria-controls="navSub1"><span class="bil"><span class="bil-en">Buy</span><span class="bil-mi" aria-hidden="true">Hoko</span></span><span class="nav-caret" aria-hidden="true"></span></a>
+          <ul class="nav-sub" id="navSub1" hidden>
             <li><a href="products.html" aria-label="Products"><span class="bil"><span class="bil-en">Products</span><span class="bil-mi" aria-hidden="true">Ngā Hua</span></span></a></li>
             <li><a href="index.html#portals" aria-label="Partnerships"><span class="bil"><span class="bil-en">Partnerships</span><span class="bil-mi" aria-hidden="true">Ngā Hoa</span></span></a></li>
-          </ul>
+          </ul></li>
+        <li class="nav-parent" data-idx="2"><a href="investors.html" aria-label="Invest"><span class="bil"><span class="bil-en">Invest</span><span class="bil-mi" aria-hidden="true">Haumi</span></span></a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="contact.html" class="nav-cta-wrap" aria-label="Contact"><span class="bil"><span class="bil-en">Contact</span><span class="bil-mi" aria-hidden="true">Whakapā Mai</span></span></a>
+        <button class="nav-burger" aria-expanded="false" aria-controls="navDrawer" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -2364,24 +2372,16 @@ if(!SMALL&&!REDUCED){
   });
 })();
 
-/* Mobile drawer: burger toggle + accordion. Clones each sub-list into its
-   parent so the drawer has something to expand on touch widths. */
+/* Mobile drawer: burger toggle only. Accordion expansion of each parent's
+   children is handled by the click-to-open panel script below - the same
+   nav-sub element serves both the desktop dropdown and the mobile
+   accordion, so there is nothing to clone. */
 (function(){
   const nav = document.getElementById('nav');
   if (!nav) return;
   const burger = nav.querySelector('.nav-burger');
   const links = nav.querySelector('.nav-links');
   if (!burger || !links) return;
-
-  // Clone each sub-list into its parent so the accordion has something to expand.
-  nav.querySelectorAll('.nav-bar2 .nav-sub').forEach(sub => {
-    const parent = nav.querySelector(`.nav-parent[data-idx="${sub.dataset.for}"]`);
-    if (parent && !parent.querySelector('.nav-sub')) {
-      const clone = sub.cloneNode(true);
-      clone.removeAttribute('hidden');
-      parent.appendChild(clone);
-    }
-  });
 
   function closeDrawer(){
     links.classList.remove('is-open');
@@ -2402,43 +2402,58 @@ if(!SMALL&&!REDUCED){
   drawerMQ.addEventListener('change', e => { if (!e.matches) closeDrawer(); });
 
   // Escape closes the open drawer, restores state, and returns focus to the
-  // burger (coexists with the second-bar Escape handler registered below).
+  // burger (coexists with the panel Escape handler registered below).
   nav.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('is-open')) {
       closeDrawer();
       burger.focus();
     }
   });
-
-  // On touch widths, first tap expands rather than navigates.
-  nav.querySelectorAll('.nav-parent[data-haskids] > a').forEach(a => {
-    a.addEventListener('click', e => {
-      if (window.matchMedia('(max-width:900px)').matches) {
-        const li = a.closest('.nav-parent');
-        if (!li.classList.contains('is-expanded')) { e.preventDefault(); li.classList.add('is-expanded'); }
-      }
-    });
-  });
 })();
 
-/* Second bar follows the hovered parent; returns to the active one on leave. */
+/* Click-to-open children panel. A parent with children keeps its href (for
+   no-JS and crawlers) but its click is intercepted here: it opens that
+   parent's own nested nav-sub and closes any other open panel. Clicking the
+   same parent again closes it. Works identically at every viewport width -
+   on desktop the panel overlays below the bar (position:absolute, see CSS);
+   on mobile the same element lays out inline as the accordion body. */
 (function(){
   const nav = document.getElementById('nav');
   if (!nav) return;
-  const subs = [...nav.querySelectorAll('.nav-sub')];
-  const activeEl = nav.querySelector('.nav-parent.is-active');
-  const activeIdx = activeEl ? activeEl.dataset.idx : '0';
-  function show(idx){ subs.forEach(s => { s.hidden = s.dataset.for !== String(idx); }); }
-  // Every parent gets a listener (not just ones with children) so hovering a
-  // childless parent (e.g. Invest) reverts the bar to the page default
-  // instead of leaving the previously-hovered sibling's children on screen.
-  nav.querySelectorAll('.nav-parent').forEach(p => {
-    const idx = p.hasAttribute('data-haskids') ? p.dataset.idx : activeIdx;
-    p.addEventListener('mouseenter', () => show(idx));
-    p.addEventListener('focusin',   () => show(idx));
+  const parents = [...nav.querySelectorAll('.nav-parent[data-haskids]')];
+
+  function closeAll(except){
+    parents.forEach(li => {
+      if (li === except) return;
+      const a = li.querySelector(':scope > a');
+      const sub = li.querySelector(':scope > .nav-sub');
+      if (!sub || sub.hidden) return;
+      sub.hidden = true;
+      li.classList.remove('is-expanded');
+      if (a) a.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  parents.forEach(li => {
+    const a = li.querySelector(':scope > a');
+    const sub = li.querySelector(':scope > .nav-sub');
+    if (!a || !sub) return;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const wasOpen = !sub.hidden;
+      closeAll(li);
+      sub.hidden = wasOpen;
+      li.classList.toggle('is-expanded', !wasOpen);
+      a.setAttribute('aria-expanded', String(!wasOpen));
+    });
   });
-  nav.addEventListener('mouseleave', () => show(activeIdx));
-  nav.addEventListener('keydown', e => { if (e.key === 'Escape') show(activeIdx); });
+
+  // Click outside the nav closes any open panel.
+  document.addEventListener('click', e => {
+    if (!nav.contains(e.target)) closeAll();
+  });
+  // Escape closes any open panel (coexists with the drawer Escape handler above).
+  nav.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 })();
 </script>
 </body>
