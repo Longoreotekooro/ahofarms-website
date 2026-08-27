@@ -38,19 +38,30 @@ The nav adopts puro.nz's exact three-parent shape.
 
 Only parents with real children carry a caret. Verified against puro.nz: `Learn` and `Buy` carry carets, `Invest` has neither caret nor children.
 
-### Second bar
+### Layout
 
-Always visible. Shows the current section's children; hovering a different parent swaps its contents.
+`Learn` · `Buy` · `Invest` are **centred** in the bar, with the logo at the left edge and the Contact CTA at the right. The three parents form the visual centre of the header, not a right-aligned cluster.
 
-`Invest` has no children, so the rule for what the bar shows is explicit:
+### Children panel — click to open
 
-- On the homepage, and on any page whose parent has no children, the bar shows **Learn's** children.
-- On a page under a parent that has children, it shows that parent's children.
-- Hovering a parent that has children swaps the bar to those children; hovering a childless parent **reverts the bar to the page default** (Learn's children).
+**Revised 2026-08-28 (supersedes the always-visible second bar).**
 
-  *Revised 2026-08-28.* The original rule was "leaves the bar unchanged". Review of Task 2 found that this makes one parent's children appear while a different parent is hovered — moving the pointer from `Buy` to `Invest` left Buy's children on screen, misattributing them to Invest. Reverting to the default removes the ambiguity: nothing ever appears to belong to a parent that has no children.
+Children are **hidden until a parent is clicked**. There is no hover-reveal and no persistent second bar.
 
-The bar is never empty.
+- Clicking a parent that has children opens its panel; clicking it again closes it. Only one panel is open at a time.
+- Clicking `Invest` navigates to `investors.html` — it has no children, so there is no panel to open.
+- Clicking outside the nav, or pressing Escape, closes any open panel.
+- The panel **overlays** the page rather than displacing it, so the header never changes height. A header that grows and shrinks as panels open would shift the hero and every section beneath it.
+- A parent with children keeps its `href` for no-JS and crawler purposes, but its click is intercepted when JS is available. This makes desktop behave the same way mobile already does.
+- `aria-expanded` reflects each parent's open state.
+
+Every parent's children sit **within that parent's panel** — nothing is shown outside the category it belongs to.
+
+*Why this replaced the previous rule:* the earlier design kept a second bar permanently visible and swapped its contents on hover. That forced a rule for what a childless parent should show, which went through two revisions ("leave unchanged", then "revert to default") and still put one parent's children on screen under circumstances where they read as belonging to another. Click-to-open removes the question entirely: a panel is open because someone opened it, and it belongs to the parent they clicked.
+
+### On every page
+
+The same three parents appear on **all** pages, not only the homepage — see §4 for how the markup is propagated.
 
 ### Learn ▾
 
