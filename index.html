@@ -297,6 +297,10 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .nav-sub[hidden]{display:none;}
 .nav-sub a{text-decoration:none;}
 .nav-parent.is-active > a .bil-en{color:var(--gold);}
+/* Cloned accordion sub-lists (mobile drawer only) are hidden at every width
+   by default; the mobile media query below reveals them only when expanded.
+   Scoped to .nav-parent so it never touches the real .nav-bar2 lists. */
+.nav-parent .nav-sub{display:none;}
 
 @media(prefers-reduced-motion:reduce){.bil-en,.bil-mi{transition:none;}}
 
@@ -320,8 +324,9 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   .nav-burger{display:flex;}
   .nav-links{position:fixed;inset:0;top:72px;background:var(--void,#05070a);
              flex-direction:column;align-items:stretch;gap:0;padding:var(--s3);
-             overflow-y:auto;transform:translateX(100%);transition:transform .28s ease;z-index:90;}
-  .nav-links.is-open{transform:translateX(0);}
+             overflow-y:auto;transform:translateX(100%);transition:transform .28s ease;z-index:90;
+             visibility:hidden;}
+  .nav-links.is-open{transform:translateX(0);visibility:visible;}
   .nav-parent{border-bottom:1px solid rgba(255,255,255,0.08);}
   .nav-parent > a{padding:16px 4px;justify-content:space-between;}
   /* No hover on touch - show BOTH languages stacked instead of swapping. */
@@ -2421,10 +2426,31 @@ if(!SMALL&&!REDUCED){
     }
   });
 
+  function closeDrawer(){
+    links.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
   burger.addEventListener('click', () => {
     const open = links.classList.toggle('is-open');
     burger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  // If the viewport crosses above the mobile breakpoint while the drawer is
+  // open, the burger disappears and becomes unreachable — force the drawer
+  // closed so it can never strand body scroll locked or the panel stuck open.
+  const drawerMQ = window.matchMedia('(max-width:900px)');
+  drawerMQ.addEventListener('change', e => { if (!e.matches) closeDrawer(); });
+
+  // Escape closes the open drawer, restores state, and returns focus to the
+  // burger (coexists with the second-bar Escape handler registered below).
+  nav.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('is-open')) {
+      closeDrawer();
+      burger.focus();
+    }
   });
 
   // On touch widths, first tap expands rather than navigates.
