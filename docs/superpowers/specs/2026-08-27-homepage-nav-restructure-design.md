@@ -46,7 +46,9 @@ Always visible. Shows the current section's children; hovering a different paren
 
 - On the homepage, and on any page whose parent has no children, the bar shows **Learn's** children.
 - On a page under a parent that has children, it shows that parent's children.
-- Hovering a parent that has children swaps the bar to those children; hovering a childless parent leaves the bar unchanged.
+- Hovering a parent that has children swaps the bar to those children; hovering a childless parent **reverts the bar to the page default** (Learn's children).
+
+  *Revised 2026-08-28.* The original rule was "leaves the bar unchanged". Review of Task 2 found that this makes one parent's children appear while a different parent is hovered — moving the pointer from `Buy` to `Invest` left Buy's children on screen, misattributing them to Invest. Reverting to the default removes the ambiguity: nothing ever appears to belong to a parent that has no children.
 
 The bar is never empty.
 
