@@ -280,14 +280,19 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 
 /* --- two-tier nav ------------------------------------------------ */
 /* Bilingual swap. Both labels occupy ONE grid cell sized to the wider
-   of the two, so the bar cannot reflow when the text changes. */
+   of the two, so the bar cannot reflow when the text changes. Hover is
+   scoped to each item's OWN trigger element only - the child combinator
+   on .nav-parent>a keeps a parent's hover from reaching into its own
+   (possibly open) dropdown panel below it, and .nav-sub a:hover /
+   .nav-cta-wrap:hover each address a single element, so no two items
+   ever translate together and no item translates by proximity alone. */
 .bil{display:grid;}
-.bil-en,.bil-mi{grid-area:1/1;transition:opacity .22s ease;}
+.bil-en,.bil-mi{grid-area:1/1;transition:opacity .32s ease,transform .32s ease;}
 .bil-en{font-size:0.75rem;font-weight:500;letter-spacing:0.06em;color:var(--white);}
 .bil-mi{font-size:0.75rem;font-weight:400;letter-spacing:0.06em;
-        color:var(--teal-light);font-style:italic;opacity:0;}
-.nav-parent:hover .bil-en,.nav-sub a:hover .bil-en{opacity:0;}
-.nav-parent:hover .bil-mi,.nav-sub a:hover .bil-mi{opacity:1;}
+        color:var(--teal-light);font-style:italic;opacity:0;transform:translateY(3px);}
+.nav-parent>a:hover .bil-en,.nav-sub a:hover .bil-en,.nav-cta-wrap:hover .bil-en{opacity:0;transform:translateY(-3px);}
+.nav-parent>a:hover .bil-mi,.nav-sub a:hover .bil-mi,.nav-cta-wrap:hover .bil-mi{opacity:1;transform:translateY(0);}
 
 .nav-caret{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;
            border-top:4px solid currentColor;opacity:.55;transition:transform .2s;}
@@ -311,7 +316,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .nav-parent.is-active > a .bil-en{color:var(--gold);}
 .nav-parent.is-expanded .nav-caret{transform:rotate(180deg);}
 
-@media(prefers-reduced-motion:reduce){.bil-en,.bil-mi{transition:none;}}
+@media(prefers-reduced-motion:reduce){.bil-en,.bil-mi{transition:none !important;transform:none !important;}}
 
 .nav-cta-wrap{
   background:transparent;
@@ -325,7 +330,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   border-color:var(--teal) !important;opacity:1 !important;
 }
 .nav-cta-wrap .bil-en{color:inherit;}
-.nav-cta-wrap .bil-mi{display:none;}
+.nav-cta-wrap .bil-mi{color:inherit;}
 .nav-burger{display:none;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:8px;}
 .nav-burger span{display:block;width:20px;height:1.5px;background:var(--white);transition:transform .2s;}
 
@@ -340,7 +345,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   .nav-parent > a{padding:16px 4px;justify-content:space-between;}
   /* No hover on touch - show BOTH languages stacked instead of swapping. */
   .bil{display:block;}
-  .bil-mi{opacity:1;display:block;font-size:0.625rem;color:rgba(115,168,165,0.7);}
+  .bil-mi{opacity:1;transform:none;display:block;font-size:0.625rem;color:rgba(115,168,165,0.7);}
   /* Same nav-sub element as desktop, now laid out inline as the accordion
      panel instead of an absolutely-positioned overlay. */
   .nav-parent .nav-sub{position:static;transform:none;margin:0;min-width:0;
