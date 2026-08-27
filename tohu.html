@@ -1595,7 +1595,23 @@ window.addEventListener('scroll',()=>{
     if (!nav.contains(e.target)) closeAll();
   });
   // Escape closes any open panel (coexists with the drawer Escape handler above).
-  nav.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+  // If focus was inside the panel that's closing, return it to the parent
+  // trigger that opened it - mirrors the drawer's burger.focus() above so a
+  // keyboard user never gets dropped to <body> and loses their place.
+  nav.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const openLi = parents.find(li => {
+      const sub = li.querySelector(':scope > .nav-sub');
+      return sub && !sub.hidden;
+    });
+    if (!openLi) return;
+    const refocus = openLi.contains(document.activeElement);
+    closeAll();
+    if (refocus) {
+      const a = openLi.querySelector(':scope > a');
+      if (a) a.focus();
+    }
+  });
 })();
 </script>
 </body>
