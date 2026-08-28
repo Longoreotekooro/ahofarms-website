@@ -297,24 +297,76 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .nav-caret{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;
            border-top:4px solid currentColor;opacity:.55;transition:transform .2s;}
 
-/* click-to-open children panel. Children live inside their own parent's
+/* horizontal mega-panel dropdown. Children live inside their own parent's
    <li> (single source, emitted once by renderNav - no second bar, no
-   cloning). Closed by default via [hidden]; JS toggles it on click.
-   Positioned absolutely so opening a panel never changes .nav-inner's
-   height - nothing below the header ever shifts. */
-.nav-parent{position:relative;}
-.nav-parent .nav-sub{
-  position:absolute;top:100%;left:50%;transform:translateX(-50%);
-  margin:10px 0 0;padding:10px 0;min-width:220px;
-  background:rgba(5,8,12,0.95);border:1px solid rgba(255,255,255,0.1);
-  border-radius:4px;box-shadow:0 14px 34px rgba(0,0,0,0.45);
-  display:flex;flex-direction:column;gap:2px;
-  list-style:none;z-index:110;
-}
+   cloning). Closed by default via [hidden] (removes it from layout AND the
+   accessibility/tab-order tree); JS toggles [hidden] on hover, focus and
+   click. >900px the panel is positioned against <nav> itself rather than
+   the narrow parent tab: .nav-parent no longer establishes its own
+   positioning context, so .nav (position:fixed) becomes the nearest
+   positioned ancestor and left:0/right:0 lets the panel span the full bar.
+   This also solves the hover "gap" problem structurally rather than by
+   timer: .nav-sub is a DOM descendant of .nav-parent regardless of where
+   it is painted, so mouseenter/mouseleave and :hover never see the trip
+   from tab to panel as "leaving" the parent - there is no dead zone to
+   cross. The JS close-delay (see script below) is a second line of
+   defence, not the primary fix. */
 .nav-parent .nav-sub[hidden]{display:none;}
+.nav-parent .nav-sub{list-style:none;z-index:110;}
 .nav-parent .nav-sub a{display:block;padding:8px 20px;text-decoration:none;white-space:nowrap;}
 .nav-parent.is-active > a .bil-en{color:var(--gold);}
 .nav-parent.is-expanded .nav-caret{transform:rotate(180deg);}
+
+@media(min-width:901px){
+  .nav-parent .nav-sub{
+    position:absolute;top:100%;left:0;right:0;margin:0 auto;max-width:var(--max);
+    box-sizing:border-box;
+    display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;
+    gap:clamp(40px,6vw,112px);
+    padding:30px var(--s5) 34px;
+    background:rgba(4,7,11,0.98);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-radius:0 0 16px 16px;
+    box-shadow:0 26px 48px rgba(0,0,0,0.38);
+    opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);
+    transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s;
+  }
+  /* Desktop panel is position:absolute (out of flow), so staying display:flex
+     while closed costs nothing - this cancels the universal [hidden]{display:
+     none} just for this breakpoint so opacity/transform can actually
+     transition (display:none can't be animated). visibility:hidden below
+     still removes it from the tab order and the accessibility tree while
+     closed, so this loses nothing that [hidden] was providing. */
+  .nav-parent .nav-sub[hidden]{display:flex;}
+  .nav-parent .nav-sub.is-open{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  /* 4+ children (Learn's 11) spread edge to edge; fewer (Buy's 2) centre as
+     a group instead of stretching two words across a near-1280px bar. */
+  .nav-parent .nav-sub:has(li:nth-child(4)){justify-content:space-between;gap:var(--s2);}
+  .nav-parent .nav-sub li{flex:0 1 auto;min-width:0;}
+  .nav-parent .nav-sub a{padding:6px 2px;position:relative;}
+  .nav-parent .nav-sub a::after{
+    content:'';position:absolute;left:2px;right:2px;bottom:-2px;height:1px;
+    background:var(--gold);transform:scaleX(0);transform-origin:left;
+    transition:transform .22s ease;
+  }
+  .nav-parent .nav-sub a:hover::after,
+  .nav-parent .nav-sub a:focus-visible::after{transform:scaleX(1);}
+}
+/* tablet: keep the single row but tighten spacing/type so Learn's 11
+   children still fit on one line without wrapping or clipping down to
+   1000px viewport width. */
+@media(min-width:901px) and (max-width:1180px){
+  .nav-parent .nav-sub{padding:24px var(--s3) 28px;gap:clamp(18px,2.4vw,40px);}
+  .nav-parent .nav-sub:has(li:nth-child(4)){gap:var(--s1);}
+  .nav-parent .nav-sub .bil-en,.nav-parent .nav-sub .bil-mi{font-size:0.6875rem;letter-spacing:0.02em;}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav-parent .nav-sub{transition:none !important;transform:none !important;}
+  .nav-parent .nav-sub a::after{transition:none !important;}
+}
 
 @media(prefers-reduced-motion:reduce){.bil-en,.bil-mi{transition:none !important;transform:none !important;}}
 
@@ -346,11 +398,14 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   /* No hover on touch - show BOTH languages stacked instead of swapping. */
   .bil{display:block;}
   .bil-mi{opacity:1;transform:none;display:block;font-size:0.625rem;color:rgba(115,168,165,0.7);}
-  /* Same nav-sub element as desktop, now laid out inline as the accordion
-     panel instead of an absolutely-positioned overlay. */
-  .nav-parent .nav-sub{position:static;transform:none;margin:0;min-width:0;
-                       background:none;border:0;box-shadow:none;
-                       align-items:flex-start;padding:0 0 12px 12px;}
+  /* Same nav-sub element as desktop, now laid out inline as the stacked
+     accordion body instead of an absolutely-positioned horizontal panel -
+     explicit resets below so it never depends on the >900px panel rules. */
+  .nav-parent .nav-sub{position:static;display:flex;flex-direction:column;flex-wrap:nowrap;
+                       transform:none;margin:0;max-width:none;min-width:0;
+                       background:none;backdrop-filter:none;border:0;box-shadow:none;border-radius:0;
+                       align-items:flex-start;justify-content:flex-start;gap:2px;
+                       padding:0 0 12px 12px;opacity:1;}
   .nav-parent .nav-sub a{padding:8px 0;}
 }
 
@@ -2416,40 +2471,85 @@ if(!SMALL&&!REDUCED){
   });
 })();
 
-/* Click-to-open children panel. A parent with children keeps its href (for
-   no-JS and crawlers) but its click is intercepted here: it opens that
-   parent's own nested nav-sub and closes any other open panel. Clicking the
-   same parent again closes it. Works identically at every viewport width -
-   on desktop the panel overlays below the bar (position:absolute, see CSS);
-   on mobile the same element lays out inline as the accordion body. */
+/* Hover-to-open children panel (reverses Task 3b's click-to-open at the
+   owner's request). A parent with children keeps its href (for no-JS and
+   crawlers) but its click is intercepted: it toggles that parent's own
+   nested nav-sub and closes any other open panel. Hover and focus also
+   open it - hover for mouse users so the panel appears without a click,
+   focus so keyboard users tabbing onto the trigger can reach the children,
+   click still toggles for touch/hybrid devices where hover never fires.
+   Works identically at every viewport width - on desktop the panel is a
+   horizontal bar below the nav (position:absolute, see CSS); on mobile the
+   same element lays out inline as the accordion body. */
 (function(){
   const nav = document.getElementById('nav');
   if (!nav) return;
   const parents = [...nav.querySelectorAll('.nav-parent[data-haskids]')];
+  const hoverCapable = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const CLOSE_DELAY = 200;
+  let closeTimer = null;
+
+  function cancelScheduledClose(){
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+  }
+
+  function openPanel(li){
+    const a = li.querySelector(':scope > a');
+    const sub = li.querySelector(':scope > .nav-sub');
+    if (!a || !sub) return;
+    closeAll(li);
+    sub.hidden = false;
+    sub.classList.add('is-open');
+    li.classList.add('is-expanded');
+    a.setAttribute('aria-expanded', 'true');
+  }
+
+  function closePanel(li){
+    const a = li.querySelector(':scope > a');
+    const sub = li.querySelector(':scope > .nav-sub');
+    if (!sub || sub.hidden) return;
+    sub.hidden = true;
+    sub.classList.remove('is-open');
+    li.classList.remove('is-expanded');
+    if (a) a.setAttribute('aria-expanded', 'false');
+  }
 
   function closeAll(except){
-    parents.forEach(li => {
-      if (li === except) return;
-      const a = li.querySelector(':scope > a');
-      const sub = li.querySelector(':scope > .nav-sub');
-      if (!sub || sub.hidden) return;
-      sub.hidden = true;
-      li.classList.remove('is-expanded');
-      if (a) a.setAttribute('aria-expanded', 'false');
-    });
+    parents.forEach(li => { if (li !== except) closePanel(li); });
+  }
+
+  // Cancelled if the pointer re-enters the same li (trigger or panel)
+  // before the delay elapses - this is what stops the panel disappearing
+  // while the cursor crosses from the tab down into it.
+  function scheduleClose(li){
+    cancelScheduledClose();
+    closeTimer = setTimeout(() => { closePanel(li); closeTimer = null; }, CLOSE_DELAY);
   }
 
   parents.forEach(li => {
     const a = li.querySelector(':scope > a');
     const sub = li.querySelector(':scope > .nav-sub');
     if (!a || !sub) return;
+
     a.addEventListener('click', e => {
       e.preventDefault();
       const wasOpen = !sub.hidden;
-      closeAll(li);
-      sub.hidden = wasOpen;
-      li.classList.toggle('is-expanded', !wasOpen);
-      a.setAttribute('aria-expanded', String(!wasOpen));
+      cancelScheduledClose();
+      if (wasOpen) closePanel(li); else openPanel(li);
+    });
+
+    if (hoverCapable) {
+      li.addEventListener('mouseenter', () => { cancelScheduledClose(); openPanel(li); });
+      li.addEventListener('mouseleave', () => { scheduleClose(li); });
+    }
+
+    // Keyboard: focus on the trigger opens the panel so Tab can reach the
+    // children. focusout closes it only once focus leaves this li's whole
+    // subtree (trigger + panel), not when it merely moves between children.
+    a.addEventListener('focus', () => { cancelScheduledClose(); openPanel(li); });
+    li.addEventListener('focusout', e => {
+      if (li.contains(e.relatedTarget)) return;
+      closePanel(li);
     });
   });
 
@@ -2469,6 +2569,7 @@ if(!SMALL&&!REDUCED){
     });
     if (!openLi) return;
     const refocus = openLi.contains(document.activeElement);
+    cancelScheduledClose();
     closeAll();
     if (refocus) {
       const a = openLi.querySelector(':scope > a');
