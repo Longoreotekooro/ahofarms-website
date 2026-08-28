@@ -1341,6 +1341,286 @@ html.no-video .hero-sound{display:none;}
 }
 
 /* ================================================================
+   01 · THE AHO ADVANTAGE — the story picks up where the film ends.
+   One fibre descends out of the hero and every moment hangs off it.
+   It gathers the proof points as it passes them (21 · 2 · 3),
+   separates into three cultivation environments, reconverges, and
+   weaves back into a single aho that carries on into THE LAND.
+   No boundaries — the moments are positions on one thread.
+   ================================================================ */
+#advantage{overflow-x:clip;}
+.adv-body{max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
+
+/* —— the descending fibre. Each moment is pinned to the aho, and
+      the aho draws itself downward as the moment arrives. —— */
+.adv-moment{
+  position:relative;
+  padding-left:clamp(var(--s4),4.4vw,var(--s6));
+  padding-bottom:clamp(var(--s7),11vh,var(--s8));
+}
+.adv-moment::before{
+  content:'';position:absolute;left:0;top:7px;bottom:0;width:1px;
+  background:linear-gradient(to bottom,rgba(201,160,106,0.62),rgba(201,160,106,0.10));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 1.7s var(--ease);
+}
+.adv-moment.in::before{transform:scaleY(1);}
+.adv-moment::after{ /* the node the thread lights as it reaches it */
+  content:'';position:absolute;left:-2px;top:5px;width:5px;height:5px;
+  border-radius:50%;background:var(--gold);
+  box-shadow:0 0 10px rgba(201,160,106,0.8);
+  opacity:0;transition:opacity 0.9s ease 0.45s;
+}
+.adv-moment.in::after{opacity:1;}
+
+/* —— opening: the name —— */
+.adv-open{
+  display:grid;
+  grid-template-columns:minmax(0,1.06fr) minmax(0,0.94fr);
+  column-gap:clamp(var(--s5),5.5vw,var(--s7));
+  align-items:start;
+}
+.adv-word{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(3.4rem,7.4vw,6.2rem);line-height:0.98;
+  letter-spacing:-0.03em;color:var(--gold-light);
+  display:block;margin:var(--s2) 0 var(--s3);
+}
+.adv-lede{
+  font-family:var(--font-h);font-weight:300;
+  font-size:clamp(1.5rem,2.7vw,2.35rem);line-height:1.3;
+  letter-spacing:-0.02em;color:var(--starlight);
+  max-width:26ch;text-wrap:balance;
+}
+.adv-lede em{font-style:italic;color:var(--gold-light);}
+.adv-p{color:var(--silver);max-width:54ch;margin-top:var(--s4);}
+.adv-p b{color:var(--starlight);font-weight:500;}
+
+/* —— proof points — the numbers appear where the thread reaches
+      them, not lined up in a row —— */
+.adv-stat{
+  display:flex;align-items:flex-start;flex-wrap:wrap;
+  gap:clamp(var(--s3),3.6vw,var(--s6));
+}
+.adv-stat-n{
+  font-family:var(--font-h);font-weight:300;line-height:0.78;
+  font-size:clamp(5rem,13vw,11rem);letter-spacing:-0.05em;
+  color:var(--starlight);flex-shrink:0;white-space:nowrap;
+}
+.adv-stat-n .plus{color:var(--gold);font-size:0.4em;vertical-align:0.62em;}
+.adv-stat-c{flex:1 1 340px;min-width:0;padding-top:clamp(4px,1.2vw,16px);}
+.adv-stat-l{
+  display:block;font-size:0.6875rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
+}
+.adv-stat-l::before{
+  content:'';display:block;width:36px;height:1px;margin-bottom:14px;
+  background:linear-gradient(to right,var(--gold),transparent);
+}
+.adv-stat-c .adv-p{margin-top:var(--s3);}
+
+/* —— copy beside an image —— */
+.adv-duo{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.86fr);
+  gap:clamp(var(--s5),5vw,var(--s7));align-items:center;
+}
+
+/* —— full-bleed moment — the thread passes behind the land —— */
+.adv-cine{margin:0 0 clamp(var(--s7),11vh,var(--s8));}
+.adv-cine .ph{border-left-width:0;border-right-width:0;border-radius:0;}
+.adv-cine-cap{
+  max-width:var(--max);margin:var(--s3) auto 0;padding:0 var(--s4);
+  display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;
+  font-size:0.6875rem;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(168,173,179,0.55);
+}
+.adv-cine-cap .sep{width:32px;height:1px;background:var(--gold-border);}
+
+/* ================================================================
+   THREE ENVIRONMENTS — one cultivation system, not three cards.
+   The aho separates into three fibres above a single continuous
+   band of imagery, then reconverges below it.
+   ================================================================ */
+.adv-envs{margin-top:var(--s5);}
+.adv-fibres{
+  display:block;width:100%;
+  height:clamp(56px,6.5vw,96px);overflow:visible;
+}
+.adv-fibres path{
+  fill:none;stroke:var(--gold);stroke-width:1;opacity:0.42;
+  transition:stroke-dashoffset 2.2s var(--ease),
+             opacity 0.5s var(--ease),stroke 0.5s var(--ease);
+}
+.adv-env-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));}
+.adv-env{position:relative;transition:opacity 0.55s var(--ease);}
+/* the three frames share edges — one band, divided by hairlines */
+.adv-env .ph{border-right-width:0;border-radius:0;}
+.adv-env:last-child .ph{border-right-width:1px;}
+.adv-env-body{padding:var(--s4) var(--s3) 0 0;}
+.adv-env-n{
+  display:block;font-family:var(--font-h);font-style:italic;
+  font-size:0.85rem;color:rgba(201,160,106,0.75);margin-bottom:10px;
+}
+.adv-env h3{
+  display:inline-block;position:relative;padding-bottom:9px;
+  font-family:var(--font-b);font-size:0.75rem;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;color:var(--starlight);
+}
+.adv-env h3::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.55s var(--ease);
+}
+.adv-env-word{
+  display:block;font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(1.6rem,2.3vw,2.1rem);line-height:1.12;
+  color:var(--teal-light);margin:10px 0 12px;
+}
+.adv-env p{font-size:0.875rem;line-height:1.7;color:var(--silver);max-width:34ch;}
+/* hover: the system responds as a whole — the hovered environment
+   holds the light, its fibre brightens, the others recede */
+@media(hover:hover){
+  .adv-env:hover h3::after{transform:scaleX(1);}
+  .adv-envs:has(.adv-env:hover) .adv-env:not(:hover){opacity:0.42;}
+  .adv-envs:has(.adv-env:hover) .adv-env:hover .ph{
+    border-color:rgba(201,160,106,0.55);
+    background-color:rgba(26,34,33,0.5);
+  }
+  .adv-envs:has(.adv-env:nth-child(1):hover) .fib-1,
+  .adv-envs:has(.adv-env:nth-child(2):hover) .fib-2,
+  .adv-envs:has(.adv-env:nth-child(3):hover) .fib-3{
+    opacity:1;stroke:var(--gold-light);
+  }
+}
+
+/* —— traceability — three words on one line of thread —— */
+.adv-trace{
+  display:flex;align-items:center;flex-wrap:wrap;
+  margin-top:var(--s5);
+}
+.adv-tw{display:flex;align-items:center;gap:12px;}
+.adv-tw i{
+  width:5px;height:5px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 9px rgba(201,160,106,0.7);flex-shrink:0;
+}
+.adv-tw span{
+  font-family:var(--font-h);font-weight:300;letter-spacing:-0.02em;
+  font-size:clamp(1.35rem,2.3vw,1.95rem);color:var(--starlight);
+}
+.adv-tw-link{
+  width:clamp(26px,4.5vw,68px);height:1px;flex-shrink:0;
+  margin:0 clamp(12px,1.8vw,24px);
+  background:linear-gradient(to right,var(--gold),rgba(201,160,106,0.14));
+}
+
+/* ================================================================
+   THE WEAVE — from many threads, one aho. The last moment, then
+   the thread simply keeps going; there is no closing edge.
+   ================================================================ */
+.adv-conn{margin-top:var(--s6);}
+.adv-finale{max-width:900px;margin:0 auto;padding:0 var(--s4);text-align:center;}
+.adv-weave{display:block;width:100%;max-width:300px;margin:0 auto var(--s5);height:auto;overflow:visible;}
+.adv-weave path{
+  fill:none;stroke-width:1;
+  transition:stroke-dashoffset 2.4s var(--ease);
+}
+.adv-final-line{
+  font-family:var(--font-h);font-weight:300;
+  font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.12;
+  letter-spacing:-0.03em;color:var(--starlight);text-wrap:balance;
+}
+.adv-final-line em{font-style:italic;color:var(--gold-light);}
+.adv-final-sub{
+  margin-top:var(--s3);
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(1.15rem,2vw,1.6rem);color:var(--teal-light);
+}
+/* the aho leaves the chapter — a fade, never a rule */
+.adv-outflow{
+  width:1px;height:clamp(96px,15vh,170px);margin:var(--s6) auto 0;
+  background:linear-gradient(to bottom,rgba(201,160,106,0.8),rgba(201,160,106,0));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 1.8s var(--ease);
+}
+.adv-outflow.in{transform:scaleY(1);}
+
+/* ================================================================
+   ASSET PLACEHOLDERS — deliberately unfinished. Every box holds the
+   real aspect ratio so the layout is honest, and states plainly
+   which asset belongs in it.
+   ================================================================ */
+.ph{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  gap:9px;padding:var(--s3);
+  border:1px dashed var(--gold-border);border-radius:3px;
+  background-color:rgba(18,24,24,0.34);
+  background-image:repeating-linear-gradient(135deg,
+    rgba(201,160,106,0.055) 0 1px, transparent 1px 12px);
+  transition:border-color 0.5s var(--ease),background-color 0.5s var(--ease);
+  overflow:hidden;
+}
+.ph-tag{
+  font-family:var(--font-b);font-size:0.5rem;font-weight:700;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(201,160,106,0.75);
+}
+.ph-lab{
+  font-family:var(--font-b);font-size:0.75rem;font-weight:500;
+  line-height:1.55;color:rgba(243,241,235,0.66);max-width:36ch;
+}
+.ph-note{
+  font-family:var(--font-b);font-size:0.6875rem;font-weight:400;
+  line-height:1.5;color:rgba(168,173,179,0.62);max-width:42ch;
+}
+.ph-spec{
+  font-family:var(--font-b);font-size:0.5625rem;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(168,173,179,0.5);
+}
+.ph--45{aspect-ratio:4/5;}
+.ph--32{aspect-ratio:3/2;}
+.ph--34{aspect-ratio:3/4;}
+.ph--219{aspect-ratio:21/9;}
+.ph--1610{aspect-ratio:16/10;}
+/* the macro runs off the right edge of the screen — never a frame */
+.adv-macro{
+  margin-right:calc(-1 * max((100vw - 1280px) / 2 + 32px, 32px));
+  border-radius:4px 0 0 4px;border-right-width:0;
+}
+
+@media(max-width:900px){
+  .adv-moment{padding-left:var(--s4);padding-bottom:var(--s7);}
+  .adv-open,.adv-duo{grid-template-columns:1fr;row-gap:var(--s5);}
+  .adv-macro{margin-right:0;border-radius:3px;border-right-width:1px;}
+  .adv-stat-n{font-size:clamp(4.4rem,21vw,7rem);}
+  .adv-stat-c{flex:1 1 100%;}
+  .ph{padding:var(--s2);gap:7px;}
+  .ph-note{display:none;}
+  /* three environments stack into one clean column; the aho rail of
+     the moment itself keeps them connected, so the fibres retire */
+  .adv-fibres{display:none;}
+  .adv-env-row{grid-template-columns:1fr;}
+  .adv-env{margin-top:var(--s5);}
+  .adv-env:first-child{margin-top:0;}
+  .adv-env .ph{border-right-width:1px;border-radius:3px;}
+  .adv-env-body{padding:var(--s3) 0 0;}
+  .adv-envs{margin-top:var(--s4);}
+  .adv-tw-link{width:24px;margin:0 14px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .adv-moment::before{transform:scaleY(1) !important;transition:none !important;}
+  .adv-moment::after{opacity:1 !important;transition:none !important;}
+  .adv-outflow{transform:scaleY(1) !important;transition:none !important;}
+  .adv-fibres path,.adv-weave path{
+    stroke-dashoffset:0 !important;transition:none !important;
+  }
+  .adv-env,.adv-env h3::after,.ph{transition:none !important;}
+  .adv-env h3::after{transform:scaleX(1) !important;}
+}
+
+/* ================================================================
    REDUCED MOTION — a still, complete experience
    ================================================================ */
 @media (prefers-reduced-motion: reduce){
@@ -1508,6 +1788,218 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
     </div>
   </div>
+
+  <!-- ========================================================
+       01 · THE AHO ADVANTAGE — the film ends, the thread does not.
+       A single fibre descends out of the hero and every moment of
+       the story hangs off it: the name → 21 years → the whenua →
+       two sites → three environments → traceability → the weave.
+       ======================================================== -->
+  <section class="chapter" id="advantage" style="padding-top:var(--s6);padding-bottom:0;">
+    <div class="drift gold" style="top:3%;left:-20%;width:64vw;height:64vw;" aria-hidden="true"></div>
+    <div class="drift teal" style="top:44%;right:-22%;width:58vw;height:58vw;" aria-hidden="true"></div>
+
+    <div class="adv-body">
+
+      <!-- · the name · -->
+      <div class="adv-moment adv-in">
+        <div class="adv-open">
+          <div>
+            <div class="mlab reveal" data-aho><b>01</b>&nbsp;/&nbsp;THE AHO ADVANTAGE</div>
+            <span class="eyebrow gold reveal">TE AHO <span>·</span> THE THREAD THAT CONNECTS</span>
+            <span class="adv-word emerge">Aho</span>
+            <p class="adv-lede emerge">The thread that connects us — to our <em>whenua</em>, to those who came before us, and to the generations still to come.</p>
+            <p class="adv-p reveal d2">Aho Farms combines more than 21 years of California cultivation experience with a distinctly Aotearoa approach to medicinal cannabis.</p>
+          </div>
+          <div class="ph ph--45 adv-macro reveal d1">
+            <span class="ph-tag">Awaiting asset</span>
+            <span class="ph-lab">[MACRO IMAGE — Flax / muka fibre detail]</span>
+            <span class="ph-note">Backlit strands of prepared muka, shallow depth of field, one fibre in focus running top to bottom of frame.</span>
+            <span class="ph-spec">4:5 portrait · Photography</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- · 21+ years · -->
+      <div class="adv-moment adv-in">
+        <div class="adv-stat">
+          <span class="adv-stat-n emerge">21<span class="plus">+</span></span>
+          <div class="adv-stat-c">
+            <span class="adv-stat-l reveal d1">Years of cultivation experience</span>
+            <p class="adv-p reveal d2">More than two decades of California cultivation experience, applied to a distinctly Aotearoa approach to medicinal cannabis.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- · Māori whenua · -->
+      <div class="adv-moment adv-in">
+        <div class="adv-duo">
+          <div>
+            <span class="eyebrow gold reveal">TE WHENUA <span>·</span> MĀORI-OWNED, MĀORI LAND</span>
+            <p class="adv-lede emerge">Bringing international cultivation knowledge home, and creating new opportunity from the land.</p>
+            <p class="adv-p reveal d2">We are Māori-owned and building on Māori whenua — knowledge earned offshore, put to work on our own land.</p>
+          </div>
+          <div class="ph ph--32 reveal d1">
+            <span class="ph-tag">Awaiting asset</span>
+            <span class="ph-lab">[IMAGE — Team working on Māori whenua]</span>
+            <span class="ph-note">Two or three people mid-task among the plants, natural light, faces readable, whenua and horizon visible behind them. Documentary, not posed.</span>
+            <span class="ph-spec">3:2 landscape · Photography</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- · two sites · -->
+      <div class="adv-moment adv-in" style="padding-bottom:var(--s5);">
+        <div class="adv-stat">
+          <span class="adv-stat-n emerge">2</span>
+          <div class="adv-stat-c">
+            <span class="adv-stat-l reveal d1">Hawke's Bay cultivation sites</span>
+            <p class="adv-p reveal d2">Across two cultivation sites in Hawke's Bay, we operate across three growing environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="adv-cine">
+      <div class="ph ph--219 reveal">
+        <span class="ph-tag">Awaiting asset</span>
+        <span class="ph-lab">[VIDEO — Aerial view of Aho whenua / cultivation site]</span>
+            <span class="ph-note">Slow, low-altitude drone push across the site at golden hour, holding one continuous move with no cuts. Silent loop, 8–12s, muted and autoplaying. A 21:9 still frame from the same flight is the fallback.</span>
+        <span class="ph-spec">21:9 · Drone video (still fallback)</span>
+      </div>
+      <div class="adv-cine-cap">
+        <span>Te Matau-a-Māui · Hawke's Bay</span><div class="sep"></div>
+        <span>Two sites · Three environments</span>
+      </div>
+    </div>
+
+    <div class="adv-body">
+
+      <!-- · three environments · -->
+      <div class="adv-moment adv-in" data-aho>
+        <div class="adv-stat">
+          <span class="adv-stat-n emerge">3</span>
+          <div class="adv-stat-c">
+            <span class="adv-stat-l reveal d1">Growing environments</span>
+            <p class="adv-p reveal d2">Each environment has a different purpose, and allows us to match genetics and cultivation techniques with the conditions in which they perform best.</p>
+          </div>
+        </div>
+
+        <div class="adv-envs">
+          <!-- the aho separates into three fibres -->
+          <svg class="adv-fibres" viewBox="0 0 1200 100" preserveAspectRatio="none" data-draw-group aria-hidden="true">
+            <path class="fib-1" data-draw vector-effect="non-scaling-stroke" d="M600,0 C600,46 200,52 200,100"/>
+            <path class="fib-2" data-draw vector-effect="non-scaling-stroke" d="M600,0 C600,40 600,60 600,100"/>
+            <path class="fib-3" data-draw vector-effect="non-scaling-stroke" d="M600,0 C600,46 1000,52 1000,100"/>
+          </svg>
+
+          <div class="adv-env-row">
+            <article class="adv-env">
+              <div class="ph ph--34 reveal">
+                <span class="ph-tag">Awaiting asset</span>
+                <span class="ph-lab">[IMAGE — Indoor cultivation facility]</span>
+            <span class="ph-note">Cool, clean, engineered. A room of plants under controlled light, strong vertical perspective down a row.</span>
+                <span class="ph-spec">3:4 portrait · Photography</span>
+              </div>
+              <div class="adv-env-body">
+                <span class="adv-env-n">01</span>
+                <h3>Indoor</h3>
+                <span class="adv-env-word">Precision</span>
+                <p class="reveal">Controlled environment, genetic refinement and premium flower.</p>
+              </div>
+            </article>
+
+            <article class="adv-env">
+              <div class="ph ph--34 reveal d1">
+                <span class="ph-tag">Awaiting asset</span>
+                <span class="ph-lab">[IMAGE — Greenhouse cultivation]</span>
+            <span class="ph-note">Diffused daylight through the structure, canopy in the foreground, the glasshouse frame reading as a line drawing against the sky.</span>
+                <span class="ph-spec">3:4 portrait · Photography</span>
+              </div>
+              <div class="adv-env-body">
+                <span class="adv-env-n">02</span>
+                <h3>Greenhouse</h3>
+                <span class="adv-env-word">Balance</span>
+                <p class="reveal">Natural sunlight combined with environmental control.</p>
+              </div>
+            </article>
+
+            <article class="adv-env">
+              <div class="ph ph--34 reveal d2">
+                <span class="ph-tag">Awaiting asset</span>
+                <span class="ph-lab">[IMAGE — Outdoor cultivation / Hawke's Bay landscape]</span>
+            <span class="ph-note">Open sky, plants in full season, hills of Hawke's Bay behind. Warm, high UV, late-afternoon light.</span>
+                <span class="ph-spec">3:4 portrait · Photography</span>
+              </div>
+              <div class="adv-env-body">
+                <span class="adv-env-n">03</span>
+                <h3>Outdoor</h3>
+                <span class="adv-env-word">Whenua</span>
+                <p class="reveal">Hawke's Bay sunlight, natural UV exposure and full-season cultivation.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- and returns to one -->
+          <svg class="adv-fibres" viewBox="0 0 1200 100" preserveAspectRatio="none" data-draw-group aria-hidden="true">
+            <path data-draw vector-effect="non-scaling-stroke" d="M200,0 C200,48 600,54 600,100"/>
+            <path data-draw vector-effect="non-scaling-stroke" d="M600,0 C600,40 600,60 600,100"/>
+            <path data-draw vector-effect="non-scaling-stroke" d="M1000,0 C1000,48 600,54 600,100"/>
+          </svg>
+        </div>
+
+        <p class="adv-p reveal" style="max-width:66ch;margin-top:var(--s5);">Our outdoor and greenhouse cultivation harnesses Hawke's Bay's long summer days, abundant natural sunlight and intense UV exposure, while our indoor environment provides the precision and environmental control required for consistent premium flower.</p>
+      </div>
+
+      <!-- · traceability · -->
+      <div class="adv-moment adv-in" data-aho>
+        <div class="adv-duo">
+          <div>
+            <span class="eyebrow gold reveal">TE KOUNGA <span>·</span> QUALITY, TRANSPARENCY, TRACEABILITY</span>
+            <p class="adv-lede emerge">Every stage of production creates a complete history of every batch we produce.</p>
+            <div class="adv-trace reveal d2" aria-label="Quality, transparency, traceability">
+              <div class="adv-tw"><i></i><span>Quality</span></div>
+              <div class="adv-tw-link"></div>
+              <div class="adv-tw"><i></i><span>Transparency</span></div>
+              <div class="adv-tw-link"></div>
+              <div class="adv-tw"><i></i><span>Traceability</span></div>
+            </div>
+          </div>
+          <div class="ph ph--1610 reveal d1">
+            <span class="ph-tag">Awaiting asset</span>
+            <span class="ph-lab">[MOTION — Batch record, drawing itself]</span>
+            <span class="ph-note">A short looping animation of a single batch's chain of custody assembling line by line along a gold thread. Built in-page or supplied as a transparent-background loop; no stock footage.</span>
+            <span class="ph-spec">16:10 · Motion graphic / animated UI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- · the weave · -->
+      <div class="adv-moment adv-in" data-aho style="padding-bottom:0;">
+        <span class="eyebrow gold reveal">TE RARANGA <span>·</span> THE WEAVE</span>
+        <p class="adv-lede emerge">Ultimately, Aho is about connection.</p>
+        <div class="adv-conn reveal">
+          <div class="mani-lines">
+            <div class="mani-line adv-in"><span class="mani-num">01</span><strong>Knowledge</strong><span class="mani-thread"></span>whenua</div>
+            <div class="mani-line adv-in"><span class="mani-num">02</span><strong>Māori land</strong><span class="mani-thread"></span>economic opportunity</div>
+            <div class="mani-line adv-in"><span class="mani-num">03</span><strong>Traditional values</strong><span class="mani-thread"></span>modern cultivation</div>
+            <div class="mani-line adv-in"><span class="mani-num">04</span><strong>What we build today</strong><span class="mani-thread"></span>the generations that follow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="adv-finale">
+      <svg class="adv-weave" viewBox="0 0 320 230" data-draw-group aria-hidden="true">
+        <path data-draw stroke="#c9a06a" d="M32,0 C32,72 128,62 160,116 S 160,178 160,230"/>
+        <path data-draw stroke="#73a8a5" d="M160,0 C160,58 196,80 160,116 S 160,178 160,230"/>
+        <path data-draw stroke="#c9a06a" d="M288,0 C288,72 192,62 160,116 S 160,178 160,230"/>
+      </svg>
+      <p class="adv-final-line emerge">From many threads, <em>one Aho.</em></p>
+      <p class="adv-final-sub reveal d2">Grown on our whenua. Built for generations.</p>
+      <div class="adv-outflow adv-in" aria-hidden="true"></div>
+    </div>
+  </section>
 
   <!-- ========================================================
        03 · THE LAND — terroir at 39° south
@@ -2222,7 +2714,7 @@ const J_STAGES=[
    REVEALS — IntersectionObserver + CSS (one motion language)
    ================================================================ */
 (function(){
-  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.cult-photo,.people-img');
+  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.cult-photo,.people-img,.adv-in,.adv-outflow');
   if(REDUCED){els.forEach(el=>el.classList.add('in'));return;}
   const io=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
@@ -2301,6 +2793,34 @@ const J_STAGES=[
     });
   },{threshold:0.3});
   io.observe(svg);
+})();
+
+/* ---------- Aho fibres draw — the thread separates into three
+   environments and returns to one. Same engine as the braid:
+   IntersectionObserver + a CSS stroke-dashoffset transition, so
+   there is no scroll handler and nothing to throttle. ---------- */
+(function(){
+  const groups=[...document.querySelectorAll('[data-draw-group]')];
+  if(!groups.length)return;
+  groups.forEach(g=>{
+    g.querySelectorAll('[data-draw]').forEach(p=>{
+      let L=0;
+      try{L=p.getTotalLength();}catch(e){}
+      if(!L||!isFinite(L))return;
+      p.style.strokeDasharray=L;
+      p.style.strokeDashoffset=REDUCED?0:L;
+    });
+  });
+  if(REDUCED)return;
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting)return;
+      io.unobserve(en.target);
+      const ps=[...en.target.querySelectorAll('[data-draw]')];
+      requestAnimationFrame(()=>ps.forEach(p=>{p.style.strokeDashoffset=0;}));
+    });
+  },{threshold:0.25});
+  groups.forEach(g=>io.observe(g));
 })();
 
 /* ---------- Product tilt (desktop, subtle) ---------- */
