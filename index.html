@@ -1174,6 +1174,57 @@ html.no-video .hero-sound{display:none;}
 }
 
 /* ================================================================
+   10.5 · PARTNERED WITH US — placeholder logo marquee, same
+   mechanism as the credentials thread near the top of the page
+   (.creds / .creds-track), so there is only one carousel
+   implementation on this file.
+   ================================================================ */
+.partners-hdr{max-width:720px;margin:0 auto var(--s5);padding:0 var(--s4);text-align:center;}
+.partners-hdr p{color:var(--silver);max-width:54ch;margin:0 auto;}
+.plogos{max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
+.plogos-viewport{
+  overflow:hidden;max-width:100%;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
+}
+.plogos-viewport:hover .plogos-track{animation-play-state:paused;}
+.plogos-track{
+  display:flex;width:max-content;
+  animation:plogosScroll 32s linear infinite;
+  will-change:transform;
+}
+.plogos-group{
+  display:flex;align-items:center;gap:var(--s4);
+  padding-right:var(--s4);flex-shrink:0;
+}
+@keyframes plogosScroll{
+  to{transform:translateX(-50%);}
+}
+@media(prefers-reduced-motion:reduce){
+  .plogos-track{animation:none;}
+}
+.plogo{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;flex-shrink:0;width:172px;height:84px;
+  border:1px dashed var(--gold-border);border-radius:4px;
+  background-color:rgba(18,24,24,0.34);
+  background-image:repeating-linear-gradient(135deg,
+    rgba(201,160,106,0.055) 0 1px, transparent 1px 12px);
+}
+.plogo-tag{
+  font-family:var(--font-b);font-size:0.5rem;font-weight:700;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(201,160,106,0.75);
+}
+.plogo-lab{
+  font-family:var(--font-b);font-size:0.6875rem;font-weight:500;
+  letter-spacing:0.02em;color:rgba(243,241,235,0.5);
+}
+@media(max-width:900px){
+  .plogo{width:140px;height:72px;}
+}
+
+/* ================================================================
    11 · FINAL CONNECTION — the thread reaches its last light
    ================================================================ */
 .connect-sec{
@@ -1960,7 +2011,7 @@ html.no-video .hero-scroll{opacity:1;}
        ======================================================== -->
   <section class="chapter" id="land" style="padding-top:var(--s6);">
     <div class="w-narrow" style="text-align:left;">
-      <div class="mlab reveal" data-aho><b>02</b>&nbsp;/&nbsp;THE LAND</div>
+      <div class="mlab reveal" data-aho><b>02</b>&nbsp;/&nbsp;TERROIR</div>
       <span class="eyebrow gold reveal">TE WĀHI <span>·</span> SENSE OF PLACE</span>
     </div>
 
@@ -2018,7 +2069,7 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="chapter" id="science">
     <div class="drift gold" style="top:-6%;right:-12%;width:50vw;height:50vw;" aria-hidden="true"></div>
     <div class="braid-hdr" data-aho>
-      <div class="mlab reveal"><b>05</b>&nbsp;/&nbsp;OUR SCIENCE</div>
+      <div class="mlab reveal"><b>03</b>&nbsp;/&nbsp;OUR SCIENCE</div>
       <span class="eyebrow reveal">TE PŪTAIAO ME TE MĀTAURANGA <span>·</span> SCIENCE MEETS TRADITION</span>
       <h2 class="emerge">Two strands. One weave.</h2>
       <p class="reveal d2">Pharmaceutical-grade cultivation and mātauranga Māori are not in tension at Aho Farms. Like the two strands of a woven cord, each holds the other in place.</p>
@@ -2058,7 +2109,7 @@ html.no-video .hero-scroll{opacity:1;}
        ======================================================== -->
   <section class="chapter" id="trust">
     <div class="trust-hdr" data-aho>
-      <div class="mlab reveal" style="justify-content:center;"><b>07</b>&nbsp;/&nbsp;TRUST</div>
+      <div class="mlab reveal" style="justify-content:center;"><b>04</b>&nbsp;/&nbsp;TRUST</div>
       <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TE WHAKAMĀTAU <span>·</span> PROVEN QUALITY</span>
       <h2 class="emerge">Trust is grown here too.</h2>
       <p class="reveal d2">Every claim we make is licensed, tested, or documented — and available to verified partners.</p>
@@ -2175,6 +2226,54 @@ html.no-video .hero-scroll{opacity:1;}
         <h4>What the 2025 Medsafe guidance means for NZ operators</h4>
         <p>A breakdown of the updated Medsafe advertising guidance and what it means for licensed cultivators, prescribers, and pharmacies.</p>
       </a>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       10.5 · PARTNERED WITH US — placeholder tiles only.
+       ======================================================== -->
+  <section class="chapter" id="partners" style="padding-top:var(--s7);">
+    <div class="partners-hdr" data-aho>
+      <div class="mlab reveal" style="justify-content:center;"><b>07</b>&nbsp;/&nbsp;PARTNERED WITH US</div>
+      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> PARTNERED WITH US</span>
+      <h2 class="emerge">The thread runs through others too.</h2>
+    </div>
+    <div class="plogos">
+      <div class="plogos-viewport reveal d1" aria-label="Aho Farms partners">
+        <div class="plogos-track">
+          <!--
+            PLACEHOLDER TILES ONLY. Replace with cleared partner logos when supplied.
+
+            COMPLIANCE — DO NOT ADD without checking with legal/compliance first:
+            - Medsafe, the Ministry of Health, or any other regulator. Regulators
+              licence Aho Farms; they do not endorse it, and a logo here would
+              wrongly imply endorsement.
+            - The NZ Government logo or crest — its use carries its own separate
+              permission requirements.
+
+            Genuine partners that could eventually appear here (no logos yet,
+            placeholders only): Ngāti Pāhauwera, the Waaka whānau, Hill Labs,
+            export partners. Do not add names or logos until real, cleared
+            assets are supplied — this is a layout placeholder, not a claim.
+          -->
+          <div class="plogos-group">
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+          </div>
+          <div class="plogos-group" aria-hidden="true">
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
