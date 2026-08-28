@@ -2013,96 +2013,6 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ========================================================
-       05 · OUR FLOWER — what the land and the thread produce
-       ======================================================== -->
-  <section class="chapter" id="products" style="padding-bottom:var(--s7);">
-    <div class="flower-hdr" data-aho>
-      <div class="mlab reveal"><b>04</b>&nbsp;/&nbsp;OUR FLOWER</div>
-      <span class="eyebrow gold reveal">NGĀ HUA <span>·</span> OUR PRODUCTS</span>
-      <h2 class="emerge">Premium medicinal flower.<br>Available by prescription.</h2>
-      <p class="reveal d2">Full product specifications, certificates of analysis, and dosing guidance are available to registered prescribers in the portal.</p>
-    </div>
-
-    <!-- RĀ -->
-    <article class="pstage" id="pRa">
-      <div class="pstage-inner">
-        <div class="pstage-visual reveal">
-          <span class="prod-ghost" aria-hidden="true">Rā</span>
-          <div class="prod-glow prod-glow--ra"></div>
-          <div class="prod-float">
-            <div class="prod-tilt">
-              <div class="prod-ring"></div>
-              <img
-                src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto/v1781149945/ChatGPT_Image_Jun_11_2026_03_52_01_PM_gfza7m.png"
-                alt="RĀ — Aho Farms medicinal cannabis product"
-                class="prod-pkg" loading="lazy">
-            </div>
-          </div>
-        </div>
-        <div class="pstage-body">
-          <div class="prod-meta reveal">
-            <span class="prod-tag">01 · Flagship</span>
-            <span class="prod-rx">Prescription Only</span>
-          </div>
-          <h3 class="prod-name reveal d1">RĀ</h3>
-          <p class="prod-sub reveal d1">Named for the sun. Cultivated outdoors under natural Hawke's Bay sunlight, expressed in a richer, more complex flower.</p>
-          <ul class="prod-specs reveal d2">
-            <li><span class="prod-spec-k">Cultivar</span><span class="prod-spec-v">Oreo</span></li>
-            <li><span class="prod-spec-k">Method</span><span class="prod-spec-v">Outdoor sun-grown</span></li>
-            <li><span class="prod-spec-k">Form</span><span class="prod-spec-v">Dried medicinal flower</span></li>
-            <li><span class="prod-spec-k">Origin</span><span class="prod-spec-v">Hawke's Bay</span></li>
-            <li><span class="prod-spec-k">Testing</span><span class="prod-spec-v">Hill Labs · IANZ accredited</span></li>
-          </ul>
-          <a href="prescribers.html" class="prod-cta reveal d3">
-            Prescriber Information
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- SOURCE -->
-    <article class="pstage alt" id="pSource">
-      <div class="pstage-inner">
-        <div class="pstage-body">
-          <div class="prod-meta reveal">
-            <span class="prod-tag">02 · Consistent Supply</span>
-            <span class="prod-rx">Prescription Only</span>
-          </div>
-          <h3 class="prod-name reveal d1">SOURCE</h3>
-          <p class="prod-sub reveal d1">A reliable, well-documented product for patients established on medicinal cannabis therapy — grown indoors for batch-to-batch consistency.</p>
-          <ul class="prod-specs reveal d2">
-            <li><span class="prod-spec-k">Cultivar</span><span class="prod-spec-v">Wake &amp; Cake C30</span></li>
-            <li><span class="prod-spec-k">Method</span><span class="prod-spec-v">Indoor / consistent supply</span></li>
-            <li><span class="prod-spec-k">Form</span><span class="prod-spec-v">Dried medicinal flower</span></li>
-            <li><span class="prod-spec-k">Origin</span><span class="prod-spec-v">Aotearoa New Zealand</span></li>
-            <li><span class="prod-spec-k">Testing</span><span class="prod-spec-v">Hill Labs · IANZ accredited</span></li>
-          </ul>
-          <a href="prescribers.html" class="prod-cta reveal d3">
-            Prescriber Information
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-        <div class="pstage-visual reveal">
-          <span class="prod-ghost" aria-hidden="true">Source</span>
-          <div class="prod-glow prod-glow--source"></div>
-          <div class="prod-float" style="animation-delay:-4.5s;">
-            <div class="prod-tilt">
-              <div class="prod-ring"></div>
-              <img
-                src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto/v1781149002/ChatGPT_Image_Jun_11_2026_03_35_51_PM_g5rlm1.png"
-                alt="SOURCE — Aho Farms medicinal cannabis product"
-                class="prod-pkg" loading="lazy">
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <p class="prods-disc">Product information on this page is intended for licensed prescribers and healthcare professionals only. These products are not available for general purchase. Prescriptions are required.</p>
-  </section>
-
-  <!-- ========================================================
        06 · SCIENCE — two strands, one weave
        ======================================================== -->
   <section class="chapter" id="science">
@@ -2728,23 +2638,6 @@ window.addEventListener('scroll',()=>{
   },{threshold:0.25});
   groups.forEach(g=>io.observe(g));
 })();
-
-/* ---------- Product tilt (desktop, subtle) ---------- */
-if(!SMALL&&!REDUCED){
-  document.querySelectorAll('.pstage').forEach(st=>{
-    const tilt=st.querySelector('.prod-tilt');
-    if(!tilt)return;
-    st.addEventListener('pointermove',e=>{
-      const r=st.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width-0.5;
-      const y=(e.clientY-r.top)/r.height-0.5;
-      tilt.style.transform=`rotateY(${(x*10).toFixed(2)}deg) rotateX(${(-y*7).toFixed(2)}deg)`;
-    });
-    st.addEventListener('pointerleave',()=>{
-      tilt.style.transform='rotateY(0deg) rotateX(0deg)';
-    });
-  });
-}
 
 /* ---------- Final constellation — breathes with the cursor,
    never more than a few pixels. A luxury-watch shimmer. ---------- */
