@@ -49,7 +49,7 @@ const ACTIVE_PARENT_CASES = [
   ['about.html', 'Learn'],
   ['products.html', 'Buy'],
   ['news.html', 'Learn'],
-  ['investors.html', 'Learn'],
+  ['investors.html', 'Invest'],
 ];
 ACTIVE_PARENT_CASES.forEach(([page, expected]) => {
   const html = renderNav(page);

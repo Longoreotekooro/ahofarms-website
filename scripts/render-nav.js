@@ -22,8 +22,11 @@ function renderNav(currentPage) {
     p.children.some(c => isActive(c.href, currentPage)) || isActive(p.href, currentPage)
   );
   if (foundIdx !== -1) activeIdx = foundIdx;
-  // A childless parent cannot populate the bar - fall back to Learn.
-  if (!NAV[activeIdx].children.length) activeIdx = 0;
+  // NOTE: this used to force childless parents back to Learn, from when a
+  // persistent second bar needed populating with *something*. That bar no
+  // longer exists - each parent's children render inside its own <li> - so
+  // a childless active parent (e.g. Invest) just renders without a caret/
+  // dropdown, which is correct. Do not reintroduce the fallback.
 
   // Each parent's children render as a <ul class="nav-sub"> INSIDE that
   // parent's own <li>, once. This is the single source for both the desktop
