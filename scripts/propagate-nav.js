@@ -75,6 +75,7 @@ const NAV_CSS = sliceLines(249, 410);
 const FOOTER_CSS = sliceLines(1268, 1319);
 const STAR_CSS = sliceLines(195, 207);
 const FOOTER_HTML = sliceLines(1453, 1504); // <footer ...> ... </footer>, no leading comment
+const JS_ENV = sliceLines(1515, 1518);
 const JS_SCROLL = sliceLines(1521, 1523);
 const JS_STARFIELD = sliceLines(1536, 1561);
 const JS_DRAWER = sliceLines(1577, 1614);
@@ -173,20 +174,18 @@ function stripDeadNavJs(html, file) {
 
   // contact.html / news.html: scroll toggle + hamburger toggle share a
   // <script> with real form/filter logic - remove only the dead lines.
-  html = html.replace(
-    /\s*const nav = document\.getElementById\('nav'\);\s*\n\s*window\.addEventListener\('scroll', \(\) => \{ nav\.classList\.toggle\('scrolled', window\.scrollY > \d+\); \}\);\s*\n\s*\n\s*const hamburger = document\.getElementById\('hamburger'\);\s*\n\s*const navLinks = document\.getElementById\('navLinks'\);\s*\n\s*hamburger\.addEventListener\('click', \(\) => \{ navLinks\.classList\.toggle\('open'\); \}\);\s*\n/,
-    '\n'
-  );
+  // (news.html's scroll listener body spans multiple lines and both pages
+  // carry stray one-line comments above each block - matched independently
+  // so formatting differences between the two donors don't matter.)
+  html = html.replace(/[ \t]*\/\/ Nav scroll\s*\n/, '');
+  html = html.replace(/[ \t]*const nav = document\.getElementById\('nav'\);\s*\n[ \t]*window\.addEventListener\('scroll', \(\) => \{[\s\S]*?\}\);\s*\n/, '');
+  html = html.replace(/[ \t]*\/\/ Mobile nav\s*\n/, '');
+  html = html.replace(/[ \t]*const hamburger = document\.getElementById\('hamburger'\);\s*\n[ \t]*const navLinks = document\.getElementById\('navLinks'\);\s*\n[ \t]*hamburger\.addEventListener\('click', \(\) => \{ navLinks\.classList\.toggle\('open'\); \}\);\s*\n/, '');
 
-  // pharmacies.html: nav scroll + hamburger IIFE section, inside a larger
-  // IIFE that also holds real form-validation logic (kept).
+  // pharmacies.html / prescribers.html: nav scroll + hamburger IIFE section,
+  // inside a larger IIFE that also holds real form-validation logic (kept).
   html = html.replace(
-    /\/\* ----- Nav scroll effect ----- \*\/[\s\S]*?hamburger\.addEventListener\(function \(\) \{\s*\n\s*var isOpen = mobileMenu\.classList\.toggle\('open'\);\s*\n\s*hamburger\.setAttribute\('aria-expanded', String\(isOpen\)\);\s*\n\s*\}\);\s*\n\s*\n/,
-    ''
-  );
-  // prescribers.html: same shape, different trailing comment name.
-  html = html.replace(
-    /\/\* ----- Nav scroll effect ----- \*\/[\s\S]*?hamburger\.addEventListener\(function \(\) \{\s*\n\s*var isOpen = mobileMenu\.classList\.toggle\('open'\);\s*\n\s*hamburger\.setAttribute\('aria-expanded', String\(isOpen\)\);\s*\n\s*\}\);\s*\n\s*\n/,
+    /[ \t]*\/\* ----- Nav scroll effect ----- \*\/[\s\S]*?hamburger\.addEventListener\('click', function \(\) \{\s*\n\s*var isOpen = mobileMenu\.classList\.toggle\('open'\);\s*\n\s*hamburger\.setAttribute\('aria-expanded', String\(isOpen\)\);\s*\n\s*\}\);\s*\n\s*\n/,
     ''
   );
   return html;
@@ -244,10 +243,10 @@ function processPage(file) {
   const rootBlock = html.match(/:root\s*\{[\s\S]*?\}/);
   const missing = NEEDED_VARS.filter(v => !new RegExp('--' + v + '\\s*:').test(rootBlock ? rootBlock[0] : html));
   let extraRootDecls = missing.map(v => `  --${v}: ${donorVar(v)};`).join('\n');
-  if (isFixedHeaderPortal) extraRootDecls += '\n  --nav-h: 72px;';
+  if (isFixedHeaderPortal) extraRootDecls += '\n  --nav-h: 73px;';
   const rootAddition = extraRootDecls
     ? `:root{\n${extraRootDecls}\n}\n`
-    : (isFixedHeaderPortal ? `:root{\n  --nav-h: 72px;\n}\n` : '');
+    : (isFixedHeaderPortal ? `:root{\n  --nav-h: 73px;\n}\n` : '');
 
   const cssBlock = [
     rootAddition,
@@ -262,7 +261,7 @@ function processPage(file) {
     '   so the nav is pinned permanently "scrolled" rather than transparent. */',
     '.nav *,.footer *{box-sizing:border-box;}',
     '.nav{background:rgba(5,8,12,0.92);border-bottom:1px solid var(--hairline);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}',
-    isPortal ? '' : 'body{padding-top:72px;}',
+    isFixedHeaderPortal ? '' : 'body{padding-top:73px;}',
   ].filter(Boolean).join('\n');
 
   let r = sentinelSwapOrInsert(html, OWN_SENTINELS.css[0], OWN_SENTINELS.css[1], cssBlock, /<\/style>/, 'nav CSS');
@@ -278,7 +277,7 @@ function processPage(file) {
       .replace(/calc\(100vh - var\(--header-h\)\)/g, 'calc(100vh - var(--header-h) - var(--nav-h))')
       .replace(/calc\(var\(--header-h\) \+ 45px\)/g, 'calc(var(--header-h) + var(--nav-h) + 45px)');
   } else if (file === 'investors-portal.html') {
-    // sticky (not fixed) header - the universal body{padding-top:72px} above
+    // sticky (not fixed) header - the universal body{padding-top:73px} above
     // already reserves the space; nothing further needed.
   }
 
@@ -288,6 +287,8 @@ function processPage(file) {
   // ---- 7. Nav JS ----
   const jsBlock = [
     '<script>',
+    JS_ENV,
+    '',
     JS_SCROLL,
     '',
     JS_STARFIELD,
