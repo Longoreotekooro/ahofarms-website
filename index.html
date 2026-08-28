@@ -846,52 +846,6 @@ html.no-video .hero-sound{display:none;}
 }
 
 /* ================================================================
-   04 · CULTIVATION — seed to patient along the thread
-   ================================================================ */
-.cult-grid{
-  max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:grid;grid-template-columns:0.8fr 1.2fr;gap:var(--s7);
-}
-.cult-left{position:sticky;top:110px;align-self:start;}
-.cult-left p{color:var(--silver);max-width:40ch;}
-.cult-photo{
-  margin-top:var(--s5);border-radius:6px;overflow:hidden;position:relative;
-  box-shadow:var(--glass-shadow);
-}
-.cult-photo::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(200deg,rgba(5,5,5,0.3),transparent 50%);
-}
-.cult-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;
-  transform:scale(1.08);transition:transform 7s var(--ease);}
-.cult-photo.in img{transform:scale(1);}
-.jlist{list-style:none;position:relative;padding-left:var(--s4);}
-.jlist::before{
-  content:'';position:absolute;left:2px;top:8px;bottom:8px;width:1px;
-  background:linear-gradient(to bottom,var(--gold),rgba(201,160,106,0.1));
-}
-.jitem{position:relative;padding:0 0 var(--s5);}
-.jitem::before{
-  content:'';position:absolute;left:calc(-1 * var(--s4) + 0px);top:7px;
-  width:5px;height:5px;border-radius:50%;
-  background:var(--gold);box-shadow:0 0 9px rgba(201,160,106,0.7);
-}
-.jitem-num{
-  font-family:var(--font-h);font-style:italic;font-size:0.9rem;
-  color:rgba(201,160,106,0.8);display:block;margin-bottom:4px;
-}
-.jitem h4{
-  font-family:var(--font-h);font-size:1.5rem;font-weight:400;
-  color:var(--starlight);margin-bottom:8px;
-}
-.jitem h4 em{font-style:italic;color:var(--teal-light);font-size:0.85em;}
-.jitem p{font-size:0.875rem;color:var(--silver);line-height:1.7;max-width:56ch;}
-@media(max-width:900px){
-  .cult-grid{grid-template-columns:1fr;gap:var(--s5);}
-  .cult-left{position:static;}
-}
-
-/* ================================================================
    05 · OUR FLOWER — each product presented like an object of care
    ================================================================ */
 .flower-hdr{max-width:820px;margin:0 auto var(--s6);padding:0 var(--s4);}
@@ -1634,7 +1588,7 @@ html.no-video .hero-sound{display:none;}
   .reveal,.emerge,.unveil{opacity:1 !important;transform:none !important;transition:none !important;filter:none !important;clip-path:none !important;}
   .mani-line .mani-thread{transform:scaleX(1) !important;transition:none !important;}
   .mani-line .mani-thread::after{opacity:1 !important;transition:none !important;}
-  .cult-photo img,.people-img img,.why-visual img{transform:none !important;transition:none !important;}
+  .people-img img,.why-visual img{transform:none !important;transition:none !important;}
   .cine-img{transform:none !important;}
   #threadPath{stroke-dashoffset:0 !important;}
 }
@@ -2055,26 +2009,6 @@ html.no-video .hero-scroll{opacity:1;}
         <span class="num-n">100<sup>%</sup></span>
         <span class="num-l">Sun-grown across our outdoor and greenhouse environments, on Māori freehold whenua — richer terpene and cannabinoid expression.</span>
       </div>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       04 · CULTIVATION — one unbroken thread, seed to patient
-       ======================================================== -->
-  <section class="chapter" id="process">
-    <div class="drift teal" style="top:0;left:-15%;width:60vw;height:60vw;" aria-hidden="true"></div>
-    <div class="cult-grid">
-      <div class="cult-left" data-aho>
-        <div class="mlab reveal"><b>03</b>&nbsp;/&nbsp;CULTIVATION</div>
-        <span class="eyebrow gold reveal">MAI I TE WHENUA KI TE RONGOĀ <span>·</span> FROM LAND TO MEDICINE</span>
-        <h2 class="emerge">One unbroken thread,<br>from seed to patient.</h2>
-        <p class="reveal d2" style="margin-top:var(--s3)">Ten moments. One line. The same aho that begins in the seed ends in a patient's hand — and never breaks in between.</p>
-        <div class="cult-photo unveil reveal d2">
-          <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965845/aho_farms/raupunga/IMG_4143.jpg"
-            alt="Cultivation at Aho Farms — Hawke's Bay" loading="lazy">
-        </div>
-      </div>
-      <ol class="jlist" id="jList"></ol>
     </div>
   </section>
 
@@ -2683,38 +2617,10 @@ window.addEventListener('scroll',()=>{
 })();
 
 /* ================================================================
-   SEED TO PATIENT — one unbroken thread (content preserved)
-   ================================================================ */
-const J_STAGES=[
-  {mi:'Te kākano',    en:'Seed',            d:'Cultivars selected for Hawke’s Bay conditions — Oreo and Wake & Cake C30, both proven for the New Zealand climate. From 89 mother plants, only the 15 strongest expressions made it here.'},
-  {mi:'Te whakatipu', en:'Propagation',     d:'Seedlings are established under careful watch, then hardened for life outdoors. Weak plants never leave the nursery — the thread starts strong or not at all.'},
-  {mi:'Te māra',      en:'Cultivation',     d:'Transplanted to Māori freehold whenua in Hawke’s Bay. Natural light, living soil, coastal air. No synthetic pesticides, herbicides, or artificial growth enhancers — pest pressure is managed with integrated pest management.'},
-  {mi:'Te puāwai',    en:'Flowering',       d:'Plants follow the natural photoperiod through Hawke’s Bay’s 2,200+ sunshine hours. The sun’s full spectrum drives a richer terpene profile and more complex cannabinoid expression — the signature of our outdoor and greenhouse flower.'},
-  {mi:'Te hauhake',   en:'Harvest',         d:'Hand-harvested at peak cannabinoid and terpene development. Timing is set by trichome examination — whānau hands, expert eyes, no machines.'},
-  {mi:'Te whakamaroke', en:'Drying',        d:'Slow-dried in controlled conditions with moisture monitored throughout. Patience here protects everything the season built.'},
-  {mi:'Te whakarite', en:'Processing',      d:'Hand-trimmed and packaged in controlled conditions, with full chain-of-custody documentation from plant to pack.'},
-  {mi:'Te whakamātau', en:'Quality Testing', d:'Every batch goes to Hill Labs, Hamilton — IANZ accredited — for full cannabinoid profile, terpene analysis, heavy metals, pesticides, microbials, moisture, and foreign matter. CFU below 200: New Zealand’s standard, stricter than Australia’s.'},
-  {mi:'Te rongoā',    en:'Medicine',        d:'Only flower with a full certificate of analysis is released. What leaves the farm is no longer a crop — it is a prescription medicine.'},
-  {mi:'Te tūroro',    en:'Patient',         d:'Dispensed through licensed prescribers and pharmacies to the people who need it. The aho runs unbroken — from ancestral whenua to a patient’s hand.'}
-];
-(function(){
-  const list=document.getElementById('jList');
-  if(!list)return;
-  J_STAGES.forEach((s,i)=>{
-    const li=document.createElement('li');
-    li.className='jitem reveal';
-    li.innerHTML=`<span class="jitem-num">${String(i+1).padStart(2,'0')} / 10</span>
-      <h4>${s.en} <em>· ${s.mi}</em></h4>
-      <p>${s.d}</p>`;
-    list.appendChild(li);
-  });
-})();
-
-/* ================================================================
    REVEALS — IntersectionObserver + CSS (one motion language)
    ================================================================ */
 (function(){
-  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.cult-photo,.people-img,.adv-in,.adv-outflow');
+  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.people-img,.adv-in,.adv-outflow');
   if(REDUCED){els.forEach(el=>el.classList.add('in'));return;}
   const io=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
