@@ -5,7 +5,8 @@
       "name": "aho-site",
       "runtimeExecutable": "node",
       "runtimeArgs": ["scripts/dev-server.js"],
-      "port": 8123
+      "port": 8123,
+      "autoPort": true
     }
   ]
 }

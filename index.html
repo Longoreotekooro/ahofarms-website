@@ -410,8 +410,11 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 
 /* ================================================================
-   01 · HERO — the film IS the opening experience (preserved)
-   flower & leaf → trichomes → droplet → cosmos → Matariki
+   01 · HERO — the film IS the opening experience
+   darkness → a thread of light → sunrise whenua → trichome dew →
+   the droplet → a burst of muka fibre → the braid → the horizon.
+   The film carries its own closing title; the interface answers
+   the film early and is quiet again before that title lands.
    ================================================================ */
 .hero{
   position:relative;height:100vh;height:100svh;
@@ -422,11 +425,13 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center;
   display:block;
+  opacity:calc(1 - var(--exit,0)*0.9);
 }
 .hero-poster{
   position:absolute;inset:0;display:none;
-  background-image:url('assets/aho-matariki-poster.jpg');
+  background-image:url('assets/aho-thread-poster.jpg');
   background-size:cover;background-position:center;
+  opacity:calc(1 - var(--exit,0)*0.9);
 }
 /* film grain — carries the cinematic texture into the interface */
 .hero-grain{
@@ -449,7 +454,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .hero-ui-inner{
   width:100%;max-width:var(--max);margin:0 auto;
-  padding:0 var(--s4) 13vh;position:relative;
+  padding:0 var(--s4) 17vh;position:relative;
 }
 /* readability scrim, local to the type — no box, no card */
 .hero-ui-inner::before{
@@ -463,10 +468,20 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .hero.ph1 [data-ph="1"],
 .hero.ph2 [data-ph="2"],
+.hero.ph3 [data-ph="3"],
+.hero.ph4 [data-ph="4"],
 .hero.ph5 [data-ph="5"]{opacity:1;transform:none;}
-/* headline breathes in during cosmic expansion, lands with Matariki */
-.hero.ph3 [data-ph="3"]{opacity:0.38;transform:none;}
-.hero.ph5 [data-ph="3"]{opacity:1;}
+/* the interface fades as the visitor follows the thread out of the
+   film — only the cue fibre at the bottom edge stays lit */
+.hero-ui{opacity:calc(1 - var(--exit,0)*1.6);}
+/* ph6 — the film's own closing title arrives: the interface's
+   identity type steps aside so the words appear only once. The
+   sub, actions and cue remain as the settled state. */
+.hero.ph6 .hero-tereo,
+.hero.ph6 .hero-spark,
+.hero.ph6 h1,
+.hero.ph6 .hero-line,
+.hero.ph6 .hero-woven{opacity:0 !important;transform:none;}
 
 .hero-eyebrow{
   display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);
@@ -499,11 +514,34 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   color:var(--teal-light);display:block;margin-bottom:var(--s2);
   text-shadow:0 1px 14px rgba(2,4,8,0.8);
 }
+/* the name — a mark, not a headline. The film is the headline. */
 .hero h1{
-  font-size:clamp(3rem,7vw,6.4rem);
-  font-weight:300;line-height:0.98;letter-spacing:-0.04em;
-  color:var(--white);max-width:14ch;margin-bottom:var(--s3);
+  font-size:clamp(2.9rem,6vw,5.2rem);
+  font-weight:300;line-height:1;letter-spacing:0.16em;
+  color:var(--white);margin-bottom:var(--s2);
   text-shadow:0 2px 30px rgba(2,4,8,0.85),0 1px 8px rgba(2,4,8,0.6);
+}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+/* …then the meaning of the name */
+.hero-line{
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(1.5rem,2.9vw,2.4rem);line-height:1.2;
+  letter-spacing:-0.02em;color:var(--gold-light);
+  display:block;margin-bottom:var(--s3);
+  text-shadow:0 1px 16px rgba(2,4,8,0.85);
+}
+/* …then, quieter still, what the thread passes through */
+.hero-woven{
+  display:flex;align-items:center;flex-wrap:wrap;column-gap:14px;row-gap:6px;
+  font-size:0.6875rem;font-weight:600;letter-spacing:0.28em;
+  text-transform:uppercase;color:rgba(243,241,235,0.55);
+  margin-bottom:var(--s4);
+  text-shadow:0 1px 10px rgba(2,4,8,0.8);
+}
+.hero-woven i{
+  width:4px;height:4px;border-radius:50%;flex-shrink:0;
+  background:rgba(201,160,106,0.75);
+  box-shadow:0 0 8px rgba(201,160,106,0.55);
 }
 .hero-sub{
   font-size:1rem;line-height:1.75;color:rgba(243,241,235,0.6);
@@ -512,32 +550,43 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .hero-actions{display:flex;gap:var(--s2);flex-wrap:wrap;pointer-events:auto;}
 
-/* scroll cue — a thread with a travelling point of light */
+/* the invitation — FOLLOW THE THREAD, and one extremely fine muka
+   fibre running from the words to the bottom edge of the viewport.
+   When the visitor scrolls, the fibre continues out of the film
+   and into the page (.thread-inflow picks it up). */
 .hero-scroll{
-  position:absolute;bottom:var(--s4);left:50%;z-index:5;
+  position:absolute;bottom:0;left:50%;z-index:5;
   transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:10px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
   opacity:0;transition:opacity 1.4s var(--ease);
 }
-.hero.ph5 .hero-scroll{opacity:1;}
+.hero.ph4 .hero-scroll{opacity:1;}
 .hero-scroll-line{
-  position:relative;width:1px;height:52px;
-  background:rgba(243,241,235,0.16);overflow:hidden;
+  position:relative;width:1px;height:clamp(64px,10vh,120px);
+  background:linear-gradient(to bottom,rgba(201,160,106,0.55),rgba(243,241,235,0.12));
+  overflow:hidden;
 }
 .hero-scroll-line::after{
-  content:'';position:absolute;left:-1px;top:-8px;width:3px;height:8px;
+  content:'';position:absolute;left:-1px;top:-10px;width:3px;height:10px;
   border-radius:2px;
   background:linear-gradient(to bottom,transparent,var(--gold-light));
   box-shadow:0 0 8px rgba(227,200,148,0.8);
-  animation:cueTravel 2.6s var(--ease) infinite;
+  animation:cueTravel 3s var(--ease) infinite;
 }
 @keyframes cueTravel{
   0%{transform:translateY(0);}
-  70%,100%{transform:translateY(68px);}
+  70%,100%{transform:translateY(140px);}
 }
 .hero-scroll-txt{
-  font-size:0.5625rem;font-weight:700;letter-spacing:0.26em;
-  text-transform:uppercase;color:rgba(243,241,235,0.35);
+  font-size:0.5625rem;font-weight:700;letter-spacing:0.3em;
+  text-transform:uppercase;color:rgba(243,241,235,0.5);
+}
+/* small screens: the later phases reserve their space (opacity-only
+   reveals never shift layout), which pushes the stack up — retire
+   the eyebrow so nothing rides under the nav */
+@media(max-width:640px){
+  .hero-eyebrow{display:none;}
+  .hero-woven{column-gap:10px;letter-spacing:0.22em;}
 }
 
 /* sound toggle — the film carries a score. Entering through the
@@ -1345,6 +1394,20 @@ html.no-video .hero-sound{display:none;}
   #threadLayer{display:none;}
 }
 
+/* the fibre that leaves the film — it continues out of the hero's
+   FOLLOW THE THREAD cue, enters the page ahead of the visitor,
+   and hands over to the aho rail of the first chapter */
+.thread-inflow{
+  width:1px;height:clamp(80px,14vh,150px);margin:0 auto;
+  background:linear-gradient(to bottom,rgba(201,160,106,0.75),rgba(201,160,106,0.12));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 1.6s var(--ease);
+}
+.thread-inflow.in{transform:scaleY(1);}
+@media (prefers-reduced-motion: reduce){
+  .thread-inflow{transform:scaleY(1) !important;transition:none !important;}
+}
+
 /* ================================================================
    01 · THE AHO ADVANTAGE — the story picks up where the film ends.
    One fibre descends out of the hero and every moment hangs off it.
@@ -1705,12 +1768,15 @@ html.no-video .hero-scroll{opacity:1;}
 
 <!-- ============================================================
      01 · HERO — the cinematic film is the opening experience.
-     Flower & leaf → trichomes → droplet → cosmos → Matariki.
+     Darkness → thread of light → sunrise whenua → trichome dew →
+     droplet → muka fibre burst → the braid → the horizon title.
+     The type answers the film beat by beat, then steps aside for
+     the film's own closing card.
      ============================================================ -->
-<section class="hero" id="hero" aria-label="Aho Farms — from a single flower to the stars of Matariki">
+<section class="hero" id="hero" aria-label="Aho Farms — the thread that connects">
   <video class="hero-film" id="heroFilm"
          autoplay muted playsinline preload="auto"
-         poster="assets/aho-matariki-poster.jpg"
+         poster="assets/aho-thread-poster.jpg"
          aria-hidden="true">
   </video>
   <div class="hero-poster" aria-hidden="true"></div>
@@ -1725,7 +1791,11 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
       <div class="hero-spark" data-ph="2" aria-hidden="true"></div>
       <span class="hero-tereo" data-ph="2">He aho tēnei.</span>
-      <h1 data-ph="3">Grown for <em>good</em> in New&nbsp;Zealand.</h1>
+      <h1 data-ph="2">AHO<span class="vh"> — Māori-led medicinal cannabis cultivation, Hawke's Bay, New Zealand</span></h1>
+      <span class="hero-line" data-ph="3">The thread that connects.</span>
+      <div class="hero-woven" data-ph="4" role="text" aria-label="Whenua. People. Knowledge. Medicine.">
+        <span>Whenua</span><i aria-hidden="true"></i><span>People</span><i aria-hidden="true"></i><span>Knowledge</span><i aria-hidden="true"></i><span>Medicine</span>
+      </div>
       <p class="hero-sub" data-ph="5">Māori-led medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium medicinal flower — available exclusively through licensed prescribers and qualified partners.</p>
       <div class="hero-actions" data-ph="5">
         <a href="about.html" class="btn btn-primary">Discover Aho Farms</a>
@@ -1735,8 +1805,8 @@ html.no-video .hero-scroll{opacity:1;}
   </div>
 
   <div class="hero-scroll" aria-hidden="true">
+    <span class="hero-scroll-txt">Follow the thread</span>
     <div class="hero-scroll-line"></div>
-    <span class="hero-scroll-txt">Discover Aho</span>
   </div>
 
   <button class="hero-sound" id="heroSound" data-ph="1" aria-label="Turn sound on" aria-pressed="false">
@@ -1757,6 +1827,9 @@ html.no-video .hero-scroll{opacity:1;}
      ============================================================ -->
 <div class="page-grain" aria-hidden="true"></div>
 <main id="journey">
+
+  <!-- the fibre continues out of the film and into the page -->
+  <div class="thread-inflow adv-in" aria-hidden="true"></div>
 
   <!-- credentials — a quiet thread of proof, travelling on one line -->
   <div class="creds">
@@ -2421,10 +2494,11 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ================================================================
-   HERO FILM — the interface answers the film. (preserved)
-   Storyboard beats: 0–2 darkness · 2–7 botanical / trichome ·
-   7–9 droplet · 9–11 into the droplet · 11–13 cosmic expansion ·
-   13–15 Matariki settles. The film holds on its final frame.
+   HERO FILM — the interface answers the film.
+   Storyboard beats (35.6s): 0–5 darkness / a thread of light ·
+   5–7 sunrise over the whenua · 7–15 trichome dew · 15–16 droplet ·
+   16–23 muka fibre burst · 23–31 the braid · 31–35.5 the film's own
+   closing title. The film holds on its final frame.
    ================================================================ */
 (function(){
   const hero=document.getElementById('hero');
@@ -2432,18 +2506,25 @@ window.addEventListener('scroll',()=>{
   if(!film)return;
 
   if(REDUCED){
-    /* still experience: poster + full interface, no playback */
-    hero.classList.add('ph1','ph2','ph3','ph5');
+    /* still experience: the title-card poster + the settled
+       interface (ph6 keeps the identity type from doubling the
+       poster's own words) */
+    hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
     return;
   }
 
   /* choose the encode for the viewport (mobile gets a tighter,
      centre-framed crop at a fraction of the weight) */
-  const src=MOBILE?'assets/aho-matariki-hero-mobile.mp4':'assets/aho-matariki-hero-desktop.mp4';
-  if(MOBILE)film.poster='assets/aho-matariki-poster-mobile.jpg';
+  const src=MOBILE?'assets/aho-thread-hero-mobile.mp4':'assets/aho-thread-hero-desktop.mp4';
+  if(MOBILE)film.poster='assets/aho-thread-poster-mobile.jpg';
   film.src=src;
 
-  const PHASES=[[2,'ph1'],[7,'ph2'],[9,'ph3'],[13,'ph5']];
+  /* ph1 eyebrow in the darkness · ph2 the name as the light-thread
+     climbs · ph3 the meaning at the trichomes · ph4 the woven words
+     + FOLLOW THE THREAD at the fibre burst · ph5 sub + actions as
+     the braid reaches for the horizon (before the title card) ·
+     ph6 the identity type steps aside for the film's own title */
+  const PHASES=[[2,'ph1'],[4.4,'ph2'],[9,'ph3'],[16.5,'ph4'],[29.5,'ph5'],[31.3,'ph6']];
   let done=false;
   function setPhases(t){
     for(const [at,cls] of PHASES){
@@ -2455,7 +2536,7 @@ window.addEventListener('scroll',()=>{
   film.addEventListener('timeupdate',()=>{
     if(done)return;
     setPhases(film.currentTime);
-    if(hero.classList.contains('ph5'))done=true;
+    if(hero.classList.contains('ph6'))done=true;
   });
   let started=false;
   film.addEventListener('playing',()=>{
@@ -2464,7 +2545,7 @@ window.addEventListener('scroll',()=>{
     setPhases(film.currentTime);
   },{once:true});
   film.addEventListener('ended',()=>{
-    hero.classList.add('ph1','ph2','ph3','ph5');
+    hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
     done=true;
   });
 
@@ -2511,7 +2592,7 @@ window.addEventListener('scroll',()=>{
      unmuted playback — entering the site starts the film from the
      top WITH its score */
   function restartWithSound(){
-    hero.classList.remove('ph1','ph2','ph3','ph5');
+    hero.classList.remove('ph1','ph2','ph3','ph4','ph5','ph6');
     done=false;
     film.muted=false;
     setSnd(true);
@@ -2528,14 +2609,37 @@ window.addEventListener('scroll',()=>{
   window.__ahoEnterWithSound=restartWithSound;
 
   /* resilience: if the film truly can't start, show the still
-     Matariki state instead of leaving the visitor in the dark */
+     title-card state instead of leaving the visitor in the dark */
   setTimeout(()=>{
     if(!started&&!done){
       document.documentElement.classList.add('no-video');
-      hero.classList.add('ph1','ph2','ph3','ph5');
+      hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
       done=true;
     }
   },4500);
+})();
+
+/* ================================================================
+   FOLLOW THE THREAD — the film releases the visitor. As they
+   scroll away the film darkens and the interface recedes, while
+   the cue fibre stays lit and hands over to .thread-inflow.
+   ================================================================ */
+(function(){
+  if(REDUCED)return;
+  const hero=document.getElementById('hero');
+  if(!hero)return;
+  let ticking=false;
+  function set(){
+    const v=Math.min(Math.max(window.scrollY/(window.innerHeight*0.85),0),1);
+    hero.style.setProperty('--exit',v.toFixed(3));
+    ticking=false;
+  }
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(set);
+  },{passive:true});
+  set();
 })();
 
 /* ================================================================
