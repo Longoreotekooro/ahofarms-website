@@ -1562,16 +1562,6 @@ html.no-video .hero-sound{display:none;}
   .adv-conv{margin-top:var(--s4);}
 }
 
-.adv-finale{max-width:900px;margin:0 auto;padding:0 var(--s4);text-align:center;}
-/* the aho leaves the chapter — a fade, never a rule */
-.adv-outflow{
-  width:1px;height:clamp(96px,15vh,170px);margin:var(--s6) auto 0;
-  background:linear-gradient(to bottom,rgba(201,160,106,0.8),rgba(201,160,106,0));
-  transform:scaleY(0);transform-origin:top;
-  transition:transform 1.8s var(--ease);
-}
-.adv-outflow.in{transform:scaleY(1);}
-
 /* ================================================================
    ASSET PLACEHOLDERS — deliberately unfinished. Every box holds the
    real aspect ratio so the layout is honest, and states plainly
@@ -1743,7 +1733,6 @@ html.no-video .hero-sound{display:none;}
 @media (prefers-reduced-motion: reduce){
   .adv-moment::before{transform:scaleY(1) !important;transition:none !important;}
   .adv-moment::after{opacity:1 !important;transition:none !important;}
-  .adv-outflow{transform:scaleY(1) !important;transition:none !important;}
   .adv-fibres path{
     stroke-dashoffset:0 !important;transition:none !important;
   }
@@ -2066,15 +2055,12 @@ html.no-video .hero-scroll{opacity:1;}
 
     </div>
 
-    <div class="adv-finale">
-      <div class="adv-outflow adv-in" aria-hidden="true"></div>
-    </div>
   </section>
 
   <!-- ========================================================
        03 · THE LAND — terroir at 39° south
        ======================================================== -->
-  <section class="chapter" id="land" style="padding-top:var(--s6);">
+  <section class="chapter" id="land" style="padding-top:var(--s4);">
     <div class="w-narrow" style="text-align:left;">
       <div class="mlab reveal" data-aho><b>02</b>&nbsp;/&nbsp;TERROIR</div>
       <span class="eyebrow gold reveal">TE WĀHI <span>·</span> SENSE OF PLACE</span>
@@ -2697,7 +2683,7 @@ window.addEventListener('scroll',()=>{
    REVEALS — IntersectionObserver + CSS (one motion language)
    ================================================================ */
 (function(){
-  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.people-img,.adv-in,.adv-outflow');
+  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.people-img,.adv-in');
   if(REDUCED){els.forEach(el=>el.classList.add('in'));return;}
   const io=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
