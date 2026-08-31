@@ -1456,10 +1456,15 @@ html.no-video .hero-sound{display:none;}
 /* —— copy beside an image —— */
 /* —— te whenua — the land itself, full bleed between the moments —— */
 .adv-whenua-cine{margin:0 0 clamp(var(--s7),11vh,var(--s8));}
+/* the team is in the upper band of this photo — pin the frame there,
+   no parallax drift, and keep the top fade light so faces stay lit */
+.adv-whenua-cine .cine-img{top:0;height:100%;object-position:center 6%;}
+.adv-whenua-cine::before{height:18%;background:linear-gradient(to bottom,rgba(5,5,5,0.6),transparent);}
 .adv-whenua-cine::after{
-  height:58%;
-  background:linear-gradient(to top,rgba(10,15,14,0.97) 16%,rgba(10,15,14,0.55) 55%,transparent);
+  height:44%;
+  background:linear-gradient(to top,rgba(10,15,14,0.96) 12%,rgba(10,15,14,0.4) 52%,transparent);
 }
+.adv-whenua-cine .cine-veil{background:radial-gradient(110% 90% at 50% 40%, transparent 55%, rgba(5,8,8,0.4) 100%);}
 .adv-whenua-cine .cine-caption .eyebrow,
 .adv-whenua-cine .cine-caption h2{text-shadow:0 2px 34px rgba(2,4,6,0.95),0 1px 8px rgba(2,4,6,0.7);}
 .adv-whenua-cine .cine-caption h2{
@@ -1940,7 +1945,7 @@ html.no-video .hero-scroll{opacity:1;}
 
     <!-- · Māori whenua — the land itself, full bleed · -->
     <div class="cine adv-whenua-cine" aria-label="The Aho Farms team working among medicinal cannabis plants on Māori whenua">
-      <img class="cine-img" data-plx="0.16"
+      <img class="cine-img"
         src="assets/aho-team-whenua.jpg"
         alt="The Aho Farms team working among medicinal cannabis plants in a greenhouse" width="1600" height="1067" loading="lazy">
       <div class="cine-veil"></div>
