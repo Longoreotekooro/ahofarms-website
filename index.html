@@ -1131,24 +1131,16 @@ html.no-video .hero-sound{display:none;}
   .plogos-track{animation:none;}
 }
 .plogo{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:6px;flex-shrink:0;width:172px;height:84px;
-  border:1px dashed var(--gold-border);border-radius:4px;
-  background-color:rgba(18,24,24,0.34);
-  background-image:repeating-linear-gradient(135deg,
-    rgba(201,160,106,0.055) 0 1px, transparent 1px 12px);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;width:196px;height:96px;padding:16px 22px;
+  border-radius:6px;background:rgba(243,241,235,0.96);
+  box-shadow:0 14px 40px rgba(0,0,0,0.35);
 }
-.plogo-tag{
-  font-family:var(--font-b);font-size:0.5rem;font-weight:700;
-  letter-spacing:0.28em;text-transform:uppercase;
-  color:rgba(201,160,106,0.75);
-}
-.plogo-lab{
-  font-family:var(--font-b);font-size:0.6875rem;font-weight:500;
-  letter-spacing:0.02em;color:rgba(243,241,235,0.5);
+.plogo img{
+  max-width:100%;max-height:100%;object-fit:contain;display:block;
 }
 @media(max-width:900px){
-  .plogo{width:140px;height:72px;}
+  .plogo{width:156px;height:78px;padding:12px 16px;}
 }
 
 /* ================================================================
@@ -2005,15 +1997,15 @@ html.no-video .hero-scroll{opacity:1;}
        ======================================================== -->
   <section class="chapter" id="partners" style="padding-top:var(--s7);">
     <div class="partners-hdr" data-aho>
-      <div class="mlab reveal" style="justify-content:center;"><b>02</b>&nbsp;/&nbsp;PARTNERED WITH US</div>
-      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> PARTNERED WITH US</span>
+      <div class="mlab reveal" style="justify-content:center;"><b>02</b>&nbsp;/&nbsp;OUR NETWORK</div>
+      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> OUR NETWORK</span>
       <h2 class="emerge">The thread runs through others too.</h2>
     </div>
     <div class="plogos">
       <div class="plogos-viewport reveal d1" aria-label="Aho Farms partners">
         <div class="plogos-track">
           <!--
-            PLACEHOLDER TILES ONLY. Replace with cleared partner logos when supplied.
+            Logos supplied and cleared by the CEO (2026-08-31): NZTE, MPI, Te Puni Kōkiri, MSD, Ngāti Pāhauwera Development Trust.
 
             COMPLIANCE — DO NOT ADD without checking with legal/compliance first:
             - Medsafe, the Ministry of Health, or any other regulator. Regulators
@@ -2028,20 +2020,18 @@ html.no-video .hero-scroll{opacity:1;}
             assets are supplied — this is a layout placeholder, not a claim.
           -->
           <div class="plogos-group">
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
           </div>
           <div class="plogos-group" aria-hidden="true">
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
-            <span class="plogo"><span class="plogo-tag">Awaiting logo</span><span class="plogo-lab">Partner</span></span>
+            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
           </div>
         </div>
       </div>
