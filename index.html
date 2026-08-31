@@ -422,17 +422,30 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   background:var(--void);
   overflow:hidden;
 }
+/* one media plate carries the exit fade for film, loop and poster
+   together, so scrolling away darkens them as a single image */
+.hero-media{
+  position:absolute;inset:0;
+  opacity:calc(1 - var(--exit,0)*0.9);
+}
 .hero-film{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center;
   display:block;
-  opacity:calc(1 - var(--exit,0)*0.9);
 }
+/* the braid loop — when the film reaches its hold frame, this
+   seamless 4.25s cycle of the braid on the whenua dissolves in
+   over it and breathes until the visitor follows the thread down */
+.hero-loop{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:0;transition:opacity 1.8s var(--ease);
+}
+.hero-loop.on{opacity:1;}
 .hero-poster{
   position:absolute;inset:0;display:none;
   background-image:url('assets/aho-thread-poster.jpg');
   background-size:cover;background-position:center;
-  opacity:calc(1 - var(--exit,0)*0.9);
 }
 /* film grain — carries the cinematic texture into the interface */
 .hero-grain{
@@ -1703,7 +1716,7 @@ html.no-video .hero-sound{display:none;}
    ================================================================ */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
-  .hero-film{display:none;}
+  .hero-film,.hero-loop{display:none;}
   .hero-poster{display:block;}
   .hero [data-ph]{opacity:1 !important;transform:none !important;transition:none !important;}
   .hero-spark::after{transform:scaleY(1) !important;transition:none !important;}
@@ -1716,7 +1729,8 @@ html.no-video .hero-sound{display:none;}
   .cine-img{transform:none !important;}
   #threadPath{stroke-dashoffset:0 !important;}
 }
-html.no-video .hero-film{display:none;}
+html.no-video .hero-film,
+html.no-video .hero-loop{display:none;}
 html.no-video .hero-poster{display:block;}
 html.no-video .hero [data-ph]{opacity:1;transform:none;}
 html.no-video .hero-spark::after{transform:scaleY(1);}
@@ -1784,12 +1798,16 @@ html.no-video .hero-scroll{opacity:1;}
      before it and the braid points into FOLLOW THE THREAD.
      ============================================================ -->
 <section class="hero" id="hero" aria-label="Aho Farms — the thread that connects">
-  <video class="hero-film" id="heroFilm"
-         autoplay muted playsinline preload="auto"
-         poster="assets/aho-thread-poster.jpg"
-         aria-hidden="true">
-  </video>
-  <div class="hero-poster" aria-hidden="true"></div>
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-film" id="heroFilm"
+           autoplay muted playsinline preload="auto"
+           poster="assets/aho-thread-poster.jpg">
+    </video>
+    <video class="hero-loop" id="heroLoop"
+           muted loop playsinline preload="none">
+    </video>
+    <div class="hero-poster"></div>
+  </div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
 
@@ -2530,6 +2548,18 @@ window.addEventListener('scroll',()=>{
   if(MOBILE)film.poster='assets/aho-thread-poster-mobile.jpg';
   film.src=src;
 
+  /* the braid loop — primed late in the film (so it never competes
+     with the film for bandwidth), started when the film ends */
+  const loop=document.getElementById('heroLoop');
+  let loopPrimed=false;
+  if(loop)loop.src=MOBILE?'assets/aho-thread-loop-mobile.mp4':'assets/aho-thread-loop-desktop.mp4';
+  function startLoop(){
+    if(!loop)return;
+    loop.classList.add('on');
+    const p=loop.play();
+    if(p&&p.catch)p.catch(()=>{});
+  }
+
   /* ph1 eyebrow in the darkness · ph2 the name as the light-thread
      climbs · ph3 the meaning at the trichomes · ph4 the woven words
      + FOLLOW THE THREAD at the fibre burst · ph5 sub + actions
@@ -2544,6 +2574,10 @@ window.addEventListener('scroll',()=>{
   /* timeupdate (not rAF) drives the phases — it keeps firing when
      the tab is backgrounded, so the reveal never gets stuck */
   film.addEventListener('timeupdate',()=>{
+    if(loop&&!loopPrimed&&film.currentTime>=16){
+      loopPrimed=true;
+      loop.load();
+    }
     if(done)return;
     setPhases(film.currentTime);
     if(hero.classList.contains('ph5'))done=true;
@@ -2557,6 +2591,7 @@ window.addEventListener('scroll',()=>{
   film.addEventListener('ended',()=>{
     hero.classList.add('ph1','ph2','ph3','ph4','ph5');
     done=true;
+    startLoop();
   });
 
   /* autoplay can reject if called before any data has loaded —
@@ -2577,9 +2612,14 @@ window.addEventListener('scroll',()=>{
      (27.2s), which is before the 29s end — gating on it left a
      backgrounded film frozen just short of its hold frame. */
   document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden&&film.paused&&!film.ended){
+    if(document.hidden)return;
+    if(film.paused&&!film.ended){
       const p=film.play();
       if(p&&p.catch)p.catch(()=>{});
+    }
+    if(loop&&loop.classList.contains('on')&&loop.paused){
+      const q=loop.play();
+      if(q&&q.catch)q.catch(()=>{});
     }
   });
 
@@ -2606,6 +2646,11 @@ window.addEventListener('scroll',()=>{
      top WITH its score */
   function restartWithSound(){
     hero.classList.remove('ph1','ph2','ph3','ph4','ph5');
+    if(loop){
+      loop.classList.remove('on');
+      loop.pause();
+      try{loop.currentTime=0;}catch(e){}
+    }
     done=false;
     film.muted=false;
     setSnd(true);
@@ -2641,10 +2686,21 @@ window.addEventListener('scroll',()=>{
   if(REDUCED)return;
   const hero=document.getElementById('hero');
   if(!hero)return;
+  const loop=document.getElementById('heroLoop');
   let ticking=false;
   function set(){
     const v=Math.min(Math.max(window.scrollY/(window.innerHeight*0.85),0),1);
     hero.style.setProperty('--exit',v.toFixed(3));
+    /* the loop rests once the visitor has mostly left the film,
+       and breathes again if they return to the top */
+    if(loop&&loop.classList.contains('on')){
+      if(v>0.7&&!loop.paused){
+        loop.pause();
+      }else if(v<=0.7&&loop.paused&&!document.hidden){
+        const p=loop.play();
+        if(p&&p.catch)p.catch(()=>{});
+      }
+    }
     ticking=false;
   }
   window.addEventListener('scroll',()=>{
