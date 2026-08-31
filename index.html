@@ -208,44 +208,6 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 /* ================================================================
    GATE (existing functionality — preserved)
    ================================================================ */
-.gate{
-  position:fixed;inset:0;
-  background:rgba(5,7,10,0.97);
-  backdrop-filter:blur(16px);
-  z-index:1000;display:flex;align-items:center;justify-content:center;
-  padding:var(--s4);transition:opacity 0.35s ease;
-}
-.gate.hidden{opacity:0;pointer-events:none;}
-.gate-box{
-  background:var(--charcoal);
-  border:1px solid var(--border-2);
-  border-radius:4px;padding:var(--s6);
-  max-width:480px;width:100%;text-align:center;
-}
-.gate-logo{
-  font-family:var(--font-h);font-size:1.5rem;font-weight:500;
-  letter-spacing:0.14em;color:var(--white);margin-bottom:var(--s5);
-}
-.gate-logo em{font-style:normal;color:var(--teal-light);}
-.gate-box h2{color:var(--white);font-size:1.9rem;margin-bottom:var(--s2);}
-.gate-box p{color:rgba(255,255,255,0.5);font-size:0.9375rem;line-height:1.7;margin-bottom:var(--s5);}
-.gate-yes{
-  width:100%;padding:15px;
-  background:var(--teal);color:var(--white);
-  border:1.5px solid var(--teal);border-radius:3px;
-  font-family:var(--font-b);font-size:0.9375rem;font-weight:600;
-  letter-spacing:0.04em;cursor:pointer;transition:background 0.2s;
-  margin-bottom:var(--s2);
-}
-.gate-yes:hover{background:var(--teal-deep);}
-.gate-no{
-  width:100%;padding:10px;background:transparent;
-  color:rgba(255,255,255,0.3);border:none;
-  font-family:var(--font-b);font-size:0.8125rem;
-  cursor:pointer;transition:color 0.2s;
-}
-.gate-no:hover{color:rgba(255,255,255,0.6);}
-
 /* ================================================================
    NAV — bilingual (preserved) · transparent over film, then veiled
    ================================================================ */
@@ -603,10 +565,19 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   .hero-eyebrow{display:none;}
   .hero-woven{column-gap:10px;letter-spacing:0.22em;}
 }
+@media(max-height:700px){
+  .hero-eyebrow{display:none;}
+}
+.hero-actions .hero-alt{
+  display:inline-flex;align-items:center;padding:14px 6px;
+  font-size:0.6875rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(243,241,235,0.78);border-bottom:1px solid rgba(243,241,235,0.25);
+  transition:color 0.3s,border-color 0.3s;
+}
+.hero-actions .hero-alt:hover{color:var(--gold-light);border-color:var(--gold);}
 
-/* sound toggle — the film carries a score. Entering through the
-   gate starts it with sound; this pill covers returning visitors
-   who skip the gate and arrive muted. */
+/* sound toggle — the film carries a score. It opens muted;
+   this pill starts it from the top with sound. */
 .hero-sound{
   position:absolute;right:var(--s4);bottom:var(--s4);z-index:6;
   height:44px;padding:0 18px;border-radius:22px;
@@ -1007,6 +978,21 @@ html.no-video .hero-sound{display:none;}
 /* ================================================================
    09 · PORTALS — pick up the thread · floating glass
    ================================================================ */
+.trust-strip{
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  max-width:var(--max);margin:0 auto var(--s6);padding:var(--s4);
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+  font-size:0.6875rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(243,241,235,0.72);transition:color 0.3s;
+}
+.trust-strip i{font-style:normal;color:var(--gold);}
+.trust-strip:hover{color:var(--starlight);}
+.connect-btns .connect-alt{
+  align-self:center;padding:14px 4px;font-size:0.6875rem;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;color:rgba(243,241,235,0.66);
+  border-bottom:1px solid rgba(243,241,235,0.22);transition:color 0.3s,border-color 0.3s;
+}
+.connect-btns .connect-alt:hover{color:var(--gold-light);border-color:var(--gold);}
 .portals-hdr{max-width:var(--max);margin:0 auto var(--s6);padding:0 var(--s4);}
 .portals-hdr p{max-width:54ch;}
 .portals-hdr p{color:var(--silver);}
@@ -1109,26 +1095,11 @@ html.no-video .hero-sound{display:none;}
 .partners-hdr{max-width:720px;margin:0 auto var(--s5);padding:0 var(--s4);text-align:center;}
 .partners-hdr p{color:var(--silver);max-width:54ch;margin:0 auto;}
 .plogos{max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
-.plogos-viewport{
-  overflow:hidden;max-width:100%;
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
-  mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent);
-}
-.plogos-viewport:hover .plogos-track{animation-play-state:paused;}
-.plogos-track{
-  display:flex;width:max-content;
-  animation:plogosScroll 32s linear infinite;
-  will-change:transform;
-}
+.plogos-viewport{max-width:100%;}
+.plogos-track{display:flex;justify-content:center;}
 .plogos-group{
-  display:flex;align-items:center;gap:var(--s4);
-  padding-right:var(--s4);flex-shrink:0;
-}
-@keyframes plogosScroll{
-  to{transform:translateX(-50%);}
-}
-@media(prefers-reduced-motion:reduce){
-  .plogos-track{animation:none;}
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:var(--s4);
 }
 .plogo{
   display:flex;align-items:center;justify-content:center;
@@ -1555,7 +1526,7 @@ html.no-video .hero-sound{display:none;}
 }
 .adv-open .adv-story-bridge{max-width:34ch;margin-bottom:0;}
 .adv-story-grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:clamp(var(--s4),4vw,var(--s6));
   padding:var(--s5) 0;
   border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
@@ -1626,20 +1597,6 @@ html.no-video .hero-scroll{opacity:1;}
 </style>
 </head>
 <body>
-
-<!-- GATE (preserved) -->
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <div class="gate-logo">AHO <em>FARMS</em></div>
-    <span class="eyebrow" style="justify-content:center;display:flex">TŪHONO MAI <span>·</span> VISITOR DECLARATION</span>
-    <h2>Before you enter</h2>
-    <p>This website is intended for healthcare professionals, licensed pharmacists, industry partners, and institutional stakeholders. It is not intended for patients or consumers.</p>
-    <div>
-      <button class="gate-yes" onclick="acceptGate()">I am a healthcare or industry professional</button>
-      <button class="gate-no" onclick="declineGate()">I am a member of the general public</button>
-    </div>
-  </div>
-</div>
 
 <!-- NAV (preserved) -->
 <!-- AHO:NAV:START - generated by scripts/propagate-nav.js, do not edit by hand -->
@@ -1715,7 +1672,7 @@ html.no-video .hero-scroll{opacity:1;}
       <p class="hero-sub" data-ph="5">Māori owned medicinal cannabis cultivation from Hawke's Bay. Licensed grower of premium medicinal flower available exclusively through licensed prescribers and qualified partners.</p>
       <div class="hero-actions" data-ph="5">
         <a href="about.html" class="btn btn-primary">Discover Aho Farms</a>
-        <a href="prescribers.html" class="btn btn-outline">Healthcare Professionals</a>
+        <a href="prescribers.html" class="hero-alt">Healthcare Professionals</a>
       </div>
     </div>
   </div>
@@ -1812,18 +1769,15 @@ html.no-video .hero-scroll{opacity:1;}
         <div class="adv-story">
           <div class="adv-story-grid reveal d2">
             <div>
-              <p>We bring together more than <strong>21 years of combined California cultivation experience</strong> with a distinctly Aotearoa approach to growing medicinal cannabis, bringing world class knowledge home and applying it on Māori land.</p>
+              <p>We bring together more than <strong>20 years of combined California cultivation experience</strong> with a distinctly Aotearoa approach to growing medicinal cannabis, bringing world class knowledge home and applying it on Māori land.</p>
               <p>We are <strong>Māori owned and built on Māori whenua</strong>, creating an industry that connects international cultivation expertise with our responsibility to the land, our people and the generations that will follow.</p>
             </div>
             <div>
               <p>Across <strong>two cultivation sites in Hawke’s Bay, New Zealand</strong>, we grow across three distinct environments: <strong>indoor, greenhouse and outdoor</strong>. This allows us to match genetics with the environment in which they perform best, while creating a diverse and resilient cultivation platform.</p>
               <p>Our outdoor and greenhouse crops harness Hawke’s Bay’s long summer days, abundant natural sunlight and intense UV exposure. Indoors, precisely controlled environments allow us to refine genetics, maintain consistency and cultivate premium flower to exacting standards.</p>
             </div>
-            <div>
-              <p>Behind every plant is a commitment to <strong>quality, transparency and traceability</strong>. From propagation and cultivation through to harvest, drying and curing, each stage is recorded, creating a complete history of every batch we produce.</p>
-              <p class="adv-story-turn">For us, growing medicinal cannabis is only part of the story.</p>
-            </div>
           </div>
+          <p class="adv-story-turn reveal">For us, growing medicinal cannabis is only part of the story.</p>
 
         </div>
       </div>
@@ -1916,6 +1870,49 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ========================================================
+       OUR NETWORK — the thread runs through others too.
+       ======================================================== -->
+  <section class="chapter" id="partners" style="padding-top:var(--s7);">
+    <div class="partners-hdr" data-aho>
+      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> OUR NETWORK</span>
+      <h2 class="emerge">The thread runs through others too.</h2>
+    </div>
+    <div class="plogos">
+      <div class="plogos-viewport reveal d1" aria-label="Aho Farms partners">
+        <div class="plogos-track">
+          <!--
+            Logos supplied and cleared by the CEO (2026-08-31): NZTE, MPI, Te Puni Kōkiri, MSD, Ngāti Pāhauwera Development Trust.
+
+            COMPLIANCE — DO NOT ADD without checking with legal/compliance first:
+            - Medsafe, the Ministry of Health, or any other regulator. Regulators
+              licence Aho Farms; they do not endorse it, and a logo here would
+              wrongly imply endorsement.
+            - The NZ Government logo or crest — its use carries its own separate
+              permission requirements.
+
+            Genuine partners that could eventually appear here (no logos yet,
+            placeholders only): Ngāti Pāhauwera, the Waaka whānau, Hill Labs,
+            export partners. Do not add names or logos until real, cleared
+            assets are supplied — this is a layout placeholder, not a claim.
+          -->
+          <div class="plogos-group">
+            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
+            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
+          </div>
+                  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- trust, in one line — the detail lives at about.html#trust -->
+  <a class="trust-strip reveal" href="about.html#trust" aria-label="Licensing and testing - the detail on our About page">
+    <span>Licensed NZ cultivator</span><i aria-hidden="true">·</i><span>Every batch IANZ-tested</span><i aria-hidden="true">·</i><span>Prescription only</span>
+  </a>
+
+  <!-- ========================================================
        09 · PORTALS — pick up the thread
        ======================================================== -->
   <section class="chapter" id="portals" style="padding-top:var(--s7);">
@@ -1928,25 +1925,25 @@ html.no-video .hero-scroll{opacity:1;}
       <li class="reveal"><a class="portal-row" href="prescribers.html">
         <span class="portal-num"><span class="portal-node"></span>01</span>
         <h4>Prescribers &amp; Clinicians</h4>
-        <p>Product specs, CoAs, clinical evidence, dosing guidance, prescribing pathway.</p>
+        <p>Clinical evidence, CoAs and the prescribing pathway.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
       <li class="reveal d1"><a class="portal-row" href="pharmacies.html">
         <span class="portal-num"><span class="portal-node"></span>02</span>
         <h4>Pharmacies</h4>
-        <p>Formulary information, supply terms, batch documentation, dispensing guidelines.</p>
+        <p>Supply terms, batch documentation and dispensing.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
       <li class="reveal d2"><a class="portal-row" href="export-partners.html">
         <span class="portal-num"><span class="portal-node"></span>03</span>
         <h4>Export &amp; Distribution</h4>
-        <p>Capability statement, compliance docs, supply volumes, market information.</p>
+        <p>Capability, compliance and supply for qualified markets.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
       <li class="reveal d3"><a class="portal-row" href="investors.html">
         <span class="portal-num"><span class="portal-node"></span>04</span>
         <h4>Investors</h4>
-        <p>Investment thesis, market opportunity, company overview, team credentials.</p>
+        <p>The investment thesis and company overview.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
     </ul>
@@ -1992,51 +1989,6 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ========================================================
-       10.5 · PARTNERED WITH US — placeholder tiles only.
-       ======================================================== -->
-  <section class="chapter" id="partners" style="padding-top:var(--s7);">
-    <div class="partners-hdr" data-aho>
-      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> OUR NETWORK</span>
-      <h2 class="emerge">The thread runs through others too.</h2>
-    </div>
-    <div class="plogos">
-      <div class="plogos-viewport reveal d1" aria-label="Aho Farms partners">
-        <div class="plogos-track">
-          <!--
-            Logos supplied and cleared by the CEO (2026-08-31): NZTE, MPI, Te Puni Kōkiri, MSD, Ngāti Pāhauwera Development Trust.
-
-            COMPLIANCE — DO NOT ADD without checking with legal/compliance first:
-            - Medsafe, the Ministry of Health, or any other regulator. Regulators
-              licence Aho Farms; they do not endorse it, and a logo here would
-              wrongly imply endorsement.
-            - The NZ Government logo or crest — its use carries its own separate
-              permission requirements.
-
-            Genuine partners that could eventually appear here (no logos yet,
-            placeholders only): Ngāti Pāhauwera, the Waaka whānau, Hill Labs,
-            export partners. Do not add names or logos until real, cleared
-            assets are supplied — this is a layout placeholder, not a claim.
-          -->
-          <div class="plogos-group">
-            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
-          </div>
-          <div class="plogos-group" aria-hidden="true">
-            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
-            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================
        11 · FINAL CONNECTION — the thread reaches its last light
        ======================================================== -->
   <section class="connect-sec" id="connect">
@@ -2059,13 +2011,13 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
     <div class="wrap" data-aho>
       <div class="connect-node reveal" aria-hidden="true"></div>
-      <span class="eyebrow gold reveal" style="justify-content:center;display:flex"><b style="color:var(--gold);margin-right:10px">08</b> TŪHONO MAI <span>·</span> WORK WITH US</span>
+      <span class="eyebrow gold reveal" style="justify-content:center;display:flex">TŪHONO MAI <span>·</span> WORK WITH US</span>
       <span class="connect-headline emerge">Tūhono mai.</span>
       <p class="connect-sub reveal d2">Join the thread. Prescribers, pharmacies, export partners and investors, we'd like to hear from you.</p>
       <div class="connect-btns reveal d3">
         <a href="contact.html" class="btn btn-primary">Become a Partner</a>
-        <a href="prescribers.html" class="btn btn-outline">Request Access</a>
-        <a href="products.html" class="btn btn-gold">View Our Flower</a>
+        <a href="prescribers.html" class="connect-alt">Request Access</a>
+        <a href="products.html" class="connect-alt">View Our Flower</a>
       </div>
     </div>
   </section>
@@ -2139,32 +2091,10 @@ html.no-video .hero-scroll{opacity:1;}
      IntersectionObserver + rAF carry every effect.
      ============================================================ -->
 <script>
-/* ---------- Gate (preserved) ---------- */
-function acceptGate(){
-  document.cookie='aho_gate=1;max-age=86400;path=/';
-  const g=document.getElementById('gate');
-  g.classList.add('hidden');
-  setTimeout(()=>g.style.display='none',360);
-  if(window.__ahoEnterWithSound)window.__ahoEnterWithSound();
-}
-function declineGate(){
-  document.cookie='aho_gate=0;max-age=86400;path=/';
-  const g=document.getElementById('gate');
-  g.classList.add('hidden');
-  setTimeout(()=>g.style.display='none',360);
-  if(window.__ahoEnterWithSound)window.__ahoEnterWithSound();
-}
-(function(){
-  if(document.cookie.split(';').some(c=>c.trim().startsWith('aho_gate='))){
-    const g=document.getElementById('gate');
-    if(g)g.style.display='none';
-  }
-})();
-
 /* ---------- Environment ---------- */
 const REDUCED=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 const SMALL=window.innerWidth<900;
-const MOBILE=window.matchMedia('(max-width:767px)').matches;
+const MOBILE=Math.min(screen.width,screen.height)<768;
 
 /* ---------- Nav ---------- */
 window.addEventListener('scroll',()=>{
@@ -2290,9 +2220,8 @@ window.addEventListener('scroll',()=>{
     setSnd(!film.muted);
   });
 
-  /* the gate click is a real user gesture, so the browser permits
-     unmuted playback — entering the site starts the film from the
-     top WITH its score */
+  /* the pill click is a real user gesture, so the browser permits
+     unmuted playback — restart the film from the top WITH its score */
   function restartWithSound(){
     hero.classList.remove('ph1','ph2','ph3','ph4','ph5');
     if(loop){
@@ -2338,7 +2267,8 @@ window.addEventListener('scroll',()=>{
   const loop=document.getElementById('heroLoop');
   let ticking=false;
   function set(){
-    const v=Math.min(Math.max(window.scrollY/(window.innerHeight*0.85),0),1);
+    const denom=window.innerHeight*0.85;
+    const v=denom>0?Math.min(Math.max(window.scrollY/denom,0),1):0;
     hero.style.setProperty('--exit',v.toFixed(3));
     /* the loop rests once the visitor has mostly left the film,
        and breathes again if they return to the top */
@@ -2357,6 +2287,8 @@ window.addEventListener('scroll',()=>{
     ticking=true;
     requestAnimationFrame(set);
   },{passive:true});
+  window.addEventListener('resize',()=>{ticking=false;set();},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){ticking=false;set();}});
   set();
 })();
 
