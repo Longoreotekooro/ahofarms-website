@@ -413,8 +413,8 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
    01 · HERO — the film IS the opening experience
    darkness → a thread of light → sunrise whenua → trichome dew →
    the droplet → a burst of muka fibre → the braid → the horizon.
-   The film carries its own closing title; the interface answers
-   the film early and is quiet again before that title lands.
+   The film ends clean (no baked-in text), so the interface's type
+   holds the final frame as the settled state.
    ================================================================ */
 .hero{
   position:relative;height:100vh;height:100svh;
@@ -478,14 +478,6 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 /* the interface fades as the visitor follows the thread out of the
    film — only the cue fibre at the bottom edge stays lit */
 .hero-ui{opacity:calc(1 - var(--exit,0)*1.6);}
-/* ph6 — the film's own closing title arrives: the interface's
-   identity type steps aside so the words appear only once. The
-   sub, actions and cue remain as the settled state. */
-.hero.ph6 .hero-tereo,
-.hero.ph6 .hero-spark,
-.hero.ph6 h1,
-.hero.ph6 .hero-line,
-.hero.ph6 .hero-woven{opacity:0 !important;transform:none;}
 
 .hero-eyebrow{
   display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);
@@ -1786,9 +1778,9 @@ html.no-video .hero-scroll{opacity:1;}
 <!-- ============================================================
      01 · HERO — the cinematic film is the opening experience.
      Darkness → thread of light → sunrise whenua → trichome dew →
-     droplet → muka fibre burst → the braid → the horizon title.
-     The type answers the film beat by beat, then steps aside for
-     the film's own closing card.
+     droplet → muka fibre burst → the braid → the horizon.
+     The type answers the film beat by beat and holds the clean
+     final frame as the settled state.
      ============================================================ -->
 <section class="hero" id="hero" aria-label="Aho Farms — the thread that connects">
   <video class="hero-film" id="heroFilm"
@@ -2513,10 +2505,11 @@ window.addEventListener('scroll',()=>{
 
 /* ================================================================
    HERO FILM — the interface answers the film.
-   Storyboard beats (35.6s): 0–5 darkness / a thread of light ·
-   5–7 sunrise over the whenua · 7–15 trichome dew · 15–16 droplet ·
-   16–23 muka fibre burst · 23–31 the braid · 31–35.5 the film's own
-   closing title. The film holds on its final frame.
+   Storyboard beats (34.2s, no baked-in text): 0–5 darkness / a
+   thread of light · 5–7 sunrise over the whenua · 7–15 trichome
+   dew · 15–16 droplet · 16–23 muka fibre burst · 23–31 the braid ·
+   31–34.2 the thread runs to the horizon. The film holds on its
+   clean final frame and the interface's type stays with it.
    ================================================================ */
 (function(){
   const hero=document.getElementById('hero');
@@ -2524,10 +2517,8 @@ window.addEventListener('scroll',()=>{
   if(!film)return;
 
   if(REDUCED){
-    /* still experience: the title-card poster + the settled
-       interface (ph6 keeps the identity type from doubling the
-       poster's own words) */
-    hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
+    /* still experience: poster + full interface, no playback */
+    hero.classList.add('ph1','ph2','ph3','ph4','ph5');
     return;
   }
 
@@ -2540,9 +2531,8 @@ window.addEventListener('scroll',()=>{
   /* ph1 eyebrow in the darkness · ph2 the name as the light-thread
      climbs · ph3 the meaning at the trichomes · ph4 the woven words
      + FOLLOW THE THREAD at the fibre burst · ph5 sub + actions as
-     the braid reaches for the horizon (before the title card) ·
-     ph6 the identity type steps aside for the film's own title */
-  const PHASES=[[2,'ph1'],[4.4,'ph2'],[9,'ph3'],[16.5,'ph4'],[29.5,'ph5'],[31.3,'ph6']];
+     the braid reaches for the horizon */
+  const PHASES=[[2,'ph1'],[4.4,'ph2'],[9,'ph3'],[16.5,'ph4'],[29.5,'ph5']];
   let done=false;
   function setPhases(t){
     for(const [at,cls] of PHASES){
@@ -2554,7 +2544,7 @@ window.addEventListener('scroll',()=>{
   film.addEventListener('timeupdate',()=>{
     if(done)return;
     setPhases(film.currentTime);
-    if(hero.classList.contains('ph6'))done=true;
+    if(hero.classList.contains('ph5'))done=true;
   });
   let started=false;
   film.addEventListener('playing',()=>{
@@ -2563,7 +2553,7 @@ window.addEventListener('scroll',()=>{
     setPhases(film.currentTime);
   },{once:true});
   film.addEventListener('ended',()=>{
-    hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
+    hero.classList.add('ph1','ph2','ph3','ph4','ph5');
     done=true;
   });
 
@@ -2610,7 +2600,7 @@ window.addEventListener('scroll',()=>{
      unmuted playback — entering the site starts the film from the
      top WITH its score */
   function restartWithSound(){
-    hero.classList.remove('ph1','ph2','ph3','ph4','ph5','ph6');
+    hero.classList.remove('ph1','ph2','ph3','ph4','ph5');
     done=false;
     film.muted=false;
     setSnd(true);
@@ -2631,7 +2621,7 @@ window.addEventListener('scroll',()=>{
   setTimeout(()=>{
     if(!started&&!done){
       document.documentElement.classList.add('no-video');
-      hero.classList.add('ph1','ph2','ph3','ph4','ph5','ph6');
+      hero.classList.add('ph1','ph2','ph3','ph4','ph5');
       done=true;
     }
   },4500);
