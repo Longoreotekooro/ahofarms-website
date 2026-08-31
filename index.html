@@ -1460,10 +1460,19 @@ html.no-video .hero-sound{display:none;}
 .adv-stat-c .adv-p{margin-top:var(--s3);}
 
 /* —— copy beside an image —— */
-.adv-duo{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.86fr);
-  gap:clamp(var(--s5),5vw,var(--s7));align-items:center;
+/* —— te whenua — the land itself, full bleed between the moments —— */
+.adv-whenua-cine{margin:0 0 clamp(var(--s7),11vh,var(--s8));}
+.adv-whenua-cine::after{
+  height:58%;
+  background:linear-gradient(to top,rgba(10,15,14,0.97) 16%,rgba(10,15,14,0.55) 55%,transparent);
 }
+.adv-whenua-cine .cine-caption .eyebrow,
+.adv-whenua-cine .cine-caption h2{text-shadow:0 2px 34px rgba(2,4,6,0.95),0 1px 8px rgba(2,4,6,0.7);}
+.adv-whenua-cine .cine-caption h2{
+  font-size:clamp(1.8rem,3.4vw,3.1rem);max-width:24ch;
+  line-height:1.12;text-wrap:balance;
+}
+.adv-whenua-cine .cine-caption .eyebrow{margin-bottom:var(--s3);display:inline-flex;}
 
 /* —— full-bleed moment — the thread passes behind the land —— */
 .adv-cine{margin:0 0 clamp(var(--s7),11vh,var(--s8));}
@@ -1639,30 +1648,6 @@ html.no-video .hero-sound{display:none;}
 @media(hover:hover){
   .adv-photo:hover img{transform:scale(1.045);filter:saturate(0.92) contrast(1.05) brightness(0.94);}
 }
-.adv-whenua-photo{
-  position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:4px;
-  background:var(--night-2);box-shadow:0 28px 70px rgba(0,0,0,0.34);
-}
-.adv-whenua-photo::before{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to top,rgba(5,8,8,0.72),transparent 48%);
-}
-.adv-whenua-photo::after{
-  content:'';position:absolute;z-index:2;left:0;right:0;bottom:0;height:1px;
-  background:linear-gradient(to right,var(--gold),rgba(201,160,106,0.12));
-}
-.adv-whenua-photo img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  filter:saturate(0.88) contrast(1.03);transition:transform 1.4s var(--ease),filter 1s var(--ease);
-}
-.adv-whenua-photo figcaption{
-  position:absolute;z-index:3;left:var(--s3);bottom:var(--s3);
-  display:flex;align-items:center;gap:12px;
-  font-size:0.56rem;font-weight:700;letter-spacing:0.18em;
-  text-transform:uppercase;color:rgba(243,241,235,0.9);
-}
-.adv-whenua-photo figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
-@media(hover:hover){.adv-whenua-photo:hover img{transform:scale(1.025);filter:saturate(0.98) contrast(1.04);}}
 .adv-intro{padding-bottom:clamp(var(--s6),8vh,var(--s7));}
 .adv-story{margin-top:clamp(var(--s5),6vw,var(--s7));max-width:none;}
 .adv-story-lede{
@@ -1698,16 +1683,35 @@ html.no-video .hero-sound{display:none;}
 .adv-story-turn{color:var(--starlight)!important;font-family:var(--font-h);font-size:1.35rem!important;}
 .adv-story-connection{
   display:grid;grid-template-columns:minmax(220px,0.7fr) minmax(0,1.3fr);
-  gap:clamp(var(--s4),5vw,var(--s7));align-items:start;padding:var(--s5) 0 0;
+  gap:clamp(var(--s4),5vw,var(--s7));align-items:start;padding:var(--s6) 0 0;
 }
 .adv-story-connection h3{
+  position:sticky;top:110px;
   font-family:var(--font-h);font-size:clamp(2rem,4vw,3.8rem);
   font-weight:300;font-style:italic;line-height:0.95;color:var(--gold-light);
+  text-wrap:balance;
 }
+/* —— the manifesto: four connections, set like a credo —— */
+.adv-manifesto p{
+  font-family:var(--font-h);font-weight:300;
+  font-size:clamp(1.3rem,2.1vw,1.8rem);line-height:1.5;
+  color:var(--starlight);max-width:34ch;
+}
+.adv-manifesto p+p{
+  margin-top:clamp(var(--s4),4.5vh,var(--s5));
+  padding-top:clamp(var(--s4),4.5vh,var(--s5));
+  position:relative;
+}
+.adv-manifesto p+p::before{
+  content:'';position:absolute;top:0;left:0;width:44px;height:1px;
+  background:linear-gradient(to right,var(--gold),transparent);
+}
+.adv-manifesto em{font-style:italic;color:var(--gold-light);}
 
 @media(max-width:900px){
   .adv-moment{padding-left:var(--s4);padding-bottom:var(--s7);}
-  .adv-open,.adv-duo{grid-template-columns:1fr;row-gap:var(--s5);}
+  .adv-open{grid-template-columns:1fr;row-gap:var(--s5);}
+  .adv-story-connection h3{position:static;}
   .adv-macro{margin-right:0;border-radius:3px;border-right-width:1px;}
   .adv-story-grid,.adv-story-connection{grid-template-columns:1fr;gap:var(--s5);}
   .adv-story{margin-top:var(--s6);}
@@ -1964,28 +1968,36 @@ html.no-video .hero-scroll{opacity:1;}
             </div>
           </div>
 
-          <div class="adv-story-connection reveal">
-            <h3>Aho is about connection.</h3>
-            <p>Connecting the knowledge we have gained overseas with the whenua we have returned to. Connecting Māori land with new economic opportunity. Connecting traditional values with modern cultivation. And creating something today that can provide opportunity for generations tomorrow.</p>
+          <div class="adv-story-connection">
+            <h3 class="emerge">Aho is about connection.</h3>
+            <div class="adv-manifesto">
+              <p class="reveal"><em>Connecting</em> the knowledge we have gained overseas with the whenua we have returned to.</p>
+              <p class="reveal d1"><em>Connecting</em> Māori land with new economic opportunity.</p>
+              <p class="reveal d2"><em>Connecting</em> traditional values with modern cultivation.</p>
+              <p class="reveal d3"><em>And creating</em> something today that can provide opportunity for generations tomorrow.</p>
+            </div>
           </div>
 
         </div>
       </div>
 
-      <!-- · Māori whenua · -->
-      <div class="adv-moment adv-in">
-        <div class="adv-duo">
-          <div>
-            <span class="eyebrow gold reveal">TE WHENUA <span>·</span> MĀORI OWNED, MĀORI LAND</span>
-            <p class="adv-lede emerge">Bringing international cultivation knowledge home, and creating new opportunity from the land.</p>
-          </div>
-          <figure class="adv-whenua-photo reveal d1">
-            <img src="assets/aho-team-whenua.jpg" alt="The Aho Farms team working among medicinal cannabis plants in a greenhouse" width="1600" height="1067" loading="lazy">
-            <figcaption>Cultivation on Māori whenua</figcaption>
-          </figure>
+    </div>
+
+    <!-- · Māori whenua — the land itself, full bleed · -->
+    <div class="cine adv-whenua-cine" aria-label="The Aho Farms team working among medicinal cannabis plants on Māori whenua">
+      <img class="cine-img" data-plx="0.16"
+        src="assets/aho-team-whenua.jpg"
+        alt="The Aho Farms team working among medicinal cannabis plants in a greenhouse" width="1600" height="1067" loading="lazy">
+      <div class="cine-veil"></div>
+      <div class="cine-caption">
+        <div class="cine-caption-inner">
+          <span class="eyebrow gold reveal">TE WHENUA <span>·</span> MĀORI OWNED, MĀORI LAND</span>
+          <h2 class="emerge">Bringing international cultivation knowledge home, and creating new opportunity from the land.</h2>
         </div>
       </div>
+    </div>
 
+    <div class="adv-body">
       <!-- · three environments · -->
       <div class="adv-moment adv-in" data-aho>
         <div class="adv-stat">
