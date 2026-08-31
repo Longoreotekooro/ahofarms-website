@@ -452,15 +452,19 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   display:flex;align-items:flex-end;
   pointer-events:none;
 }
+/* readability scrim — full-bleed, edge to edge, so it never shows a
+   seam on wide screens: a breath of dark at the top (the nav reads
+   over bright sky) and a deeper one at the bottom (the type). The
+   middle stays clear so the film breathes. */
+.hero-ui::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgba(3,6,10,0.58), rgba(3,6,10,0.22) 14%, transparent 28%),
+    linear-gradient(to top, rgba(2,4,8,0.6), rgba(2,4,8,0.26) 30%, transparent 58%);
+}
 .hero-ui-inner{
   width:100%;max-width:var(--max);margin:0 auto;
   padding:0 var(--s4) 17vh;position:relative;
-}
-/* readability scrim, local to the type — no box, no card */
-.hero-ui-inner::before{
-  content:'';position:absolute;left:-12vw;right:32%;top:-14vh;bottom:-6vh;
-  background:radial-gradient(75% 80% at 26% 74%, rgba(2,4,8,0.66), transparent 70%);
-  pointer-events:none;z-index:-1;
 }
 .hero [data-ph]{
   opacity:0;transform:translateY(18px);
