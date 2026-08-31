@@ -1561,6 +1561,19 @@ html.no-video .hero-sound{display:none;}
   }
 }
 
+/* —— the convergence — spoken at the point where the three fibres
+      return to one —— */
+.adv-conv{
+  text-align:center;margin-top:var(--s2);
+  font-family:var(--font-h);font-weight:300;
+  font-size:clamp(1.3rem,2.4vw,2rem);letter-spacing:-0.02em;
+  color:var(--starlight);
+}
+.adv-conv em{font-style:italic;color:var(--gold-light);}
+@media(max-width:900px){
+  .adv-conv{margin-top:var(--s4);}
+}
+
 /* —— traceability — three words on one line of thread —— */
 .adv-trace{
   display:flex;align-items:center;flex-wrap:wrap;
@@ -2024,6 +2037,7 @@ html.no-video .hero-scroll{opacity:1;}
             <path data-draw vector-effect="non-scaling-stroke" d="M600,0 C600,40 600,60 600,100"/>
             <path data-draw vector-effect="non-scaling-stroke" d="M1000,0 C1000,48 600,54 600,100"/>
           </svg>
+          <p class="adv-conv reveal">Three environments. <em>One Aho.</em></p>
         </div>
 
         <p class="adv-p reveal" style="max-width:66ch;margin-top:var(--s5);">Our outdoor and greenhouse cultivation harnesses Hawke's Bay's long summer days, abundant natural sunlight and intense UV exposure, while our indoor environment provides the precision and environmental control required for consistent premium flower.</p>
