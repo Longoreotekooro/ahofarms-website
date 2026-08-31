@@ -412,9 +412,10 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 /* ================================================================
    01 · HERO — the film IS the opening experience
    darkness → a thread of light → sunrise whenua → trichome dew →
-   the droplet → a burst of muka fibre → the braid → the horizon.
-   The film ends clean (no baked-in text), so the interface's type
-   holds the final frame as the settled state.
+   the droplet → a burst of muka fibre → the braid, running toward
+   the horizon. The film ends clean on the 29s braid frame; the
+   interface's type holds that frame as the settled state, and the
+   braid leads the eye down into FOLLOW THE THREAD.
    ================================================================ */
 .hero{
   position:relative;height:100vh;height:100svh;
@@ -1778,9 +1779,9 @@ html.no-video .hero-scroll{opacity:1;}
 <!-- ============================================================
      01 · HERO — the cinematic film is the opening experience.
      Darkness → thread of light → sunrise whenua → trichome dew →
-     droplet → muka fibre burst → the braid → the horizon.
-     The type answers the film beat by beat and holds the clean
-     final frame as the settled state.
+     droplet → muka fibre burst → the braid toward the horizon.
+     The film holds on the 29s braid frame; the type settles just
+     before it and the braid points into FOLLOW THE THREAD.
      ============================================================ -->
 <section class="hero" id="hero" aria-label="Aho Farms — the thread that connects">
   <video class="hero-film" id="heroFilm"
@@ -2505,11 +2506,12 @@ window.addEventListener('scroll',()=>{
 
 /* ================================================================
    HERO FILM — the interface answers the film.
-   Storyboard beats (34.2s, no baked-in text): 0–5 darkness / a
-   thread of light · 5–7 sunrise over the whenua · 7–15 trichome
-   dew · 15–16 droplet · 16–23 muka fibre burst · 23–31 the braid ·
-   31–34.2 the thread runs to the horizon. The film holds on its
-   clean final frame and the interface's type stays with it.
+   Storyboard beats (trimmed to 29.0s, no baked-in text): 0–5
+   darkness / a thread of light · 5–7 sunrise over the whenua ·
+   7–15 trichome dew · 15–16 droplet · 16–23 muka fibre burst ·
+   23–29 the braid runs toward the horizon. The encode ends ON the
+   29s braid frame (score fades out in the encode), so the browser
+   holds that frame natively and the settled interface lives on it.
    ================================================================ */
 (function(){
   const hero=document.getElementById('hero');
@@ -2530,9 +2532,9 @@ window.addEventListener('scroll',()=>{
 
   /* ph1 eyebrow in the darkness · ph2 the name as the light-thread
      climbs · ph3 the meaning at the trichomes · ph4 the woven words
-     + FOLLOW THE THREAD at the fibre burst · ph5 sub + actions as
-     the braid reaches for the horizon */
-  const PHASES=[[2,'ph1'],[4.4,'ph2'],[9,'ph3'],[16.5,'ph4'],[29.5,'ph5']];
+     + FOLLOW THE THREAD at the fibre burst · ph5 sub + actions
+     settle as the braid slows into the 29s hold frame */
+  const PHASES=[[2,'ph1'],[4.4,'ph2'],[9,'ph3'],[16.5,'ph4'],[27.2,'ph5']];
   let done=false;
   function setPhases(t){
     for(const [at,cls] of PHASES){
@@ -2570,9 +2572,12 @@ window.addEventListener('scroll',()=>{
   window.addEventListener('pointerdown',tryPlay,{once:true});
   window.addEventListener('keydown',tryPlay,{once:true});
   /* browsers pause muted offscreen video — resume when the
-     visitor returns, unless the film already finished */
+     visitor returns, unless the film already finished. Do NOT
+     gate on `done` here: `done` goes true at the last phase
+     (27.2s), which is before the 29s end — gating on it left a
+     backgrounded film frozen just short of its hold frame. */
   document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden&&film.paused&&!film.ended&&!done){
+    if(!document.hidden&&film.paused&&!film.ended){
       const p=film.play();
       if(p&&p.catch)p.catch(()=>{});
     }
