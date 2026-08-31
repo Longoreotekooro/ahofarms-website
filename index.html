@@ -1303,8 +1303,10 @@ html.no-video .hero-sound{display:none;}
 }
 .adv-stat-c{flex:1 1 340px;min-width:0;padding-top:clamp(4px,1.2vw,16px);}
 .adv-stat-l{
-  display:block;font-size:0.6875rem;font-weight:700;
-  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
+  display:block;
+  font-family:var(--font-h);font-weight:300;line-height:1.05;
+  font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-0.02em;
+  color:var(--starlight);text-wrap:balance;
 }
 .adv-stat-l::before{
   content:'';display:block;width:36px;height:1px;margin-bottom:14px;
@@ -1538,7 +1540,20 @@ html.no-video .hero-sound{display:none;}
 .adv-story-grid strong{
   color:var(--starlight);font-weight:500;
 }
-.adv-story-turn{color:var(--starlight)!important;font-family:var(--font-h);font-size:1.35rem!important;}
+/* —— the turn — the sentence the whole story pivots on —— */
+.adv-story-turn{
+  position:relative;max-width:26ch;
+  margin:clamp(var(--s5),7vh,var(--s6)) 0 var(--s3);
+  padding-top:var(--s4);
+  font-family:var(--font-h);font-weight:300;line-height:1.2;
+  font-size:clamp(1.7rem,3.2vw,2.7rem);letter-spacing:-0.02em;
+  color:var(--starlight);text-wrap:balance;
+}
+.adv-story-turn::before{
+  content:'';position:absolute;top:0;left:2px;width:52px;height:1px;
+  background:linear-gradient(to right,var(--gold),transparent);
+}
+.adv-story-turn em{font-style:italic;color:var(--gold-light);}
 
 @media(max-width:900px){
   .adv-moment{padding-left:var(--s4);padding-bottom:var(--s7);}
@@ -1777,7 +1792,7 @@ html.no-video .hero-scroll{opacity:1;}
               <p>Our outdoor and greenhouse crops harness Hawke’s Bay’s long summer days, abundant natural sunlight and intense UV exposure. Indoors, precisely controlled environments allow us to refine genetics, maintain consistency and cultivate premium flower to exacting standards.</p>
             </div>
           </div>
-          <p class="adv-story-turn reveal">For us, growing medicinal cannabis is only part of the story.</p>
+          <p class="adv-story-turn emerge">For us, growing medicinal cannabis is only <em>part of the story.</em></p>
 
         </div>
       </div>
