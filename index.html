@@ -474,7 +474,8 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   content:'';position:absolute;inset:0;pointer-events:none;
   background:
     linear-gradient(to bottom, rgba(3,6,10,0.58), rgba(3,6,10,0.22) 14%, transparent 28%),
-    linear-gradient(to top, rgba(2,4,8,0.6), rgba(2,4,8,0.26) 30%, transparent 58%);
+    radial-gradient(58% 66% at 11% 70%, rgba(2,4,8,0.52), transparent 72%),
+    linear-gradient(to top, rgba(2,4,8,0.66), rgba(2,4,8,0.3) 32%, transparent 60%);
 }
 .hero-ui-inner{
   width:100%;max-width:var(--max);margin:0 auto;
@@ -499,7 +500,8 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .hero-eyebrow-line{width:24px;height:1px;background:var(--gold);}
 .hero-eyebrow-txt{
   font-size:0.625rem;font-weight:700;letter-spacing:0.2em;
-  text-transform:uppercase;color:rgba(243,241,235,0.75);
+  text-transform:uppercase;color:rgba(243,241,235,0.92);
+  text-shadow:0 1px 10px rgba(2,4,8,0.9),0 1px 3px rgba(2,4,8,0.7);
 }
 /* the droplet moment — a point of light, and a thread begins */
 .hero-spark{
@@ -522,14 +524,15 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   font-family:var(--font-h);font-style:italic;font-weight:300;
   font-size:clamp(1.3rem,2.4vw,1.9rem);
   color:var(--teal-light);display:block;margin-bottom:var(--s2);
-  text-shadow:0 1px 14px rgba(2,4,8,0.8);
+  text-shadow:0 1px 18px rgba(2,4,8,0.95),0 1px 5px rgba(2,4,8,0.75);
 }
 /* the name — a mark, not a headline. The film is the headline. */
 .hero h1{
   font-size:clamp(2.9rem,6vw,5.2rem);
   font-weight:300;line-height:1;letter-spacing:0.16em;
   color:var(--white);margin-bottom:var(--s2);
-  text-shadow:0 2px 30px rgba(2,4,8,0.85),0 1px 8px rgba(2,4,8,0.6);
+  text-shadow:0 2px 38px rgba(2,4,8,0.95),0 2px 12px rgba(2,4,8,0.8),
+              0 1px 3px rgba(2,4,8,0.65);
 }
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
 /* …then the meaning of the name */
@@ -538,15 +541,16 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   font-size:clamp(1.5rem,2.9vw,2.4rem);line-height:1.2;
   letter-spacing:-0.02em;color:var(--gold-light);
   display:block;margin-bottom:var(--s3);
-  text-shadow:0 1px 16px rgba(2,4,8,0.85);
+  text-shadow:0 1px 22px rgba(2,4,8,0.95),0 1px 7px rgba(2,4,8,0.8),
+              0 1px 2px rgba(2,4,8,0.6);
 }
 /* …then, quieter still, what the thread passes through */
 .hero-woven{
   display:flex;align-items:center;flex-wrap:wrap;column-gap:14px;row-gap:6px;
   font-size:0.6875rem;font-weight:600;letter-spacing:0.28em;
-  text-transform:uppercase;color:rgba(243,241,235,0.55);
+  text-transform:uppercase;color:rgba(243,241,235,0.82);
   margin-bottom:var(--s4);
-  text-shadow:0 1px 10px rgba(2,4,8,0.8);
+  text-shadow:0 1px 14px rgba(2,4,8,0.95),0 1px 4px rgba(2,4,8,0.75);
 }
 .hero-woven i{
   width:4px;height:4px;border-radius:50%;flex-shrink:0;
@@ -554,9 +558,9 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
   box-shadow:0 0 8px rgba(201,160,106,0.55);
 }
 .hero-sub{
-  font-size:1rem;line-height:1.75;color:rgba(243,241,235,0.6);
+  font-size:1rem;line-height:1.75;color:rgba(243,241,235,0.8);
   max-width:48ch;margin-bottom:var(--s5);
-  text-shadow:0 1px 12px rgba(2,4,8,0.8);
+  text-shadow:0 1px 16px rgba(2,4,8,0.95),0 1px 5px rgba(2,4,8,0.75);
 }
 .hero-actions{display:flex;gap:var(--s2);flex-wrap:wrap;pointer-events:auto;}
 
@@ -589,7 +593,8 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .hero-scroll-txt{
   font-size:0.5625rem;font-weight:700;letter-spacing:0.3em;
-  text-transform:uppercase;color:rgba(243,241,235,0.5);
+  text-transform:uppercase;color:rgba(243,241,235,0.75);
+  text-shadow:0 1px 10px rgba(2,4,8,0.9),0 1px 3px rgba(2,4,8,0.7);
 }
 /* small screens: the later phases reserve their space (opacity-only
    reveals never shift layout), which pushes the stack up — retire
