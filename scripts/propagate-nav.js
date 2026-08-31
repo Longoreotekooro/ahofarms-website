@@ -86,18 +86,18 @@ function sliceLines(a, b) { return donorLines.slice(a - 1, b).join('\n'); }
 function expect(cond, msg) { if (!cond) throw new Error('propagate-nav donor extraction failed: ' + msg); }
 expect(donorLines[248].trim().startsWith('/* ==='), 'nav CSS start marker moved');
 expect(donorLines[409].trim() === '}', 'nav CSS end marker moved');
-expect(donorLines[1267].trim().startsWith('/* ==='), 'footer CSS start marker moved');
-expect(donorLines[1318].trim() === '}', 'footer CSS end marker moved');
-expect(donorLines[1452].includes('<footer class="footer" id="contact">'), 'footer HTML start marker moved');
-expect(donorLines[1503].trim() === '</footer>', 'footer HTML end marker moved');
+expect(donorLines[1280].trim().startsWith('/* ==='), 'footer CSS start marker moved');
+expect(donorLines[1331].trim() === '}', 'footer CSS end marker moved');
+expect(donorLines[1511].includes('<footer class="footer" id="contact">'), 'footer HTML start marker moved');
+expect(donorLines[1562].trim() === '</footer>', 'footer HTML end marker moved');
 
 const NAV_CSS = sliceLines(249, 410);
-const FOOTER_CSS = sliceLines(1268, 1319);
+const FOOTER_CSS = sliceLines(1281, 1332);
 const STAR_CSS = sliceLines(195, 207);
-const FOOTER_HTML = sliceLines(1453, 1504); // <footer ...> ... </footer>, no leading comment
-const JS_ENV = sliceLines(1515, 1518);
-const JS_SCROLL = sliceLines(1521, 1523);
-const JS_STARFIELD = sliceLines(1536, 1561);
+const FOOTER_HTML = sliceLines(1512, 1563); // <footer ...> ... </footer>, no leading comment
+const JS_ENV = sliceLines(1574, 1577);
+const JS_SCROLL = sliceLines(1580, 1582);
+const JS_STARFIELD = sliceLines(1595, 1620);
 const JS_DRAWER = sliceLines(1577, 1614);
 const JS_DROPDOWN = sliceLines(1616, 1721);
 

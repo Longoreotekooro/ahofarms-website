@@ -1265,6 +1265,19 @@ html.no-video .hero-sound{display:none;}
 .disc-ico svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
 .disc p{font-size:0.75rem;color:rgba(168,173,179,0.6);line-height:1.7;max-width:110ch;}
 
+/* —— INGOA · THE NAME (moved from about.html) —— */
+.ab-name-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:center;}
+.ab-name-visual{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.ab-name-visual img{width:260px;height:auto;filter:drop-shadow(0 0 48px rgba(115,168,165,0.3));}
+.ab-name-tag{margin-top:var(--s3);font-size:0.625rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(168,173,179,0.55);}
+.ab-name-body p{color:var(--silver);margin-bottom:var(--s3);max-width:56ch;}
+.ab-name-meanings{margin-top:var(--s5);border-top:1px solid var(--hairline);}
+.ab-name-meaning{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:var(--s3) 0;border-bottom:1px solid var(--hairline);align-items:start;}
+.ab-nm-word{font-family:var(--font-h);font-size:1.9rem;font-style:italic;color:var(--gold-light);line-height:1;padding-top:2px;}
+.ab-nm-title{font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--starlight);margin-bottom:6px;}
+.ab-nm-body{font-size:0.8125rem;color:var(--silver);line-height:1.7;}
+@media(max-width:900px){.ab-name-grid{grid-template-columns:1fr;gap:var(--s5);}}
+
 /* ================================================================
    FOOTER (preserved structure · night environment, a few lights)
    ================================================================ */
@@ -1446,6 +1459,52 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
     </div>
   </section>
+
+  <section class="chapter" id="name">
+    <div class="starfield" data-stars="16" aria-hidden="true"></div>
+    <div class="drift gold" style="top:10%;right:-10%;width:50vw;height:50vw;" aria-hidden="true"></div>
+    <div class="wrap ab-name-grid">
+      <div class="ab-name-visual reveal">
+        <img
+          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,w_640,e_background_removal/v1781240323/aho_farms/brand/aho_logo_colour.png"
+          alt="Aho Farms logo"
+          loading="lazy"
+        />
+        <p class="ab-name-tag">Hawke's Bay · Aotearoa New Zealand · Est. 2020</p>
+      </div>
+      <div class="ab-name-body">
+        <div class="mlab reveal"><b>02</b>&nbsp;/&nbsp;THE NAME</div>
+        <span class="eyebrow gold reveal d1">INGOA <span>·</span> THE NAME</span>
+        <h2 class="emerge">More than a name.<br>A philosophy.</h2>
+        <p class="reveal d2">Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately — not as branding, but as belief.</p>
+        <p class="reveal d2">Every decision we make, every relationship we build, and every product we grow is an expression of that thread. The aho between people and whenua. Between past and future. Between healing knowledge and those who need it.</p>
+        <div class="ab-name-meanings">
+          <div class="ab-name-meaning reveal">
+            <div class="ab-nm-word">Aho</div>
+            <div>
+              <div class="ab-nm-title">Thread / Connection</div>
+              <p class="ab-nm-body">The horizontal threads of woven flax — the aho holds the structure together. Without the aho, there is no weaving. Without connection, there is no company.</p>
+            </div>
+          </div>
+          <div class="ab-name-meaning reveal d1">
+            <div class="ab-nm-word">Whenua</div>
+            <div>
+              <div class="ab-nm-title">Land / Placenta</div>
+              <p class="ab-nm-body">Our operation is rooted in Hawke's Bay — ancestral land that gives identity, purpose, and sustenance. The whenua is not a resource. It is a responsibility.</p>
+            </div>
+          </div>
+          <div class="ab-name-meaning reveal d2">
+            <div class="ab-nm-word">Māra</div>
+            <div>
+              <div class="ab-nm-title">Garden / Cultivation</div>
+              <p class="ab-nm-body">The māra is the place where knowledge meets earth — where the discipline of cultivation becomes an act of care. Aho Farms is a māra with purpose and precision.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 </main>
 
