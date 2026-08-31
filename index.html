@@ -1009,46 +1009,54 @@ html.no-video .hero-sound{display:none;}
    ================================================================ */
 .portals-hdr{max-width:720px;margin:0 auto var(--s6);padding:0 var(--s4);}
 .portals-hdr p{color:var(--silver);}
-.portal-grid{
+/* —— an editorial index: four rows, hairlines and air, no boxes —— */
+.portal-index{
   max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);
   list-style:none;
 }
-.portal-card{
-  display:flex;flex-direction:column;gap:var(--s2);
-  min-height:230px;padding:var(--s4);
+.portal-index li{border-top:1px solid var(--hairline);}
+.portal-index li:last-child{border-bottom:1px solid var(--hairline);}
+.portal-row{
+  display:grid;grid-template-columns:auto minmax(0,1.15fr) minmax(0,1fr) auto;
+  align-items:center;gap:clamp(var(--s3),4vw,var(--s6));
+  padding:clamp(var(--s4),4.6vh,var(--s5)) var(--s2);
+  text-decoration:none;
 }
-.portal-card .portal-num{
+.portal-row .portal-num{
   font-family:var(--font-h);font-style:italic;
   font-size:0.9rem;color:rgba(201,160,106,0.7);
-  display:flex;align-items:center;gap:12px;margin-bottom:var(--s2);
+  display:flex;align-items:center;gap:12px;min-width:52px;
 }
 .portal-node{
   width:5px;height:5px;border-radius:50%;flex-shrink:0;
   background:rgba(243,241,235,0.25);
   transition:background 0.35s,box-shadow 0.35s;
 }
-.portal-card:hover .portal-node,.portal-card:focus-visible .portal-node{
+.portal-row:hover .portal-node,.portal-row:focus-visible .portal-node{
   background:var(--gold);box-shadow:0 0 12px rgba(201,160,106,0.8);
 }
-.portal-card h4{
-  font-family:var(--font-b);font-size:1rem;font-weight:600;
-  letter-spacing:0.01em;color:var(--starlight);
+.portal-row h4{
+  font-family:var(--font-h);font-weight:300;line-height:1.05;
+  font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:-0.015em;color:var(--starlight);
+  transition:transform 0.55s var(--ease),color 0.55s var(--ease);
 }
-.portal-card p{font-size:0.8125rem;color:var(--silver);line-height:1.6;flex-grow:1;}
+.portal-row:hover h4,.portal-row:focus-visible h4{
+  transform:translateX(8px);color:var(--gold-light);
+}
+.portal-row p{font-size:0.85rem;color:var(--silver);line-height:1.7;max-width:44ch;}
 .portal-go{
   display:inline-flex;align-items:center;gap:8px;
   font-size:0.6875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
   color:var(--teal-light);white-space:nowrap;transition:gap 0.3s var(--ease);
 }
-.portal-card:hover .portal-go{gap:13px;}
+.portal-row:hover .portal-go{gap:14px;}
 .portal-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
-@media(max-width:1100px){
-  .portal-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:640px){
-  .portal-grid{grid-template-columns:1fr;}
-  .portal-card{min-height:0;}
+@media(max-width:900px){
+  .portal-row{
+    grid-template-columns:1fr;gap:var(--s2);
+    padding:var(--s4) var(--s1);
+  }
+  .portal-row p{max-width:58ch;}
 }
 
 /* ================================================================
@@ -1924,26 +1932,26 @@ html.no-video .hero-scroll{opacity:1;}
       <h2 class="emerge">Pick up the thread.</h2>
       <p class="reveal d2">All portals are professionally verified. Select the one that applies to you.</p>
     </div>
-    <ul class="portal-grid">
-      <li class="reveal"><a class="portal-card glass" href="prescribers.html">
+    <ul class="portal-index">
+      <li class="reveal"><a class="portal-row" href="prescribers.html">
         <span class="portal-num"><span class="portal-node"></span>01</span>
         <h4>Prescribers &amp; Clinicians</h4>
         <p>Product specs, CoAs, clinical evidence, dosing guidance, prescribing pathway.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
-      <li class="reveal d1"><a class="portal-card glass" href="pharmacies.html">
+      <li class="reveal d1"><a class="portal-row" href="pharmacies.html">
         <span class="portal-num"><span class="portal-node"></span>02</span>
         <h4>Pharmacies</h4>
         <p>Formulary information, supply terms, batch documentation, dispensing guidelines.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
-      <li class="reveal d2"><a class="portal-card glass" href="export-partners.html">
+      <li class="reveal d2"><a class="portal-row" href="export-partners.html">
         <span class="portal-num"><span class="portal-node"></span>03</span>
         <h4>Export &amp; Distribution</h4>
         <p>Capability statement, compliance docs, supply volumes, market information.</p>
         <span class="portal-go">Access Portal<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a></li>
-      <li class="reveal d3"><a class="portal-card glass" href="investors.html">
+      <li class="reveal d3"><a class="portal-row" href="investors.html">
         <span class="portal-num"><span class="portal-node"></span>04</span>
         <h4>Investors</h4>
         <p>Investment thesis, market opportunity, company overview, team credentials.</p>
