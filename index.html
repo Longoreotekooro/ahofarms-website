@@ -1674,49 +1674,21 @@ html.no-video .hero-sound{display:none;}
   border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
 }
 .adv-story-grid>div{display:flex;flex-direction:column;gap:var(--s4);}
-.adv-story-grid p,.adv-story-connection p{
+.adv-story-grid p{
   color:var(--silver);font-size:0.95rem;line-height:1.85;max-width:58ch;
 }
-.adv-story-grid strong,.adv-story-connection strong{
+.adv-story-grid strong{
   color:var(--starlight);font-weight:500;
 }
 .adv-story-turn{color:var(--starlight)!important;font-family:var(--font-h);font-size:1.35rem!important;}
-.adv-story-connection{
-  display:grid;grid-template-columns:minmax(220px,0.7fr) minmax(0,1.3fr);
-  gap:clamp(var(--s4),5vw,var(--s7));align-items:start;padding:var(--s6) 0 0;
-}
-.adv-story-connection h3{
-  position:sticky;top:110px;
-  font-family:var(--font-h);font-size:clamp(2rem,4vw,3.8rem);
-  font-weight:300;font-style:italic;line-height:0.95;color:var(--gold-light);
-  text-wrap:balance;
-}
-/* —— the manifesto: four connections, set like a credo —— */
-.adv-manifesto p{
-  font-family:var(--font-h);font-weight:300;
-  font-size:clamp(1.3rem,2.1vw,1.8rem);line-height:1.5;
-  color:var(--starlight);max-width:34ch;
-}
-.adv-manifesto p+p{
-  margin-top:clamp(var(--s4),4.5vh,var(--s5));
-  padding-top:clamp(var(--s4),4.5vh,var(--s5));
-  position:relative;
-}
-.adv-manifesto p+p::before{
-  content:'';position:absolute;top:0;left:0;width:44px;height:1px;
-  background:linear-gradient(to right,var(--gold),transparent);
-}
-.adv-manifesto em{font-style:italic;color:var(--gold-light);}
 
 @media(max-width:900px){
   .adv-moment{padding-left:var(--s4);padding-bottom:var(--s7);}
   .adv-open{grid-template-columns:1fr;row-gap:var(--s5);}
-  .adv-story-connection h3{position:static;}
   .adv-macro{margin-right:0;border-radius:3px;border-right-width:1px;}
-  .adv-story-grid,.adv-story-connection{grid-template-columns:1fr;gap:var(--s5);}
+  .adv-story-grid{grid-template-columns:1fr;gap:var(--s5);}
   .adv-story{margin-top:var(--s6);}
   .adv-story-grid{padding:var(--s5) 0;}
-  .adv-story-connection{padding:var(--s5) 0;}
   .adv-photo{height:auto;min-height:430px;aspect-ratio:4/5;}
   .adv-stat-n{font-size:clamp(4.4rem,21vw,7rem);}
   .adv-stat-c{flex:1 1 100%;}
@@ -1965,16 +1937,6 @@ html.no-video .hero-scroll{opacity:1;}
             <div>
               <p>Behind every plant is a commitment to <strong>quality, transparency and traceability</strong>. From propagation and cultivation through to harvest, drying and curing, each stage is recorded, creating a complete history of every batch we produce.</p>
               <p class="adv-story-turn">For us, growing medicinal cannabis is only part of the story.</p>
-            </div>
-          </div>
-
-          <div class="adv-story-connection">
-            <h3 class="emerge">Aho is about connection.</h3>
-            <div class="adv-manifesto">
-              <p class="reveal"><em>Connecting</em> the knowledge we have gained overseas with the whenua we have returned to.</p>
-              <p class="reveal d1"><em>Connecting</em> Māori land with new economic opportunity.</p>
-              <p class="reveal d2"><em>Connecting</em> traditional values with modern cultivation.</p>
-              <p class="reveal d3"><em>And creating</em> something today that can provide opportunity for generations tomorrow.</p>
             </div>
           </div>
 
