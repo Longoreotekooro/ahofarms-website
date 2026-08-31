@@ -1562,77 +1562,6 @@ html.no-video .hero-sound{display:none;}
   .adv-conv{margin-top:var(--s4);}
 }
 
-/* —— traceability: a finished batch ledger, not a placeholder —— */
-.adv-quality{
-  display:grid;grid-template-columns:minmax(0,0.78fr) minmax(0,1.22fr);
-  gap:clamp(var(--s5),7vw,var(--s8));align-items:start;
-}
-.quality-pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s5);}
-.quality-pillar{padding-right:var(--s3);border-right:1px solid var(--hairline);}
-.quality-pillar:last-child{padding-right:0;border-right:0;padding-left:var(--s3);}
-.quality-pillar:nth-child(2){padding-left:var(--s3);}
-.quality-pillar b{
-  display:block;margin-bottom:8px;font-family:var(--font-h);font-style:italic;
-  font-size:0.85rem;font-weight:400;color:var(--gold);
-}
-.quality-pillar span{
-  font-size:0.66rem;font-weight:700;letter-spacing:0.13em;
-  text-transform:uppercase;color:var(--starlight);
-}
-.batch-ledger{
-  position:relative;overflow:hidden;padding:clamp(var(--s4),4vw,var(--s5));
-  border:1px solid var(--gold-border);border-radius:4px;
-  background:linear-gradient(145deg,rgba(22,32,30,0.8),rgba(7,14,15,0.62));
-  box-shadow:0 30px 80px rgba(0,0,0,0.32);
-}
-.batch-ledger::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at 90% 10%,rgba(115,168,165,0.12),transparent 42%);
-}
-.batch-head{position:relative;display:flex;justify-content:space-between;gap:var(--s3);padding-bottom:var(--s4);border-bottom:1px solid var(--hairline);}
-.batch-kicker,.batch-state{
-  font-size:0.58rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
-}
-.batch-kicker{color:var(--gold);}.batch-state{color:var(--teal-light);}
-.batch-state::before{content:'';display:inline-block;width:5px;height:5px;margin-right:8px;border-radius:50%;background:var(--teal-light);box-shadow:0 0 9px rgba(162,196,195,0.65);}
-.batch-stages{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s4);}
-.batch-stage{position:relative;min-height:112px;padding:0 var(--s3) var(--s4) 18px;border-left:1px solid rgba(201,160,106,0.2);}
-.batch-stage::before{content:'';position:absolute;left:-3px;top:3px;width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.6);}
-.batch-stage small{display:block;margin-bottom:8px;font-size:0.54rem;letter-spacing:0.16em;color:rgba(201,160,106,0.7);}
-.batch-stage strong{display:block;font-size:0.78rem;font-weight:600;color:var(--starlight);}
-.batch-stage span{display:block;margin-top:6px;font-size:0.68rem;line-height:1.5;color:var(--silver);}
-.batch-foot{position:relative;display:flex;justify-content:space-between;gap:var(--s3);padding-top:var(--s3);border-top:1px solid var(--hairline);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(168,173,179,0.65);}
-.batch-foot strong{color:var(--starlight);font-weight:500;}
-
-/* ================================================================
-   THE WEAVE — from many threads, one aho. The last moment, then
-   the thread simply keeps going; there is no closing edge.
-   ================================================================ */
-.weave-head{display:grid;grid-template-columns:minmax(180px,0.6fr) minmax(0,1.4fr);gap:var(--s6);align-items:end;}
-.weave-head .adv-lede{margin:0;}
-.weave-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:var(--s6);background:var(--hairline);border:1px solid var(--hairline);}
-.weave-link{position:relative;min-height:190px;padding:var(--s4);background:rgba(7,14,15,0.92);transition:background 0.4s var(--ease);}
-.weave-link:hover{background:rgba(20,31,29,0.94);}
-.weave-num{display:block;margin-bottom:var(--s4);font-family:var(--font-h);font-style:italic;font-size:0.85rem;color:var(--gold);}
-.weave-source,.weave-dest{display:block;font-family:var(--font-h);font-weight:300;line-height:1.05;}
-.weave-source{font-size:clamp(1.45rem,2.7vw,2.2rem);color:var(--starlight);}
-.weave-thread{display:flex;align-items:center;gap:10px;margin:var(--s3) 0;width:100%;}
-.weave-thread::before{content:'';height:1px;flex:1;background:linear-gradient(to right,var(--gold),rgba(115,168,165,0.5));}
-.weave-thread::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal-light);box-shadow:0 0 8px rgba(162,196,195,0.55);}
-.weave-dest{font-size:clamp(1.15rem,2vw,1.55rem);font-style:italic;color:var(--teal-light);}
-@media(max-width:900px){
-  .adv-quality,.weave-head{grid-template-columns:1fr;gap:var(--s5);}
-  .batch-stages{grid-template-columns:repeat(2,1fr);}
-  .weave-links{grid-template-columns:1fr;}
-  .weave-link{min-height:0;}
-}
-@media(max-width:540px){
-  .quality-pillars{grid-template-columns:1fr;gap:var(--s3);}
-  .quality-pillar,.quality-pillar:nth-child(2),.quality-pillar:last-child{padding:0 0 var(--s3);border-right:0;border-bottom:1px solid var(--hairline);}
-  .quality-pillar:last-child{border-bottom:0;}
-  .batch-stages{grid-template-columns:1fr;}
-  .batch-stage{min-height:90px;}
-}
 .adv-finale{max-width:900px;margin:0 auto;padding:0 var(--s4);text-align:center;}
 .adv-weave{display:block;width:100%;max-width:300px;margin:0 auto var(--s5);height:auto;overflow:visible;}
 .adv-weave path{
@@ -2151,49 +2080,6 @@ html.no-video .hero-scroll{opacity:1;}
         <p class="adv-p reveal" style="max-width:66ch;margin-top:var(--s5);">Our outdoor and greenhouse cultivation harnesses Hawke's Bay's long summer days, abundant natural sunlight and intense UV exposure, while our indoor environment provides the precision and environmental control required for consistent premium flower.</p>
       </div>
 
-      <!-- · traceability · -->
-      <div class="adv-moment adv-in" data-aho>
-        <div class="adv-quality">
-          <div>
-            <span class="eyebrow gold reveal">TE KOUNGA <span>·</span> QUALITY, TRANSPARENCY, TRACEABILITY</span>
-            <p class="adv-lede emerge">Every stage of production creates a complete history of every batch we produce.</p>
-            <div class="quality-pillars reveal d2" aria-label="Quality, transparency and traceability">
-              <div class="quality-pillar"><b>01</b><span>Quality</span></div>
-              <div class="quality-pillar"><b>02</b><span>Transparency</span></div>
-              <div class="quality-pillar"><b>03</b><span>Traceability</span></div>
-            </div>
-          </div>
-          <div class="batch-ledger reveal d1" aria-label="Example batch production record">
-            <div class="batch-head">
-              <span class="batch-kicker">Batch record · AF 2407</span>
-              <span class="batch-state">Verified</span>
-            </div>
-            <div class="batch-stages">
-              <div class="batch-stage"><small>01</small><strong>Propagation</strong><span>Plant identity recorded</span></div>
-              <div class="batch-stage"><small>02</small><strong>Cultivation</strong><span>Environment and inputs</span></div>
-              <div class="batch-stage"><small>03</small><strong>Harvest</strong><span>Date and weight recorded</span></div>
-              <div class="batch-stage"><small>04</small><strong>Drying</strong><span>Room and conditions</span></div>
-              <div class="batch-stage"><small>05</small><strong>Curing</strong><span>Time and moisture</span></div>
-              <div class="batch-stage"><small>06</small><strong>Release</strong><span>Testing and certificates</span></div>
-            </div>
-            <div class="batch-foot"><span>Plant to pack</span><strong>Complete history</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- · the weave · -->
-      <div class="adv-moment adv-in" data-aho style="padding-bottom:0;">
-        <div class="weave-head">
-          <span class="eyebrow gold reveal">TE RARANGA <span>·</span> THE WEAVE</span>
-          <p class="adv-lede emerge">The weave, made visible.</p>
-        </div>
-        <div class="weave-links reveal" aria-label="The connections woven through Aho Farms">
-          <div class="weave-link"><span class="weave-num">01</span><strong class="weave-source">Knowledge</strong><span class="weave-thread"></span><span class="weave-dest">Whenua</span></div>
-          <div class="weave-link"><span class="weave-num">02</span><strong class="weave-source">Māori land</strong><span class="weave-thread"></span><span class="weave-dest">Economic opportunity</span></div>
-          <div class="weave-link"><span class="weave-num">03</span><strong class="weave-source">Traditional values</strong><span class="weave-thread"></span><span class="weave-dest">Modern cultivation</span></div>
-          <div class="weave-link"><span class="weave-num">04</span><strong class="weave-source">What we build today</strong><span class="weave-thread"></span><span class="weave-dest">The generations that follow</span></div>
-          </div>
-      </div>
     </div>
 
     <div class="adv-finale">
