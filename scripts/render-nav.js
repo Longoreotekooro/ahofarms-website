@@ -18,8 +18,12 @@ function renderNav(currentPage) {
   // First match wins (not last) - e.g. on the homepage, Learn's and Buy's
   // children both resolve to index.html, and Learn (index 0) must win.
   let activeIdx = 0;
+  // Anchor children that point INTO the homepage (index.html#...) don't
+  // claim the active state - the homepage belongs to Learn (index 0) by
+  // default, not to whichever parent happens to hold a #section link.
   const foundIdx = NAV.findIndex((p) =>
-    p.children.some(c => isActive(c.href, currentPage)) || isActive(p.href, currentPage)
+    p.children.some(c => isActive(c.href, currentPage) && !c.href.startsWith('index.html#')) ||
+    isActive(p.href, currentPage)
   );
   if (foundIdx !== -1) activeIdx = foundIdx;
   // NOTE: this used to force childless parents back to Learn, from when a
