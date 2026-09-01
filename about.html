@@ -1639,17 +1639,6 @@ html.no-video .hero-scroll{opacity:1;}
    ABOUT v3 — the thread IS the page (2026-09)
    ================================================================ */
 #journey{position:relative;}
-.abx2-thread{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;display:none;}
-@media(min-width:901px){.abx2-thread{display:block;}}
-#journey>section{position:relative;z-index:2;}
-#journey .abx-photo, #journey .abx2-land-cine, #journey .abx2-close-cine, #journey .abx2-ph-frame, #journey .abx2-land-panel{position:relative;z-index:3;}
-/* mobile: the thread simplifies to a quiet left rail */
-.abx2-rail{display:none;}
-@media(max-width:900px){
-  .abx2-rail{display:block;position:absolute;left:18px;top:96vh;bottom:0;width:1px;z-index:1;
-    background:linear-gradient(to bottom,rgba(201,160,106,0.7),rgba(201,160,106,0.25) 60%,rgba(115,168,165,0.3) 85%,transparent);}
-}
-
 /* —— hero —— */
 .abx2-hero{position:relative;height:min(92vh,960px);min-height:560px;overflow:hidden;}
 .abx2-hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(0.94) contrast(1.04);}
@@ -1787,31 +1776,6 @@ html.no-video .hero-scroll{opacity:1;}
 <div class="page-grain" aria-hidden="true"></div>
 <main id="journey" style="padding-top:0">
 
-  <!-- ============================================================
-       THE THREAD — one aho runs the length of this page.
-       Built by JS from the [data-tn] waypoints below: it weaves
-       between the margins, vanishes behind photography (images sit
-       above it), splits into fibres at the mahi chain, reconnects,
-       and draws itself in as the visitor scrolls.
-       [CUSTOM THREAD / MUKA SVG — PLACEHOLDER]: the drawn line is
-       currently a pure 1px gradient stroke; a future upgrade can
-       swap in a textured muka-fibre stroke along the same path.
-       ============================================================ -->
-  <svg class="abx2-thread" id="ahoThread" aria-hidden="true" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="abxThreadG" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="rgba(201,160,106,0.0)"/>
-        <stop offset="0.04" stop-color="rgba(201,160,106,0.85)"/>
-        <stop offset="0.6" stop-color="rgba(201,160,106,0.7)"/>
-        <stop offset="0.85" stop-color="rgba(115,168,165,0.65)"/>
-        <stop offset="1" stop-color="rgba(115,168,165,0.0)"/>
-      </linearGradient>
-    </defs>
-    <path id="ahoThreadF1" fill="none" stroke="rgba(201,160,106,0.4)" stroke-width="1"/>
-    <path id="ahoThreadF2" fill="none" stroke="rgba(115,168,165,0.35)" stroke-width="1"/>
-    <path id="ahoThreadMain" fill="none" stroke="url(#abxThreadG)" stroke-width="1.4"/>
-  </svg>
-  <div class="abx2-rail" aria-hidden="true"></div>
 
   <!-- ============================================================
        HERO — cinematic, image first.
@@ -1837,14 +1801,14 @@ html.no-video .hero-scroll{opacity:1;}
         <p class="abx2-hero-line reveal d1">Kia ora. Ko Aho tēnei.</p>
       </div>
     </div>
-    <div class="abx2-hero-cue" aria-hidden="true" data-tn="0.5"><span></span></div>
+    <div class="abx2-hero-cue" aria-hidden="true"><span></span></div>
   </section>
 
   <!-- ================= INTRODUCTION — the thread emerges ================= -->
   <section class="abx-sec abx2-intro" id="timatanga">
     <div class="wrap">
       <div class="abx2-intro-grid">
-        <div class="abx2-intro-copy" data-tn="0.08">
+        <div class="abx2-intro-copy">
           <p class="abx2-lede emerge">Aho Farms is built on the belief that whenua can create more than a crop.</p>
           <p class="reveal d1">It can create opportunity, skilled employment, stronger Māori participation in the economy, reconnection and intergenerational value.</p>
           <p class="reveal d1">By creating productive new uses for underutilised Māori whenua, we want to help build an industry in which Māori can participate across the entire value chain — as landowners, employees, investors, leaders and beneficiaries.</p>
@@ -1881,7 +1845,7 @@ html.no-video .hero-scroll{opacity:1;}
              FINAL ASSET: a licensed black-and-white archival photograph of
              Māori urban migration, 1950s–70s — a family arriving in the city,
              or a rural railway platform — treated duotone night/gold. -->
-        <div class="abx2-ph-frame reveal" data-tn="0.9">
+        <div class="abx2-ph-frame reveal">
           <span class="abx2-ph-tag">[ ARCHIVAL IMAGE — PLACEHOLDER ]</span>
           <span class="abx2-ph-sub">Māori urban migration · 1950s–1970s · duotone treatment</span>
         </div>
@@ -1897,7 +1861,7 @@ html.no-video .hero-scroll{opacity:1;}
           </div>
         </div>
       </div>
-      <p class="abx-pull emerge" data-tn="0.07">Returning opportunity to the whenua can create <em>new reasons to return to the whenua.</em></p>
+      <p class="abx-pull emerge">Returning opportunity to the whenua can create <em>new reasons to return to the whenua.</em></p>
       <p class="abx-source reveal">Source: Statistics New Zealand, New Zealand Official Yearbook.</p>
     </div>
   </section>
@@ -1907,7 +1871,7 @@ html.no-video .hero-scroll{opacity:1;}
     <!-- [FULL-WIDTH WHENUA IMAGE — PLACEHOLDER-QUALITY]: current asset is the
          Raupunga hillside; final asset could be a wider aerial of Māori
          freehold whenua patterns across the landscape. -->
-    <div class="abx2-land-cine" data-tn="0.5">
+    <div class="abx2-land-cine">
       <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920,h_820,g_south/v1780965789/aho_farms/raupunga/75978258454.jpg"
         alt="Māori freehold whenua — the land itself" width="1920" height="820" loading="lazy">
       <div class="abx2-land-caption">
@@ -1918,7 +1882,7 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
     </div>
     <div class="wrap">
-      <div class="abx2-land-panel glass reveal" data-tn="0.14">
+      <div class="abx2-land-panel glass reveal">
         <span class="abx-stat-n abx-stat-sm">≈1.4m<sup>ha</sup></span>
         <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
       </div>
@@ -1951,7 +1915,7 @@ html.no-video .hero-scroll{opacity:1;}
           <!-- [CULTIVATION VIDEO LOOP — PLACEHOLDER]
                FINAL ASSET: a 10s silent loop of hands working canopy in the
                greenhouse — tying, pruning, inspecting — shallow depth of field. -->
-          <figure class="abx-photo reveal d1" data-tn="0.88">
+          <figure class="abx-photo reveal d1">
             <img src="assets/aho-greenhouse-cultivation.jpg" alt="Skilled cultivation work under natural light in an Aho Farms greenhouse" width="900" height="1200" loading="lazy">
             <figcaption>[ CULTIVATION VIDEO LOOP — PLACEHOLDER ]</figcaption>
           </figure>
@@ -1966,7 +1930,7 @@ html.no-video .hero-scroll{opacity:1;}
           </figure>
         </div>
       </div>
-      <div class="abx-chain reveal" role="text" data-tn="0.5" data-split="1" aria-label="Whenua to mahi to pūkenga to income to whānau to community">
+      <div class="abx-chain reveal" role="text" aria-label="Whenua to mahi to pūkenga to income to whānau to community">
         <span class="abx-chain-item"><i></i>Whenua</span><span class="abx-chain-thread" aria-hidden="true"></span>
         <span class="abx-chain-item"><i></i>Mahi</span><span class="abx-chain-thread" aria-hidden="true"></span>
         <span class="abx-chain-item"><i></i>Pūkenga</span><span class="abx-chain-thread" aria-hidden="true"></span>
@@ -1991,7 +1955,7 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
       <div class="abx-split">
         <div>
-          <div class="abx-copy reveal d1" data-tn="0.08">
+          <div class="abx-copy reveal d1">
             <p><strong>Aho Farms is backed by Māori investment because ownership matters.</strong></p>
             <p>We believe Māori economic development is stronger when participation extends beyond land and labour into investment, leadership and ownership.</p>
             <p>The opportunity is to create a cycle in which Māori capital helps activate Māori opportunity, commercially sustainable businesses create value, and more of that value has the potential to remain within Māori communities.</p>
@@ -2036,7 +2000,7 @@ html.no-video .hero-scroll{opacity:1;}
           <h2 class="emerge">17.5% of the population.<br>Around 52% of the prison population.</h2>
         </div>
       </div>
-      <div class="abx-statpair reveal d1" data-tn="0.5" aria-label="Māori share of the prison population versus the general population">
+      <div class="abx-statpair reveal d1" aria-label="Māori share of the prison population versus the general population">
         <div class="abx-stat">
           <span class="abx-stat-n">52<sup>%</sup></span>
           <span class="abx-stat-l">Māori share of the prison population</span>
@@ -2065,7 +2029,7 @@ html.no-video .hero-scroll{opacity:1;}
           <h2 class="emerge">The history matters. So does getting it right.</h2>
         </div>
       </div>
-      <div class="abx-quiet reveal d1" data-tn="0.06">
+      <div class="abx-quiet reveal d1">
         <p>Māori have been disproportionately represented among people identified by Police for personal possession and use of illicit drugs.</p>
         <p>Ministry of Health analysis found Māori were identified by Police for these offences at a rate greater than their share of New Zealand's population. While conviction rates declined for both Māori and non-Māori, they declined more steeply for non-Māori.</p>
         <p><strong>But an important distinction matters:</strong> the evidence does not show that large numbers of Māori have been imprisoned solely for cannabis possession or use. Ministry of Justice analysis indicates imprisonment solely for cannabis possession/use has been rare.</p>
@@ -2099,7 +2063,7 @@ html.no-video .hero-scroll{opacity:1;}
             <span><em>From crop</em><i></i>to medicine.</span>
           </div>
         </div>
-        <figure class="abx-photo abx2-flower reveal d2" data-tn="0.9">
+        <figure class="abx-photo abx2-flower reveal d2">
           <!-- [CANNABIS FLOWER MACRO — PLACEHOLDER-QUALITY]: current asset is the
                indoor flower under lights; final asset could be a trichome-level
                macro with warm rim light against darkness. -->
@@ -2134,7 +2098,7 @@ html.no-video .hero-scroll{opacity:1;}
     <!-- [TEAM / PEOPLE ON WHENUA IMAGE — PLACEHOLDER-QUALITY]: current asset is
          the greenhouse team photo; final asset should be whānau on open whenua
          at dusk — people and land in one frame, no cannabis in shot. -->
-    <div class="abx2-close-cine" data-tn="0.5">
+    <div class="abx2-close-cine">
       <img src="assets/aho-team-whenua.jpg" alt="Whānau on the whenua — the people this story returns to" width="1600" height="1067" loading="lazy">
       <div class="abx2-close-words">
         <p class="emerge">Whenua is where this story begins.<br><em>Our people are where its value should return.</em></p>
@@ -2147,7 +2111,7 @@ html.no-video .hero-scroll{opacity:1;}
     <div class="starfield" data-stars="40" aria-hidden="true"></div>
     <div class="wrap">
       <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TŪHONO MAI <span>·</span> THE THREAD CONTINUES</span>
-      <span class="abx-tuhono-line emerge" data-tn="0.5">Tūhono mai.</span>
+      <span class="abx-tuhono-line emerge">Tūhono mai.</span>
       <p class="abx-tuhono-sub reveal d1">The thread continues with you.</p>
       <div class="abx-tuhono-btns reveal d2">
         <a href="contact.html" class="btn btn-primary">Partner with us</a>
@@ -2495,91 +2459,6 @@ window.addEventListener('scroll',()=>{
       if (a) a.focus();
     }
   });
-})();
-</script>
-
-<script>
-/* ================================================================
-   THE AHO — a single thread drawn down the page through the
-   [data-tn] waypoints. Weaves margin to margin, hides behind
-   imagery (which stacks above it), splits into two fibres at the
-   mahi chain, and draws in with the visitor's scroll. Mobile gets
-   a simple rail (CSS); reduced-motion gets the thread fully drawn.
-   ================================================================ */
-(function(){
-  const svg=document.getElementById('ahoThread');
-  if(!svg)return;
-  const mainEl=document.getElementById('journey');
-  const REDUCED2=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const mainPath=document.getElementById('ahoThreadMain');
-  const f1=document.getElementById('ahoThreadF1');
-  const f2=document.getElementById('ahoThreadF2');
-  let len=0,f1len=0,f2len=0,built=false;
-
-  function catmull(pts){
-    if(pts.length<2)return '';
-    let d='M'+pts[0].x.toFixed(1)+','+pts[0].y.toFixed(1);
-    for(let i=0;i<pts.length-1;i++){
-      const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
-      const c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
-      const c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
-      d+='C'+c1x.toFixed(1)+','+c1y.toFixed(1)+' '+c2x.toFixed(1)+','+c2y.toFixed(1)+' '+p2.x.toFixed(1)+','+p2.y.toFixed(1);
-    }
-    return d;
-  }
-
-  function build(){
-    if(window.innerWidth<=900){svg.style.display='none';return;}
-    svg.style.display='block';
-    const mr=mainEl.getBoundingClientRect();
-    const W=mr.width,H=mainEl.scrollHeight;
-    svg.setAttribute('viewBox','0 0 '+W+' '+H);
-    const nodes=[...mainEl.querySelectorAll('[data-tn]')];
-    let splitIdx=-1;
-    const pts=nodes.map((el,i)=>{
-      const r=el.getBoundingClientRect();
-      if(el.dataset.split)splitIdx=i;
-      return {x:W*parseFloat(el.dataset.tn),y:r.top-mr.top+r.height*0.5};
-    }).filter(p=>isFinite(p.y));
-    if(pts.length<2)return;
-    mainPath.setAttribute('d',catmull(pts));
-    len=mainPath.getTotalLength();
-    mainPath.style.strokeDasharray=len;
-    if(splitIdx>0&&splitIdx<pts.length-1){
-      const a=pts[splitIdx-1],b=pts[splitIdx],c=pts[splitIdx+1];
-      f1.setAttribute('d',catmull([a,{x:b.x-W*0.16,y:b.y-14},c]));
-      f2.setAttribute('d',catmull([a,{x:b.x+W*0.16,y:b.y+14},c]));
-      f1len=f1.getTotalLength();f2len=f2.getTotalLength();
-      f1.style.strokeDasharray=f1len;f2.style.strokeDasharray=f2len;
-    }
-    built=true;
-    update();
-  }
-
-  function update(){
-    if(!built)return;
-    if(REDUCED2){
-      mainPath.style.strokeDashoffset=0;f1.style.strokeDashoffset=0;f2.style.strokeDashoffset=0;
-      return;
-    }
-    const mr=mainEl.getBoundingClientRect();
-    const seen=Math.min(Math.max((window.innerHeight-mr.top)/mainEl.scrollHeight,0),1);
-    const p=Math.min(seen*1.12,1);
-    mainPath.style.strokeDashoffset=len*(1-p);
-    f1.style.strokeDashoffset=f1len*(1-p);
-    f2.style.strokeDashoffset=f2len*(1-p);
-  }
-
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(ticking)return;ticking=true;
-    requestAnimationFrame(()=>{update();ticking=false;});
-  },{passive:true});
-  let rt;
-  window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(build,180);},{passive:true});
-  window.addEventListener('load',()=>setTimeout(build,300));
-  if(document.readyState==='complete')setTimeout(build,300);else build();
-  setTimeout(build,2500); /* late layout shifts (fonts, lazy images) */
 })();
 </script>
 
