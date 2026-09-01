@@ -1800,6 +1800,57 @@ html.no-video .hero-scroll{opacity:1;}
   width:calc(100% - 2*var(--plate-g));
   margin:0 auto;border-radius:var(--plate-r);
 }
+
+/* ================================================================
+   ABOUT TRIAL — connected chapter transitions (prototype for the
+   site-wide system). Chapters return to full width; separation now
+   comes from four transition types: A tonal blends, B the image
+   bridge, C thread bridges, D full-bleed visual resets.
+   ================================================================ */
+.abx2-hero{width:100%;margin:0;border-radius:0;height:min(92vh,960px);}
+.ch-flax,.ch-earth,.ch-green{width:100%;margin:0;border-radius:0;overflow:visible;}
+
+/* C · thread bridge: a tall tonal zone with one drawn fibre */
+.tbridge{position:relative;height:clamp(150px,24vh,290px);
+  background:linear-gradient(to bottom,var(--tb-from),var(--tb-mid) 52%,var(--tb-to));}
+.tbridge svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.tbridge path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.6s var(--ease) 0.15s;}
+.tbridge.in path{stroke-dashoffset:0;}
+@media(prefers-reduced-motion:reduce){.tbridge path{stroke-dashoffset:0!important;transition:none!important;}}
+
+/* B · image bridge: the whenua cine straddles flax and earth */
+#cities{padding-top:clamp(var(--s5),6vh,var(--s6));padding-bottom:clamp(170px,24vh,320px);}
+#whenua{padding-top:0;}
+.abx2-land-cine{width:calc(100% - 2*var(--plate-g));
+  margin:calc(-1*clamp(110px,17vh,250px)) auto 0;
+  border-radius:var(--plate-r);}
+
+/* A · tonal blends at chapter entries (band lives inside the padding) */
+.tzin-earth{padding-top:clamp(150px,20vh,250px)!important;}
+.tzin-earth::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(130px,18vh,220px);pointer-events:none;
+  background:linear-gradient(to bottom,#ded3bf,rgba(122,107,80,0.35) 55%,transparent);}
+.tzin-green{padding-top:clamp(140px,18vh,230px)!important;}
+.tzin-green::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(120px,16vh,200px);pointer-events:none;
+  background:linear-gradient(to bottom,#0d1f1a,rgba(10,20,17,0.4) 60%,transparent);}
+.tzin-flax{padding-top:clamp(150px,20vh,250px)!important;}
+.tzin-flax::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(130px,18vh,220px);pointer-events:none;
+  background:linear-gradient(to bottom,#efe9db,rgba(150,138,112,0.3) 55%,transparent);}
+
+/* D · visual reset: full-bleed macro rising from black into flax */
+.vreset{position:relative;height:min(68vh,640px);overflow:hidden;}
+.vreset img{width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(0.96) contrast(1.05);}
+.vreset::before{content:'';position:absolute;left:0;right:0;top:0;height:34%;
+  background:linear-gradient(to bottom,#050808,transparent);}
+.vreset::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;
+  background:linear-gradient(to top,#efe9db,rgba(239,233,219,0.45) 45%,transparent);}
+#hauora{padding-top:clamp(var(--s5),6vh,var(--s6));}
+#hauora .abx-fromto{max-width:640px;}
+
+@media(max-width:900px){
+  .tbridge{height:clamp(110px,16vh,180px);}
+  .abx2-land-cine{margin-top:calc(-1*clamp(70px,10vh,140px));}
+  #cities{padding-bottom:clamp(120px,16vh,200px);}
+}
 </style>
 <body>
 
@@ -1896,6 +1947,17 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
+  <!-- TRANSITION C · thread bridge — charcoal sinks through earth into
+       flax; one fibre crosses, gold in the dark, deepening in the light -->
+  <div class="tbridge reveal" aria-hidden="true" style="--tb-from:#050808;--tb-mid:#6b5f49;--tb-to:#efe9db;">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="none">
+      <defs><linearGradient id="tbgA" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="rgba(201,160,106,0.9)"/><stop offset="1" stop-color="rgba(90,74,36,0.85)"/>
+      </linearGradient></defs>
+      <path pathLength="1" vector-effect="non-scaling-stroke" fill="none" stroke="url(#tbgA)" stroke-width="1.4"
+        d="M180,0 C330,120 560,60 700,140 S 1000,220 1060,260"/>
+    </svg>
+  </div>
   <!-- ================ 01 · FROM WHENUA TO THE CITIES ================ -->
   <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="cities">
     <div class="wrap">
@@ -1967,7 +2029,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 03 · MAHI — the thread splits into many hands ================ -->
-  <section class="abx-sec" id="mahi">
+  <section class="abx-sec tzin-earth" id="mahi">
     <div class="wrap">
       <div class="abx-head">
         <span class="abx-num reveal">03</span>
@@ -2008,6 +2070,17 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
+  <!-- TRANSITION C · thread bridge — charcoal into deep Aho green;
+       the fibre turns from gold toward teal as the ground changes -->
+  <div class="tbridge reveal" aria-hidden="true" style="--tb-from:#050808;--tb-mid:#0a1713;--tb-to:#0d1f1a;">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+      <defs><linearGradient id="tbgB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="rgba(201,160,106,0.8)"/><stop offset="1" stop-color="rgba(115,168,165,0.8)"/>
+      </linearGradient></defs>
+      <path pathLength="1" vector-effect="non-scaling-stroke" fill="none" stroke="url(#tbgB)" stroke-width="1.4"
+        d="M980,0 C820,90 520,70 400,130 S 180,190 140,220"/>
+    </svg>
+  </div>
   <!-- ================ 04 · BACKED BY MĀORI ================ -->
   <section class="abx-sec ch-green" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
@@ -2056,7 +2129,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 05 · THE HARDER PART ================ -->
-  <section class="abx-sec abx-quiet-sec abx2-uaua" id="context">
+  <section class="abx-sec abx-quiet-sec abx2-uaua tzin-green" id="context">
     <span class="abx2-vertical" aria-hidden="true">TE TAHA UAUA</span>
     <div class="wrap">
       <div class="abx-head">
@@ -2106,6 +2179,14 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
+  <!-- TRANSITION D · visual reset — the plant itself between the hard
+       chapters and hauora. Rises out of near-black, dissolves into flax.
+       [MACRO CANNABIS FLOWER — PLACEHOLDER-QUALITY]
+       FINAL ASSET: 21:9 trichome-level macro, warm rim light against
+       darkness, very shallow focus; slow 8s drift if shot as video. -->
+  <div class="vreset">
+    <img src="assets/aho-why-aho-flower.jpg" alt="Premium medicinal cannabis flower — the plant at the centre of a regulated future" loading="lazy">
+  </div>
   <!-- ================ 07 · FROM HARM TO HAUORA ================ -->
   <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="hauora">
     <div class="wrap">
@@ -2116,7 +2197,7 @@ html.no-video .hero-scroll{opacity:1;}
           <h2 class="emerge">A different relationship with the plant.</h2>
         </div>
       </div>
-      <div class="abx-split">
+      <div>
         <div>
           <div class="abx-copy reveal d1">
             <p>The future we are working toward is fundamentally different from the past.</p>
@@ -2129,19 +2210,13 @@ html.no-video .hero-scroll{opacity:1;}
             <span><em>From crop</em><i></i>to medicine.</span>
           </div>
         </div>
-        <figure class="abx-photo abx2-flower reveal d2">
-          <!-- [CANNABIS FLOWER MACRO — PLACEHOLDER-QUALITY]: current asset is the
-               indoor flower under lights; final asset could be a trichome-level
-               macro with warm rim light against darkness. -->
-          <img src="assets/aho-why-aho-flower.jpg" alt="Premium medicinal cannabis flower under cultivation lights at Aho Farms" width="1200" height="1600" loading="lazy">
-          <figcaption>Medicine, grown to standard</figcaption>
-        </figure>
+        
       </div>
     </div>
   </section>
 
   <!-- ================ 08 · THE FUTURE — image-led close ================ -->
-  <section class="abx2-close" id="uri">
+  <section class="abx2-close tzin-flax" id="uri">
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
