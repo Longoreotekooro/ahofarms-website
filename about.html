@@ -1734,6 +1734,47 @@ html.no-video .hero-scroll{opacity:1;}
   .abx2-flower{justify-self:start;max-width:100%;}
   .abx2-city-grid .abx2-ph-frame{min-height:280px;}
 }
+
+/* ================================================================
+   CHAPTER TONAL SYSTEM (DESIGN-BASELINE §2-4) — background creates
+   separation; local custom-property overrides re-ink the type so
+   every existing component works on light chapters unchanged.
+   ================================================================ */
+.ch-flax{
+  --starlight:#1d211f;--silver:#4d524e;--white:#141816;
+  --gold:#8f6a33;--gold-light:#7a5a28;--gold-border:rgba(143,106,51,0.38);
+  --teal-light:#2e6360;--hairline:rgba(20,26,24,0.16);
+  background:#efe9db;color:#3a3f3c;
+}
+.ch-earth{
+  --starlight:#241f16;--silver:#5a5240;--white:#1c1811;
+  --gold:#7d5c2a;--gold-light:#6d5023;--gold-border:rgba(125,92,42,0.42);
+  --teal-light:#2e5f5c;--hairline:rgba(36,31,22,0.18);
+  background:#ded3bf;color:#463f30;
+}
+.ch-green{
+  --hairline:rgba(243,241,235,0.12);
+  background:linear-gradient(180deg,#0d1f1a,#102620 55%,#0c1d18);
+}
+/* soft tonal seam where a light chapter rises out of the dark page */
+.ch-seam-top{position:relative;}
+.ch-seam-top::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(56px,9vh,110px);pointer-events:none;
+  background:linear-gradient(to bottom,#050808,transparent);}
+.ch-seam-bottom{position:relative;}
+.ch-seam-bottom::after{content:'';position:absolute;left:0;right:0;bottom:0;height:clamp(56px,9vh,110px);pointer-events:none;
+  background:linear-gradient(to top,#050808,transparent);}
+/* component re-inks for light chapters */
+.ch-flax .abx2-ph-frame,.ch-earth .abx2-ph-frame{
+  border-color:rgba(143,106,51,0.5);
+  background:rgba(255,255,255,0.32) repeating-linear-gradient(135deg,rgba(143,106,51,0.06) 0 1px,transparent 1px 14px);}
+.ch-flax .abx-photo,.ch-earth .abx-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
+.ch-earth .glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(36,31,22,0.14);box-shadow:0 24px 60px rgba(35,28,14,0.25);}
+.ch-earth .abx2-land-cine::before{
+  background:linear-gradient(to bottom,rgba(5,5,5,0.85),transparent 30%),
+             linear-gradient(to top,#ded3bf 4%,rgba(222,211,191,0.4) 30%,transparent 58%);}
+.ch-earth .abx2-land-caption .eyebrow,.ch-earth .abx2-land-caption h2{
+  --starlight:#f3f1eb;--gold:#c9a06a;color:var(--starlight);}
+.ch-flax .abx-quiet-close{--gold-light:#7a5a28;}
 </style>
 <body>
 
@@ -1831,7 +1872,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 01 · FROM WHENUA TO THE CITIES ================ -->
-  <section class="abx-sec" id="cities">
+  <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="cities">
     <div class="wrap">
       <div class="abx-head">
         <span class="abx-num reveal">01</span>
@@ -1867,7 +1908,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 02 · WHENUA WITH POTENTIAL ================ -->
-  <section class="abx2-land" id="whenua">
+  <section class="abx2-land ch-earth ch-seam-bottom" id="whenua">
     <!-- [FULL-WIDTH WHENUA IMAGE — PLACEHOLDER-QUALITY]: current asset is the
          Raupunga hillside; final asset could be a wider aerial of Māori
          freehold whenua patterns across the landscape. -->
@@ -1943,7 +1984,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 04 · BACKED BY MĀORI ================ -->
-  <section class="abx-sec" id="puna">
+  <section class="abx-sec ch-green" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
@@ -2041,7 +2082,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 07 · FROM HARM TO HAUORA ================ -->
-  <section class="abx-sec" id="hauora">
+  <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="hauora">
     <div class="wrap">
       <div class="abx-head">
         <span class="abx-num reveal">07</span>
