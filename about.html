@@ -1681,12 +1681,6 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
 .abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.7);}
 .abx2-car-43{aspect-ratio:4/3;}
-/* the whenua cine as a rotating background — cine geometry wins,
-   overlays and caption stay above the crossfading images */
-.abx2-land-cine.abx2-carousel{aspect-ratio:auto;box-shadow:none;}
-.abx2-land-cine::before{z-index:2;}
-.abx2-land-cine .abx2-land-caption{z-index:3;}
-.abx2-land-cine .abx2-car-dots{z-index:3;}
 /* in the 01 chapter the carousel stretches to match the copy column,
    so the image fills the space instead of leaving flax beneath it */
 .abx2-city-grid{align-items:stretch;}
@@ -1700,16 +1694,29 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-city-grid .abx2-ph-frame{min-height:460px;}
 .abx2-city-stat .abx-stat{margin-bottom:var(--s4);}
 
-/* —— 02 whenua — image-led —— */
+/* —— 02 whenua — the photos are 4:3, so the plate is built around a 4:3
+   photo object: flush to the plate's top-left corner (oversized image
+   edge), heading + stat sit beside it on the sand, and beneath, a short
+   statement on the left is woven against the copy on the right —— */
 .abx2-land{position:relative;padding:0 0 clamp(var(--s6),9vh,var(--s8));}
-.abx2-land-cine{position:relative;height:min(72vh,700px);overflow:hidden;}
-.abx2-land-cine img{width:100%;height:100%;object-fit:cover;filter:saturate(0.94) contrast(1.03);}
-.abx2-land-cine::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(5,5,5,0.85),transparent 30%),
-             linear-gradient(to top,rgba(10,15,14,0.94) 6%,rgba(10,15,14,0.35) 40%,transparent 62%);}
-.abx2-land-caption{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px);z-index:2;}
-.abx2-land-caption h2{font-size:clamp(2.2rem,4.6vw,4rem);text-shadow:0 2px 40px rgba(2,4,6,0.9);}
-.abx2-land-panel{display:inline-flex;flex-direction:column;gap:10px;margin-top:calc(-1*clamp(48px,9vh,96px));padding:clamp(var(--s3),3vw,var(--s4)) clamp(var(--s4),4vw,var(--s5));border-radius:4px;}
+.abx2-land-grid{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(var(--s4),4vw,var(--s6));align-items:end;}
+.abx2-land-photo{aspect-ratio:4/3;align-self:start;margin:0;border-radius:0 var(--plate-r) var(--plate-r) 0;box-shadow:0 30px 70px rgba(35,28,14,0.3);}
+.abx2-land-photo::before{background:linear-gradient(to top,rgba(20,16,8,0.6),transparent 36%);}
+.abx2-land-photo img{filter:saturate(0.96) contrast(1.02);}
+.abx2-land-lead{padding:clamp(var(--s5),7vh,var(--s7)) var(--s4) clamp(var(--s3),3vh,var(--s4)) 0;}
+.abx2-land-lead h2{font-size:clamp(2rem,3.3vw,3.1rem);line-height:1.08;margin:var(--s3) 0 clamp(var(--s4),5vh,var(--s5));max-width:15ch;text-wrap:balance;}
+.abx2-land-lead .abx-stat-n{font-size:clamp(3rem,5.4vw,4.6rem);}
+.abx2-land-body{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;margin-top:clamp(var(--s5),8vh,var(--s7));}
+.abx2-land-say{font-family:var(--font-h);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.22;letter-spacing:-0.015em;color:var(--starlight);max-width:15ch;text-wrap:balance;padding-top:4px;}
+.abx2-land-say em{font-style:italic;color:var(--gold);}
+.abx2-land-say::after{content:'';display:block;width:56px;height:1px;background:var(--gold);margin-top:var(--s3);}
+@media(max-width:900px){
+  .abx2-land-grid{grid-template-columns:1fr;gap:0;}
+  .abx2-land-photo{border-radius:0;box-shadow:none;}
+  .abx2-land-lead{padding:var(--s5) var(--s4) 0;}
+  .abx2-land-body{grid-template-columns:1fr;gap:var(--s4);margin-top:var(--s5);}
+  .abx2-land-say{max-width:20ch;}
+}
 
 /* —— 03 mahi —— */
 .abx2-mahi-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:start;}
@@ -1783,8 +1790,6 @@ html.no-video .hero-scroll{opacity:1;}
   background:rgba(255,255,255,0.32) repeating-linear-gradient(135deg,rgba(143,106,51,0.06) 0 1px,transparent 1px 14px);}
 .ch-flax .abx-photo,.ch-earth .abx-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
 .ch-earth .glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(36,31,22,0.14);box-shadow:0 24px 60px rgba(35,28,14,0.25);}
-.ch-earth .abx2-land-caption .eyebrow,.ch-earth .abx2-land-caption h2{
-  --starlight:#f3f1eb;--gold:#c9a06a;color:var(--starlight);}
 .ch-flax .abx-quiet-close{--gold-light:#7a5a28;}
 
 /* ================================================================
@@ -1829,12 +1834,9 @@ html.no-video .hero-scroll{opacity:1;}
 .tbridge.in path{stroke-dashoffset:0;}
 @media(prefers-reduced-motion:reduce){.tbridge path{stroke-dashoffset:0!important;transition:none!important;}}
 
-/* B · image bridge: the whenua cine straddles flax and earth */
-#cities{padding-top:clamp(var(--s5),6vh,var(--s6));padding-bottom:clamp(170px,24vh,320px);}
-#whenua{padding-top:0;}
-.abx2-land-cine{width:calc(100% - 2*var(--plate-g));
-  margin:calc(-1*clamp(110px,17vh,250px)) auto 0;
-  border-radius:var(--plate-r);}
+/* B · 01 → 02: the plates already separate the chapters; the whenua
+   photo object sits flush in the top corner of the earth plate */
+#cities{padding-top:clamp(var(--s5),6vh,var(--s6));}
 
 /* A · tonal blends at chapter entries (band lives inside the padding) */
 .tzin-earth{padding-top:clamp(150px,20vh,250px)!important;}
@@ -1859,8 +1861,6 @@ html.no-video .hero-scroll{opacity:1;}
 
 @media(max-width:900px){
   .tbridge{height:clamp(110px,16vh,180px);}
-  .abx2-land-cine{margin-top:calc(-1*clamp(70px,10vh,140px));}
-  #cities{padding-bottom:clamp(120px,16vh,200px);}
 }
 </style>
 <body>
@@ -1997,36 +1997,38 @@ html.no-video .hero-scroll{opacity:1;}
 
   <!-- ================ 02 · WHENUA WITH POTENTIAL ================ -->
   <section class="abx2-land ch-earth ch-seam-bottom" id="whenua">
-    <!-- [FULL-WIDTH WHENUA IMAGE — PLACEHOLDER-QUALITY]: current asset is the
-         Raupunga hillside; final asset could be a wider aerial of Māori
-         freehold whenua patterns across the landscape. -->
-    <div class="abx2-land-cine abx2-carousel">
-      <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" loading="lazy">
-      <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" loading="lazy">
-      <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" loading="lazy">
-      <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
-        <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
-        <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
-        <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
-      </span>
-      <div class="abx2-land-caption">
-        <div class="wrap">
-          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
-          <h2 class="emerge">5% remains.<br>What we do with it matters.</h2>
+    <div class="abx2-land-grid">
+      <!-- [WHENUA PHOTO OBJECT — 4:3, PLACEHOLDER-QUALITY]: current assets are
+           the worked-soil / pad / aerial site photos (all 4:3, shown at their
+           native ratio — never crop them to a panorama); final asset could be
+           a wider aerial of Māori freehold whenua patterns across the landscape. -->
+      <figure class="abx2-carousel abx2-land-photo reveal" aria-label="The Aho Farms whenua being prepared for cultivation">
+        <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" width="1400" height="1050" loading="lazy">
+        <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" width="1400" height="1050" loading="lazy">
+        <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" width="1400" height="1052" loading="lazy">
+        <figcaption>Aho Farms whenua · Hawke's Bay</figcaption>
+        <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+          <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
+          <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
+          <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
+        </span>
+      </figure>
+      <div class="abx2-land-lead">
+        <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
+        <h2 class="emerge">5% remains. What we do with it matters.</h2>
+        <div class="abx-stat reveal d1">
+          <span class="abx-stat-n abx-stat-sm">≈1.4m<sup>ha</sup></span>
+          <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
         </div>
       </div>
     </div>
     <div class="wrap">
-      <div class="abx-statgrid" style="margin-top:clamp(var(--s5),7vh,var(--s6));">
-        <div class="abx-stat reveal">
-          <span class="abx-stat-n abx-stat-sm">≈1.4m<sup>ha</sup></span>
-          <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
-        </div>
+      <div class="abx2-land-body">
+        <p class="abx2-land-say emerge">Whenua with potential. <em>Opportunity with purpose.</em></p>
         <div class="abx-copy reveal d1">
           <p>Today, Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it concentrated in the central and upper North Island.</p>
           <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
           <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
-          <p class="abx-strong">Whenua with potential. Opportunity with purpose.</p>
           <p class="abx-source reveal">Source: Te Puni Kōkiri, 2024.</p>
         </div>
       </div>
