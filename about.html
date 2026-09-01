@@ -1681,6 +1681,12 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
 .abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.7);}
 .abx2-car-43{aspect-ratio:4/3;}
+/* the whenua cine as a rotating background — cine geometry wins,
+   overlays and caption stay above the crossfading images */
+.abx2-land-cine.abx2-carousel{aspect-ratio:auto;box-shadow:none;}
+.abx2-land-cine::before{z-index:2;}
+.abx2-land-cine .abx2-land-caption{z-index:3;}
+.abx2-land-cine .abx2-car-dots{z-index:3;}
 /* in the 01 chapter the carousel stretches to match the copy column,
    so the image fills the space instead of leaving flax beneath it */
 .abx2-city-grid{align-items:stretch;}
@@ -1965,18 +1971,12 @@ html.no-video .hero-scroll{opacity:1;}
         </div>
       </div>
       <div class="abx2-city-grid">
-        <!-- the whenua coming back into production — clearing, levelling,
-             and the expansion from the air (drone shot last) -->
-        <figure class="abx2-carousel abx2-car-43 reveal" aria-label="The whenua being brought back into production">
-          <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" loading="lazy">
-          <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" loading="lazy">
-          <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" loading="lazy">
-          <figcaption>The whenua, returning to work · Raupunga</figcaption>
-          <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
-            <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
-            <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
-            <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
-          </span>
+        <!-- the places that anchor identity — whānau at the marae.
+             [FULL WHARENUI IMAGE — AWAITING FILE]: the wide shot of the
+             whole wharenui goes FIRST in this carousel once supplied. -->
+        <figure class="abx2-carousel abx2-car-43 reveal" aria-label="Whānau at the marae — the places that anchor identity">
+          <img class="on" src="assets/marae-whanau.jpg" alt="Four generations of whānau standing together in front of the wharenui" loading="lazy">
+          <figcaption>Marae · the places that anchor identity</figcaption>
         </figure>
         <div class="abx2-city-stat">
           <div class="abx-stat reveal">
@@ -2000,9 +2000,15 @@ html.no-video .hero-scroll{opacity:1;}
     <!-- [FULL-WIDTH WHENUA IMAGE — PLACEHOLDER-QUALITY]: current asset is the
          Raupunga hillside; final asset could be a wider aerial of Māori
          freehold whenua patterns across the landscape. -->
-    <div class="abx2-land-cine">
-      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920,h_820,g_south/v1780965789/aho_farms/raupunga/75978258454.jpg"
-        alt="Māori freehold whenua — the land itself" width="1920" height="820" loading="lazy">
+    <div class="abx2-land-cine abx2-carousel">
+      <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" loading="lazy">
+      <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" loading="lazy">
+      <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" loading="lazy">
+      <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+        <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
+        <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
+        <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
+      </span>
       <div class="abx2-land-caption">
         <div class="wrap">
           <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
