@@ -1506,6 +1506,89 @@ html.no-video .hero-scroll{opacity:1;}
 .ab-co-table a{color:var(--teal-light);}
 @media(max-width:900px){.ab-co-grid{grid-template-columns:1fr;gap:var(--s4);}}
 
+
+/* ================================================================
+   ABOUT REDESIGN — kia ora, ko Aho tēnei (2026-09)
+   ================================================================ */
+.abx-hero{position:relative;padding:clamp(var(--s6),9vh,var(--s8)) 0 clamp(var(--s6),10vh,var(--s8));overflow:hidden;}
+.abx-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:center;}
+.abx-hero-copy h1{font-size:clamp(3rem,6.4vw,5.6rem);line-height:1.02;letter-spacing:-0.03em;margin:var(--s3) 0 var(--s4);}
+.abx-couplet{display:flex;flex-direction:column;gap:6px;margin-bottom:var(--s4);padding-left:18px;border-left:1px solid var(--gold-border);}
+.abx-couplet span{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.15rem,1.9vw,1.5rem);color:var(--gold-light);}
+.abx-hero-copy p{color:var(--silver);max-width:56ch;margin-bottom:var(--s3);line-height:1.85;}
+.abx-hero-close{font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.4;color:var(--starlight)!important;margin:var(--s4) 0 var(--s5)!important;}
+.abx-hero-close em{font-style:italic;color:var(--gold-light);}
+.abx-hero-visual{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,0.45);}
+.abx-hero-visual img{display:block;width:100%;height:auto;filter:saturate(0.92) contrast(1.03);}
+.abx-hero-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,8,8,0.55),transparent 45%);}
+.abx-hero-visual figcaption{position:absolute;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
+.abx-hero-visual figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
+
+.abx-sec{position:relative;padding:clamp(var(--s6),9vh,var(--s8)) 0;overflow:hidden;}
+.abx-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--s3);align-items:start;margin-bottom:clamp(var(--s5),5vh,var(--s6));}
+.abx-num{font-family:var(--font-h);font-style:italic;font-size:1rem;color:rgba(201,160,106,0.75);padding-top:6px;position:relative;}
+.abx-num::after{content:'';position:absolute;left:2px;top:34px;bottom:-8px;width:1px;background:linear-gradient(to bottom,rgba(201,160,106,0.5),transparent);}
+.abx-head h2{font-size:clamp(2rem,4vw,3.3rem);font-weight:300;line-height:1.08;letter-spacing:-0.02em;margin-top:var(--s2);text-wrap:balance;max-width:22ch;}
+.abx-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(var(--s4),4vw,var(--s6));}
+.abx-cols p,.abx-copy p{color:var(--silver);font-size:0.95rem;line-height:1.85;max-width:58ch;margin-bottom:var(--s3);}
+.abx-cols strong,.abx-copy strong{color:var(--starlight);font-weight:500;}
+.abx-strong{font-family:var(--font-h);font-weight:300;font-size:clamp(1.2rem,1.9vw,1.55rem)!important;line-height:1.45!important;color:var(--starlight)!important;}
+.abx-pull{position:relative;max-width:30ch;margin:clamp(var(--s5),6vh,var(--s6)) 0;padding-top:var(--s4);font-family:var(--font-h);font-weight:300;line-height:1.22;font-size:clamp(1.6rem,3vw,2.5rem);letter-spacing:-0.02em;color:var(--starlight);text-wrap:balance;}
+.abx-pull::before{content:'';position:absolute;top:0;left:2px;width:52px;height:1px;background:linear-gradient(to right,var(--gold),transparent);}
+.abx-pull em{font-style:italic;color:var(--gold-light);}
+.abx-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:start;}
+.abx-split-rev{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);}
+.abx-photo{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.38);}
+.abx-photo img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(0.9) contrast(1.03);}
+.abx-photo::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,8,8,0.6),transparent 42%);}
+.abx-photo figcaption{position:absolute;z-index:2;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
+.abx-photo figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
+
+/* the chain — nodes strung on one thread */
+.abx-chain{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:clamp(var(--s5),6vh,var(--s6));padding:var(--s4) 0;border-top:1px solid var(--hairline);}
+.abx-chain-item{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.8vw,1.45rem);color:var(--starlight);white-space:nowrap;}
+.abx-chain-item i{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 9px rgba(201,160,106,0.7);}
+.abx-chain-thread{flex:1 1 24px;min-width:24px;height:1px;background:linear-gradient(to right,rgba(201,160,106,0.65),rgba(115,168,165,0.4));}
+.abx-chain-note{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.1rem,1.8vw,1.4rem);color:var(--gold-light);margin-top:var(--s3);}
+
+/* the cycle — four stations, and the thread returns */
+.abx-cycle{position:relative;max-width:640px;margin:clamp(var(--s4),4vh,var(--s5)) 0 0;padding-left:64px;}
+.abx-cycle-item{position:relative;display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--hairline);}
+.abx-cycle-item:last-of-type{border-bottom:none;}
+.abx-cycle-item i{flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(201,160,106,0.7);}
+.abx-cycle-item span{font-family:var(--font-h);font-weight:300;font-size:clamp(1.15rem,2vw,1.6rem);color:var(--starlight);}
+.abx-cycle-return{position:absolute;left:0;top:22px;bottom:22px;width:56px;}
+.abx-cycle-return svg{width:100%;height:100%;overflow:visible;}
+.abx-cycle-close{margin-top:var(--s4);}
+
+/* hauora — quiet, measured */
+.abx-quiet-sec{background:linear-gradient(to bottom,transparent,rgba(7,12,12,0.55) 18%,rgba(7,12,12,0.55) 82%,transparent);}
+.abx-quiet{max-width:62ch;}
+.abx-quiet p{color:var(--silver);font-size:0.98rem;line-height:1.9;margin-bottom:var(--s3);}
+.abx-quiet strong{color:var(--starlight);font-weight:500;}
+.abx-quiet-close{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.2rem,2vw,1.6rem)!important;line-height:1.5!important;color:var(--gold-light)!important;padding-top:var(--s3);}
+
+/* tūhono mai */
+.abx-tuhono{position:relative;padding:clamp(var(--s7),12vh,var(--s9)) 0;text-align:center;overflow:hidden;}
+.abx-tuhono-line{display:block;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(3rem,7vw,5.8rem);letter-spacing:-0.03em;line-height:1;color:var(--starlight);margin:var(--s3) 0 var(--s2);}
+.abx-tuhono-sub{font-family:var(--font-h);font-weight:300;font-size:clamp(1.3rem,2.2vw,1.8rem);color:var(--gold-light);margin-bottom:var(--s4);}
+.abx-tuhono-body{max-width:62ch;margin:0 auto var(--s5);color:var(--silver);line-height:1.85;}
+.abx-tuhono-btns{display:flex;align-items:center;justify-content:center;gap:var(--s4);flex-wrap:wrap;}
+.abx-quiet-link{padding:14px 4px;font-size:0.6875rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(243,241,235,0.66);border-bottom:1px solid rgba(243,241,235,0.22);transition:color 0.3s,border-color 0.3s;}
+.abx-quiet-link:hover{color:var(--gold-light);border-color:var(--gold);}
+
+@media(max-width:900px){
+  .abx-hero-grid,.abx-split,.abx-split-rev,.abx-cols{grid-template-columns:1fr;}
+  .abx-hero-visual{order:-1;max-height:52vh;}
+  .abx-hero-visual img{height:100%;object-fit:cover;}
+  .abx-head{grid-template-columns:1fr;gap:var(--s2);}
+  .abx-num::after{display:none;}
+  .abx-chain{gap:10px;}
+  .abx-chain-thread{min-width:16px;}
+  .abx-cycle{padding-left:0;}
+  .abx-cycle-return{display:none;}
+  .abx-split-rev .abx-photo{order:2;}
+}
 </style>
 <body>
 
@@ -1548,392 +1631,231 @@ html.no-video .hero-scroll{opacity:1;}
 <div class="page-grain" aria-hidden="true"></div>
 <main id="journey" style="padding-top:170px">
 
-  <section class="chapter" id="story" style="padding-top:0">
-    <div class="starfield" data-stars="20" aria-hidden="true"></div>
-    <div class="drift teal" style="top:-10%;left:-10%;width:55vw;height:55vw;" aria-hidden="true"></div>
+  <!-- ========================================================
+       HERO — kia ora, ko Aho tēnei
+       ======================================================== -->
+  <section class="abx-hero" id="haere-mai">
+    <div class="starfield" data-stars="22" aria-hidden="true"></div>
+    <div class="drift gold" style="top:-8%;right:-14%;width:52vw;height:52vw;" aria-hidden="true"></div>
+    <div class="wrap abx-hero-grid">
+      <div class="abx-hero-copy">
+        <span class="eyebrow gold reveal">NAU MAI <span>·</span> ABOUT AHO FARMS</span>
+        <h1 class="emerge">Kia ora.<br>Ko Aho tēnei.</h1>
+        <div class="abx-couplet reveal d1">
+          <span>Returning value to the whenua.</span>
+          <span>Returning people to the whenua.</span>
+        </div>
+        <p class="reveal d2">Aho Farms was founded on a simple belief: whenua can do more than grow a crop. It can grow opportunity, employment, knowledge, connection and intergenerational prosperity.</p>
+        <p class="reveal d2">By creating new productive uses for underutilised Māori whenua, we see an opportunity to build a medicinal cannabis industry in which Māori are not simply participants, but landowners, investors, employees and beneficiaries.</p>
+        <p class="abx-hero-close reveal d3">This is about more than cultivation.<br><em>It is about what cultivation can make possible.</em></p>
+        <a class="btn btn-primary reveal d3" href="#whenua">Our kaupapa ↓</a>
+      </div>
+      <figure class="abx-hero-visual reveal d1">
+        <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000,h_1300/v1780965789/aho_farms/raupunga/75978258454.jpg"
+          alt="Aho Farms whenua — northern Hawke's Bay" width="1000" height="1300">
+        <figcaption>Te Matau-a-Māui · Hawke's Bay</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ======================= 01 · WHENUA ======================= -->
+  <section class="abx-sec" id="whenua">
     <div class="wrap">
-      <div class="mlab reveal" data-aho><b>01</b>&nbsp;/&nbsp;OUR STORY</div>
-      <span class="eyebrow gold reveal">MŌ MĀTOU <span>·</span> OUR STORY</span>
-      <h1 class="emerge" style="margin-bottom:var(--s2)">He aho.<br><em>He hononga.</em></h1>
-      <p class="ab-gloss reveal d1">The thread. The connection. Our purpose.</p>
-      <p class="reveal d2" style="color:var(--silver);max-width:60ch;font-size:1rem;line-height:1.82;">A licensed Māori-led medicinal cannabis cultivator. Founded on ancestral Hawke's Bay land. Built from 20 years of cultivation expertise. Growing for the future of our whānau, our communities, and the patients who depend on quality medicine.</p>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">01</span>
+        <div>
+          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA</span>
+          <h2 class="emerge">The opportunity has always been beneath our feet.</h2>
+        </div>
+      </div>
+      <div class="abx-cols reveal d1">
+        <div>
+          <p>Across Aotearoa, Māori collectively hold significant whenua with the potential to generate greater social and economic value for its owners and surrounding communities.</p>
+          <p>Aho Farms exists to help unlock that potential.</p>
+        </div>
+        <div>
+          <p>Through high-value medicinal cannabis cultivation, we aim to create productive opportunities for Māori-owned whenua while respecting that whenua is more than an economic asset.</p>
+        </div>
+      </div>
+      <p class="abx-pull emerge">It is whakapapa. It is identity. <em>It connects generations.</em></p>
+      <div class="abx-cols reveal">
+        <div>
+          <p>For us, revitalising whenua and revitalising Māori communities are part of the same kaupapa.</p>
+        </div>
+        <div>
+          <p class="abx-strong">When whenua thrives, there is an opportunity for whānau to thrive with it.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="chapter ab-quote-sec" id="purpose">
+  <!-- ================= 02 · WHAKAPAPA & RECONNECTION ================= -->
+  <section class="abx-sec" id="hononga">
+    <div class="drift teal" style="top:6%;left:-18%;width:56vw;height:56vw;" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="mlab reveal" style="justify-content:center;"><b>02</b>&nbsp;/&nbsp;OUR PURPOSE</div>
-      <div class="ab-quote-rule reveal d1"><span>Our Purpose</span></div>
-      <p class="ab-quote reveal d2">"We exist to build a <strong>sustainable Māori enterprise</strong> that creates lasting value — for our whānau, our community, and the patients who depend on quality medicinal cannabis."</p>
-      <p class="ab-quote-attr reveal d3">Tiakina te whenua, tiakina te iwi — Founding Kaupapa, Aho Farms</p>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">02</span>
+        <div>
+          <span class="eyebrow gold reveal">HE AHO KI TE WHENUA <span>·</span> WHAKAPAPA &amp; RECONNECTION</span>
+          <h2 class="emerge">Bringing our people home.</h2>
+        </div>
+      </div>
+      <div class="abx-split">
+        <div>
+          <div class="abx-copy reveal d1">
+            <p>For generations, urbanisation drew many Māori away from their traditional rohe in search of employment, education and opportunity.</p>
+            <p>That movement created new possibilities, but it also contributed to distance between some whānau and the places, marae, hapū and iwi that anchor identity and belonging.</p>
+            <p>We believe economic opportunity on Māori whenua can become part of reversing that pattern.</p>
+            <p>When meaningful, skilled work exists closer to home, returning becomes possible. Whānau can build careers without necessarily having to leave their whenua behind.</p>
+            <p><strong>Aho Farms wants to help create those reasons to return.</strong></p>
+            <p>Not by trying to recreate the past, but by building a modern Māori industry firmly connected to where we come from.</p>
+          </div>
+        </div>
+        <figure class="abx-photo reveal d2">
+          <img src="assets/aho-team-whenua.jpg" alt="Whānau working together among the plants on Aho Farms whenua" width="1600" height="1067" loading="lazy">
+          <figcaption>Whānau on the whenua</figcaption>
+        </figure>
+      </div>
+      <div class="abx-chain reveal" role="text" aria-label="Whenua to mahi to whānau to marae to hapū to iwi">
+        <span class="abx-chain-item"><i></i>Whenua</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Mahi</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Whānau</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Marae</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Hapū</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Iwi</span>
+      </div>
+      <p class="abx-chain-note reveal d1">A new economic thread can strengthen an old connection.</p>
     </div>
   </section>
 
-  <section class="chapter" id="korero">
+  <!-- ======================= 03 · MAHI ======================= -->
+  <section class="abx-sec" id="mahi">
     <div class="wrap">
-      <div class="ab-story-intro">
-        <div class="mlab reveal"><b>03</b>&nbsp;/&nbsp;HE KŌRERO</div>
-        <span class="eyebrow reveal">HE KŌRERO <span>·</span> OUR STORY</span>
-        <h2 class="emerge">From the soil up.<br>Built to last.</h2>
-        <p class="reveal d2">Aho Farms did not begin with a spreadsheet. It began with a conviction — that Māori land should produce Māori prosperity, and that the knowledge to make that happen already existed. It just needed to find its way home.</p>
-      </div>
-
-      <div class="ab-story-ch reveal">
-        <div class="ab-story-ch-img unveil in">
-          <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965845/aho_farms/raupunga/IMG_4143.jpg"
-            alt="Aho Farms cultivation operations — Hawke's Bay"
-            loading="lazy"
-          />
-        </div>
-        <div class="ab-story-ch-txt">
-          <div class="ab-story-ch-kicker">Chapter One</div>
-          <h3 class="ab-story-ch-h3">The return.<br>From California to Hawke's Bay.</h3>
-          <p class="ab-story-ch-p">The founder of Aho Farms spent years inside California's regulated cannabis industry — rising from cultivation floors to overseeing teams of 23+, managing full harvest cycles, and building an understanding of what genuine quality control looks like at scale. It was not a detour. It was preparation.</p>
-          <p class="ab-story-ch-p">Returning to Aotearoa, the conviction was clear: the knowledge gap between California and New Zealand represented an opportunity. Not an opportunity to import American culture, but to apply hard-earned expertise to Māori land, under Māori governance, for Māori futures. The expertise came from California. The purpose came from home.</p>
-          <blockquote class="ab-story-ch-pullq">"The knowledge came from California. The purpose came from home."</blockquote>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">03</span>
+        <div>
+          <span class="eyebrow gold reveal">HE MAHI WHAI TIKANGA <span>·</span> MAHI</span>
+          <h2 class="emerge">Māori employment. Māori capability. Māori prosperity.</h2>
         </div>
       </div>
-
-      <div class="ab-story-ch ab-story-ch--flip reveal">
-        <div class="ab-story-ch-img unveil in">
-          <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965849/aho_farms/raupunga/IMG_4195.jpg"
-            alt="Aho Farms — Hawke's Bay whenua"
-            loading="lazy"
-          />
-        </div>
-        <div class="ab-story-ch-txt">
-          <div class="ab-story-ch-kicker">Chapter Two</div>
-          <h3 class="ab-story-ch-h3">The whenua.<br>Land as the foundation.</h3>
-          <p class="ab-story-ch-p">Aho Farms was established on Māori freehold land in Hawke's Bay — a partnership built not simply on commercial terms, but on the obligations of kaitiakitanga. The land was not chosen for convenience. It was chosen because it was ours to care for, and because productive use of that land in Māori hands represents something far greater than any single harvest.</p>
-          <p class="ab-story-ch-p">The partnership created employment pathways for local whānau, activated land that had not been in productive use, and demonstrated what Māori land-based enterprise can look like when it is done properly — compliant, commercially serious, and deeply connected to the people it belongs to.</p>
-          <blockquote class="ab-story-ch-pullq">"Productive use of Māori land, in Māori hands — that is what this has always been about."</blockquote>
-        </div>
-      </div>
-
-      <div class="ab-story-ch reveal">
-        <div class="ab-story-ch-img unveil in">
-          <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1781145005/8f8d9be9-695b-44b6-8ac0-77733120fa8e_y0skhd.jpg"
-            alt="Aho Farms licensed medicinal cannabis facility"
-            loading="lazy"
-          />
-        </div>
-        <div class="ab-story-ch-txt">
-          <div class="ab-story-ch-kicker">Chapter Three</div>
-          <h3 class="ab-story-ch-h3">The licence.<br>Compliance as credibility.</h3>
-          <p class="ab-story-ch-p">New Zealand's Medicinal Cannabis Scheme has among the strictest quality standards in the world — a regulatory environment designed to protect patients and separate genuine operators from those who simply want proximity to a growing market. Earning a cultivation licence is not a formality. It is proof of intent.</p>
-          <p class="ab-story-ch-p">Aho Farms is one of a limited number of licensed medicinal cannabis cultivators in New Zealand. Every batch is independently laboratory tested. Every product meets or exceeds the scheme's stringent microbial and cannabinoid requirements. That compliance is not a constraint we work around. It is the standard we hold ourselves to — and the guarantee we make to every prescriber, pharmacist, and patient in the supply chain.</p>
-          <blockquote class="ab-story-ch-pullq">"Compliance is not a constraint. It is the commitment we make to every patient in our supply chain."</blockquote>
+      <div class="abx-split abx-split-rev">
+        <figure class="abx-photo reveal d2">
+          <img src="assets/aho-greenhouse-cultivation.jpg" alt="Skilled cultivation work under natural light in an Aho Farms greenhouse" width="900" height="1200" loading="lazy">
+          <figcaption>Skills that stay in the community</figcaption>
+        </figure>
+        <div>
+          <div class="abx-copy reveal d1">
+            <p><strong>A new industry creates more than jobs.</strong></p>
+            <p>It creates pathways into horticulture, science, cultivation, manufacturing, compliance, operations, logistics, technology, management and governance.</p>
+            <p>Our ambition is to develop those pathways for Māori.</p>
+            <p>We want people entering Aho Farms to have opportunities to build genuine expertise, progress into leadership and take knowledge with them throughout their careers.</p>
+            <p>Because every skilled worker represents more than an employee.</p>
+            <p>They represent income entering a household. Skills remaining within a community. Experience that can be passed on. And greater Māori participation in an emerging global industry.</p>
+          </div>
         </div>
       </div>
+      <p class="abx-pull emerge">The measure of our success should not simply be what leaves the farm. <em>It should also be what remains in the community.</em></p>
     </div>
   </section>
 
-  <section class="chapter" id="about">
-    <div class="starfield" data-stars="16" aria-hidden="true"></div>
-    <div class="people-grid">
-      <div class="people-img unveil reveal">
-        <img
-          src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000/v1780965576/IMG_6092_talxyt.jpg"
-          alt="Aho Farms growing site — Hawke's Bay, Aotearoa New Zealand"
-          loading="lazy">
-      </div>
-      <div class="people-content" data-aho>
-        <div class="mlab reveal"><b>04</b>&nbsp;/&nbsp;OUR PEOPLE</div>
-        <span class="eyebrow reveal">MŌ MĀTOU <span>·</span> OUR STORY</span>
-        <span class="te-reo-line reveal" style="color:var(--teal-light)">Tiakina te whenua, tiakina te iwi.</span>
-        <h2 class="emerge">Five generations of land. One generation to build on it differently.</h2>
-        <p class="reveal d2">Aho Farms was founded on a conviction that Māori land, combined with California-grade cultivation expertise, could produce medicinal cannabis that sets a new standard in Aotearoa and beyond.</p>
-        <p class="reveal d2">In partnership with the Waaka whānau, we grow on Māori freehold land in Hawke's Bay. The climate, the soil, and the people make this land exceptional. We treat it accordingly.</p>
-        <div class="dual reveal d3">
-          <div>
-            <span class="dual-label">California Expertise</span>
-            <span class="dual-val">20 years cultivation experience from the world's most mature cannabis market</span>
-          </div>
-          <div class="dual-div"></div>
-          <div>
-            <span class="dual-label">Hawke's Bay Whenua</span>
-            <span class="dual-val">Five-generation farming connection to ancestral lands of Te Hapuku</span>
-          </div>
-        </div>
-        <div class="people-quote reveal d3">
-          <blockquote>Guard the land, guard the people.</blockquote>
-          <cite>— Tiakina te whenua, tiakina te iwi · Founding kaupapa of Aho Farms</cite>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="chapter" id="timeline">
+  <!-- ==================== 04 · MĀORI CAPITAL ==================== -->
+  <section class="abx-sec" id="puna">
+    <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="tl-hdr-wrap reveal" style="text-align:center;margin-bottom:var(--s7);">
-        <div class="mlab reveal" style="justify-content:center;"><b>05</b>&nbsp;/&nbsp;THE JOURNEY</div>
-        <span class="eyebrow reveal" style="justify-content:center;display:block;">TE HAERENGA <span>·</span> THE JOURNEY</span>
-        <h2 class="emerge">Our <em>milestones.</em></h2>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">04</span>
+        <div>
+          <span class="eyebrow gold reveal">NĀ TĀTOU, MĀ TĀTOU <span>·</span> MĀORI CAPITAL</span>
+          <h2 class="emerge">Backed by Māori. Building for Māori.</h2>
+        </div>
       </div>
-      <div class="ab-tl">
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l reveal">
-            <div class="ab-tl-year">2020</div>
-            <div class="ab-tl-tag">Formation</div>
-            <h3 class="ab-tl-title">Company Founded</h3>
-            <p class="ab-tl-body">Aho Farms Limited is established. A partnership is formed on Māori freehold land in Hawke's Bay, grounding the company in the obligations of kaitiakitanga from day one.</p>
-            <span class="ab-tl-badge">Hawke's Bay</span>
-          </div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r"></div>
+      <div class="abx-cols reveal d1">
+        <div>
+          <p><strong>Ownership matters.</strong></p>
+          <p>Aho Farms is backed by Māori investment because we believe Māori economic development becomes more powerful when Māori participate throughout the value chain — not only through labour or land, but through capital and ownership as well.</p>
         </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l"></div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r reveal">
-            <div class="ab-tl-year">2021</div>
-            <div class="ab-tl-tag">Infrastructure</div>
-            <h3 class="ab-tl-title">Licence Applications &amp; Site Development</h3>
-            <p class="ab-tl-body">Licence applications lodged with the Ministry of Health. Site preparation and compliance infrastructure development commences. Earthworks and facility construction begin.</p>
-            <span class="ab-tl-badge">Ministry of Health</span>
-          </div>
+        <div>
+          <p>Our ambition is to build a commercially strong enterprise capable of generating sustainable value for its investors, landowners, employees and communities.</p>
+          <p>That creates a different kind of cycle:</p>
         </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l reveal">
-            <div class="ab-tl-year">2022</div>
-            <div class="ab-tl-tag">Licence Milestone</div>
-            <h3 class="ab-tl-title">Cultivation Licence Granted</h3>
-            <p class="ab-tl-body">A cultivation licence is granted under the New Zealand Medicinal Cannabis Scheme — one of a limited number granted nationally. A material milestone for the company and for Māori commercial enterprise in the sector.</p>
-            <span class="ab-tl-badge">NZ Medicinal Cannabis Scheme</span>
-          </div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r"></div>
-        </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l"></div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r reveal">
-            <div class="ab-tl-year">2023</div>
-            <div class="ab-tl-tag">First Season</div>
-            <h3 class="ab-tl-title">First Cultivation Season Commences</h3>
-            <p class="ab-tl-body">Cultivation Director joins the team, bringing 20 years of cannabis cultivation expertise across international and domestic markets. First grow season begins at the Hawke's Bay site. Genetics programme established including pheno hunt across 89 mother plants.</p>
-            <span class="ab-tl-badge">20 Years Expertise On-Site</span>
-          </div>
-        </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l reveal">
-            <div class="ab-tl-year">2024</div>
-            <div class="ab-tl-tag">First Harvest</div>
-            <h3 class="ab-tl-title">First Harvest &amp; Board Formalised</h3>
-            <p class="ab-tl-body">First harvest completed and submitted for independent laboratory testing. Genetics programme narrows from 89 mothers to 15 top-performing cultivar selections. Board of Directors formalised with independent governance structure.</p>
-            <span class="ab-tl-badge">15 Cultivar Selections</span>
-          </div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r"></div>
-        </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l"></div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r reveal">
-            <div class="ab-tl-year">2025</div>
-            <div class="ab-tl-tag">Market Entry</div>
-            <h3 class="ab-tl-title">First Supply to NZ Prescribers</h3>
-            <p class="ab-tl-body">RĀ and SOURCE product lines launched and made available through the pharmacy channel on prescription. Prescriber portal established. Aho Farms becomes an active supplier in the New Zealand medicinal cannabis supply chain.</p>
-            <span class="ab-tl-badge">RĀ + SOURCE Launched</span>
-          </div>
-        </div>
-
-        <div class="ab-tl-row">
-          <div class="ab-tl-side ab-tl-side--l reveal">
-            <div class="ab-tl-year">2026</div>
-            <div class="ab-tl-tag">Export</div>
-            <h3 class="ab-tl-title">Export Licence Active</h3>
-            <p class="ab-tl-body">Export licence secured. Second successful harvest season completed. Distribution partnerships in active development for Australian and international markets. Aho Farms enters phase two of its commercial growth strategy.</p>
-            <span class="ab-tl-badge">NZ + Australia</span>
-          </div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r"></div>
-        </div>
-
-        <div class="ab-tl-row ab-tl-row--future">
-          <div class="ab-tl-side ab-tl-side--l"></div>
-          <div class="ab-tl-spine"><div class="ab-tl-dot"></div></div>
-          <div class="ab-tl-side ab-tl-side--r reveal">
-            <div class="ab-tl-year">Next</div>
-            <div class="ab-tl-tag">The Road Ahead</div>
-            <h3 class="ab-tl-title">Expansion &amp; Scale</h3>
-            <p class="ab-tl-body">Indoor facility expansion. Processing capability development. Additional cultivar lines. Deeper Australian market penetration. Broader Māori employment and whānau whenua development. The foundation is built. The next chapter is growth.</p>
-            <span class="ab-tl-badge">Looking Forward</span>
-          </div>
-        </div>
-
       </div>
+      <div class="abx-cycle reveal">
+        <div class="abx-cycle-item"><i></i><span>Māori whenua creates opportunity.</span></div>
+        <div class="abx-cycle-item"><i></i><span>Māori capital helps build it.</span></div>
+        <div class="abx-cycle-item"><i></i><span>Māori people develop it.</span></div>
+        <div class="abx-cycle-item"><i></i><span>Value can return to Māori communities.</span></div>
+        <div class="abx-cycle-return" aria-hidden="true">
+          <svg viewBox="0 0 60 130" preserveAspectRatio="none"><defs><linearGradient id="abxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(201,160,106,0.15)"/><stop offset="1" stop-color="rgba(201,160,106,0.75)"/></linearGradient></defs><path d="M52,126 C10,120 10,10 52,4" fill="none" stroke="url(#abxg)" stroke-width="1"/><path d="M52,4 l-7,-3 m7,3 l-7,3" stroke="rgba(201,160,106,0.7)" fill="none" stroke-width="1"/></svg>
+        </div>
+      </div>
+      <p class="abx-strong abx-cycle-close reveal d1">And from that foundation, the next opportunity can begin.</p>
     </div>
   </section>
 
-  <section class="chapter" id="impact">
-    <div class="drift blue" style="top:0;right:-15%;width:50vw;height:50vw;" aria-hidden="true"></div>
+  <!-- ======================= 05 · HAUORA ======================= -->
+  <section class="abx-sec abx-quiet-sec" id="hauora">
     <div class="wrap">
-      <div class="reveal" style="max-width:640px;margin-bottom:var(--s6);">
-        <div class="mlab reveal"><b>06</b>&nbsp;/&nbsp;IMPACT</div>
-        <span class="eyebrow reveal">TE PĀNGA <span>·</span> IMPACT</span>
-        <h2 class="emerge">Building more<br>than a <em>business.</em></h2>
-        <p class="reveal d2" style="color:var(--silver);margin-top:var(--s3);">Aho Farms measures its success not only in revenue, but in the lives it touches — the whānau employed, the land activated, and the patients served through a compliant, high-quality supply chain.</p>
-      </div>
-      <div class="ab-impact-cells">
-        <div class="ab-impact-cell reveal">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div class="ab-impact-cell-num">16<sup>+</sup></div>
-          <div class="ab-impact-cell-label">Whānau Employed</div>
-          <p class="ab-impact-cell-desc">16 local Māori community members employed across cultivation, operations, and administration. Direct pathways from employment into training and career development.</p>
-        </div>
-        <div class="ab-impact-cell reveal d1">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <div class="ab-impact-cell-num">2</div>
-          <div class="ab-impact-cell-label">Licensed Sites</div>
-          <p class="ab-impact-cell-desc">Two operational cultivation sites in Hawke's Bay under licence, spanning outdoor, greenhouse and indoor growing environments. Both actively producing.</p>
-        </div>
-        <div class="ab-impact-cell reveal d2">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="ab-impact-cell-num">100<sup>%</sup></div>
-          <div class="ab-impact-cell-label">Māori Owned</div>
-          <p class="ab-impact-cell-desc">Māori-owned and Māori-governed enterprise. Every commercial decision reflects the obligations of kaitiakitanga and the long-term wellbeing of whānau stakeholders.</p>
-        </div>
-        <div class="ab-impact-cell reveal">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-          <div class="ab-impact-cell-num">2.4<sup>ac</sup></div>
-          <div class="ab-impact-cell-label">Acres Under Canopy</div>
-          <p class="ab-impact-cell-desc">2.4 acres of productive canopy on Māori freehold land previously out of productive use. Growing season after season, building the agricultural record that underpins long-term value.</p>
-        </div>
-        <div class="ab-impact-cell reveal d1">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="ab-impact-cell-num">2</div>
-          <div class="ab-impact-cell-label">Successful Harvests</div>
-          <p class="ab-impact-cell-desc">Two completed harvest seasons. Every batch independently tested and verified to meet New Zealand's medicinal cannabis quality standard before entering the supply chain.</p>
-        </div>
-        <div class="ab-impact-cell reveal d2">
-          <div class="ab-impact-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-          <div class="ab-impact-cell-num">NZ+AU</div>
-          <div class="ab-impact-cell-label">Export Markets</div>
-          <p class="ab-impact-cell-desc">Export licence held. Active development of Australian market partnerships alongside the domestic NZ prescriber supply chain. Building the international presence of NZ-grown medicinal cannabis.</p>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">05</span>
+        <div>
+          <span class="eyebrow reveal">HE RONGOĀ, HE ARA HOU <span>·</span> HAUORA</span>
+          <h2 class="emerge">From disproportionate harm to meaningful participation.</h2>
         </div>
       </div>
-      <p class="ab-impact-cell-note">Impact data reflects current operational figures as of June 2026.</p>
-    </div>
-  </section>
-
-  <section class="chapter" id="community-impact">
-    <div class="impact-wrap">
-      <div class="impact-hdr" data-aho>
-        <div class="mlab reveal" style="justify-content:center;"><b>07</b>&nbsp;/&nbsp;COMMUNITY IMPACT</div>
-        <span class="eyebrow gold reveal">ORANGA TĀNGATA <span>·</span> COMMUNITY IMPACT</span>
-        <span class="te-reo-line reveal d1">Ehara taku toa i te toa takitahi, engari he toa takitini.</span>
-        <h2 class="emerge">The thread does not end at the farm gate.</h2>
-        <p class="reveal d2">Like the stars of Matariki, each outcome stands alone — and means more together. Every connection below is held by the same aho that runs through our cultivation.</p>
-      </div>
-      <div class="impact-facts">
-        <div class="ifact reveal"><span class="ifact-n">5</span><div class="ifact-l">New whānau team members welcomed from the local community ahead of peak season.</div></div>
-        <div class="ifact reveal d1"><span class="ifact-n">2</span><div class="ifact-l">Team members enrolled in supported formal horticulture training.</div></div>
-        <div class="ifact reveal d2"><span class="ifact-n">100%</span><div class="ifact-l">Hawke's Bay operated — local employment, local supply chain.</div></div>
-        <div class="ifact reveal d3"><span class="ifact-n">Iwi</span><div class="ifact-l">Ngāti Pāhauwera partnership and shared ownership structure.</div></div>
-      </div>
-      <div class="impact-cta reveal">
-        <a href="social-impact.html" class="btn btn-gold">Read Our Social Impact</a>
-        <a href="kaupapa.html" class="btn btn-outline">Our Kaupapa</a>
+      <div class="abx-quiet reveal d1">
+        <p>The relationship between Māori communities and cannabis carries a difficult history.</p>
+        <p>Māori have experienced disproportionate harm through the criminal justice system in relation to cannabis and other drug offences. That history cannot simply be separated from conversations about the emergence of a legal medicinal cannabis industry.</p>
+        <p><strong>Aho Farms sees an opportunity to contribute to a different future.</strong></p>
+        <p>One in which cannabis is approached through regulated cultivation, science, quality, healthcare and responsible access — and in which Māori have opportunities to participate in the legal industry being built around it.</p>
+        <p>Our long-term aspiration is that Māori are represented throughout that system: from whenua and cultivation through to ownership, employment, research and, where clinically appropriate, access to prescribed medicinal cannabis.</p>
+        <p class="abx-quiet-close">The plant associated with harm for some of our communities can become part of a highly regulated industry focused on health, knowledge and economic opportunity.</p>
       </div>
     </div>
   </section>
 
-  <section class="chapter" id="team">
+  <!-- ================== 06 · INTERGENERATIONAL ================== -->
+  <section class="abx-sec" id="uri">
+    <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="reveal" style="margin-bottom:var(--s7);">
-        <div class="mlab reveal"><b>08</b>&nbsp;/&nbsp;LEADERSHIP</div>
-        <span class="eyebrow reveal">NGĀ KAIĀRAHI <span>·</span> LEADERSHIP</span>
-        <h2 class="emerge">The people<br>behind the purpose.</h2>
-      </div>
-
-      <div class="ab-founder-spot">
-        <div class="ab-founder-img unveil reveal">
-          <img
-            src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_840,h_1120,g_face/v1781237471/aho_farms/team/longo_headshot.png"
-            alt="Longo Reo Te Kooro — Managing Director &amp; Founder, Aho Farms"
-            loading="lazy"
-          />
-        </div>
-        <div class="reveal d1">
-          <span class="ab-founder-kicker">Managing Director &amp; Founder</span>
-          <h2 class="ab-founder-name">Longo Reo<br>Te Kooro</h2>
-          <p class="ab-founder-role">Managing Director &amp; Founder · Aho Farms Limited</p>
-          <p class="ab-founder-bio">Longo Reo Te Kooro is a Māori entrepreneur from Hawke's Bay. He spent years inside California's regulated cannabis industry — rising from the cultivation floor to managing teams of 23+, overseeing full harvest cycles, manicuring, and packaging operations at scale. He built an understanding of quality control, compliance, and commercial discipline that few in New Zealand's emerging sector possess.</p>
-          <p class="ab-founder-bio">Returning to Aotearoa, Longo recognised that the knowledge gap between California and New Zealand represented a genuine opportunity — and that the land, the people, and the regulatory moment were aligned. Aho Farms is the direct result of that conviction. It is not a company that happened to Māori land. It is a company built from it.</p>
-          <p class="ab-founder-bio">His focus is building a sustainable, compliant, commercially serious medicinal cannabis enterprise that creates lasting value for whānau, for the patients it serves, and for Māori land-based enterprise in New Zealand.</p>
-          <div class="ab-founder-creds">
-            <div class="ab-founder-cred"><span class="ab-fcred-k">Background</span><span class="ab-fcred-v">20+ years cultivation industry experience, California and NZ</span></div>
-            <div class="ab-founder-cred"><span class="ab-fcred-k">Role</span><span class="ab-fcred-v">Managing Director — strategy, commercial development, stakeholder relationships</span></div>
-            <div class="ab-founder-cred"><span class="ab-fcred-k">Iwi</span><span class="ab-fcred-v">[PLACEHOLDER — please provide iwi affiliation if approved for public use]</span></div>
-            <div class="ab-founder-cred"><span class="ab-fcred-k">Based</span><span class="ab-fcred-v">Hawke's Bay, Aotearoa New Zealand</span></div>
-          </div>
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">06</span>
+        <div>
+          <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> INTERGENERATIONAL</span>
+          <h2 class="emerge">We are planting for generations we may never meet.</h2>
         </div>
       </div>
-
-      <h3 class="ab-team-subhdr reveal">Key team</h3>
-      <div class="ab-team-grid">
-        <div class="ab-team-card reveal">
-          <div class="ab-team-card-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <p>Team photo required</p>
-          </div>
-          <div class="ab-team-card-body">
-            <div class="ab-team-card-name">Michael Maclean</div>
-            <div class="ab-team-card-role">Cultivation Director</div>
-            <p class="ab-team-card-bio">Brings 20+ years of cannabis cultivation expertise across international and domestic markets. Leads all cultivation operations including genetics programme, growing protocols, and quality systems.</p>
+      <div class="abx-split">
+        <div>
+          <div class="abx-copy reveal d1">
+            <p class="abx-strong">Aho is the thread.</p>
+            <p>The thread between people and whenua. Between commercial success and community prosperity. Between knowledge from around the world and opportunity here at home.</p>
+            <p>We are building Aho Farms with a long horizon.</p>
+            <p>Success would mean seeing productive Māori whenua, skilled Māori workforces, stronger Māori businesses and capital, deeper connections to home, and a medicinal cannabis sector in which Māori have a meaningful place.</p>
+            <p>Not as separate outcomes.</p>
+            <p><strong>As parts of the same story.</strong></p>
           </div>
         </div>
-        <div class="ab-team-card reveal d1">
-          <div class="ab-team-card-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <p>Team photo required</p>
-          </div>
-          <div class="ab-team-card-body">
-            <div class="ab-team-card-name">[Name Placeholder]</div>
-            <div class="ab-team-card-role">Operations / [Role]</div>
-            <p class="ab-team-card-bio">Please provide the name, role, and a short bio for additional key team members. Photos can be supplied separately.</p>
-          </div>
-        </div>
-        <div class="ab-team-card reveal d2">
-          <div class="ab-team-card-img">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <p>Team photo required</p>
-          </div>
-          <div class="ab-team-card-body">
-            <div class="ab-team-card-name">[Name Placeholder]</div>
-            <div class="ab-team-card-role">[Role]</div>
-            <p class="ab-team-card-bio">Please provide the name, role, and a short bio for additional key team members. Photos can be supplied separately.</p>
-          </div>
-        </div>
+        <figure class="abx-photo reveal d2">
+          <img src="assets/aho-weave-macro.jpg" alt="Woven muka fibre — many threads bound into one aho" width="1200" height="1500" loading="lazy">
+          <figcaption>Many threads. One aho.</figcaption>
+        </figure>
       </div>
+      <p class="abx-pull emerge">What we cultivate today should create opportunity <em>long after the harvest.</em></p>
+    </div>
+  </section>
 
-      <div class="reveal">
-        <div class="ab-board-hdr">
-          <h3>Board of Directors</h3>
-          <p>Independent governance structure overseeing strategy, compliance, and long-term company direction.</p>
-        </div>
-        <table class="ab-board-table">
-          <thead>
-            <tr><th>Name</th><th>Role</th><th>Background</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Stephen McPhail</td><td>Independent Chair</td><td>Experienced independent director. Provides governance leadership and oversight of company strategy and compliance obligations.</td></tr>
-            <tr><td>Toro Waaka</td><td>Director</td><td>Represents the whenua and whānau interests central to Aho Farms' founding partnership. Brings deep knowledge of Māori land and community.</td></tr>
-            <tr><td>David Steele</td><td>Director</td><td>[PLACEHOLDER — please provide brief background note for David Steele]</td></tr>
-            <tr><td>Sarah Reo</td><td>Governance</td><td>[PLACEHOLDER — please provide brief background note for Sarah Reo]</td></tr>
-            <tr><td>Russell Bell</td><td>Governance</td><td>[PLACEHOLDER — please provide brief background note for Russell Bell]</td></tr>
-          </tbody>
-        </table>
+  <!-- ===================== TŪHONO MAI ===================== -->
+  <section class="abx-tuhono" id="tuhono">
+    <div class="starfield" data-stars="40" aria-hidden="true"></div>
+    <div class="wrap" data-aho>
+      <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TŪHONO MAI <span>·</span> THE THREAD CONTINUES</span>
+      <span class="abx-tuhono-line emerge">Tūhono mai.</span>
+      <p class="abx-tuhono-sub reveal d1">The thread continues with you.</p>
+      <p class="abx-tuhono-body reveal d2">Whether you represent Māori landowners looking at the future of your whenua, investors seeking Māori-led opportunities, whānau looking to build careers, or organisations wanting to work alongside us — there is a place in this kaupapa for meaningful partnership.</p>
+      <div class="abx-tuhono-btns reveal d3">
+        <a href="contact.html" class="btn btn-primary">Explore partnerships</a>
+        <a href="contact.html" class="abx-quiet-link">Work with Aho</a>
+        <a href="team.html" class="abx-quiet-link">Talk to our team</a>
       </div>
     </div>
   </section>
@@ -1943,7 +1865,6 @@ html.no-video .hero-scroll{opacity:1;}
        ======================================================== -->
   <section class="chapter" id="trust">
     <div class="trust-hdr" data-aho>
-      <div class="mlab reveal" style="justify-content:center;"><b>09</b>&nbsp;/&nbsp;TRUST</div>
       <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TE WHAKAMĀTAU <span>·</span> PROVEN QUALITY</span>
       <h2 class="emerge">Trust is grown here too.</h2>
       <p class="reveal d2">Every claim we make is licensed, tested or documented, and available to verified partners.</p>
@@ -1987,46 +1908,9 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <section class="chapter" id="forward">
-    <div class="drift gold" style="bottom:-10%;left:-10%;width:55vw;height:55vw;" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="reveal" style="margin-bottom:var(--s6);">
-        <div class="mlab reveal"><b>10</b>&nbsp;/&nbsp;LOOKING FORWARD</div>
-        <span class="eyebrow gold reveal">TE ANAMATA <span>·</span> LOOKING FORWARD</span>
-        <h2 class="emerge">The best<br>is yet to <em>grow.</em></h2>
-        <p class="reveal d2" style="color:var(--silver);max-width:60ch;margin-top:var(--s3);">Aho Farms is not a finished story. The foundation has been built — the licences held, the harvests completed, the supply chain activated, and the partnerships formed. What comes next is scale, depth, and impact at a level the first years were designed to make possible.</p>
-      </div>
-      <div class="ab-fwd-pillars">
-        <div class="ab-fwd-pillar reveal">
-          <div class="ab-fwd-pillar-n">1</div>
-          <h3 class="ab-fwd-pillar-h">Cultivation Expansion</h3>
-          <p class="ab-fwd-pillar-p">Indoor facility expansion to deliver year-round supply consistency. Increased outdoor capacity. Genetics programme delivering consistent top-tier cultivar performance across every batch.</p>
-        </div>
-        <div class="ab-fwd-pillar reveal d1">
-          <div class="ab-fwd-pillar-n">2</div>
-          <h3 class="ab-fwd-pillar-h">Export Growth</h3>
-          <p class="ab-fwd-pillar-p">Active development of Australian market distribution partnerships. NZ-grown medicinal cannabis, certified to the world's strictest standards, positioned for global supply. New markets as opportunities arise.</p>
-        </div>
-        <div class="ab-fwd-pillar reveal d2">
-          <div class="ab-fwd-pillar-n">3</div>
-          <h3 class="ab-fwd-pillar-h">Community Development</h3>
-          <p class="ab-fwd-pillar-p">Deeper whānau employment. Formal training pathways. Land utilisation expanding on the Māori freehold model. Shareholders seeing genuine returns. A company that proves Māori land-based enterprise works — and works well.</p>
-        </div>
-      </div>
-      <div class="ab-fwd-endquote reveal">
-        <p>"Ko te aho tūhono tāngata — it is the thread that connects people."</p>
-        <div class="ab-fwd-btns">
-          <a href="prescribers.html" class="btn btn-primary">Prescriber Access</a>
-          <a href="investors.html" class="btn btn-outline">Investor Information</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="chapter" id="company" style="padding-bottom:var(--s7);">
     <div class="wrap ab-co-grid">
       <div class="reveal">
-        <div class="mlab reveal"><b>11</b>&nbsp;/&nbsp;COMPANY DETAILS</div>
         <h2>Company information</h2>
         <p>Aho Farms Limited is registered in New Zealand and holds licences under the New Zealand Medicinal Cannabis Scheme. The company is Māori-owned and governed, operating from Hawke's Bay with an active cultivation and export licence.</p>
       </div>
@@ -2043,7 +1927,6 @@ html.no-video .hero-scroll{opacity:1;}
       </table>
     </div>
   </section>
-
 </main>
 
 <!-- FOOTER (preserved) -->
