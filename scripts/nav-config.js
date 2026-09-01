@@ -10,8 +10,9 @@ const NAV = [
     children: [
       { en: 'About',        mi: 'Mō Mātou',          href: 'about.html' },
       { en: 'Our Origins',  mi: 'Ō Mātou Takenga',   href: 'origins.html' },
+      // Our Board is deliberately NOT a nav item — the board is being folded
+      // into the Our Team page. board.html still exists and still resolves.
       { en: 'Our Team',     mi: 'Tō Mātou Tīma',     href: 'team.html' },
-      { en: 'Our Board',    mi: 'Te Poari',          href: 'board.html' },
       { en: 'Our Business', mi: 'Tā Mātou Pakihi',   href: 'business.html' },
       { en: 'Our Tohu',     mi: 'Tō Mātou Tohu',     href: 'tohu.html' },
       { en: 'Our Whenua',   mi: 'Tō Mātou Whenua',   href: 'cultivation.html#whenua' },

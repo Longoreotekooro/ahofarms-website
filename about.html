@@ -1694,28 +1694,35 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-city-grid .abx2-ph-frame{min-height:460px;}
 .abx2-city-stat .abx-stat{margin-bottom:var(--s4);}
 
-/* —— 02 whenua — the photos are 4:3, so the plate is built around a 4:3
-   photo object: flush to the plate's top-left corner (oversized image
-   edge), heading + stat sit beside it on the sand, and beneath, a short
-   statement on the left is woven against the copy on the right —— */
-.abx2-land{position:relative;padding:0 0 clamp(var(--s6),9vh,var(--s8));}
-.abx2-land-grid{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(var(--s4),4vw,var(--s6));align-items:end;}
-.abx2-land-photo{aspect-ratio:4/3;align-self:start;margin:0;border-radius:0 var(--plate-r) var(--plate-r) 0;box-shadow:0 30px 70px rgba(35,28,14,0.3);}
-.abx2-land-photo::before{background:linear-gradient(to top,rgba(20,16,8,0.6),transparent 36%);}
-.abx2-land-photo img{filter:saturate(0.96) contrast(1.02);}
-.abx2-land-lead{padding:clamp(var(--s5),7vh,var(--s7)) var(--s4) clamp(var(--s3),3vh,var(--s4)) 0;}
-.abx2-land-lead h2{font-size:clamp(2rem,3.3vw,3.1rem);line-height:1.08;margin:var(--s3) 0 clamp(var(--s4),5vh,var(--s5));max-width:15ch;text-wrap:balance;}
-.abx2-land-lead .abx-stat-n{font-size:clamp(3rem,5.4vw,4.6rem);}
-.abx2-land-body{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;margin-top:clamp(var(--s5),8vh,var(--s7));}
-.abx2-land-say{font-family:var(--font-h);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.22;letter-spacing:-0.015em;color:var(--starlight);max-width:15ch;text-wrap:balance;padding-top:4px;}
-.abx2-land-say em{font-style:italic;color:var(--gold);}
-.abx2-land-say::after{content:'';display:block;width:56px;height:1px;background:var(--gold);margin-top:var(--s3);}
+/* —— 02 whenua — a black chapter in three unequal movements: the claim
+   leads at full width with the hectare figure set against it; the 4:3 photo
+   then runs off the right edge with the statement held in the black beside
+   it; the argument closes in two quiet columns. —— */
+.abx2-land{position:relative;}
+.abx2-land-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,0.5fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:end;}
+.abx2-land-head h2{margin-top:var(--s3);font-size:clamp(2.5rem,5.4vw,4.8rem);line-height:1;letter-spacing:-0.04em;text-wrap:balance;}
+.abx2-land-head h2 em{display:block;margin-top:0.2em;font-style:italic;font-size:0.6em;line-height:1.1;letter-spacing:-0.02em;color:var(--gold-light);}
+.abx2-land-stat{padding-bottom:0.4rem;}
+.abx2-land-stat .abx-stat-n{font-size:clamp(2.8rem,4.6vw,4rem);}
+/* the photo object breaks the grid and runs to the right edge of the page */
+.abx2-land-frame{display:grid;grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);gap:clamp(var(--s4),4vw,var(--s6));align-items:center;
+  margin-top:clamp(var(--s5),8vh,var(--s7));
+  padding-left:max(var(--s4),calc((100% - var(--max))/2 + var(--s4)));}
+.abx2-land-photo{aspect-ratio:4/3;margin:0;border-radius:var(--plate-r) 0 0 var(--plate-r);box-shadow:0 40px 90px rgba(0,0,0,0.5);}
+.abx2-land-photo::before{background:linear-gradient(to top,rgba(4,7,7,0.72),transparent 40%);}
+.abx2-land-say{font-family:var(--font-h);font-weight:300;font-size:clamp(1.5rem,2.5vw,2.3rem);line-height:1.2;letter-spacing:-0.02em;color:var(--starlight);max-width:14ch;text-wrap:balance;}
+.abx2-land-say em{font-style:italic;color:var(--gold-light);}
+.abx2-land-say::after{content:'';display:block;width:56px;height:1px;background:var(--gold);opacity:0.75;margin-top:var(--s3);}
+.abx2-land-copy{columns:2;column-gap:clamp(var(--s5),5vw,var(--s7));margin-top:clamp(var(--s5),8vh,var(--s7));}
+.abx2-land-copy p{max-width:none;break-inside:avoid;}
 @media(max-width:900px){
-  .abx2-land-grid{grid-template-columns:1fr;gap:0;}
+  .abx2-land-head{grid-template-columns:1fr;gap:var(--s4);align-items:start;}
+  .abx2-land-stat{padding-bottom:0;}
+  .abx2-land-frame{grid-template-columns:1fr;gap:var(--s4);padding-left:0;margin-top:var(--s5);}
+  .abx2-land-aside{order:2;padding:0 var(--s4);}
   .abx2-land-photo{border-radius:0;box-shadow:none;}
-  .abx2-land-lead{padding:var(--s5) var(--s4) 0;}
-  .abx2-land-body{grid-template-columns:1fr;gap:var(--s4);margin-top:var(--s5);}
   .abx2-land-say{max-width:20ch;}
+  .abx2-land-copy{columns:1;margin-top:var(--s5);}
 }
 
 /* —— 03 mahi —— */
@@ -1767,12 +1774,6 @@ html.no-video .hero-scroll{opacity:1;}
   --teal-light:#2e6360;--hairline:rgba(20,26,24,0.16);
   background:#efe9db;color:#3a3f3c;
 }
-.ch-earth{
-  --starlight:#241f16;--silver:#5a5240;--white:#1c1811;
-  --gold:#7d5c2a;--gold-light:#6d5023;--gold-border:rgba(125,92,42,0.42);
-  --teal-light:#2e5f5c;--hairline:rgba(36,31,22,0.18);
-  background:#ded3bf;color:#463f30;
-}
 .ch-green{
   --hairline:rgba(243,241,235,0.12);
   background:linear-gradient(180deg,#0d1f1a,#102620 55%,#0c1d18);
@@ -1785,11 +1786,14 @@ html.no-video .hero-scroll{opacity:1;}
 .ch-seam-bottom::after{content:'';position:absolute;left:0;right:0;bottom:0;height:clamp(56px,9vh,110px);pointer-events:none;
   background:linear-gradient(to top,#050808,transparent);}
 /* component re-inks for light chapters */
-.ch-flax .abx2-ph-frame,.ch-earth .abx2-ph-frame{
+.ch-flax .abx2-ph-frame{
   border-color:rgba(143,106,51,0.5);
   background:rgba(255,255,255,0.32) repeating-linear-gradient(135deg,rgba(143,106,51,0.06) 0 1px,transparent 1px 14px);}
-.ch-flax .abx-photo,.ch-earth .abx-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
-.ch-earth .glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(36,31,22,0.14);box-shadow:0 24px 60px rgba(35,28,14,0.25);}
+.ch-flax .abx-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
+/* the aho chain re-inks for a light chapter — the dark-background glow and
+   the pale thread both wash out on flax */
+.ch-flax .abx-chain-item i{box-shadow:none;}
+.ch-flax .abx-chain-thread{background:linear-gradient(to right,rgba(143,106,51,0.6),rgba(46,99,96,0.42));}
 .ch-flax .abx-quiet-close{--gold-light:#7a5a28;}
 
 /* ================================================================
@@ -1799,7 +1803,7 @@ html.no-video .hero-scroll{opacity:1;}
    not butted colour bands. Seam gradients retired.
    ================================================================ */
 :root{--plate-g:clamp(10px,1.4vw,22px);--plate-r:clamp(16px,2vw,30px);}
-.ch-flax,.ch-earth,.ch-green{
+.ch-flax,.ch-green{
   width:calc(100% - 2*var(--plate-g));
   margin:var(--plate-g) auto;
   border-radius:var(--plate-r);
@@ -1824,7 +1828,7 @@ html.no-video .hero-scroll{opacity:1;}
    bridge, C thread bridges, D full-bleed visual resets.
    ================================================================ */
 .abx2-hero{width:100%;margin:0;border-radius:0;height:min(92vh,960px);}
-.ch-flax,.ch-earth,.ch-green{width:100%;margin:0;border-radius:0;overflow:visible;}
+.ch-flax,.ch-green{width:100%;margin:0;border-radius:0;overflow:visible;}
 
 /* C · thread bridge: a tall tonal zone with one drawn fibre */
 .tbridge{position:relative;height:clamp(150px,24vh,290px);
@@ -1834,17 +1838,11 @@ html.no-video .hero-scroll{opacity:1;}
 .tbridge.in path{stroke-dashoffset:0;}
 @media(prefers-reduced-motion:reduce){.tbridge path{stroke-dashoffset:0!important;transition:none!important;}}
 
-/* B · 01 → 02: the plates already separate the chapters; the whenua
-   photo object sits flush in the top corner of the earth plate */
+/* B · 01 → 02: the flax plate lifts off the black; 02 is the black itself,
+   so the chapters separate by tone alone and need no bridging device */
 #cities{padding-top:clamp(var(--s5),6vh,var(--s6));}
 
 /* A · tonal blends at chapter entries (band lives inside the padding) */
-.tzin-earth{padding-top:clamp(150px,20vh,250px)!important;}
-.tzin-earth::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(130px,18vh,220px);pointer-events:none;
-  background:linear-gradient(to bottom,#ded3bf,rgba(122,107,80,0.35) 55%,transparent);}
-.tzin-green{padding-top:clamp(140px,18vh,230px)!important;}
-.tzin-green::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(120px,16vh,200px);pointer-events:none;
-  background:linear-gradient(to bottom,#0d1f1a,rgba(10,20,17,0.4) 60%,transparent);}
 .tzin-flax{padding-top:clamp(150px,20vh,250px)!important;}
 .tzin-flax::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(130px,18vh,220px);pointer-events:none;
   background:linear-gradient(to bottom,#efe9db,rgba(150,138,112,0.3) 55%,transparent);}
@@ -1875,7 +1873,6 @@ html.no-video .hero-scroll{opacity:1;}
             <li><a href="about.html" aria-label="About"><span class="bil"><span class="bil-en">About</span><span class="bil-mi" aria-hidden="true">Mō Mātou</span></span></a></li>
             <li><a href="origins.html" aria-label="Our Origins"><span class="bil"><span class="bil-en">Our Origins</span><span class="bil-mi" aria-hidden="true">Ō Mātou Takenga</span></span></a></li>
             <li><a href="team.html" aria-label="Our Team"><span class="bil"><span class="bil-en">Our Team</span><span class="bil-mi" aria-hidden="true">Tō Mātou Tīma</span></span></a></li>
-            <li><a href="board.html" aria-label="Our Board"><span class="bil"><span class="bil-en">Our Board</span><span class="bil-mi" aria-hidden="true">Te Poari</span></span></a></li>
             <li><a href="business.html" aria-label="Our Business"><span class="bil"><span class="bil-en">Our Business</span><span class="bil-mi" aria-hidden="true">Tā Mātou Pakihi</span></span></a></li>
             <li><a href="tohu.html" aria-label="Our Tohu"><span class="bil"><span class="bil-en">Our Tohu</span><span class="bil-mi" aria-hidden="true">Tō Mātou Tohu</span></span></a></li>
             <li><a href="cultivation.html#whenua" aria-label="Our Whenua"><span class="bil"><span class="bil-en">Our Whenua</span><span class="bil-mi" aria-hidden="true">Tō Mātou Whenua</span></span></a></li>
@@ -1996,8 +1993,23 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 02 · WHENUA WITH POTENTIAL ================ -->
-  <section class="abx2-land ch-earth ch-seam-bottom" id="whenua">
-    <div class="abx2-land-grid">
+  <section class="abx-sec abx2-land" id="whenua">
+    <div class="wrap">
+      <div class="abx2-land-head">
+        <div>
+          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
+          <h2 class="emerge">5% remains.<em>What we do with it matters.</em></h2>
+        </div>
+        <div class="abx-stat abx2-land-stat reveal d1">
+          <span class="abx-stat-n">≈1.4m<sup>ha</sup></span>
+          <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
+        </div>
+      </div>
+    </div>
+    <div class="abx2-land-frame">
+      <div class="abx2-land-aside">
+        <p class="abx2-land-say emerge">Whenua with potential. <em>Opportunity with purpose.</em></p>
+      </div>
       <!-- [WHENUA PHOTO OBJECT — 4:3, PLACEHOLDER-QUALITY]: current assets are
            the worked-soil / pad / aerial site photos (all 4:3, shown at their
            native ratio — never crop them to a panorama); final asset could be
@@ -2013,30 +2025,19 @@ html.no-video .hero-scroll{opacity:1;}
           <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
         </span>
       </figure>
-      <div class="abx2-land-lead">
-        <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
-        <h2 class="emerge">5% remains. What we do with it matters.</h2>
-        <div class="abx-stat reveal d1">
-          <span class="abx-stat-n abx-stat-sm">≈1.4m<sup>ha</sup></span>
-          <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
-        </div>
-      </div>
     </div>
     <div class="wrap">
-      <div class="abx2-land-body">
-        <p class="abx2-land-say emerge">Whenua with potential. <em>Opportunity with purpose.</em></p>
-        <div class="abx-copy reveal d1">
-          <p>Today, Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it concentrated in the central and upper North Island.</p>
-          <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
-          <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
-          <p class="abx-source reveal">Source: Te Puni Kōkiri, 2024.</p>
-        </div>
+      <div class="abx-copy abx2-land-copy reveal d1">
+        <p>Today, Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it concentrated in the central and upper North Island.</p>
+        <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
+        <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
       </div>
+      <p class="abx-source reveal">Source: Te Puni Kōkiri, 2024.</p>
     </div>
   </section>
 
   <!-- ================ 03 · MAHI — the thread splits into many hands ================ -->
-  <section class="abx-sec" id="mahi">
+  <section class="abx-sec ch-flax" id="mahi">
     <div class="wrap">
       <div class="abx-head">
         <span class="abx-num reveal">03</span>
@@ -2078,7 +2079,7 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 04 · BACKED BY MĀORI ================ -->
-  <section class="abx-sec ch-earth" id="puna">
+  <section class="abx-sec ch-green" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
