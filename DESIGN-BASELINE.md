@@ -123,3 +123,16 @@ utility block.
 
 ## 25 · One connected experience
 Clear separation, one continuous story. *Separate chapters. One thread.*
+
+## Addendum · Plate grammar (2026-09-01, ref puro.nz — whole site)
+Section separation is executed as **inset rounded plates on the void canvas**:
+- Tonal chapters (flax / earth / green) and photo/cine moments render as
+  large rounded plates (`--plate-r`) inset by a consistent gutter
+  (`--plate-g`); the dark canvas shows around every plate.
+- Dark charcoal passages stay full-width on the canvas between plates.
+- Split sibling plates (text plate beside photo plate, separate radii and
+  a gutter between) are the preferred two-column treatment.
+- Photo plates clipped to the plate radius serve as visual breaks.
+- Gradient seams are retired — separation comes from air and radius.
+- Page heroes may be inset plates (interior pages) or full-bleed (homepage
+  film hero remains the signature exception).

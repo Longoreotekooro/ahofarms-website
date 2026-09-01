@@ -1775,6 +1775,31 @@ html.no-video .hero-scroll{opacity:1;}
 .ch-earth .abx2-land-caption .eyebrow,.ch-earth .abx2-land-caption h2{
   --starlight:#f3f1eb;--gold:#c9a06a;color:var(--starlight);}
 .ch-flax .abx-quiet-close{--gold-light:#7a5a28;}
+
+/* ================================================================
+   PLATE SYSTEM — chapter separation as inset rounded plates on the
+   void canvas (reference: puro.nz/quality). The canvas shows in the
+   gutters around each plate; separation comes from air and radius,
+   not butted colour bands. Seam gradients retired.
+   ================================================================ */
+:root{--plate-g:clamp(10px,1.4vw,22px);--plate-r:clamp(16px,2vw,30px);}
+.ch-flax,.ch-earth,.ch-green{
+  width:calc(100% - 2*var(--plate-g));
+  margin:var(--plate-g) auto;
+  border-radius:var(--plate-r);
+  overflow:hidden;
+}
+.ch-seam-top::before,.ch-seam-bottom::after{display:none;}
+.abx2-hero{
+  width:calc(100% - 2*var(--plate-g));
+  margin:calc(84px + var(--plate-g)) auto var(--plate-g);
+  border-radius:var(--plate-r);
+  height:min(86vh,900px);
+}
+.abx2-close-cine{
+  width:calc(100% - 2*var(--plate-g));
+  margin:0 auto;border-radius:var(--plate-r);
+}
 </style>
 <body>
 

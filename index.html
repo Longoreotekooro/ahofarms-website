@@ -1609,6 +1609,31 @@ html.no-video .hero-poster{display:block;}
 html.no-video .hero [data-ph]{opacity:1;transform:none;}
 html.no-video .hero-spark::after{transform:scaleY(1);}
 html.no-video .hero-scroll{opacity:1;}
+
+/* ================================================================
+   PLATE SYSTEM — chapter separation as inset rounded plates on the
+   void canvas (reference: puro.nz, whole-site grammar). Photo
+   moments and tonal chapters float with canvas gutters around them.
+   ================================================================ */
+:root{--plate-g:clamp(10px,1.4vw,22px);--plate-r:clamp(16px,2vw,30px);}
+.ch-flax{
+  --starlight:#1d211f;--silver:#4d524e;--white:#141816;
+  --gold:#8f6a33;--gold-light:#7a5a28;--gold-border:rgba(143,106,51,0.38);
+  --teal-light:#2e6360;--hairline:rgba(20,26,24,0.16);
+  background:#efe9db;color:#3a3f3c;
+  width:calc(100% - 2*var(--plate-g));
+  margin:var(--plate-g) auto;
+  border-radius:var(--plate-r);
+  overflow:hidden;
+}
+/* the Te Whenua film moment becomes a photo plate */
+.adv-whenua-cine{
+  width:calc(100% - 2*var(--plate-g));
+  margin-left:auto;margin-right:auto;
+  border-radius:var(--plate-r);overflow:hidden;
+}
+/* logo tiles sit calmly on the flax plate */
+.ch-flax .plogo{box-shadow:0 14px 34px rgba(35,28,14,0.18);border:1px solid rgba(36,31,22,0.08);}
 </style>
 </head>
 <body>
@@ -1887,7 +1912,7 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ========================================================
        OUR NETWORK — the thread runs through others too.
        ======================================================== -->
-  <section class="chapter" id="partners" style="padding-top:var(--s7);">
+  <section class="chapter ch-flax" id="partners" style="padding-top:var(--s6);padding-bottom:var(--s6);">
     <div class="partners-hdr" data-aho>
       <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">Ō MĀTOU HOA <span>·</span> OUR NETWORK</span>
       <h2 class="emerge">The thread runs through others too.</h2>
