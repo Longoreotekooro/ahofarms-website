@@ -1681,6 +1681,13 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
 .abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.7);}
 .abx2-car-43{aspect-ratio:4/3;}
+/* in the 01 chapter the carousel stretches to match the copy column,
+   so the image fills the space instead of leaving flax beneath it */
+.abx2-city-grid{align-items:stretch;}
+.abx2-city-grid .abx2-car-43{aspect-ratio:auto;height:100%;min-height:460px;}
+@media(max-width:900px){
+  .abx2-city-grid .abx2-car-43{aspect-ratio:4/3;height:auto;min-height:0;}
+}
 
 /* —— 01 cities —— */
 .abx2-city-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;}
