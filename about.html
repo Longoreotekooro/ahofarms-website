@@ -1680,6 +1680,7 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-car-dots{position:absolute;z-index:2;right:var(--s3);bottom:var(--s3);display:flex;gap:8px;}
 .abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
 .abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.7);}
+.abx2-car-43{aspect-ratio:4/3;}
 
 /* —— 01 cities —— */
 .abx2-city-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;}
@@ -1958,14 +1959,19 @@ html.no-video .hero-scroll{opacity:1;}
         </div>
       </div>
       <div class="abx2-city-grid">
-        <!-- [ARCHIVAL IMAGE — PLACEHOLDER]
-             FINAL ASSET: a licensed black-and-white archival photograph of
-             Māori urban migration, 1950s–70s — a family arriving in the city,
-             or a rural railway platform — treated duotone night/gold. -->
-        <div class="abx2-ph-frame reveal">
-          <span class="abx2-ph-tag">[ ARCHIVAL IMAGE — PLACEHOLDER ]</span>
-          <span class="abx2-ph-sub">Māori urban migration · 1950s–1970s · duotone treatment</span>
-        </div>
+        <!-- the whenua coming back into production — clearing, levelling,
+             and the expansion from the air (drone shot last) -->
+        <figure class="abx2-carousel abx2-car-43 reveal" aria-label="The whenua being brought back into production">
+          <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" loading="lazy">
+          <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" loading="lazy">
+          <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" loading="lazy">
+          <figcaption>The whenua, returning to work · Raupunga</figcaption>
+          <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+            <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
+            <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
+            <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
+          </span>
+        </figure>
         <div class="abx2-city-stat">
           <div class="abx-stat reveal">
             <span class="abx-stat-n">78.5<sup>%</sup></span>
@@ -2585,7 +2591,7 @@ window.addEventListener('scroll',()=>{
 /* whanau carousel - crossfade every 4.6s, dots to jump, pause on hover;
    no auto-advance for reduced-motion users */
 (function(){
-  const c=document.getElementById('whanauCarousel');if(!c)return;
+  document.querySelectorAll('.abx2-carousel').forEach(function(c){
   const imgs=[...c.querySelectorAll('img')],dots=[...c.querySelectorAll('.abx2-car-dot')];
   const R=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let i=0,t;
@@ -2595,6 +2601,7 @@ window.addEventListener('scroll',()=>{
   c.addEventListener('pointerenter',()=>clearInterval(t));
   c.addEventListener('pointerleave',arm);
   arm();
+  });
 })();
 </script>
 </body>
