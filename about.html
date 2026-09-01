@@ -1694,35 +1694,68 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-city-grid .abx2-ph-frame{min-height:460px;}
 .abx2-city-stat .abx-stat{margin-bottom:var(--s4);}
 
-/* —— 02 whenua — a black chapter in three unequal movements: the claim
-   leads at full width with the hectare figure set against it; the 4:3 photo
-   then runs off the right edge with the statement held in the black beside
-   it; the argument closes in two quiet columns. —— */
+/* —— 02 whenua — editorial split, after the CEO's reference boards
+   (2026-09-02): the copy column leads on the left (claim, short gold rule,
+   two paragraphs, three icon pillars); the 4:3 photo object bleeds off the
+   right edge and carries a floating stat card and a location pill; a two-up
+   statement row closes the chapter. Black base only — no second hue. —— */
 .abx2-land{position:relative;}
-.abx2-land-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,0.5fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:end;}
-.abx2-land-head h2{margin-top:var(--s3);font-size:clamp(2.5rem,5.4vw,4.8rem);line-height:1;letter-spacing:-0.04em;text-wrap:balance;}
-.abx2-land-head h2 em{display:block;margin-top:0.2em;font-style:italic;font-size:0.6em;line-height:1.1;letter-spacing:-0.02em;color:var(--gold-light);}
-.abx2-land-stat{padding-bottom:0.4rem;}
-.abx2-land-stat .abx-stat-n{font-size:clamp(2.8rem,4.6vw,4rem);}
-/* the photo object breaks the grid and runs to the right edge of the page */
-.abx2-land-frame{display:grid;grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);gap:clamp(var(--s4),4vw,var(--s6));align-items:center;
-  margin-top:clamp(var(--s5),8vh,var(--s7));
+.abx2-land-hero{display:grid;grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);grid-template-rows:auto 1fr;column-gap:clamp(var(--s4),4.5vw,var(--s7));
   padding-left:max(var(--s4),calc((100% - var(--max))/2 + var(--s4)));}
-.abx2-land-photo{aspect-ratio:4/3;margin:0;border-radius:var(--plate-r) 0 0 var(--plate-r);box-shadow:0 40px 90px rgba(0,0,0,0.5);}
-.abx2-land-photo::before{background:linear-gradient(to top,rgba(4,7,7,0.72),transparent 40%);}
-.abx2-land-say{font-family:var(--font-h);font-weight:300;font-size:clamp(1.5rem,2.5vw,2.3rem);line-height:1.2;letter-spacing:-0.02em;color:var(--starlight);max-width:14ch;text-wrap:balance;}
-.abx2-land-say em{font-style:italic;color:var(--gold-light);}
-.abx2-land-say::after{content:'';display:block;width:56px;height:1px;background:var(--gold);opacity:0.75;margin-top:var(--s3);}
-.abx2-land-copy{columns:2;column-gap:clamp(var(--s5),5vw,var(--s7));margin-top:clamp(var(--s5),8vh,var(--s7));}
-.abx2-land-copy p{max-width:none;break-inside:avoid;}
+.abx2-land-headblk{grid-column:1;grid-row:1;}
+.abx2-land-bodyblk{grid-column:1;grid-row:2;align-self:end;padding-top:var(--s3);}
+.abx2-land-headblk h2{margin-top:var(--s3);font-size:clamp(2.3rem,4.4vw,4rem);line-height:1;letter-spacing:-0.035em;text-wrap:balance;}
+.abx2-land-headblk h2 em{display:block;margin-top:0.18em;font-style:italic;font-size:0.62em;line-height:1.1;letter-spacing:-0.02em;color:var(--gold-light);}
+.abx2-land-rule{width:56px;height:1px;background:var(--gold);opacity:0.8;margin-top:clamp(var(--s3),3vh,var(--s4));}
+.abx2-land-bodyblk .abx-copy p{max-width:50ch;}
+/* icon pillars */
+.abx2-ic{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;border:1px solid rgba(201,160,106,0.5);color:var(--gold);flex:none;}
+.abx2-ic svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.abx2-land-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(var(--s4),4vh,var(--s5));}
+.abx2-land-pillar{padding:2px clamp(12px,1.6vw,22px) 0 0;}
+.abx2-land-pillar + .abx2-land-pillar{padding-left:clamp(12px,1.6vw,22px);border-left:1px solid var(--hairline);}
+.abx2-land-pillar .abx2-ic{margin-bottom:14px;}
+.abx2-land-pillar-l{display:block;font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--starlight);margin-bottom:6px;}
+.abx2-land-pillar-s{font-size:0.8rem;line-height:1.6;color:var(--silver);margin:0;max-width:22ch;}
+/* the photo object: at least 4:3, stretching taller only if the copy column is taller */
+.abx2-land-photo{grid-column:2;grid-row:1 / span 2;aspect-ratio:4/3;align-self:stretch;min-height:0;margin:0;
+  border-radius:var(--plate-r) 0 0 var(--plate-r);box-shadow:0 40px 90px rgba(0,0,0,0.5);}
+.abx2-land-photo::before{background:linear-gradient(to top,rgba(4,7,7,0.74),transparent 42%),linear-gradient(to bottom,rgba(4,7,7,0.38),transparent 40%);}
+.abx2-land-card{position:absolute;z-index:3;top:clamp(18px,3vw,40px);left:clamp(18px,3vw,40px);width:min(292px,60%);
+  padding:clamp(18px,2vw,26px) clamp(18px,2vw,26px) clamp(16px,2vw,22px);
+  background:rgba(8,12,11,0.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(201,160,106,0.28);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.45);}
+.abx2-land-card .abx-stat-n{font-size:clamp(2.5rem,3.9vw,3.5rem);}
+.abx2-land-card .abx-stat-l{max-width:none;margin-top:14px;padding-top:14px;font-size:0.68rem;letter-spacing:0.12em;}
+.abx2-land-card .abx-stat-l em{display:block;font-style:normal;color:var(--gold);margin-top:5px;}
+.abx2-land-photo figcaption{left:clamp(18px,3vw,40px);bottom:clamp(18px,3vw,36px);gap:9px;padding:9px 16px 9px 12px;border-radius:999px;
+  background:rgba(8,12,11,0.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(243,241,235,0.12);}
+.abx2-land-photo figcaption::before{display:none;}
+.abx2-land-photo figcaption svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;}
+/* closing two-up */
+.abx2-land-duo{display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(var(--s5),8vh,var(--s7));padding-top:clamp(var(--s4),5vh,var(--s5));border-top:1px solid var(--hairline);}
+.abx2-land-duo > div{padding-right:clamp(var(--s4),4vw,var(--s6));}
+.abx2-land-duo > div + div{padding-left:clamp(var(--s4),4vw,var(--s6));padding-right:0;border-left:1px solid var(--hairline);}
+.abx2-land-duo-head{display:flex;align-items:center;gap:18px;margin-bottom:var(--s3);}
+.abx2-land-duo-head .abx2-ic{width:62px;height:62px;}
+.abx2-land-duo-head .abx2-ic svg{width:30px;height:30px;}
+.abx2-land-duo h3{font-family:var(--font-h);font-weight:300;font-size:clamp(1.5rem,2.3vw,2.1rem);line-height:1.1;letter-spacing:-0.02em;color:var(--starlight);margin:0;}
+.abx2-land-duo h3 em{font-style:italic;color:var(--gold-light);}
+.abx2-land-duo p{color:var(--silver);font-size:0.95rem;line-height:1.85;max-width:52ch;margin:0;}
 @media(max-width:900px){
-  .abx2-land-head{grid-template-columns:1fr;gap:var(--s4);align-items:start;}
-  .abx2-land-stat{padding-bottom:0;}
-  .abx2-land-frame{grid-template-columns:1fr;gap:var(--s4);padding-left:0;margin-top:var(--s5);}
-  .abx2-land-aside{order:2;padding:0 var(--s4);}
-  .abx2-land-photo{border-radius:0;box-shadow:none;}
-  .abx2-land-say{max-width:20ch;}
-  .abx2-land-copy{columns:1;margin-top:var(--s5);}
+  .abx2-land-hero{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding-left:0;column-gap:0;}
+  .abx2-land-headblk{grid-column:1;grid-row:1;padding:0 var(--s4);}
+  .abx2-land-photo{grid-column:1;grid-row:2;align-self:start;border-radius:0;box-shadow:none;margin:var(--s4) 0;}
+  .abx2-land-bodyblk{grid-column:1;grid-row:3;padding:0 var(--s4);}
+  .abx2-land-pillars{grid-template-columns:1fr;gap:var(--s3);}
+  .abx2-land-pillar{display:grid;grid-template-columns:52px 1fr;column-gap:14px;padding:0;}
+  .abx2-land-pillar + .abx2-land-pillar{padding:var(--s3) 0 0;border-left:0;border-top:1px solid var(--hairline);}
+  .abx2-land-pillar .abx2-ic{grid-row:1 / span 2;margin:0;}
+  .abx2-land-pillar-s{max-width:none;}
+  .abx2-land-card{width:min(220px,62%);}
+  .abx2-land-duo{grid-template-columns:1fr;}
+  .abx2-land-duo > div{padding:0;}
+  .abx2-land-duo > div + div{padding:var(--s4) 0 0;margin-top:var(--s4);border-left:0;border-top:1px solid var(--hairline);}
 }
 
 /* —— 03 mahi —— */
@@ -1999,21 +2032,11 @@ html.no-video .hero-scroll{opacity:1;}
 
   <!-- ================ 02 · WHENUA WITH POTENTIAL ================ -->
   <section class="abx-sec abx2-land" id="whenua">
-    <div class="wrap">
-      <div class="abx2-land-head">
-        <div>
-          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
-          <h2 class="emerge">5% remains.<em>What we do with it matters.</em></h2>
-        </div>
-        <div class="abx-stat abx2-land-stat reveal d1">
-          <span class="abx-stat-n">≈1.4m<sup>ha</sup></span>
-          <span class="abx-stat-l">Māori freehold land — approximately 5% of Aotearoa</span>
-        </div>
-      </div>
-    </div>
-    <div class="abx2-land-frame">
-      <div class="abx2-land-aside">
-        <p class="abx2-land-say emerge">Whenua with potential. <em>Opportunity with purpose.</em></p>
+    <div class="abx2-land-hero">
+      <div class="abx2-land-headblk">
+        <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
+        <h2 class="emerge">5% remains.<em>What we do with it matters.</em></h2>
+        <div class="abx2-land-rule reveal" aria-hidden="true"></div>
       </div>
       <!-- [WHENUA PHOTO OBJECT — 4:3, PLACEHOLDER-QUALITY]: current assets are
            the worked-soil / pad / aerial site photos (all 4:3, shown at their
@@ -2023,19 +2046,57 @@ html.no-video .hero-scroll{opacity:1;}
         <img class="on" src="assets/whenua-work-1.jpg" alt="Freshly cleared and worked soil on the Aho Farms whenua" width="1400" height="1050" loading="lazy">
         <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" width="1400" height="1050" loading="lazy">
         <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air — greenhouses and the cleared expansion" width="1400" height="1052" loading="lazy">
-        <figcaption>Aho Farms whenua · Hawke's Bay</figcaption>
+        <div class="abx2-land-card abx-stat">
+          <span class="abx-stat-n">≈1.4m<sup>ha</sup></span>
+          <span class="abx-stat-l">Māori freehold land<em>Approximately 5% of Aotearoa</em></span>
+        </div>
+        <figcaption><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Aho Farms whenua · Hawke's Bay</figcaption>
         <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
           <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
           <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
           <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
         </span>
       </figure>
+      <div class="abx2-land-bodyblk">
+        <div class="abx-copy reveal d1">
+          <p>Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it in the central and upper North Island.</p>
+          <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
+        </div>
+        <div class="abx2-land-pillars reveal d2">
+          <div class="abx2-land-pillar">
+            <span class="abx2-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 16.5 8 9l4 4.5 3-3.5 6.5 6.5"/><path d="M2.5 20c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 7 0"/></svg></span>
+            <span class="abx2-land-pillar-l">Māori freehold land</span>
+            <p class="abx2-land-pillar-s">~5% of Aotearoa · ≈1.4 million hectares</p>
+          </div>
+          <div class="abx2-land-pillar">
+            <span class="abx2-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M7 20v-1.5a5 5 0 0 1 10 0V20"/><path d="M1.5 18.5V18a3.5 3.5 0 0 1 4.5-3.4M22.5 18.5V18a3.5 3.5 0 0 0-4.5-3.4"/></svg></span>
+            <span class="abx2-land-pillar-l">Opportunity</span>
+            <p class="abx2-land-pillar-s">Where whenua is suitable, potential creates possibility.</p>
+          </div>
+          <div class="abx2-land-pillar">
+            <span class="abx2-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5s-4.2-2.7-4.2-5.6A2.3 2.3 0 0 1 12 5.7a2.3 2.3 0 0 1 4.2 1.2c0 2.9-4.2 5.6-4.2 5.6z"/><path d="M3 15.5c1.8-1.2 3.6-1.4 5.4-.5l3 1.4c.9.4.9 1.7 0 2.1l-2.4 1"/><path d="M21 15.5c-1.8-1.2-3.6-1.4-5.4-.5l-2.1 1"/><path d="M3 20.5c2.6 0 4.2 1 6.2 1 1.6 0 3-.6 4.4-1.4L21 17.5"/></svg></span>
+            <span class="abx2-land-pillar-l">Purpose</span>
+            <p class="abx2-land-pillar-s">Economic returns while maintaining connection to the land and its people.</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="wrap">
-      <div class="abx-copy abx2-land-copy reveal d1">
-        <p>Today, Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it concentrated in the central and upper North Island.</p>
-        <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
-        <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
+      <div class="abx2-land-duo">
+        <div class="reveal">
+          <div class="abx2-land-duo-head">
+            <span class="abx2-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C6.5 21 3 17.2 3 12.6 3 7.6 7 4 11.6 4 15.8 4 19 7 19 10.8c0 3.2-2.4 5.6-5.4 5.6-2.6 0-4.6-1.9-4.6-4.3 0-2 1.5-3.5 3.4-3.5 1.6 0 2.7 1.1 2.7 2.5"/></svg></span>
+            <h3>More than land. <em>A legacy.</em></h3>
+          </div>
+          <p>For Aho, this whenua is more than a place to grow. It is a taonga tuku iho — a gift passed down, with the responsibility to protect it, enhance it and create opportunity for those who follow.</p>
+        </div>
+        <div class="reveal d1">
+          <div class="abx2-land-duo-head">
+            <span class="abx2-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8.5"/><path d="M12 12.5c0-4.2 3-6.8 7.5-6.8 0 4.4-3 7-7.5 6.8z"/><path d="M12 15.5c0-3.2-2.4-5.3-6-5.3 0 3.4 2.4 5.5 6 5.3z"/></svg></span>
+            <h3>Opportunity with <em>purpose.</em></h3>
+          </div>
+          <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
+        </div>
       </div>
       <p class="abx-source reveal">Source: Te Puni Kōkiri, 2024.</p>
     </div>
