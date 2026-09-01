@@ -1654,9 +1654,9 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-hero{position:relative;height:min(92vh,960px);min-height:560px;overflow:hidden;}
 .abx2-hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(0.94) contrast(1.04);}
 .abx2-hero-veil{position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(3,6,10,0.62),rgba(3,6,10,0.12) 30%,transparent 55%),
-             radial-gradient(70% 60% at 22% 78%,rgba(2,4,8,0.66),transparent 70%),
-             linear-gradient(to top,rgba(5,8,8,0.88),rgba(5,8,8,0.3) 34%,transparent 60%);}
+  background:linear-gradient(to bottom,rgba(3,6,10,0.66),rgba(3,6,10,0.16) 30%,transparent 55%),
+             radial-gradient(76% 68% at 20% 74%,rgba(2,4,8,0.8),rgba(2,4,8,0.35) 52%,transparent 74%),
+             linear-gradient(to top,rgba(5,8,8,0.92),rgba(5,8,8,0.34) 36%,transparent 62%);}
 .abx2-hero-ui{position:absolute;left:0;right:0;bottom:clamp(56px,11vh,120px);z-index:2;}
 .abx2-hero-ui h1{font-size:clamp(3rem,7vw,6.2rem);line-height:0.98;letter-spacing:-0.035em;margin:var(--s3) 0 var(--s3);text-shadow:0 2px 44px rgba(2,4,6,0.9);}
 .abx2-hero-line{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.2rem,2vw,1.6rem);color:var(--gold-light);text-shadow:0 1px 20px rgba(2,4,6,0.9);}
@@ -1813,9 +1813,12 @@ html.no-video .hero-scroll{opacity:1;}
        below stands in.
        ============================================================ -->
   <section class="abx2-hero" id="haere-mai">
-    <img class="abx2-hero-media" src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920,h_1100/v1780965789/aho_farms/raupunga/75978258454.jpg"
-      alt="The Aho Farms whenua — northern Hawke's Bay at first light" width="1920" height="1100">
-    <span class="abx2-ph-chip">[ HERO VIDEO — PLACEHOLDER ]</span>
+    <!-- Drone flight over the whenua (DJI 2026-06-13, 22s to end,
+         tail crossfaded onto its head so the loop is seamless). -->
+    <video class="abx2-hero-media" autoplay muted loop playsinline preload="auto"
+      poster="assets/aho-about-hero-poster.jpg"
+      src="assets/aho-about-hero.mp4"
+      aria-label="Aerial flight over the Aho Farms whenua — northern Hawke's Bay"></video>
     <div class="abx2-hero-veil" aria-hidden="true"></div>
     <div class="abx2-hero-ui">
       <div class="wrap">
