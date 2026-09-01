@@ -1448,6 +1448,55 @@ html.no-video .hero-scroll{opacity:1;}
 .cv-product-detail{font-size:0.8125rem;color:var(--silver);line-height:1.7;margin-bottom:var(--s4);}
 @media(max-width:600px){.cv-product-pair{grid-template-columns:1fr;max-width:400px;}}
 
+
+/* ================================================================
+   CHAPTER TONAL SYSTEM (DESIGN-BASELINE §2-4)
+   ================================================================ */
+.ch-flax{
+  --starlight:#1d211f;--silver:#4d524e;--white:#141816;
+  --gold:#8f6a33;--gold-light:#7a5a28;--gold-border:rgba(143,106,51,0.38);
+  --teal-light:#2e6360;--hairline:rgba(20,26,24,0.16);
+  background:#efe9db;color:#3a3f3c;
+}
+.ch-earth{
+  --starlight:#241f16;--silver:#5a5240;--white:#1c1811;
+  --gold:#7d5c2a;--gold-light:#6d5023;--gold-border:rgba(125,92,42,0.42);
+  --teal-light:#2e5f5c;--hairline:rgba(36,31,22,0.18);
+  background:#ded3bf;color:#463f30;
+}
+.ch-green{
+  --hairline:rgba(243,241,235,0.12);
+  background:linear-gradient(180deg,#0d1f1a,#102620 55%,#0c1d18);
+}
+.ch-seam-top{position:relative;}
+.ch-seam-top::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(56px,9vh,110px);pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom,#050808,transparent);}
+.ch-seam-bottom{position:relative;}
+.ch-seam-bottom::after{content:'';position:absolute;left:0;right:0;bottom:0;height:clamp(56px,9vh,110px);pointer-events:none;z-index:1;
+  background:linear-gradient(to top,#050808,transparent);}
+.ch-flax .glass{background:rgba(255,255,255,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(36,31,22,0.14);box-shadow:0 24px 60px rgba(35,28,14,0.22);}
+.ch-earth .cine{margin-top:0;}
+.ch-earth .cine::after{background:linear-gradient(to top,#ded3bf 6%,rgba(222,211,191,0.4) 35%,transparent);}
+.ch-earth .cine-caption .te-reo-line,.ch-earth .cine-caption h2{--starlight:#f3f1eb;--teal-light:#a2c4c3;color:var(--starlight);}
+.ch-earth .cv-stat-v,.ch-flax .cv-principle h3{color:var(--starlight);}
+
+/* —— cultivation hero —— */
+.cvx-hero{position:relative;height:min(92vh,940px);min-height:560px;overflow:hidden;}
+.cvx-hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:saturate(0.94) contrast(1.04);}
+.cvx-hero-veil{position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(3,6,10,0.66),rgba(3,6,10,0.16) 30%,transparent 55%),
+             radial-gradient(76% 68% at 22% 74%,rgba(2,4,8,0.78),rgba(2,4,8,0.34) 52%,transparent 74%),
+             linear-gradient(to top,rgba(5,8,8,0.92),rgba(5,8,8,0.34) 36%,transparent 62%);}
+.cvx-hero-ui{position:absolute;left:0;right:0;bottom:clamp(48px,10vh,110px);z-index:2;}
+.cvx-hero-ui h1{font-size:clamp(2.6rem,5.6vw,5rem);line-height:1.02;letter-spacing:-0.03em;margin:var(--s3) 0 var(--s3);text-shadow:0 2px 44px rgba(2,4,6,0.9);max-width:18ch;}
+.cvx-hero-sub{max-width:60ch;color:rgba(243,241,235,0.82);line-height:1.8;margin-bottom:var(--s4);text-shadow:0 1px 16px rgba(2,4,6,0.85);}
+.cvx-ph-chip{position:absolute;top:calc(var(--s3) + 92px);right:var(--s3);z-index:3;
+  padding:7px 12px;border:1px dashed rgba(201,160,106,0.55);border-radius:3px;
+  font-size:0.56rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(201,160,106,0.85);background:rgba(5,8,8,0.55);backdrop-filter:blur(6px);}
+@media(max-width:900px){
+  .cvx-ph-chip{top:auto;bottom:var(--s3);right:var(--s3);}
+}
 </style>
 </head>
 <body>
@@ -1490,20 +1539,32 @@ html.no-video .hero-scroll{opacity:1;}
 <!-- AHO:NAV:END -->
 
 <div class="page-grain" aria-hidden="true"></div>
-<main id="journey" style="padding-top:170px">
+<main id="journey" style="padding-top:0">
 
-    <section class="chapter" id="cultivation" style="padding-top:0">
-    <div class="starfield" data-stars="20" aria-hidden="true"></div>
-    <div class="drift teal" style="top:-10%;right:-10%;width:55vw;height:55vw;" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="mlab reveal"><b>01</b>&nbsp;/&nbsp;CULTIVATION &amp; QUALITY</div>
-      <span class="eyebrow gold reveal">MĀRA HUA <span>&middot;</span> CULTIVATION &amp; QUALITY</span>
-      <h2 class="emerge">Grown in Hawke's Bay. Tested to the highest standard.</h2>
-      <p class="reveal d2" style="margin-top:var(--s3);color:var(--silver);max-width:62ch;">Every plant is grown on Māori freehold land in Hawke's Bay — outdoors, in the greenhouse, or indoors, matched to where it performs best. Every batch is independently tested by Hill Labs, Hamilton before it reaches a patient.</p>
-      <div class="cv-pills reveal d3">
-        <span class="cv-pill">Licensed Cultivator</span>
-        <span class="cv-pill">Indoor &middot; Greenhouse &middot; Outdoor</span>
-        <span class="cv-pill">IANZ-Accredited Testing</span>
+  <!-- ============================================================
+       HERO — cultivation, image first (DESIGN-BASELINE §1).
+       [HERO VIDEO — PLACEHOLDER]
+       FINAL ASSET: 16:9 cinematic loop — slow push through the
+       greenhouse canopy at golden hour, leaves brushing the lens,
+       settling on a single maturing flower. 15–20s, silent,
+       graded to the night/gold palette.
+       ============================================================ -->
+  <section class="cvx-hero" id="cultivation">
+    <img class="cvx-hero-media"
+      src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920,h_1100/v1780965845/aho_farms/raupunga/IMG_4143.jpg"
+      alt="Cultivation at Aho Farms — Hawke's Bay" width="1920" height="1100">
+    <span class="cvx-ph-chip">[ HERO VIDEO — PLACEHOLDER ]</span>
+    <div class="cvx-hero-veil" aria-hidden="true"></div>
+    <div class="cvx-hero-ui">
+      <div class="wrap">
+        <span class="eyebrow gold reveal">MĀRA HUA <span>·</span> CULTIVATION &amp; QUALITY</span>
+        <h1 class="emerge">Grown in Hawke's Bay.<br>Tested to the highest standard.</h1>
+        <p class="cvx-hero-sub reveal d1">Every plant is grown on Māori freehold land in Hawke's Bay — outdoors, in the greenhouse, or indoors, matched to where it performs best. Every batch is independently tested by Hill Labs, Hamilton before it reaches a patient.</p>
+        <div class="cv-pills reveal d2">
+          <span class="cv-pill">Licensed Cultivator</span>
+          <span class="cv-pill">Indoor · Greenhouse · Outdoor</span>
+          <span class="cv-pill">IANZ-Accredited Testing</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1511,7 +1572,7 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ========================================================
        02 · THE WHENUA — Hawke's Bay
        ======================================================== -->
-  <section class="chapter" id="whenua">
+  <section class="chapter ch-earth ch-seam-top ch-seam-bottom" id="whenua" style="padding-top:var(--s7);">
     <div class="w-narrow" style="text-align:left;">
       <div class="mlab reveal" data-aho><b>02</b>&nbsp;/&nbsp;TERROIR</div>
       <span class="eyebrow gold reveal">TE WĀHI <span>·</span> SENSE OF PLACE</span>
@@ -1589,7 +1650,7 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ========================================================
        04 · HOW WE GROW — cultivation principles
        ======================================================== -->
-  <section class="chapter" id="standards">
+  <section class="chapter ch-flax ch-seam-top ch-seam-bottom" id="standards">
     <div class="drift gold" style="top:-6%;right:-12%;width:50vw;height:50vw;" aria-hidden="true"></div>
     <div class="braid-hdr" data-aho>
       <div class="mlab reveal"><b>04</b>&nbsp;/&nbsp;OUR SCIENCE</div>
@@ -1630,7 +1691,7 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ========================================================
        05 · QUALITY ASSURANCE
        ======================================================== -->
-  <section class="chapter" id="quality">
+  <section class="chapter ch-green" id="quality">
     <div class="drift gold" style="bottom:-10%;left:-10%;width:50vw;height:50vw;" aria-hidden="true"></div>
     <div class="cv-quality-grid">
       <div class="cv-quality-copy" data-aho>
@@ -1647,8 +1708,8 @@ html.no-video .hero-scroll{opacity:1;}
         </div>
       </div>
       <div class="cv-quality-img unveil reveal d1">
-        <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-          alt="Laboratory testing equipment" loading="lazy">
+        <img src="assets/aho-indoor-cultivation.jpg"
+          alt="Premium medicinal flower grown in Aho Farms controlled indoor environment" loading="lazy">
       </div>
     </div>
   </section>
