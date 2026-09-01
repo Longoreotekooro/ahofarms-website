@@ -1681,6 +1681,16 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-lede{font-family:var(--font-h);font-weight:300;font-size:clamp(1.7rem,3.2vw,2.8rem);line-height:1.18;letter-spacing:-0.02em;color:var(--starlight);max-width:24ch;text-wrap:balance;margin-bottom:var(--s4);}
 .abx2-intro-copy p{color:var(--silver);max-width:56ch;line-height:1.85;margin-bottom:var(--s3);}
 .abx2-intro-photo{max-width:420px;justify-self:end;}
+/* whānau carousel — stacked crossfade, quiet dots */
+.abx2-carousel{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:4px;box-shadow:0 30px 70px rgba(0,0,0,0.38);z-index:3;}
+.abx2-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s var(--ease);filter:saturate(0.92) contrast(1.03);}
+.abx2-carousel img.on{opacity:1;}
+.abx2-carousel::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,8,8,0.6),transparent 42%);}
+.abx2-carousel figcaption{position:absolute;z-index:2;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
+.abx2-carousel figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
+.abx2-car-dots{position:absolute;z-index:2;right:var(--s3);bottom:var(--s3);display:flex;gap:8px;}
+.abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
+.abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(201,160,106,0.7);}
 
 /* —— 01 cities —— */
 .abx2-city-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;}
@@ -1840,12 +1850,17 @@ html.no-video .hero-scroll{opacity:1;}
           <p class="reveal d1">By creating productive new uses for underutilised Māori whenua, we want to help build an industry in which Māori can participate across the entire value chain — as landowners, employees, investors, leaders and beneficiaries.</p>
           <p class="abx-hero-close reveal d2">This is about what we grow.<br><em>And what can grow from it.</em></p>
         </div>
-        <figure class="abx-photo abx2-intro-photo reveal d2">
-          <!-- [MACRO MUKA FIBRE IMAGE — PLACEHOLDER-QUALITY]: current asset is
-               the woven muka macro; final asset could be a single fibre
-               catching light against darkness, echoing the drawn thread. -->
-          <img src="assets/aho-weave-macro.jpg" alt="Muka fibre — the aho itself, thread and connection" width="1200" height="1500" loading="lazy">
-          <figcaption>Te aho · the thread</figcaption>
+        <!-- whānau building the farm — quiet crossfading carousel -->
+        <figure class="abx2-carousel abx2-intro-photo reveal d2" id="whanauCarousel" aria-label="Whānau building Aho Farms">
+          <img class="on" src="assets/whanau-build-1.jpg" alt="A whānau member at the scissor lift between greenhouse rows during the build" loading="lazy">
+          <img src="assets/whanau-build-2.jpg" alt="A whānau member on site during greenhouse construction" loading="lazy">
+          <img src="assets/whanau-build-3.jpg" alt="The crew driving greenhouse foundations into the covered ground" loading="lazy">
+          <figcaption>Whānau building the farm · Raupunga</figcaption>
+          <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+            <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
+            <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
+            <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
+          </span>
         </figure>
       </div>
     </div>
@@ -2568,5 +2583,21 @@ window.addEventListener('scroll',()=>{
 })();
 </script>
 
+<script>
+/* whanau carousel - crossfade every 4.6s, dots to jump, pause on hover;
+   no auto-advance for reduced-motion users */
+(function(){
+  const c=document.getElementById('whanauCarousel');if(!c)return;
+  const imgs=[...c.querySelectorAll('img')],dots=[...c.querySelectorAll('.abx2-car-dot')];
+  const R=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let i=0,t;
+  function show(n){i=n;imgs.forEach((im,k)=>im.classList.toggle('on',k===n));dots.forEach((d,k)=>d.classList.toggle('on',k===n));}
+  function arm(){if(R)return;clearInterval(t);t=setInterval(()=>show((i+1)%imgs.length),4600);}
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);arm();}));
+  c.addEventListener('pointerenter',()=>clearInterval(t));
+  c.addEventListener('pointerleave',arm);
+  arm();
+})();
+</script>
 </body>
 </html>
