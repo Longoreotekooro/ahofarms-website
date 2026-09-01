@@ -1589,6 +1589,51 @@ html.no-video .hero-scroll{opacity:1;}
   .abx-cycle-return{display:none;}
   .abx-split-rev .abx-photo{order:2;}
 }
+
+/* —— about v2: statistics, ring, restraint —— */
+.abx-statgrid{display:grid;grid-template-columns:minmax(220px,0.8fr) minmax(0,1.2fr);gap:clamp(var(--s4),5vw,var(--s7));align-items:start;}
+.abx-stat{display:flex;flex-direction:column;gap:10px;}
+.abx-stat-n{font-family:var(--font-h);font-weight:300;line-height:0.9;font-size:clamp(4rem,9vw,7.5rem);letter-spacing:-0.04em;color:var(--starlight);white-space:nowrap;}
+.abx-stat-n sup{font-size:0.34em;color:var(--gold);vertical-align:super;letter-spacing:0;}
+.abx-stat-sm{font-size:clamp(3rem,6.6vw,5.4rem);}
+.abx-stat-dim{color:rgba(243,241,235,0.45);}
+.abx-stat-l{max-width:24ch;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--silver);line-height:1.6;padding-top:10px;border-top:1px solid var(--gold-border);}
+.abx-statpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(var(--s4),5vw,var(--s7));max-width:760px;margin-bottom:clamp(var(--s4),5vh,var(--s5));}
+.abx-source{margin-top:var(--s3);font-size:0.6875rem;letter-spacing:0.06em;color:rgba(168,173,179,0.5);}
+.abx-photo-pair{display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s3);align-items:stretch;}
+.abx-photo-pair .abx-photo{min-height:100%;}
+
+/* the cycle ring */
+.abx-ring-wrap{display:flex;flex-direction:column;align-items:center;}
+.abx-ring{position:relative;width:min(100%,440px);aspect-ratio:1;}
+.abx-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.abx-ring-label{position:absolute;font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--starlight);white-space:nowrap;text-shadow:0 2px 12px rgba(2,4,6,0.9);}
+.abx-ring-centre{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.25;color:var(--gold-light);}
+.abx-ring-list{display:none;}
+@media(max-width:640px){
+  .abx-ring{display:none;}
+  .abx-ring-list{display:flex;flex-direction:column;gap:12px;width:100%;padding:var(--s3) 0;border-top:1px solid var(--hairline);}
+  .abx-ring-list span{font-family:var(--font-h);font-weight:300;font-size:1.15rem;color:var(--starlight);padding-left:16px;position:relative;}
+  .abx-ring-list span::before{content:'';position:absolute;left:0;top:0.62em;width:5px;height:5px;border-radius:50%;background:var(--gold);}
+  .abx-ring-list-back{font-style:italic;color:var(--gold-light)!important;}
+}
+
+/* from → to */
+.abx-fromto{display:flex;flex-direction:column;gap:16px;margin-top:clamp(var(--s4),5vh,var(--s5));padding-top:var(--s4);border-top:1px solid var(--hairline);}
+.abx-fromto span{display:flex;align-items:center;gap:16px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,2.2vw,1.8rem);color:var(--starlight);}
+.abx-fromto em{font-style:italic;color:rgba(243,241,235,0.55);}
+.abx-fromto i{flex:0 1 64px;min-width:28px;height:1px;background:linear-gradient(to right,rgba(201,160,106,0.7),rgba(115,168,165,0.45));}
+
+/* full-bleed close */
+.abx-cine{position:relative;height:min(66vh,640px);overflow:hidden;}
+.abx-cine img{width:100%;height:100%;object-fit:cover;filter:saturate(0.94) contrast(1.03);}
+.abx-cine::before{content:'';position:absolute;left:0;right:0;top:0;height:30%;background:linear-gradient(to bottom,rgba(5,5,5,0.9),transparent);}
+.abx-cine::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(to top,rgba(10,15,14,0.92),transparent);}
+
+@media(max-width:900px){
+  .abx-statgrid,.abx-photo-pair{grid-template-columns:1fr;}
+  .abx-statpair{grid-template-columns:1fr;gap:var(--s4);}
+}
 </style>
 <body>
 
@@ -1632,7 +1677,7 @@ html.no-video .hero-scroll{opacity:1;}
 <main id="journey" style="padding-top:170px">
 
   <!-- ========================================================
-       HERO — kia ora, ko Aho tēnei
+       HERO — emotional, not statistical
        ======================================================== -->
   <section class="abx-hero" id="haere-mai">
     <div class="starfield" data-stars="22" aria-hidden="true"></div>
@@ -1640,15 +1685,14 @@ html.no-video .hero-scroll{opacity:1;}
     <div class="wrap abx-hero-grid">
       <div class="abx-hero-copy">
         <span class="eyebrow gold reveal">NAU MAI <span>·</span> ABOUT AHO FARMS</span>
-        <h1 class="emerge">Kia ora.<br>Ko Aho tēnei.</h1>
+        <h1 class="emerge">Our whenua.<br>Our people.<br>Our future.</h1>
         <div class="abx-couplet reveal d1">
-          <span>Returning value to the whenua.</span>
-          <span>Returning people to the whenua.</span>
+          <span>Kia ora. Ko Aho tēnei.</span>
         </div>
-        <p class="reveal d2">Aho Farms was founded on a simple belief: whenua can do more than grow a crop. It can grow opportunity, employment, knowledge, connection and intergenerational prosperity.</p>
-        <p class="reveal d2">By creating new productive uses for underutilised Māori whenua, we see an opportunity to build a medicinal cannabis industry in which Māori are not simply participants, but landowners, investors, employees and beneficiaries.</p>
-        <p class="abx-hero-close reveal d3">This is about more than cultivation.<br><em>It is about what cultivation can make possible.</em></p>
-        <a class="btn btn-primary reveal d3" href="#whenua">Our kaupapa ↓</a>
+        <p class="reveal d2">Aho Farms is built on the belief that whenua can create more than a crop. It can create opportunity, skilled employment, stronger Māori participation in the economy, reconnection and intergenerational value.</p>
+        <p class="reveal d2">By creating productive new uses for underutilised Māori whenua, we want to help build an industry in which Māori can participate across the entire value chain — as landowners, employees, investors, leaders and beneficiaries.</p>
+        <p class="abx-hero-close reveal d3">This is about what we grow.<br><em>And what can grow from it.</em></p>
+        <a class="btn btn-primary reveal d3" href="#cities">Our kaupapa ↓</a>
       </div>
       <figure class="abx-hero-visual reveal d1">
         <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1000,h_1300/v1780965789/aho_farms/raupunga/75978258454.jpg"
@@ -1658,189 +1702,248 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ======================= 01 · WHENUA ======================= -->
-  <section class="abx-sec" id="whenua">
+  <!-- ================ 01 · FROM WHENUA TO THE CITIES ================ -->
+  <section class="abx-sec" id="cities">
     <div class="wrap">
       <div class="abx-head" data-aho>
         <span class="abx-num reveal">01</span>
         <div>
-          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA</span>
-          <h2 class="emerge">The opportunity has always been beneath our feet.</h2>
+          <span class="eyebrow gold reveal">TE NEKEHANGA <span>·</span> FROM WHENUA TO THE CITIES</span>
+          <h2 class="emerge">In little more than two generations, the shape of Māori life changed.</h2>
         </div>
       </div>
-      <div class="abx-cols reveal d1">
-        <div>
-          <p>Across Aotearoa, Māori collectively hold significant whenua with the potential to generate greater social and economic value for its owners and surrounding communities.</p>
-          <p>Aho Farms exists to help unlock that potential.</p>
+      <div class="abx-statgrid">
+        <div class="abx-stat reveal">
+          <span class="abx-stat-n">78.5<sup>%</sup></span>
+          <span class="abx-stat-l">of Māori lived in urban areas by 1981</span>
         </div>
-        <div>
-          <p>Through high-value medicinal cannabis cultivation, we aim to create productive opportunities for Māori-owned whenua while respecting that whenua is more than an economic asset.</p>
-        </div>
-      </div>
-      <p class="abx-pull emerge">It is whakapapa. It is identity. <em>It connects generations.</em></p>
-      <div class="abx-cols reveal">
-        <div>
-          <p>For us, revitalising whenua and revitalising Māori communities are part of the same kaupapa.</p>
-        </div>
-        <div>
-          <p class="abx-strong">When whenua thrives, there is an opportunity for whānau to thrive with it.</p>
+        <div class="abx-copy reveal d1">
+          <p>In 1926, just 15.6% of Māori lived in urban areas. By 1981, that figure had reached 78.5%.</p>
+          <p>Urbanisation brought access to employment and opportunity, but for many whānau it also meant physical distance from ancestral whenua, marae, hapū and iwi.</p>
+          <p>Aho cannot undo that history. But we believe creating meaningful economic opportunities on Māori whenua can give more of our people the choice to build careers closer to home.</p>
         </div>
       </div>
+      <p class="abx-pull emerge">Returning opportunity to the whenua can create <em>new reasons to return to the whenua.</em></p>
+      <p class="abx-source reveal">Source: Statistics New Zealand, New Zealand Official Yearbook.</p>
     </div>
   </section>
 
-  <!-- ================= 02 · WHAKAPAPA & RECONNECTION ================= -->
-  <section class="abx-sec" id="hononga">
-    <div class="drift teal" style="top:6%;left:-18%;width:56vw;height:56vw;" aria-hidden="true"></div>
+  <!-- ================ 02 · WHENUA WITH POTENTIAL ================ -->
+  <section class="abx-sec" id="whenua">
+    <div class="drift teal" style="top:8%;left:-18%;width:52vw;height:52vw;" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head" data-aho>
         <span class="abx-num reveal">02</span>
         <div>
-          <span class="eyebrow gold reveal">HE AHO KI TE WHENUA <span>·</span> WHAKAPAPA &amp; RECONNECTION</span>
-          <h2 class="emerge">Bringing our people home.</h2>
+          <span class="eyebrow gold reveal">HE TAONGA TUKU IHO <span>·</span> WHENUA WITH POTENTIAL</span>
+          <h2 class="emerge">5% remains. What we do with it matters.</h2>
         </div>
       </div>
-      <div class="abx-split">
-        <div>
-          <div class="abx-copy reveal d1">
-            <p>For generations, urbanisation drew many Māori away from their traditional rohe in search of employment, education and opportunity.</p>
-            <p>That movement created new possibilities, but it also contributed to distance between some whānau and the places, marae, hapū and iwi that anchor identity and belonging.</p>
-            <p>We believe economic opportunity on Māori whenua can become part of reversing that pattern.</p>
-            <p>When meaningful, skilled work exists closer to home, returning becomes possible. Whānau can build careers without necessarily having to leave their whenua behind.</p>
-            <p><strong>Aho Farms wants to help create those reasons to return.</strong></p>
-            <p>Not by trying to recreate the past, but by building a modern Māori industry firmly connected to where we come from.</p>
-          </div>
+      <div class="abx-statgrid">
+        <div class="abx-stat reveal">
+          <span class="abx-stat-n abx-stat-sm">≈1.4m<sup>ha</sup></span>
+          <span class="abx-stat-l">Māori freehold land</span>
         </div>
-        <figure class="abx-photo reveal d2">
-          <img src="assets/aho-team-whenua.jpg" alt="Whānau working together among the plants on Aho Farms whenua" width="1600" height="1067" loading="lazy">
-          <figcaption>Whānau on the whenua</figcaption>
-        </figure>
+        <div class="abx-copy reveal d1">
+          <p>Today, Māori freehold land represents approximately 5% of New Zealand's total land area, with much of it concentrated in the central and upper North Island.</p>
+          <p>For Aho, this whenua is not simply a commercial asset waiting to be developed. It is inherited across generations and carries whakapapa, identity and responsibility.</p>
+          <p>Where whenua is suitable, we see an opportunity to establish high-value cultivation that can generate employment, capability and sustainable economic returns while maintaining the connection between the land and its people.</p>
+        </div>
       </div>
-      <div class="abx-chain reveal" role="text" aria-label="Whenua to mahi to whānau to marae to hapū to iwi">
-        <span class="abx-chain-item"><i></i>Whenua</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Mahi</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Whānau</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Marae</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Hapū</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Iwi</span>
-      </div>
-      <p class="abx-chain-note reveal d1">A new economic thread can strengthen an old connection.</p>
+      <p class="abx-pull emerge">Whenua with potential. <em>Opportunity with purpose.</em></p>
+      <p class="abx-source reveal">Source: Te Puni Kōkiri, 2024.</p>
     </div>
   </section>
 
-  <!-- ======================= 03 · MAHI ======================= -->
+  <!-- ================ 03 · MAHI ================ -->
   <section class="abx-sec" id="mahi">
     <div class="wrap">
       <div class="abx-head" data-aho>
         <span class="abx-num reveal">03</span>
         <div>
-          <span class="eyebrow gold reveal">HE MAHI WHAI TIKANGA <span>·</span> MAHI</span>
-          <h2 class="emerge">Māori employment. Māori capability. Māori prosperity.</h2>
+          <span class="eyebrow gold reveal">HE MAHI WHAI TIKANGA <span>·</span> MAHI THAT BUILDS MĀORI ECONOMIES</span>
+          <h2 class="emerge">Bring opportunity home.</h2>
         </div>
       </div>
-      <div class="abx-split abx-split-rev">
-        <figure class="abx-photo reveal d2">
-          <img src="assets/aho-greenhouse-cultivation.jpg" alt="Skilled cultivation work under natural light in an Aho Farms greenhouse" width="900" height="1200" loading="lazy">
-          <figcaption>Skills that stay in the community</figcaption>
-        </figure>
+      <div class="abx-split">
         <div>
           <div class="abx-copy reveal d1">
-            <p><strong>A new industry creates more than jobs.</strong></p>
-            <p>It creates pathways into horticulture, science, cultivation, manufacturing, compliance, operations, logistics, technology, management and governance.</p>
-            <p>Our ambition is to develop those pathways for Māori.</p>
-            <p>We want people entering Aho Farms to have opportunities to build genuine expertise, progress into leadership and take knowledge with them throughout their careers.</p>
-            <p>Because every skilled worker represents more than an employee.</p>
-            <p>They represent income entering a household. Skills remaining within a community. Experience that can be passed on. And greater Māori participation in an emerging global industry.</p>
+            <p><strong>A medicinal cannabis operation requires far more than growers.</strong></p>
+            <p>It creates opportunities across horticulture, science, quality assurance, compliance, manufacturing, logistics, technology, management and governance.</p>
+            <p>Our ambition is to build pathways through those roles for Māori — creating skills that stay with our people, income that supports whānau and experience that contributes to a stronger Māori economy.</p>
           </div>
         </div>
+        <div class="abx-photo-pair reveal d2">
+          <figure class="abx-photo">
+            <img src="assets/aho-greenhouse-cultivation.jpg" alt="Skilled cultivation work under natural light in an Aho Farms greenhouse" width="900" height="1200" loading="lazy">
+          </figure>
+          <figure class="abx-photo">
+            <img src="assets/aho-team-whenua.jpg" alt="Whānau working together among the plants on Aho Farms whenua" width="1600" height="1067" loading="lazy">
+            <figcaption>Skills that stay with our people</figcaption>
+          </figure>
+        </div>
       </div>
-      <p class="abx-pull emerge">The measure of our success should not simply be what leaves the farm. <em>It should also be what remains in the community.</em></p>
+      <div class="abx-chain reveal" role="text" aria-label="Whenua to mahi to pūkenga to income to whānau to community">
+        <span class="abx-chain-item"><i></i>Whenua</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Mahi</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Pūkenga</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Income</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Whānau</span><span class="abx-chain-thread" aria-hidden="true"></span>
+        <span class="abx-chain-item"><i></i>Community</span>
+      </div>
+      <p class="abx-pull emerge">We don't only want to grow plants on Māori whenua. <em>We want to grow capability from it.</em></p>
     </div>
   </section>
 
-  <!-- ==================== 04 · MĀORI CAPITAL ==================== -->
+  <!-- ================ 04 · BACKED BY MĀORI ================ -->
   <section class="abx-sec" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head" data-aho>
         <span class="abx-num reveal">04</span>
         <div>
-          <span class="eyebrow gold reveal">NĀ TĀTOU, MĀ TĀTOU <span>·</span> MĀORI CAPITAL</span>
-          <h2 class="emerge">Backed by Māori. Building for Māori.</h2>
-        </div>
-      </div>
-      <div class="abx-cols reveal d1">
-        <div>
-          <p><strong>Ownership matters.</strong></p>
-          <p>Aho Farms is backed by Māori investment because we believe Māori economic development becomes more powerful when Māori participate throughout the value chain — not only through labour or land, but through capital and ownership as well.</p>
-        </div>
-        <div>
-          <p>Our ambition is to build a commercially strong enterprise capable of generating sustainable value for its investors, landowners, employees and communities.</p>
-          <p>That creates a different kind of cycle:</p>
-        </div>
-      </div>
-      <div class="abx-cycle reveal">
-        <div class="abx-cycle-item"><i></i><span>Māori whenua creates opportunity.</span></div>
-        <div class="abx-cycle-item"><i></i><span>Māori capital helps build it.</span></div>
-        <div class="abx-cycle-item"><i></i><span>Māori people develop it.</span></div>
-        <div class="abx-cycle-item"><i></i><span>Value can return to Māori communities.</span></div>
-        <div class="abx-cycle-return" aria-hidden="true">
-          <svg viewBox="0 0 60 130" preserveAspectRatio="none"><defs><linearGradient id="abxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(201,160,106,0.15)"/><stop offset="1" stop-color="rgba(201,160,106,0.75)"/></linearGradient></defs><path d="M52,126 C10,120 10,10 52,4" fill="none" stroke="url(#abxg)" stroke-width="1"/><path d="M52,4 l-7,-3 m7,3 l-7,3" stroke="rgba(201,160,106,0.7)" fill="none" stroke-width="1"/></svg>
-        </div>
-      </div>
-      <p class="abx-strong abx-cycle-close reveal d1">And from that foundation, the next opportunity can begin.</p>
-    </div>
-  </section>
-
-  <!-- ======================= 05 · HAUORA ======================= -->
-  <section class="abx-sec abx-quiet-sec" id="hauora">
-    <div class="wrap">
-      <div class="abx-head" data-aho>
-        <span class="abx-num reveal">05</span>
-        <div>
-          <span class="eyebrow reveal">HE RONGOĀ, HE ARA HOU <span>·</span> HAUORA</span>
-          <h2 class="emerge">From disproportionate harm to meaningful participation.</h2>
-        </div>
-      </div>
-      <div class="abx-quiet reveal d1">
-        <p>The relationship between Māori communities and cannabis carries a difficult history.</p>
-        <p>Māori have experienced disproportionate harm through the criminal justice system in relation to cannabis and other drug offences. That history cannot simply be separated from conversations about the emergence of a legal medicinal cannabis industry.</p>
-        <p><strong>Aho Farms sees an opportunity to contribute to a different future.</strong></p>
-        <p>One in which cannabis is approached through regulated cultivation, science, quality, healthcare and responsible access — and in which Māori have opportunities to participate in the legal industry being built around it.</p>
-        <p>Our long-term aspiration is that Māori are represented throughout that system: from whenua and cultivation through to ownership, employment, research and, where clinically appropriate, access to prescribed medicinal cannabis.</p>
-        <p class="abx-quiet-close">The plant associated with harm for some of our communities can become part of a highly regulated industry focused on health, knowledge and economic opportunity.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== 06 · INTERGENERATIONAL ================== -->
-  <section class="abx-sec" id="uri">
-    <div class="starfield" data-stars="34" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="abx-head" data-aho>
-        <span class="abx-num reveal">06</span>
-        <div>
-          <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> INTERGENERATIONAL</span>
-          <h2 class="emerge">We are planting for generations we may never meet.</h2>
+          <span class="eyebrow gold reveal">NĀ TĀTOU, MĀ TĀTOU <span>·</span> BACKED BY MĀORI</span>
+          <h2 class="emerge">Māori whenua. Māori capital. Māori participation.</h2>
         </div>
       </div>
       <div class="abx-split">
         <div>
           <div class="abx-copy reveal d1">
-            <p class="abx-strong">Aho is the thread.</p>
-            <p>The thread between people and whenua. Between commercial success and community prosperity. Between knowledge from around the world and opportunity here at home.</p>
-            <p>We are building Aho Farms with a long horizon.</p>
-            <p>Success would mean seeing productive Māori whenua, skilled Māori workforces, stronger Māori businesses and capital, deeper connections to home, and a medicinal cannabis sector in which Māori have a meaningful place.</p>
-            <p>Not as separate outcomes.</p>
-            <p><strong>As parts of the same story.</strong></p>
+            <p><strong>Aho Farms is backed by Māori investment because ownership matters.</strong></p>
+            <p>We believe Māori economic development is stronger when participation extends beyond land and labour into investment, leadership and ownership.</p>
+            <p>The opportunity is to create a cycle in which Māori capital helps activate Māori opportunity, commercially sustainable businesses create value, and more of that value has the potential to remain within Māori communities.</p>
           </div>
         </div>
-        <figure class="abx-photo reveal d2">
-          <img src="assets/aho-weave-macro.jpg" alt="Woven muka fibre — many threads bound into one aho" width="1200" height="1500" loading="lazy">
-          <figcaption>Many threads. One aho.</figcaption>
-        </figure>
+        <div class="abx-ring-wrap reveal d1">
+          <div class="abx-ring" aria-label="Māori whenua to Māori investment to Māori employment to Māori enterprise to Māori prosperity, returning to Māori whenua">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(201,160,106,0.4)" stroke-width="1"/>
+              <path d="M212,52 l-14,-6 m14,6 l-13,8" stroke="rgba(201,160,106,0.8)" fill="none" stroke-width="1.2"/>
+              <g fill="#c9a06a">
+                <circle cx="200" cy="50" r="3.4"/>
+                <circle cx="342.7" cy="153.6" r="3.4"/>
+                <circle cx="288.2" cy="321.4" r="3.4"/>
+                <circle cx="111.8" cy="321.4" r="3.4"/>
+                <circle cx="57.3" cy="153.6" r="3.4"/>
+              </g>
+            </svg>
+            <span class="abx-ring-label" style="left:50%;top:3%;transform:translate(-50%,-50%);">Māori Whenua</span>
+            <span class="abx-ring-label" style="left:93%;top:37%;transform:translate(-50%,-50%);">Māori Investment</span>
+            <span class="abx-ring-label" style="left:76%;top:88%;transform:translate(-50%,-50%);">Māori Employment</span>
+            <span class="abx-ring-label" style="left:24%;top:88%;transform:translate(-50%,-50%);">Māori Enterprise</span>
+            <span class="abx-ring-label" style="left:7%;top:37%;transform:translate(-50%,-50%);">Māori Prosperity</span>
+            <span class="abx-ring-centre">Mō tātou,<br>mā tātou.</span>
+          </div>
+          <div class="abx-ring-list" role="text">
+            <span>Māori Whenua</span><span>Māori Investment</span><span>Māori Employment</span><span>Māori Enterprise</span><span>Māori Prosperity</span><span class="abx-ring-list-back">↺ back to the whenua — Mō tātou, mā tātou.</span>
+          </div>
+        </div>
       </div>
-      <p class="abx-pull emerge">What we cultivate today should create opportunity <em>long after the harvest.</em></p>
+    </div>
+  </section>
+
+  <!-- ================ 05 · THE HARDER PART ================ -->
+  <section class="abx-sec abx-quiet-sec" id="context">
+    <div class="wrap">
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">05</span>
+        <div>
+          <span class="eyebrow reveal">TE TAHA UAUA <span>·</span> THE HARDER PART OF THE STORY</span>
+          <h2 class="emerge">17.5% of the population.<br>Around 52% of the prison population.</h2>
+        </div>
+      </div>
+      <div class="abx-statpair reveal d1" aria-label="Māori share of the prison population versus the general population">
+        <div class="abx-stat">
+          <span class="abx-stat-n">52<sup>%</sup></span>
+          <span class="abx-stat-l">Māori share of the prison population</span>
+        </div>
+        <div class="abx-stat">
+          <span class="abx-stat-n abx-stat-dim">17.5<sup>%</sup></span>
+          <span class="abx-stat-l">Māori share of the general population</span>
+        </div>
+      </div>
+      <div class="abx-quiet reveal d1">
+        <p>Māori continue to be dramatically overrepresented in New Zealand's prison population.</p>
+        <p>In 2026, Māori comprise around 52% of people in prison, despite representing approximately 17.5% of the general population.</p>
+        <p>That disparity extends beyond any single drug, offence or cause. It reflects a much broader and more complex history of inequity within New Zealand's justice system.</p>
+      </div>
+      <p class="abx-source reveal">Source: Office of the Inspectorate / Department of Corrections, 2026.</p>
+    </div>
+  </section>
+
+  <!-- ================ 06 · CANNABIS, PRECISELY ================ -->
+  <section class="abx-sec abx-quiet-sec" id="precise" style="padding-top:0;">
+    <div class="wrap">
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">06</span>
+        <div>
+          <span class="eyebrow reveal">TE KŌRERO TIKA <span>·</span> CANNABIS AND THE JUSTICE SYSTEM</span>
+          <h2 class="emerge">The history matters. So does getting it right.</h2>
+        </div>
+      </div>
+      <div class="abx-quiet reveal d1">
+        <p>Māori have been disproportionately represented among people identified by Police for personal possession and use of illicit drugs.</p>
+        <p>Ministry of Health analysis found Māori were identified by Police for these offences at a rate greater than their share of New Zealand's population. While conviction rates declined for both Māori and non-Māori, they declined more steeply for non-Māori.</p>
+        <p><strong>But an important distinction matters:</strong> the evidence does not show that large numbers of Māori have been imprisoned solely for cannabis possession or use. Ministry of Justice analysis indicates imprisonment solely for cannabis possession/use has been rare.</p>
+        <p>For Aho, acknowledging that history is not about overstating it.</p>
+        <p class="abx-quiet-close">It is about recognising the disproportionate interaction Māori have experienced with drug enforcement while looking toward a very different relationship with cannabis — one based on legal cultivation, science, regulation, employment, ownership and healthcare.</p>
+      </div>
+      <p class="abx-source reveal">Sources: Ministry of Health; Ministry of Justice.</p>
+    </div>
+  </section>
+
+  <!-- ================ 07 · FROM HARM TO HAUORA ================ -->
+  <section class="abx-sec" id="hauora">
+    <div class="wrap">
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">07</span>
+        <div>
+          <span class="eyebrow gold reveal">HE RONGOĀ, HE ARA HOU <span>·</span> FROM HARM TO HAUORA</span>
+          <h2 class="emerge">A different relationship with the plant.</h2>
+        </div>
+      </div>
+      <div class="abx-cols reveal d1">
+        <div>
+          <p>The future we are working toward is fundamentally different from the past.</p>
+          <p>Cannabis within New Zealand's medicinal framework is a highly regulated healthcare product — cultivated to defined standards and supplied through legal medical pathways.</p>
+        </div>
+        <div>
+          <p>Our aspiration is for Māori to have meaningful participation throughout that emerging system: from whenua and investment to employment, cultivation, research and leadership — and, where clinically appropriate, access to prescribed medicinal cannabis.</p>
+        </div>
+      </div>
+      <div class="abx-fromto reveal">
+        <span><em>From enforcement</em><i></i>to opportunity.</span>
+        <span><em>From exclusion</em><i></i>to participation.</span>
+        <span><em>From crop</em><i></i>to medicine.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ 08 · THE FUTURE ================ -->
+  <section class="abx-sec" id="uri" style="padding-bottom:0;">
+    <div class="starfield" data-stars="34" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="abx-head" data-aho>
+        <span class="abx-num reveal">08</span>
+        <div>
+          <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> WHAT COMES NEXT</span>
+          <h2 class="emerge">What we cultivate today should create opportunity for generations.</h2>
+        </div>
+      </div>
+      <div class="abx-cols reveal d1">
+        <div>
+          <p><strong>The story of Aho Farms is ultimately not about statistics.</strong></p>
+          <p>It is about what happens next.</p>
+        </div>
+        <div>
+          <p>More productive Māori whenua. More skilled Māori employment. More Māori capital participating in emerging industries. Stronger connections between people and place. And meaningful Māori participation in the future of medicinal cannabis in Aotearoa.</p>
+        </div>
+      </div>
+      <p class="abx-pull emerge" style="margin-bottom:clamp(var(--s5),6vh,var(--s6));">Whenua is where this story begins. <em>Our people are where its value should return.</em></p>
+    </div>
+    <div class="abx-cine" aria-label="Aho Farms whenua — northern Hawke's Bay">
+      <img src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,c_fill,w_1920,h_900/v1780965789/aho_farms/raupunga/75978258454.jpg"
+        alt="The Aho Farms whenua under open sky — northern Hawke's Bay" width="1920" height="900" loading="lazy">
     </div>
   </section>
 
@@ -1851,11 +1954,10 @@ html.no-video .hero-scroll{opacity:1;}
       <span class="eyebrow gold reveal" style="display:flex;justify-content:center;">TŪHONO MAI <span>·</span> THE THREAD CONTINUES</span>
       <span class="abx-tuhono-line emerge">Tūhono mai.</span>
       <p class="abx-tuhono-sub reveal d1">The thread continues with you.</p>
-      <p class="abx-tuhono-body reveal d2">Whether you represent Māori landowners looking at the future of your whenua, investors seeking Māori-led opportunities, whānau looking to build careers, or organisations wanting to work alongside us — there is a place in this kaupapa for meaningful partnership.</p>
-      <div class="abx-tuhono-btns reveal d3">
-        <a href="contact.html" class="btn btn-primary">Explore partnerships</a>
-        <a href="contact.html" class="abx-quiet-link">Work with Aho</a>
-        <a href="team.html" class="abx-quiet-link">Talk to our team</a>
+      <div class="abx-tuhono-btns reveal d2">
+        <a href="contact.html" class="btn btn-primary">Partner with us</a>
+        <a href="investors.html" class="abx-quiet-link">Invest with Aho</a>
+        <a href="contact.html" class="abx-quiet-link">Work with us</a>
       </div>
     </div>
   </section>
