@@ -1611,10 +1611,6 @@ html.no-video .hero-scroll{opacity:1;}
 }
 
 /* from → to */
-.abx-fromto{display:flex;flex-direction:column;gap:16px;margin-top:clamp(var(--s4),5vh,var(--s5));padding-top:var(--s4);border-top:1px solid var(--hairline);}
-.abx-fromto span{display:flex;align-items:center;gap:16px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,2.2vw,1.8rem);color:var(--starlight);}
-.abx-fromto em{font-style:italic;color:rgba(243,241,235,0.55);}
-.abx-fromto i{flex:0 1 64px;min-width:28px;height:1px;background:linear-gradient(to right,rgba(201,160,106,0.7),rgba(115,168,165,0.45));}
 
 /* full-bleed close */
 .abx-cine{position:relative;height:min(66vh,640px);overflow:hidden;}
@@ -1846,9 +1842,9 @@ html.no-video .hero-scroll{opacity:1;}
 /* CHAPTER TONES (CEO 2026-09-02): black base + flax off-white ONLY.
    The sand tone is retired and green is ruled out for this page. Order is
    dark(intro) - flax(01 cities) - dark(02 whenua) - flax(03 mahi) -
-   dark(04 puna) - photo(.vreset) - flax(05 hauora) - dark(06 uri): no two
-   adjacent chapters share a tone, and the full-bleed photograph carries the
-   one place where two dark chapters would otherwise have met.
+   dark(04 puna) - photo(.vreset) - dark(05 uri): the full-bleed photograph
+   is what separates the last two dark chapters, so keep it if either of
+   those chapters changes.
    B · 01 → 02: the flax lifts off the black, so 01 and 02 separate by tone
    alone and need no bridging device */
 #cities{padding-top:clamp(var(--s5),6vh,var(--s6));}
@@ -1864,9 +1860,7 @@ html.no-video .hero-scroll{opacity:1;}
 .vreset::before{content:'';position:absolute;left:0;right:0;top:0;height:34%;
   background:linear-gradient(to bottom,#050808,transparent);}
 .vreset::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;
-  background:linear-gradient(to top,#efe9db,rgba(239,233,219,0.45) 45%,transparent);}
-#hauora{padding-top:clamp(var(--s5),6vh,var(--s6));}
-#hauora .abx-fromto{max-width:640px;}
+  background:linear-gradient(to top,#050808,rgba(5,8,8,0.45) 45%,transparent);}
 
 @media(max-width:900px){
   .tbridge{height:clamp(110px,16vh,180px);}
@@ -2156,47 +2150,20 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- TRANSITION D · visual reset — the plant itself between the Māori
-       capital chapter and hauora. Rises out of near-black, dissolves into flax.
+       capital chapter and the close. Rises out of near-black and settles back
+       into it, so it reads as one held breath between two dark chapters.
        [MACRO CANNABIS FLOWER — PLACEHOLDER-QUALITY]
        FINAL ASSET: 21:9 trichome-level macro, warm rim light against
        darkness, very shallow focus; slow 8s drift if shot as video. -->
   <div class="vreset">
     <img src="assets/aho-why-aho-flower.jpg" alt="Premium medicinal cannabis flower — the plant at the centre of a regulated future" loading="lazy">
   </div>
-  <!-- ================ 05 · FROM HARM TO HAUORA ================ -->
-  <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="hauora">
-    <div class="wrap">
-      <div class="abx-head">
-        <span class="abx-num reveal">05</span>
-        <div>
-          <span class="eyebrow gold reveal">HE RONGOĀ, HE ARA HOU <span>·</span> FROM HARM TO HAUORA</span>
-          <h2 class="emerge">A different relationship with the plant.</h2>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div class="abx-copy reveal d1">
-            <p>The future we are working toward is fundamentally different from the past.</p>
-            <p>Cannabis within New Zealand's medicinal framework is a highly regulated healthcare product — cultivated to defined standards and supplied through legal medical pathways.</p>
-            <p>Our aspiration is for Māori to have meaningful participation throughout that emerging system: from whenua and investment to employment, cultivation, research and leadership — and, where clinically appropriate, access to prescribed medicinal cannabis.</p>
-          </div>
-          <div class="abx-fromto reveal">
-            <span><em>From enforcement</em><i></i>to opportunity.</span>
-            <span><em>From exclusion</em><i></i>to participation.</span>
-            <span><em>From crop</em><i></i>to medicine.</span>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <!-- ================ 06 · THE FUTURE — image-led close ================ -->
+  <!-- ================ 05 · THE FUTURE — image-led close ================ -->
   <section class="abx2-close" id="uri">
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">06</span>
+        <span class="abx-num reveal">05</span>
         <div>
           <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> WHAT COMES NEXT</span>
           <h2 class="emerge">What we cultivate today should create opportunity for generations.</h2>
