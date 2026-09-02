@@ -1536,8 +1536,6 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-pull{position:relative;max-width:30ch;margin:clamp(var(--s5),6vh,var(--s6)) 0;padding-top:var(--s4);font-family:var(--font-h);font-weight:300;line-height:1.22;font-size:clamp(1.6rem,3vw,2.5rem);letter-spacing:-0.02em;color:var(--starlight);text-wrap:balance;}
 .abx-pull::before{content:'';position:absolute;top:0;left:2px;width:52px;height:1px;background:linear-gradient(to right,var(--gold),transparent);}
 .abx-pull em{font-style:italic;color:var(--gold-light);}
-.abx-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:start;}
-.abx-split-rev{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);}
 .abx-photo{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.38);}
 .abx-photo img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(0.9) contrast(1.03);}
 .abx-photo::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,8,8,0.6),transparent 42%);}
@@ -1571,7 +1569,7 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-quiet-link:hover{color:var(--gold-light);border-color:var(--gold);}
 
 @media(max-width:900px){
-  .abx-hero-grid,.abx-split,.abx-split-rev,.abx-cols{grid-template-columns:1fr;}
+  .abx-cols{grid-template-columns:1fr;}
   .abx-hero-visual{order:-1;max-height:52vh;}
   .abx-hero-visual img{height:100%;object-fit:cover;}
   .abx-head{grid-template-columns:1fr;gap:var(--s2);}
@@ -1580,7 +1578,6 @@ html.no-video .hero-scroll{opacity:1;}
   .abx-chain-thread{min-width:16px;}
   .abx-cycle{padding-left:0;}
   .abx-cycle-return{display:none;}
-  .abx-split-rev .abx-photo{order:2;}
 }
 
 /* —— about v2: statistics, ring, restraint —— */
@@ -1597,13 +1594,13 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* the cycle ring */
 .abx-ring-wrap{display:flex;flex-direction:column;align-items:center;}
-.abx-ring{position:relative;width:min(100%,440px);aspect-ratio:1;}
-.abx-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-.abx-ring-label{position:absolute;font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--starlight);white-space:nowrap;text-shadow:0 2px 12px rgba(2,4,6,0.9);}
-.abx-ring-centre{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.25;color:var(--gold-light);}
+/* a head with no chapter number squares up to the content edge */
+.abx-head--flush{grid-template-columns:minmax(0,1fr);}
+.abx-circle{margin:clamp(var(--s5),7vh,var(--s6)) 0 0;width:100%;border-radius:var(--plate-r);overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,0.5);}
+.abx-circle img{display:block;width:100%;height:auto;}
 .abx-ring-list{display:none;}
 @media(max-width:640px){
-  .abx-ring{display:none;}
+  .abx-circle{border-radius:12px;box-shadow:none;}
   .abx-ring-list{display:flex;flex-direction:column;gap:12px;width:100%;padding:var(--s3) 0;border-top:1px solid var(--hairline);}
   .abx-ring-list span{font-family:var(--font-h);font-weight:300;font-size:1.15rem;color:var(--starlight);padding-left:16px;position:relative;}
   .abx-ring-list span::before{content:'';position:absolute;left:0;top:0.62em;width:5px;height:5px;border-radius:50%;background:var(--gold);}
@@ -2098,55 +2095,39 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="abx-sec" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="abx-head">
-        <span class="abx-num reveal">04</span>
+      <div class="abx-head abx-head--flush">
         <div>
           <span class="eyebrow gold reveal">NĀ TĀTOU, MĀ TĀTOU <span>·</span> BACKED BY MĀORI</span>
           <h2 class="emerge">Māori whenua. Māori capital. Māori participation.</h2>
         </div>
       </div>
-      <div class="abx-split">
-        <div>
-          <div class="abx-copy reveal d1">
-            <p><strong>Aho Farms is backed by Māori investment because ownership matters.</strong></p>
-            <p>We believe Māori economic development is stronger when participation extends beyond land and labour into investment, leadership and ownership.</p>
-            <p>The opportunity is to create a cycle in which Māori capital helps activate Māori opportunity, commercially sustainable businesses create value, and more of that value has the potential to remain within Māori communities.</p>
-          </div>
-        </div>
-        <div class="abx-ring-wrap reveal d1">
-          <div class="abx-ring" aria-label="Māori whenua to Māori investment to Māori employment to Māori enterprise to Māori prosperity, returning to Māori whenua">
-            <svg viewBox="0 0 400 400" aria-hidden="true">
-              <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(201,160,106,0.4)" stroke-width="1"/>
-              <path d="M212,52 l-14,-6 m14,6 l-13,8" stroke="rgba(201,160,106,0.8)" fill="none" stroke-width="1.2"/>
-              <g fill="#c9a06a">
-                <circle cx="200" cy="50" r="3.4"/>
-                <circle cx="342.7" cy="153.6" r="3.4"/>
-                <circle cx="288.2" cy="321.4" r="3.4"/>
-                <circle cx="111.8" cy="321.4" r="3.4"/>
-                <circle cx="57.3" cy="153.6" r="3.4"/>
-              </g>
-            </svg>
-            <span class="abx-ring-label" style="left:50%;top:3%;transform:translate(-50%,-50%);">Māori Whenua</span>
-            <span class="abx-ring-label" style="left:93%;top:37%;transform:translate(-50%,-50%);">Māori Investment</span>
-            <span class="abx-ring-label" style="left:76%;top:88%;transform:translate(-50%,-50%);">Māori Employment</span>
-            <span class="abx-ring-label" style="left:24%;top:88%;transform:translate(-50%,-50%);">Māori Enterprise</span>
-            <span class="abx-ring-label" style="left:7%;top:37%;transform:translate(-50%,-50%);">Māori Prosperity</span>
-            <span class="abx-ring-centre">Mō tātou,<br>mā tātou.</span>
-          </div>
-          <div class="abx-ring-list" role="text">
-            <span>Māori Whenua</span><span>Māori Investment</span><span>Māori Employment</span><span>Māori Enterprise</span><span>Māori Prosperity</span><span class="abx-ring-list-back">↺ back to the whenua — Mō tātou, mā tātou.</span>
-          </div>
+      <div class="abx-copy reveal d1">
+        <p><strong>Aho Farms is backed by Māori investment because ownership matters.</strong></p>
+        <p>We believe Māori economic development is stronger when participation extends beyond land and labour into investment, leadership and ownership.</p>
+        <p>The opportunity is to create a cycle in which Māori capital helps activate Māori opportunity, commercially sustainable businesses create value, and more of that value has the potential to remain within Māori communities.</p>
+      </div>
+      <div class="abx-ring-wrap reveal d1">
+        <!-- [MŌ TĀTOU, MĀ TĀTOU CIRCLE — supplied by the CEO 2026-09-02]
+             Replaces the hand-drawn SVG ring. The artwork carries its own
+             labels, so it runs full width; .abx-ring-list below repeats the
+             same content as text for phones and screen readers. -->
+        <figure class="abx-circle">
+          <img src="assets/aho-mo-tatou-circle.jpg" width="1402" height="1122" loading="lazy"
+               alt="A rope tied in a circle over a cannabis leaf, captioned Mō tātou, mā tātou. Five points sit around it: Māori Whenua, rooted in our land, guided by whakapapa. Māori Investment, investing in our future with purpose, patience and pride. Māori Employment, mahi that sustains whānau and creates lasting impact. Māori Enterprise, creating innovative pathways owned by our people. Māori Prosperity, building wealth that strengthens whānau and uplifts generations.">
+        </figure>
+        <div class="abx-ring-list" role="text">
+          <span>Māori Whenua</span><span>Māori Investment</span><span>Māori Employment</span><span>Māori Enterprise</span><span>Māori Prosperity</span><span class="abx-ring-list-back">↺ back to the whenua, mō tātou, mā tātou.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================ 05 · THE FUTURE — image-led close ================ -->
+  <!-- ================ 04 · THE FUTURE — image-led close ================ -->
   <section class="abx2-close" id="uri">
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">05</span>
+        <span class="abx-num reveal">04</span>
         <div>
           <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> WHAT COMES NEXT</span>
           <h2 class="emerge">What we cultivate today should create opportunity for generations.</h2>
