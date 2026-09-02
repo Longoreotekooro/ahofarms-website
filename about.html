@@ -1543,11 +1543,8 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-photo figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
 
 /* the chain — nodes strung on one thread */
-.abx-chain{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:clamp(var(--s5),6vh,var(--s6));padding:var(--s4) 0;border-top:1px solid var(--hairline);}
-.abx-chain-item{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.8vw,1.45rem);color:var(--starlight);white-space:nowrap;}
-.abx-chain-item i{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 9px rgba(201,160,106,0.7);}
-.abx-chain-thread{flex:1 1 24px;min-width:24px;height:1px;background:linear-gradient(to right,rgba(201,160,106,0.65),rgba(115,168,165,0.4));}
-.abx-chain-note{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.1rem,1.8vw,1.4rem);color:var(--gold-light);margin-top:var(--s3);}
+.abx-chainband{margin:clamp(var(--s5),6vh,var(--s6)) 0 0;width:100%;}
+.abx-chainband img{display:block;width:100%;height:auto;}
 
 /* the cycle — four stations, and the thread returns */
 .abx-cycle{position:relative;max-width:640px;margin:clamp(var(--s4),4vh,var(--s5)) 0 0;padding-left:64px;}
@@ -1574,8 +1571,6 @@ html.no-video .hero-scroll{opacity:1;}
   .abx-hero-visual img{height:100%;object-fit:cover;}
   .abx-head{grid-template-columns:1fr;gap:var(--s2);}
   .abx-num::after{display:none;}
-  .abx-chain{gap:10px;}
-  .abx-chain-thread{min-width:16px;}
   .abx-cycle{padding-left:0;}
   .abx-cycle-return{display:none;}
 }
@@ -1789,10 +1784,6 @@ html.no-video .hero-scroll{opacity:1;}
   border-color:rgba(143,106,51,0.5);
   background:rgba(255,255,255,0.32) repeating-linear-gradient(135deg,rgba(143,106,51,0.06) 0 1px,transparent 1px 14px);}
 .ch-flax .abx-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
-/* the aho chain re-inks for a light chapter — the dark-background glow and
-   the pale thread both wash out on flax */
-.ch-flax .abx-chain-item i{box-shadow:none;}
-.ch-flax .abx-chain-thread{background:linear-gradient(to right,rgba(143,106,51,0.6),rgba(46,99,96,0.42));}
 
 /* ================================================================
    PLATE SYSTEM — chapter separation as inset rounded plates on the
@@ -2079,14 +2070,14 @@ html.no-video .hero-scroll{opacity:1;}
           </figure>
         </div>
       </div>
-      <div class="abx-chain reveal" role="text" aria-label="Whenua to mahi to pūkenga to income to whānau to community">
-        <span class="abx-chain-item"><i></i>Whenua</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Mahi</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Pūkenga</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Income</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Whānau</span><span class="abx-chain-thread" aria-hidden="true"></span>
-        <span class="abx-chain-item"><i></i>Community</span>
-      </div>
+      <!-- [WHENUA TO COMMUNITY BANNER — supplied by the CEO 2026-09-02]
+           Replaces the hand-built .abx-chain row. Cropped from the supplied
+           1748x900 PNG to the band itself (1712x437); its cream is within two
+           points of the flax chapter, so it sits flush without a plate. -->
+      <figure class="abx-chainband reveal">
+        <img src="assets/aho-mahi-chain.jpg" width="1712" height="437" loading="lazy"
+             alt="Six linked steps: Whenua, our land, our foundation. Mahi, meaningful work, stronger futures. Pūkenga, growing skills, growing potential. Income, economic growth, whānau prosperity. Whānau, stronger together, for generations. Community, connected roots, shared abundance.">
+      </figure>
       <p class="abx-pull emerge">We don't only want to grow plants on Māori whenua. <em>We want to grow capability from it.</em></p>
     </div>
   </section>
