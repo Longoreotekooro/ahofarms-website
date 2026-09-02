@@ -1842,9 +1842,9 @@ html.no-video .hero-scroll{opacity:1;}
 /* CHAPTER TONES (CEO 2026-09-02): black base + flax off-white ONLY.
    The sand tone is retired and green is ruled out for this page. Order is
    dark(intro) - flax(01 cities) - dark(02 whenua) - flax(03 mahi) -
-   dark(04 puna) - photo(.vreset) - dark(05 uri): the full-bleed photograph
-   is what separates the last two dark chapters, so keep it if either of
-   those chapters changes.
+   dark(04 puna) - dark(05 uri). 04 and 05 are the one same-tone pair on the
+   page (CEO removed the photograph that used to divide them); 05 carries a
+   starfield and its own full-bleed close, which is what marks the change.
    B · 01 → 02: the flax lifts off the black, so 01 and 02 separate by tone
    alone and need no bridging device */
 #cities{padding-top:clamp(var(--s5),6vh,var(--s6));}
@@ -1853,14 +1853,6 @@ html.no-video .hero-scroll{opacity:1;}
 .tzin-flax{padding-top:clamp(150px,20vh,250px)!important;}
 .tzin-flax::before{content:'';position:absolute;left:0;right:0;top:0;height:clamp(130px,18vh,220px);pointer-events:none;
   background:linear-gradient(to bottom,#efe9db,rgba(150,138,112,0.3) 55%,transparent);}
-
-/* D · visual reset: full-bleed macro rising from black into flax */
-.vreset{position:relative;height:min(68vh,640px);overflow:hidden;}
-.vreset img{width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(0.96) contrast(1.05);}
-.vreset::before{content:'';position:absolute;left:0;right:0;top:0;height:34%;
-  background:linear-gradient(to bottom,#050808,transparent);}
-.vreset::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;
-  background:linear-gradient(to top,#050808,rgba(5,8,8,0.45) 45%,transparent);}
 
 @media(max-width:900px){
   .tbridge{height:clamp(110px,16vh,180px);}
@@ -2149,15 +2141,6 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- TRANSITION D · visual reset — the plant itself between the Māori
-       capital chapter and the close. Rises out of near-black and settles back
-       into it, so it reads as one held breath between two dark chapters.
-       [MACRO CANNABIS FLOWER — PLACEHOLDER-QUALITY]
-       FINAL ASSET: 21:9 trichome-level macro, warm rim light against
-       darkness, very shallow focus; slow 8s drift if shot as video. -->
-  <div class="vreset">
-    <img src="assets/aho-why-aho-flower.jpg" alt="Premium medicinal cannabis flower — the plant at the centre of a regulated future" loading="lazy">
-  </div>
   <!-- ================ 05 · THE FUTURE — image-led close ================ -->
   <section class="abx2-close" id="uri">
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
