@@ -1561,13 +1561,6 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-cycle-return svg{width:100%;height:100%;overflow:visible;}
 .abx-cycle-close{margin-top:var(--s4);}
 
-/* hauora — quiet, measured */
-.abx-quiet-sec{background:linear-gradient(to bottom,transparent,rgba(7,12,12,0.55) 18%,rgba(7,12,12,0.55) 82%,transparent);}
-.abx-quiet{max-width:62ch;}
-.abx-quiet p{color:var(--silver);font-size:0.98rem;line-height:1.9;margin-bottom:var(--s3);}
-.abx-quiet strong{color:var(--starlight);font-weight:500;}
-.abx-quiet-close{font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.2rem,2vw,1.6rem)!important;line-height:1.5!important;color:var(--gold-light)!important;padding-top:var(--s3);}
-
 /* tūhono mai */
 .abx-tuhono{position:relative;padding:clamp(var(--s7),12vh,var(--s9)) 0;text-align:center;overflow:hidden;}
 .abx-tuhono-line{display:block;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(3rem,7vw,5.8rem);letter-spacing:-0.03em;line-height:1;color:var(--starlight);margin:var(--s3) 0 var(--s2);}
@@ -1598,7 +1591,6 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-stat-sm{font-size:clamp(3rem,6.6vw,5.4rem);}
 .abx-stat-dim{color:rgba(243,241,235,0.45);}
 .abx-stat-l{max-width:24ch;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--silver);line-height:1.6;padding-top:10px;border-top:1px solid var(--gold-border);}
-.abx-statpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(var(--s4),5vw,var(--s7));max-width:760px;margin-bottom:clamp(var(--s4),5vh,var(--s5));}
 .abx-source{margin-top:var(--s3);font-size:0.6875rem;letter-spacing:0.06em;color:rgba(168,173,179,0.5);}
 .abx-photo-pair{display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s3);align-items:stretch;}
 .abx-photo-pair .abx-photo{min-height:100%;}
@@ -1632,7 +1624,6 @@ html.no-video .hero-scroll{opacity:1;}
 
 @media(max-width:900px){
   .abx-statgrid,.abx-photo-pair{grid-template-columns:1fr;}
-  .abx-statpair{grid-template-columns:1fr;gap:var(--s4);}
 }
 
 /* ================================================================
@@ -1752,11 +1743,6 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-offset-photo{max-width:86%;margin-top:var(--s4);margin-left:14%;}
 .abx2-mahi-grid .abx-photo figcaption{font-size:0.52rem;}
 
-/* —— 05 vertical statement —— */
-.abx2-uaua{overflow:visible;}
-.abx2-vertical{position:absolute;right:clamp(6px,2vw,28px);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;
-  font-size:0.62rem;font-weight:700;letter-spacing:0.5em;text-transform:uppercase;color:rgba(243,241,235,0.16);pointer-events:none;}
-
 /* —— 07 flower —— */
 .abx2-flower{max-width:440px;justify-self:end;}
 
@@ -1779,7 +1765,6 @@ html.no-video .hero-scroll{opacity:1;}
   .abx2-mahi-sticky{position:static;}
   .abx2-offset-photo{max-width:100%;margin-left:0;}
   .abx2-ph-chip{top:auto;bottom:var(--s3);right:var(--s3);}
-  .abx2-vertical{display:none;}
   .abx2-flower{justify-self:start;max-width:100%;}
   .abx2-city-grid .abx2-ph-frame{min-height:280px;}
 }
@@ -1815,7 +1800,6 @@ html.no-video .hero-scroll{opacity:1;}
    the pale thread both wash out on flax */
 .ch-flax .abx-chain-item i{box-shadow:none;}
 .ch-flax .abx-chain-thread{background:linear-gradient(to right,rgba(143,106,51,0.6),rgba(46,99,96,0.42));}
-.ch-flax .abx-quiet-close{--gold-light:#7a5a28;}
 
 /* ================================================================
    PLATE SYSTEM — chapter separation as inset rounded plates on the
@@ -1861,9 +1845,10 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* CHAPTER TONES (CEO 2026-09-02): black base + flax off-white ONLY.
    The sand tone is retired and green is ruled out for this page. Order is
-   dark - flax - dark - flax - dark - quiet-dark - photo - flax - dark; where
-   two dark chapters meet, .abx-quiet-sec deepens the second and .vreset puts
-   a full-bleed photograph between the hard chapters and hauora.
+   dark(intro) - flax(01 cities) - dark(02 whenua) - flax(03 mahi) -
+   dark(04 puna) - photo(.vreset) - flax(05 hauora) - dark(06 uri): no two
+   adjacent chapters share a tone, and the full-bleed photograph carries the
+   one place where two dark chapters would otherwise have met.
    B · 01 → 02: the flax lifts off the black, so 01 and 02 separate by tone
    alone and need no bridging device */
 #cities{padding-top:clamp(var(--s5),6vh,var(--s6));}
@@ -2170,70 +2155,19 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ================ 05 · THE HARDER PART ================ -->
-  <section class="abx-sec abx-quiet-sec abx2-uaua" id="context">
-    <span class="abx2-vertical" aria-hidden="true">TE TAHA UAUA</span>
-    <div class="wrap">
-      <div class="abx-head">
-        <span class="abx-num reveal">05</span>
-        <div>
-          <span class="eyebrow reveal">TE TAHA UAUA <span>·</span> THE HARDER PART OF THE STORY</span>
-          <h2 class="emerge">17.5% of the population.<br>Around 52% of the prison population.</h2>
-        </div>
-      </div>
-      <div class="abx-statpair reveal d1" aria-label="Māori share of the prison population versus the general population">
-        <div class="abx-stat">
-          <span class="abx-stat-n">52<sup>%</sup></span>
-          <span class="abx-stat-l">Māori share of the prison population</span>
-        </div>
-        <div class="abx-stat">
-          <span class="abx-stat-n abx-stat-dim">17.5<sup>%</sup></span>
-          <span class="abx-stat-l">Māori share of the general population</span>
-        </div>
-      </div>
-      <div class="abx-quiet reveal d1">
-        <p>Māori continue to be dramatically overrepresented in New Zealand's prison population.</p>
-        <p>In 2026, Māori comprise around 52% of people in prison, despite representing approximately 17.5% of the general population.</p>
-        <p>That disparity extends beyond any single drug, offence or cause. It reflects a much broader and more complex history of inequity within New Zealand's justice system.</p>
-      </div>
-      <p class="abx-source reveal">Source: Office of the Inspectorate / Department of Corrections, 2026.</p>
-    </div>
-  </section>
-
-  <!-- ================ 06 · CANNABIS, PRECISELY ================ -->
-  <section class="abx-sec abx-quiet-sec" id="precise" style="padding-top:0;">
-    <div class="wrap">
-      <div class="abx-head">
-        <span class="abx-num reveal">06</span>
-        <div>
-          <span class="eyebrow reveal">TE KŌRERO TIKA <span>·</span> CANNABIS AND THE JUSTICE SYSTEM</span>
-          <h2 class="emerge">The history matters. So does getting it right.</h2>
-        </div>
-      </div>
-      <div class="abx-quiet reveal d1">
-        <p>Māori have been disproportionately represented among people identified by Police for personal possession and use of illicit drugs.</p>
-        <p>Ministry of Health analysis found Māori were identified by Police for these offences at a rate greater than their share of New Zealand's population. While conviction rates declined for both Māori and non-Māori, they declined more steeply for non-Māori.</p>
-        <p><strong>But an important distinction matters:</strong> the evidence does not show that large numbers of Māori have been imprisoned solely for cannabis possession or use. Ministry of Justice analysis indicates imprisonment solely for cannabis possession/use has been rare.</p>
-        <p>For Aho, acknowledging that history is not about overstating it.</p>
-        <p class="abx-quiet-close">It is about recognising the disproportionate interaction Māori have experienced with drug enforcement while looking toward a very different relationship with cannabis — one based on legal cultivation, science, regulation, employment, ownership and healthcare.</p>
-      </div>
-      <p class="abx-source reveal">Sources: Ministry of Health; Ministry of Justice.</p>
-    </div>
-  </section>
-
-  <!-- TRANSITION D · visual reset — the plant itself between the hard
-       chapters and hauora. Rises out of near-black, dissolves into flax.
+  <!-- TRANSITION D · visual reset — the plant itself between the Māori
+       capital chapter and hauora. Rises out of near-black, dissolves into flax.
        [MACRO CANNABIS FLOWER — PLACEHOLDER-QUALITY]
        FINAL ASSET: 21:9 trichome-level macro, warm rim light against
        darkness, very shallow focus; slow 8s drift if shot as video. -->
   <div class="vreset">
     <img src="assets/aho-why-aho-flower.jpg" alt="Premium medicinal cannabis flower — the plant at the centre of a regulated future" loading="lazy">
   </div>
-  <!-- ================ 07 · FROM HARM TO HAUORA ================ -->
+  <!-- ================ 05 · FROM HARM TO HAUORA ================ -->
   <section class="abx-sec ch-flax ch-seam-top ch-seam-bottom" id="hauora">
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">07</span>
+        <span class="abx-num reveal">05</span>
         <div>
           <span class="eyebrow gold reveal">HE RONGOĀ, HE ARA HOU <span>·</span> FROM HARM TO HAUORA</span>
           <h2 class="emerge">A different relationship with the plant.</h2>
@@ -2257,12 +2191,12 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ================ 08 · THE FUTURE — image-led close ================ -->
+  <!-- ================ 06 · THE FUTURE — image-led close ================ -->
   <section class="abx2-close" id="uri">
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">08</span>
+        <span class="abx-num reveal">06</span>
         <div>
           <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> WHAT COMES NEXT</span>
           <h2 class="emerge">What we cultivate today should create opportunity for generations.</h2>
