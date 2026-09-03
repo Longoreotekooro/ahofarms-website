@@ -1455,10 +1455,15 @@ html.no-video .hero-scroll{opacity:1;}
 /* —— 3 · the journey before aho (flax) —— */
 .og-journey-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,0.42fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:end;margin-bottom:clamp(var(--s6),9vh,var(--s8));}
 .og-journey-head .og-ph{min-height:420px;aspect-ratio:3/4;}
+.og-journey-head .og-founder{aspect-ratio:3/2;align-self:end;}
 .og-timeline{position:relative;padding-top:38px;}
 .og-timeline-track{position:absolute;left:0;right:calc(-1*var(--s4));top:0;height:1px;background:linear-gradient(to right,var(--gold) 0 88%,transparent);opacity:0.7;}
 .og-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(var(--s3),2.4vw,var(--s5));list-style:none;margin:0;padding:0;}
 .og-step{position:relative;padding-top:var(--s3);}
+.og-timeline-fig{margin:0;border-radius:10px;overflow:hidden;box-shadow:0 26px 60px rgba(35,28,14,0.22);}
+.og-timeline-fig img{display:block;width:100%;height:auto;}
+.og-timeline.has-fig{padding-top:0;}
+.og-timeline.has-fig .og-timeline-track,.og-timeline.has-fig .og-steps{display:none;}
 .og-step::before{content:'';position:absolute;left:0;top:-42px;width:7px;height:7px;border-radius:50%;background:var(--gold);}
 .og-step::after{content:'';position:absolute;left:3px;top:-35px;width:1px;height:30px;background:var(--gold);opacity:0.55;}
 .og-step h3{font-family:var(--font-h);font-weight:300;font-size:clamp(1.35rem,1.9vw,1.8rem);line-height:1.15;color:var(--starlight);margin-bottom:12px;}
@@ -1535,7 +1540,12 @@ html.no-video .hero-scroll{opacity:1;}
   .og-home .og-photo{aspect-ratio:4/3;}
   .og-journey-head{grid-template-columns:1fr;}
   .og-journey-head .og-ph{min-height:0;aspect-ratio:4/3;}
+  .og-journey-head .og-founder{max-width:520px;}
   .og-timeline{padding:0 0 0 22px;}
+  .og-timeline.has-fig{padding:0 0 0 22px;}
+  .og-timeline.has-fig .og-timeline-fig{display:none;}
+  .og-timeline.has-fig .og-timeline-track,.og-timeline.has-fig .og-steps{display:grid;}
+  .og-timeline.has-fig .og-timeline-track{display:block;}
   .og-timeline-track{left:3px;right:auto;top:0;bottom:0;width:1px;height:auto;background:linear-gradient(to bottom,var(--gold) 0 90%,transparent);}
   .og-steps{grid-template-columns:1fr;gap:var(--s4);}
   .og-step{padding-top:0;}
@@ -1688,11 +1698,21 @@ html.no-video .hero-scroll{opacity:1;}
             <p>Years before Aho Farms existed, our founder travelled to the United States to attend college and play American football.</p>
           </div>
         </div>
-        <!-- [FOUNDER PORTRAIT — PLACEHOLDER]: 3:4, natural light on the whenua,
-             looking off-frame toward the hills; quiet, not corporate. -->
-        <div class="og-ph" role="img" aria-label="FOUNDER PORTRAIT placeholder"><b>[ FOUNDER PORTRAIT — PLACEHOLDER ]</b><span>3:4 portrait · natural light on the whenua · looking off-frame toward the hills · quiet, not corporate</span></div>
+        <!-- [FOUNDER PORTRAIT]: current source is a 420x279 headshot, so the
+             frame follows its native 3:2 rather than the 3:4 in the brief.
+             Swap in a higher-resolution original (1200px+ wide) when available. -->
+        <figure class="og-photo og-founder">
+          <img src="assets/aho-origin-founder.jpg" alt="Aho Farms founder smiling, standing by a lake with hills behind" width="420" height="279" loading="lazy">
+          <figcaption>Our founder</figcaption>
+        </figure>
       </div>
-      <div class="og-timeline reveal">
+      <div class="og-timeline has-fig reveal">
+        <!-- Desktop: the illustrated timeline (aho cord with five knots over the
+             Hawke's Bay hills). Below 900px the same five steps render as the
+             text list so the copy stays readable on phones. -->
+        <figure class="og-timeline-fig">
+          <img src="assets/aho-origin-journey-timeline.jpg" alt="Timeline of the journey before Aho: American football, the injury, medicine, California, seven years — five knots along a single cord above the Hawke's Bay hills" width="1903" height="826" loading="lazy">
+        </figure>
         <span class="og-timeline-track" aria-hidden="true"></span>
         <ol class="og-steps">
           <li class="og-step">
