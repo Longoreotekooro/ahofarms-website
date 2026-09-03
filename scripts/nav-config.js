@@ -17,7 +17,7 @@ const NAV = [
       { en: 'Our Tohu',     mi: 'Tō Mātou Tohu',     href: 'tohu.html' },
       { en: 'Our Whenua',   mi: 'Tō Mātou Whenua',   href: 'cultivation.html#whenua' },
       { en: 'Cultivation',  mi: 'Māra Hua',          href: 'cultivation.html' },
-      { en: 'Quality',      mi: 'Te Whakamātau',     href: 'about.html#trust' },
+      { en: 'Quality',      mi: 'Te Whakamātau',     href: 'cultivation.html#trust' },
       { en: 'Our Kaupapa',  mi: 'Te Kaupapa',        href: 'kaupapa.html' },
       { en: 'News',         mi: 'Ngā Kōrero',        href: 'news.html' },
     ],

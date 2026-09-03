@@ -88,18 +88,27 @@ expect(donorLines[248].trim().startsWith('/* ==='), 'nav CSS start marker moved'
 expect(donorLines[409].trim() === '}', 'nav CSS end marker moved');
 expect(donorLines[1280].trim().startsWith('/* ==='), 'footer CSS start marker moved');
 expect(donorLines[1331].trim() === '}', 'footer CSS end marker moved');
-expect(donorLines[1511].includes('<footer class="footer" id="contact">'), 'footer HTML start marker moved');
-expect(donorLines[1562].trim() === '</footer>', 'footer HTML end marker moved');
+// Everything in the BODY shifts when the nav gains or loses an item - and
+// this script stamps its own donor, so that happens on every nav-config.js
+// edit. Pinning body line numbers made the script fail the next time the nav
+// changed size; derive the offset from the footer marker instead. The CSS
+// ranges below live in <head>, ahead of the nav, so they never move.
+const FOOTER_ANCHOR = 1512; // 1-based line of <footer ...> when these ranges were written
+const footerAt = donorLines.findIndex(l => l.includes('<footer class="footer" id="contact">')) + 1;
+expect(footerAt > 0, 'footer HTML start marker not found in donor');
+const BODY_SHIFT = footerAt - FOOTER_ANCHOR;
+function sliceBody(a, b) { return sliceLines(a + BODY_SHIFT, b + BODY_SHIFT); }
+expect(donorLines[1562 + BODY_SHIFT].trim() === '</footer>', 'footer HTML end marker moved');
 
 const NAV_CSS = sliceLines(249, 410);
 const FOOTER_CSS = sliceLines(1281, 1332);
 const STAR_CSS = sliceLines(195, 207);
-const FOOTER_HTML = sliceLines(1512, 1563); // <footer ...> ... </footer>, no leading comment
-const JS_ENV = sliceLines(1574, 1577);
-const JS_SCROLL = sliceLines(1580, 1582);
-const JS_STARFIELD = sliceLines(1595, 1620);
-const JS_DRAWER = sliceLines(1577, 1614);
-const JS_DROPDOWN = sliceLines(1616, 1721);
+const FOOTER_HTML = sliceBody(1512, 1563); // <footer ...> ... </footer>, no leading comment
+const JS_ENV = sliceBody(1574, 1577);
+const JS_SCROLL = sliceBody(1580, 1582);
+const JS_STARFIELD = sliceBody(1595, 1620);
+const JS_DRAWER = sliceBody(1577, 1614);
+const JS_DROPDOWN = sliceBody(1616, 1721);
 
 // Root tokens the ported CSS needs that legacy pages don't already define.
 // (--teal/--teal-light/--teal-deep/--white are already identical across
