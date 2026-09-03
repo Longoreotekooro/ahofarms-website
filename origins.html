@@ -1387,6 +1387,7 @@ html.no-video .hero-scroll{opacity:1;}
   --teal-light:#2e6360;--hairline:rgba(20,26,24,0.16);
   background:#efe9db;color:#3a3f3c;
 }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 .og-sec{position:relative;padding:clamp(96px,12vh,160px) 0;overflow:hidden;}
 .og-sec > *{position:relative;z-index:1;}
 .og-copy p{color:var(--silver);font-size:0.98rem;line-height:1.9;max-width:56ch;margin-bottom:var(--s3);}
@@ -1453,9 +1454,24 @@ html.no-video .hero-scroll{opacity:1;}
 .og-beat em{font-style:italic;color:var(--gold-light);}
 
 /* —— 3 · the journey before aho (flax) —— */
-.og-journey-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,0.42fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:end;margin-bottom:clamp(var(--s6),9vh,var(--s8));}
-.og-journey-head .og-ph{min-height:420px;aspect-ratio:3/4;}
-.og-journey-head .og-founder{aspect-ratio:3/2;align-self:end;}
+.og-founder-banner{position:relative;min-height:clamp(560px,82vh,900px);background:#0d0f0d;color:var(--starlight);overflow:hidden;display:flex;align-items:center;}
+.og-founder-banner-img{position:absolute;top:0;right:0;bottom:0;width:60%;height:100%;object-fit:cover;object-position:50% 28%;filter:saturate(0.94) contrast(1.03);}
+.og-founder-banner-rope{position:absolute;left:0;bottom:0;z-index:1;width:clamp(220px,26vw,420px);height:auto;pointer-events:none;opacity:0.9;
+  -webkit-mask-image:linear-gradient(to right,#000 55%,transparent),linear-gradient(to top,#000 45%,transparent);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,#000 55%,transparent),linear-gradient(to top,#000 45%,transparent);mask-composite:intersect;}
+.og-founder-banner::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,#0d0f0d 0 34%,rgba(13,15,13,0.94) 42%,rgba(13,15,13,0.55) 54%,rgba(13,15,13,0) 68%),
+             linear-gradient(to top,rgba(13,15,13,0.55),rgba(13,15,13,0) 32%),
+             linear-gradient(to bottom,rgba(13,15,13,0.35),rgba(13,15,13,0) 22%);}
+.og-founder-banner-ui{position:relative;z-index:2;width:100%;padding:clamp(88px,12vh,150px) 0;}
+.og-founder-copy{max-width:36rem;}
+.og-founder-copy .og-h2{margin-bottom:var(--s4);}
+.og-knot-rule{display:flex;align-items:center;gap:10px;color:var(--gold);margin:0 0 var(--s4);max-width:30rem;}
+.og-knot-rule span{flex:1;height:1px;background:linear-gradient(to right,rgba(201,160,106,0.15),rgba(201,160,106,0.7) 50%,rgba(201,160,106,0.15));}
+.og-knot-rule svg{flex:none;opacity:0.9;}
+.og-founder-copy .og-copy p{color:rgba(243,241,235,0.82);font-size:1.02rem;line-height:2;max-width:34rem;}
+.og-founder-tag{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(var(--s5),6vh,var(--s7));font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--starlight);}
+.og-founder-tag::before{content:'';width:34px;height:1px;background:var(--gold);}
 .og-timeline{position:relative;padding-top:38px;}
 .og-timeline-track{position:absolute;left:0;right:calc(-1*var(--s4));top:0;height:1px;background:linear-gradient(to right,var(--gold) 0 88%,transparent);opacity:0.7;}
 .og-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(var(--s3),2.4vw,var(--s5));list-style:none;margin:0;padding:0;}
@@ -1538,9 +1554,12 @@ html.no-video .hero-scroll{opacity:1;}
   .og-grid--copy-photo,.og-grid--photo-copy,.og-thread-sec .og-grid{grid-template-columns:1fr;}
   .og-return .og-photo{aspect-ratio:4/3;order:-1;position:relative;top:auto;}
   .og-home .og-photo{aspect-ratio:4/3;}
-  .og-journey-head{grid-template-columns:1fr;}
-  .og-journey-head .og-ph{min-height:0;aspect-ratio:4/3;}
-  .og-journey-head .og-founder{max-width:520px;}
+  .og-founder-banner{min-height:0;display:block;}
+  .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
+  .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
+  .og-founder-banner-rope{display:none;}
+  .og-founder-banner-ui{margin-top:-28vw;padding:0 0 clamp(64px,10vh,96px);}
+  .og-founder-copy{max-width:none;}
   .og-timeline{padding:0 0 0 22px;}
   .og-timeline.has-fig{padding:0 0 0 22px;}
   .og-timeline.has-fig .og-timeline-fig{display:none;}
@@ -1688,24 +1707,34 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 3 · THE JOURNEY BEFORE AHO ================ -->
-  <section class="og-sec ch-flax og-journey" id="journey-before">
-    <div class="wrap">
-      <div class="og-journey-head">
-        <div>
+  <!-- Full-bleed founder banner: copy on the left over deep charcoal, the
+       founder photograph bleeding in from the right. Photo asset is the text-free
+       right portion of the founder composite (907x916); the rope strip is a
+       crop of its bottom-left corner. -->
+  <section class="og-founder-banner" id="journey-before">
+    <img class="og-founder-banner-img" src="assets/aho-origin-founder-banner.jpg" alt="Aho Farms founder smiling, standing by a lake with hills behind" width="907" height="916" loading="lazy">
+    <img class="og-founder-banner-rope" src="assets/aho-origin-rope.jpg" alt="" width="470" height="216" loading="lazy" aria-hidden="true">
+    <div class="og-founder-banner-ui">
+      <div class="wrap">
+        <div class="og-founder-copy">
           <span class="eyebrow gold og-eyebrow reveal">THE JOURNEY BEFORE AHO</span>
           <h2 class="og-h2 emerge">But the journey to Aho began much earlier.</h2>
+          <div class="og-knot-rule reveal d1" aria-hidden="true">
+            <span></span>
+            <svg viewBox="0 0 28 16" width="28" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M8 8a5 5 0 1 0 6-4.9A5 5 0 1 0 8 8Zm0 0a5 5 0 1 1 6 4.9A5 5 0 1 1 8 8Z"/><path d="M14 3.1a5 5 0 1 1 0 9.8"/></svg>
+            <span></span>
+          </div>
           <div class="og-copy reveal d1">
             <p>Years before Aho Farms existed, our founder travelled to the United States to attend college and play American football.</p>
           </div>
+          <span class="og-founder-tag reveal d2">Our founder</span>
         </div>
-        <!-- [FOUNDER PORTRAIT]: current source is a 420x279 headshot, so the
-             frame follows its native 3:2 rather than the 3:4 in the brief.
-             Swap in a higher-resolution original (1200px+ wide) when available. -->
-        <figure class="og-photo og-founder">
-          <img src="assets/aho-origin-founder.jpg" alt="Aho Farms founder smiling, standing by a lake with hills behind" width="420" height="279" loading="lazy">
-          <figcaption>Our founder</figcaption>
-        </figure>
       </div>
+    </div>
+  </section>
+  <section class="og-sec ch-flax og-journey" aria-labelledby="journey-timeline-heading">
+    <div class="wrap">
+      <h2 id="journey-timeline-heading" class="sr-only">Five steps on the way to Aho</h2>
       <div class="og-timeline has-fig reveal">
         <!-- Desktop: the illustrated timeline (aho cord with five knots over the
              Hawke's Bay hills). Below 900px the same five steps render as the
