@@ -1673,10 +1673,10 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* —— 03 mahi —— */
 .abx2-mahi-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,0.98fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:center;}
-/* the supplied photo is a 3:4 portrait but the scene is horizontal — hold it
-   at 4:3 and bias the framing down so the group, not the sky, carries it */
+/* the asset is pre-cropped to exactly the 4:3 band this slot shows, so every
+   delivered pixel is visible — no object-position nudging needed */
 .abx2-mahi-photo{margin:0;}
-.abx2-mahi-photo img{aspect-ratio:4/3;object-position:center 62%;}
+.abx2-mahi-photo img{aspect-ratio:4/3;}
 .abx2-mahi-grid .abx-photo figcaption{font-size:0.52rem;}
 
 /* —— 07 flower —— */
@@ -1686,7 +1686,6 @@ html.no-video .hero-scroll{opacity:1;}
 @media(max-width:900px){
   .abx2-intro-grid,.abx2-city-grid,.abx2-mahi-grid{grid-template-columns:1fr;}
   .abx2-intro-photo{justify-self:start;max-width:100%;}
-  .abx2-mahi-photo img{aspect-ratio:4/3;}
   .abx2-ph-chip{top:auto;bottom:var(--s3);right:var(--s3);}
   .abx2-flower{justify-self:start;max-width:100%;}
   .abx2-city-grid .abx2-ph-frame{min-height:280px;}
@@ -1987,7 +1986,7 @@ html.no-video .hero-scroll{opacity:1;}
           <p>Our ambition is to build pathways through those roles for Māori — creating skills that stay with our people, income that supports whānau and experience that contributes to a stronger Māori economy.</p>
         </div>
         <figure class="abx-photo abx2-mahi-photo reveal d1">
-          <img src="assets/aho-whanau-site-visit.jpg" width="1400" height="1867" loading="lazy"
+          <img src="assets/aho-whanau-site-visit.jpg" width="1536" height="1152" loading="lazy"
                alt="Several generations of whānau standing together talking on the yard at the Aho Farms site, with the bush-covered hillside rising behind them">
           <figcaption>Whānau working together to build opportunity</figcaption>
         </figure>
