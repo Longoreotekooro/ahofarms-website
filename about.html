@@ -1525,9 +1525,7 @@ html.no-video .hero-scroll{opacity:1;}
 .abx-hero-visual figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
 
 .abx-sec{position:relative;padding:clamp(var(--s6),9vh,var(--s8)) 0;overflow:hidden;}
-.abx-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--s3);align-items:start;margin-bottom:clamp(var(--s5),5vh,var(--s6));}
-.abx-num{font-family:var(--font-h);font-style:italic;font-size:1rem;color:rgba(201,160,106,0.75);padding-top:6px;position:relative;}
-.abx-num::after{content:'';position:absolute;left:2px;top:34px;bottom:-8px;width:1px;background:linear-gradient(to bottom,rgba(201,160,106,0.5),transparent);}
+.abx-head{display:grid;grid-template-columns:minmax(0,1fr);margin-bottom:clamp(var(--s5),5vh,var(--s6));}
 .abx-head h2{font-size:clamp(2rem,4vw,3.3rem);font-weight:300;line-height:1.08;letter-spacing:-0.02em;margin-top:var(--s2);text-wrap:balance;max-width:22ch;}
 .abx-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(var(--s4),4vw,var(--s6));}
 .abx-cols p,.abx-copy p{color:var(--silver);font-size:0.95rem;line-height:1.85;max-width:58ch;margin-bottom:var(--s3);}
@@ -1576,8 +1574,6 @@ html.no-video .hero-scroll{opacity:1;}
   .abx-cols{grid-template-columns:1fr;}
   .abx-hero-visual{order:-1;max-height:52vh;}
   .abx-hero-visual img{height:100%;object-fit:cover;}
-  .abx-head{grid-template-columns:1fr;gap:var(--s2);}
-  .abx-num::after{display:none;}
   .abx-cycle{padding-left:0;}
   .abx-cycle-return{display:none;}
 }
@@ -1596,8 +1592,6 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* the cycle ring */
 .abx-ring-wrap{display:flex;flex-direction:column;align-items:center;}
-/* a head with no chapter number squares up to the content edge */
-.abx-head--flush{grid-template-columns:minmax(0,1fr);}
 .abx-circle{margin:clamp(var(--s5),7vh,var(--s6)) 0 0;width:100%;border-radius:var(--plate-r);overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,0.5);}
 .abx-circle img{display:block;width:100%;height:auto;}
 .abx-ring-list{display:none;}
@@ -1733,9 +1727,11 @@ html.no-video .hero-scroll{opacity:1;}
 }
 
 /* —— 03 mahi —— */
-.abx2-mahi-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:start;}
-.abx2-mahi-sticky{position:sticky;top:110px;}
-.abx2-offset-photo{max-width:86%;margin-top:var(--s4);margin-left:14%;}
+.abx2-mahi-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,0.98fr);gap:clamp(var(--s5),5vw,var(--s7));align-items:center;}
+/* the supplied photo is a 3:4 portrait but the scene is horizontal — hold it
+   at 4:3 and bias the framing down so the group, not the sky, carries it */
+.abx2-mahi-photo{margin:0;}
+.abx2-mahi-photo img{aspect-ratio:4/3;object-position:center 62%;}
 .abx2-mahi-grid .abx-photo figcaption{font-size:0.52rem;}
 
 /* —— 07 flower —— */
@@ -1757,8 +1753,7 @@ html.no-video .hero-scroll{opacity:1;}
 @media(max-width:900px){
   .abx2-intro-grid,.abx2-city-grid,.abx2-mahi-grid{grid-template-columns:1fr;}
   .abx2-intro-photo{justify-self:start;max-width:100%;}
-  .abx2-mahi-sticky{position:static;}
-  .abx2-offset-photo{max-width:100%;margin-left:0;}
+  .abx2-mahi-photo img{aspect-ratio:4/3;}
   .abx2-ph-chip{top:auto;bottom:var(--s3);right:var(--s3);}
   .abx2-flower{justify-self:start;max-width:100%;}
   .abx2-city-grid .abx2-ph-frame{min-height:280px;}
@@ -2051,31 +2046,22 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="abx-sec ch-flax" id="mahi">
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">03</span>
         <div>
           <span class="eyebrow gold reveal">HE MAHI WHAI TIKANGA <span>·</span> MAHI THAT BUILDS MĀORI ECONOMIES</span>
           <h2 class="emerge">Bring opportunity home.</h2>
         </div>
       </div>
       <div class="abx2-mahi-grid">
-        <div class="abx2-mahi-sticky">
-          <!-- [CULTIVATION VIDEO LOOP — PLACEHOLDER]
-               FINAL ASSET: a 10s silent loop of hands working canopy in the
-               greenhouse — tying, pruning, inspecting — shallow depth of field. -->
-          <figure class="abx-photo reveal d1">
-            <img src="assets/aho-greenhouse-cultivation.jpg" alt="Skilled cultivation work under natural light in an Aho Farms greenhouse" width="900" height="1200" loading="lazy">
-            <figcaption>[ CULTIVATION VIDEO LOOP — PLACEHOLDER ]</figcaption>
-          </figure>
-        </div>
         <div class="abx-copy reveal">
           <p><strong>A medicinal cannabis operation requires far more than growers.</strong></p>
           <p>It creates opportunities across horticulture, science, quality assurance, compliance, manufacturing, logistics, technology, management and governance.</p>
           <p>Our ambition is to build pathways through those roles for Māori — creating skills that stay with our people, income that supports whānau and experience that contributes to a stronger Māori economy.</p>
-          <figure class="abx-photo abx2-offset-photo reveal d2">
-            <img src="assets/aho-team-whenua.jpg" alt="Whānau working together among the plants on Aho Farms whenua" width="1600" height="1067" loading="lazy">
-            <figcaption>Skills that stay with our people</figcaption>
-          </figure>
         </div>
+        <figure class="abx-photo abx2-mahi-photo reveal d1">
+          <img src="assets/aho-whanau-site-visit.jpg" width="1400" height="1867" loading="lazy"
+               alt="Several generations of whānau standing together talking on the yard at the Aho Farms site, with the bush-covered hillside rising behind them">
+          <figcaption>Whānau working together to build opportunity</figcaption>
+        </figure>
       </div>
       <!-- [WHENUA TO COMMUNITY BANNER — supplied by the CEO 2026-09-02]
            Replaces the hand-built .abx-chain row. Cropped from the supplied
@@ -2101,7 +2087,7 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="abx-sec" id="puna">
     <div class="drift gold" style="bottom:-6%;right:-16%;width:48vw;height:48vw;" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="abx-head abx-head--flush">
+      <div class="abx-head">
         <div>
           <span class="eyebrow gold reveal">NĀ TĀTOU, MĀ TĀTOU <span>·</span> BACKED BY MĀORI</span>
           <h2 class="emerge">Māori whenua. Māori capital. Māori participation.</h2>
@@ -2133,7 +2119,6 @@ html.no-video .hero-scroll{opacity:1;}
     <div class="starfield" data-stars="34" aria-hidden="true"></div>
     <div class="wrap">
       <div class="abx-head">
-        <span class="abx-num reveal">04</span>
         <div>
           <span class="eyebrow gold reveal">MŌ NGĀ URI WHAKATIPU <span>·</span> WHAT COMES NEXT</span>
           <h2 class="emerge">What we cultivate today should create opportunity for generations.</h2>
