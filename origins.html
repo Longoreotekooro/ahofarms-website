@@ -1404,7 +1404,8 @@ html.no-video .hero-scroll{opacity:1;}
 .og-grid--photo-copy{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);}
 /* photo object */
 .og-photo{position:relative;margin:0;border-radius:6px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,0.42);}
-.og-photo img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.03);}
+.og-photo img,.og-photo video{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.03);}
+.og-photo video{background:#0b1210;}
 .og-photo::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,8,8,0.62),transparent 44%);}
 .og-photo figcaption{position:absolute;z-index:2;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
 .og-photo figcaption::before{content:'';width:28px;height:1px;background:#c9a06a;}
@@ -1660,8 +1661,13 @@ html.no-video .hero-scroll{opacity:1;}
           </div>
         </div>
         <figure class="og-photo reveal d1">
-          <img src="assets/marae-whanau.jpg" alt="Four generations of whānau standing together in front of the wharenui" width="1400" height="934" loading="lazy">
-          <figcaption>Whānau at the marae · tūrangawaewae</figcaption>
+          <video class="og-loop" autoplay muted loop playsinline preload="metadata"
+                 poster="assets/origin-whenua-poster.jpg"
+                 aria-label="Aerial view of the whānau whenua: rolling green hills above freshly worked paddocks">
+            <source src="assets/origin-whenua-loop-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
+            <source src="assets/origin-whenua-loop-desktop.mp4" type="video/mp4">
+          </video>
+          <figcaption>Our whenua, from above · tūrangawaewae</figcaption>
         </figure>
       </div>
       <p class="og-pull og-return-pull emerge">Yet the desire to return <em>never disappeared.</em></p>
@@ -2035,6 +2041,21 @@ window.addEventListener('scroll',()=>{
     });
   },{rootMargin:'0px 0px -10% 0px',threshold:0.05});
   els.forEach(el=>io.observe(el));
+})();
+
+/* Ambient loops (.og-loop): play only while on screen, and retry play()
+   ourselves - the autoplay attribute alone is dropped by low-power and
+   data-saver modes. Reduced motion holds the poster frame. */
+(function(){
+  const loops=document.querySelectorAll('video.og-loop');
+  if(!loops.length) return;
+  if(REDUCED){loops.forEach(v=>{v.removeAttribute('autoplay');v.pause();});return;}
+  const tryPlay=v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{});};
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{en.isIntersecting?tryPlay(en.target):en.target.pause();});
+  },{rootMargin:'120px 0px',threshold:0.01});
+  loops.forEach(v=>{io.observe(v);v.addEventListener('canplay',()=>{if(!v.paused)return;const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)tryPlay(v);},{once:true});});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible')return;loops.forEach(v=>{const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)tryPlay(v);});});
 })();
 
 /* Mobile drawer: burger toggle only. Accordion expansion of each parent's
