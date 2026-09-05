@@ -1440,14 +1440,17 @@ html.no-video .hero-scroll{opacity:1;}
 .og-hero-drop{position:absolute;left:50%;bottom:0;z-index:2;width:1px;height:clamp(56px,9vh,110px);background:linear-gradient(to bottom,transparent,var(--gold));opacity:0.8;}
 
 /* —— 1 · a return to whenua (flax) —— */
-.og-return .og-photo{aspect-ratio:3/2;align-self:start;position:sticky;top:110px;}
+.og-return .og-photo{aspect-ratio:3/4;align-self:start;position:sticky;top:110px;}
+.og-return .og-photo img{object-position:center 42%;}
 .og-return-pull{margin-top:clamp(var(--s6),9vh,var(--s8));padding-top:clamp(var(--s4),5vh,var(--s5));border-top:1px solid var(--hairline);max-width:22ch;}
 
 /* —— 2 · come home (dark) —— */
 .og-ask{font-size:0.72rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--silver);margin-bottom:var(--s3);}
 .og-question{font-family:var(--font-h);font-weight:300;font-size:clamp(2.2rem,4.8vw,4.4rem);line-height:1.06;letter-spacing:-0.035em;color:var(--starlight);max-width:20ch;text-wrap:balance;margin-bottom:clamp(var(--s6),9vh,var(--s8));}
 .og-question em{font-style:italic;color:var(--gold-light);}
-.og-home .og-photo{aspect-ratio:3/4;}
+.og-home .og-photo{aspect-ratio:1/1;}
+.og-home .og-photo-stack{display:grid;gap:var(--s4);align-self:start;}
+.og-home .og-photo--loop{aspect-ratio:16/9;}
 .og-viable{margin:clamp(var(--s5),7vh,var(--s7)) 0;max-width:24ch;}
 .og-beats{margin-top:clamp(var(--s6),9vh,var(--s8));display:grid;grid-template-columns:auto 1fr;column-gap:clamp(var(--s4),4vw,var(--s6));align-items:stretch;}
 .og-beats-line{grid-row:1 / span 4;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 12%,var(--gold) 88%,transparent);opacity:0.7;}
@@ -1553,8 +1556,9 @@ html.no-video .hero-scroll{opacity:1;}
 @media(max-width:900px){
   .og-sec{padding:clamp(72px,10vh,110px) 0;}
   .og-grid--copy-photo,.og-grid--photo-copy,.og-thread-sec .og-grid{grid-template-columns:1fr;}
-  .og-return .og-photo{aspect-ratio:4/3;order:-1;position:relative;top:auto;}
+  .og-return .og-photo{aspect-ratio:4/5;order:-1;position:relative;top:auto;}
   .og-home .og-photo{aspect-ratio:4/3;}
+  .og-home .og-photo--loop{aspect-ratio:16/9;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1632,7 +1636,7 @@ html.no-video .hero-scroll{opacity:1;}
        frame at desktop widths. A 16:9 or 21:9 reshoot at golden hour would let
        the hero breathe more on wide screens. -->
   <section class="og-hero" id="origin">
-    <img src="assets/aho-origin-hero-waharoa.jpg" alt="The carved waharoa at the Aho Farms entrance — a wooden gateway with whakairo on its bargeboards, framed by native bush and lawn" width="1600" height="1200" fetchpriority="high">
+    <img src="assets/aho-origin-hero-waharoa-mono.jpg" alt="The carved waharoa at the Aho Farms entrance in black and white — whakairo along its bargeboards, a tekoteko at the post, framed by trees and the palisade fence" width="1920" height="1440" fetchpriority="high">
     <div class="og-hero-ui">
       <div class="wrap">
         <span class="eyebrow gold reveal">Ō MĀTOU TAKENGA <span>·</span> OUR ORIGIN</span>
@@ -1660,14 +1664,9 @@ html.no-video .hero-scroll{opacity:1;}
             <p>And with each generation away from home, the connection between whānau and whenua became harder to maintain.</p>
           </div>
         </div>
-        <figure class="og-photo reveal d1">
-          <video class="og-loop" autoplay muted loop playsinline preload="metadata"
-                 poster="assets/origin-whenua-poster.jpg"
-                 aria-label="Aerial view of the whānau whenua: rolling green hills above freshly worked paddocks">
-            <source src="assets/origin-whenua-loop-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
-            <source src="assets/origin-whenua-loop-desktop.mp4" type="video/mp4">
-          </video>
-          <figcaption>Our whenua, from above · tūrangawaewae</figcaption>
+        <figure class="og-photo og-photo--tall reveal d1">
+          <img src="assets/origin-tekoteko-mono.jpg" alt="Carved tekoteko standing in the shelter of the waharoa, in black and white, eyes catching the light" width="1200" height="1600" loading="lazy">
+          <figcaption>The whenua remained · a guardian at the gateway</figcaption>
         </figure>
       </div>
       <p class="og-pull og-return-pull emerge">Yet the desire to return <em>never disappeared.</em></p>
@@ -1697,10 +1696,21 @@ html.no-video .hero-scroll{opacity:1;}
             <p>We didn't have to choose between what the whenua was already providing and what it could become.</p>
           </div>
         </div>
-        <figure class="og-photo reveal d2">
-          <img src="assets/aho-outdoor-cultivation.jpg" alt="Medicinal cannabis growing outdoors on a small cultivation footprint at Aho Farms" width="900" height="1200" loading="lazy">
-          <figcaption>A small footprint on the whenua</figcaption>
-        </figure>
+        <div class="og-photo-stack">
+          <figure class="og-photo og-photo--loop reveal d1">
+            <video class="og-loop" autoplay muted loop playsinline preload="metadata"
+                   poster="assets/origin-whenua-poster.jpg"
+                   aria-label="Aerial view of the whānau whenua: rolling green hills above freshly worked paddocks">
+              <source src="assets/origin-whenua-loop-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
+              <source src="assets/origin-whenua-loop-desktop.mp4" type="video/mp4">
+            </video>
+            <figcaption>Our whenua, from above · tūrangawaewae</figcaption>
+          </figure>
+          <figure class="og-photo reveal d2">
+            <img src="assets/aho-outdoor-cultivation.jpg" alt="Medicinal cannabis growing outdoors on a small cultivation footprint at Aho Farms" width="900" height="1200" loading="lazy">
+            <figcaption>A small footprint on the whenua</figcaption>
+          </figure>
+        </div>
       </div>
       <div class="og-beats reveal">
         <span class="og-beats-line" aria-hidden="true"></span>
