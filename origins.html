@@ -1448,14 +1448,32 @@ html.no-video .hero-scroll{opacity:1;}
 .og-ask{font-size:0.72rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--silver);margin-bottom:var(--s3);}
 .og-question{font-family:var(--font-h);font-weight:300;font-size:clamp(2.2rem,4.8vw,4.4rem);line-height:1.06;letter-spacing:-0.035em;color:var(--starlight);max-width:20ch;text-wrap:balance;margin-bottom:clamp(var(--s6),9vh,var(--s8));}
 .og-question em{font-style:italic;color:var(--gold-light);}
-.og-home .og-photo{aspect-ratio:1/1;}
-.og-home .og-photo-stack{display:grid;gap:var(--s4);align-self:start;}
-.og-home .og-photo--loop{aspect-ratio:16/9;}
-.og-viable{margin:clamp(var(--s5),7vh,var(--s7)) 0;max-width:24ch;}
-.og-beats{margin-top:clamp(var(--s6),9vh,var(--s8));display:grid;grid-template-columns:auto 1fr;column-gap:clamp(var(--s4),4vw,var(--s6));align-items:stretch;}
-.og-beats-line{grid-row:1 / span 4;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 12%,var(--gold) 88%,transparent);opacity:0.7;}
-.og-beat{font-family:var(--font-h);font-weight:300;font-size:clamp(1.8rem,3.6vw,3.3rem);line-height:1.1;letter-spacing:-0.025em;color:var(--starlight);padding:clamp(10px,1.6vh,18px) 0;}
+/* deep-green wash rising through the lower half (baseline: green is selective) */
+.og-home::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 85% 55% at 68% 82%,rgba(26,62,52,0.5),transparent 72%),
+             linear-gradient(to bottom,transparent 28%,rgba(15,38,32,0.42) 72%,transparent 100%);}
+.og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
+.og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
+.og-home .og-photo{aspect-ratio:auto;min-height:220px;}
+.og-home .og-photo img,.og-home .og-photo video{position:absolute;inset:0;width:100%;height:100%;}
+.og-home .og-photo--crop img{object-position:50% 78%;}
+.og-eyebrow--dash{display:flex;align-items:center;gap:14px;}
+.og-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
+.og-home-h2 em{display:block;}
+.og-home-question{font-size:clamp(1.9rem,3vw,2.9rem);max-width:24ch;margin-bottom:clamp(var(--s4),4vh,var(--s5));}
+.og-rule{display:block;width:40px;height:1px;background:var(--gold);opacity:0.8;margin:0 0 clamp(var(--s4),4vh,var(--s5));}
+.og-plate{margin-top:clamp(var(--s5),6vh,var(--s7));display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(var(--s4),4vw,var(--s6));padding:clamp(var(--s4),3.2vw,var(--s6));border:1px solid var(--gold-border);border-radius:8px;background:linear-gradient(135deg,rgba(243,241,235,0.035),rgba(243,241,235,0.008));}
+.og-plate-lead{font-family:var(--font-h);font-weight:300;font-size:clamp(1.7rem,2.6vw,2.5rem);line-height:1.18;letter-spacing:-0.02em;color:var(--starlight);max-width:15ch;text-wrap:balance;margin:0;}
+.og-plate-lead em{font-style:italic;color:var(--gold-light);}
+.og-plate-copy{border-left:1px solid var(--hairline);padding-left:clamp(var(--s4),3vw,var(--s5));}
+.og-plate-copy p{max-width:none;}
+.og-beats{margin-top:clamp(var(--s6),9vh,var(--s8));display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:end;}
+.og-beats-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.og-beat{font-family:var(--font-h);font-weight:300;font-size:clamp(1.15rem,1.5vw,1.45rem);line-height:1.2;letter-spacing:-0.015em;color:var(--starlight);padding:var(--s4) clamp(var(--s3),2vw,var(--s4)) 0 0;border-top:1px solid var(--hairline);margin:0;}
+.og-beat + .og-beat{padding-left:clamp(var(--s3),2vw,var(--s4));border-left:1px solid var(--hairline);}
 .og-beat em{font-style:italic;color:var(--gold-light);}
+.og-viable{margin:0;max-width:20ch;font-size:clamp(1.6rem,2.4vw,2.3rem);line-height:1.25;justify-self:end;}
+.og-viable::after{content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.8;margin-top:var(--s4);}
 
 /* —— 3 · the journey before aho (flax) —— */
 .og-founder-banner{position:relative;min-height:clamp(560px,82vh,900px);background:#0d0f0d;color:var(--starlight);overflow:hidden;display:flex;align-items:center;}
@@ -1557,8 +1575,16 @@ html.no-video .hero-scroll{opacity:1;}
   .og-sec{padding:clamp(72px,10vh,110px) 0;}
   .og-grid--copy-photo,.og-grid--photo-copy,.og-thread-sec .og-grid{grid-template-columns:1fr;}
   .og-return .og-photo{aspect-ratio:4/5;order:-1;position:relative;top:auto;}
-  .og-home .og-photo{aspect-ratio:4/3;}
+  .og-home-top{grid-template-columns:1fr;}
+  .og-home .og-photo-stack{grid-template-rows:none;}
+  .og-home .og-photo{aspect-ratio:4/3;min-height:0;}
   .og-home .og-photo--loop{aspect-ratio:16/9;}
+  .og-plate{grid-template-columns:1fr;}
+  .og-plate-copy{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s4);}
+  .og-beats{grid-template-columns:1fr;align-items:start;}
+  .og-beats-row{grid-template-columns:1fr;}
+  .og-beat + .og-beat{padding-left:0;border-left:0;}
+  .og-viable{justify-self:start;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1674,26 +1700,24 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 2 · THE IDEA WAS SIMPLE: COME HOME ================ -->
+  <!-- Editorial opening: copy left, whenua loop + cultivation still right
+       with the two columns level; a bordered "different possibility" plate
+       spanning below; then the four beats as a rule-separated row with the
+       "It has to be viable" closing beside them. No icons, no chapter
+       numbers (CEO rulings). Background carries a subtle deep-green wash. -->
   <section class="og-sec og-home" id="come-home">
     <div class="wrap">
-      <span class="eyebrow gold og-eyebrow reveal">THE IDEA WAS SIMPLE</span>
-      <h2 class="og-h2 emerge">The idea was simple: <em>come home.</em></h2>
-      <p class="og-ask reveal">Aho began with a question</p>
-      <p class="og-question emerge">How do we create a commercially viable reason for our whānau <em>to return to the whenua?</em></p>
-      <div class="og-grid og-grid--copy-photo">
-        <div>
+      <div class="og-home-top">
+        <div class="og-home-copy">
+          <span class="eyebrow gold og-eyebrow og-eyebrow--dash reveal">THE IDEA WAS SIMPLE</span>
+          <h2 class="og-h2 og-home-h2 emerge">The idea was simple: <em>come home.</em></h2>
+          <p class="og-ask reveal">Aho began with a question</p>
+          <p class="og-question og-home-question emerge">How do we create a commercially viable reason for our whānau <em>to return to the whenua?</em></p>
+          <span class="og-rule reveal" aria-hidden="true"></span>
           <div class="og-copy reveal">
             <p>The answer couldn't simply be <strong>come home.</strong></p>
             <p>There needed to be meaningful mahi. There needed to be opportunity. And whatever we built needed to generate enough value from the whenua to sustain the people returning to it.</p>
             <p>Because returning to whenua cannot survive on sentiment alone.</p>
-          </div>
-          <p class="og-lead og-viable reveal d1">It has to be viable. <em>That became one of the foundations of Aho.</em></p>
-          <div class="og-copy reveal d1">
-            <p>The challenge was finding an industry that could create meaningful economic value without requiring hundreds of hectares of land or displacing the agricultural activity already supporting the whenua.</p>
-            <p><strong>Medicinal cannabis offered a different possibility.</strong></p>
-            <p>High-value cultivation could begin on a relatively small footprint.</p>
-            <p>It meant we could establish cultivation on previously underutilised areas, prove commercial viability and create employment while allowing the majority of the whenua to continue under its existing agricultural leases.</p>
-            <p>We didn't have to choose between what the whenua was already providing and what it could become.</p>
           </div>
         </div>
         <div class="og-photo-stack">
@@ -1706,18 +1730,29 @@ html.no-video .hero-scroll{opacity:1;}
             </video>
             <figcaption>Our whenua, from above · tūrangawaewae</figcaption>
           </figure>
-          <figure class="og-photo reveal d2">
+          <figure class="og-photo og-photo--crop reveal d2">
             <img src="assets/aho-outdoor-cultivation.jpg" alt="Medicinal cannabis growing outdoors on a small cultivation footprint at Aho Farms" width="900" height="1200" loading="lazy">
             <figcaption>A small footprint on the whenua</figcaption>
           </figure>
         </div>
       </div>
+      <div class="og-plate reveal d1">
+        <p class="og-plate-lead">Medicinal cannabis offered a different <em>possibility.</em></p>
+        <div class="og-copy og-plate-copy">
+          <p>The challenge was finding an industry that could create meaningful economic value without requiring hundreds of hectares of land or displacing the agricultural activity already supporting the whenua.</p>
+          <p>High-value cultivation could begin on a relatively small footprint.</p>
+          <p>It meant we could establish cultivation on previously underutilised areas, prove commercial viability and create employment while allowing the majority of the whenua to continue under its existing agricultural leases.</p>
+          <p>We didn't have to choose between what the whenua was already providing and what it could become.</p>
+        </div>
+      </div>
       <div class="og-beats reveal">
-        <span class="og-beats-line" aria-hidden="true"></span>
-        <p class="og-beat">We could start small.</p>
-        <p class="og-beat">We could learn.</p>
-        <p class="og-beat">We could prove the model.</p>
-        <p class="og-beat">And we could <em>return.</em></p>
+        <div class="og-beats-row">
+          <p class="og-beat">We could start small.</p>
+          <p class="og-beat">We could learn.</p>
+          <p class="og-beat">We could prove the model.</p>
+          <p class="og-beat">And we could <em>return.</em></p>
+        </div>
+        <p class="og-lead og-viable">It has to be viable. <em>That became one of the foundations of Aho.</em></p>
       </div>
     </div>
   </section>
