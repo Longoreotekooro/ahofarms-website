@@ -1449,7 +1449,10 @@ html.no-video .hero-scroll{opacity:1;}
 .og-question{font-family:var(--font-h);font-weight:300;font-size:clamp(2.2rem,4.8vw,4.4rem);line-height:1.06;letter-spacing:-0.035em;color:var(--starlight);max-width:20ch;text-wrap:balance;margin-bottom:clamp(var(--s6),9vh,var(--s8));}
 .og-question em{font-style:italic;color:var(--gold-light);}
 /* flat black chapter - CEO ruled out the green wash (2026-09-07) */
-.og-home{background:var(--void);}
+.og-home{background:var(--void);padding-bottom:0;}
+.og-beats-panel{margin:clamp(var(--s6),9vh,var(--s8)) 0 0;width:100%;}
+.og-beats-panel img{display:block;width:100%;height:auto;}
+@media(min-width:901px){.og-home .og-beats{display:none;}}
 .og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
 .og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
 .og-home .og-photo{aspect-ratio:auto;min-height:220px;}
@@ -1583,6 +1586,9 @@ html.no-video .hero-scroll{opacity:1;}
   .og-beats-row{grid-template-columns:1fr;}
   .og-beat + .og-beat{padding-left:0;border-left:0;}
   .og-viable{justify-self:start;}
+  .og-home{padding-bottom:0;}
+  .og-beats-panel{margin-top:clamp(var(--s6),8vh,var(--s7));}
+  .og-beats-panel img{aspect-ratio:1/1;object-fit:cover;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1700,9 +1706,11 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ================ 2 · THE IDEA WAS SIMPLE: COME HOME ================ -->
   <!-- Editorial opening: copy left, whenua loop + cultivation still right
        with the two columns level; a bordered "different possibility" plate
-       spanning below; then the four beats as a rule-separated row with the
-       "It has to be viable" closing beside them. No icons, no chapter
-       numbers (CEO rulings). Background carries a subtle deep-green wash. -->
+       spanning below; then the CEO-supplied beats panel (assets/aho-origin-
+       beats-panel.jpg: the four beats + "It has to be viable" set over the
+       coast / seedling / muka artwork) full-bleed as the movement's final
+       edge. Under 900px the panel is cropped to its imagery and the HTML
+       beats show instead. No icons, no chapter numbers (CEO rulings). -->
   <section class="og-sec og-home" id="come-home">
     <div class="wrap">
       <div class="og-home-top">
@@ -1753,6 +1761,12 @@ html.no-video .hero-scroll{opacity:1;}
         <p class="og-lead og-viable">It has to be viable. <em>That became one of the foundations of Aho.</em></p>
       </div>
     </div>
+    <figure class="og-beats-panel reveal">
+      <picture>
+        <source media="(max-width: 900px)" srcset="assets/aho-origin-beats-panel-mobile.jpg" width="900" height="900">
+        <img src="assets/aho-origin-beats-panel.jpg" alt="We could start small. We could learn. We could prove the model. And we could return. It has to be viable. That became one of the foundations of Aho. Artwork: a sunrise over the coast, a young seedling in dark soil, and a muka cord running beneath." width="1672" height="941" loading="lazy">
+      </picture>
+    </figure>
   </section>
 
   <!-- ================ 3 · THE JOURNEY BEFORE AHO ================ -->
