@@ -1476,14 +1476,13 @@ html.no-video .hero-scroll{opacity:1;}
   .og-panel-words li,.og-finale-line,.og-viable{opacity:1;transform:none;filter:none;transition:none;}
   .og-panel-words::after,.og-finale-rule{transform:none;transition:none;}
 }
-.og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:start;}
-.og-home .og-photo-stack{display:grid;grid-template-rows:auto auto;gap:var(--s4);align-content:start;}
-.og-home .og-photo{min-height:0;}
+.og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
+.og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
+.og-home .og-photo{aspect-ratio:auto;min-height:220px;}
 .og-home .og-photo img,.og-home .og-photo video{position:absolute;inset:0;width:100%;height:100%;}
-/* the cultivation still is a 3:4 phone photo - give it a 3:4 frame at the same
-   column width so the whole picture shows with nothing cropped away */
-.og-home .og-photo--crop{aspect-ratio:3/4;}
-.og-home .og-photo--loop{aspect-ratio:16/9;}
+/* the still is a 3:4 phone photo in a landscape slot: frame it on the plants
+   themselves - tops through bases - rather than the sky or the foreground */
+.og-home .og-photo--crop img{object-position:50% 44%;}
 .og-eyebrow--dash{display:flex;align-items:center;gap:14px;}
 .og-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
 .og-home-question{font-size:clamp(1.9rem,3vw,2.9rem);max-width:24ch;margin-bottom:clamp(var(--s4),4vh,var(--s5));}
@@ -1619,8 +1618,7 @@ html.no-video .hero-scroll{opacity:1;}
   .og-return .og-photo{aspect-ratio:4/5;order:-1;position:relative;top:auto;}
   .og-home-top{grid-template-columns:1fr;}
   .og-home .og-photo-stack{grid-template-rows:none;}
-  .og-home .og-photo{min-height:0;}
-  .og-home .og-photo--crop{aspect-ratio:3/4;}
+  .og-home .og-photo{aspect-ratio:4/3;min-height:0;}
   .og-home .og-photo--loop{aspect-ratio:16/9;}
   .og-plate{grid-template-columns:1fr;}
   .og-plate-copy{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s4);}
