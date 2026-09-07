@@ -1581,21 +1581,25 @@ html.no-video .hero-scroll{opacity:1;}
 /* —— 6 · from a company to a model (dark) —— */
 /* —— 6 · the model: the CEO's dusk-beach canvas as a 2:1 slide —— */
 .og-model{padding:0 0 clamp(96px,12vh,160px);}
-.og-model-slide{position:relative;width:100%;aspect-ratio:3/2;container-type:inline-size;color:var(--starlight);
-  background:#0c0b09 url("assets/aho-origin-model-bg.jpg") center/cover no-repeat;}
-.og-model-top{position:absolute;z-index:2;left:4.5%;width:46%;top:5.5%;text-align:left;}
+.og-model-slide{position:relative;width:100%;aspect-ratio:4/3;container-type:inline-size;color:var(--starlight);
+  background:#0e0e0f url("assets/aho-origin-model-bg.jpg") center bottom / 100% auto no-repeat;}
+/* the picture is 2:1 (50cqw tall); a short fade at its top edge merges the extended sky into it */
+.og-model-slide::before{content:'';position:absolute;left:0;right:0;top:calc(100% - 50cqw);height:8cqw;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,#0e0e0f,rgba(14,14,15,0));}
+.og-model-top{position:absolute;z-index:2;left:4.5%;width:48%;top:7%;text-align:left;}
 .og-model-eyebrow{display:inline-flex;align-items:center;gap:1cqw;margin:0;font-size:clamp(9px,0.78cqw,13px);letter-spacing:0.28em;}
 .og-model-eyebrow::after{content:'';width:2.8cqw;height:1px;background:var(--gold);opacity:0.8;}
-.og-model-intro{margin:1.1cqw 0 0;max-width:40ch;font-family:var(--font-h);font-weight:300;font-size:1.35cqw;line-height:1.4;color:rgba(243,241,235,0.8);}
-.og-model-head{margin:0.9cqw 0 0;max-width:30ch;font-size:2.95cqw;line-height:1.06;letter-spacing:-0.03em;}
+.og-model-intro{margin:1.3cqw 0 0;max-width:40ch;font-family:var(--font-h);font-weight:300;font-size:1.5cqw;line-height:1.4;color:rgba(243,241,235,0.82);}
+.og-model-head{margin:1.1cqw 0 0;max-width:30ch;font-size:3.4cqw;line-height:1.06;letter-spacing:-0.03em;}
 .og-model-picture{display:none;}
-.og-model-grid{position:absolute;z-index:2;left:4.5%;right:4.5%;top:31%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:2cqw;}
+.og-model-grid{position:absolute;z-index:2;left:4.5%;right:4.5%;top:36%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:2cqw;}
 .og-model-cell i{display:block;width:2cqw;height:1px;background:var(--gold);margin-bottom:1cqw;opacity:0.85;}
-.og-model-cell p{margin:0;font-family:var(--font-h);font-weight:300;font-size:1.18cqw;line-height:1.42;color:var(--starlight);text-shadow:0 1px 18px rgba(0,0,0,0.55);}
+.og-model-cell p{margin:0;font-family:var(--font-h);font-weight:300;font-size:1.3cqw;line-height:1.42;color:var(--starlight);text-shadow:0 1px 18px rgba(0,0,0,0.55);}
 .og-model-hope{margin:clamp(var(--s6),9vh,var(--s7)) 0 0;max-width:30ch;}
 @media(max-width:1099px){
   .og-model{padding-top:clamp(72px,10vh,110px);}
   .og-model-slide{aspect-ratio:auto;background:none;display:flex;flex-direction:column;}
+  .og-model-slide::before{display:none;}
   .og-model-top{position:static;text-align:left;padding:0 var(--s4);}
   .og-model-eyebrow{display:block;font-size:0.625rem;letter-spacing:0.18em;}
   .og-model-eyebrow::after{display:none;}
