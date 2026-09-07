@@ -1613,17 +1613,6 @@ html.no-video .hero-scroll{opacity:1;}
 }
 
 /* —— 7 · from whānau to whānau (full-bleed photo, then the measure) —— */
-.og-wide{position:relative;height:min(78vh,780px);overflow:hidden;background:#050505;}
-.og-wide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(0.88) contrast(1.05);}
-.og-wide::before{content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(to bottom,rgba(5,5,5,0.85),transparent 30%),linear-gradient(to top,rgba(5,5,5,0.96) 10%,rgba(5,5,5,0.5) 46%,transparent 70%);}
-.og-wide-ui{position:absolute;left:0;right:0;bottom:clamp(48px,9vh,96px);z-index:2;}
-.og-chant{display:grid;gap:4px;}
-.og-chant span{font-family:var(--font-h);font-weight:300;font-size:clamp(2rem,4.6vw,4.2rem);line-height:1.08;letter-spacing:-0.03em;color:var(--starlight);text-shadow:0 2px 40px rgba(2,4,6,0.9);}
-.og-chant span:last-child{color:var(--gold-light);font-style:italic;}
-.og-measure{position:relative;padding:clamp(var(--s7),10vh,var(--s8)) 0;}
-.og-measure .og-copy{max-width:52ch;margin-bottom:clamp(var(--s5),7vh,var(--s7));}
-.og-measure .og-pull{max-width:24ch;}
 
 /* —— 8 · the thread of aho (dark, muka behind) —— */
 .og-thread-sec{background:#050505;}
@@ -1697,7 +1686,6 @@ html.no-video .hero-scroll{opacity:1;}
   .og-photo--bleed img{position:static;height:100%;}
   .og-bigger-copy{order:3;padding-top:0;}
   .og-bigger-coda .og-copy,.og-bigger-close{grid-column:1;}
-  .og-wide{height:min(70vh,560px);}
   .og-thread-bg img{object-position:center;opacity:0.3;}
   .og-thread-bg::after{background:linear-gradient(to bottom,rgba(5,5,5,0.9),rgba(5,5,5,0.92));}
   .og-principles{grid-template-columns:1fr 1fr;row-gap:var(--s4);}
@@ -2022,31 +2010,6 @@ html.no-video .hero-scroll{opacity:1;}
         <div class="og-model-cell reveal d4"><i></i><p>And where commercial success becomes the mechanism through which connection to whenua can be strengthened again.</p></div>
       </div>
       <p class="og-lead og-model-hope reveal d2">If we can prove that model on our own whenua, our hope is that one day <em>it can extend beyond it.</em></p>
-    </div>
-  </section>
-
-  <!-- ================ 7 · FROM WHĀNAU TO WHĀNAU ================ -->
-  <!-- [WHĀNAU BUILDING IMAGE — PLACEHOLDER-QUALITY]: whānau raising the first
-       greenhouse frames stands in; final asset should be people and whenua in
-       one wide frame, late light, no cannabis in shot. -->
-  <div class="og-wide" id="whanau-to-whanau">
-    <img src="assets/whanau-build-3.jpg" alt="Whānau driving the first greenhouse posts into the ground on the Aho Farms site" width="1400" height="1050" loading="lazy">
-    <div class="og-wide-ui">
-      <div class="wrap">
-        <div class="og-chant emerge">
-          <span>From whānau to whānau.</span>
-          <span>From hapū to hapū.</span>
-          <span>From iwi to iwi.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <section class="og-measure" id="measure">
-    <div class="wrap">
-      <div class="og-copy reveal">
-        <p>Not by assuming every whenua or community is the same, but by demonstrating what becomes possible when the right crop, knowledge, infrastructure and commercial model come together.</p>
-      </div>
-      <p class="og-pull emerge">Because the ultimate measure of Aho won't simply be how much cannabis we grow. <em>It will be what growing it enables.</em></p>
     </div>
   </section>
 
