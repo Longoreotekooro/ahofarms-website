@@ -1450,9 +1450,39 @@ html.no-video .hero-scroll{opacity:1;}
 .og-question em{font-style:italic;color:var(--gold-light);}
 /* flat black chapter - CEO ruled out the green wash (2026-09-07) */
 .og-home{background:var(--void);padding-bottom:0;}
-.og-beats-panel{margin:clamp(var(--s6),9vh,var(--s8)) 0 0;width:100%;}
-.og-beats-panel img{display:block;width:100%;height:auto;}
+/* beats panel: artwork + live copy; soil dissolves into the founder banner (#0d0f0d) */
+.og-beats-panel{position:relative;margin:clamp(var(--s6),9vh,var(--s8)) 0 0;width:100%;background:#0d0f0d;container-type:inline-size;}
+.og-beats-panel img{display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(to bottom,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,#000 74%,transparent 100%);}
+.og-beats-panel::before{content:'';position:absolute;left:0;right:0;top:0;height:9%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0.48),transparent);}
+.og-panel-copy{position:absolute;z-index:2;left:5.7%;top:15.5%;width:38%;color:#1d211f;}
+.og-panel-beats{margin:0;font-family:var(--font-h);font-weight:300;font-size:3.6vw;font-size:3.65cqw;line-height:1.12;letter-spacing:-0.025em;}
+.og-panel-line{display:block;opacity:0;transform:translateY(0.35em);filter:blur(6px);transition:opacity 0.9s cubic-bezier(.2,.7,.2,1),transform 0.9s cubic-bezier(.2,.7,.2,1),filter 0.9s ease;}
+.og-panel-line em{font-style:italic;color:#8f6a33;}
+.og-panel-rule{display:block;width:2.6cqw;min-width:32px;height:1px;background:#8f6a33;opacity:0.9;margin:2cqw 0 1.6cqw;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1);}
+.og-panel-close{margin:0;font-family:var(--font-h);font-weight:300;font-size:2vw;font-size:2.05cqw;line-height:1.3;letter-spacing:-0.01em;max-width:24ch;text-wrap:balance;opacity:0;transform:translateY(0.4em);transition:opacity 0.9s ease,transform 0.9s cubic-bezier(.2,.7,.2,1);}
+.og-panel-words{position:absolute;z-index:2;left:90%;top:37%;width:8.5%;margin:0;padding:0;list-style:none;font-family:var(--font-b);font-weight:500;font-size:clamp(9px,0.75cqw,13px);letter-spacing:0.24em;text-transform:uppercase;line-height:2.4;color:rgba(243,241,235,0.86);}
+.og-panel-words li{opacity:0;transform:translateX(10px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.7,.2,1);}
+.og-panel-words::after{content:'';display:block;width:4.2cqw;height:1px;background:#c9a06a;margin-top:0.9cqw;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1) 1.55s;}
+.og-beats-panel.in .og-panel-line{opacity:1;transform:none;filter:blur(0);}
+.og-beats-panel.in .og-panel-line:nth-child(1){transition-delay:0.35s;}
+.og-beats-panel.in .og-panel-line:nth-child(2){transition-delay:0.55s;}
+.og-beats-panel.in .og-panel-line:nth-child(3){transition-delay:0.75s;}
+.og-beats-panel.in .og-panel-line:nth-child(4){transition-delay:0.95s;}
+.og-beats-panel.in .og-panel-rule{transform:scaleX(1);transition-delay:1.2s;}
+.og-beats-panel.in .og-panel-close{opacity:1;transform:none;transition-delay:1.35s;}
+.og-beats-panel.in .og-panel-words li{opacity:1;transform:none;}
+.og-beats-panel.in .og-panel-words li:nth-child(1){transition-delay:0.9s;}
+.og-beats-panel.in .og-panel-words li:nth-child(2){transition-delay:1.02s;}
+.og-beats-panel.in .og-panel-words li:nth-child(3){transition-delay:1.14s;}
+.og-beats-panel.in .og-panel-words li:nth-child(4){transition-delay:1.26s;}
+.og-beats-panel.in .og-panel-words li:nth-child(5){transition-delay:1.38s;}
+.og-beats-panel.in .og-panel-words::after{transform:scaleX(1);}
 @media(min-width:901px){.og-home .og-beats{display:none;}}
+@media(prefers-reduced-motion:reduce){
+  .og-panel-line,.og-panel-close,.og-panel-words li{opacity:1;transform:none;filter:none;transition:none;}
+  .og-panel-rule,.og-panel-words::after{transform:none;transition:none;}
+}
 .og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
 .og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
 .og-home .og-photo{aspect-ratio:auto;min-height:220px;}
@@ -1589,6 +1619,7 @@ html.no-video .hero-scroll{opacity:1;}
   .og-home{padding-bottom:0;}
   .og-beats-panel{margin-top:clamp(var(--s6),8vh,var(--s7));}
   .og-beats-panel img{aspect-ratio:1/1;object-fit:cover;}
+  .og-beats-panel::before,.og-panel-copy,.og-panel-words{display:none;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1707,10 +1738,12 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- Editorial opening: copy left, whenua loop + cultivation still right
        with the two columns level; a bordered "different possibility" plate
        spanning below; then the CEO-supplied beats panel (assets/aho-origin-
-       beats-panel.jpg: the four beats + "It has to be viable" set over the
-       coast / seedling / muka artwork) full-bleed as the movement's final
-       edge. Under 900px the panel is cropped to its imagery and the HTML
-       beats show instead. No icons, no chapter numbers (CEO rulings). -->
+       beats-panel.jpg, ARTWORK ONLY - the four beats, "It has to be viable"
+       and the word column are live HTML overlaid with staged reveals, sized
+       in container units so they track the artwork) full-bleed as the
+       movement's final edge, its soil dissolving into the founder banner's
+       charcoal. Under 900px the panel is cropped to its imagery, the overlay
+       hides and the HTML beats show instead. No icons, no numbers (CEO). -->
   <section class="og-sec og-home" id="come-home">
     <div class="wrap">
       <div class="og-home-top">
@@ -1764,8 +1797,25 @@ html.no-video .hero-scroll{opacity:1;}
     <figure class="og-beats-panel reveal">
       <picture>
         <source media="(max-width: 900px)" srcset="assets/aho-origin-beats-panel-mobile.jpg" width="900" height="900">
-        <img src="assets/aho-origin-beats-panel.jpg" alt="We could start small. We could learn. We could prove the model. And we could return. It has to be viable. That became one of the foundations of Aho. Artwork: a sunrise over the coast, a young seedling in dark soil, and a muka cord running beneath." width="1672" height="941" loading="lazy">
+        <img src="assets/aho-origin-beats-panel.jpg" alt="Sunrise over the coast, a young seedling rising from dark soil, and a muka cord running beneath" width="1672" height="941" loading="lazy">
       </picture>
+      <div class="og-panel-copy">
+        <p class="og-panel-beats">
+          <span class="og-panel-line">We could start small.</span>
+          <span class="og-panel-line">We could learn.</span>
+          <span class="og-panel-line">We could prove the model.</span>
+          <span class="og-panel-line">And we could <em>return.</em></span>
+        </p>
+        <span class="og-panel-rule" aria-hidden="true"></span>
+        <p class="og-panel-close">It has to be viable. That became one of the foundations of Aho.</p>
+      </div>
+      <ul class="og-panel-words" aria-label="What a return means">
+        <li>People</li>
+        <li>Land</li>
+        <li>Knowledge</li>
+        <li>Opportunity</li>
+        <li>A stronger tomorrow</li>
+      </ul>
     </figure>
   </section>
 
