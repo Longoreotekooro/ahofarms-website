@@ -1406,8 +1406,8 @@ html.no-video .hero-scroll{opacity:1;}
 .og-photo{position:relative;margin:0;border-radius:6px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,0.42);}
 .og-photo img,.og-photo video{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.03);}
 .og-photo video{background:#0b1210;}
-.og-photo::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,8,8,0.62),transparent 44%);}
-.og-photo figcaption{position:absolute;z-index:2;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
+.og-photo::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top,rgba(5,8,8,0.62),transparent 44%);}
+.og-photo figcaption{position:absolute;z-index:3;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(243,241,235,0.9);}
 .og-photo figcaption::before{content:'';width:28px;height:1px;background:#c9a06a;}
 .ch-flax .og-photo{box-shadow:0 26px 60px rgba(35,28,14,0.28);}
 /* labelled placeholder — never a simplified design (baseline §13) */
@@ -1476,11 +1476,14 @@ html.no-video .hero-scroll{opacity:1;}
   .og-panel-words li,.og-finale-line,.og-viable{opacity:1;transform:none;filter:none;transition:none;}
   .og-panel-words::after,.og-finale-rule{transform:none;transition:none;}
 }
-.og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
-.og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
-.og-home .og-photo{aspect-ratio:auto;min-height:220px;}
+.og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:start;}
+.og-home .og-photo-stack{display:grid;grid-template-rows:auto auto;gap:var(--s4);align-content:start;}
+.og-home .og-photo{min-height:0;}
 .og-home .og-photo img,.og-home .og-photo video{position:absolute;inset:0;width:100%;height:100%;}
-.og-home .og-photo--crop img{object-position:50% 78%;}
+/* the cultivation still is a 3:4 phone photo - give it a 3:4 frame at the same
+   column width so the whole picture shows with nothing cropped away */
+.og-home .og-photo--crop{aspect-ratio:3/4;}
+.og-home .og-photo--loop{aspect-ratio:16/9;}
 .og-eyebrow--dash{display:flex;align-items:center;gap:14px;}
 .og-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
 .og-home-question{font-size:clamp(1.9rem,3vw,2.9rem);max-width:24ch;margin-bottom:clamp(var(--s4),4vh,var(--s5));}
@@ -1616,7 +1619,8 @@ html.no-video .hero-scroll{opacity:1;}
   .og-return .og-photo{aspect-ratio:4/5;order:-1;position:relative;top:auto;}
   .og-home-top{grid-template-columns:1fr;}
   .og-home .og-photo-stack{grid-template-rows:none;}
-  .og-home .og-photo{aspect-ratio:4/3;min-height:0;}
+  .og-home .og-photo{min-height:0;}
+  .og-home .og-photo--crop{aspect-ratio:3/4;}
   .og-home .og-photo--loop{aspect-ratio:16/9;}
   .og-plate{grid-template-columns:1fr;}
   .og-plate-copy{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s4);}
