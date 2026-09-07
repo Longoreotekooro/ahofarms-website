@@ -1455,7 +1455,6 @@ html.no-video .hero-scroll{opacity:1;}
 .og-beats-panel{position:relative;margin:0 0 clamp(var(--s6),9vh,var(--s8));width:100%;background:var(--void);container-type:inline-size;}
 .og-beats-panel picture{display:block;width:100%;}
 .og-beats-panel img{display:block;width:100%;height:auto;}
-.og-beats-panel::before{content:'';position:absolute;left:0;right:0;top:0;height:9%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0.45),transparent);}
 .og-panel-copy{position:absolute;z-index:2;left:5.5%;top:27%;width:38%;}
 .og-panel-copy .eyebrow{color:#8f6a33;margin-bottom:1.4cqw;}
 .og-panel-copy .og-eyebrow--dash::after{background:#8f6a33;}
@@ -1471,6 +1470,14 @@ html.no-video .hero-scroll{opacity:1;}
 .og-beats-panel.in .og-panel-words li:nth-child(4){transition-delay:1.06s;}
 .og-beats-panel.in .og-panel-words li:nth-child(5){transition-delay:1.18s;}
 .og-beats-panel.in .og-panel-words::after{transform:scaleX(1);}
+/* BLEED: the flax chapter brightens into the artwork's own cream (#fcf9f2) and the
+   movement opens with no padding, so the picture emerges out of the page instead of
+   starting after a band. Desktop only: under 900px the movement opens on the
+   headline over black, so there is no cream-to-flax join to hide. */
+@media(min-width:901px){
+  .og-return{background-image:linear-gradient(to bottom,rgba(252,249,242,0) calc(100% - 300px),#fcf9f2 100%);}
+  .og-home{padding-top:0;}
+}
 @media(prefers-reduced-motion:reduce){
   .og-panel-words li,.og-finale-line,.og-viable{opacity:1;transform:none;filter:none;transition:none;}
   .og-panel-words::after,.og-finale-rule{transform:none;transition:none;}
@@ -1617,7 +1624,6 @@ html.no-video .hero-scroll{opacity:1;}
   .og-beats-panel{display:flex;flex-direction:column;margin:0 0 clamp(var(--s5),7vh,var(--s6));}
   .og-beats-panel picture{order:2;}
   .og-beats-panel img{aspect-ratio:1/1;object-fit:cover;}
-  .og-beats-panel::before{display:none;}
   .og-panel-copy{order:1;position:static;width:auto;padding:0 var(--s4) clamp(var(--s4),5vh,var(--s5));}
   .og-panel-copy .eyebrow{color:var(--gold);margin-bottom:var(--s3);}
   .og-panel-copy .og-eyebrow--dash::after{background:var(--gold);}
