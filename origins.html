@@ -1420,12 +1420,6 @@ html.no-video .hero-scroll{opacity:1;}
 .ch-flax .og-ph b{color:#8f6a33;}
 .ch-flax .og-ph span{color:#5a5f5a;}
 /* the drawn thread */
-.og-thread{display:block;overflow:visible;}
-.og-thread path{fill:none;stroke:var(--gold);stroke-width:1;stroke-linecap:round;opacity:0.85;}
-.og-thread circle{fill:var(--gold);}
-.og-draw path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.8s var(--ease) 0.2s;}
-.og-draw.in path{stroke-dashoffset:0;}
-@media(prefers-reduced-motion:reduce){.og-draw path{stroke-dashoffset:0!important;transition:none!important;}}
 
 /* —— hero —— */
 .og-hero{position:relative;height:min(88vh,900px);min-height:560px;overflow:hidden;background:#050505;}
@@ -1548,7 +1542,15 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* —— 4 · two journeys meet (dark, room to breathe) —— */
 .og-meet{padding:clamp(120px,16vh,220px) 0;text-align:center;}
-.og-meet .og-thread{width:min(100%,760px);height:auto;margin:0 auto clamp(var(--s5),7vh,var(--s7));}
+/* the aho cord where the two journeys meet - the photographed muka replaces the
+   drawn SVG thread. Its black ground is keyed to alpha so it sits on the section. */
+.og-cord{display:block;width:min(100%,900px);height:auto;transform:none;margin:0 auto clamp(var(--s5),7vh,var(--s7));
+  -webkit-mask-image:linear-gradient(90deg,#000 0 34%,rgba(0,0,0,0) 66%);mask-image:linear-gradient(90deg,#000 0 34%,rgba(0,0,0,0) 66%);
+  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:100% 0;mask-position:100% 0;
+  transition:opacity 1.2s var(--ease),-webkit-mask-position 1.8s cubic-bezier(.2,.7,.2,1) 0.15s,mask-position 1.8s cubic-bezier(.2,.7,.2,1) 0.15s;}
+.og-cord.in{-webkit-mask-position:0 0;mask-position:0 0;}
+@media(prefers-reduced-motion:reduce){.og-cord{-webkit-mask-image:none;mask-image:none;transition:none;}}
 .og-meet-lines{display:grid;gap:18px;max-width:34ch;margin:0 auto clamp(var(--s6),10vh,var(--s8));}
 .og-meet-lines p{font-family:var(--font-h);font-weight:300;font-size:clamp(1.4rem,2.3vw,2rem);line-height:1.3;color:var(--starlight);}
 .og-meet-lines p + p{color:var(--gold-light);font-style:italic;}
@@ -1895,12 +1897,8 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ================ 4 · TWO JOURNEYS MEET ================ -->
   <section class="og-sec og-meet" id="two-journeys">
     <div class="wrap">
-      <!-- two threads, drawn in from either side, meeting at one point -->
-      <svg class="og-thread og-draw reveal" viewBox="0 0 760 120" aria-hidden="true">
-        <path pathLength="1" d="M0 20 C 200 20, 300 100, 380 100"/>
-        <path pathLength="1" d="M760 20 C 560 20, 460 100, 380 100"/>
-        <circle cx="380" cy="100" r="4"/>
-      </svg>
+      <!-- the aho cord, drawn across the page where the two journeys meet -->
+      <img class="og-cord reveal" src="assets/aho-origin-cord.png" alt="" aria-hidden="true" width="1600" height="189" loading="lazy">
       <div class="og-meet-lines">
         <p class="emerge">A desire to return to whenua.</p>
         <p class="emerge">And the knowledge of an industry capable of making that return commercially possible.</p>
