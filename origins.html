@@ -1444,34 +1444,36 @@ html.no-video .hero-scroll{opacity:1;}
 .og-question em{font-style:italic;color:var(--gold-light);}
 /* flat black chapter - CEO ruled out the green wash (2026-09-07) */
 .og-home{background:var(--void);padding-bottom:0;}
-/* opening artwork: headline lives on the cream, word column on the dark wedge.
-   Sizes are container units so the copy tracks the picture at any width. */
-.og-beats-panel{position:relative;margin:0 0 clamp(var(--s6),9vh,var(--s8));width:100%;background:var(--void);container-type:inline-size;}
-.og-beats-panel picture{display:block;width:100%;}
-.og-beats-panel img{display:block;width:100%;height:auto;}
-.og-panel-copy{position:absolute;z-index:2;left:5.5%;top:27%;width:38%;}
-.og-panel-copy .eyebrow{color:#8f6a33;margin-bottom:1.4cqw;}
-.og-panel-copy .og-eyebrow--dash::after{background:#8f6a33;}
-.og-panel-h2{margin:0;color:#1d211f;font-size:4.6vw;font-size:4.6cqw;line-height:1.07;letter-spacing:-0.035em;}
-.og-panel-h2 em{display:block;font-style:italic;color:#8f6a33;}
-.og-panel-words{position:absolute;z-index:2;left:90%;top:37%;width:8.5%;margin:0;padding:0;list-style:none;font-family:var(--font-b);font-weight:500;font-size:clamp(9px,0.75cqw,13px);letter-spacing:0.24em;text-transform:uppercase;line-height:2.4;color:rgba(243,241,235,0.86);}
+/* the movement opens ON the sunrise: the photograph is the ground the whole
+   opening sits on, scrimmed so it descends into the section's black. The copy
+   sits in the photo's dark foreground (lum under 25 there) so light type holds. */
+.og-sunrise{position:relative;width:100%;display:flex;align-items:flex-end;
+  min-height:clamp(600px,92vh,980px);margin:0 0 clamp(var(--s6),9vh,var(--s8));
+  background:#0a0c0d url("assets/aho-origin-sunrise.jpg") center 55%/cover no-repeat;}
+.og-sunrise::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(5,5,5,0.28) 0%,rgba(5,5,5,0) 26%,rgba(5,5,5,0.16) 62%,rgba(5,5,5,0.68) 92%,var(--void) 100%);}
+.og-sunrise-ui{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;gap:clamp(var(--s5),5vw,var(--s7));padding-bottom:clamp(var(--s6),10vh,var(--s7));}
+.og-panel-copy{max-width:none;}
+.og-panel-copy .eyebrow{color:var(--gold);margin-bottom:var(--s3);}
+.og-panel-h2{margin:0;max-width:9.5em;color:var(--starlight);font-size:clamp(2.6rem,5.4vw,5rem);line-height:1.05;letter-spacing:-0.035em;
+  text-shadow:0 2px 34px rgba(0,0,0,0.45);}
+.og-panel-h2 em{display:block;font-style:italic;color:var(--gold-light);}
+.og-panel-words{margin:0;padding:0;list-style:none;text-align:right;font-family:var(--font-b);font-weight:500;
+  font-size:clamp(9px,0.72vw,12px);letter-spacing:0.24em;text-transform:uppercase;line-height:2.5;color:rgba(243,241,235,0.9);}
 .og-panel-words li{opacity:0;transform:translateX(10px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.7,.2,1);}
-.og-panel-words::after{content:'';display:block;width:4.2cqw;height:1px;background:#c9a06a;margin-top:0.9cqw;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1) 1.35s;}
-.og-beats-panel.in .og-panel-words li{opacity:1;transform:none;}
-.og-beats-panel.in .og-panel-words li:nth-child(1){transition-delay:0.7s;}
-.og-beats-panel.in .og-panel-words li:nth-child(2){transition-delay:0.82s;}
-.og-beats-panel.in .og-panel-words li:nth-child(3){transition-delay:0.94s;}
-.og-beats-panel.in .og-panel-words li:nth-child(4){transition-delay:1.06s;}
-.og-beats-panel.in .og-panel-words li:nth-child(5){transition-delay:1.18s;}
-.og-beats-panel.in .og-panel-words::after{transform:scaleX(1);}
-/* BLEED: the flax chapter brightens into the artwork's own cream (#fcf9f2) and the
-   movement opens with no padding, so the picture emerges out of the page instead of
-   starting after a band. Desktop only: under 900px the movement opens on the
-   headline over black, so there is no cream-to-flax join to hide. */
-@media(min-width:901px){
-  .og-return{background-image:linear-gradient(to bottom,rgba(252,249,242,0) calc(100% - 300px),#fcf9f2 100%);}
-  .og-home{padding-top:0;}
-}
+.og-panel-words::after{content:'';display:block;width:44px;height:1px;background:var(--gold);margin:var(--s3) 0 0 auto;
+  transform-origin:right;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1) 1.3s;}
+.og-sunrise.in .og-panel-words li{opacity:1;transform:none;}
+.og-sunrise.in .og-panel-words li:nth-child(1){transition-delay:0.65s;}
+.og-sunrise.in .og-panel-words li:nth-child(2){transition-delay:0.77s;}
+.og-sunrise.in .og-panel-words li:nth-child(3){transition-delay:0.89s;}
+.og-sunrise.in .og-panel-words li:nth-child(4){transition-delay:1.01s;}
+.og-sunrise.in .og-panel-words li:nth-child(5){transition-delay:1.13s;}
+.og-sunrise.in .og-panel-words::after{transform:scaleX(1);}
+/* the movement opens with no padding so the photograph starts hard against the
+   flax chapter above it, the way a full-bleed picture should */
+@media(min-width:901px){.og-home{padding-top:0;}}
 @media(prefers-reduced-motion:reduce){
   .og-panel-words li,.og-finale-line,.og-viable{opacity:1;transform:none;filter:none;transition:none;}
   .og-panel-words::after,.og-finale-rule{transform:none;transition:none;}
@@ -1619,17 +1621,13 @@ html.no-video .hero-scroll{opacity:1;}
   .og-plate-copy{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s4);}
   .og-home{padding-bottom:0;}
   .og-finale{padding:clamp(var(--s6),10vh,var(--s7)) 0 clamp(var(--s6),11vh,var(--s7));}
-  /* the copy leaves the artwork and stacks: headline, picture, words */
-  .og-beats-panel{display:flex;flex-direction:column;margin:0 0 clamp(var(--s5),7vh,var(--s6));}
-  .og-beats-panel picture{order:2;}
-  .og-beats-panel img{aspect-ratio:1/1;object-fit:cover;}
-  .og-panel-copy{order:1;position:static;width:auto;padding:0 var(--s4) clamp(var(--s4),5vh,var(--s5));}
-  .og-panel-copy .eyebrow{color:var(--gold);margin-bottom:var(--s3);}
-  .og-panel-copy .og-eyebrow--dash::after{background:var(--gold);}
-  .og-panel-h2{color:var(--starlight);font-size:clamp(2rem,8.2vw,2.9rem);}
-  .og-panel-h2 em{color:var(--gold-light);}
-  .og-panel-words{order:3;position:static;width:auto;padding:clamp(var(--s4),5vh,var(--s5)) var(--s4) 0;line-height:2.2;font-size:10px;}
-  .og-panel-words::after{width:44px;}
+  .og-sunrise{min-height:clamp(520px,84vh,720px);margin-bottom:clamp(var(--s5),7vh,var(--s6));
+    background-image:url("assets/aho-origin-sunrise-mobile.jpg");background-position:center 58%;}
+  .og-sunrise-ui{grid-template-columns:1fr;gap:clamp(var(--s4),5vh,var(--s5));}
+  .og-panel-copy{max-width:none;}
+  .og-panel-h2{font-size:clamp(2rem,8.2vw,2.9rem);}
+  .og-panel-words{text-align:left;line-height:2.2;font-size:10px;}
+  .og-panel-words::after{margin-left:0;transform-origin:left;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1762,23 +1760,21 @@ html.no-video .hero-scroll{opacity:1;}
        artwork and stacks: headline, square crop, words. Copy positions are in
        container units so they track the artwork. No icons, no numbers (CEO). -->
   <section class="og-sec og-home" id="come-home">
-    <figure class="og-beats-panel reveal">
-      <picture>
-        <source media="(max-width: 900px)" srcset="assets/aho-origin-beats-panel-mobile.jpg?v=3" width="900" height="900">
-        <img src="assets/aho-origin-beats-panel.jpg?v=3" alt="Sunrise over the coast, a young seedling rising from dark soil, and a muka cord running beneath" width="1672" height="941">
-      </picture>
-      <div class="og-panel-copy">
-        <span class="eyebrow gold og-eyebrow og-eyebrow--dash">THE IDEA WAS SIMPLE</span>
-        <h2 class="og-h2 og-panel-h2">The idea was simple: <em>come home.</em></h2>
+    <div class="og-sunrise reveal" role="img" aria-label="Sunrise over the beach below the whenua, the road and grass verge running down to the sand">
+      <div class="wrap og-sunrise-ui">
+        <div class="og-panel-copy">
+          <span class="eyebrow gold og-eyebrow og-eyebrow--dash">THE IDEA WAS SIMPLE</span>
+          <h2 class="og-h2 og-panel-h2">The idea was simple: <em>come home.</em></h2>
+        </div>
+        <ul class="og-panel-words" aria-label="What a return means">
+          <li>People</li>
+          <li>Land</li>
+          <li>Knowledge</li>
+          <li>Opportunity</li>
+          <li>A stronger tomorrow</li>
+        </ul>
       </div>
-      <ul class="og-panel-words" aria-label="What a return means">
-        <li>People</li>
-        <li>Land</li>
-        <li>Knowledge</li>
-        <li>Opportunity</li>
-        <li>A stronger tomorrow</li>
-      </ul>
-    </figure>
+    </div>
     <div class="wrap">
       <div class="og-home-top">
         <div class="og-home-copy">
