@@ -1450,36 +1450,30 @@ html.no-video .hero-scroll{opacity:1;}
 .og-question em{font-style:italic;color:var(--gold-light);}
 /* flat black chapter - CEO ruled out the green wash (2026-09-07) */
 .og-home{background:var(--void);padding-bottom:0;}
-/* beats panel: artwork + live copy. Ends on a CLEAN edge - the closing
-   statement below (.og-closing) is what separates it from the next image. */
-.og-beats-panel{position:relative;margin:clamp(var(--s6),9vh,var(--s8)) 0 0;width:100%;background:var(--void);container-type:inline-size;}
+/* opening artwork: headline lives on the cream, word column on the dark wedge.
+   Sizes are container units so the copy tracks the picture at any width. */
+.og-beats-panel{position:relative;margin:0 0 clamp(var(--s6),9vh,var(--s8));width:100%;background:var(--void);container-type:inline-size;}
+.og-beats-panel picture{display:block;width:100%;}
 .og-beats-panel img{display:block;width:100%;height:auto;}
-.og-beats-panel::before{content:'';position:absolute;left:0;right:0;top:0;height:9%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0.48),transparent);}
-.og-panel-copy{position:absolute;z-index:2;left:5.5%;top:19%;width:38%;color:#1d211f;}
-.og-panel-beats{margin:0;font-family:var(--font-h);font-weight:300;font-size:3.5vw;font-size:3.55cqw;line-height:1.14;letter-spacing:-0.025em;white-space:nowrap;}
-.og-panel-line{display:block;opacity:0;transform:translateY(0.35em);filter:blur(6px);transition:opacity 0.9s cubic-bezier(.2,.7,.2,1),transform 0.9s cubic-bezier(.2,.7,.2,1),filter 0.9s ease;}
-.og-panel-line em{font-style:italic;color:#8f6a33;}
-.og-panel-rule{display:block;width:3.2cqw;min-width:36px;height:1px;background:#8f6a33;opacity:0.9;margin:2.4cqw 0 0;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1);}
+.og-beats-panel::before{content:'';position:absolute;left:0;right:0;top:0;height:9%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0.45),transparent);}
+.og-panel-copy{position:absolute;z-index:2;left:5.5%;top:27%;width:38%;}
+.og-panel-copy .eyebrow{color:#8f6a33;margin-bottom:1.4cqw;}
+.og-panel-copy .og-eyebrow--dash::after{background:#8f6a33;}
+.og-panel-h2{margin:0;color:#1d211f;font-size:4.6vw;font-size:4.6cqw;line-height:1.07;letter-spacing:-0.035em;}
+.og-panel-h2 em{display:block;font-style:italic;color:#8f6a33;}
 .og-panel-words{position:absolute;z-index:2;left:90%;top:37%;width:8.5%;margin:0;padding:0;list-style:none;font-family:var(--font-b);font-weight:500;font-size:clamp(9px,0.75cqw,13px);letter-spacing:0.24em;text-transform:uppercase;line-height:2.4;color:rgba(243,241,235,0.86);}
 .og-panel-words li{opacity:0;transform:translateX(10px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.7,.2,1);}
-.og-panel-words::after{content:'';display:block;width:4.2cqw;height:1px;background:#c9a06a;margin-top:0.9cqw;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1) 1.55s;}
-.og-beats-panel.in .og-panel-line{opacity:1;transform:none;filter:blur(0);}
-.og-beats-panel.in .og-panel-line:nth-child(1){transition-delay:0.35s;}
-.og-beats-panel.in .og-panel-line:nth-child(2){transition-delay:0.55s;}
-.og-beats-panel.in .og-panel-line:nth-child(3){transition-delay:0.75s;}
-.og-beats-panel.in .og-panel-line:nth-child(4){transition-delay:0.95s;}
-.og-beats-panel.in .og-panel-rule{transform:scaleX(1);transition-delay:1.2s;}
+.og-panel-words::after{content:'';display:block;width:4.2cqw;height:1px;background:#c9a06a;margin-top:0.9cqw;transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1) 1.35s;}
 .og-beats-panel.in .og-panel-words li{opacity:1;transform:none;}
-.og-beats-panel.in .og-panel-words li:nth-child(1){transition-delay:0.9s;}
-.og-beats-panel.in .og-panel-words li:nth-child(2){transition-delay:1.02s;}
-.og-beats-panel.in .og-panel-words li:nth-child(3){transition-delay:1.14s;}
-.og-beats-panel.in .og-panel-words li:nth-child(4){transition-delay:1.26s;}
-.og-beats-panel.in .og-panel-words li:nth-child(5){transition-delay:1.38s;}
+.og-beats-panel.in .og-panel-words li:nth-child(1){transition-delay:0.7s;}
+.og-beats-panel.in .og-panel-words li:nth-child(2){transition-delay:0.82s;}
+.og-beats-panel.in .og-panel-words li:nth-child(3){transition-delay:0.94s;}
+.og-beats-panel.in .og-panel-words li:nth-child(4){transition-delay:1.06s;}
+.og-beats-panel.in .og-panel-words li:nth-child(5){transition-delay:1.18s;}
 .og-beats-panel.in .og-panel-words::after{transform:scaleX(1);}
-@media(min-width:901px){.og-home .og-beats{display:none;}}
 @media(prefers-reduced-motion:reduce){
-  .og-panel-line,.og-panel-words li{opacity:1;transform:none;filter:none;transition:none;}
-  .og-panel-rule,.og-panel-words::after{transform:none;transition:none;}
+  .og-panel-words li,.og-finale-line,.og-viable{opacity:1;transform:none;filter:none;transition:none;}
+  .og-panel-words::after,.og-finale-rule{transform:none;transition:none;}
 }
 .og-home-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s8));align-items:stretch;}
 .og-home .og-photo-stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--s4);min-height:0;}
@@ -1488,7 +1482,6 @@ html.no-video .hero-scroll{opacity:1;}
 .og-home .og-photo--crop img{object-position:50% 78%;}
 .og-eyebrow--dash{display:flex;align-items:center;gap:14px;}
 .og-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
-.og-home-h2 em{display:block;}
 .og-home-question{font-size:clamp(1.9rem,3vw,2.9rem);max-width:24ch;margin-bottom:clamp(var(--s4),4vh,var(--s5));}
 .og-rule{display:block;width:40px;height:1px;background:var(--gold);opacity:0.8;margin:0 0 clamp(var(--s4),4vh,var(--s5));}
 .og-plate{margin-top:clamp(var(--s5),6vh,var(--s7));display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(var(--s4),4vw,var(--s6));padding:clamp(var(--s4),3.2vw,var(--s6));border:1px solid var(--gold-border);border-radius:8px;background:linear-gradient(135deg,rgba(243,241,235,0.035),rgba(243,241,235,0.008));}
@@ -1496,15 +1489,21 @@ html.no-video .hero-scroll{opacity:1;}
 .og-plate-lead em{font-style:italic;color:var(--gold-light);}
 .og-plate-copy{border-left:1px solid var(--hairline);padding-left:clamp(var(--s4),3vw,var(--s5));}
 .og-plate-copy p{max-width:none;}
-.og-beats{margin-top:clamp(var(--s6),9vh,var(--s8));}
-.og-beats-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
-.og-beat{font-family:var(--font-h);font-weight:300;font-size:clamp(1.15rem,1.5vw,1.45rem);line-height:1.2;letter-spacing:-0.015em;color:var(--starlight);padding:var(--s4) clamp(var(--s3),2vw,var(--s4)) 0 0;border-top:1px solid var(--hairline);margin:0;}
-.og-beat + .og-beat{padding-left:clamp(var(--s3),2vw,var(--s4));border-left:1px solid var(--hairline);}
-.og-beat em{font-style:italic;color:var(--gold-light);}
-/* the movement's last word: alone on black, the breath before the founder banner */
-.og-closing{background:var(--void);padding:clamp(var(--s6),13vh,var(--s8)) 0 clamp(var(--s7),16vh,var(--s8));}
-.og-viable{margin:0;max-width:22ch;font-size:clamp(1.7rem,3vw,2.9rem);line-height:1.24;}
-.og-viable::before{content:'';display:block;width:44px;height:1px;background:var(--gold);opacity:0.85;margin-bottom:clamp(var(--s4),4vh,var(--s5));}
+/* the movement ends on type, alone on black - and that black is the breath
+   before the founder banner, so two full-bleed images never touch */
+.og-finale{background:var(--void);padding:clamp(var(--s6),12vh,var(--s8)) 0 clamp(var(--s7),15vh,var(--s8));}
+.og-finale-beats{margin:0;font-family:var(--font-h);font-weight:300;font-size:clamp(1.9rem,3.9vw,3.5rem);line-height:1.15;letter-spacing:-0.03em;color:var(--starlight);}
+.og-finale-line{display:block;opacity:0;transform:translateY(0.3em);filter:blur(6px);transition:opacity 0.9s cubic-bezier(.2,.7,.2,1),transform 0.9s cubic-bezier(.2,.7,.2,1),filter 0.9s ease;}
+.og-finale-line em{font-style:italic;color:var(--gold-light);}
+.og-finale-rule{display:block;width:44px;height:1px;background:var(--gold);opacity:0.85;margin:clamp(var(--s5),6vh,var(--s6)) 0 clamp(var(--s4),4vh,var(--s5));transform-origin:left;transform:scaleX(0);transition:transform 0.8s cubic-bezier(.2,.7,.2,1);}
+.og-viable{margin:0;max-width:26ch;font-size:clamp(1.3rem,1.9vw,1.85rem);line-height:1.36;opacity:0;transform:translateY(0.4em);transition:opacity 0.9s ease,transform 0.9s cubic-bezier(.2,.7,.2,1);}
+.og-finale.in .og-finale-line{opacity:1;transform:none;filter:blur(0);}
+.og-finale.in .og-finale-line:nth-child(1){transition-delay:0.1s;}
+.og-finale.in .og-finale-line:nth-child(2){transition-delay:0.3s;}
+.og-finale.in .og-finale-line:nth-child(3){transition-delay:0.5s;}
+.og-finale.in .og-finale-line:nth-child(4){transition-delay:0.7s;}
+.og-finale.in .og-finale-rule{transform:scaleX(1);transition-delay:0.95s;}
+.og-finale.in .og-viable{opacity:1;transform:none;transition-delay:1.1s;}
 
 /* —— 3 · the journey before aho (flax) —— */
 .og-founder-banner{position:relative;min-height:clamp(560px,82vh,900px);background:#0d0f0d;color:var(--starlight);overflow:hidden;display:flex;align-items:center;}
@@ -1612,13 +1611,20 @@ html.no-video .hero-scroll{opacity:1;}
   .og-home .og-photo--loop{aspect-ratio:16/9;}
   .og-plate{grid-template-columns:1fr;}
   .og-plate-copy{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s4);}
-  .og-beats-row{grid-template-columns:1fr;}
-  .og-beat + .og-beat{padding-left:0;border-left:0;}
-  .og-closing{padding:clamp(var(--s6),10vh,var(--s7)) 0;}
   .og-home{padding-bottom:0;}
-  .og-beats-panel{margin-top:clamp(var(--s6),8vh,var(--s7));}
+  .og-finale{padding:clamp(var(--s6),10vh,var(--s7)) 0 clamp(var(--s6),11vh,var(--s7));}
+  /* the copy leaves the artwork and stacks: headline, picture, words */
+  .og-beats-panel{display:flex;flex-direction:column;margin:0 0 clamp(var(--s5),7vh,var(--s6));}
+  .og-beats-panel picture{order:2;}
   .og-beats-panel img{aspect-ratio:1/1;object-fit:cover;}
-  .og-beats-panel::before,.og-panel-copy,.og-panel-words{display:none;}
+  .og-beats-panel::before{display:none;}
+  .og-panel-copy{order:1;position:static;width:auto;padding:0 var(--s4) clamp(var(--s4),5vh,var(--s5));}
+  .og-panel-copy .eyebrow{color:var(--gold);margin-bottom:var(--s3);}
+  .og-panel-copy .og-eyebrow--dash::after{background:var(--gold);}
+  .og-panel-h2{color:var(--starlight);font-size:clamp(2rem,8.2vw,2.9rem);}
+  .og-panel-h2 em{color:var(--gold-light);}
+  .og-panel-words{order:3;position:static;width:auto;padding:clamp(var(--s4),5vh,var(--s5)) var(--s4) 0;line-height:2.2;font-size:10px;}
+  .og-panel-words::after{width:44px;}
   .og-founder-banner{min-height:0;display:block;}
   .og-founder-banner-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/3;object-position:center 20%;}
   .og-founder-banner::before{background:linear-gradient(to bottom,rgba(13,15,13,0) 40%,#0d0f0d 75%);}
@@ -1734,23 +1740,36 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 2 · THE IDEA WAS SIMPLE: COME HOME ================ -->
-  <!-- Editorial opening: copy left, whenua loop + cultivation still right
-       with the two columns level; a bordered "different possibility" plate
-       spanning below; then the CEO-supplied beats panel (assets/aho-origin-
-       beats-panel.jpg, ARTWORK ONLY - the four beats, "It has to be viable"
-       and the word column are live HTML overlaid with staged reveals, sized
-       in container units so they track the artwork) full-bleed, ending on a
-       CLEAN edge. The "It has to be viable" closing then sits alone on black
-       beneath it (.og-closing) so two full-bleed images never touch - that
-       black passage is the movement's last word and the breath before the
-       founder banner. Under 900px the overlay hides and the HTML beats show
-       above the cropped panel. No icons, no numbers (CEO rulings). -->
+  <!-- Opens on the CEO's artwork (assets/aho-origin-beats-panel.jpg, artwork
+       only): the headline sits live on its cream, the word column on the dark
+       wedge. Then the question + copy with the whenua loop and cultivation
+       still, the "different possibility" plate, and the movement ENDS on
+       typography - the four beats and "It has to be viable" alone on black,
+       which is also the breath before the founder banner's photograph, so no
+       two full-bleed images ever touch. Under 900px the overlay leaves the
+       artwork and stacks: headline, square crop, words. Copy positions are in
+       container units so they track the artwork. No icons, no numbers (CEO). -->
   <section class="og-sec og-home" id="come-home">
+    <figure class="og-beats-panel reveal">
+      <picture>
+        <source media="(max-width: 900px)" srcset="assets/aho-origin-beats-panel-mobile.jpg?v=3" width="900" height="900">
+        <img src="assets/aho-origin-beats-panel.jpg?v=3" alt="Sunrise over the coast, a young seedling rising from dark soil, and a muka cord running beneath" width="1672" height="941">
+      </picture>
+      <div class="og-panel-copy">
+        <span class="eyebrow gold og-eyebrow og-eyebrow--dash">THE IDEA WAS SIMPLE</span>
+        <h2 class="og-h2 og-panel-h2">The idea was simple: <em>come home.</em></h2>
+      </div>
+      <ul class="og-panel-words" aria-label="What a return means">
+        <li>People</li>
+        <li>Land</li>
+        <li>Knowledge</li>
+        <li>Opportunity</li>
+        <li>A stronger tomorrow</li>
+      </ul>
+    </figure>
     <div class="wrap">
       <div class="og-home-top">
         <div class="og-home-copy">
-          <span class="eyebrow gold og-eyebrow og-eyebrow--dash reveal">THE IDEA WAS SIMPLE</span>
-          <h2 class="og-h2 og-home-h2 emerge">The idea was simple: <em>come home.</em></h2>
           <p class="og-ask reveal">Aho began with a question</p>
           <p class="og-question og-home-question emerge">How do we create a commercially viable reason for our whānau <em>to return to the whenua?</em></p>
           <span class="og-rule reveal" aria-hidden="true"></span>
@@ -1785,40 +1804,17 @@ html.no-video .hero-scroll{opacity:1;}
           <p>We didn't have to choose between what the whenua was already providing and what it could become.</p>
         </div>
       </div>
-      <div class="og-beats reveal">
-        <div class="og-beats-row">
-          <p class="og-beat">We could start small.</p>
-          <p class="og-beat">We could learn.</p>
-          <p class="og-beat">We could prove the model.</p>
-          <p class="og-beat">And we could <em>return.</em></p>
-        </div>
-      </div>
     </div>
-    <figure class="og-beats-panel reveal">
-      <picture>
-        <source media="(max-width: 900px)" srcset="assets/aho-origin-beats-panel-mobile.jpg?v=3" width="900" height="900">
-        <img src="assets/aho-origin-beats-panel.jpg?v=3" alt="Sunrise over the coast, a young seedling rising from dark soil, and a muka cord running beneath" width="1672" height="941" loading="lazy">
-      </picture>
-      <div class="og-panel-copy">
-        <p class="og-panel-beats">
-          <span class="og-panel-line">We could start small.</span>
-          <span class="og-panel-line">We could learn.</span>
-          <span class="og-panel-line">We could prove the model.</span>
-          <span class="og-panel-line">And we could <em>return.</em></span>
-        </p>
-        <span class="og-panel-rule" aria-hidden="true"></span>
-      </div>
-      <ul class="og-panel-words" aria-label="What a return means">
-        <li>People</li>
-        <li>Land</li>
-        <li>Knowledge</li>
-        <li>Opportunity</li>
-        <li>A stronger tomorrow</li>
-      </ul>
-    </figure>
-    <div class="og-closing">
+    <div class="og-finale reveal">
       <div class="wrap">
-        <p class="og-lead og-viable reveal">It has to be viable. <em>That became one of the foundations of Aho.</em></p>
+        <p class="og-finale-beats">
+          <span class="og-finale-line">We could start small.</span>
+          <span class="og-finale-line">We could learn.</span>
+          <span class="og-finale-line">We could prove the model.</span>
+          <span class="og-finale-line">And we could <em>return.</em></span>
+        </p>
+        <span class="og-finale-rule" aria-hidden="true"></span>
+        <p class="og-lead og-viable">It has to be viable. <em>That became one of the foundations of Aho.</em></p>
       </div>
     </div>
   </section>
