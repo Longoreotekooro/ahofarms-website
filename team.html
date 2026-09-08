@@ -1383,7 +1383,7 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-flax{--starlight:#1d211f;--silver:#4d524e;--white:#141816;--gold:#8f6a33;--gold-light:#7a5a28;--gold-border:rgba(143,106,51,0.38);--hairline:rgba(20,26,24,0.16);background:#efe9db;color:#3a3f3c;}
 .tm-sec{position:relative;padding:clamp(96px,12vh,160px) 0;overflow:hidden;}
 .tm-eyebrow{display:block;margin-bottom:var(--s3);}
-.tm-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.92fr);min-height:clamp(540px,74vh,760px);
+.tm-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.92fr);min-height:clamp(600px,82vh,860px);
   background:#0b0b0b;overflow:hidden;container-type:inline-size;}
 /* copy sits on the page content line: cqw measures the SECTION, so the grid cell can't skew the maths */
 .tm-hero-copy{align-self:center;padding:clamp(var(--s6),9vh,var(--s8)) clamp(var(--s5),4vw,var(--s7)) clamp(var(--s6),9vh,var(--s8))
@@ -1393,7 +1393,7 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
 .tm-hero-sub{margin:var(--s4) 0 0;max-width:34ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.5;color:var(--silver);}
 .tm-hero-photo{position:relative;margin:0;min-height:100%;}
-.tm-hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
+.tm-hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;}
 .tm-hero-photo::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to right,#0b0b0b,rgba(11,11,11,0) 16%);}
 .tm-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:var(--s4);
   border:1px dashed rgba(201,160,106,0.5);border-radius:6px;
@@ -1422,6 +1422,8 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-flax .ph-block p{color:#5a5f5a;}
 @media(max-width:900px){
   .tm-sec{padding:clamp(72px,10vh,110px) 0;}
+  /* the fixed nav is 72px tall on phones too, but the shell pads main to 46px there - start the hero beneath the nav */
+  #journey{padding-top:72px;}
   .tm-hero{grid-template-columns:1fr;min-height:0;}
   .tm-hero-photo{order:-1;aspect-ratio:4/5;min-height:0;}
   .tm-hero-photo::before{background:linear-gradient(to top,#0b0b0b,rgba(11,11,11,0) 22%);}
