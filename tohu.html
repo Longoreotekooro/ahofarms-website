@@ -1420,16 +1420,6 @@ html.no-video .hero-scroll{opacity:1;}
 .th-hero-words span{display:inline-flex;align-items:center;}
 .th-hero-words span + span::before{content:'';display:inline-block;width:22px;height:1px;background:var(--gold);margin:0 12px;opacity:0.8;}
 
-/* —— the five pairings —— */
-.th-thread{position:relative;padding:clamp(72px,9vh,110px) 0 clamp(80px,10vh,120px);background:#0a0c0b;}
-.th-cols{margin-top:clamp(var(--s5),6vh,var(--s6));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));}
-.th-col{padding:0 clamp(var(--s3),2vw,var(--s5)) 0 0;}
-.th-col + .th-col{padding-left:clamp(var(--s3),2vw,var(--s5));border-left:1px solid var(--hairline);}
-.th-col i{display:block;width:28px;height:1px;background:var(--gold);opacity:0.85;margin-bottom:var(--s4);}
-.th-col h3{margin:0 0 10px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.3rem,1.8vw,1.75rem);line-height:1.15;letter-spacing:-0.015em;color:var(--starlight);}
-.th-pair{display:block;font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1rem,1.15vw,1.15rem);line-height:1.4;color:var(--gold-light);}
-.th-pair::before{content:'\2192';display:inline-block;margin-right:8px;font-style:normal;color:var(--gold);opacity:0.8;}
-
 /* —— more than a name: muka photo | body | definition rail —— */
 .th-principle{position:relative;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.35fr) minmax(0,0.62fr);background:var(--void);container-type:inline-size;}
 .th-principle-photo{position:relative;margin:0;min-height:100%;}
@@ -1479,10 +1469,8 @@ html.no-video .hero-scroll{opacity:1;}
   .th-hero h1{max-width:none;}
   .th-hero-foot{flex-direction:column;align-items:flex-start;}
   .th-hero-words{justify-content:flex-start;}
-  .th-thread{padding:clamp(64px,9vh,88px) 0;}
-  .th-cols{grid-template-columns:1fr 1fr;gap:var(--s5) var(--s4);}
-  .th-col,.th-col + .th-col{padding:0;border-left:0;}
   .th-principle{grid-template-columns:1fr;}
+  .th-principle-body{order:1;} .th-principle-photo{order:2;} .th-principle-rail{order:3;}
   .th-principle-photo{min-height:0;aspect-ratio:4/3;}
   .th-principle-body{padding:clamp(var(--s6),8vh,var(--s7)) var(--s4);}
   .th-terms{grid-template-columns:1fr;}
@@ -1554,20 +1542,6 @@ html.no-video .hero-scroll{opacity:1;}
           <span class="eyebrow gold th-eyebrow th-eyebrow--sub">TE TIKANGA O TE INGOA <span>&middot;</span> THE MEANING OF AHO</span>
           <p class="th-hero-words" aria-label="The five threads"><span>Ancestors</span><span>Whenua</span><span>Nature</span><span>Mātauranga Māori</span><span>People</span></p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================ OUR GUIDING THREAD · the five pairings ================ -->
-  <section class="th-thread" id="thread">
-    <div class="wrap">
-      <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">OUR GUIDING THREAD</span>
-      <div class="th-cols">
-        <div class="th-col reveal"><i></i><h3>Ancestors</h3><span class="th-pair">future generations</span></div>
-        <div class="th-col reveal d1"><i></i><h3>Whenua</h3><span class="th-pair">cultivation</span></div>
-        <div class="th-col reveal d2"><i></i><h3>Nature</h3><span class="th-pair">medicine</span></div>
-        <div class="th-col reveal d3"><i></i><h3>Mātauranga Māori</h3><span class="th-pair">modern science</span></div>
-        <div class="th-col reveal d4"><i></i><h3>People</h3><span class="th-pair">one another</span></div>
       </div>
     </div>
   </section>
