@@ -13,12 +13,11 @@ const NAV = [
       // Our Board is deliberately NOT a nav item — the board is being folded
       // into the Our Team page. board.html still exists and still resolves.
       { en: 'Our Team',     mi: 'Tō Mātou Tīma',     href: 'team.html' },
-      { en: 'Our Business', mi: 'Tā Mātou Pakihi',   href: 'business.html' },
       { en: 'Our Tohu',     mi: 'Tō Mātou Tohu',     href: 'tohu.html' },
-      { en: 'Our Whenua',   mi: 'Tō Mātou Whenua',   href: 'cultivation.html#whenua' },
-      { en: 'Cultivation',  mi: 'Māra Hua',          href: 'cultivation.html' },
+      // Our Whenua + Cultivation were merged into one item (CEO, 2026-09-08);
+      // both lived on cultivation.html. te reo reuses the two existing labels.
+      { en: 'Whenua & Cultivation', mi: 'Whenua · Māra Hua', href: 'cultivation.html' },
       { en: 'Quality',      mi: 'Te Whakamātau',     href: 'cultivation.html#trust' },
-      { en: 'Our Kaupapa',  mi: 'Te Kaupapa',        href: 'kaupapa.html' },
       { en: 'News',         mi: 'Ngā Kōrero',        href: 'news.html' },
     ],
   },
