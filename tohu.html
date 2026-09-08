@@ -1397,18 +1397,25 @@ html.no-video .hero-scroll{opacity:1;}
 .th-ph span{font-size:0.7rem;line-height:1.6;letter-spacing:0.04em;color:rgba(168,173,179,0.7);max-width:30ch;}
 
 /* —— hero on the aerial —— */
-.th-hero{position:relative;min-height:clamp(640px,92vh,900px);display:flex;align-items:center;overflow:hidden;container-type:inline-size;
+.th-hero{position:relative;min-height:clamp(620px,calc(100vh - 72px),900px);display:flex;align-items:flex-end;overflow:hidden;container-type:inline-size;
   background:#0a0c0b url("assets/aho-tohu-hero-whenua.jpg") center 58%/cover no-repeat;}
 .th-hero::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to right,rgba(5,5,5,0.9) 0%,rgba(5,5,5,0.72) 34%,rgba(5,5,5,0.2) 62%,rgba(5,5,5,0) 80%),
+  background:linear-gradient(to right,rgba(5,5,5,0.92) 0%,rgba(5,5,5,0.8) 30%,rgba(5,5,5,0.56) 54%,rgba(5,5,5,0.18) 72%,rgba(5,5,5,0) 86%),
              linear-gradient(to bottom,rgba(5,5,5,0.55),rgba(5,5,5,0) 26%,rgba(5,5,5,0) 70%,var(--void) 100%);}
-.th-hero-ui{position:relative;z-index:2;width:100%;padding:clamp(var(--s7),12vh,var(--s9)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4)));}
-.th-hero-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.75fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:start;max-width:62rem;}
+.th-hero-ui{position:relative;z-index:2;width:100%;padding:clamp(var(--s7),12vh,var(--s9)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4))) clamp(var(--s5),8vh,var(--s7));}
+.th-hero-copy{max-width:60rem;}
 .th-hero h1{margin:0;max-width:11ch;}
-.th-hero-sub{margin:var(--s4) 0 0;max-width:36ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.5;color:var(--silver);}
-.th-hero-quote{margin:0.6em 0 0;max-width:18ch;font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1.3rem,1.9vw,1.75rem);line-height:1.35;color:var(--gold-light);}
+.th-hero h1 em{font-style:italic;color:var(--gold-light);}
+.th-hero-row{max-width:54rem;margin-top:clamp(var(--s4),4.5vh,var(--s5));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:end;}
+.th-hero-sub{margin:0;max-width:34ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.5;color:var(--silver);}
+.th-hero-lead .th-btn{margin-top:var(--s4);}
+.th-hero-quote{margin:0;padding-left:clamp(var(--s3),2vw,var(--s4));border-left:1px solid rgba(201,160,106,0.55);max-width:22ch;
+  font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1.3rem,1.9vw,1.75rem);line-height:1.35;color:var(--gold-light);text-shadow:0 1px 18px rgba(0,0,0,0.6);}
+.th-hero-quote p{margin:0;}
 .th-hero-quote em{font-style:italic;color:var(--gold-light);}
-.th-hero-words{position:absolute;z-index:2;right:max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4)));bottom:clamp(var(--s5),6vh,var(--s6));margin:0;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 0;
+.th-hero-foot{margin-top:clamp(var(--s5),7vh,var(--s7));padding-top:var(--s3);border-top:1px solid rgba(243,241,235,0.14);display:flex;justify-content:space-between;align-items:center;gap:var(--s3) var(--s5);flex-wrap:wrap;}
+.th-hero-foot .th-eyebrow--sub{margin:0;}
+.th-hero-words{margin:0;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 0;
   font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,241,235,0.88);text-shadow:0 1px 14px rgba(0,0,0,0.6);}
 .th-hero-words span{display:inline-flex;align-items:center;}
 .th-hero-words span + span::before{content:'';display:inline-block;width:22px;height:1px;background:var(--gold);margin:0 12px;opacity:0.8;}
@@ -1461,7 +1468,7 @@ html.no-video .hero-scroll{opacity:1;}
   .th-principle-rail .th-def-type,.th-principle-rail .th-def-word{grid-column:1;}
   .th-principle-rail .th-def-sense{grid-column:2;}
   .th-principle-rail .th-mark,.th-principle-rail .th-mark-tag{grid-column:3;margin:0;}
-  .th-hero-row{grid-template-columns:1fr;}
+  .th-hero-row{grid-template-columns:1fr;gap:var(--s5);}
   .th-hero-quote{max-width:30ch;}
 }
 @media(max-width:900px){
@@ -1470,7 +1477,8 @@ html.no-video .hero-scroll{opacity:1;}
   .th-hero::before{background:linear-gradient(to top,rgba(5,5,5,0.94) 0%,rgba(5,5,5,0.7) 45%,rgba(5,5,5,0.15) 75%,rgba(5,5,5,0.5) 100%);}
   .th-hero-ui{padding:clamp(var(--s6),9vh,var(--s7)) var(--s4);}
   .th-hero h1{max-width:none;}
-  .th-hero-words{position:static;justify-content:flex-start;margin-top:var(--s5);}
+  .th-hero-foot{flex-direction:column;align-items:flex-start;}
+  .th-hero-words{justify-content:flex-start;}
   .th-thread{padding:clamp(64px,9vh,88px) 0;}
   .th-cols{grid-template-columns:1fr 1fr;gap:var(--s5) var(--s4);}
   .th-col,.th-col + .th-col{padding:0;border-left:0;}
@@ -1525,25 +1533,28 @@ html.no-video .hero-scroll{opacity:1;}
 <main id="journey">
   <!-- ================ HERO · THE THREAD THAT CONNECTS ================ -->
   <!-- CEO mood board, hero: the aerial of the whenua (river mouth, farm, coast)
-       full-bleed; copy on the left over the dark hills, the italic line beside
-       it, the five terms as a word line bottom-right. Every line here is the
+       full-bleed; one editorial block low-left over the dark hills: kicker,
+       headline, sub-line + CTA beside the ruled pull-quote, then a hairline
+       strip carrying the meaning line and the five terms. Every line here is the
        site's own copy except the sub-line, which is a labelled placeholder.
        No chapter numbers, no icons. -->
   <section class="th-hero" id="tohu">
     <div class="th-hero-ui">
       <div class="th-hero-copy">
         <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">WHY AHO EXISTS</span>
-        <span class="eyebrow gold th-eyebrow th-eyebrow--sub reveal d1">TE TIKANGA O TE INGOA <span>&middot;</span> THE MEANING OF AHO</span>
+        <h1 class="emerge">The thread that <em>connects.</em></h1>
         <div class="th-hero-row">
-          <div>
-            <h1 class="emerge">The thread that connects.</h1>
-            <p class="th-hero-sub th-ph-line reveal d2">Hero line to be supplied &mdash; one sentence on what aho is.</p>
-            <a class="th-btn reveal d3" href="origins.html">Our story <span aria-hidden="true">&rarr;</span></a>
+          <div class="th-hero-lead reveal d2">
+            <p class="th-hero-sub th-ph-line">Hero line to be supplied &mdash; one sentence on what aho is.</p>
+            <a class="th-btn" href="origins.html">Our story <span aria-hidden="true">&rarr;</span></a>
           </div>
-          <p class="th-hero-quote emerge">We are not simply cultivating medicine. We are cultivating <em>connection.</em></p>
+          <blockquote class="th-hero-quote emerge"><p>We are not simply cultivating medicine. We are cultivating <em>connection.</em></p></blockquote>
+        </div>
+        <div class="th-hero-foot reveal d3">
+          <span class="eyebrow gold th-eyebrow th-eyebrow--sub">TE TIKANGA O TE INGOA <span>&middot;</span> THE MEANING OF AHO</span>
+          <p class="th-hero-words" aria-label="The five threads"><span>Ancestors</span><span>Whenua</span><span>Nature</span><span>Mātauranga Māori</span><span>People</span></p>
         </div>
       </div>
-      <p class="th-hero-words reveal d3" aria-label="The five threads"><span>Ancestors</span><span>Whenua</span><span>Nature</span><span>Mātauranga Māori</span><span>People</span></p>
     </div>
   </section>
 
