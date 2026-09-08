@@ -1632,11 +1632,14 @@ html.no-video .hero-scroll{opacity:1;}
 /* —— 9 · closing (flax) —— */
 .og-close{padding-bottom:clamp(120px,14vh,180px);}
 .og-close .og-pull{font-size:clamp(2rem,4.2vw,3.8rem);max-width:22ch;}
-.og-principles{margin-top:clamp(var(--s6),10vh,var(--s8));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
-.og-principles div{padding:var(--s4) clamp(var(--s3),2.4vw,var(--s5)) 0 0;border-top:1px solid var(--hairline);}
-.og-principles div + div{padding-left:clamp(var(--s3),2.4vw,var(--s5));}
-.og-principles span{display:block;font-family:var(--font-h);font-weight:300;font-size:clamp(1.3rem,1.9vw,1.8rem);line-height:1.2;color:var(--starlight);}
-.og-principles i{display:block;width:28px;height:1px;background:var(--gold);margin-bottom:var(--s3);opacity:0.8;}
+/* the four principles on the paper-and-thread canvas (3:1) */
+.og-principles-plate{position:relative;width:100%;aspect-ratio:3/1;margin-top:clamp(var(--s6),9vh,var(--s8));container-type:inline-size;
+  background:#f5efe7 url("assets/aho-origin-principles-bg.jpg") center/cover no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);}
+.og-principles{position:absolute;left:6.5%;right:6%;top:29%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:3cqw;}
+.og-principles div{padding:0;border:0;}
+.og-principles i{display:block;width:2.2cqw;height:1px;background:var(--gold);margin-bottom:1.6cqw;opacity:0.9;}
+.og-principles span{display:block;font-family:var(--font-h);font-weight:300;font-size:2.3cqw;line-height:1.2;letter-spacing:-0.015em;color:var(--starlight);}
 
 @media(max-width:900px){
   .og-sec{padding:clamp(72px,10vh,110px) 0;}
@@ -1688,9 +1691,10 @@ html.no-video .hero-scroll{opacity:1;}
   .og-bigger-coda .og-copy,.og-bigger-close{grid-column:1;}
   .og-thread-bg img{object-position:center;opacity:0.3;}
   .og-thread-bg::after{background:linear-gradient(to bottom,rgba(5,5,5,0.9),rgba(5,5,5,0.92));}
-  .og-principles{grid-template-columns:1fr 1fr;row-gap:var(--s4);}
-  .og-principles div + div{padding-left:0;}
-  .og-principles div:nth-child(2n){padding-left:var(--s3);}
+  .og-principles-plate{aspect-ratio:auto;background:none;-webkit-mask-image:none;mask-image:none;margin-top:clamp(var(--s5),7vh,var(--s6));padding:0 var(--s4);}
+  .og-principles{position:static;grid-template-columns:1fr 1fr;gap:var(--s5) var(--s4);}
+  .og-principles i{width:28px;margin-bottom:var(--s3);}
+  .og-principles span{font-size:clamp(1.25rem,5vw,1.6rem);}
 }
 </style>
 </head>
@@ -2044,6 +2048,13 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="og-sec ch-flax og-close" id="pathway-home">
     <div class="wrap">
       <p class="og-pull emerge">Aho started as a pathway home for one whānau. <em>Our ambition is to help build a pathway home for many.</em></p>
+    </div>
+    <!-- The four principles on the CEO's paper-and-thread canvas: the gold rule is
+         part of the artwork (22% down, 6.5%-94% across), the lines sit beneath it
+         and above the thread (which runs 52%-88%). Edges are masked so the paper
+         melts into the flax chapter. Under 900px the canvas goes and the four
+         lines return to a plain 2x2 list. -->
+    <div class="og-principles-plate reveal">
       <div class="og-principles">
         <div class="reveal"><i></i><span>Return to whenua.</span></div>
         <div class="reveal d1"><i></i><span>Create opportunity.</span></div>
