@@ -85,9 +85,9 @@ function sliceLines(a, b) { return donorLines.slice(a - 1, b).join('\n'); }
 
 function expect(cond, msg) { if (!cond) throw new Error('propagate-nav donor extraction failed: ' + msg); }
 expect(donorLines[248].trim().startsWith('/* ==='), 'nav CSS start marker moved');
-expect(donorLines[409].trim() === '}', 'nav CSS end marker moved');
-expect(donorLines[1280].trim().startsWith('/* ==='), 'footer CSS start marker moved');
-expect(donorLines[1331].trim() === '}', 'footer CSS end marker moved');
+expect(donorLines[411].trim() === '}', 'nav CSS end marker moved');
+expect(donorLines[1282].trim().startsWith('/* ==='), 'footer CSS start marker moved');
+expect(donorLines[1333].trim() === '}', 'footer CSS end marker moved');
 // Everything in the BODY shifts when the nav gains or loses an item - and
 // this script stamps its own donor, so that happens on every nav-config.js
 // edit. Pinning body line numbers made the script fail the next time the nav
@@ -100,8 +100,8 @@ const BODY_SHIFT = footerAt - FOOTER_ANCHOR;
 function sliceBody(a, b) { return sliceLines(a + BODY_SHIFT, b + BODY_SHIFT); }
 expect(donorLines[1562 + BODY_SHIFT].trim() === '</footer>', 'footer HTML end marker moved');
 
-const NAV_CSS = sliceLines(249, 410);
-const FOOTER_CSS = sliceLines(1281, 1332);
+const NAV_CSS = sliceLines(249, 412);
+const FOOTER_CSS = sliceLines(1283, 1334);
 const STAR_CSS = sliceLines(195, 207);
 const FOOTER_HTML = sliceBody(1512, 1563); // <footer ...> ... </footer>, no leading comment
 const JS_ENV = sliceBody(1574, 1577);
