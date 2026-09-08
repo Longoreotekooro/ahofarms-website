@@ -1375,6 +1375,53 @@ html.no-video .hero-scroll{opacity:1;}
           font-size:0.625rem;letter-spacing:0.18em;color:var(--gold,#c9a06a);
           margin-bottom:10px;}
 .ph-block p{color:rgba(168,173,179,0.75);font-style:italic;}
+/* ================================================================
+   OUR TEAM — hero placeholder, board (5) and core team (3) rosters.
+   Every name, role, bio and portrait is a labelled placeholder until
+   the CEO supplies it. No chapter numbers, no icons (CEO rulings).
+   ================================================================ */
+.tm-flax{--starlight:#1d211f;--silver:#4d524e;--white:#141816;--gold:#8f6a33;--gold-light:#7a5a28;--gold-border:rgba(143,106,51,0.38);--hairline:rgba(20,26,24,0.16);background:#efe9db;color:#3a3f3c;}
+.tm-sec{position:relative;padding:clamp(96px,12vh,160px) 0;overflow:hidden;}
+.tm-eyebrow{display:block;margin-bottom:var(--s3);}
+.tm-hero{position:relative;min-height:clamp(520px,78vh,840px);display:flex;align-items:flex-end;background:#0a0b0b;overflow:hidden;}
+.tm-hero-ui{position:relative;z-index:2;width:100%;padding:clamp(var(--s6),9vh,var(--s8)) 0;}
+.tm-hero h1{max-width:14ch;margin:0;}
+.tm-hero::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,5,5,0.78),rgba(5,5,5,0) 55%);}
+.tm-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:var(--s4);
+  border:1px dashed rgba(201,160,106,0.5);border-radius:6px;
+  background:rgba(14,20,20,0.4) repeating-linear-gradient(135deg,rgba(201,160,106,0.045) 0 1px,transparent 1px 14px);}
+.tm-ph b{font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,160,106,0.9);}
+.tm-ph span{font-size:0.7rem;line-height:1.6;letter-spacing:0.04em;color:rgba(168,173,179,0.7);max-width:30ch;}
+.tm-ph--hero{position:absolute;inset:clamp(16px,2vw,28px);border-radius:8px;justify-content:flex-start;padding-top:clamp(var(--s5),8vh,var(--s7));}
+.tm-ph--portrait{aspect-ratio:3/4;}
+.tm-flax .tm-ph{border-color:rgba(143,106,51,0.5);background:rgba(255,255,255,0.32) repeating-linear-gradient(135deg,rgba(143,106,51,0.06) 0 1px,transparent 1px 14px);}
+.tm-flax .tm-ph b{color:#8f6a33;}
+.tm-flax .tm-ph span{color:#5a5f5a;}
+.tm-intro{max-width:56ch;margin:var(--s4) 0 0;}
+.tm-ph-heading{max-width:40ch;margin:var(--s4) 0 0;}
+.tm-grid{margin-top:clamp(var(--s6),9vh,var(--s8));display:grid;gap:clamp(var(--s5),3.2vw,var(--s7)) clamp(var(--s4),2.4vw,var(--s6));}
+.tm-grid--5{grid-template-columns:repeat(5,minmax(0,1fr));}
+.tm-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.tm-name{margin:var(--s3) 0 4px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,1.7vw,1.6rem);line-height:1.2;letter-spacing:-0.015em;color:var(--starlight);}
+.tm-grid--3 .tm-name{font-size:clamp(1.5rem,2.2vw,2rem);}
+.tm-role{margin:0;font-size:0.68rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);}
+.tm-ph-line{font-style:italic;opacity:0.72;display:table;border-bottom:1px dashed var(--gold-border,rgba(201,160,106,0.4));padding-bottom:2px;}
+.tm-role.tm-ph-line{font-style:normal;text-transform:none;letter-spacing:0.06em;}
+.tm-person .ph-block{margin:var(--s3) 0 0;padding:var(--s3);}
+.tm-person .ph-block::before{font-size:0.56rem;margin-bottom:6px;}
+.tm-person .ph-block p{font-size:0.82rem;line-height:1.55;}
+.tm-flax .ph-block{border-color:rgba(143,106,51,0.4);background:rgba(255,255,255,0.28);}
+.tm-flax .ph-block::before{color:#8f6a33;}
+.tm-flax .ph-block p{color:#5a5f5a;}
+@media(max-width:900px){
+  .tm-sec{padding:clamp(72px,10vh,110px) 0;}
+  .tm-hero{min-height:clamp(420px,64vh,600px);}
+  .tm-grid--5{grid-template-columns:1fr 1fr;}
+  .tm-grid--3{grid-template-columns:1fr;}
+}
+@media(min-width:901px) and (max-width:1180px){
+  .tm-grid--5{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
 </style>
 </head>
 <body>
@@ -1416,15 +1463,86 @@ html.no-video .hero-scroll{opacity:1;}
 <!-- AHO:NAV:END -->
 
 <div class="page-grain" aria-hidden="true"></div>
-<main id="journey" style="padding-top:170px">
-    <section class="chapter" id="team" style="padding-top:0">
-    <div class="starfield" data-stars="20" aria-hidden="true"></div>
+<main id="journey">
+  <!-- ================ HERO · OUR TEAM ================ -->
+  <!-- [TEAM HERO PHOTO — PLACEHOLDER]: the whole team on the whenua, late light,
+       wide frame, no cannabis in shot. Labelled placeholder per baseline; the
+       hero line is the shell's existing copy. No chapter numbers, no icons. -->
+  <section class="tm-hero" id="team-hero">
+    <div class="tm-ph tm-ph--hero" aria-hidden="true"><b>Team hero photo</b><span>The whole team on the whenua &middot; late light &middot; wide frame &middot; no cannabis in shot</span></div>
+    <div class="tm-hero-ui">
+      <div class="wrap">
+        <span class="eyebrow gold tm-eyebrow reveal">TŌ MĀTOU TĪMA <span>&middot;</span> OUR TEAM</span>
+        <h1 class="emerge">The hands on the thread.</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ TE POARI · OUR BOARD (five directors) ================ -->
+  <section class="tm-sec tm-flax" id="board">
     <div class="wrap">
-      <div class="mlab reveal"><b>02</b>&nbsp;/&nbsp;OUR TEAM</div>
-      <span class="eyebrow gold reveal">TŌ MĀTOU TĪMA <span>&middot;</span> OUR TEAM</span>
-      <h2 class="emerge">The hands on the thread.</h2>
-      <div class="ph-block">
-        <p>Team roster to be supplied by Aho Farms &mdash; names, roles, short bios, and photos for each team member.</p>
+      <span class="eyebrow gold tm-eyebrow reveal">TE POARI <span>&middot;</span> OUR BOARD</span>
+      <h2 class="emerge">Governance.</h2>
+      <div class="ph-block tm-intro reveal"><p>Board introduction to be supplied &mdash; two or three sentences on how the board is constituted and what it is accountable for.</p></div>
+      <div class="tm-grid tm-grid--5">
+        <div class="tm-person reveal">
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 1</b><span>3:4 &middot; plain background &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Director name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d1">
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 2</b><span>3:4 &middot; plain background &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Director name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d2">
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 3</b><span>3:4 &middot; plain background &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Director name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d3">
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 4</b><span>3:4 &middot; plain background &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Director name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d4">
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 5</b><span>3:4 &middot; plain background &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Director name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ CORE TEAM (three members) ================ -->
+  <section class="tm-sec" id="team">
+    <div class="wrap">
+      <span class="eyebrow gold tm-eyebrow reveal">CORE TEAM</span>
+      <div class="ph-block tm-ph-heading reveal"><p>Core team heading to be supplied &mdash; one line in the voice of the origins page.</p></div>
+      <div class="tm-grid tm-grid--3">
+        <div class="tm-person reveal">
+          <div class="tm-ph tm-ph--portrait"><b>Team member portrait 1</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Team member name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d1">
+          <div class="tm-ph tm-ph--portrait"><b>Team member portrait 2</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Team member name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
+        <div class="tm-person reveal d2">
+          <div class="tm-ph tm-ph--portrait"><b>Team member portrait 3</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
+          <h3 class="tm-name tm-ph-line">Team member name</h3>
+          <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <div class="ph-block"><p>Short bio to be supplied.</p></div>
+        </div>
       </div>
     </div>
   </section>
