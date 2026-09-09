@@ -1440,10 +1440,14 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* —— closing on a labelled landscape placeholder —— */
 .th-close{position:relative;min-height:clamp(560px,78vh,760px);display:flex;align-items:flex-end;background:#0a0c0b;overflow:hidden;container-type:inline-size;}
-.th-ph--close{position:absolute;inset:clamp(16px,2vw,28px);border-radius:8px;justify-content:flex-start;padding-top:clamp(var(--s5),8vh,var(--s7));}
+.th-close-photo{position:absolute;inset:clamp(16px,2vw,28px);margin:0;border-radius:8px;overflow:hidden;}
+.th-close-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;}
+.th-close-photo::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(5,5,5,0.66),rgba(5,5,5,0.24) 46%,rgba(5,5,5,0) 66%);}
 .th-close::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,5,5,0.85),rgba(5,5,5,0) 60%);}
 .th-close-ui{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:end;
-  padding:clamp(var(--s6),9vh,var(--s8)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4)));}
+  padding:clamp(var(--s6),9vh,var(--s8)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4)));
+  text-shadow:0 1px 16px rgba(0,0,0,0.55);}
 .th-close-copy h2{max-width:16ch;margin:0;}
 .th-close-copy h2 em{font-style:italic;color:var(--gold-light);}
 .th-rule{display:block;width:44px;height:1px;background:var(--gold);opacity:0.85;margin-top:var(--s4);}
@@ -1571,10 +1575,16 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ A STRONGER TOMORROW · closing ================ -->
-  <!-- [CLOSING LANDSCAPE — PLACEHOLDER]: a second wide landscape of the whenua at
-       golden hour, distinct from the hero. Labelled until supplied. -->
+  <!-- CLOSING PANEL: the CEO's glasshouse interior (supplied 2026-09-09) as an
+       inset panel, not a full bleed - it sits on the section ground so it never
+       butts against the muka photograph above. Portrait crop on small screens. -->
   <section class="th-close" id="tomorrow">
-    <div class="th-ph th-ph--close" aria-hidden="true"><b>Closing landscape</b><span>The whenua at golden hour &middot; wide &middot; distinct from the hero aerial</span></div>
+    <figure class="th-close-photo">
+      <picture>
+        <source media="(max-width:700px)" srcset="assets/aho-tohu-close-glasshouse-mobile.jpg">
+        <img src="assets/aho-tohu-close-glasshouse.jpg" alt="Rows of plants under the tunnel houses at Aho Farms" loading="lazy" decoding="async">
+      </picture>
+    </figure>
     <div class="th-close-ui">
       <div class="th-close-copy">
         <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">A STRONGER TOMORROW</span>
