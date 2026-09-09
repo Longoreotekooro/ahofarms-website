@@ -1173,6 +1173,16 @@ html.no-video .hero-sound{display:none;}
 }
 .portal-card:hover .portal-go{gap:13px;}
 .portal-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+/* short laptops: keep the hero to one screen by tightening the type, not by clipping */
+@media(min-width:901px) and (max-height:820px){
+  .cl-hero-copy{padding-top:clamp(var(--s4),5vh,var(--s6));padding-bottom:clamp(var(--s5),7vh,var(--s7));}
+  .cl-h1{font-size:min(7.2vw,12.5vh);}
+  .cl-hero-sub{margin-top:var(--s3);font-size:min(1.5rem,2.6vh);}
+  .cl-hero-rule{margin:var(--s3) 0;}
+  .cl-hero-p{font-size:min(1.05rem,2vh);line-height:1.65;}
+  .cl-cue{margin-top:clamp(var(--s4),3.5vh,var(--s5));}
+  .cl-eyebrow{margin-bottom:var(--s2);}
+}
 @media(max-width:1100px){
   .portal-grid{grid-template-columns:repeat(2,1fr);}
 }
@@ -1406,7 +1416,7 @@ html.no-video .hero-scroll{opacity:1;}
    assets/aho-cultivation-hero-flower.jpg is the CEO's composite (1207x957). The
    hero fits one screen - the image's own height where the viewport allows,
    otherwise the viewport's, cover-cropped around the plant (CEO: not zoomed in). */
-.cl-hero{--hh:min(calc(100cqw * 957 / 1207),calc(100vh - 72px));--imgw:calc(var(--hh) * 1207 / 957);position:relative;height:var(--hh);min-height:560px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:end;background:#0b0f0e;container-type:inline-size;overflow:hidden;}
+.cl-hero{--hh:min(calc(100cqw * 957 / 1207),calc(100vh - 72px));--imgw:calc(var(--hh) * 1207 / 957);position:relative;min-height:max(var(--hh),560px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:end;background:#0b0f0e;container-type:inline-size;overflow:hidden;}
 .cl-hero-media{position:absolute;inset:0;background:#0b0f0e url(assets/aho-cultivation-hero-flower.jpg) 50% 50%/cover no-repeat;overflow:hidden;}
 .cl-hero-media::before{content:'';position:absolute;inset:-48px;background:inherit;filter:blur(34px) brightness(0.62) saturate(0.9);}
 .cl-hero-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:100% 50%;-webkit-mask-image:linear-gradient(to right,transparent calc(100% - var(--imgw)),#000 calc(100% - var(--imgw) + 180px));mask-image:linear-gradient(to right,transparent calc(100% - var(--imgw)),#000 calc(100% - var(--imgw) + 180px));}
