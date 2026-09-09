@@ -1501,16 +1501,14 @@ html.no-video .hero-scroll{opacity:1;}
 .cl-quote em{font-style:italic;color:var(--gold);}
 
 /* 5 · THE 39TH PARALLEL - the thread here is latitude: one dashed line across the Pacific */
-.cl-par-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.8fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:center;}
+.cl-par-grid{display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:center;}
 .cl-par .cl-p{color:rgba(243,241,235,0.72);}
 .cl-question{margin:var(--s5) 0 0;font-family:var(--font-h);font-weight:300;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.25;max-width:22ch;color:var(--starlight);}
-.cl-lat{position:relative;display:grid;grid-template-rows:auto 1fr auto;justify-items:start;min-height:clamp(320px,44vh,460px);padding-left:clamp(var(--s5),3vw,var(--s6));}
-.cl-lat::before{content:'';position:absolute;left:0;top:0;bottom:0;border-left:1px dashed rgba(243,241,235,0.55);}
-.cl-lat-pt{position:relative;}
-.cl-lat-pt::before{content:'';position:absolute;left:calc(-1*clamp(var(--s5),3vw,var(--s6)) - 4px);top:0.85em;width:9px;height:9px;border-radius:50%;background:var(--gold);}
-.cl-lat-deg{display:block;font-family:var(--font-h);font-weight:300;font-size:clamp(2rem,3vw,2.8rem);line-height:1;color:var(--starlight);}
-.cl-lat-name{display:block;margin-top:6px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.05rem,1.3vw,1.2rem);color:rgba(243,241,235,0.75);}
-.cl-lat-mid{align-self:center;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,241,235,0.45);}
+.cl-par{background:#0a221b;}
+.cl-globe{margin:0;position:relative;aspect-ratio:1112/941;min-height:0;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 18%),linear-gradient(to top,transparent,#000 14%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent,#000 18%),linear-gradient(to top,transparent,#000 14%);mask-composite:intersect;}
+.cl-globe img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* 6 · ENVIRONMENTS - three portrait photo plates in a row on the canvas */
 .cl-env{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--plate-g);width:calc(100% - 2*var(--plate-g));margin:var(--plate-g) auto;}
@@ -1567,7 +1565,7 @@ html.no-video .hero-scroll{opacity:1;}
   .cl-steps{grid-template-columns:1fr;gap:var(--s3);}
   .cl-flower{aspect-ratio:4/5;order:-1;}
   .cl-terroir-media{order:-1;}
-  .cl-lat{min-height:280px;}
+  .cl-globe{order:-1;}
   .cl-env{grid-template-columns:1fr;}
   .cl-env .cl-plate{aspect-ratio:4/5;}
   .cl-close{min-height:clamp(560px,86vh,800px);}
@@ -1742,8 +1740,8 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 5 · THE 39TH PARALLEL ================ -->
-  <!-- Map-led, kept geographic and elegant: the only diagram is one dashed line
-       of latitude with two points on it. No heavy infographic. -->
+  <!-- Map-led: the CEO's globe illustration (cropped to the Pacific, its own colour
+       becomes the plate's so it dissolves in). No heavy infographic. -->
   <section class="cl-plate cl-green cl-sec cl-par" id="parallel">
     <div class="wrap cl-par-grid">
       <div>
@@ -1756,11 +1754,9 @@ html.no-video .hero-scroll{opacity:1;}
         <p class="cl-p reveal d3">For us, the comparison raises a simple question:</p>
         <p class="cl-question reveal d3">What can exceptional cannabis expression look like in Hawke’s Bay?</p>
       </div>
-      <div class="cl-lat reveal d1" role="img" aria-label="Northern California at about 39 degrees north; the Pacific Ocean between; Hawke’s Bay at about 39 degrees south">
-        <div class="cl-lat-pt"><span class="cl-lat-deg">39° N</span><span class="cl-lat-name">Northern California</span></div>
-        <span class="cl-lat-mid">Pacific Ocean</span>
-        <div class="cl-lat-pt"><span class="cl-lat-deg">39° S</span><span class="cl-lat-name">Hawke’s Bay</span></div>
-      </div>
+      <figure class="cl-globe reveal d1">
+        <img src="assets/aho-39th-parallel-globe.jpg" alt="A globe of the Pacific in deep green and gold: Northern California marked at 39° north, Hawke’s Bay at 39° south, one dashed line of latitude joining them across the ocean" width="1112" height="941" loading="lazy">
+      </figure>
     </div>
   </section>
 
