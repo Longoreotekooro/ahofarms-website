@@ -1420,14 +1420,14 @@ html.no-video .hero-scroll{opacity:1;}
 .cl-cue-mark{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-border);display:grid;place-items:center;transition:background 0.45s var(--ease),border-color 0.45s var(--ease);}
 .cl-cue-mark svg{width:16px;height:16px;}
 .cl-cue:hover .cl-cue-mark,.cl-cue:focus-visible .cl-cue-mark{border-color:var(--gold);background:rgba(201,160,106,0.1);}
-.cl-hero-aside{position:relative;z-index:2;align-self:end;padding:0 max(var(--s4),calc((100cqw - var(--max))/2)) clamp(var(--s6),8vh,var(--s8)) var(--s3);}
+.cl-hero-aside{position:relative;z-index:2;align-self:start;padding:calc(var(--hh) * 0.3) max(var(--s4),calc((100cqw - var(--max))/2)) 0 var(--s3);}
 .cl-hero-aside p,.cl-hero-aside ul{width:clamp(140px,10.5vw,160px);text-shadow:0 1px 22px rgba(11,15,14,0.95),0 0 6px rgba(11,15,14,0.6);}
 /* a soft pool of shade behind the aside so it reads over the leaves */
-.cl-hero-aside::before{content:'';position:absolute;z-index:-1;inset:-56px -24px -24px -72px;pointer-events:none;background:radial-gradient(ellipse at 58% 55%,rgba(11,15,14,0.72),rgba(11,15,14,0.35) 45%,transparent 72%);}
+.cl-hero-aside::before{content:'';position:absolute;z-index:-1;inset:calc(var(--hh) * 0.3 - 64px) -32px -48px -88px;pointer-events:none;background:radial-gradient(ellipse at 58% 50%,rgba(11,15,14,0.66),rgba(11,15,14,0.32) 48%,transparent 74%);}
 .cl-hero-stack li{white-space:nowrap;}
-.cl-hero-aside p{margin:0;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.3rem,1.95vw,1.8rem);line-height:1.3;color:var(--gold);}
+.cl-hero-aside p{margin:0;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.3rem,1.95vw,1.8rem);line-height:1.3;color:#f3f1eb;}
 .cl-hero-aside .cl-hero-rule{width:48px;}
-.cl-hero-stack{margin:0;padding:0;list-style:none;font-size:0.66rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;line-height:2.25;color:var(--gold);}
+.cl-hero-stack{margin:0;padding:0;list-style:none;font-size:0.7rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;line-height:2.2;color:rgba(243,241,235,0.9);}
 
 /* flax band flush beneath the hero: the whole, then the four words */
 .cl-band{width:100%;margin:0;border-radius:0;padding:clamp(72px,9vh,120px) 0;background:#efe9db url(assets/aho-cultivation-band-flax.jpg) center bottom/cover no-repeat;}
@@ -1528,7 +1528,7 @@ html.no-video .hero-scroll{opacity:1;}
   .cl-hero-media::after{background:linear-gradient(to top,rgba(11,15,14,0.88) 0%,rgba(11,15,14,0.62) 42%,rgba(11,15,14,0.18) 72%,rgba(11,15,14,0) 88%);}
   .cl-hero-copy{align-self:end;}
   .cl-hero-copy{padding:var(--s7) var(--s4) var(--s4);max-width:none;}
-  .cl-hero-aside{padding:0 var(--s4) var(--s6);}
+  .cl-hero-aside{align-self:end;padding:0 var(--s4) var(--s6);}
   .cl-hero-aside p,.cl-hero-aside ul{width:auto;}
   .cl-hero-aside::before{display:none;}
   .cl-hero-stack li br{display:none;}
