@@ -1419,28 +1419,51 @@ html.no-video .hero-scroll{opacity:1;}
 .th-hero-words span + span::before{content:'';display:inline-block;width:22px;height:1px;background:var(--gold);margin:0 12px;opacity:0.8;}
 
 /* —— more than a name: muka photo | body | definition rail —— */
-.th-principle{position:relative;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.35fr) minmax(0,0.62fr);background:var(--void);container-type:inline-size;}
+.th-principle{position:relative;display:grid;grid-template-columns:minmax(280px,0.5fr) minmax(0,1fr);background:var(--void);container-type:inline-size;}
+
+/* left third: the muka photograph, full height, with a ruled caption */
 .th-principle-photo{position:relative;margin:0;min-height:100%;}
 .th-principle-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.03);}
-.th-principle-photo::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(to left,rgba(5,5,5,0.55),rgba(5,5,5,0) 30%);}
-.th-principle-body{padding:clamp(var(--s7),11vh,var(--s9)) clamp(var(--s5),4vw,var(--s7));}
-.th-principle-body h2{max-width:17ch;}
-.th-copy p{color:var(--silver);font-size:0.98rem;line-height:1.9;max-width:58ch;margin:0 0 var(--s3);}
-.th-terms{margin-top:clamp(var(--s5),6vh,var(--s6));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(var(--s4),2.4vw,var(--s5));border-top:1px solid var(--hairline);padding-top:clamp(var(--s4),4vh,var(--s5));}
-.th-term-word{display:block;font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1.25rem,1.6vw,1.5rem);color:var(--gold-light);margin-bottom:6px;}
-.th-term-title{display:block;font-size:0.6rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--starlight);margin-bottom:8px;}
-.th-term p{margin:0;font-size:0.82rem;line-height:1.6;color:var(--silver);}
-.th-principle-rail{align-self:center;padding:clamp(var(--s6),8vh,var(--s8)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4))) clamp(var(--s6),8vh,var(--s8)) clamp(var(--s4),2.4vw,var(--s6));border-left:1px solid rgba(201,160,106,0.35);}
+.th-principle-photo::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to left,rgba(5,5,5,0.55),rgba(5,5,5,0) 30%),
+             linear-gradient(to bottom,rgba(5,5,5,0.72),rgba(5,5,5,0) 34%),
+             linear-gradient(to top,rgba(5,5,5,0.8),rgba(5,5,5,0) 22%);}
+.th-photo-note{position:absolute;z-index:2;left:clamp(var(--s4),3.2vw,var(--s6));top:clamp(var(--s5),7vh,var(--s7));
+  max-width:14ch;padding:var(--s3) 0;border-top:1px solid rgba(201,160,106,0.55);border-bottom:1px solid rgba(201,160,106,0.55);
+  font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.45;color:var(--gold-light);}
+
+/* right: the naming argument, then the terms band under a hairline */
+.th-principle-main{padding:clamp(var(--s7),11vh,var(--s9)) 0;}
+.th-principle-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,0.4fr);
+  gap:clamp(var(--s5),4vw,var(--s7));
+  padding:0 max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4))) 0 clamp(var(--s5),4vw,var(--s7));}
+.th-principle-body h2{max-width:15ch;font-size:clamp(2.1rem,3.5vw,3.3rem);line-height:1.08;}
+.th-copy{margin-top:clamp(var(--s4),4vh,var(--s5));}
+.th-copy p{color:var(--silver);font-size:0.98rem;line-height:1.9;max-width:62ch;margin:0 0 var(--s4);}
+.th-principle-body .th-btn{margin-top:var(--s3);}
+
+/* the te reo definition, on its own ruled rail */
+.th-principle-rail{align-self:start;padding-left:clamp(var(--s4),2.6vw,var(--s6));border-left:1px solid rgba(201,160,106,0.35);}
 .th-def-type{display:block;font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);opacity:0.85;margin-bottom:var(--s3);}
 .th-def-word{display:block;font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(2.4rem,3.4vw,3.4rem);line-height:1;color:var(--gold-light);margin-bottom:var(--s4);}
-.th-def-sense{margin:0 0 var(--s3);font-size:0.86rem;line-height:1.6;color:var(--silver);}
+.th-def-sense{margin:0;font-size:0.86rem;line-height:1.75;color:var(--silver);}
 .th-def-sense b{color:var(--starlight);font-weight:500;}
+.th-def-rule{margin:var(--s4) 0;}
 .th-mark{display:block;width:clamp(96px,8vw,130px);height:auto;margin:clamp(var(--s5),5vh,var(--s6)) 0 var(--s3);opacity:0.92;}
-.th-mark-tag{display:block;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(168,173,179,0.75);}
+.th-mark-tag{display:block;font-size:0.56rem;font-weight:700;letter-spacing:0.12em;line-height:1.7;text-transform:uppercase;color:rgba(168,173,179,0.75);}
+
+/* the three terms, their own band so they are never squeezed into a column */
+.th-terms{margin:clamp(var(--s6),8vh,var(--s7)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4))) 0 clamp(var(--s5),4vw,var(--s7));
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(var(--s5),3.4vw,var(--s7));
+  border-top:1px solid var(--hairline);padding-top:clamp(var(--s5),5vh,var(--s6));}
+.th-term-word{display:block;font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1.3rem,1.75vw,1.6rem);color:var(--gold-light);margin-bottom:8px;}
+.th-term-title{display:block;font-size:0.6rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--starlight);margin-bottom:var(--s3);}
+.th-term p{margin:0;font-size:0.86rem;line-height:1.75;color:var(--silver);max-width:36ch;}
 
 /* —— closing on a labelled landscape placeholder —— */
 .th-close{position:relative;min-height:clamp(560px,78vh,760px);display:flex;align-items:flex-end;background:#0a0c0b;overflow:hidden;container-type:inline-size;}
-.th-close-photo{position:absolute;inset:clamp(16px,2vw,28px);margin:0;border-radius:8px;overflow:hidden;}
+.th-close-photo{position:absolute;left:clamp(16px,2vw,28px);right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);
+  top:clamp(48px,5vw,84px);margin:0;border-radius:8px;overflow:hidden;}
 .th-close-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;}
 .th-close-photo::after{content:'';position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to bottom,rgba(5,5,5,0.66),rgba(5,5,5,0.24) 46%,rgba(5,5,5,0) 66%);}
@@ -1455,11 +1478,15 @@ html.no-video .hero-scroll{opacity:1;}
 .th-close-side .th-btn{margin-top:var(--s4);}
 
 @media(max-width:1100px){
-  .th-principle{grid-template-columns:minmax(0,0.9fr) minmax(0,1.4fr);}
-  .th-principle-rail{grid-column:1 / -1;border-left:0;border-top:1px solid rgba(201,160,106,0.35);padding:clamp(var(--s5),6vh,var(--s6)) max(var(--s4),calc((100cqw - var(--max)) / 2 + var(--s4)));display:grid;grid-template-columns:auto 1fr auto;column-gap:var(--s5);align-items:center;}
+  .th-principle{grid-template-columns:minmax(240px,0.44fr) minmax(0,1fr);}
+  .th-principle-top{grid-template-columns:1fr;gap:clamp(var(--s5),5vh,var(--s6));}
+  .th-principle-rail{border-left:0;border-top:1px solid rgba(201,160,106,0.35);padding:clamp(var(--s5),5vh,var(--s6)) 0 0;
+    display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.7fr) minmax(0,1fr);column-gap:clamp(var(--s4),3vw,var(--s5));align-items:start;}
+  .th-principle-rail .th-mark-tag{max-width:22ch;}
   .th-principle-rail .th-def-type,.th-principle-rail .th-def-word{grid-column:1;}
-  .th-principle-rail .th-def-sense{grid-column:2;}
+  .th-principle-rail .th-def-sense,.th-principle-rail .th-def-rule{grid-column:2;}
   .th-principle-rail .th-mark,.th-principle-rail .th-mark-tag{grid-column:3;margin:0;}
+  .th-terms{gap:clamp(var(--s4),2.6vw,var(--s5));}
 }
 @media(max-width:900px){
   #journey{padding-top:72px;}
@@ -1469,13 +1496,18 @@ html.no-video .hero-scroll{opacity:1;}
   .th-hero h1{max-width:none;}
   .th-hero-foot{flex-direction:column;align-items:flex-start;}
   .th-hero-words{justify-content:flex-start;}
+  /* stacked: copy, then the photograph, then the terms - so the muka image
+     never butts against the hero above it or the closing panel below it. */
   .th-principle{grid-template-columns:1fr;}
-  .th-principle-body{order:1;} .th-principle-photo{order:2;} .th-principle-rail{order:3;}
-  .th-principle-photo{min-height:0;aspect-ratio:4/3;}
-  .th-principle-body{padding:clamp(var(--s6),8vh,var(--s7)) var(--s4);}
-  .th-terms{grid-template-columns:1fr;}
-  .th-principle-rail{grid-template-columns:1fr;row-gap:var(--s3);padding:clamp(var(--s5),6vh,var(--s6)) var(--s4);}
-  .th-principle-rail .th-def-type,.th-principle-rail .th-def-word,.th-principle-rail .th-def-sense,.th-principle-rail .th-mark,.th-principle-rail .th-mark-tag{grid-column:1;}
+  .th-principle-main{display:contents;}
+  .th-principle-top{order:1;padding:clamp(var(--s6),8vh,var(--s7)) var(--s4) 0;}
+  .th-principle-photo{order:2;min-height:0;aspect-ratio:4/3;margin-top:clamp(var(--s6),8vh,var(--s7));}
+  .th-terms{order:3;grid-template-columns:1fr;gap:clamp(var(--s5),5vh,var(--s6));
+    margin:0 var(--s4);padding:clamp(var(--s6),8vh,var(--s7)) 0;border-top:0;}
+  .th-term p{max-width:none;}
+  .th-photo-note{max-width:16ch;}
+  .th-principle-rail{grid-template-columns:1fr;row-gap:var(--s3);}
+  .th-principle-rail .th-def-type,.th-principle-rail .th-def-word,.th-principle-rail .th-def-sense,.th-principle-rail .th-def-rule,.th-principle-rail .th-mark,.th-principle-rail .th-mark-tag{grid-column:1;}
   .th-principle-rail .th-mark{margin-top:var(--s4);}
   .th-close{min-height:clamp(480px,70vh,600px);}
   .th-close-ui{grid-template-columns:1fr;padding:clamp(var(--s6),8vh,var(--s7)) var(--s4);}
@@ -1546,32 +1578,44 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ INGOA · MORE THAN A NAME ================ -->
+  <!-- CEO mood board 2026-09-09: muka photograph holds the left third full
+       height; the dark side carries the naming argument with the te reo
+       definition on a ruled rail beside it, then the three terms drop to
+       their own full-width band under a hairline so nothing is squashed.
+       Every line is the page's own copy; the photo caption is a labelled
+       placeholder because the board's caption is not Aho copy. -->
   <section class="th-principle" id="name">
     <figure class="th-principle-photo reveal">
       <img src="assets/aho-weave-macro.jpg" alt="Woven muka fibre &mdash; the aho, a single thread bound into many" width="1400" height="933" loading="lazy">
+      <figcaption class="th-photo-note reveal d1"><span class="th-ph-line">Photo caption to be supplied &mdash; one short line.</span></figcaption>
     </figure>
-    <div class="th-principle-body">
-      <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">INGOA <span>&middot;</span> THE NAME</span>
-      <h2 class="emerge">More than a name.<br>A philosophy.</h2>
-      <div class="th-copy reveal d1">
-        <p>Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately &mdash; not as branding, but as belief.</p>
-        <p>Every decision we make, every relationship we build, and every product we grow is an expression of that thread. The aho between people and whenua. Between past and future. Between healing knowledge and those who need it.</p>
+    <div class="th-principle-main">
+      <div class="th-principle-top">
+        <div class="th-principle-body">
+          <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">INGOA <span>&middot;</span> THE NAME</span>
+          <h2 class="emerge">More than a name.<br>A philosophy.</h2>
+          <div class="th-copy reveal d1">
+            <p>Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately &mdash; not as branding, but as belief.</p>
+            <p>Every decision we make, every relationship we build, and every product we grow is an expression of that thread. The aho between people and whenua. Between past and future. Between healing knowledge and those who need it.</p>
+          </div>
+          <a class="th-btn reveal d2" href="cultivation.html">Our approach <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <aside class="th-principle-rail reveal d2">
+          <span class="th-def-type">Aho &middot; Te Reo Māori</span>
+          <span class="th-def-word">aho</span>
+          <p class="th-def-sense"><b>In weaving</b> &mdash; a thread. The weft that binds the whole together.</p>
+          <span class="th-rule th-def-rule" aria-hidden="true"></span>
+          <p class="th-def-sense"><b>In whakapapa</b> &mdash; the line of descent.</p>
+          <img class="th-mark" src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,w_640,e_background_removal/v1781240323/aho_farms/brand/aho_logo_colour.png" alt="Aho Farms tohu" loading="lazy">
+          <span class="th-mark-tag">Hawke's Bay &middot; Aotearoa New Zealand &middot; Est. 2020</span>
+        </aside>
       </div>
       <div class="th-terms">
         <div class="th-term reveal d1"><span class="th-term-word">Aho</span><span class="th-term-title">Thread / Connection</span><p>The horizontal threads of woven flax &mdash; the aho holds the structure together. Without the aho, there is no weaving. Without connection, there is no company.</p></div>
         <div class="th-term reveal d2"><span class="th-term-word">Whenua</span><span class="th-term-title">Land / Placenta</span><p>Our operation is rooted in Hawke's Bay &mdash; ancestral land that gives identity, purpose, and sustenance. The whenua is not a resource. It is a responsibility.</p></div>
         <div class="th-term reveal d3"><span class="th-term-word">Māra</span><span class="th-term-title">Garden / Cultivation</span><p>The māra is the place where knowledge meets earth &mdash; where the discipline of cultivation becomes an act of care. Aho Farms is a māra with purpose and precision.</p></div>
       </div>
-      <a class="th-btn reveal d2" href="cultivation.html">Our approach <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <aside class="th-principle-rail reveal d2">
-      <span class="th-def-type">Aho &middot; Te Reo Māori</span>
-      <span class="th-def-word">aho</span>
-      <p class="th-def-sense"><b>In weaving</b> &mdash; a thread. The weft that binds the whole together.</p>
-      <p class="th-def-sense"><b>In whakapapa</b> &mdash; the line of descent.</p>
-      <img class="th-mark" src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,w_640,e_background_removal/v1781240323/aho_farms/brand/aho_logo_colour.png" alt="Aho Farms tohu" loading="lazy">
-      <span class="th-mark-tag">Hawke's Bay &middot; Aotearoa New Zealand &middot; Est. 2020</span>
-    </aside>
   </section>
 
   <!-- ================ A STRONGER TOMORROW · closing ================ -->
