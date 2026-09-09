@@ -1382,7 +1382,7 @@ html.no-video .hero-scroll{opacity:1;}
    Dark-led. Eight chapters on the void canvas, tonal chapters and
    photo moments as inset rounded plates (--plate-g / --plate-r).
    Flow: Hero → Kāinga & Māra → 89 to 12 → Terroir → 39th Parallel →
-   Environments → Capacity → Closing. Not a facilities page: the
+   Capacity → Closing. Not a facilities page: the
    infrastructure supports the story, place stays the subject.
    ================================================================ */
 :root{--plate-g:clamp(10px,1.4vw,22px);--plate-r:clamp(16px,2vw,30px);}
@@ -1510,17 +1510,7 @@ html.no-video .hero-scroll{opacity:1;}
   mask-image:linear-gradient(to right,transparent,#000 16%,#000 86%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 86%,transparent);mask-composite:intersect;}
 .cl-globe img{width:100%;height:100%;object-fit:cover;display:block;}
 
-/* 6 · ENVIRONMENTS - three portrait photo plates in a row on the canvas */
-.cl-env{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--plate-g);width:calc(100% - 2*var(--plate-g));margin:var(--plate-g) auto;}
-.cl-env .cl-plate{width:100%;margin:0;aspect-ratio:3/4;display:flex;align-items:flex-end;background:#0e1413;}
-.cl-env img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.85);}
-.cl-env .cl-ph{position:absolute;inset:0;border-radius:0;border:0;}
-.cl-env-cap{position:relative;z-index:2;padding:clamp(var(--s4),3vw,var(--s6));width:100%;background:linear-gradient(to top,rgba(11,15,14,0.92),rgba(11,15,14,0.55) 60%,transparent);}
-.cl-env-cap h3{margin:0;font-size:clamp(1.7rem,2.4vw,2.3rem);line-height:1.1;}
-.cl-env-cap p{margin:var(--s2) 0 0;max-width:30ch;font-size:0.9rem;line-height:1.65;color:rgba(243,241,235,0.75);}
-.cl-env-line{margin:0 auto;padding:clamp(var(--s5),7vh,var(--s7)) var(--s4) clamp(var(--s6),9vh,var(--s8));text-align:center;font-size:clamp(1.25rem,1.9vw,1.7rem);max-width:44ch;}
-
-/* 7 · CAPACITY - a moment of clarity: four numbers, then the statement */
+/* 6 · CAPACITY - a moment of clarity: four numbers, then the statement */
 .cl-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4);padding-bottom:clamp(var(--s6),8vh,var(--s8));border-bottom:1px solid var(--hairline);}
 .cl-stat{padding-top:var(--s3);border-top:1px solid var(--gold-border);}
 .cl-stat-v{display:block;font-family:var(--font-h);font-weight:300;font-size:clamp(2.8rem,5vw,4.8rem);line-height:0.95;letter-spacing:-0.02em;color:var(--starlight);}
@@ -1528,7 +1518,7 @@ html.no-video .hero-scroll{opacity:1;}
 .cl-stat-l{display:block;margin-top:var(--s2);font-size:0.68rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);}
 .cl-cap-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:start;padding-top:clamp(var(--s6),8vh,var(--s8));}
 
-/* 8 · CLOSING - finish emotionally: the whenua at sunrise, the statement, the sign-off */
+/* 7 · CLOSING - finish emotionally: the whenua at sunrise, the statement, the sign-off */
 .cl-close{min-height:clamp(640px,92vh,960px);display:grid;align-items:center;background:#0b0f0e;container-type:inline-size;}
 .cl-close-media{position:absolute;inset:0;}
 .cl-close-media img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;filter:saturate(0.85);}
@@ -1566,8 +1556,6 @@ html.no-video .hero-scroll{opacity:1;}
   .cl-flower{aspect-ratio:4/5;order:-1;}
   .cl-terroir-media{order:-1;}
   .cl-globe{order:-1;}
-  .cl-env{grid-template-columns:1fr;}
-  .cl-env .cl-plate{aspect-ratio:4/5;}
   .cl-close{min-height:clamp(560px,86vh,800px);}
   .cl-close-copy{padding:var(--s7) var(--s4);}
 }
@@ -1760,26 +1748,7 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ================ 6 · CULTIVATION ACROSS ENVIRONMENTS ================ -->
-  <section id="environments">
-    <div class="cl-env">
-      <article class="cl-plate reveal">
-        <div class="cl-ph"><b>Indoor</b><span>Photo · 3:4 · Kāinga propagation benches or the mother room · clean, precise, cool light · still</span></div>
-        <div class="cl-env-cap"><h3>Indoor</h3><p>Precision, propagation and genetic preservation.</p></div>
-      </article>
-      <article class="cl-plate reveal d1">
-        <img src="assets/aho-greenhouse-cultivation.jpg" alt="Plants growing inside a Māra greenhouse in natural light" width="900" height="1200" loading="lazy">
-        <div class="cl-env-cap"><h3>Greenhouse</h3><p>Protection with greater connection to natural light and seasonal conditions.</p></div>
-      </article>
-      <article class="cl-plate reveal d2">
-        <img src="assets/aho-outdoor-cultivation.jpg" alt="Outdoor cannabis cultivation at Māra under open Hawke’s Bay sky" width="900" height="1200" loading="lazy">
-        <div class="cl-env-cap"><h3>Outdoor</h3><p>Cultivation directly influenced by the Hawke’s Bay environment.</p></div>
-      </article>
-    </div>
-    <p class="cl-env-line cl-serif reveal">One genetic library. Multiple cultivation environments. Greater understanding of how each cultivar performs.</p>
-  </section>
-
-  <!-- ================ 7 · BUILT WITH CAPACITY TO GROW ================ -->
+  <!-- ================ 6 · BUILT WITH CAPACITY TO GROW ================ -->
   <section class="cl-plate cl-flax cl-sec" id="capacity">
     <div class="wrap">
       <div class="cl-stats">
@@ -1801,7 +1770,7 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ================ 8 · GROWN HERE FOR A REASON · closing ================ -->
+  <!-- ================ 7 · GROWN HERE FOR A REASON · closing ================ -->
   <section class="cl-plate cl-close" id="closing">
     <div class="cl-close-media">
       <img src="assets/aho-origin-sunrise.jpg" alt="Sunrise over the whenua in Hawke’s Bay, hills in low light" width="1800" height="1350" loading="lazy">
