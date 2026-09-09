@@ -1423,16 +1423,12 @@ html.no-video .hero-scroll{opacity:1;}
 /* the portrait is held whole on the right (its own width at the hero's
    height) over a blurred, darkened field of itself, so the left is quiet for
    the copy and the flower is never cropped into a wide frame */
-.ql-hero{--hh:max(calc(100vh - 72px),620px);--imgw:calc(var(--hh) * 1500 / 2000);position:relative;min-height:var(--hh);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:end;background:#0b0f0e;container-type:inline-size;overflow:hidden;}
-.ql-hero-media{position:absolute;inset:0;background:#0b0f0e url(assets/aho-mara-4.jpg) 50% 40%/cover no-repeat;overflow:hidden;}
-.ql-hero-media::before{content:'';position:absolute;inset:-48px;background:inherit;filter:blur(38px) brightness(0.42) saturate(0.7);}
-.ql-hero-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:100% 50%;filter:saturate(0.82) brightness(0.9);-webkit-mask-image:linear-gradient(to right,transparent calc(100% - var(--imgw)),#000 calc(100% - var(--imgw) + 200px));mask-image:linear-gradient(to right,transparent calc(100% - var(--imgw)),#000 calc(100% - var(--imgw) + 200px));}
-.ql-hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(11,15,14,0.55) 0%,rgba(11,15,14,0.3) 40%,rgba(11,15,14,0) 62%),linear-gradient(to top,rgba(11,15,14,0.6) 0%,rgba(11,15,14,0) 34%),linear-gradient(to bottom,rgba(11,15,14,0.4) 0%,rgba(11,15,14,0) 22%);}
-.ql-hero-thread{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible;}
-.ql-hero-thread path{fill:none;stroke:var(--gold);stroke-width:1;stroke-linecap:round;opacity:0.8;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 3.2s var(--ease) 0.9s;}
-.ql-hero-thread.in path{stroke-dashoffset:0;}
-.ql-hero-thread circle{fill:var(--gold-light);opacity:0;transition:opacity 1.2s var(--ease) 0.9s;}
-.ql-hero-thread.in circle{opacity:0.95;}
+.ql-hero{--hh:max(calc(100vh - 72px),620px);position:relative;min-height:var(--hh);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:end;background:#0b0f0e;container-type:inline-size;overflow:hidden;}
+/* the CEO's plate (cola + muka thread, 1850x850) runs full-bleed as a cover; the thread is IN the artwork, so no drawn SVG thread here */
+.ql-hero-media{position:absolute;inset:0;background:#0b0f0e;overflow:hidden;}
+.ql-hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;}
+/* scrims: the copy sits on the plate's dark left (blurred hill + field); the sky is bright so the top-left gets a deeper breath; bottom holds the stack */
+.ql-hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(9,13,20,0.72) 0%,rgba(9,13,20,0.5) 30%,rgba(9,13,20,0.14) 52%,rgba(9,13,20,0) 66%),linear-gradient(to bottom,rgba(9,13,20,0.5) 0%,rgba(9,13,20,0) 26%),linear-gradient(to top,rgba(9,13,20,0.55) 0%,rgba(9,13,20,0) 30%);}
 .ql-hero-copy{position:relative;z-index:2;align-self:center;padding:clamp(var(--s6),8vh,var(--s8)) var(--s4) clamp(var(--s6),9vh,var(--s8)) max(var(--s4),calc((100cqw - var(--max))/2 + var(--s4)));max-width:min(100%,calc((100cqw - var(--max))/2 + 60ch));}
 .ql-h1{margin:0;font-size:clamp(3.1rem,6.8vw,6rem);line-height:0.96;letter-spacing:-0.02em;max-width:9ch;}
 .ql-h1 em{font-style:italic;color:var(--gold);}
@@ -1566,8 +1562,7 @@ html.no-video .hero-scroll{opacity:1;}
 }
 @media(max-width:900px){
   .ql-hero{min-height:clamp(600px,88vh,820px);grid-template-columns:1fr;}
-  .ql-hero-media::before{display:none;}
-  .ql-hero-media img{object-fit:cover;object-position:60% 40%;-webkit-mask-image:none;mask-image:none;}
+  .ql-hero-media img{object-position:50% 40%;}
   .ql-hero-media::after{background:linear-gradient(to top,rgba(11,15,14,0.94) 0%,rgba(11,15,14,0.8) 46%,rgba(11,15,14,0.3) 76%,rgba(11,15,14,0) 92%);}
   .ql-hero-copy{align-self:end;padding:var(--s7) var(--s4) var(--s4);max-width:none;}
   .ql-h1{font-size:clamp(2.8rem,12vw,4.2rem);}
@@ -1591,7 +1586,6 @@ html.no-video .hero-scroll{opacity:1;}
   /* the questions' thread ends with the questions once the copy stacks beneath them */
   .ql-qthread{bottom:-12px;}
   /* the hero chip drops to the foot of the frame, clear of the eyebrow */
-  .ql-hero>.cl-chip{top:auto;bottom:var(--s3);right:var(--s3);}
   .ql-finale p{font-size:clamp(1.9rem,8.4vw,3.2rem);}
 }
 </style>
@@ -1640,12 +1634,13 @@ html.no-video .hero-scroll{opacity:1;}
        and does not return until it has work to do. -->
   <section class="ql-hero" id="quality">
     <div class="ql-hero-media">
-      <img src="assets/aho-mara-4.jpg" alt="A mature outdoor cola at Māra, close, in full sun" width="1500" height="2000" fetchpriority="high">
+      <picture>
+        <source media="(max-width:640px)" srcset="assets/aho-quality-hero-mobile.jpg">
+        <img src="assets/aho-quality-hero.jpg" alt="A mature outdoor cola in full sun, a muka thread of gold light woven through its leaves" width="1850" height="850" fetchpriority="high">
+      </picture>
     </div>
-    <svg class="ql-hero-thread" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><path d="M800,255 C760,330 690,372 600,392 S440,430 380,500 S340,580 330,640" pathLength="1"/><circle cx="800" cy="255" r="3.5"/></svg>
-    <span class="cl-chip">Hero photo · placeholder crop</span>
     <div class="ql-hero-copy">
-      <span class="eyebrow gold cl-eyebrow reveal">QUALITY &amp; TESTING · BUILT IN FROM THE BEGINNING</span>
+      <span class="eyebrow gold cl-eyebrow reveal">QUALITY &amp; TESTING</span>
       <h1 class="ql-h1 emerge">Quality at<br><em>every stage.</em></h1>
       <p class="ql-hero-lede reveal d1">At Aho, quality is not a final inspection.</p>
       <p class="ql-hero-p reveal d2">It begins with the plant, the people growing it, and the decisions made throughout every stage of cultivation.</p>
