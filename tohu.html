@@ -1387,7 +1387,6 @@ html.no-video .hero-scroll{opacity:1;}
 .th-eyebrow{display:block;margin-bottom:var(--s3);}
 .th-eyebrow--dash{display:flex;align-items:center;gap:14px;}
 .th-eyebrow--dash::after{content:'';width:34px;height:1px;background:var(--gold);opacity:0.7;}
-.th-eyebrow--sub{color:rgba(243,241,235,0.72);margin-bottom:var(--s4);}
 .th-btn{display:inline-flex;align-items:center;gap:12px;margin-top:var(--s5);padding:14px 22px;border:1px solid rgba(201,160,106,0.55);border-radius:3px;
   font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:border-color .3s,background .3s;}
 .th-btn:hover{border-color:var(--gold);background:rgba(201,160,106,0.08);}
@@ -1411,12 +1410,6 @@ html.no-video .hero-scroll{opacity:1;}
 .th-hero-row{max-width:38rem;margin-top:clamp(var(--s4),4.5vh,var(--s5));}
 .th-hero-sub{margin:0;max-width:34ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.35vw,1.3rem);line-height:1.5;color:var(--silver);}
 .th-hero-lead .th-btn{margin-top:var(--s4);}
-.th-hero-foot{margin-top:clamp(var(--s5),7vh,var(--s7));padding-top:var(--s3);border-top:1px solid rgba(243,241,235,0.14);display:flex;justify-content:space-between;align-items:center;gap:var(--s3) var(--s5);flex-wrap:wrap;}
-.th-hero-foot .th-eyebrow--sub{margin:0;}
-.th-hero-words{margin:0;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 0;
-  font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,241,235,0.88);text-shadow:0 1px 14px rgba(0,0,0,0.6);}
-.th-hero-words span{display:inline-flex;align-items:center;}
-.th-hero-words span + span::before{content:'';display:inline-block;width:22px;height:1px;background:var(--gold);margin:0 12px;opacity:0.8;}
 
 /* —— more than a name: muka photo | body | definition rail —— */
 .th-principle{position:relative;display:grid;grid-template-columns:minmax(280px,0.5fr) minmax(0,1fr);background:var(--void);container-type:inline-size;}
@@ -1494,8 +1487,6 @@ html.no-video .hero-scroll{opacity:1;}
   .th-hero::before{background:linear-gradient(to top,rgba(5,5,5,0.94) 0%,rgba(5,5,5,0.7) 45%,rgba(5,5,5,0.15) 75%,rgba(5,5,5,0.5) 100%);}
   .th-hero-ui{padding:clamp(var(--s6),9vh,var(--s7)) var(--s4);}
   .th-hero h1{max-width:none;}
-  .th-hero-foot{flex-direction:column;align-items:flex-start;}
-  .th-hero-words{justify-content:flex-start;}
   /* stacked: copy, then the photograph, then the terms - so the muka image
      never butts against the hero above it or the closing panel below it. */
   .th-principle{grid-template-columns:1fr;}
@@ -1569,10 +1560,6 @@ html.no-video .hero-scroll{opacity:1;}
             <a class="th-btn" href="origins.html">Our story <span aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
-        <div class="th-hero-foot reveal d3">
-          <span class="eyebrow gold th-eyebrow th-eyebrow--sub">TE TIKANGA O TE INGOA <span>&middot;</span> THE MEANING OF AHO</span>
-          <p class="th-hero-words" aria-label="The five threads"><span>Ancestors</span><span>Whenua</span><span>Nature</span><span>Mātauranga Māori</span><span>People</span></p>
-        </div>
       </div>
     </div>
   </section>
@@ -1586,8 +1573,8 @@ html.no-video .hero-scroll{opacity:1;}
        placeholder because the board's caption is not Aho copy. -->
   <section class="th-principle" id="name">
     <figure class="th-principle-photo reveal">
-      <img src="assets/aho-weave-macro.jpg" alt="Woven muka fibre &mdash; the aho, a single thread bound into many" width="1400" height="933" loading="lazy">
-      <figcaption class="th-photo-note reveal d1"><span class="th-ph-line">Photo caption to be supplied &mdash; one short line.</span></figcaption>
+      <img src="assets/aho-weave-macro.jpg" alt="Woven muka fibre, the aho, a single thread bound into many" width="1400" height="933" loading="lazy">
+      <figcaption class="th-photo-note reveal d1"><span class="th-ph-line">Photo caption to be supplied, one short line.</span></figcaption>
     </figure>
     <div class="th-principle-main">
       <div class="th-principle-top">
@@ -1595,7 +1582,7 @@ html.no-video .hero-scroll{opacity:1;}
           <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">INGOA <span>&middot;</span> THE NAME</span>
           <h2 class="emerge">More than a name.<br>A philosophy.</h2>
           <div class="th-copy reveal d1">
-            <p>Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately &mdash; not as branding, but as belief.</p>
+            <p>Aho is the thread. In te reo Māori, it is the cord that connects, the line that holds, and the bond that binds people to each other and to the land. Our name was chosen deliberately, not as branding, but as belief.</p>
             <p>Every decision we make, every relationship we build, and every product we grow is an expression of that thread. The aho between people and whenua. Between past and future. Between healing knowledge and those who need it.</p>
           </div>
           <a class="th-btn reveal d2" href="cultivation.html">Our approach <span aria-hidden="true">&rarr;</span></a>
@@ -1603,17 +1590,17 @@ html.no-video .hero-scroll{opacity:1;}
         <aside class="th-principle-rail reveal d2">
           <span class="th-def-type">Aho &middot; Te Reo Māori</span>
           <span class="th-def-word">aho</span>
-          <p class="th-def-sense"><b>In weaving</b> &mdash; a thread. The weft that binds the whole together.</p>
+          <p class="th-def-sense"><b>In weaving</b>, a thread. The weft that binds the whole together.</p>
           <span class="th-rule th-def-rule" aria-hidden="true"></span>
-          <p class="th-def-sense"><b>In whakapapa</b> &mdash; the line of descent.</p>
+          <p class="th-def-sense"><b>In whakapapa</b>, the line of descent.</p>
           <img class="th-mark" src="https://res.cloudinary.com/dgu3c7wmz/image/upload/f_auto,q_auto,w_640,e_background_removal/v1781240323/aho_farms/brand/aho_logo_colour.png" alt="Aho Farms tohu" loading="lazy">
           <span class="th-mark-tag">Hawke's Bay &middot; Aotearoa New Zealand &middot; Est. 2020</span>
         </aside>
       </div>
       <div class="th-terms">
-        <div class="th-term reveal d1"><span class="th-term-word">Aho</span><span class="th-term-title">Thread / Connection</span><p>The horizontal threads of woven flax &mdash; the aho holds the structure together. Without the aho, there is no weaving. Without connection, there is no company.</p></div>
-        <div class="th-term reveal d2"><span class="th-term-word">Whenua</span><span class="th-term-title">Land / Placenta</span><p>Our operation is rooted in Hawke's Bay &mdash; ancestral land that gives identity, purpose, and sustenance. The whenua is not a resource. It is a responsibility.</p></div>
-        <div class="th-term reveal d3"><span class="th-term-word">Māra</span><span class="th-term-title">Garden / Cultivation</span><p>The māra is the place where knowledge meets earth &mdash; where the discipline of cultivation becomes an act of care. Aho Farms is a māra with purpose and precision.</p></div>
+        <div class="th-term reveal d1"><span class="th-term-word">Aho</span><span class="th-term-title">Thread / Connection</span><p>The horizontal threads of woven flax, the aho holds the structure together. Without the aho, there is no weaving. Without connection, there is no company.</p></div>
+        <div class="th-term reveal d2"><span class="th-term-word">Whenua</span><span class="th-term-title">Land / Placenta</span><p>Our operation is rooted in Hawke's Bay, ancestral land that gives identity, purpose, and sustenance. The whenua is not a resource. It is a responsibility.</p></div>
+        <div class="th-term reveal d3"><span class="th-term-word">Māra</span><span class="th-term-title">Garden / Cultivation</span><p>The māra is the place where knowledge meets earth, where the discipline of cultivation becomes an act of care. Aho Farms is a māra with purpose and precision.</p></div>
       </div>
     </div>
   </section>
@@ -1632,11 +1619,11 @@ html.no-video .hero-scroll{opacity:1;}
     <div class="th-close-ui">
       <div class="th-close-copy">
         <span class="eyebrow gold th-eyebrow th-eyebrow--dash reveal">A STRONGER TOMORROW</span>
-        <h2 class="emerge">At Aho Farms, it is both &mdash; and it runs through <em>every plant we grow.</em></h2>
+        <h2 class="emerge">At Aho Farms, it is both, and it runs through <em>every plant we grow.</em></h2>
         <span class="th-rule reveal d1" aria-hidden="true"></span>
       </div>
       <div class="th-close-side">
-        <p class="th-close-line th-ph-line reveal d1">Closing line to be supplied &mdash; two short sentences.</p>
+        <p class="th-close-line reveal d1">What we cultivate today is part of what we leave for those who follow.</p>
         <a class="th-btn reveal d2" href="contact.html">Join the journey <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
