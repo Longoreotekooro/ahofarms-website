@@ -1406,6 +1406,9 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-head-note{align-self:stretch;padding-left:clamp(var(--s4),2.4vw,var(--s5));border-left:1px solid var(--hairline);}
 .tm-head + .tm-grid{margin-top:clamp(var(--s5),6.5vh,var(--s7));}
 .tm-head-note p{margin:0;max-width:42ch;font-size:clamp(0.92rem,1vw,1rem);line-height:1.8;color:var(--silver);}
+.tm-head-note .ph-block{margin:0;}
+.tm-head h2.tm-ph-line{font-size:clamp(1.7rem,2.5vw,2.35rem);align-self:start;justify-self:start;}
+#team .tm-head-note{border-left-color:rgba(243,241,235,0.16);}
 /* Card: a short gold rule under the role, then the bio, then the profile toggle
    pinned to the bottom so every card in a row ends on the same line. */
 .tm-person{display:flex;flex-direction:column;}
@@ -1430,7 +1433,6 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-flax .tm-ph b{color:#8f6a33;}
 .tm-flax .tm-ph span{color:#5a5f5a;}
 .tm-intro{max-width:56ch;margin:var(--s4) 0 0;}
-.tm-ph-heading{max-width:40ch;margin:var(--s4) 0 0;}
 .tm-grid{margin-top:clamp(var(--s6),9vh,var(--s8));display:grid;gap:clamp(var(--s5),3.2vw,var(--s7)) clamp(var(--s4),2.4vw,var(--s6));}
 .tm-grid--5{grid-template-columns:repeat(5,minmax(0,1fr));}
 .tm-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -1589,8 +1591,13 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ================ CORE TEAM (three members) ================ -->
   <section class="tm-sec" id="team">
     <div class="wrap">
-      <span class="eyebrow gold tm-eyebrow reveal">CORE TEAM</span>
-      <div class="ph-block tm-ph-heading reveal"><p>Core team heading to be supplied &mdash; one line in the voice of the origins page.</p></div>
+      <span class="eyebrow gold tm-eyebrow tm-eyebrow--dash reveal">CORE TEAM</span>
+      <div class="tm-head">
+        <h2 class="emerge tm-ph-line">Core team heading to be supplied.</h2>
+        <div class="tm-head-note reveal d1">
+          <div class="ph-block"><p>Core team introduction to be supplied &mdash; one line in the voice of the origins page, then two or three sentences on who does the work and what holds them together.</p></div>
+        </div>
+      </div>
       <div class="tm-grid tm-grid--3">
         <div class="tm-person reveal">
           <div class="tm-ph tm-ph--portrait"><b>Team member portrait 1</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
