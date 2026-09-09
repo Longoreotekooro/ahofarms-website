@@ -1397,6 +1397,29 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-hero-photo{position:relative;margin:0;min-height:100%;}
 .tm-hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;}
 .tm-hero-photo::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to right,#0b0b0b,rgba(11,11,11,0) 16%);}
+/* Board header after the CEO's mood board: the headline holds the left,
+   the board's remit sits right of a single hairline. One column on phones. */
+.tm-head{margin-top:var(--s2);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr);
+  gap:clamp(var(--s5),4.4vw,var(--s7));align-items:stretch;}
+.tm-head h2{margin:0;font-size:clamp(2.05rem,3.2vw,3rem);line-height:1.14;}
+.tm-head h2 em{font-style:italic;color:var(--gold);}
+.tm-head-note{align-self:stretch;padding-left:clamp(var(--s4),2.4vw,var(--s5));border-left:1px solid var(--hairline);}
+.tm-head + .tm-grid{margin-top:clamp(var(--s5),6.5vh,var(--s7));}
+.tm-head-note p{margin:0;max-width:42ch;font-size:clamp(0.92rem,1vw,1rem);line-height:1.8;color:var(--silver);}
+/* Card: a short gold rule under the role, then the bio, then the profile toggle
+   pinned to the bottom so every card in a row ends on the same line. */
+.tm-person{display:flex;flex-direction:column;}
+.tm-rule{display:block;width:28px;height:1px;margin:var(--s3) 0 0;background:var(--gold);opacity:0.8;}
+.tm-more{margin:auto 0 0;padding:clamp(var(--s4),2.2vw,var(--s5)) 0 0;display:inline-flex;align-items:center;gap:14px;
+  background:none;border:0;cursor:pointer;text-align:left;
+  font-family:var(--font-h);font-weight:300;font-size:clamp(0.95rem,1.05vw,1.05rem);color:var(--starlight);}
+.tm-more-mark{flex:none;width:clamp(34px,2.6vw,40px);aspect-ratio:1;border-radius:50%;color:var(--gold);
+  border:1px solid var(--gold-border);display:grid;place-items:center;
+  transition:background 0.45s var(--ease),border-color 0.45s var(--ease);}
+.tm-more-mark svg{width:15px;height:15px;transition:transform 0.45s var(--ease);}
+.tm-more:hover .tm-more-mark,.tm-more:focus-visible .tm-more-mark{border-color:var(--gold);background:rgba(143,106,51,0.08);}
+.tm-more[aria-expanded="true"] .tm-more-mark svg{transform:rotate(90deg);}
+.tm-profile{margin:var(--s3) 0 0;}
 .tm-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:var(--s4);
   border:1px dashed rgba(201,160,106,0.5);border-radius:6px;
   background:rgba(14,20,20,0.4) repeating-linear-gradient(135deg,rgba(201,160,106,0.045) 0 1px,transparent 1px 14px);}
@@ -1430,6 +1453,8 @@ html.no-video .hero-scroll{opacity:1;}
   .tm-hero-photo{order:-1;aspect-ratio:4/5;min-height:0;}
   .tm-hero-photo::before{background:linear-gradient(to top,#0b0b0b,rgba(11,11,11,0) 22%);}
   .tm-hero-copy{padding:clamp(var(--s5),6vh,var(--s6)) var(--s4) clamp(var(--s6),8vh,var(--s7));}
+  .tm-head{grid-template-columns:1fr;gap:var(--s4);}
+  .tm-head-note{padding-left:0;border-left:0;}
   .tm-grid--5{grid-template-columns:1fr 1fr;}
   .tm-grid--3{grid-template-columns:1fr;}
 }
@@ -1494,39 +1519,68 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ================ TE POARI · OUR BOARD (five directors) ================ -->
   <section class="tm-sec tm-flax" id="board">
     <div class="wrap">
-      <span class="eyebrow gold tm-eyebrow reveal">TE POARI <span>&middot;</span> OUR BOARD</span>
-      <h2 class="emerge">Governance.</h2>
-      <div class="ph-block tm-intro reveal"><p>Board introduction to be supplied &mdash; two or three sentences on how the board is constituted and what it is accountable for.</p></div>
+      <span class="eyebrow gold tm-eyebrow tm-eyebrow--dash reveal">TE POARI <span>&middot;</span> OUR BOARD</span>
+      <div class="tm-head">
+        <h2 class="emerge">Guided by experience.<br>Committed to a <em>stronger tomorrow.</em></h2>
+        <div class="tm-head-note reveal d1">
+          <p>Our board brings together a diverse range of knowledge, experience and perspectives, ensuring we remain accountable to our people, our land, and future generations.</p>
+        </div>
+      </div>
       <div class="tm-grid tm-grid--5">
         <div class="tm-person reveal">
           <div class="tm-ph tm-ph--portrait"><b>Director portrait 1</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-b1">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-b1" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d1">
           <div class="tm-ph tm-ph--portrait"><b>Director portrait 2</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-b2">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-b2" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d2">
           <div class="tm-ph tm-ph--portrait"><b>Director portrait 3</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-b3">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-b3" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d3">
           <div class="tm-ph tm-ph--portrait"><b>Director portrait 4</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-b4">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-b4" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d4">
           <div class="tm-ph tm-ph--portrait"><b>Director portrait 5</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-b5">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-b5" hidden><p>Full profile to be supplied.</p></div>
         </div>
       </div>
     </div>
@@ -1542,19 +1596,34 @@ html.no-video .hero-scroll{opacity:1;}
           <div class="tm-ph tm-ph--portrait"><b>Team member portrait 1</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Team member name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-t1">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-t1" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d1">
           <div class="tm-ph tm-ph--portrait"><b>Team member portrait 2</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Team member name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-t2">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-t2" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d2">
           <div class="tm-ph tm-ph--portrait"><b>Team member portrait 3</b><span>3:4 &middot; on the whenua or in the greenhouse &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Team member name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
+          <span class="tm-rule" aria-hidden="true"></span>
           <div class="ph-block"><p>Short bio to be supplied.</p></div>
+          <button class="tm-more" type="button" aria-expanded="false" aria-controls="profile-t3">View profile
+            <span class="tm-more-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></span>
+          </button>
+          <div class="tm-profile ph-block" id="profile-t3" hidden><p>Full profile to be supplied.</p></div>
         </div>
       </div>
     </div>
@@ -1644,6 +1713,21 @@ window.addEventListener('scroll',()=>{
   function fit(){ main.style.paddingTop=nav.offsetHeight+"px"; }
   fit();
   window.addEventListener('resize',fit);
+})();
+
+/* ---------- Team: profile toggles ----------
+   The card shows the short bio; "View profile" opens the full one in place.
+   No dead links - every toggle reveals content that lives on this page. */
+(function(){
+  document.querySelectorAll('.tm-more').forEach(btn=>{
+    const panel=document.getElementById(btn.getAttribute('aria-controls'));
+    if(!panel)return;
+    btn.addEventListener('click',()=>{
+      const open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded',String(!open));
+      panel.hidden=open;
+    });
+  });
 })();
 
 /* ================================================================
