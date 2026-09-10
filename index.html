@@ -492,7 +492,8 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 /* the name — a mark, not a headline. The film is the headline. */
 /* the wordmark itself (CEO, 2026-09-10) - same asset as header and footer,
-   sized for the film; white here, gold is one token away (.hero-mark{color:var(--gold)}) */
+   sized for the film; the brand teal two-tone (CEO, 2026-09-11) - drop the
+   --colour class to fall back to a single-colour mask in currentColor */
 .hero-mark{display:block;height:clamp(3rem,6.4vw,5.6rem);color:var(--white);
   filter:drop-shadow(0 2px 16px rgba(2,4,8,0.85)) drop-shadow(0 1px 3px rgba(2,4,8,0.6));}
 .hero h1{
@@ -507,7 +508,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 .hero-line{
   font-family:var(--font-h);font-style:italic;font-weight:300;
   font-size:clamp(1.5rem,2.9vw,2.4rem);line-height:1.2;
-  letter-spacing:-0.02em;color:var(--gold-light);
+  letter-spacing:-0.02em;color:var(--white);
   display:block;margin-bottom:var(--s3);
   text-shadow:0 1px 22px rgba(2,4,8,0.95),0 1px 7px rgba(2,4,8,0.8),
               0 1px 2px rgba(2,4,8,0.6);
@@ -1711,7 +1712,7 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
       <div class="hero-spark" data-ph="2" aria-hidden="true"></div>
       <span class="hero-tereo" data-ph="2">He aho tēnei.</span>
-      <h1 data-ph="2"><span class="aho-mark hero-mark" aria-hidden="true"></span><span class="vh">Aho Farms, Māori owned medicinal cannabis cultivation, Hawke's Bay, New Zealand</span></h1>
+      <h1 data-ph="2"><span class="aho-mark aho-mark--colour hero-mark" aria-hidden="true"></span><span class="vh">Aho Farms, Māori owned medicinal cannabis cultivation, Hawke's Bay, New Zealand</span></h1>
       <span class="hero-line" data-ph="3">The thread that connects.</span>
       <div class="hero-woven" data-ph="4" role="text" aria-label="Whenua. People. Knowledge.">
         <span>Whenua</span><i aria-hidden="true"></i><span>People</span><i aria-hidden="true"></i><span>Knowledge</span>
