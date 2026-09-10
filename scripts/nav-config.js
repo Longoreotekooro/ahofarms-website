@@ -36,14 +36,21 @@ const NAV = [
 
 const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: 'contact.html' };
 
-// Social channels, header and footer (CEO, 2026-09-10). Only accounts that
-// actually exist go here - LinkedIn is the one live channel in the repo.
-// Add Instagram / Facebook entries when the CEO supplies the URLs; the
-// icons render wherever this list is used, so nothing else changes.
+// Social channels, header and footer (CEO, 2026-09-10; Instagram and
+// Facebook URLs supplied 2026-09-11). Order is the CEO's. The icons render
+// wherever this list is used, so adding a channel here is the whole job.
 const SOCIAL = [
   {
     name: 'LinkedIn', href: 'https://linkedin.com/company/aho-farms',
     icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>',
+  },
+  {
+    name: 'Instagram', href: 'https://www.instagram.com/aho_farms_nz/',
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>',
+  },
+  {
+    name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61584684134399',
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg>',
   },
 ];
 
