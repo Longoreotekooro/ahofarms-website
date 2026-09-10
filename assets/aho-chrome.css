@@ -55,9 +55,14 @@ html[data-palette="teal"]{
 
 /* ---- header ------------------------------------------------------- */
 .nav-logo{display:inline-flex;align-items:center;color:var(--aho-white);font-size:26px;line-height:1;text-decoration:none;transition:color .3s var(--aho-ease);}
-.nav-logo:hover,.nav-logo:focus-visible{opacity:0.82;}
-/* header mark in the brand's own two-tone teal (CEO, 2026-09-11); the footer stays white */
-.nav-logo .aho-mark{height:26px;-webkit-mask:none;mask:none;background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;}
+/* header mark: white at rest, the brand's two-tone teal crossfades in on hover
+   (CEO, 2026-09-11). The teal sits in ::after over the white mask so the two
+   can fade rather than snap. The footer mark stays white. */
+.nav-logo{position:relative;}
+.nav-logo .aho-mark{height:26px;transition:opacity .3s var(--aho-ease);}
+.nav-logo::after{content:'';position:absolute;inset:0;background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;opacity:0;transition:opacity .3s var(--aho-ease);}
+.nav-logo:hover .aho-mark,.nav-logo:focus-visible .aho-mark{opacity:0;}
+.nav-logo:hover::after,.nav-logo:focus-visible::after{opacity:1;}
 .nav-social{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none;}
 .nav-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:rgba(243,241,235,0.72);transition:color .25s,background .25s;}
 .nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-accent);background:rgba(243,241,235,0.06);}
