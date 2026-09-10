@@ -1466,20 +1466,62 @@ html.no-video .hero-scroll{opacity:1;}
 .ql-serif-l{margin:var(--s5) 0 0;font-family:var(--font-h);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.25;color:var(--starlight);}
 .ql-serif-l em{font-style:italic;color:var(--gold);}
 
-/* 2 · THE GROWER - cream editorial, the grower on the right, 20+ overlapping the picture */
-.ql-grower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.9fr);gap:clamp(var(--s6),6vw,var(--s9));align-items:center;}
-.ql-grower .cl-h2{max-width:14ch;}
-.ql-first{margin:var(--s4) 0 0;font-family:var(--font-h);font-weight:300;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.3;max-width:24ch;color:var(--starlight);}
-.ql-first em{font-style:italic;color:var(--gold);}
-.ql-grower-photo{position:relative;margin:0;padding-left:clamp(48px,7vw,120px);padding-bottom:104px;}
-.ql-grower-frame{position:relative;aspect-ratio:4/5;border-radius:calc(var(--plate-r)*0.55);overflow:hidden;background:#d9d2c2;}
-.ql-grower-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:saturate(0.88);}
-.ql-years{position:absolute;left:0;bottom:0;z-index:2;}
-.ql-years b{display:block;font-family:var(--font-h);font-weight:300;font-size:clamp(5.4rem,11.5vw,10.5rem);line-height:0.82;letter-spacing:-0.04em;color:var(--gold);text-shadow:0 2px 40px rgba(244,242,236,0.9),0 0 12px rgba(244,242,236,0.8);}
-.ql-years i{display:block;margin-top:var(--s2);font-style:normal;font-size:0.72rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--starlight);}
-.ql-years span{display:block;margin-top:6px;max-width:30ch;font-size:0.8rem;line-height:1.55;color:var(--silver);}
-.ql-grower-after{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.9fr);gap:clamp(var(--s6),6vw,var(--s9));margin-top:clamp(var(--s6),8vh,var(--s8));padding-top:clamp(var(--s5),6vh,var(--s7));border-top:1px solid var(--hairline);align-items:start;}
-.ql-grower-after .cl-sign{margin-top:0;}
+/* 2 · THE GROWER - the CEO's plate: cream, thread swirls and BOTH photographs are
+   baked into assets/aho-quality-grower.jpg (1672x941). Only the copy and the 20+
+   card are live HTML, sized in CONTAINER UNITS so they track the artwork.
+   The shipped jpg is the CEO's canvas with its PLAIN-CREAM left slab (x 0..470,
+   no artwork in it) stretched to 589px - their canvas gave the copy far less
+   cream than their board did, and the copy ran under the seedling tray. Nothing
+   is redrawn or cropped; the plate is now 1791x941 (1.902) against the board's
+   1.896. Geometry measured off the shipped file: main photo left edge 48.0%,
+   inset tray photo left 34.6% / top 56.6%, photo bottom edge 97.6%. If the
+   artwork is replaced, RE-MEASURE all four before touching the numbers below. */
+.ql-grower-sec{padding:0;background:#f4f2ec;}
+.ql-gplate{position:relative;aspect-ratio:1791/941;container-type:inline-size;}
+.ql-gart{position:absolute;inset:0;display:block;}
+.ql-gart img{display:block;width:100%;height:100%;object-fit:cover;}
+.ql-gcopy{position:absolute;left:6.4%;top:12.4%;width:26.8%;z-index:2;}
+.ql-gcopy .cl-eyebrow{margin-bottom:0;gap:1.06cqw;font-size:0.7cqw;letter-spacing:0.2em;}
+.ql-gcopy .cl-eyebrow::after{width:2.02cqw;}
+.ql-gh2{margin:2.11cqw 0 0;font-size:3.84cqw;line-height:1.22;letter-spacing:-0.012em;color:var(--starlight);}
+.ql-gh2 em{font-style:italic;color:var(--gold);}
+.ql-glede{margin:1.38cqw 0 0;font-family:var(--font-h);font-weight:300;font-size:1.56cqw;line-height:1.41;color:var(--starlight);}
+.ql-glede em{font-style:italic;color:var(--gold);}
+.ql-gp{margin:1.63cqw 0 0;font-size:1cqw;line-height:1.62;color:var(--silver);}
+.ql-grule{display:block;width:4.32cqw;height:1px;margin:1.54cqw 0 0;background:var(--gold);opacity:0.7;}
+.ql-gsign{margin:1.65cqw 0 0;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:1.3cqw;line-height:1.47;color:var(--gold);}
+/* the 20+ card straddles the photograph's left edge, clear of the tray photo below */
+.ql-gyears{position:absolute;left:43.5%;top:22%;width:14.8%;margin:0;z-index:2;
+  padding:0.95cqw 1.15cqw 1.24cqw;border-radius:0.6cqw;
+  background:rgba(250,249,245,0.6);border:1px solid rgba(255,255,255,0.45);
+  -webkit-backdrop-filter:blur(7px) saturate(1.06);backdrop-filter:blur(7px) saturate(1.06);}
+.ql-gyears b{display:block;font-family:var(--font-h);font-weight:300;font-size:8.9cqw;line-height:0.8;letter-spacing:-0.03em;color:var(--gold);}
+.ql-gyears i{display:block;margin-top:0.78cqw;font-style:normal;font-size:0.94cqw;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--starlight);}
+.ql-gyears span{display:block;margin-top:0.64cqw;padding-bottom:1.06cqw;border-bottom:1px solid var(--gold-border);
+  font-size:0.65cqw;font-weight:500;line-height:1.75;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);}
+
+/* THE GROWER, stacked: the artwork's composition cannot survive a narrow column,
+   so below 1280px the plate becomes copy -> photograph -> 20+ in normal flow and
+   every container unit above is overridden back to the page's own scale. */
+@media (max-width:1279px){
+  .ql-grower-sec{padding:clamp(88px,11vh,150px) 0;}
+  .ql-gplate{aspect-ratio:auto;display:flex;flex-direction:column;}
+  .ql-gart{position:relative;inset:auto;order:2;margin:var(--s5) var(--s4) 0;}
+  .ql-gart img{aspect-ratio:4/5;border-radius:calc(var(--plate-r)*0.55);}
+  .ql-gcopy{position:static;width:auto;padding:0 var(--s4);order:1;}
+  .ql-gcopy .cl-eyebrow{margin-bottom:var(--s3);font-size:0.68rem;letter-spacing:0.24em;}
+  .ql-gcopy .cl-eyebrow::after{width:34px;}
+  .ql-gh2{margin:0;font-size:clamp(2.1rem,5.4vw,3.2rem);}
+  .ql-glede{margin:var(--s4) 0 0;font-size:clamp(1.4rem,3.4vw,2rem);max-width:26ch;}
+  .ql-gp{margin:var(--s3) 0 0;font-size:clamp(0.95rem,1.05vw,1.05rem);max-width:46ch;}
+  .ql-grule{width:56px;margin:var(--s4) 0 0;}
+  .ql-gsign{margin:var(--s5) 0 0;font-size:clamp(1.2rem,3.2vw,1.55rem);}
+  .ql-gyears{position:static;order:3;width:auto;margin:var(--s5) var(--s4) 0;padding:var(--s4);
+    border-radius:calc(var(--plate-r)*0.4);background:rgba(255,255,255,0.5);}
+  .ql-gyears b{font-size:clamp(4.4rem,15vw,7rem);line-height:0.85;}
+  .ql-gyears i{margin-top:var(--s2);font-size:0.72rem;}
+  .ql-gyears span{margin-top:8px;padding-bottom:var(--s3);max-width:34ch;font-size:0.68rem;}
+}
 
 /* 3 + 4 · POST-HARVEST and EXPERIENCE IN THE FINISH - one dark chapter */
 .ql-harvest{background:var(--void);}
@@ -1569,10 +1611,7 @@ html.no-video .hero-scroll{opacity:1;}
   .ql-hero-aside{padding:0 var(--s4) var(--s6);}
   .ql-hero-aside::before{display:none;}
   .ql-hero-stack{width:auto;display:flex;flex-wrap:wrap;gap:0 var(--s3);line-height:1.9;}
-  .ql-two,.ql-grower,.ql-grower-after,.ql-ppp{grid-template-columns:1fr;gap:var(--s5);}
-  .ql-grower-photo{order:-1;padding-left:0;padding-bottom:clamp(120px,22vw,170px);}
-  .ql-years{left:var(--s3);bottom:0;}
-  .ql-years b{font-size:clamp(4.6rem,20vw,7rem);}
+  .ql-two,.ql-ppp{grid-template-columns:1fr;gap:var(--s5);}
   /* the drawn horizontal threads give way to a vertical one on the phone */
   .ql-hstages .ql-thread,.ql-record .ql-thread,.ql-journey .ql-thread{display:none;}
   .ql-stages--4,.ql-stages--6,.ql-stages--7{grid-template-columns:1fr;gap:0;text-align:left;padding-left:var(--s4);border-left:1px solid var(--gold-border);}
@@ -1655,30 +1694,28 @@ html.no-video .hero-scroll{opacity:1;}
   </section>
 
   <!-- ================ 2 · THE GROWER · WHERE QUALITY BEGINS ================ -->
-  <!-- Cream editorial. The people behind quality made tangible: the grower
-       on the right, the 20+ overlapping the picture. The hands photograph
-       stands in until the CEO's candid grower portrait lands. -->
-  <section class="cl-plate cl-cream cl-sec" id="grower">
-    <div class="wrap">
-      <div class="ql-grower">
-        <div>
-          <span class="eyebrow gold cl-eyebrow reveal">01 · THE FIRST LINE OF QUALITY</span>
-          <h2 class="cl-h2 emerge">Quality begins with the grower.</h2>
-          <p class="ql-first reveal d1">The first point of quality control is not a laboratory or a processing room.<br><em>It is the grower.</em></p>
-          <p class="cl-p reveal d2">Our cultivation team monitors plants throughout their lifecycle, identifying issues early and responding when required.</p>
-        </div>
-        <figure class="ql-grower-photo reveal d1">
-          <div class="ql-grower-frame unveil reveal">
-            <img src="assets/aho-team-hero-hands.jpg" alt="A grower’s hands holding a young plant, its roots bound in soil, in low sun" width="1123" height="1400" loading="lazy">
-          </div>
-          <span class="cl-chip">Grower portrait · placeholder</span>
-          <figcaption class="ql-years"><b>20+</b><i>Years</i><span>combined cultivation experience within our growing team</span></figcaption>
-        </figure>
+  <!-- The CEO's plate, built to their board: cream and thread swirls carry the
+       copy on the left, the grower photograph runs off the right edge with the
+       seedling tray inset over it, and the 20+ card straddles the photo's edge.
+       The artwork holds the pictures; the type is live HTML in container units. -->
+  <section class="cl-plate cl-cream cl-sec ql-grower-sec" id="grower">
+    <div class="ql-gplate">
+      <picture class="ql-gart">
+        <source media="(max-width:1279px)" srcset="assets/aho-quality-grower-mobile.jpg">
+        <img src="assets/aho-quality-grower.jpg" alt="A grower’s hand settling a young plant into its plug, rows of seedlings running back into low sun" width="1791" height="941" loading="lazy">
+      </picture>
+      <div class="ql-gcopy">
+        <span class="eyebrow gold cl-eyebrow reveal">01 · THE FIRST LINE OF QUALITY</span>
+        <h2 class="ql-gh2 emerge">Quality begins<br><em>with the grower.</em></h2>
+        <p class="ql-glede reveal d1">The first point of quality control is not a laboratory or a processing room.<br><em>It is the grower.</em></p>
+        <p class="ql-gp reveal d2">Our cultivation team monitors plants throughout their lifecycle, identifying issues early and responding when required.</p>
+        <span class="ql-grule reveal d2" aria-hidden="true"></span>
+        <p class="ql-gp reveal d2">That experience allows our team to recognise subtle changes in plant health, environmental response and development that may otherwise be missed.</p>
+        <p class="ql-gsign reveal d3">Every observation creates an opportunity to act.<br>Every intervention protects what comes next.</p>
       </div>
-      <div class="ql-grower-after">
-        <p class="cl-p reveal">That experience allows our team to recognise subtle changes in plant health, environmental response and development that may otherwise be missed.</p>
-        <p class="cl-sign reveal d1">Every observation creates an opportunity to act.<br>Every intervention protects what comes next.</p>
-      </div>
+      <figure class="ql-gyears reveal d2">
+        <b>20+</b><i>Years</i><span>Combined cultivation experience within our growing team</span>
+      </figure>
     </div>
   </section>
 
