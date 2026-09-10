@@ -65,11 +65,12 @@ html[data-palette="teal"]{
 .nav-logo:hover::after,.nav-logo:focus-visible::after{opacity:1;}
 .nav-social{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none;}
 .nav-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:rgba(243,241,235,0.72);transition:color .25s,background .25s;}
-.nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-accent);background:rgba(243,241,235,0.06);}
+/* header hovers go to the brand teal (CEO, 2026-09-11) */
+.nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-teal);background:rgba(243,241,235,0.06);}
 .nav-social svg{width:17px;height:17px;fill:currentColor;}
 .nav-parent.is-active > a .bil-en{color:var(--aho-accent);}
 .nav-cta-wrap{border-color:var(--aho-accent-soft) !important;color:var(--aho-accent) !important;}
-.nav-cta-wrap:hover,.nav-cta-wrap:focus-visible{background:var(--aho-accent) !important;border-color:var(--aho-accent) !important;color:var(--aho-accent-ink) !important;}
+.nav-cta-wrap:hover,.nav-cta-wrap:focus-visible{background:var(--aho-teal) !important;border-color:var(--aho-teal) !important;color:#fff !important;}
 .nav-cta-wrap .bil-mi{color:inherit !important;}
 /* dropdowns run the full width of the site, not the page margins */
 @media(min-width:901px){
