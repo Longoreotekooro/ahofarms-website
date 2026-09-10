@@ -115,7 +115,12 @@ p{text-wrap:pretty;}
 .aho-wrap{width:100%;max-width:var(--aho-max);margin:0 auto;padding:0 var(--aho-gutter);}
 .aho-footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid var(--aho-hair);}
 .aho-footer-logo{display:block;width:max-content;color:var(--aho-white);font-size:30px;line-height:1;margin-bottom:22px;}
-.aho-footer-logo .aho-mark{height:30px;}
+.aho-footer-logo{position:relative;}
+.aho-footer-logo .aho-mark{height:30px;transition:opacity .3s var(--aho-ease);}
+/* same hover as the header: white at rest, the two-tone teal fades in (CEO, 2026-09-11) */
+.aho-footer-logo::after{content:'';position:absolute;inset:0;background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;opacity:0;transition:opacity .3s var(--aho-ease);}
+.aho-footer-logo:hover .aho-mark,.aho-footer-logo:focus-visible .aho-mark{opacity:0;}
+.aho-footer-logo:hover::after,.aho-footer-logo:focus-visible::after{opacity:1;}
 .aho-footer-badge{display:inline-block;font-size:0.625rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--aho-accent);border:1px solid var(--aho-accent-soft);border-radius:2px;padding:5px 10px;margin:0 0 20px;}
 .aho-footer-intro{margin:0 0 24px;max-width:40ch;font-size:0.875rem;line-height:1.7;color:var(--aho-silver);}
 .aho-footer-social{display:flex;gap:6px;margin:0;padding:0;list-style:none;}
