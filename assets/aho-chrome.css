@@ -80,6 +80,18 @@ html[data-palette="teal"]{
   .nav-logo .aho-mark{height:22px;}
 }
 
+/* ---- buttons ----------------------------------------------------
+   One primary button everywhere, on the page's accent. Pages keep their
+   own .btn geometry; only the colour roles are pinned here so a gold
+   page never shows a teal primary beside gold labels (60/30/10). */
+.btn-primary{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);filter:brightness(1.08);}
+.btn-teal-outline{color:var(--aho-accent);border-color:var(--aho-accent);}
+.btn-teal-outline:hover,.btn-teal-outline:focus-visible{background:var(--aho-accent);color:var(--aho-accent-ink);}
+.btn-gold{color:var(--aho-accent);border-color:var(--aho-accent-soft);}
+.btn-gold:hover,.btn-gold:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
+.btn,.btn-primary,.btn-outline,.btn-gold{font-family:var(--aho-font-b);}
+
 /* ---- typography ------------------------------------------------
    Serif is for feature headings (h1, h2). Everything smaller is sans,
    as are navigation, buttons and body. Heading lines are balanced so
