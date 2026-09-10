@@ -1,4 +1,4 @@
-const { NAV, CTA } = require('./nav-config');
+const { NAV, CTA, SOCIAL } = require('./nav-config');
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
@@ -53,11 +53,14 @@ function renderNav(currentPage) {
 
   return `<nav class="nav" id="nav" aria-label="Main">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">AHO <em>FARMS</em></a>
+      <a href="index.html" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
       <ul class="nav-links" id="navDrawer">
         ${parents}
       </ul>
       <div class="nav-right">
+        <ul class="nav-social" aria-label="Aho Farms on social media">
+          ${SOCIAL.map(s => `<li><a href="${esc(s.href)}" target="_blank" rel="noopener" aria-label="${esc(s.name)}">${s.icon}</a></li>`).join('')}
+        </ul>
         <a href="${esc(CTA.href)}" class="nav-cta-wrap" aria-label="${esc(CTA.en)}">${label(CTA)}</a>
         <button class="nav-burger" aria-expanded="false" aria-controls="navDrawer" aria-label="Menu">
           <span></span><span></span><span></span>

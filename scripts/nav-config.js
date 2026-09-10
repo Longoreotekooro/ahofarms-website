@@ -36,4 +36,25 @@ const NAV = [
 
 const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: 'contact.html' };
 
-module.exports = { NAV, CTA, SENTINEL_START, SENTINEL_END };
+// Social channels, header and footer (CEO, 2026-09-10). Only accounts that
+// actually exist go here - LinkedIn is the one live channel in the repo.
+// Add Instagram / Facebook entries when the CEO supplies the URLs; the
+// icons render wherever this list is used, so nothing else changes.
+const SOCIAL = [
+  {
+    name: 'LinkedIn', href: 'https://linkedin.com/company/aho-farms',
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>',
+  },
+];
+
+// The five ways in, used by the floating "Connect with us" sheet and the
+// footer's Portals column (CEO, 2026-09-10). Order is the CEO's.
+const CONNECT = [
+  { label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true },
+  { label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true },
+  { label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true },
+  { label: 'Investors',        href: 'investors.html',       note: 'The opportunity and investor materials',            portal: true },
+  { label: 'Contact the team', href: 'contact.html',         note: 'General enquiries and media',                       portal: false },
+];
+
+module.exports = { NAV, CTA, SOCIAL, CONNECT, SENTINEL_START, SENTINEL_END };

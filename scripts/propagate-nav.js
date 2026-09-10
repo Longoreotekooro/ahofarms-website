@@ -94,16 +94,22 @@ expect(donorLines[1333].trim() === '}', 'footer CSS end marker moved');
 // changed size; derive the offset from the footer marker instead. The CSS
 // ranges below live in <head>, ahead of the nav, so they never move.
 const FOOTER_ANCHOR = 1512; // 1-based line of <footer ...> when these ranges were written
-const footerAt = donorLines.findIndex(l => l.includes('<footer class="footer" id="contact">')) + 1;
+// The donor footer is now the shared aho-footer stamped by
+// scripts/propagate-chrome.js (CEO site-wide feedback, 2026-09-10), whose
+// length differs from the old one - so the footer end and everything after
+// it are located by search, not by pinned offset.
+const footerAt = donorLines.findIndex(l => /<footer class="(?:aho-)?footer" id="contact">/.test(l)) + 1;
 expect(footerAt > 0, 'footer HTML start marker not found in donor');
 const BODY_SHIFT = footerAt - FOOTER_ANCHOR;
-function sliceBody(a, b) { return sliceLines(a + BODY_SHIFT, b + BODY_SHIFT); }
-expect(donorLines[1562 + BODY_SHIFT].trim() === '</footer>', 'footer HTML end marker moved');
+const footerEnd = donorLines.findIndex((l, i) => i >= footerAt - 1 && l.trim() === '</footer>') + 1;
+expect(footerEnd > footerAt, 'footer HTML end marker not found in donor');
+const TAIL_SHIFT = footerEnd - (1562 + BODY_SHIFT);
+function sliceBody(a, b) { return a >= 1563 ? sliceLines(a + BODY_SHIFT + TAIL_SHIFT, b + BODY_SHIFT + TAIL_SHIFT) : sliceLines(a + BODY_SHIFT, b + BODY_SHIFT); }
 
 const NAV_CSS = sliceLines(249, 412);
 const FOOTER_CSS = sliceLines(1283, 1334);
 const STAR_CSS = sliceLines(195, 207);
-const FOOTER_HTML = sliceBody(1512, 1563); // <footer ...> ... </footer>, no leading comment
+const FOOTER_HTML = sliceLines(footerAt, footerEnd); // <footer ...> ... </footer>, no leading comment
 const JS_ENV = sliceBody(1574, 1577);
 const JS_SCROLL = sliceBody(1580, 1582);
 const JS_STARFIELD = sliceBody(1595, 1620);

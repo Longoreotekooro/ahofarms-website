@@ -1,0 +1,183 @@
+/* ====================================================================
+   AHO FARMS · shared chrome
+   One stylesheet linked from every page, loaded AFTER the page's own
+   inline <style> so it wins ties. Carries the things the CEO asked to be
+   identical everywhere (2026-09-10 site-wide feedback): palette tokens,
+   the wordmark header with social icons, full-width dropdowns, the
+   simplified footer, the floating "Connect with us" button, heading
+   line balancing and the sans/serif split.
+
+   Palette. Two are allowed (Palette A: charcoal · sand · gold, the
+   default; Palette B: charcoal · white · teal). Both share one system;
+   only the accent moves. Switch a page with <html data-palette="teal">.
+   Nothing here redefines a page's own --gold / --teal tokens.
+   ==================================================================== */
+:root{
+  --aho-ink:#0b0d0f;
+  --aho-charcoal:#101112;
+  --aho-sand:#e7dcc6;
+  --aho-paper:#f4f2ec;
+  --aho-white:#f3f1eb;
+  --aho-gold:#c9a06a;
+  --aho-gold-light:#e3c894;
+  --aho-teal:#62aaa6;
+  --aho-teal-light:#99c5c4;
+  --aho-silver:#a8adb3;
+  --aho-hair:rgba(243,241,235,0.1);
+  --aho-accent:var(--aho-gold);
+  --aho-accent-soft:rgba(201,160,106,0.34);
+  --aho-accent-ink:#141210;
+  --aho-font-h:'Cormorant Garamond',Georgia,serif;
+  --aho-font-b:'Inter',system-ui,sans-serif;
+  --aho-ease:cubic-bezier(0.22,1,0.36,1);
+  --aho-max:1280px;
+  --aho-gutter:32px;
+}
+html[data-palette="teal"]{
+  --aho-accent:var(--aho-teal);
+  --aho-accent-soft:rgba(98,170,166,0.38);
+  --aho-accent-ink:#0b1514;
+}
+
+/* ---- the wordmark, one asset, any colour --------------------------
+   The mono SVG paints in currentColor with the lighter halves at 0.72
+   alpha, so used as a mask it keeps the mark's two-tone split whatever
+   colour the element carries. Height sets the size; width follows the
+   mark's own ratio. */
+.aho-mark{
+  display:inline-block;height:1em;aspect-ratio:731.21/250.10;vertical-align:middle;
+  background:currentColor;
+  -webkit-mask:url(brand/aho-wordmark.svg) center/contain no-repeat;
+          mask:url(brand/aho-wordmark.svg) center/contain no-repeat;
+}
+.aho-mark--colour{-webkit-mask:none;mask:none;
+  background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;}
+
+/* ---- header ------------------------------------------------------- */
+.nav-logo{display:inline-flex;align-items:center;color:var(--aho-white);font-size:26px;line-height:1;text-decoration:none;transition:color .3s var(--aho-ease);}
+.nav-logo:hover,.nav-logo:focus-visible{color:var(--aho-accent);}
+.nav-logo .aho-mark{height:26px;}
+.nav-social{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none;}
+.nav-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:rgba(243,241,235,0.72);transition:color .25s,background .25s;}
+.nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-accent);background:rgba(243,241,235,0.06);}
+.nav-social svg{width:17px;height:17px;fill:currentColor;}
+.nav-parent.is-active > a .bil-en{color:var(--aho-accent);}
+.nav-cta-wrap{border-color:var(--aho-accent-soft) !important;color:var(--aho-accent) !important;}
+.nav-cta-wrap:hover,.nav-cta-wrap:focus-visible{background:var(--aho-accent) !important;border-color:var(--aho-accent) !important;color:var(--aho-accent-ink) !important;}
+.nav-cta-wrap .bil-mi{color:inherit !important;}
+/* dropdowns run the full width of the site, not the page margins */
+@media(min-width:901px){
+  .nav-parent .nav-sub{
+    left:0;right:0;max-width:none;margin:0;border-radius:0;
+    padding:30px max(var(--aho-gutter),calc((100% - var(--aho-max))/2 + var(--aho-gutter))) 34px;
+    border-bottom:1px solid var(--aho-hair);
+    box-shadow:0 30px 60px rgba(0,0,0,0.42);
+  }
+  .nav-parent .nav-sub a::after{background:var(--aho-accent);}
+}
+@media(max-width:900px){
+  .nav-social{display:none;}
+  .nav-logo .aho-mark{height:22px;}
+}
+
+/* ---- typography ------------------------------------------------
+   Serif is for feature headings (h1, h2). Everything smaller is sans,
+   as are navigation, buttons and body. Heading lines are balanced so
+   the last line never carries one short word. */
+h3,h4,h5,h6{font-family:var(--aho-font-b);}
+h1,h2,h3{text-wrap:balance;}
+p{text-wrap:pretty;}
+
+/* ---- footer ----------------------------------------------------- */
+.aho-footer{position:relative;background:var(--aho-ink);color:var(--aho-white);font-family:var(--aho-font-b);padding:96px 0 40px;overflow:hidden;}
+.aho-footer *{box-sizing:border-box;}
+.aho-footer a{color:inherit;text-decoration:none;}
+.aho-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--aho-hair) 20%,var(--aho-hair) 80%,transparent);}
+.aho-wrap{width:100%;max-width:var(--aho-max);margin:0 auto;padding:0 var(--aho-gutter);}
+.aho-footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid var(--aho-hair);}
+.aho-footer-logo{display:block;width:max-content;color:var(--aho-white);font-size:30px;line-height:1;margin-bottom:22px;}
+.aho-footer-logo .aho-mark{height:30px;}
+.aho-footer-badge{display:inline-block;font-size:0.625rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--aho-accent);border:1px solid var(--aho-accent-soft);border-radius:2px;padding:5px 10px;margin:0 0 20px;}
+.aho-footer-intro{margin:0 0 24px;max-width:40ch;font-size:0.875rem;line-height:1.7;color:var(--aho-silver);}
+.aho-footer-social{display:flex;gap:6px;margin:0;padding:0;list-style:none;}
+.aho-footer-social a{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--aho-hair);color:rgba(243,241,235,0.72);transition:color .25s,border-color .25s;}
+.aho-footer-social a:hover,.aho-footer-social a:focus-visible{color:var(--aho-accent);border-color:var(--aho-accent-soft);}
+.aho-footer-social svg{width:16px;height:16px;fill:currentColor;}
+.aho-footer-col h5{margin:0 0 22px;font-family:var(--aho-font-b);font-size:0.6875rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(243,241,235,0.45);}
+.aho-footer-col ul{list-style:none;margin:0;padding:0;}
+.aho-footer-col li{margin:0 0 12px;}
+.aho-footer-col li a{font-size:0.8125rem;color:var(--aho-white);transition:color .25s;}
+.aho-footer-col li a:hover,.aho-footer-col li a:focus-visible{color:var(--aho-accent);}
+.aho-footer-col li a small{display:block;margin-top:2px;font-size:0.72rem;color:var(--aho-silver);}
+.aho-footer-bottom{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:32px;}
+.aho-footer-copy{font-size:0.75rem;color:rgba(168,173,179,0.6);}
+.aho-footer-copy a{text-decoration:underline;text-underline-offset:3px;}
+.aho-footer-copy a:hover{color:var(--aho-white);}
+.aho-footer-legal{font-size:0.6875rem;line-height:1.6;color:rgba(168,173,179,0.45);max-width:56ch;}
+@media(max-width:900px){
+  .aho-footer{padding:72px 0 36px;}
+  .aho-footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+  .aho-footer-top > :first-child{grid-column:1 / -1;}
+}
+@media(max-width:560px){
+  .aho-footer-top{grid-template-columns:1fr;}
+}
+
+/* ---- floating "Connect with us" ------------------------------------
+   Bottom centre, appears once the visitor has scrolled. Opens a sheet
+   with the five ways in. Sits above the page but below the open nav
+   drawer. */
+.aho-connect{position:fixed;left:50%;bottom:22px;z-index:95;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+  transition:opacity .4s var(--aho-ease),transform .4s var(--aho-ease);}
+.aho-connect.is-shown{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+.aho-connect-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px 13px 18px;border-radius:999px;border:1px solid var(--aho-accent-soft);
+  background:rgba(11,13,15,0.82);color:var(--aho-white);font-family:var(--aho-font-b);font-size:0.8125rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 44px rgba(0,0,0,0.45);
+  transition:background .25s,border-color .25s,color .25s,transform .25s var(--aho-ease);}
+.aho-connect-btn svg{width:18px;height:18px;fill:none;stroke:var(--aho-accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s;}
+.aho-connect-btn:hover,.aho-connect-btn:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);transform:translateY(-2px);}
+.aho-connect-btn:hover svg,.aho-connect-btn:focus-visible svg{stroke:var(--aho-accent-ink);}
+.aho-connect-btn:focus-visible{outline:2px solid var(--aho-white);outline-offset:3px;}
+
+.aho-sheet{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;padding:16px;
+  background:rgba(4,6,8,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .3s var(--aho-ease),visibility 0s linear .3s;}
+.aho-sheet.is-open{opacity:1;visibility:visible;transition:opacity .3s var(--aho-ease);}
+.aho-sheet-panel{width:min(100%,520px);border-radius:18px;border:1px solid var(--aho-hair);background:var(--aho-charcoal);color:var(--aho-white);
+  padding:28px 28px 22px;box-shadow:0 40px 90px rgba(0,0,0,0.6);font-family:var(--aho-font-b);
+  transform:translateY(24px);transition:transform .35s var(--aho-ease);}
+.aho-sheet.is-open .aho-sheet-panel{transform:translateY(0);}
+.aho-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.aho-sheet-eyebrow{display:block;font-size:0.625rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--aho-accent);margin-bottom:8px;}
+.aho-sheet-title{margin:0;font-family:var(--aho-font-h);font-weight:400;font-size:1.75rem;line-height:1.1;letter-spacing:-0.01em;color:var(--aho-white);}
+.aho-sheet-close{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid var(--aho-hair);background:transparent;color:var(--aho-white);cursor:pointer;display:grid;place-items:center;transition:border-color .25s,color .25s;}
+.aho-sheet-close:hover,.aho-sheet-close:focus-visible{border-color:var(--aho-accent);color:var(--aho-accent);}
+.aho-sheet-close svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;fill:none;}
+.aho-sheet-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
+.aho-sheet-list a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border-radius:10px;border:1px solid transparent;
+  color:var(--aho-white);text-decoration:none;transition:background .2s,border-color .2s;}
+.aho-sheet-list a:hover,.aho-sheet-list a:focus-visible{background:rgba(243,241,235,0.05);border-color:var(--aho-hair);}
+.aho-sheet-list b{display:block;font-weight:600;font-size:0.9375rem;letter-spacing:0.01em;}
+.aho-sheet-list small{display:block;margin-top:3px;font-size:0.75rem;color:var(--aho-silver);}
+.aho-sheet-list svg{flex-shrink:0;width:16px;height:16px;stroke:var(--aho-accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;fill:none;
+  transform:translateX(-4px);opacity:0.6;transition:transform .25s var(--aho-ease),opacity .25s;}
+.aho-sheet-list a:hover svg,.aho-sheet-list a:focus-visible svg{transform:none;opacity:1;}
+.aho-sheet-list a.is-current{border-color:var(--aho-accent-soft);}
+.aho-sheet-list a:focus-visible,.aho-sheet-close:focus-visible{outline:2px solid var(--aho-accent);outline-offset:2px;}
+@media(min-width:640px){.aho-sheet{place-items:center;}}
+@media(max-width:560px){
+  .aho-connect{bottom:14px;}
+  .aho-connect-btn{padding:12px 18px 12px 16px;font-size:0.75rem;}
+  .aho-sheet-panel{padding:22px 18px 16px;border-radius:16px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .aho-connect,.aho-connect-btn,.aho-sheet,.aho-sheet-panel,.aho-sheet-list svg{transition:none !important;}
+}
+body.aho-sheet-open{overflow:hidden;}
+
+/* ---- optional photography treatment ------------------------------
+   The CEO floated black-and-white photography for Palette A pages.
+   Opt in per page with <html class="aho-mono">; colour returns on hover
+   so the product is never hidden. Off by default. */
+html.aho-mono img:not(.aho-keep-colour):not([src*="brand/"]):not([src*="partners/"]){filter:grayscale(1);transition:filter .6s var(--aho-ease);}
+html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
