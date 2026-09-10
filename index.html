@@ -484,25 +484,21 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--gold-light);}
 }
 .hero.ph2 .hero-spark::after{transform:scaleY(1);}
 
-.hero-tereo{
-  font-family:var(--font-h);font-style:italic;font-weight:300;
-  font-size:clamp(1.3rem,2.4vw,1.9rem);
-  color:var(--teal-light);display:block;margin-bottom:var(--s2);
-  text-shadow:0 1px 18px rgba(2,4,8,0.95),0 1px 5px rgba(2,4,8,0.75);
-}
 /* the name — a mark, not a headline. The film is the headline. */
 /* the wordmark itself (CEO, 2026-09-10) - same asset as header and footer,
    sized for the film; the brand teal two-tone (CEO, 2026-09-11) - drop the
    --colour class to fall back to a single-colour mask in currentColor */
-.hero-mark{display:block;height:clamp(3rem,6.4vw,5.6rem);color:var(--white);
-  filter:drop-shadow(0 2px 16px rgba(2,4,8,0.85)) drop-shadow(0 1px 3px rgba(2,4,8,0.6));}
+/* "He aho tēnei." with the wordmark standing in for the word (CEO, 2026-09-11):
+   the phrase is the h1, set in the mark's own teal so word and mark read as one. */
 .hero h1{
-  font-size:clamp(2.9rem,6vw,5.2rem);
-  font-weight:300;line-height:1;letter-spacing:0.16em;
-  color:var(--white);margin-bottom:var(--s2);
-  text-shadow:0 2px 38px rgba(2,4,8,0.95),0 2px 12px rgba(2,4,8,0.8),
-              0 1px 3px rgba(2,4,8,0.65);
+  font-family:var(--font-h);font-style:italic;font-weight:300;
+  font-size:clamp(2.6rem,5.4vw,4.8rem);line-height:1;letter-spacing:-0.01em;
+  color:#61a9a5;margin-bottom:var(--s3);
+  text-shadow:0 2px 34px rgba(2,4,8,0.9),0 2px 10px rgba(2,4,8,0.7),0 1px 2px rgba(2,4,8,0.55);
 }
+.hero-tereo{display:inline-flex;align-items:baseline;gap:0.24em;}
+.hero-mark{display:inline-block;height:0.74em;transform:translateY(0.06em);
+  filter:drop-shadow(0 2px 14px rgba(2,4,8,0.8)) drop-shadow(0 1px 3px rgba(2,4,8,0.55));}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
 /* …then the meaning of the name */
 .hero-line{
@@ -1711,7 +1707,7 @@ html.no-video .hero-scroll{opacity:1;}
         <span class="hero-eyebrow-txt">Hawke's Bay · Aotearoa New Zealand</span>
       </div>
       <div class="hero-spark" data-ph="2" aria-hidden="true"></div>
-      <h1 data-ph="2"><span class="aho-mark aho-mark--colour hero-mark" aria-hidden="true"></span><span class="vh">Aho Farms, Māori owned medicinal cannabis cultivation, Hawke's Bay, New Zealand</span></h1>
+      <h1 data-ph="2"><span class="hero-tereo" aria-hidden="true"><span>He</span><span class="aho-mark aho-mark--colour hero-mark"></span><span>tēnei.</span></span><span class="vh">He aho tēnei. Aho Farms, Māori owned medicinal cannabis cultivation, Hawke's Bay, New Zealand</span></h1>
       <span class="hero-line" data-ph="2">The thread that connects.</span>
       <div class="hero-woven" data-ph="4" role="text" aria-label="Whenua. People. Knowledge.">
         <span>Whenua</span><i aria-hidden="true"></i><span>People</span><i aria-hidden="true"></i><span>Knowledge</span>
