@@ -1187,6 +1187,7 @@ html.no-video .hero-sound{display:none;}
   .portal-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:640px){
+  .cl-steps,.cl-steps--4,.cl-steps--6,.cl-steps--7{grid-template-columns:1fr;gap:var(--s3);}
   .portal-grid{grid-template-columns:1fr;}
   .portal-card{min-height:0;}
 }
@@ -1466,6 +1467,52 @@ html.no-video .hero-scroll{opacity:1;}
 .ql-serif-l{margin:var(--s5) 0 0;font-family:var(--font-h);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.25;color:var(--starlight);}
 .ql-serif-l em{font-style:italic;color:var(--gold);}
 
+/* ---- components ported from the Learn pages (cultivation.html) so Quality
+   speaks the same language as its siblings: framed photography, banded heads
+   with a gold italic note, ruled step rows, pull-quotes, a full-bleed close.
+   Kept byte-identical to cultivation's rules wherever possible. ---- */
+.cl-band-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,0.75fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:stretch;}
+.cl-band-note{align-self:stretch;padding-left:clamp(var(--s4),2.6vw,var(--s6));border-left:1px solid var(--hairline);display:flex;align-items:center;}
+.cl-band-note p{margin:0;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.4rem,2vw,1.9rem);line-height:1.3;color:var(--gold);}
+.cl-band-note em{font-style:italic;color:var(--gold-light);}
+.cl-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--plate-g);width:calc(100% - 2*var(--plate-g));margin:var(--plate-g) auto;}
+.cl-split .cl-plate{width:100%;margin:0;}
+.cl-photo{aspect-ratio:4/3;background:#0e1413;}
+.cl-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.cl-steps{margin:var(--s6) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);}
+.cl-steps li{padding-top:var(--s3);border-top:1px solid var(--hairline);}
+.cl-steps b{display:block;font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,1.6vw,1.5rem);line-height:1.2;color:var(--starlight);}
+.cl-steps span{display:block;margin-top:6px;font-size:0.85rem;line-height:1.6;color:var(--silver);}
+.cl-steps--2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.cl-steps--4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.cl-steps--6{grid-template-columns:repeat(6,minmax(0,1fr));}
+.cl-steps--7{grid-template-columns:repeat(7,minmax(0,1fr));}
+.cl-quote{margin:clamp(var(--s6),8vh,var(--s8)) 0 0;padding-top:var(--s5);border-top:1px solid var(--hairline);font-family:var(--font-h);font-weight:300;font-style:italic;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.2;max-width:22ch;color:var(--starlight);}
+.cl-quote em{font-style:italic;color:var(--gold);}
+.cl-par-grid{display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:center;}
+.cl-cap-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:start;padding-top:clamp(var(--s6),8vh,var(--s8));}
+.cl-lines{margin:var(--s5) 0 0;padding:0;list-style:none;font-family:var(--font-h);font-weight:300;font-size:clamp(1.25rem,1.8vw,1.65rem);line-height:1.55;color:var(--starlight);}
+.cl-lines li+li{margin-top:2px;}
+.cl-close{min-height:clamp(640px,92vh,960px);display:grid;align-items:center;background:#0b0f0e;container-type:inline-size;}
+.cl-close-media{position:absolute;inset:0;}
+.cl-close-media img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;filter:saturate(0.85);}
+.cl-close-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(11,15,14,0.92) 0%,rgba(11,15,14,0.78) 38%,rgba(11,15,14,0.25) 70%,rgba(11,15,14,0.4) 100%);}
+.cl-close-copy{position:relative;z-index:2;padding:clamp(var(--s7),12vh,var(--s9)) var(--s4) clamp(var(--s7),12vh,var(--s9)) max(var(--s4),calc((100cqw - var(--max))/2 + var(--s4)));max-width:min(100%,calc((100cqw - var(--max))/2 + 60ch));}
+.cl-close .cl-p{color:rgba(243,241,235,0.78);}
+/* Quality's own hooks onto those components */
+.ql-hcopy{background:#0a0d0c;padding:clamp(var(--s6),7vh,var(--s8)) clamp(var(--s4),4vw,var(--s7));display:flex;flex-direction:column;justify-content:center;}
+.ql-hcopy .cl-p:first-child{margin-top:0;}
+.ql-view-media{position:relative;margin:clamp(var(--s6),8vh,var(--s8)) 0 0;aspect-ratio:16/9;border-radius:calc(var(--plate-r)*0.55);overflow:hidden;background:#0e1413;}
+.ql-view-media video{width:100%;height:100%;object-fit:cover;display:block;}
+.ql-trace .cl-steps{margin-top:clamp(var(--s6),8vh,var(--s8));}
+.ql-close-lines{margin-top:var(--s5);}
+.ql-story-grid{grid-template-columns:minmax(0,1.18fr) minmax(0,0.82fr);}
+/* the split must breathe after the step row, and a 3:2 frame keeps the copy plate beside it from going hollow */
+.ql-harvest .cl-split{margin-top:clamp(var(--s6),8vh,var(--s8));}
+.ql-harvest .cl-photo{aspect-ratio:3/2;}
+.ql-harvest > .wrap > .cl-quote{margin-top:clamp(var(--s5),5vh,var(--s6));}
+.ql-trace .cl-photo,.ql-story .cl-photo{aspect-ratio:3/2;}
+
 /* 2 · THE GROWER - the CEO's plate: cream, thread swirls and BOTH photographs are
    baked into assets/aho-quality-grower.jpg (1672x941). Only the copy and the 20+
    card are live HTML, sized in CONTAINER UNITS so they track the artwork.
@@ -1567,10 +1614,7 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* 7 · TRANSPARENCY - a window onto the farm, on black */
 .ql-view{background:#0a0d0c;}
-.ql-view .ql-head{margin:0 auto;text-align:center;}
-.ql-view .ql-head .cl-eyebrow{justify-content:center;}
-.ql-view .ql-head .cl-h2{max-width:none;}
-.ql-view .cl-p{margin-left:auto;margin-right:auto;max-width:58ch;color:rgba(243,241,235,0.78);}
+.ql-view .cl-p{max-width:58ch;color:rgba(243,241,235,0.78);}
 .ql-window{position:relative;margin:clamp(var(--s6),8vh,var(--s8)) auto 0;max-width:1100px;border-radius:12px;overflow:hidden;background:#111514;border:1px solid rgba(243,241,235,0.12);box-shadow:0 40px 120px rgba(0,0,0,0.6);}
 .ql-window-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(243,241,235,0.1);background:#161b1a;}
 .ql-window-bar i{width:9px;height:9px;border-radius:50%;background:rgba(243,241,235,0.22);}
@@ -1599,6 +1643,7 @@ html.no-video .hero-scroll{opacity:1;}
 .ql-finale p+p{margin-top:0.15em;}
 
 @media(max-width:1100px){
+  .cl-steps--6,.cl-steps--7{grid-template-columns:repeat(3,minmax(0,1fr));}
   .ql-stages--7{grid-template-columns:repeat(4,minmax(0,1fr));}
   .ql-stages--6{grid-template-columns:repeat(3,minmax(0,1fr));}
 }
@@ -1611,6 +1656,12 @@ html.no-video .hero-scroll{opacity:1;}
   .ql-hero-aside{padding:0 var(--s4) var(--s6);}
   .ql-hero-aside::before{display:none;}
   .ql-hero-stack{width:auto;display:flex;flex-wrap:wrap;gap:0 var(--s3);line-height:1.9;}
+  .cl-band-grid,.cl-par-grid,.cl-cap-grid{grid-template-columns:1fr;gap:var(--s5);}
+  .cl-split{grid-template-columns:1fr;}
+  .cl-steps--4{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .cl-band-note{align-self:auto;padding:var(--s4) 0 0;border-left:0;border-top:1px solid var(--hairline);}
+  .cl-close-copy{padding:var(--s7) var(--s4);}
+  .cl-cap-grid{padding-top:var(--s6);}
   .ql-two,.ql-ppp{grid-template-columns:1fr;gap:var(--s5);}
   /* the drawn horizontal threads give way to a vertical one on the phone */
   .ql-hstages .ql-thread,.ql-record .ql-thread,.ql-journey .ql-thread{display:none;}
@@ -1726,42 +1777,42 @@ html.no-video .hero-scroll{opacity:1;}
        rather than becoming another large text section. -->
   <section class="ql-harvest cl-sec" id="harvest">
     <div class="wrap">
-      <div class="ql-head">
-        <span class="eyebrow gold cl-eyebrow reveal">02 · POST-HARVEST</span>
-        <h2 class="cl-h2 emerge">Harvest isn’t where quality ends.</h2>
-      </div>
-      <div class="ql-hstages">
-        <svg class="ql-thread" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,60 C50,60 94,60 125,60 C212,86 288,86 375,60 C462,34 538,34 625,60 C712,86 788,86 875,60 C912,60 975,60 1000,60" pathLength="1"/><circle cx="125" cy="60" r="4"/><circle cx="375" cy="60" r="4"/><circle cx="625" cy="60" r="4"/><circle cx="875" cy="60" r="4"/></svg>
-        <ol class="ql-stages ql-stages--4"><li>Harvest</li><li>Cure</li><li>Hand trim</li><li>Process</li></ol>
-      </div>
-      <div class="ql-two ql-hbody">
-        <figure class="ql-hands reveal">
-          <div class="cl-ph"><b>Photo placeholder</b><span>Close-up of hands trimming flower: one strong frame, low warm light, the blade and the bud in focus.</span></div>
-        </figure>
+      <div class="cl-band-grid">
         <div>
-          <p class="cl-p reveal d1">Our flower is carefully harvested, cured and hand trimmed, allowing each plant to be assessed again before it reaches its final form.</p>
-          <p class="cl-p reveal d2">During trimming, unwanted material and visible defects can be identified and removed by hand.</p>
-          <p class="ql-serif-l reveal d3">Slower. More deliberate. <em>Intentional.</em></p>
+          <span class="eyebrow gold cl-eyebrow reveal">02 · POST-HARVEST</span>
+          <h2 class="cl-h2 emerge">Harvest isn’t where quality ends.</h2>
         </div>
+        <div class="cl-band-note reveal d1"><p>Slower. More deliberate. <em>Intentional.</em></p></div>
       </div>
+      <ul class="cl-steps cl-steps--4 reveal d2">
+        <li><b>Harvest</b></li><li><b>Cure</b></li><li><b>Hand trim</b></li><li><b>Process</b></li>
+      </ul>
+    </div>
 
-      <!-- 4 · EXPERIENCE IN THE FINISH -->
-      <div class="ql-two ql-eyes">
+    <div class="cl-split">
+      <figure class="cl-plate cl-photo unveil reveal">
+        <img src="assets/aho-team-hero-hands.jpg" alt="A grower’s hands holding a young plant, its roots bound in soil, in low sun" width="1123" height="1400" loading="lazy">
+        <span class="cl-chip">Hand trimming · photograph to come</span>
+      </figure>
+      <div class="cl-plate ql-hcopy">
+        <p class="cl-p reveal d1">Our flower is carefully harvested, cured and hand trimmed, allowing each plant to be assessed again before it reaches its final form.</p>
+        <p class="cl-p reveal d2">During trimming, unwanted material and visible defects can be identified and removed by hand.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="cl-cap-grid">
         <div>
           <h3 class="ql-h3 emerge">Another set of experienced eyes.</h3>
           <p class="cl-p reveal d1">Aho has supported experienced cannabis trimmers from the United States to relocate to New Zealand, bringing with them more than a decade of direct industry experience.</p>
           <p class="cl-p reveal d2">Experienced trimmers understand that trimming is not simply about appearance.</p>
-          <p class="ql-serif-l reveal d3" style="margin-top:var(--s4)">It is another quality-control stage.</p>
+          <p class="ql-serif-l reveal d3">It is another quality-control stage.</p>
         </div>
-        <div class="ql-roles reveal d1">
-          <svg viewBox="0 0 44 400" preserveAspectRatio="none" class="ql-thread" aria-hidden="true">
-            <path d="M22,0 C22,40 10,70 22,100 S34,150 22,200 S10,250 22,300 S34,360 22,400" pathLength="1"/>
-            <circle cx="22" cy="50" r="4"/><circle cx="22" cy="150" r="4"/><circle cx="22" cy="250" r="4"/><circle cx="22" cy="350" r="4"/>
-          </svg>
-          <ol><li>Grower</li><li>Harvester</li><li>Trimmer</li><li>Processor</li></ol>
-        </div>
+        <ul class="cl-steps cl-steps--2 reveal d1" style="margin-top:0">
+          <li><b>Grower</b></li><li><b>Harvester</b></li><li><b>Trimmer</b></li><li><b>Processor</b></li>
+        </ul>
       </div>
-      <p class="ql-reinforced reveal">Quality is reinforced at multiple stages rather than relying on a single inspection at the end.</p>
+      <p class="cl-quote reveal">Quality is reinforced at multiple stages rather than relying on a single inspection at the end.</p>
     </div>
   </section>
 
@@ -1769,26 +1820,28 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- Sand plate: a crop record, not software. Seven records on one thread. -->
   <section class="cl-plate cl-earth cl-sec ql-trace" id="traceability">
     <div class="wrap">
-      <div class="ql-two">
-        <div class="ql-head">
+      <div class="cl-band-grid">
+        <div>
           <span class="eyebrow gold cl-eyebrow reveal">03 · DIGITAL TRACEABILITY</span>
           <h2 class="cl-h2 emerge">One plant. One connected history.</h2>
         </div>
+        <div class="cl-band-note reveal d1"><p>Human experience is supported by digital traceability.</p></div>
+      </div>
+      <ul class="cl-steps cl-steps--7 reveal d2">
+        <li><b>Clone</b></li><li><b>Cultivation</b></li><li><b>Harvest</b></li><li><b>Curing</b></li><li><b>Trimming</b></li><li><b>Processing</b></li><li><b>Sale</b></li>
+      </ul>
+      <div class="ql-record-foot"><span>Clone to sale</span><span>One connected history</span></div>
+      <div class="cl-cap-grid">
+        <figure class="cl-plate cl-photo unveil reveal">
+          <img src="assets/whenua-work-1.jpg" alt="Work under way on the whenua, the paddocks freshly turned" width="1400" height="1050" loading="lazy">
+        </figure>
         <div>
-          <p class="cl-p reveal d1">Human experience is supported by digital traceability.</p>
-          <p class="cl-p reveal d2">Aho has implemented GrowerIQ, an integrated track-and-trace system that follows our product through the cultivation and production process.</p>
+          <p class="cl-p reveal d1">Aho has implemented GrowerIQ, an integrated track-and-trace system that follows our product through the cultivation and production process.</p>
+          <p class="ql-serif-l reveal d2">Each stage creates a record.</p>
+          <p class="cl-p reveal d2">From propagation and cultivation through harvest, processing and eventual sale, the system gives us visibility over the history of each crop.</p>
+          <p class="cl-quote reveal d3">Know where it came from.<br><em>Know what went into producing it.</em></p>
         </div>
       </div>
-      <div class="ql-record reveal">
-        <svg class="ql-thread" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,60 C29,60 54,60 71,60 C121,86 164,86 214,60 C264,34 307,34 357,60 C407,86 450,86 500,60 C550,34 593,34 643,60 C693,86 736,86 786,60 C836,34 879,34 929,60 C950,60 986,60 1000,60" pathLength="1"/><circle cx="71" cy="60" r="4"/><circle cx="214" cy="60" r="4"/><circle cx="357" cy="60" r="4"/><circle cx="500" cy="60" r="4"/><circle cx="643" cy="60" r="4"/><circle cx="786" cy="60" r="4"/><circle cx="929" cy="60" r="4"/></svg>
-        <ol class="ql-stages ql-stages--7"><li>Clone</li><li>Cultivation</li><li>Harvest</li><li>Curing</li><li>Trimming</li><li>Processing</li><li>Sale</li></ol>
-        <div class="ql-record-foot"><span>Clone to sale</span><span>One connected history</span></div>
-      </div>
-      <div class="ql-record-line">
-        <p class="ql-serif-l reveal">Each stage creates a record.</p>
-        <p class="cl-p reveal d1">From propagation and cultivation through harvest, processing and eventual sale, the system gives us visibility over the history of each crop.</p>
-      </div>
-      <p class="ql-know emerge">Know where it came from.<br><em>Know what went into producing it.</em></p>
     </div>
   </section>
 
@@ -1797,24 +1850,22 @@ html.no-video .hero-scroll{opacity:1;}
        that runs on past the bottom of the plate. -->
   <section class="cl-plate cl-cream cl-sec ql-story" id="story">
     <div class="wrap">
-      <div class="ql-head">
-        <h2 class="cl-h2 emerge">The finished flower is only part of the story.</h2>
-      </div>
-      <div class="ql-two">
-        <div class="ql-questions reveal">
-          <span class="ql-qthread" aria-hidden="true"></span>
-          <ol>
+      <div class="cl-par-grid ql-story-grid">
+        <div>
+          <h2 class="cl-h2 emerge">The finished flower is only part of the story.</h2>
+          <ul class="cl-lines reveal d1">
             <li>Where was it grown?</li>
             <li>What inputs were used?</li>
             <li>How was it handled?</li>
             <li>What happened between clone and finished product?</li>
-          </ol>
-        </div>
-        <div class="ql-story-copy">
-          <p class="cl-p reveal d1">Traceability allows cultivation information to remain connected to the plant throughout its lifecycle.</p>
+          </ul>
+          <p class="cl-p reveal d2">Traceability allows cultivation information to remain connected to the plant throughout its lifecycle.</p>
           <p class="cl-p reveal d2">For us, transparency means being able to demonstrate the journey rather than simply describing the final product.</p>
           <p class="cl-sign reveal d3">From clone to sale, the story remains connected.</p>
         </div>
+        <figure class="cl-plate cl-photo unveil reveal">
+          <img src="assets/whenua-work-2.jpg" alt="Hands at work on the whenua, the crop coming on behind" width="1400" height="1050" loading="lazy">
+        </figure>
       </div>
     </div>
   </section>
@@ -1825,21 +1876,20 @@ html.no-video .hero-scroll{opacity:1;}
        exists (no link yet, so no button). -->
   <section class="cl-plate cl-sec ql-view" id="transparency">
     <div class="wrap">
-      <div class="ql-head">
-        <span class="eyebrow gold cl-eyebrow reveal">SEE WHERE IT CAME FROM</span>
-        <h2 class="cl-h2 emerge">Transparency you can explore.</h2>
-        <p class="cl-p reveal d1">Through our digital systems, there is an opportunity for customers and partners to gain greater visibility into how Aho cannabis is cultivated, including access to a virtual view of the farm and cultivation environment.</p>
-        <p class="cl-p reveal d2">Because transparency is not simply about having information available internally.</p>
-        <p class="cl-p reveal d2">It is about creating confidence in where a product came from and how it was produced.</p>
-      </div>
-      <figure class="ql-window unveil reveal">
-        <div class="ql-window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Aho Farms · virtual farm view</span></div>
-        <div class="ql-window-body">
-          <video class="ql-loop" autoplay muted loop playsinline preload="metadata" poster="assets/origin-whenua-poster.jpg" aria-label="Aerial view of the whānau whenua: rolling green hills above freshly worked paddocks">
-            <source src="assets/origin-whenua-loop-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
-            <source src="assets/origin-whenua-loop-desktop.mp4" type="video/mp4">
-          </video>
+      <div class="cl-band-grid">
+        <div>
+          <span class="eyebrow gold cl-eyebrow reveal">SEE WHERE IT CAME FROM</span>
+          <h2 class="cl-h2 emerge">Transparency you can explore.</h2>
+          <p class="cl-p reveal d1">Through our digital systems, there is an opportunity for customers and partners to gain greater visibility into how Aho cannabis is cultivated, including access to a virtual view of the farm and cultivation environment.</p>
+          <p class="cl-p reveal d2">Because transparency is not simply about having information available internally.</p>
         </div>
+        <div class="cl-band-note reveal d1"><p>It is about creating confidence in where a product came from and how it was produced.</p></div>
+      </div>
+      <figure class="ql-view-media unveil reveal">
+        <video class="ql-loop" autoplay muted loop playsinline preload="metadata" poster="assets/origin-whenua-poster.jpg" aria-label="Aerial view of the whānau whenua: rolling green hills above freshly worked paddocks">
+          <source src="assets/origin-whenua-loop-mobile.mp4" type="video/mp4" media="(max-width: 640px)">
+          <source src="assets/origin-whenua-loop-desktop.mp4" type="video/mp4">
+        </video>
         <span class="cl-chip">Virtual farm view · placeholder loop</span>
       </figure>
     </div>
@@ -1848,38 +1898,36 @@ html.no-video .hero-scroll{opacity:1;}
   <!-- ================ 8 · PEOPLE. PROCESS. PROOF. · closing ================ -->
   <!-- One continuous journey on one thread, then the closing statement, then
        the three lines very large. The Māra aerial sits far back behind it. -->
-  <section class="cl-sec ql-proof" id="proof">
-    <div class="ql-proof-bg" aria-hidden="true">
-      <img src="assets/whenua-work-3.jpg" alt="" width="1400" height="1036" loading="lazy">
+  <section class="ql-proof" id="proof">
+    <div class="ql-proof-head cl-sec">
+      <div class="wrap">
+        <ul class="cl-steps cl-steps--6 reveal">
+          <li><b>Cultivation</b><span>Plant health monitored.</span></li>
+          <li><b>Harvest</b><span>Flower assessed.</span></li>
+          <li><b>Curing</b><span>Development carefully managed.</span></li>
+          <li><b>Hand trimming</b><span>Flower individually inspected.</span></li>
+          <li><b>Processing</b><span>Controlled handling and preparation.</span></li>
+          <li><b>Traceability</b><span>Cultivation history remains connected.</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="wrap">
-      <div class="ql-journey">
-        <svg class="ql-thread" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,60 C33,60 62,60 83,60 C142,86 192,86 250,60 C308,34 358,34 417,60 C475,86 525,86 583,60 C642,34 692,34 750,60 C808,86 858,86 917,60 C942,60 983,60 1000,60" pathLength="1"/><circle cx="83" cy="60" r="4"/><circle cx="250" cy="60" r="4"/><circle cx="417" cy="60" r="4"/><circle cx="583" cy="60" r="4"/><circle cx="750" cy="60" r="4"/><circle cx="917" cy="60" r="4"/></svg>
-        <ol class="ql-stages ql-stages--6"><li>Cultivation<span>Plant health monitored.</span></li><li>Harvest<span>Flower assessed.</span></li><li>Curing<span>Development carefully managed.</span></li><li>Hand trimming<span>Flower individually inspected.</span></li><li>Processing<span>Controlled handling and preparation.</span></li><li>Traceability<span>Cultivation history remains connected.</span></li></ol>
-      </div>
-      <div class="ql-ppp">
-        <div>
-          <h2 class="cl-h2 emerge">People.<br>Process.<br><em>Proof.</em></h2>
-          <ul class="ql-three reveal d1">
-            <li>Technology gives us traceability.</li>
-            <li>Process gives us consistency.</li>
-            <li>But experienced people remain at the centre of quality.</li>
-          </ul>
-        </div>
-        <div>
-          <ul class="ql-forms reveal d1">
-            <li>A grower noticing a change in a plant.</li>
-            <li>A trimmer identifying something that does not belong.</li>
-            <li>A cultivation record showing exactly what occurred.</li>
-          </ul>
-          <p class="cl-p reveal d2">Each is a different form of quality control.</p>
-          <p class="cl-p reveal d2">Together, they protect the integrity of the product from its earliest stage through to sale.</p>
-        </div>
-      </div>
-      <div class="ql-finale">
-        <p class="emerge">Quality grown in.</p>
-        <p class="emerge">Quality checked by hand.</p>
-        <p class="emerge">Quality traced <em>from clone to sale.</em></p>
+    <div class="cl-plate cl-close">
+      <div class="cl-close-media"><img src="assets/whenua-work-3.jpg" alt="" width="1400" height="1036" loading="lazy"></div>
+      <div class="cl-close-copy">
+        <h2 class="cl-h2 emerge">People.<br>Process.<br><em>Proof.</em></h2>
+        <ul class="cl-lines reveal d1">
+          <li>Technology gives us traceability.</li>
+          <li>Process gives us consistency.</li>
+          <li>But experienced people remain at the centre of quality.</li>
+        </ul>
+        <ul class="cl-lines ql-close-lines reveal d2">
+          <li>A grower noticing a change in a plant.</li>
+          <li>A trimmer identifying something that does not belong.</li>
+          <li>A cultivation record showing exactly what occurred.</li>
+        </ul>
+        <p class="cl-p reveal d2">Each is a different form of quality control.</p>
+        <p class="cl-p reveal d2">Together, they protect the integrity of the product from its earliest stage through to sale.</p>
+        <p class="cl-quote reveal d3">Quality grown in.<br>Quality checked by hand.<br>Quality traced <em>from clone to sale.</em></p>
       </div>
     </div>
   </section>
