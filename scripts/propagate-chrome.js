@@ -12,9 +12,19 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { SOCIAL, CONNECT } = require('./nav-config');
 
 const ROOT = path.join(__dirname, '..');
+
+// vercel.json serves /assets with a one-year immutable cache, so the chrome
+// css/js links carry a content hash: any edit to either file changes the URL
+// and every returning browser refetches it. Re-run this script after editing
+// assets/aho-chrome.css or assets/aho-chrome.js.
+const assetVersion = (rel) =>
+  crypto.createHash('sha1').update(fs.readFileSync(path.join(ROOT, rel))).digest('hex').slice(0, 8);
+const CSS_HREF = `assets/aho-chrome.css?v=${assetVersion('assets/aho-chrome.css')}`;
+const JS_SRC = `assets/aho-chrome.js?v=${assetVersion('assets/aho-chrome.js')}`;
 const PORTALS = new Set(['export-portal.html', 'investors-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const escHtml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -116,8 +126,8 @@ function processPage(file) {
   let html = toEOL(raw, '\n');
   const isPortal = PORTALS.has(file);
 
-  html = swapOrInsert(html, S.css, '<link rel="stylesheet" href="assets/aho-chrome.css">', [/<\/head>/, /<body[^>]*>/], `${file} chrome css`);
-  html = swapOrInsert(html, S.js, '<script src="assets/aho-chrome.js" defer></script>', /<\/body>/, `${file} chrome js`);
+  html = swapOrInsert(html, S.css, `<link rel="stylesheet" href="${CSS_HREF}">`, [/<\/head>/, /<body[^>]*>/], `${file} chrome css`);
+  html = swapOrInsert(html, S.js, `<script src="${JS_SRC}" defer></script>`, /<\/body>/, `${file} chrome js`);
 
   if (!isPortal) {
     const footRe = new RegExp(esc(S.footer[0]) + '[\\s\\S]*?' + esc(S.footer[1]));
