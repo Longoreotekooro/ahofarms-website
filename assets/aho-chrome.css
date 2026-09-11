@@ -95,14 +95,13 @@ html[data-palette="teal"]{
      over-constrained. */
   .nav-links{top:72px;bottom:auto;left:0;right:auto;width:100%;height:calc(100vh - 72px);height:calc(100dvh - 72px);
              justify-self:start;align-self:start;}
-  /* Header Contact on touch: both languages stay (no hover to swap), but
-     the pill never wraps and stays inside the 72px bar. */
-  .nav-cta-wrap{padding:6px 12px;white-space:nowrap;}
-  .nav-cta-wrap .bil-en,.nav-cta-wrap .bil-mi{line-height:1.25;}
-  /* Both languages are already stacked here, so the desktop hover swap
-     must not run: on a phone :hover sticks after a tap and was hiding the
-     English label of whatever was last touched. */
+  /* Phone nav is English only (CEO, 2026-09-11): the te reo line is
+     dropped from the drawer and the header Contact pill. The desktop
+     hover swap must not run either - on a phone :hover sticks after a tap
+     and would hide the English label of whatever was last touched. */
+  .nav .bil-mi{display:none;}
   .nav-parent>a:hover .bil-en,.nav-sub a:hover .bil-en,.nav-cta-wrap:hover .bil-en{opacity:1;transform:none;}
+  .nav-cta-wrap{padding:9px 16px;white-space:nowrap;}
 }
 
 /* ---- buttons ----------------------------------------------------
