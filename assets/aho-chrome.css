@@ -85,6 +85,24 @@ html[data-palette="teal"]{
 @media(max-width:900px){
   .nav-social{display:none;}
   .nav-logo .aho-mark{height:22px;}
+  /* The drawer is position:fixed, but .nav carries a backdrop-filter, so
+     .nav (72px tall) is its containing block, not the viewport, and the
+     page's inset:0 rule collapsed it to content height. The header is also
+     a 3-column grid (2026-09-10) whose justify-self:center / align-items:
+     center still apply to an absolutely positioned item, which shrink-
+     wrapped it into a narrow centred column. Size it explicitly from the
+     bar's bottom edge instead; leave bottom/right unset so nothing is
+     over-constrained. */
+  .nav-links{top:72px;bottom:auto;left:0;right:auto;width:100%;height:calc(100vh - 72px);height:calc(100dvh - 72px);
+             justify-self:start;align-self:start;}
+  /* Header Contact on touch: both languages stay (no hover to swap), but
+     the pill never wraps and stays inside the 72px bar. */
+  .nav-cta-wrap{padding:6px 12px;white-space:nowrap;}
+  .nav-cta-wrap .bil-en,.nav-cta-wrap .bil-mi{line-height:1.25;}
+  /* Both languages are already stacked here, so the desktop hover swap
+     must not run: on a phone :hover sticks after a tap and was hiding the
+     English label of whatever was last touched. */
+  .nav-parent>a:hover .bil-en,.nav-sub a:hover .bil-en,.nav-cta-wrap:hover .bil-en{opacity:1;transform:none;}
 }
 
 /* ---- buttons ----------------------------------------------------
@@ -154,7 +172,7 @@ p{text-wrap:pretty;}
 .aho-connect{position:fixed;left:50%;bottom:22px;z-index:95;transform:translate(-50%,24px);opacity:0;pointer-events:none;
   transition:opacity .4s var(--aho-ease),transform .4s var(--aho-ease);}
 .aho-connect.is-shown{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
-.aho-connect-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px 13px 18px;border-radius:999px;border:1px solid var(--aho-accent-soft);
+.aho-connect-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px 13px 18px;border-radius:999px;border:1px solid var(--aho-accent-soft);white-space:nowrap;
   background:rgba(11,13,15,0.82);color:var(--aho-white);font-family:var(--aho-font-b);font-size:0.8125rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
   cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 44px rgba(0,0,0,0.45);
   transition:background .25s,border-color .25s,color .25s,transform .25s var(--aho-ease);}
