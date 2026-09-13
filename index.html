@@ -1094,18 +1094,25 @@ html.no-video .hero-sound{display:none;}
    ================================================================ */
 .partners-hdr{max-width:720px;margin:0 auto var(--s5);padding:0 var(--s4);text-align:center;}
 .partners-hdr p{color:var(--silver);max-width:54ch;margin:0 auto;}
+/* moving carousel (CEO, 2026-09-13): the group is duplicated once and the
+   track slides by half its width on a linear loop, so the join is seamless.
+   Edge-masked, pauses on hover, still under reduced motion. */
 .plogos{max-width:var(--max);margin:0 auto;padding:0 var(--s4);}
-.plogos-viewport{max-width:100%;}
-.plogos-track{display:flex;justify-content:center;}
+.plogos-viewport{max-width:100%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);}
+.plogos-viewport:hover .plogos-track{animation-play-state:paused;}
+.plogos-track{display:flex;width:max-content;animation:plogosScroll 42s linear infinite;will-change:transform;}
+@keyframes plogosScroll{to{transform:translateX(-50%);}}
 .plogos-group{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:var(--s4);
+  display:flex;align-items:center;justify-content:flex-start;
+  flex-wrap:nowrap;flex-shrink:0;gap:var(--s4);
 }
 /* transparent assets, no panel, no frame (CEO, 2026-09-10). One shared height
    balances the group; each mark is greyscale until hovered, then its own
    colours return. The two very wide marks (MPI, Te Puni Kōkiri) are capped on
    width instead so no single logo outweighs the group. */
-.plogos-group{gap:clamp(var(--s4),4vw,var(--s7));row-gap:var(--s4);}
+.plogos-group{gap:clamp(var(--s6),5vw,var(--s8));padding-right:clamp(var(--s6),5vw,var(--s8));}
 .plogo{display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .plogo img{
   display:block;width:auto;height:auto;max-height:64px;max-width:236px;object-fit:contain;
@@ -1115,6 +1122,12 @@ html.no-video .hero-sound{display:none;}
 .plogo:hover img,.plogo:focus-within img{filter:none;opacity:1;}
 @media(max-width:900px){
   .plogo img{max-height:44px;max-width:180px;}
+  .plogos-track{animation-duration:28s;}
+}
+@media(prefers-reduced-motion:reduce){
+  .plogos-track{animation:none;width:100%;justify-content:center;}
+  .plogos-group{flex-wrap:wrap;justify-content:center;padding-right:0;}
+  .plogos-group[aria-hidden="true"]{display:none;}
 }
 
 /* ================================================================
@@ -1943,6 +1956,13 @@ html.no-video .hero-scroll{opacity:1;}
             <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development" loading="lazy"></span>
             <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora" loading="lazy"></span>
             <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust" loading="lazy"></span>
+          </div>
+          <div class="plogos-group" aria-hidden="true">
+            <span class="plogo"><img src="assets/partners/nzte.png" alt="New Zealand Trade &amp; Enterprise — Te Taurapa Tūhono"></span>
+            <span class="plogo"><img src="assets/partners/mpi.png" alt="Ministry for Primary Industries — Manatū Ahu Matua"></span>
+            <span class="plogo"><img src="assets/partners/te-puni-kokiri.png" alt="Te Puni Kōkiri — Ministry of Māori Development"></span>
+            <span class="plogo"><img src="assets/partners/msd.png" alt="Ministry of Social Development — Te Manatū Whakahiato Ora"></span>
+            <span class="plogo"><img src="assets/partners/ngati-pahauwera.png" alt="Ngāti Pāhauwera Development Trust"></span>
           </div>
                   </div>
       </div>
