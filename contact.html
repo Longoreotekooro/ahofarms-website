@@ -27,7 +27,7 @@
       font-family: 'Inter', sans-serif;
       background: var(--white);
       color: var(--night);
-      font-size: 16px;
+      font-size: var(--t-base);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -40,7 +40,7 @@
     }
     .caption {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+      font-size:var(--t-xs); font-weight:600; letter-spacing:var(--track-caps);
       text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
     }
 
@@ -62,13 +62,13 @@
     /* Buttons */
     .btn {
       display: inline-block; font-family: 'Inter', sans-serif;
-      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
-      padding: 0.6rem 1.2rem; border-radius: 4px; border: none;
+      font-size: var(--t-sm); font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.6rem 1.2rem; border-radius:var(--r-ctl); border: none;
       cursor: pointer; transition: background 0.2s, transform 0.15s;
     }
     .btn-teal { background: var(--teal); color: var(--night); }
     .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
-    .btn-teal-full { background: var(--teal); color: var(--night); width: 100%; text-align: center; padding: 0.8rem; font-size: 0.875rem; }
+    .btn-teal-full { background: var(--teal); color: var(--night); width: 100%; text-align: center; padding: 0.8rem; font-size: var(--t-sm); }
     .btn-teal-full:hover { background: var(--teal-light); }
     .btn-teal-outline {
       background: transparent; color: var(--teal-deep);
@@ -80,25 +80,25 @@
     .hero { background: var(--night); padding: 9rem 2rem 5rem; }
     .hero-inner { max-width: 680px; }
     .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      color: var(--white); margin-bottom: 1.25rem; font-weight: 300;
+      font-size: var(--t-h2);
+      color: var(--white); margin-bottom: 1.25rem; font-weight:400;
     }
-    .hero p { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.75; }
+    .hero p { font-size: var(--t-base); color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.75; }
 
     /* Contact Cards */
     .contacts-section { background: var(--white); padding: 5rem 2rem; }
     .contacts-section h2 {
-      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-size: var(--t-h3);
       margin-bottom: 0.75rem;
     }
     .contacts-section > .container > p {
-      font-size: 0.9rem; color: #5a6e70; margin-bottom: 3rem; max-width: 540px;
+      font-size: var(--t-sm); color: #5a6e70; margin-bottom: 3rem; max-width: 540px;
     }
     .contacts-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
     }
     .contact-card {
-      border: 1px solid var(--card-border); border-radius: 8px;
+      border: 1px solid var(--card-border); border-radius:var(--r-card);
       padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -109,7 +109,7 @@
     .contact-card-icon {
       width: 44px; height: 44px;
       background: rgba(201,160,106,0.1);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
@@ -120,30 +120,30 @@
       stroke-linecap: round; stroke-linejoin: round;
     }
     .contact-card h3 {
-      font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
+      font-family: 'Inter', sans-serif; font-size: var(--t-sm); font-weight: 600;
       color: var(--night);
     }
     .contact-card-for {
-      font-size: 0.8rem; color: #5a6e70; line-height: 1.55; flex: 1;
+      font-size: var(--t-sm); color: #5a6e70; line-height: 1.55; flex: 1;
     }
     .contact-card-email a {
-      font-size: 0.8rem; color: var(--teal-deep); font-weight: 500;
+      font-size: var(--t-sm); color: var(--teal-deep); font-weight: 500;
       transition: color 0.2s;
     }
     .contact-card-email a:hover { color: var(--teal); }
     .contact-card-response {
-      font-size: 0.72rem; color: #8a9e9f;
+      font-size: var(--t-xs); color: #8a9e9f;
       display: flex; align-items: center; gap: 0.4rem;
     }
     .contact-card-response::before {
       content: "⏱";
     }
     .contact-card-note {
-      font-size: 0.72rem; color: #8a9e9f; font-style: italic; line-height: 1.5;
+      font-size: var(--t-xs); color: #8a9e9f; font-style: italic; line-height: 1.5;
     }
     .contact-card-link { margin-top: 0.25rem; }
     .contact-card-link a {
-      font-size: 0.78rem; font-weight: 500; color: var(--teal-deep);
+      font-size: var(--t-sm); font-weight: 500; color: var(--teal-deep);
       display: inline-flex; align-items: center; gap: 0.25rem;
       transition: color 0.2s;
     }
@@ -152,28 +152,28 @@
     /* General Form */
     .form-section { background: var(--off-white); padding: 5rem 2rem; }
     .form-section h2 {
-      font-size: clamp(2rem, 3.5vw, 2.6rem); margin-bottom: 0.75rem;
+      font-size: var(--t-h2); margin-bottom: 0.75rem;
     }
     .form-section > .container > p {
-      font-size: 0.9rem; color: #5a6e70; margin-bottom: 2.5rem; max-width: 500px;
+      font-size: var(--t-sm); color: #5a6e70; margin-bottom: 2.5rem; max-width: 500px;
     }
     .form-wrap {
       background: var(--white); border: 1px solid var(--card-border);
-      border-radius: 8px; padding: 2.5rem; max-width: 760px;
+      border-radius:var(--r-card); padding: 2.5rem; max-width: 760px;
     }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { margin-bottom: 1rem; }
     .form-group label {
-      display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em;
+      display: block; font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.05em;
       text-transform: uppercase; color: #5a6e70; margin-bottom: 0.4rem;
     }
     .form-group input,
     .form-group textarea,
     .form-group select {
       width: 100%; padding: 0.65rem 0.9rem;
-      border: 1px solid rgba(201,160,106,0.25); border-radius: 4px;
+      border: 1px solid rgba(201,160,106,0.25); border-radius:var(--r-ctl);
       background: var(--white); font-family: 'Inter', sans-serif;
-      font-size: 0.875rem; color: var(--night); outline: none; transition: border-color 0.2s;
+      font-size: var(--t-sm); color: var(--night); outline: none; transition: border-color 0.2s;
     }
     .form-group input:focus,
     .form-group textarea:focus,
@@ -188,13 +188,13 @@
       width: 16px; height: 16px; margin-top: 2px;
       accent-color: var(--teal); flex-shrink: 0;
     }
-    .form-checkbox label { font-size: 0.82rem; color: #4a5e60; line-height: 1.55; cursor: pointer; }
+    .form-checkbox label { font-size: var(--t-sm); color: #4a5e60; line-height: 1.55; cursor: pointer; }
     .form-patient-note {
       margin-top: 1.25rem; padding: 1rem 1.25rem;
       background: rgba(201,160,106,0.06);
       border: 1px solid rgba(201,160,106,0.15);
-      border-radius: 4px;
-      font-size: 0.78rem; color: #5a6e70; line-height: 1.6;
+      border-radius:var(--r-ctl);
+      font-size: var(--t-sm); color: #5a6e70; line-height: 1.6;
     }
 
     /* Location */
@@ -202,7 +202,7 @@
       background: var(--night); padding: 5rem 2rem;
     }
     .location-section h2 {
-      font-size: clamp(2rem, 3.5vw, 2.6rem);
+      font-size: var(--t-h2);
       color: var(--white); margin-bottom: 2.5rem;
     }
     .location-grid {
@@ -214,28 +214,28 @@
     }
     .location-detail-icon {
       width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(201,160,106,0.1); border-radius: 6px;
+      background: rgba(201,160,106,0.1); border-radius:var(--r-card);
       display: flex; align-items: center; justify-content: center;
     }
     .location-detail-icon svg {
       width: 17px; height: 17px; stroke: var(--teal);
       fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
     }
-    .location-detail-text strong { display: block; font-size: 0.82rem; color: var(--white); margin-bottom: 0.2rem; }
-    .location-detail-text span { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+    .location-detail-text strong { display: block; font-size: var(--t-sm); color: var(--white); margin-bottom: 0.2rem; }
+    .location-detail-text span { font-size: var(--t-sm); color: rgba(255,255,255,0.55); }
     .location-detail-text a { color: var(--teal-light); transition: color 0.2s; }
     .location-detail-text a:hover { color: var(--teal); }
     .location-note {
       margin-top: 1.5rem; padding: 0.85rem 1rem;
       background: rgba(201,160,106,0.07);
       border: 1px solid rgba(201,160,106,0.15);
-      border-radius: 4px;
-      font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.55;
+      border-radius:var(--r-ctl);
+      font-size: var(--t-sm); color: rgba(255,255,255,0.55); line-height: 1.55;
     }
     .map-placeholder {
       background: var(--night-soft);
       border: 1px solid rgba(201,160,106,0.25);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       height: 280px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -247,11 +247,11 @@
       opacity: 0.6;
     }
     .map-placeholder p {
-      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      font-size: var(--t-sm); color: rgba(255,255,255,0.5);
       font-style: italic; line-height: 1.5;
     }
     .map-placeholder span {
-      font-size: 0.7rem; color: rgba(201,160,106,0.5);
+      font-size: var(--t-xs); color: rgba(201,160,106,0.5);
       letter-spacing: 0.05em; text-transform: uppercase;
     }
 
@@ -308,7 +308,7 @@
 /* AHO:NAVCSS:END */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=a3b90e23">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=41aad582">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>

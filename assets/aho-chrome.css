@@ -62,9 +62,9 @@
   --t-md:1.125rem;                           /* 18 · lead */
   --t-lg:clamp(1.25rem,1.6vw,1.5rem);        /* 20–24 · h4 / pull */
   --t-h3:clamp(1.5rem,2.2vw,1.9rem);         /* 24–30 */
-  --t-h2:clamp(2.2rem,4vw,3.6rem);           /* 35–58 · chapter heads */
-  --t-h1:clamp(2.8rem,5.5vw,4.6rem);         /* 45–74 · page heads */
-  --t-display:clamp(3.4rem,7vw,6.4rem);      /* 54–102 · hero statements */
+  --t-h2:clamp(2rem,4vw,3.6rem);             /* 32–58 · chapter heads */
+  --t-h1:clamp(2.5rem,5.5vw,4.6rem);         /* 40–74 · page heads */
+  --t-display:clamp(3rem,7vw,6.4rem);        /* 48–102 · hero statements */
   --lh-tight:1.05; --lh-heading:1.15; --lh-body:1.65;
   --track-caps:0.16em;
   /* spacing (8px scale) */
@@ -121,9 +121,12 @@ img{height:auto;}
    Serif is for feature headings (h1, h2). Everything smaller is sans,
    as are navigation, buttons and body. Heading lines are balanced so
    the last line never carries one short word. */
-h3,h4,h5,h6{font-family:var(--aho-font-b);}
+body{font-family:var(--aho-font-b);font-size:var(--t-base);line-height:var(--lh-body);font-weight:400;-webkit-font-smoothing:antialiased;}
+h1,h2{font-family:var(--aho-font-h);font-weight:400;line-height:var(--lh-heading);letter-spacing:-0.01em;}
+h3,h4,h5,h6{font-family:var(--aho-font-b);font-weight:500;line-height:1.25;}
 h1,h2,h3{text-wrap:balance;}
 p{text-wrap:pretty;}
+small,.small{font-size:var(--t-sm);}
 .eyebrow{display:block;font-family:var(--aho-font-b);font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);
   text-transform:uppercase;color:var(--aho-accent);margin:0 0 12px;}
 .eyebrow--muted{color:var(--aho-silver);}
@@ -437,6 +440,41 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
   .aho-sheet-panel{padding:22px 18px 16px;border-radius:16px;}
 }
 body.aho-sheet-open{overflow:hidden;}
+
+/* ---- 13. legacy page grammar -------------------------------------------
+   The template-vintage pages (news, contact, prescribers, pharmacies,
+   export partners, legal, 404 - every page stamped html.aho-nav-solid)
+   keep their content and section order but render on the baseline's
+   plate grammar: a void canvas, the hero and each light chapter as an
+   inset rounded plate, dark passages full-width between them, one
+   card spec, one heading treatment. Page CSS below this layer only
+   supplies content-specific layout. */
+html.aho-nav-solid body{background:var(--aho-void);}
+html.aho-nav-solid :is(.hero,.legal-hero){margin:var(--plate-g);border-radius:var(--plate-r);overflow:hidden;
+  padding:var(--sec-y) var(--aho-gutter);text-align:left;background:var(--aho-charcoal);}
+html.aho-nav-solid :is(.hero,.legal-hero) > *{max-width:var(--aho-max);margin-left:auto;margin-right:auto;}
+html.aho-nav-solid :is(.hero,.legal-hero) h1{font-size:var(--t-h1);max-width:18ch;margin-bottom:var(--s3);}
+html.aho-nav-solid :is(.hero,.legal-hero) p{max-width:52ch;}
+html.aho-nav-solid :is(.contacts-section,.news-section,.newsletter-section,.form-section,.portal-contents,.access-form-section,
+  .section.why,.section.markets,.section.form-section,.legal-body,.section-white,.section-offwhite,.sec-white,.sec-offwhite){
+  margin:0 var(--plate-g) var(--plate-g);border-radius:var(--plate-r);overflow:hidden;
+  padding-top:var(--sec-y);padding-bottom:var(--sec-y);padding-left:var(--aho-gutter);padding-right:var(--aho-gutter);border:0;}
+html.aho-nav-solid :is(.location-section,.compliance-note,.section-dark,.sec-dark,.section.portal-contents,.section-teal-deep){
+  margin:0;border-radius:0;padding-top:var(--sec-y);padding-bottom:var(--sec-y);background:var(--aho-charcoal);}
+html.aho-nav-solid .compliance-note{padding-top:var(--s5);padding-bottom:var(--s5);}
+html.aho-nav-solid .filter-bar{top:var(--nav-h);margin:0 var(--plate-g);border-radius:var(--plate-r) var(--plate-r) 0 0;border-bottom:1px solid var(--aho-hair-light);box-shadow:none;padding:var(--s2) var(--aho-gutter);}
+html.aho-nav-solid .filter-bar + .news-section{border-radius:0 0 var(--plate-r) var(--plate-r);}
+html.aho-nav-solid :is(.hero-inner,.section-inner,.section-header){max-width:var(--aho-max);margin-left:auto;margin-right:auto;}
+html.aho-nav-solid :is(.card,.contact-card,.news-card,.market-card,.portal-card,.thesis-card,.obligation-card,.commitment-card,.quick-card,.evidence-card){
+  border:1px solid var(--aho-hair-light);border-radius:var(--r-card);box-shadow:var(--shadow-card-light);}
+html.aho-nav-solid :is(.card,.contact-card,.news-card,.market-card,.portal-card,.thesis-card,.obligation-card,.commitment-card) :is(h3,h4){
+  font-family:var(--aho-font-b);font-size:var(--t-lg);font-weight:500;line-height:1.25;}
+html.aho-nav-solid :is(.card,.contact-card,.news-card,.market-card,.portal-card,.thesis-card,.obligation-card,.commitment-card) p{color:var(--aho-muted);}
+html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-card-icon){background:var(--aho-accent-tint);border-radius:var(--r-card);color:var(--aho-accent-deep);}
+html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-card-icon) svg{stroke:currentColor;}
+@media(max-width:900px){
+  html.aho-nav-solid :is(.hero,.legal-hero){padding:var(--sec-y-sm) var(--aho-gutter) var(--sec-y);}
+}
 
 /* ---- 12. optional photography treatment ------------------------------
    The CEO floated black-and-white photography for Palette 1 pages.

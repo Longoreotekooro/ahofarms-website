@@ -34,7 +34,7 @@
       --amber-border: var(--aho-accent-soft);
     }
 
-    html { font-size: 16px; }
+    html { font-size: var(--t-base); }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -92,7 +92,7 @@
 
     .logo-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
+      font-size: var(--t-md);
       font-weight: 600;
       color: var(--text-light);
       letter-spacing: 0.04em;
@@ -106,9 +106,9 @@
     .logo-text span.logo-sub {
       display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-size:var(--t-xs);
+      font-weight:600;
+      letter-spacing:var(--track-caps);
       text-transform: uppercase;
       color: var(--text-muted);
       margin-top: 3px;
@@ -117,9 +117,9 @@
     .header-portal-label {
       padding: 0 20px;
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size:var(--t-xs);
+      font-weight:600;
+      letter-spacing:var(--track-caps);
       text-transform: uppercase;
       color: var(--teal);
     }
@@ -131,7 +131,7 @@
     }
 
     .header-greeting {
-      font-size: 13px;
+      font-size: var(--t-sm);
       color: var(--text-muted);
     }
 
@@ -142,12 +142,12 @@
 
     .btn-logout {
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: var(--t-xs);
       font-weight: 500;
       color: var(--text-muted);
       border: 1px solid var(--border-teal-strong);
       padding: 6px 14px;
-      border-radius: 4px;
+      border-radius:var(--r-ctl);
       letter-spacing: 0.04em;
       transition: all 0.18s ease;
       cursor: pointer;
@@ -178,7 +178,7 @@
     .sidebar-nav-label {
       padding: 24px 20px 10px;
       font-family: 'Inter', sans-serif;
-      font-size: 10px;
+      font-size: var(--t-xs);
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -201,7 +201,7 @@
       gap: 12px;
       padding: 11px 20px;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--t-sm);
       font-weight: 400;
       color: var(--text-muted);
       cursor: pointer;
@@ -234,7 +234,7 @@
     .sidebar-compliance {
       padding: 16px 20px 20px;
       border-top: 1px solid var(--border-teal);
-      font-size: 10.5px;
+      font-size: var(--t-xs);
       line-height: 1.55;
       color: var(--text-muted);
       opacity: 0.8;
@@ -265,26 +265,26 @@
 
     /* ─── Typography — Content Area ──────────────────────────────── */
     .section-panel h1 {
-      font-size: 34px;
+      font-size: var(--t-h2);
       color: var(--text-dark);
       margin-bottom: 12px;
     }
 
     .section-panel h2 {
-      font-size: 28px;
+      font-size: var(--t-h3);
       color: var(--text-dark);
       margin-bottom: 10px;
     }
 
     .section-panel h3 {
-      font-size: 19px;
+      font-size: var(--t-md);
       color: var(--text-dark);
       margin-bottom: 10px;
       margin-top: 30px;
     }
 
     .section-panel p {
-      font-size: 14px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       margin-bottom: 16px;
       line-height: 1.7;
@@ -293,16 +293,16 @@
     .section-caption {
       display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-size:var(--t-xs);
+      font-weight:600;
+      letter-spacing:var(--track-caps);
       text-transform: uppercase;
       color: var(--teal-deep);
       margin-bottom: 6px;
     }
 
     .intro-text {
-      font-size: 14.5px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       line-height: 1.75;
       margin-bottom: 32px;
@@ -316,10 +316,10 @@
       align-items: center;
       gap: 8px;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--t-sm);
       font-weight: 500;
       padding: 10px 20px;
-      border-radius: 4px;
+      border-radius:var(--r-ctl);
       cursor: pointer;
       transition: all 0.18s ease;
       text-decoration: none;
@@ -361,14 +361,14 @@
     .card {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 24px;
     }
 
     .card-dark {
       background: var(--card-bg);
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 24px;
       color: var(--text-light);
     }
@@ -384,12 +384,12 @@
     .stat-card {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 20px 22px;
     }
 
     .stat-card-label {
-      font-size: 11px;
+      font-size: var(--t-xs);
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -399,7 +399,7 @@
 
     .stat-card-value {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
+      font-size: var(--t-h3);
       font-weight: 600;
       color: var(--text-dark);
       line-height: 1.1;
@@ -416,7 +416,7 @@
     .quick-card {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 20px 18px;
       cursor: pointer;
       transition: all 0.18s ease;
@@ -435,7 +435,7 @@
       width: 36px;
       height: 36px;
       background: rgba(98,170,166,0.10);
-      border-radius: 6px;
+      border-radius:var(--r-card);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -450,14 +450,14 @@
 
     .quick-card-body h4 {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: var(--t-sm);
       font-weight: 600;
       color: var(--text-dark);
       margin-bottom: 3px;
     }
 
     .quick-card-body p {
-      font-size: 12px;
+      font-size: var(--t-xs);
       color: #6a8a8a;
       margin: 0;
       line-height: 1.45;
@@ -484,16 +484,16 @@
 
     .alert-box-content .alert-label {
       font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size:var(--t-xs);
+      font-weight:600;
+      letter-spacing:var(--track-caps);
       text-transform: uppercase;
       color: #8a5a10;
       margin-bottom: 4px;
     }
 
     .alert-box-content p {
-      font-size: 13.5px;
+      font-size: var(--t-sm);
       color: var(--aho-accent-tint);
       margin: 0;
       line-height: 1.6;
@@ -502,7 +502,7 @@
     /* ─── Update / Contact Strip ──────────────────────────────────── */
     .contact-strip {
       background: var(--night);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 18px 24px;
       display: flex;
       align-items: center;
@@ -513,7 +513,7 @@
 
     .contact-strip p {
       color: var(--text-muted);
-      font-size: 13px;
+      font-size: var(--t-sm);
       margin: 0;
     }
 
@@ -530,7 +530,7 @@
     .data-table {
       width: 100%;
       border-collapse: collapse;
-      border-radius: 8px;
+      border-radius:var(--r-card);
       overflow: hidden;
       margin-bottom: 24px;
       border: 1px solid var(--border-teal);
@@ -543,7 +543,7 @@
     .data-table thead th {
       padding: 12px 16px;
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: var(--t-xs);
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -557,7 +557,7 @@
 
     .data-table tbody td {
       padding: 12px 16px;
-      font-size: 13.5px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       border-bottom: 1px solid rgba(74,122,120,0.08);
       vertical-align: middle;
@@ -574,8 +574,8 @@
       display: inline-flex;
       align-items: center;
       padding: 3px 10px;
-      border-radius: 3px;
-      font-size: 11px;
+      border-radius:var(--r-ctl);
+      font-size: var(--t-xs);
       font-weight: 600;
       letter-spacing: 0.05em;
     }
@@ -596,7 +596,7 @@
     }
 
     .coa-download {
-      font-size: 12.5px;
+      font-size: var(--t-sm);
       font-weight: 500;
       color: var(--teal);
       display: inline-flex;
@@ -604,7 +604,7 @@
       gap: 5px;
       padding: 4px 10px;
       border: 1px solid rgba(98,170,166,0.3);
-      border-radius: 4px;
+      border-radius:var(--r-ctl);
       transition: all 0.16s;
     }
 
@@ -620,7 +620,7 @@
       gap: 14px;
       background: rgba(98,170,166,0.05);
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 16px 20px;
       margin-top: 20px;
     }
@@ -628,10 +628,10 @@
     .ianz-badge {
       background: var(--night);
       border: 1px solid var(--border-teal-strong);
-      border-radius: 6px;
+      border-radius:var(--r-card);
       padding: 8px 14px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
+      font-size: var(--t-sm);
       font-weight: 700;
       color: var(--teal-light);
       letter-spacing: 0.08em;
@@ -639,7 +639,7 @@
     }
 
     .ianz-note p {
-      font-size: 12.5px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       margin: 0;
       line-height: 1.55;
@@ -649,7 +649,7 @@
     .info-box {
       background: rgba(98,170,166,0.06);
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 20px 24px;
       margin-bottom: 24px;
     }
@@ -657,17 +657,17 @@
     .info-box h3 { margin-top: 0; }
 
     .info-box p {
-      font-size: 13.5px;
+      font-size: var(--t-sm);
       margin-bottom: 0;
       line-height: 1.7;
     }
 
     .note-text {
-      font-size: 13px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       background: rgba(98,170,166,0.05);
       border: 1px solid var(--border-teal);
-      border-radius: 6px;
+      border-radius:var(--r-card);
       padding: 12px 16px;
       margin-bottom: 20px;
       line-height: 1.6;
@@ -694,7 +694,7 @@
 
     .step-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 36px;
+      font-size: var(--t-h2);
       font-weight: 300;
       color: var(--teal);
       line-height: 1;
@@ -707,7 +707,7 @@
     }
 
     .step-content p {
-      font-size: 14px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       margin: 0;
       line-height: 1.65;
@@ -724,7 +724,7 @@
       display: flex;
       gap: 12px;
       padding: 10px 14px;
-      font-size: 13.5px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       border-bottom: 1px solid rgba(74,122,120,0.08);
       line-height: 1.6;
@@ -754,13 +754,13 @@
     .supply-detail-card {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 20px 22px;
     }
 
     .supply-detail-card h4 {
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: var(--t-xs);
       font-weight: 600;
       letter-spacing: 0.10em;
       text-transform: uppercase;
@@ -769,7 +769,7 @@
     }
 
     .supply-detail-card p {
-      font-size: 13.5px;
+      font-size: var(--t-sm);
       color: var(--text-body);
       margin: 0;
       line-height: 1.6;
@@ -786,7 +786,7 @@
     .contact-card {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 22px 22px 24px;
     }
 
@@ -794,7 +794,7 @@
       width: 36px;
       height: 36px;
       background: rgba(98,170,166,0.10);
-      border-radius: 6px;
+      border-radius:var(--r-card);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -809,14 +809,14 @@
     }
 
     .contact-card h3 {
-      font-size: 16px;
+      font-size: var(--t-base);
       color: var(--text-dark);
       margin-top: 0;
       margin-bottom: 6px;
     }
 
     .contact-card .contact-email {
-      font-size: 13px;
+      font-size: var(--t-sm);
       font-weight: 500;
       color: var(--teal-deep);
       display: block;
@@ -824,7 +824,7 @@
     }
 
     .contact-card .contact-desc {
-      font-size: 12.5px;
+      font-size: var(--t-sm);
       color: var(--text-muted);
       margin: 0;
       line-height: 1.55;
@@ -834,7 +834,7 @@
     .contact-form-wrapper {
       background: #fff;
       border: 1px solid var(--border-teal);
-      border-radius: 8px;
+      border-radius:var(--r-card);
       padding: 32px 36px 36px;
       max-width: 600px;
       margin-top: 32px;
@@ -843,7 +843,7 @@
     .contact-form-wrapper h3 {
       margin-top: 0;
       margin-bottom: 20px;
-      font-size: 20px;
+      font-size: var(--t-md);
       color: var(--text-dark);
     }
 
@@ -853,7 +853,7 @@
 
     .cf-group label {
       display: block;
-      font-size: 12px;
+      font-size: var(--t-xs);
       font-weight: 500;
       letter-spacing: 0.07em;
       text-transform: uppercase;
@@ -866,11 +866,11 @@
     .cf-group textarea {
       width: 100%;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: var(--t-sm);
       color: var(--text-dark);
       background: #fff;
       border: 1px solid rgba(61,82,84,0.25);
-      border-radius: 4px;
+      border-radius:var(--r-ctl);
       padding: 10px 14px;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -902,10 +902,10 @@
       display: none;
       background: rgba(98,170,166,0.10);
       border: 1px solid rgba(98,170,166,0.35);
-      border-radius: 6px;
+      border-radius:var(--r-card);
       padding: 14px 18px;
       margin-top: 16px;
-      font-size: 14px;
+      font-size: var(--t-sm);
       color: var(--teal-deep);
     }
 
@@ -933,7 +933,7 @@
     .mobile-tab {
       display: inline-block;
       padding: 12px 16px;
-      font-size: 12px;
+      font-size: var(--t-xs);
       font-weight: 500;
       color: var(--text-muted);
       cursor: pointer;
@@ -994,7 +994,7 @@
 /* AHO:NAVCSS:END */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=a3b90e23">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=41aad582">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>

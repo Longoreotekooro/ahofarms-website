@@ -32,7 +32,7 @@
       font-family: 'Inter', sans-serif;
       background: var(--white);
       color: var(--night);
-      font-size: 16px;
+      font-size: var(--t-base);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -45,9 +45,9 @@
     }
     .caption {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size:var(--t-xs);
+      font-weight:600;
+      letter-spacing:var(--track-caps);
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 1rem;
@@ -71,8 +71,8 @@
     /* Buttons */
     .btn {
       display: inline-block; font-family: 'Inter', sans-serif;
-      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
-      padding: 0.7rem 1.5rem; border-radius: 4px; border: none;
+      font-size: var(--t-sm); font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.7rem 1.5rem; border-radius:var(--r-ctl); border: none;
       cursor: pointer; transition: background 0.2s, transform 0.15s;
     }
     .btn-teal { background: var(--teal); color: var(--night); }
@@ -84,11 +84,11 @@
     }
     .hero-inner { max-width: 700px; }
     .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      color: var(--white); margin-bottom: 1.25rem; font-weight: 300;
+      font-size: var(--t-h2);
+      color: var(--white); margin-bottom: 1.25rem; font-weight:400;
     }
     .hero p {
-      font-size: 1.05rem; color: rgba(255,255,255,0.65);
+      font-size: var(--t-base); color: rgba(255,255,255,0.65);
       max-width: 580px; line-height: 1.75;
     }
 
@@ -105,13 +105,13 @@
       display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
     }
     .filter-label {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.1em;
       text-transform: uppercase; color: #8a9e9f; margin-right: 0.5rem;
     }
     .filter-pill {
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em;
-      padding: 0.35rem 0.9rem; border-radius: 4px; cursor: pointer;
+      font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.35rem 0.9rem; border-radius:var(--r-ctl); cursor: pointer;
       border: 1px solid var(--teal); color: var(--teal-deep);
       background: transparent; transition: all 0.2s;
     }
@@ -129,7 +129,7 @@
 
     /* News Card */
     .news-card {
-      border: 1px solid var(--card-border); border-radius: 8px;
+      border: 1px solid var(--card-border); border-radius:var(--r-card);
       overflow: hidden; display: flex; flex-direction: column;
       transition: box-shadow 0.3s, transform 0.2s;
     }
@@ -152,8 +152,8 @@
       display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem;
     }
     .cat-pill {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em;
-      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px;
+      font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius:var(--r-ctl);
       color: var(--white);
     }
     .cat-company   { background: var(--cat-company); }
@@ -162,16 +162,16 @@
     .cat-industry  { background: var(--cat-industry); }
 
     .news-date {
-      font-size: 0.72rem; color: #8a9e9f; font-weight: 400;
+      font-size: var(--t-xs); color: #8a9e9f; font-weight: 400;
     }
     .news-card h3 {
-      font-size: 1.15rem; margin-bottom: 0.65rem; color: var(--night); line-height: 1.3;
+      font-size: var(--t-md); margin-bottom: 0.65rem; color: var(--night); line-height: 1.3;
     }
     .news-card p {
-      font-size: 0.83rem; color: #4a5e60; line-height: 1.65; flex: 1; margin-bottom: 1rem;
+      font-size: var(--t-sm); color: #4a5e60; line-height: 1.65; flex: 1; margin-bottom: 1rem;
     }
     .news-read-more {
-      font-size: 0.78rem; font-weight: 500; color: var(--teal-deep);
+      font-size: var(--t-sm); font-weight: 500; color: var(--teal-deep);
       display: inline-flex; align-items: center; gap: 0.3rem;
       transition: color 0.2s; margin-top: auto;
     }
@@ -188,18 +188,18 @@
       max-width: 600px; margin: 0 auto; text-align: center;
     }
     .newsletter-inner h2 {
-      font-size: clamp(2rem, 4vw, 2.6rem); margin-bottom: 0.75rem;
+      font-size: var(--t-h2); margin-bottom: 0.75rem;
     }
     .newsletter-inner > p {
-      font-size: 0.9rem; color: #5a6e70; margin-bottom: 2rem; line-height: 1.7;
+      font-size: var(--t-sm); color: #5a6e70; margin-bottom: 2rem; line-height: 1.7;
     }
     .newsletter-form { display: flex; flex-direction: column; gap: 0.9rem; }
     .newsletter-form input,
     .newsletter-form select {
       padding: 0.7rem 1rem;
       border: 1px solid rgba(201,160,106,0.25);
-      border-radius: 4px;
-      font-family: 'Inter', sans-serif; font-size: 0.875rem;
+      border-radius:var(--r-ctl);
+      font-family: 'Inter', sans-serif; font-size: var(--t-sm);
       background: var(--white); color: var(--night); outline: none;
       transition: border-color 0.2s;
     }
@@ -210,7 +210,7 @@
     }
     .newsletter-form .btn-teal { width: 100%; justify-content: center; }
     .newsletter-note {
-      font-size: 0.72rem; color: #8a9e9f; margin-top: 0.75rem; line-height: 1.5;
+      font-size: var(--t-xs); color: #8a9e9f; margin-top: 0.75rem; line-height: 1.5;
     }
 
     /* Footer */
@@ -262,7 +262,7 @@
 /* AHO:NAVCSS:END */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=a3b90e23">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=41aad582">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>
