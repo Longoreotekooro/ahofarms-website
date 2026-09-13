@@ -177,8 +177,8 @@ p{text-wrap:pretty;}
   cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 44px rgba(0,0,0,0.45);
   transition:background .25s,border-color .25s,color .25s,transform .25s var(--aho-ease);}
 .aho-connect-btn svg{width:18px;height:18px;fill:none;stroke:var(--aho-accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s;}
-.aho-connect-btn:hover,.aho-connect-btn:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);transform:translateY(-2px);}
-.aho-connect-btn:hover svg,.aho-connect-btn:focus-visible svg{stroke:var(--aho-accent-ink);}
+.aho-connect-btn:hover,.aho-connect-btn:focus-visible{background:var(--aho-teal);border-color:var(--aho-teal);color:#0b1514;transform:translateY(-2px);}
+.aho-connect-btn:hover svg,.aho-connect-btn:focus-visible svg{stroke:#0b1514;}
 .aho-connect-btn:focus-visible{outline:2px solid var(--aho-white);outline-offset:3px;}
 
 .aho-sheet{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;padding:16px;
