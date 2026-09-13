@@ -1476,204 +1476,43 @@ html.no-video .hero-scroll{opacity:1;}
 .pr-stack i{display:block;margin-top:4px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--gold-light);}
 
 /* ================================================================
-   2 · CURRENT RANGE — flax plate. RĀ is the dominant hero: a tall photo
-   plate that rises above the plate's top edge; the flower plate sits low
-   and small beside it; copy and restrained specs on the left.
+   BELOW THE HERO — the CEO's reference format (2026-09-13), verbatim in
+   structure: two range cards on a flax plate, a ruled foot (portal line ·
+   Rx notice · the four-word stack), then a full-bleed Hawke's Bay close
+   ("Rooted here. Available for what's next."). Nothing else.
    ================================================================ */
-.pr-range{padding-top:clamp(var(--s7),12vh,170px);padding-bottom:clamp(88px,11vh,150px);overflow:visible;margin-top:calc(var(--plate-g) + clamp(60px,7vh,96px));}
-.pr-range-grid{display:grid;grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:start;}
-.pr-range-copy{padding-top:clamp(var(--s2),3vh,var(--s5));}
-.pr-range-stage{position:relative;min-height:clamp(520px,58vw,760px);}
-.pr-range-main{position:absolute;right:0;top:calc(-1*clamp(120px,14vh,200px));width:min(62%,460px);aspect-ratio:584/710;box-shadow:0 50px 90px rgba(20,18,12,0.35);}
-.pr-range-main img{object-position:50% 45%;}
-.pr-range-flower{position:absolute;left:0;bottom:0;width:min(52%,380px);aspect-ratio:5/4;box-shadow:0 30px 60px rgba(20,18,12,0.25);}
-.pr-range-flower img{filter:saturate(0.9);}
-.pr-range-note{position:absolute;left:0;top:clamp(var(--s5),8vh,var(--s7));max-width:min(24ch,34%);font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.15rem,1.5vw,1.45rem);line-height:1.4;color:var(--gold);}
-.pr-specs{margin:var(--s5) 0 0;padding:0;list-style:none;max-width:46ch;}
-.pr-specs li{display:grid;grid-template-columns:minmax(0,0.42fr) minmax(0,0.58fr);gap:var(--s3);padding:12px 0;border-top:1px solid var(--hairline);font-size:0.9rem;}
-.pr-specs li:last-child{border-bottom:1px solid var(--hairline);}
-.pr-specs b{font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);align-self:center;}
-.pr-specs span{color:var(--starlight);}
-.pr-specs .tbc{color:var(--gold);font-style:italic;font-family:var(--font-h);font-size:1rem;}
-.pr-range-foot{display:flex;flex-wrap:wrap;gap:var(--s4) var(--s6);align-items:center;margin-top:clamp(var(--s6),8vh,var(--s7));padding-top:var(--s4);border-top:1px solid var(--hairline);}
-.pr-range-foot p{margin:0;max-width:52ch;font-size:0.85rem;line-height:1.7;color:var(--silver);}
-
-/* ================================================================
-   3 · RANGE EXPLORER — charcoal, full-width. A selector rail and a
-   two-column stage: the product plate left (switches), the record
-   right. Adding a product = one entry in PRODUCTS below.
-   ================================================================ */
-.pr-explore{position:relative;padding:clamp(88px,11vh,150px) 0 clamp(88px,12vh,170px);background:#0b0b0b;}
-.pr-explore-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:end;}
-.pr-rail{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin:0;padding:0;list-style:none;}
-.pr-rail button{appearance:none;background:transparent;border:1px solid rgba(243,241,235,0.16);border-radius:3px;padding:12px 18px;color:rgba(243,241,235,0.72);font-family:var(--font-b);font-size:0.66rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;text-align:left;transition:border-color 0.4s var(--ease),color 0.4s var(--ease),background 0.4s var(--ease);}
-.pr-rail button[aria-selected="true"]{border-color:var(--gold);color:var(--gold-light);background:rgba(201,160,106,0.08);}
-.pr-rail button:hover{border-color:rgba(243,241,235,0.5);color:var(--starlight);}
-.pr-rail button[disabled]{border-style:dashed;opacity:0.5;cursor:default;}
-.pr-rail button small{display:block;margin-top:3px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:0.9rem;letter-spacing:0;text-transform:none;color:rgba(243,241,235,0.55);}
-.pr-stage{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:center;margin-top:clamp(var(--s6),8vh,var(--s8));}
-.pr-stage-visual{position:relative;aspect-ratio:4/5;border-radius:var(--plate-r);overflow:hidden;background:#101312;box-shadow:0 60px 120px rgba(0,0,0,0.55);}
-.pr-stage-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;opacity:0;transform:scale(1.05);transition:opacity 1.1s var(--ease),transform 2.4s var(--ease);}
-.pr-stage-visual img.on{opacity:1;transform:scale(1);}
-.pr-stage-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.5),transparent 40%);pointer-events:none;}
-.pr-stage-status{position:absolute;left:var(--s4);top:var(--s4);z-index:2;}
-.pr-record{position:relative;}
-.pr-record-name{margin:0;font-size:clamp(3rem,6vw,5.2rem);line-height:0.95;letter-spacing:-0.01em;}
-.pr-record-sub{margin:var(--s3) 0 0;max-width:44ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.2rem,1.7vw,1.55rem);line-height:1.4;color:rgba(243,241,235,0.88);}
-.pr-fields{margin:var(--s5) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--s5);}
-.pr-fields li{padding:14px 0;border-top:1px solid rgba(243,241,235,0.1);}
-.pr-fields b{display:block;font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(168,173,179,0.75);}
-.pr-fields span{display:block;margin-top:6px;font-family:var(--font-h);font-weight:300;font-size:clamp(1.05rem,1.3vw,1.25rem);line-height:1.3;color:var(--starlight);}
-.pr-fields span.tbc{font-style:italic;color:var(--gold);}
-.pr-record-foot{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s5);}
-.pr-record-cta{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:0.68rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;transition:gap 0.4s var(--ease);}
-.pr-record-cta:hover{gap:18px;}
-.pr-record-cta svg{width:14px;height:14px;}
-.pr-record.swap .pr-record-name,.pr-record.swap .pr-record-sub,.pr-record.swap .pr-fields{opacity:0;transform:translateY(10px);}
-.pr-record-name,.pr-record-sub,.pr-fields{transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);}
-
-/* ================================================================
-   4 · GREENHOUSE vs INDOOR — the statement full-width, then two tall
-   sibling photo plates: sunlit glasshouse beside controlled dark.
-   ================================================================ */
-.pr-systems{padding:clamp(88px,11vh,150px) 0 0;}
-.pr-systems-head{max-width:none;}
-.pr-systems-head .cl-h2{font-size:clamp(2.4rem,4.6vw,4.4rem);line-height:1.02;max-width:14ch;}
-.pr-sys{position:relative;min-height:clamp(560px,78vh,820px);display:flex;flex-direction:column;justify-content:flex-end;margin-top:clamp(var(--s6),8vh,var(--s8));}
-.pr-sys-media{position:absolute;inset:0;overflow:hidden;}
-.pr-sys-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 7s var(--ease);}
-.pr-sys.in .pr-sys-media img{transform:scale(1);}
-.pr-sys--gh .pr-sys-media img{object-position:50% 60%;filter:saturate(0.92);}
-.pr-sys--gh .pr-sys-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,18,12,0.92) 0%,rgba(20,18,12,0.55) 34%,rgba(20,18,12,0.05) 62%);}
-.pr-sys--in .pr-sys-media img{object-position:50% 40%;filter:saturate(0.7) contrast(1.08);}
-.pr-sys--in .pr-sys-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(4,5,5,0.96) 0%,rgba(4,5,5,0.66) 36%,rgba(4,5,5,0.12) 64%);}
-.pr-sys-copy{position:relative;z-index:2;padding:clamp(var(--s5),5vw,var(--s7));}
-.pr-sys-copy h3{margin:var(--s3) 0 0;font-size:clamp(2rem,3.4vw,3.2rem);line-height:1.02;}
-.pr-sys-copy h3 em{font-style:italic;color:var(--gold-light);}
-.pr-sys-copy p{margin:var(--s3) 0 0;max-width:40ch;font-size:0.95rem;line-height:1.75;color:rgba(243,241,235,0.82);}
-.pr-sys-list{margin:var(--s4) 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,241,235,0.6);}
-.pr-sys-list li::before{content:'·';margin-right:8px;color:var(--gold);}
-.pr-sys-list li:first-child::before{content:none;}
-.pr-systems-sign{margin:clamp(var(--s5),6vh,var(--s7)) auto 0;max-width:var(--max);padding:0 var(--s4);display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.15rem,1.6vw,1.5rem);color:var(--gold);}
-.pr-systems-sign span{max-width:28ch;}
-
-/* ================================================================
-   5 · INDOOR CRAFT — black. Macro left crossing the section top, the
-   restrained copy right.
-   ================================================================ */
-.pr-indoor{position:relative;background:#040505;padding:clamp(100px,14vh,190px) 0 clamp(100px,14vh,190px);overflow:hidden;}
-.pr-indoor-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s9));align-items:center;}
-.pr-indoor-media{position:relative;aspect-ratio:4/5;border-radius:var(--plate-r);overflow:hidden;background:#0a0c0b;box-shadow:0 60px 140px rgba(0,0,0,0.7);}
-.pr-indoor-media img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;filter:saturate(0.75) contrast(1.1) brightness(0.9);transform:scale(1.08);transition:transform 8s var(--ease);}
-.pr-indoor-media.in img{transform:scale(1);}
-.pr-indoor-media::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 40%,rgba(4,5,5,0.7) 100%);}
-.pr-indoor-copy h2{font-size:clamp(2.4rem,4.4vw,4.2rem);line-height:1.02;}
-.pr-indoor-copy h2 em{font-style:italic;color:var(--gold-light);}
-.pr-indoor-copy p{margin:var(--s4) 0 0;max-width:42ch;font-size:0.98rem;line-height:1.78;color:rgba(243,241,235,0.8);}
-.pr-indoor-jar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s4);align-items:center;margin-top:clamp(var(--s5),6vh,var(--s7));padding-top:var(--s4);border-top:1px solid rgba(243,241,235,0.1);}
-.pr-indoor-jar figure{margin:0;width:clamp(88px,9vw,120px);aspect-ratio:620/730;border-radius:10px;overflow:hidden;filter:saturate(0.8) brightness(0.85);}
-.pr-indoor-jar figure img{width:100%;height:100%;object-fit:cover;}
-.pr-indoor-jar p{margin:8px 0 0;max-width:34ch;font-size:0.85rem;color:rgba(243,241,235,0.62);}
-.pr-indoor-jar b{display:block;font-family:var(--font-h);font-weight:300;font-size:1.5rem;color:var(--starlight);}
-
-/* ================================================================
-   6 · QUALITY — cream plate. Statement left, hands-and-plant photo
-   right rising past the plate, seven touchpoints on rules below.
-   ================================================================ */
-.pr-quality{margin-top:calc(var(--plate-g) + clamp(40px,6vh,80px));overflow:visible;}
-.pr-quality-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),5vw,var(--s8));align-items:start;}
-.pr-quality-photo{position:relative;aspect-ratio:4/5;margin-top:calc(-1*clamp(120px,16vh,220px));box-shadow:0 50px 90px rgba(20,18,12,0.3);}
-.pr-quality-photo img{object-position:50% 40%;}
-.pr-quality-lede{margin:var(--s4) 0 0;max-width:34ch;font-family:var(--font-h);font-weight:300;font-size:clamp(1.3rem,1.9vw,1.8rem);line-height:1.35;color:var(--starlight);}
-.pr-quality .cl-steps{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(var(--s6),8vh,var(--s8));}
-.pr-quality .cl-steps b{font-size:clamp(1.1rem,1.4vw,1.3rem);}
-.pr-years{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s4);align-items:center;margin-top:var(--s5);padding:var(--s4) 0 0;border-top:1px solid var(--hairline);}
-.pr-years b{font-family:var(--font-h);font-weight:300;font-size:clamp(3rem,5vw,4.6rem);line-height:0.9;color:var(--gold);}
-.pr-years span{font-size:0.85rem;line-height:1.6;color:var(--silver);max-width:26ch;}
-
-/* ================================================================
-   7 · TRACEABILITY — charcoal, technical. The thread becomes a precise
-   batch line: five stations on a vertical run, record fields beside.
-   ================================================================ */
-.pr-trace{position:relative;padding:clamp(100px,13vh,180px) 0;background:#0b0b0b;}
-.pr-trace-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(var(--s6),6vw,var(--s9));align-items:start;}
-.pr-trace-copy{position:sticky;top:clamp(90px,14vh,140px);}
-.pr-trace-copy .cl-h2{max-width:14ch;}
-.pr-trace-copy .cl-p{color:rgba(168,173,179,0.9);}
-.pr-journey{position:relative;padding-left:clamp(48px,5vw,72px);}
-.pr-journey-line{position:absolute;left:12px;top:0;bottom:0;width:1px;overflow:visible;}
-.pr-journey-line svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-.pr-station{position:relative;padding:clamp(var(--s4),4vh,var(--s5)) 0;border-top:1px solid rgba(243,241,235,0.08);}
-.pr-station:last-child{border-bottom:1px solid rgba(243,241,235,0.08);}
-.pr-station::before{content:'';position:absolute;left:calc(-1*clamp(48px,5vw,72px) + 8px);top:calc(clamp(var(--s4),4vh,var(--s5)) + 8px);width:9px;height:9px;border-radius:50%;background:#0b0b0b;border:1px solid var(--gold);opacity:0;transform:scale(0.4);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);}
-.pr-station.in::before{opacity:1;transform:scale(1);}
-.pr-station-k{display:flex;align-items:baseline;gap:var(--s3);}
-.pr-station-k b{font-family:var(--font-h);font-weight:300;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1;color:var(--starlight);}
-.pr-station-k i{font-style:normal;font-size:0.6rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:rgba(201,160,106,0.85);}
-.pr-station p{margin:10px 0 0;max-width:46ch;font-size:0.9rem;line-height:1.7;color:rgba(168,173,179,0.85);}
-.pr-station-data{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.68rem;letter-spacing:0.06em;color:rgba(168,173,179,0.55);}
-.pr-station-data b{font-weight:500;color:rgba(243,241,235,0.75);}
-.pr-trace-foot{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid rgba(243,241,235,0.1);font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(168,173,179,0.7);}
-.pr-trace-foot b{color:var(--gold);font-weight:700;}
-
-/* ================================================================
-   8 · HAWKE'S BAY — image plate. The sunset ridgeline, copy low-left,
-   three provenance facts on the right edge.
-   ================================================================ */
-.pr-place{min-height:clamp(560px,86vh,880px);display:grid;align-items:end;background:#120e09;container-type:inline-size;}
-.pr-place-media{position:absolute;inset:0;}
-.pr-place-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.06);transition:transform 9s var(--ease);}
-.pr-place.in .pr-place-media img{transform:scale(1);}
-.pr-place-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(18,14,9,0.92) 0%,rgba(18,14,9,0.5) 34%,rgba(18,14,9,0.06) 62%),linear-gradient(to right,rgba(18,14,9,0.45),transparent 55%);}
-.pr-place-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:var(--s6);align-items:end;padding:clamp(var(--s6),9vh,var(--s8)) clamp(var(--s4),5vw,var(--s7));}
-.pr-place h2{font-size:clamp(2.6rem,5.2vw,5rem);line-height:0.98;}
-.pr-place h2 em{font-style:italic;color:var(--gold-light);}
-.pr-place p{margin:var(--s3) 0 0;max-width:42ch;font-size:0.95rem;line-height:1.75;color:rgba(243,241,235,0.82);}
-.pr-place-facts{margin:0;padding:0;list-style:none;display:grid;gap:var(--s3);justify-self:end;width:min(100%,360px);}
-.pr-place-facts li{padding-top:14px;border-top:1px solid rgba(243,241,235,0.22);font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,241,235,0.72);}
-.pr-place-facts li span{display:block;margin-top:6px;font-family:var(--font-h);font-weight:300;font-size:1.15rem;letter-spacing:0;text-transform:none;line-height:1.35;color:var(--starlight);}
-
-/* ================================================================
-   9 · PRESCRIBERS — deep charcoal plate, clinical. Copy left, a CoA
-   record card right, the RĀ plate small and quiet beside it.
-   ================================================================ */
-.pr-rx-plate{background:#111314;color:var(--starlight);}
-.pr-rx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(var(--s6),6vw,var(--s9));align-items:center;}
-.pr-rx-grid h2{font-size:clamp(2.2rem,3.8vw,3.6rem);line-height:1.04;}
-.pr-rx-grid h2 em{font-style:italic;color:var(--gold-light);}
-.pr-rx-grid p{margin:var(--s4) 0 0;max-width:44ch;font-size:0.98rem;line-height:1.75;color:rgba(168,173,179,0.95);}
-.pr-coa{position:relative;padding:clamp(var(--s4),3vw,var(--s5));border:1px solid rgba(243,241,235,0.12);border-radius:calc(var(--plate-r)*0.6);background:linear-gradient(160deg,rgba(243,241,235,0.03),rgba(243,241,235,0.0));}
-.pr-coa-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);padding-bottom:var(--s3);border-bottom:1px solid rgba(243,241,235,0.12);}
-.pr-coa-head b{font-family:var(--font-h);font-weight:300;font-size:1.5rem;color:var(--starlight);}
-.pr-coa-head span{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.66rem;letter-spacing:0.08em;color:rgba(201,160,106,0.85);}
-.pr-coa ul{margin:0;padding:0;list-style:none;}
-.pr-coa li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s3);padding:12px 0;border-bottom:1px solid rgba(243,241,235,0.07);font-size:0.85rem;color:rgba(243,241,235,0.85);}
-.pr-coa li:last-child{padding-right:clamp(110px,11vw,160px);}
-.pr-coa li span{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.66rem;letter-spacing:0.06em;color:rgba(168,173,179,0.6);}
-.pr-coa-foot{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s3);padding-right:clamp(110px,11vw,160px);font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(168,173,179,0.7);}
-.pr-coa-foot b{color:var(--teal-light);}
-.pr-coa-jar{position:absolute;right:calc(-1*clamp(20px,3vw,44px));bottom:calc(-1*clamp(24px,3vw,44px));width:clamp(110px,11vw,150px);aspect-ratio:584/710;border-radius:10px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.6);}
-.pr-coa-jar img{width:100%;height:100%;object-fit:cover;}
-
-/* ================================================================
-   10 · CLOSING — black. The statement at scale, the thread leaving the
-   last word and running down into the footer. Deliberate ending.
-   ================================================================ */
-.pr-close{position:relative;background:#050505;padding:clamp(140px,20vh,260px) 0 0;overflow:hidden;}
-.pr-close-stmt{margin:0;font-size:clamp(2.6rem,6.2vw,6.2rem);line-height:1.02;letter-spacing:-0.02em;max-width:16ch;}
-.pr-close-stmt em{font-style:italic;color:var(--gold-light);}
-.pr-close-rx{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s3);align-items:center;margin-top:clamp(var(--s6),9vh,var(--s8));padding-top:var(--s4);border-top:1px solid rgba(243,241,235,0.12);}
-.pr-close-rx a{color:var(--gold);font-size:0.66rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;}
-.pr-close-thread{position:relative;height:clamp(160px,24vh,300px);margin-top:var(--s5);}
-.pr-close-thread svg{position:absolute;inset:0;width:100%;height:100%;}
-
+.pr-cards{padding:clamp(56px,7vh,88px) 0 clamp(48px,6vh,72px);}
+.pr-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(var(--s3),2vw,var(--s4));}
+.pr-card{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:var(--s3);align-items:center;padding:clamp(var(--s4),3vw,var(--s5));border-radius:calc(var(--plate-r)*0.7);background:#e9e3d6;}
+.pr-card-n{display:flex;align-items:center;gap:12px;font-size:0.68rem;font-weight:600;letter-spacing:0.16em;color:#5a5f5a;}
+.pr-card-n::after{content:'';width:36px;height:1px;background:#8f6a33;opacity:0.6;}
+.pr-card h3{margin:14px 0 0;font-family:var(--font-b);font-weight:400;font-size:clamp(1.1rem,1.5vw,1.4rem);letter-spacing:0.06em;text-transform:uppercase;line-height:1.2;color:#1d211f;}
+.pr-card-st{display:block;margin-top:6px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:clamp(1.1rem,1.4vw,1.3rem);color:#8f6a33;}
+.pr-card p{margin:var(--s3) 0 0;max-width:30ch;font-size:0.9rem;line-height:1.7;color:#3a3f3c;}
+.pr-card-cta{display:inline-flex;align-items:center;gap:10px;margin-top:var(--s4);color:#8f6a33;font-size:0.85rem;font-weight:500;transition:gap 0.4s var(--ease);}
+.pr-card-cta:hover{gap:16px;}
+.pr-card-cta svg{width:14px;height:14px;}
+.pr-card-jar{position:relative;margin:0;justify-self:center;width:min(100%,220px);aspect-ratio:555/630;}
+.pr-card-jar img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;}
+.pr-cards-foot{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.9fr) auto;gap:var(--s5);align-items:start;margin-top:clamp(var(--s5),5vh,var(--s6));padding-top:var(--s4);border-top:1px solid rgba(20,26,24,0.18);}
+.pr-cards-foot p{margin:0;max-width:48ch;font-size:0.82rem;line-height:1.7;color:#3a3f3c;}
+.pr-cards-foot .rx{align-self:center;justify-self:center;font-size:0.82rem;font-weight:500;color:#1d211f;letter-spacing:0.01em;}
+.pr-cards-foot ul{margin:0;padding:0 0 0 var(--s4);list-style:none;border-left:1px solid rgba(20,26,24,0.3);font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;line-height:1.75;color:#1d211f;}
+.pr-rooted{min-height:clamp(520px,72vh,760px);display:grid;align-items:start;background:#120e09;container-type:inline-size;}
+.pr-rooted-media{position:absolute;inset:0;}
+.pr-rooted-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.06);transition:transform 9s var(--ease);}
+.pr-rooted.in .pr-rooted-media img{transform:scale(1);}
+.pr-rooted-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(18,14,9,0.6) 0%,rgba(18,14,9,0.2) 34%,rgba(18,14,9,0.05) 60%),linear-gradient(to right,rgba(18,14,9,0.4),transparent 50%);}
+.pr-rooted-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s6);align-items:start;padding:clamp(var(--s6),8vh,var(--s7)) clamp(var(--s4),4vw,var(--s6)) clamp(var(--s6),8vh,var(--s8));min-height:inherit;}
+.pr-rooted-rule{display:block;width:48px;height:1px;margin-bottom:var(--s4);background:rgba(243,241,235,0.55);}
+.pr-rooted h2{margin:0;font-size:clamp(2.4rem,4.8vw,4.4rem);line-height:1.02;letter-spacing:-0.015em;}
+.pr-rooted-aside{align-self:end;justify-self:end;padding-top:clamp(120px,22vh,240px);font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;line-height:1.7;color:rgba(243,241,235,0.9);text-shadow:0 1px 18px rgba(18,14,9,0.9);}
+.pr-rooted-aside span{display:block;}
+.pr-rooted-aside span+span{margin-top:var(--s5);}
 /* ================================================================
    RESPONSIVE — plates stack, the jars come down to size, the thread
    goes vertical and simple.
    ================================================================ */
-@media(max-width:1180px){
-  .pr-range-main{width:min(66%,420px);}
-}
 @media(max-width:900px){
   .pr-hero{grid-template-columns:1fr;--hh:max(100svh,820px);background:#0b0b0b;align-items:end;}
   .pr-hero-media{bottom:auto;height:min(64%,600px);}
@@ -1683,44 +1522,20 @@ html.no-video .hero-scroll{opacity:1;}
   .pr-hero-copy{align-self:end;padding:clamp(330px,50svh,470px) var(--s4) var(--s6);max-width:100%;}
   .pr-h1{font-size:clamp(2.6rem,11vw,3.8rem);}
   .pr-stack{margin-top:var(--s5);}
-  .pr-range{margin-top:var(--plate-g);padding-top:clamp(var(--s6),9vh,var(--s7));}
-  .pr-range-grid{grid-template-columns:1fr;}
-  .pr-range-stage{min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:var(--s3);align-items:end;}
-  .pr-range-main,.pr-range-flower{position:relative;top:auto;right:auto;width:100%;}
-  .pr-range-note{position:static;grid-column:1/-1;margin-top:var(--s3);}
-  .pr-explore-head{grid-template-columns:1fr;}
-  .pr-rail{justify-content:flex-start;}
-  .pr-stage{grid-template-columns:1fr;gap:var(--s5);}
-  .pr-stage-visual{aspect-ratio:5/4;}
-  .pr-fields{grid-template-columns:1fr 1fr;}
-  .cl-split{grid-template-columns:1fr;}
-  .pr-sys{min-height:clamp(460px,72vh,620px);}
-  .pr-indoor-grid{grid-template-columns:1fr;}
-  .pr-indoor-media{aspect-ratio:5/4;}
-  .pr-quality{margin-top:var(--plate-g);}
-  .pr-quality-grid{grid-template-columns:1fr;}
-  .pr-quality-photo{margin-top:0;aspect-ratio:5/4;}
-  .pr-quality .cl-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .pr-trace-grid{grid-template-columns:1fr;}
-  .pr-trace-copy{position:static;}
-  .pr-place-grid{grid-template-columns:1fr;}
-  .pr-place-facts{justify-self:start;}
-  .pr-rx-grid{grid-template-columns:1fr;}
-  .pr-coa-jar{right:var(--s3);bottom:calc(-1*var(--s4));width:96px;}
-  .pr-close-stmt{font-size:clamp(2.2rem,9vw,3.6rem);}
+  .pr-cards-grid{grid-template-columns:1fr;}
+  .pr-cards-foot{grid-template-columns:1fr;gap:var(--s4);}
+  .pr-cards-foot .rx{justify-self:start;}
+  .pr-cards-foot ul{padding-left:0;border-left:0;padding-top:var(--s3);border-top:1px solid rgba(20,26,24,0.3);}
+  .pr-rooted-grid{grid-template-columns:1fr;gap:var(--s5);}
+  .pr-rooted-aside{justify-self:start;padding-top:0;}
 }
-@media(max-width:640px){
-  .pr-range-stage{grid-template-columns:1fr;}
-  .pr-range-flower{display:none;}
-  .pr-fields{grid-template-columns:1fr;}
-  .pr-quality .cl-steps{grid-template-columns:1fr;}
-  .cl-chip{top:var(--s3);right:var(--s3);font-size:0.52rem;}
+@media(max-width:560px){
+  .pr-card{grid-template-columns:1fr;}
+  .pr-card-jar{width:min(100%,180px);}
 }
 @media(prefers-reduced-motion:reduce){
   .pr-hero-cola,.pr-hero-field{animation:none;transform:none;}
-  .pr-photo img,.pr-sys-media img,.pr-indoor-media img,.pr-place-media img{transform:none !important;transition:none;}
-  .pr-thread path{transition:none;stroke-dashoffset:0;}
-  .pr-thread circle,.pr-station::before{transition:none;opacity:1;transform:none;}
+  .pr-rooted-media img{transform:none !important;transition:none;}
 }
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
@@ -1796,307 +1611,56 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
    </section>
 
-  <!-- ================ 2 · CURRENT RANGE · GREENHOUSE GROWN ================ -->
-  <!-- Flax plate. RĀ rises above the plate's top edge as the dominant object;
-       the flower plate sits low beside it. The spec list stays restrained.
-       Potency and pack size wait on the confirmed CoA data (placeholders). -->
-  <section class="cl-plate cl-flax pr-range" id="range">
+  <!-- ================ THE RANGE · two cards (CEO's reference format) ================ -->
+  <section class="cl-plate cl-flax pr-cards" id="range">
     <div class="wrap">
-      <div class="pr-range-grid">
-        <div class="pr-range-copy">
-          <span class="eyebrow gold cl-eyebrow reveal">02 · CURRENT RANGE</span>
-          <h2 class="cl-h2 emerge">Greenhouse grown.<br><em>Aho standard.</em></h2>
-          <p class="cl-p reveal d1">Our greenhouse-grown range is being introduced to support a broader, value-focused segment of the medicinal market, combining efficient production with the cultivation, quality and traceability standards expected of Aho Farms.</p>
-          <ul class="pr-specs reveal d2">
-            <li><b>Product</b><span>RĀ</span></li>
-            <li><b>Cultivar</b><span>Oreo</span></li>
-            <li><b>Cultivation</b><span>Greenhouse · Hawke's Bay</span></li>
-            <li><b>Format</b><span>Dried medicinal flower</span></li>
-            <li><b>Total THC · CBD</b><span class="tbc">To be confirmed from batch CoA</span></li>
-            <li><b>Pack size</b><span class="tbc">To be confirmed</span></li>
-          </ul>
-          <div class="pr-btns reveal d3">
-            <a href="#explore" class="btn btn-gold btn-sm">View the product</a>
-            <span class="pr-rx">Prescription only</span>
+      <div class="pr-cards-grid">
+        <article class="pr-card reveal">
+          <span class="cl-chip" style="top:10px;right:10px;font-size:0.52rem;padding:6px 10px">Hi-res jar owed</span>
+          <div>
+            <span class="pr-card-n">01</span>
+            <h3>Greenhouse range</h3>
+            <span class="pr-card-st">Available now</span>
+            <p>Medicinal flower grown in greenhouse conditions and developed to deliver dependable quality within a more efficient production model.</p>
+            <a href="prescribers.html" class="pr-card-cta">View products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
-        </div>
-        <div class="pr-range-stage">
-          <p class="pr-range-note reveal d1">Named for the sun. Grown under natural Hawke's Bay light, expressed in a richer, more complex flower.</p>
-          <figure class="pr-photo pr-range-main reveal">
-            <img src="assets/aho-products-ra-jar.jpg" alt="The RĀ jar: amber glass, black lid, gold tā moko artwork on a black label" width="584" height="710" loading="lazy">
-            <span class="cl-chip">Hi-res jar cut-out owed</span>
-          </figure>
-          <figure class="pr-photo pr-range-flower reveal d2">
-            <img src="assets/aho-cultivation-hero-flower.jpg" alt="A mature Aho cola in Hawke's Bay sunlight" width="1207" height="957" loading="lazy">
-          </figure>
-        </div>
+          <figure class="pr-card-jar"><img src="assets/aho-products-ra-jar-card.jpg" alt="The RĀ jar" width="555" height="630" loading="lazy"></figure>
+        </article>
+        <article class="pr-card reveal d1">
+          <span class="cl-chip" style="top:10px;right:10px;font-size:0.52rem;padding:6px 10px">Hi-res jar owed</span>
+          <div>
+            <span class="pr-card-n">02</span>
+            <h3>Indoor craft range</h3>
+            <span class="pr-card-st">Available now</span>
+            <p>A premium indoor-grown range focused on greater environmental control, flower finish and cultivar expression.</p>
+            <a href="prescribers.html" class="pr-card-cta">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <figure class="pr-card-jar"><img src="assets/aho-products-source-jar-card.jpg" alt="The SOURCE jar" width="555" height="630" loading="lazy"></figure>
+        </article>
       </div>
-      <div class="pr-range-foot reveal">
+      <div class="pr-cards-foot reveal d2">
         <p>Full product specifications, certificates of analysis and prescribing information are available to registered prescribers through the Aho Farms portal.</p>
-        <a class="cl-cue" style="margin-top:0" href="prescribers.html"><span class="cl-cue-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>Prescriber portal</a>
+        <span class="rx">Prescription Medicine — Not for general sale</span>
+        <ul><li>Cultivation</li><li>People</li><li>Process</li><li>A higher standard</li></ul>
       </div>
     </div>
   </section>
 
-  <!-- ================ 3 · RANGE EXPLORER ================ -->
-  <!-- Charcoal, full-width. The selector rail switches the product plate and
-       the record. Products are data (PRODUCTS in the page script): a new
-       product is one entry and one rail button, no redesign. -->
-  <section class="pr-explore" id="explore">
-    <div class="wrap">
-      <div class="pr-explore-head">
-        <div>
-          <span class="eyebrow gold cl-eyebrow reveal">03 · THE RANGE</span>
-          <h2 class="cl-h2 emerge">Explore each <em>expression.</em></h2>
-        </div>
-        <ul class="pr-rail reveal d1" role="tablist" aria-label="Products" id="prRail">
-          <li><button type="button" role="tab" aria-selected="true" data-product="ra">RĀ<small>Greenhouse · available now</small></button></li>
-          <li><button type="button" role="tab" aria-selected="false" data-product="source">SOURCE<small>Indoor craft · available now</small></button></li>
-          <li><button type="button" disabled aria-disabled="true">Further cultivars<small>In development</small></button></li>
-        </ul>
-      </div>
-      <div class="pr-stage">
-        <div class="pr-stage-visual reveal" id="prStageVisual">
-          <span class="pr-tag now pr-stage-status" id="prStageStatus">Available now</span>
-          <img src="assets/aho-products-ra-jar.jpg" alt="The RĀ jar" width="584" height="710" class="on" data-product="ra" loading="lazy">
-          <img src="assets/aho-products-source-jar.jpg" alt="The SOURCE jar" width="620" height="730" data-product="source" loading="lazy">
-        </div>
-        <div class="pr-record reveal d1" id="prRecord" aria-live="polite">
-          <h3 class="pr-record-name" id="prName">RĀ</h3>
-          <p class="pr-record-sub" id="prSub">Named for the sun. Grown under natural Hawke's Bay light for a richer, more complex flower.</p>
-          <ul class="pr-fields" id="prFields"></ul>
-          <div class="pr-record-foot">
-            <a href="prescribers.html" class="pr-record-cta">Prescriber information <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-            <span class="pr-rx">Prescription Medicine — Not for general sale</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================ 4 · GREENHOUSE vs INDOOR ================ -->
-  <!-- The statement full-width on the canvas, then two tall sibling plates:
-       the sunlit glasshouse beside the controlled dark. Neither inferior. -->
-  <section class="pr-systems" id="systems">
-    <div class="wrap">
-      <div class="pr-systems-head">
-        <span class="eyebrow gold cl-eyebrow reveal">04 · TWO CULTIVATION SYSTEMS</span>
-        <h2 class="cl-h2 emerge">Different cultivation systems. Different market needs. <em>One Aho standard.</em></h2>
-      </div>
-    </div>
-    <div class="cl-split">
-      <article class="cl-plate pr-sys pr-sys--gh reveal">
-        <div class="pr-sys-media">
-          <img src="assets/aho-tohu-close-glasshouse.jpg" alt="Inside the Aho glasshouse: rows of plants under natural Hawke's Bay light" width="2400" height="1350" loading="lazy">
-        </div>
-        <div class="pr-sys-copy">
-          <span class="pr-tag now">Available · rolling out</span>
-          <h3>Greenhouse</h3>
-          <p>Designed to serve a broader, value-focused medicinal market while maintaining Aho's cultivation, quality and traceability standards.</p>
-          <ul class="pr-sys-list"><li>Natural sunlight</li><li>Living plants</li><li>Hawke's Bay</li><li>Efficient premium production</li></ul>
-        </div>
-      </article>
-      <article class="cl-plate pr-sys pr-sys--in reveal d1">
-        <div class="pr-sys-media">
-          <img src="assets/aho-indoor-cultivation.jpg" alt="An indoor-grown cola under controlled lighting" width="900" height="1200" loading="lazy">
-        </div>
-        <div class="pr-sys-copy">
-          <span class="pr-tag now">Available now</span>
-          <h3>Indoor <em>craft</em></h3>
-          <p>Developed in a highly controlled environment, the indoor programme is focused on premium flower characteristics, consistency and cultivar expression for the high-end segment of the market.</p>
-          <ul class="pr-sys-list"><li>Controlled</li><li>Precise</li><li>Cultivar expression</li><li>Highly controlled craft production</li></ul>
-        </div>
-      </article>
-    </div>
-    <div class="pr-systems-sign reveal">
-      <span>Greenhouse — efficient premium medicinal production.</span>
-      <span>Indoor — highly controlled craft production.</span>
-    </div>
-  </section>
-
-  <!-- ================ 5 · INDOOR CRAFT ================ -->
-  <!-- Black. One macro on the left (placeholder for the trichome still), the
-       restrained copy right, SOURCE small and quiet under a rule. Never shown
-       as available. -->
-  <section class="pr-indoor" id="indoor">
-    <div class="wrap">
-      <div class="pr-indoor-grid">
-        <figure class="pr-indoor-media reveal">
-          <img src="assets/aho-why-aho-flower.jpg" alt="A flowering cola under indoor cultivation lighting" width="1200" height="1600" loading="lazy">
-          <span class="cl-chip">Macro trichome still · placeholder</span>
-        </figure>
-        <div class="pr-indoor-copy">
-          <span class="pr-tag now reveal">Available now</span>
-          <h2 class="emerge" style="margin-top:var(--s4)">The next expression of <em>Aho flower.</em></h2>
-          <p class="reveal d1">Developed in a highly controlled environment, the Aho indoor programme is focused on premium flower characteristics, consistency and cultivar expression for the high-end medicinal market.</p>
-          <div class="pr-indoor-jar reveal d2">
-            <figure><img src="assets/aho-products-source-jar.jpg" alt="The SOURCE jar" width="620" height="730" loading="lazy"></figure>
-            <div>
-              <b>SOURCE</b>
-              <p>Wake &amp; Cake C30 · indoor craft. Available to patients through registered prescribers.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================ 6 · QUALITY ================ -->
-  <!-- Cream plate. Statement left, hands-and-plant photo rising past the
-       plate on the right (placeholder for the trimming still), four
-       touchpoints on rules, the 20+ figure. Points to quality.html. -->
-  <section class="cl-plate cl-cream cl-sec pr-quality" id="quality">
-    <div class="wrap">
-      <div class="pr-quality-grid">
-        <div>
-          <span class="eyebrow gold cl-eyebrow reveal">05 · QUALITY</span>
-          <h2 class="cl-h2 emerge">Quality doesn't begin <em>at the laboratory.</em></h2>
-          <p class="pr-quality-lede reveal d1">Our growers are the first line of quality control.</p>
-          <p class="cl-p reveal d2">Plant health and defects are identified during cultivation, not at final testing. Flower is harvested and cured with care, hand-trimmed by experienced cannabis trimmers, and passes through multiple quality-control touchpoints before batch testing.</p>
-          <div class="pr-years reveal d2">
-            <b>20+</b>
-            <span>Years of combined cultivation experience within our growing team.</span>
-          </div>
-          <a class="cl-cue reveal d3" href="quality.html"><span class="cl-cue-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>Our approach to quality</a>
-        </div>
-        <figure class="pr-photo pr-quality-photo reveal d1">
-          <img src="assets/aho-team-hero-hands.jpg" alt="A grower's hands holding a young cannabis plant, roots and soil intact" width="1122" height="1402" loading="lazy">
-          <span class="cl-chip">Hands trimming flower · placeholder</span>
-        </figure>
-      </div>
-      <ul class="cl-steps reveal">
-        <li><b>Growers first</b><span>Issues are seen and acted on in the crop, by the people who know it.</span></li>
-        <li><b>Harvest and cure</b><span>Slow, deliberate post-harvest handling protects what the plant built.</span></li>
-        <li><b>Hand trimmed</b><span>Experienced trimmers finish every flower by hand.</span></li>
-        <li><b>Batch tested</b><span>Independent testing on every batch, with the record to prove it.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================ 7 · TRACEABILITY ================ -->
-  <!-- Charcoal, technical. The product thread returns as a precise batch line:
-       five stations, seed to patient, GrowerIQ record fields beside each.
-       Copy is sticky on the left while the stations pass. -->
-  <section class="pr-trace" id="traceability">
-    <div class="wrap">
-      <div class="pr-trace-grid">
-        <div class="pr-trace-copy">
-          <span class="eyebrow gold cl-eyebrow reveal">06 · TRACEABILITY</span>
-          <h2 class="cl-h2 emerge">From seed to patient, <em>every step is traceable.</em></h2>
-          <p class="cl-p reveal d1">Aho Farms uses GrowerIQ to record the history of each batch — propagation, flowering, cultivation inputs, harvest, drying, curing and processing.</p>
-          <p class="cl-p reveal d2">Registered prescribers can access relevant product and batch information through the portal.</p>
-        </div>
-        <div class="pr-journey">
-          <div class="pr-journey-line" aria-hidden="true">
-            <svg class="pr-thread" viewBox="0 0 1 100" preserveAspectRatio="none"><path pathLength="1" d="M0.5 0 V100"/></svg>
-          </div>
-          <article class="pr-station reveal">
-            <div class="pr-station-k"><b>Seed</b><i>Propagation</i></div>
-            <p>Every plant begins as a recorded entity — genetics, source and propagation date logged before it reaches the crop.</p>
-            <ul class="pr-station-data"><li>BATCH <b>——</b></li><li>CULTIVAR <b>——</b></li><li>PROPAGATED <b>——</b></li></ul>
-          </article>
-          <article class="pr-station reveal">
-            <div class="pr-station-k"><b>Plant</b><i>Flowering · inputs</i></div>
-            <p>Growth stage, environment and every cultivation input are captured against the plant through vegetative growth and flowering.</p>
-            <ul class="pr-station-data"><li>SYSTEM <b>——</b></li><li>FLOWER SET <b>——</b></li><li>INPUTS <b>——</b></li></ul>
-          </article>
-          <article class="pr-station reveal">
-            <div class="pr-station-k"><b>Harvest</b><i>Harvest · drying</i></div>
-            <p>Harvest date, wet weight and drying conditions close the cultivation record and open the post-harvest one.</p>
-            <ul class="pr-station-data"><li>HARVESTED <b>——</b></li><li>DRY START <b>——</b></li><li>DRY END <b>——</b></li></ul>
-          </article>
-          <article class="pr-station reveal">
-            <div class="pr-station-k"><b>Flower</b><i>Curing · processing</i></div>
-            <p>Curing, hand trimming and processing are logged to the batch, then the batch is sampled for independent testing.</p>
-            <ul class="pr-station-data"><li>CURED <b>——</b></li><li>TRIMMED <b>——</b></li><li>CoA <b>——</b></li></ul>
-          </article>
-          <article class="pr-station reveal">
-            <div class="pr-station-k"><b>Patient</b><i>Release</i></div>
-            <p>Released flower carries its full history. Prescribers see the product and batch information that matters to their patient.</p>
-            <ul class="pr-station-data"><li>RELEASED <b>——</b></li><li>PRESCRIBER ACCESS <b>Portal</b></li></ul>
-          </article>
-        </div>
-      </div>
-      <div class="pr-trace-foot reveal">
-        <span>Seed → Plant → Harvest → Flower → Patient</span>
-        <span>Recorded in <b>GrowerIQ</b></span>
-        <span>One connected history</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================ 8 · GROWN IN HAWKE'S BAY ================ -->
-  <!-- Image plate. The sunset ridgeline (from the CEO's reference, chipped),
-       copy low-left, three provenance facts on the right. Not tourism: why
-       place matters to the flower. Links to Land & Cultivation. -->
-  <section class="cl-plate pr-place reveal" id="place">
-    <div class="pr-place-media">
+  <!-- ================ ROOTED HERE · full-bleed Hawke's Bay close ================ -->
+  <section class="cl-plate pr-rooted reveal" id="place">
+    <div class="pr-rooted-media">
       <img src="assets/aho-products-terroir-band.jpg" alt="Hawke's Bay hill country running down to the coast at sunset" width="1920" height="746" loading="lazy">
       <span class="cl-chip">Reference landscape · replace with whenua still</span>
     </div>
-    <div class="pr-place-grid">
+    <div class="pr-rooted-grid">
       <div>
-        <span class="eyebrow gold cl-eyebrow reveal">07 · PROVENANCE</span>
-        <h2 class="emerge">Grown in <em>Hawke's Bay.</em></h2>
-        <p class="reveal d1">This medicine comes from a particular place: Māori whenua in one of Aotearoa's sunniest, driest growing regions, cultivated by people who have grown here for years. The environment shapes the flower.</p>
-        <a class="cl-cue reveal d2" href="cultivation.html"><span class="cl-cue-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>Land &amp; Cultivation</a>
+        <span class="pr-rooted-rule reveal" aria-hidden="true"></span>
+        <h2 class="emerge">Rooted here.<br>Available for what's next.</h2>
       </div>
-      <ul class="pr-place-facts reveal d1">
-        <li>Sunlight<span>Abundant natural light through the growing season.</span></li>
-        <li>Climate<span>Dry summers suited to cultivation.</span></li>
-        <li>Whenua<span>Māori freehold land. New Zealand provenance.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================ 9 · FOR REGISTERED PRESCRIBERS ================ -->
-  <!-- Deep charcoal plate, clinical. Copy left, the Certificate of Analysis
-       record card right with RĀ small beside it. Portal CTAs. -->
-  <section class="cl-plate cl-sec pr-rx-plate" id="prescribers">
-    <div class="wrap">
-      <div class="pr-rx-grid">
-        <div>
-          <span class="eyebrow gold cl-eyebrow reveal">08 · PRESCRIBER PORTAL</span>
-          <h2 class="emerge">For registered <em>prescribers.</em></h2>
-          <p class="reveal d1">Full product specifications, certificates of analysis and prescribing information are available to registered prescribers through the Aho Farms portal.</p>
-          <div class="pr-btns reveal d2">
-            <a href="prescribers.html" class="btn btn-primary">Enter Prescriber Portal</a>
-            <a href="pharmacies.html" class="btn btn-outline">Pharmacy portal</a>
-          </div>
-        </div>
-        <div class="pr-coa reveal d1">
-          <div class="pr-coa-head"><b>Certificate of Analysis</b><span>BATCH ——</span></div>
-          <ul>
-            <li>Cannabinoid profile<span>QUANTIFIED</span></li>
-            <li>Terpene analysis<span>PRIMARY · SECONDARY</span></li>
-            <li>Heavy metals<span>SCREENED</span></li>
-            <li>Pesticide residues<span>MULTI-RESIDUE</span></li>
-            <li>Microbial<span>TAC · E. COLI · SALMONELLA · Y&amp;M</span></li>
-            <li>Moisture &amp; foreign matter<span>MEASURED · INSPECTED</span></li>
-          </ul>
-          <div class="pr-coa-foot"><span>Testing partner · <b>Hill Labs</b></span><span>IANZ accredited</span></div>
-          <figure class="pr-coa-jar" aria-hidden="true"><img src="assets/aho-products-ra-jar.jpg" alt="" width="584" height="710" loading="lazy"></figure>
-        </div>
+      <div class="pr-rooted-aside reveal d1">
+        <span>Hawke's Bay<br>New Zealand</span>
+        <span>Medicinal cannabis<br>for a healthier<br>tomorrow</span>
       </div>
-    </div>
-  </section>
-
-  <!-- ================ 10 · CLOSING STATEMENT ================ -->
-  <!-- Black. The statement at scale with room around it; the thread leaves
-       the last word and runs down into the footer. -->
-  <section class="pr-close" id="close">
-    <div class="wrap">
-      <h2 class="pr-close-stmt emerge">Different cultivation systems.<br>Different market needs.<br><em>One Aho standard.</em></h2>
-      <div class="pr-close-rx reveal d1">
-        <span class="pr-rx">Prescription Medicine — Not for general sale</span>
-        <a href="contact.html">Tūhono mai · Contact</a>
-      </div>
-    </div>
-    <div class="pr-close-thread" aria-hidden="true">
-      <svg class="pr-thread" viewBox="0 0 1000 300" preserveAspectRatio="none">
-        <path pathLength="1" d="M 120 0 C 120 110, 150 170, 150 300"/>
-        <circle cx="120" cy="0" r="2.5"/>
-      </svg>
     </div>
   </section>
 
@@ -2165,7 +1729,7 @@ window.addEventListener('scroll',()=>{
    traceability stations share the same observer.
    ================================================================ */
 (function(){
-  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.pr-thread,.pr-photo,.pr-sys,.pr-place,.pr-indoor-media,.pr-station');
+  const els=document.querySelectorAll('.reveal,.emerge,.unveil,.pr-rooted');
   if(REDUCED){els.forEach(el=>el.classList.add('in'));return;}
   const io=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
@@ -2175,75 +1739,6 @@ window.addEventListener('scroll',()=>{
   els.forEach(el=>io.observe(el));
 })();
 
-/* ================================================================
-   RANGE EXPLORER — products are data. To add a product: one entry
-   here (with its image in #prStageVisual) and one rail button.
-   Values not yet supplied stay as 'tbc' placeholders — never invented.
-   ================================================================ */
-const PRODUCTS={
-  ra:{
-    name:'RĀ',
-    status:{label:'Available now',cls:'now'},
-    sub:'Named for the sun. Grown under natural Hawke\'s Bay light for a richer, more complex flower.',
-    fields:[
-      ['Cultivar','Oreo'],
-      ['Cultivation','Greenhouse · Hawke\'s Bay'],
-      ['Total THC',null],
-      ['Total CBD',null],
-      ['Format','Dried medicinal flower'],
-      ['Pack size',null],
-      ['Origin','Hawke\'s Bay, Aotearoa New Zealand'],
-      ['Testing','Hill Labs · IANZ accredited']
-    ]
-  },
-  source:{
-    name:'SOURCE',
-    status:{label:'Available now · indoor craft',cls:'now'},
-    sub:'A highly controlled indoor expression, focused on consistency and cultivar character for the high-end medicinal market.',
-    fields:[
-      ['Cultivar','Wake & Cake C30'],
-      ['Cultivation','Indoor craft'],
-      ['Total THC',null],
-      ['Total CBD',null],
-      ['Format','Dried medicinal flower'],
-      ['Pack size',null],
-      ['Origin','Aotearoa New Zealand'],
-      ['Testing','Hill Labs · IANZ accredited']
-    ]
-  }
-};
-(function(){
-  const rail=document.getElementById('prRail');
-  const record=document.getElementById('prRecord');
-  const nameEl=document.getElementById('prName');
-  const subEl=document.getElementById('prSub');
-  const fieldsEl=document.getElementById('prFields');
-  const statusEl=document.getElementById('prStageStatus');
-  const visual=document.getElementById('prStageVisual');
-  if(!rail||!record)return;
-  function render(id){
-    const p=PRODUCTS[id];if(!p)return;
-    nameEl.textContent=p.name;
-    subEl.textContent=p.sub;
-    fieldsEl.innerHTML=p.fields.map(([k,v])=>
-      '<li><b>'+k+'</b><span'+(v==null?' class="tbc">To be confirmed':'>'+v)+'</span></li>'
-    ).join('');
-    statusEl.textContent=p.status.label;
-    statusEl.className='pr-tag pr-stage-status '+p.status.cls;
-    visual.querySelectorAll('img').forEach(im=>im.classList.toggle('on',im.dataset.product===id));
-    rail.querySelectorAll('button[data-product]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.product===id)));
-  }
-  function select(id){
-    if(REDUCED){render(id);return;}
-    record.classList.add('swap');
-    setTimeout(()=>{render(id);record.classList.remove('swap');},380);
-  }
-  rail.addEventListener('click',e=>{
-    const b=e.target.closest('button[data-product]');
-    if(b&&!b.disabled)select(b.dataset.product);
-  });
-  render('ra');
-})();
 
 /* Mobile drawer: burger toggle only. Accordion expansion of each parent's
    children is handled by the click-to-open panel script below - the same
