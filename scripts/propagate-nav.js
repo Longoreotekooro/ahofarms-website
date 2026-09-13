@@ -49,7 +49,9 @@ const OWN_SENTINELS = {
 // Legacy token names -> shared tokens. Only stamped where the page does not
 // already define the name itself (its own :root wins for anything else).
 const ALIASES = {
-  'gold': 'var(--aho-gold)', 'gold-light': 'var(--aho-gold-light)', 'gold-border': 'var(--aho-accent-soft)',
+  // "gold" in legacy page CSS means "the page accent": gold on Palette 1,
+  // teal on Palette 2 (data-palette="teal"). Never both on one page.
+  'gold': 'var(--aho-accent)', 'gold-light': 'var(--aho-accent-light)', 'gold-border': 'var(--aho-accent-soft)',
   'hairline': 'var(--aho-hair)', 'max': 'var(--aho-max)',
   's1': 'var(--s1)', 's2': 'var(--s2)', 's3': 'var(--s3)', 's4': 'var(--s4)', 's5': 'var(--s5)', 's6': 'var(--s6)', 's7': 'var(--s7)',
   'silver': 'var(--aho-silver)', 'starlight': 'var(--aho-white)', 'void': 'var(--aho-void)',

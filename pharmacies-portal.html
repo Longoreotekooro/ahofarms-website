@@ -13,25 +13,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --night:       #1a2426;
+      --night: var(--aho-teal-night);
       --sidebar-bg:  #253032;
       --card-bg:     #2f3d3f;
-      --content-bg:  #f4f6f6;
-      --teal: var(--aho-teal);
-      --teal-light: var(--aho-teal-light);
-      --teal-deep: var(--aho-teal-deep);
+      --content-bg: #f3f5f5;
+      --teal: var(--aho-accent);
+      --teal-light: var(--aho-accent-light);
+      --teal-deep: var(--aho-accent-deep);
       --soil:        #8b6f47;
       --text-light:  #e8eded;
       --text-muted:  #8faaa8;
       --text-dark:   #1e2e30;
       --text-body:   #2e4042;
-      --border-teal: rgba(115,168,165,0.15);
-      --border-teal-strong: rgba(115,168,165,0.35);
+      --border-teal: rgba(98,170,166,0.15);
+      --border-teal-strong: rgba(98,170,166,0.35);
       --sidebar-w:   260px;
       --header-h:    60px;
-      --amber:       #d4882a;
-      --amber-bg:    rgba(212,136,42,0.10);
-      --amber-border:rgba(212,136,42,0.30);
+      --amber: var(--aho-accent);
+      --amber-bg: var(--aho-accent-tint);
+      --amber-border: var(--aho-accent-soft);
     }
 
     html { font-size: 16px; }
@@ -212,13 +212,13 @@
 
     .nav-item:hover {
       color: var(--teal-light);
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
     }
 
     .nav-item.active {
       color: var(--teal);
       border-left-color: var(--teal);
-      background: rgba(115,168,165,0.08);
+      background: rgba(98,170,166,0.08);
       font-weight: 500;
     }
 
@@ -345,7 +345,7 @@
     }
 
     .btn-outline:hover {
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       color: var(--teal-deep);
       text-decoration: none;
     }
@@ -427,14 +427,14 @@
 
     .quick-card:hover {
       border-color: var(--teal);
-      box-shadow: 0 2px 12px rgba(115,168,165,0.12);
+      box-shadow: 0 2px 12px rgba(98,170,166,0.12);
       transform: translateY(-1px);
     }
 
     .quick-card-icon {
       width: 36px;
       height: 36px;
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -494,7 +494,7 @@
 
     .alert-box-content p {
       font-size: 13.5px;
-      color: #5a3e10;
+      color: var(--aho-accent-tint);
       margin: 0;
       line-height: 1.6;
     }
@@ -553,7 +553,7 @@
     }
 
     .data-table tbody tr:nth-child(odd) td { background: #fff; }
-    .data-table tbody tr:nth-child(even) td { background: rgba(115,168,165,0.04); }
+    .data-table tbody tr:nth-child(even) td { background: rgba(98,170,166,0.04); }
 
     .data-table tbody td {
       padding: 12px 16px;
@@ -581,12 +581,12 @@
     }
 
     .badge-current {
-      background: rgba(115,168,165,0.15);
+      background: rgba(98,170,166,0.15);
       color: var(--teal-deep);
     }
 
     .badge-available {
-      background: rgba(115,168,165,0.15);
+      background: rgba(98,170,166,0.15);
       color: var(--teal-deep);
     }
 
@@ -603,13 +603,13 @@
       align-items: center;
       gap: 5px;
       padding: 4px 10px;
-      border: 1px solid rgba(115,168,165,0.3);
+      border: 1px solid rgba(98,170,166,0.3);
       border-radius: 4px;
       transition: all 0.16s;
     }
 
     .coa-download:hover {
-      background: rgba(115,168,165,0.08);
+      background: rgba(98,170,166,0.08);
       border-color: var(--teal);
       text-decoration: none;
     }
@@ -618,7 +618,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(115,168,165,0.05);
+      background: rgba(98,170,166,0.05);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 16px 20px;
@@ -647,7 +647,7 @@
 
     /* ─── Info Box / Consideration ────────────────────────────────── */
     .info-box {
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 20px 24px;
@@ -665,7 +665,7 @@
     .note-text {
       font-size: 13px;
       color: var(--text-body);
-      background: rgba(115,168,165,0.05);
+      background: rgba(98,170,166,0.05);
       border: 1px solid var(--border-teal);
       border-radius: 6px;
       padding: 12px 16px;
@@ -793,7 +793,7 @@
     .contact-card-icon {
       width: 36px;
       height: 36px;
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -882,7 +882,7 @@
     .cf-group select:focus,
     .cf-group textarea:focus {
       border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(115,168,165,0.14);
+      box-shadow: 0 0 0 3px rgba(98,170,166,0.14);
     }
 
     .cf-group textarea {
@@ -900,8 +900,8 @@
 
     .form-success-banner {
       display: none;
-      background: rgba(115,168,165,0.10);
-      border: 1px solid rgba(115,168,165,0.35);
+      background: rgba(98,170,166,0.10);
+      border: 1px solid rgba(98,170,166,0.35);
       border-radius: 6px;
       padding: 14px 18px;
       margin-top: 16px;
@@ -971,8 +971,8 @@
 
   /* AHO:NAVCSS:START - generated by scripts/propagate-nav.js, do not edit by hand */
 :root{
-  --gold: var(--aho-gold);
-  --gold-light: var(--aho-gold-light);
+  --gold: var(--aho-accent);
+  --gold-light: var(--aho-accent-light);
   --gold-border: var(--aho-accent-soft);
   --hairline: var(--aho-hair);
   --max: var(--aho-max);
@@ -994,7 +994,7 @@
 /* AHO:NAVCSS:END */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=52766ffe">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=a3b90e23">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>
@@ -1040,8 +1040,8 @@
   <div class="header-left">
     <a href="pharmacies.html" class="header-logo" aria-label="Aho Farms home">
       <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" stroke="#73a8a5" stroke-width="1.5" fill="none"/>
-        <path d="M20 32V18M20 18C20 18 14 15 12 8c5 .5 9 4 9.5 10M20 18c0 0 6-4 8-10-5 .5-9 4-9.5 10" stroke="#73a8a5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="20" r="19" stroke="#62aaa6" stroke-width="1.5" fill="none"/>
+        <path d="M20 32V18M20 18C20 18 14 15 12 8c5 .5 9 4 9.5 10M20 18c0 0 6-4 8-10-5 .5-9 4-9.5 10" stroke="#62aaa6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="logo-text">
         AHO <span class="logo-farms">FARMS</span>

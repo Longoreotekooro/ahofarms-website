@@ -277,6 +277,15 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
 .plate--teal-night{background:var(--aho-teal-night);color:var(--aho-white);}
 .plate--flax .eyebrow,.plate--cream .eyebrow,.plate--earth .eyebrow{color:var(--aho-accent-deep);}
 .plate--flax .stat span,.plate--cream .stat span,.plate--earth .stat span{color:var(--aho-muted);}
+/* On light grounds the accent is used for text (eyebrows, links, small
+   labels), where mid gold / light teal fail contrast on flax. Inside any
+   light chapter the page-level accent names resolve to the deep accent;
+   filled buttons keep the true accent through .btn rules above. */
+.plate--flax,.plate--cream,.plate--earth,.ch-flax,.cl-flax,.cl-cream,.cl-earth,.tm-flax,.og-sec.ch-flax,
+.section-white,.section-offwhite,.sec-white,.sec-offwhite,.news-section,.newsletter-section,.filter-bar,.contacts-section,.form-section,
+.legal-body,.portal-contents,.access-form-section,.section.why,.section.markets,.section.form-section,.portal-main,.content{
+  --gold:var(--aho-accent-deep);--gold-light:var(--aho-accent-deep);--teal:var(--aho-accent-deep);--teal-light:var(--aho-accent-deep);
+  --aho-accent-on:var(--aho-accent-deep);}
 .sec{padding:var(--sec-y) 0;}
 .sec--sm{padding:var(--sec-y-sm) 0;}
 .sec--lg{padding:var(--sec-y-lg) 0;}

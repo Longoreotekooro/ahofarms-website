@@ -13,25 +13,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --night:       #1a2426;
+      --night: var(--aho-teal-night);
       --sidebar-bg:  #253032;
       --card-bg:     #2f3d3f;
-      --content-bg:  #f4f6f6;
-      --teal: var(--aho-teal);
-      --teal-light: var(--aho-teal-light);
-      --teal-deep: var(--aho-teal-deep);
+      --content-bg: #f3f5f5;
+      --teal: var(--aho-accent);
+      --teal-light: var(--aho-accent-light);
+      --teal-deep: var(--aho-accent-deep);
       --soil:        #8b6f47;
       --text-light:  #e8eded;
       --text-muted:  #8faaa8;
       --text-dark:   #1e2e30;
       --text-body:   #2e4042;
-      --border-teal: rgba(115,168,165,0.15);
-      --border-teal-strong: rgba(115,168,165,0.35);
+      --border-teal: rgba(98,170,166,0.15);
+      --border-teal-strong: rgba(98,170,166,0.35);
       --sidebar-w:   260px;
       --header-h:    60px;
-      --amber:       #d4882a;
-      --amber-bg:    rgba(212,136,42,0.10);
-      --amber-border:rgba(212,136,42,0.30);
+      --amber: var(--aho-accent);
+      --amber-bg: var(--aho-accent-tint);
+      --amber-border: var(--aho-accent-soft);
     }
 
     html { font-size: 16px; }
@@ -208,13 +208,13 @@
 
     .nav-item:hover {
       color: var(--teal-light);
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
     }
 
     .nav-item.active {
       color: var(--teal);
       border-left-color: var(--teal);
-      background: rgba(115,168,165,0.08);
+      background: rgba(98,170,166,0.08);
       font-weight: 500;
     }
 
@@ -340,7 +340,7 @@
     }
 
     .btn-outline:hover {
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       color: var(--teal-deep);
       text-decoration: none;
     }
@@ -390,14 +390,14 @@
 
     .quick-card:hover {
       border-color: var(--teal);
-      box-shadow: 0 2px 12px rgba(115,168,165,0.12);
+      box-shadow: 0 2px 12px rgba(98,170,166,0.12);
       transform: translateY(-1px);
     }
 
     .quick-card-icon {
       width: 36px;
       height: 36px;
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -428,8 +428,8 @@
 
     /* ─── Update Box ────────────────────────────────────────── */
     .update-box {
-      background: rgba(115,168,165,0.07);
-      border: 1px solid rgba(115,168,165,0.25);
+      background: rgba(98,170,166,0.07);
+      border: 1px solid rgba(98,170,166,0.25);
       border-left: 3px solid var(--teal);
       border-radius: 0 8px 8px 0;
       padding: 16px 20px;
@@ -494,7 +494,7 @@
     }
 
     .product-table tr:nth-child(even) td {
-      background: rgba(115,168,165,0.04);
+      background: rgba(98,170,166,0.04);
     }
 
     .product-table td {
@@ -516,7 +516,7 @@
 
     /* ─── Consideration Box ─────────────────────────────────── */
     .consideration-box {
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 22px 24px;
@@ -562,7 +562,7 @@
     }
 
     .coa-table tbody tr:nth-child(odd) td { background: #fff; }
-    .coa-table tbody tr:nth-child(even) td { background: rgba(115,168,165,0.04); }
+    .coa-table tbody tr:nth-child(even) td { background: rgba(98,170,166,0.04); }
 
     .coa-table tbody td {
       padding: 12px 16px;
@@ -584,7 +584,7 @@
     }
 
     .badge-current {
-      background: rgba(115,168,165,0.15);
+      background: rgba(98,170,166,0.15);
       color: var(--teal-deep);
     }
 
@@ -601,13 +601,13 @@
       align-items: center;
       gap: 5px;
       padding: 4px 10px;
-      border: 1px solid rgba(115,168,165,0.3);
+      border: 1px solid rgba(98,170,166,0.3);
       border-radius: 4px;
       transition: all 0.16s;
     }
 
     .coa-download:hover {
-      background: rgba(115,168,165,0.08);
+      background: rgba(98,170,166,0.08);
       border-color: var(--teal);
       text-decoration: none;
     }
@@ -616,7 +616,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(115,168,165,0.05);
+      background: rgba(98,170,166,0.05);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 16px 20px;
@@ -709,7 +709,7 @@
     }
 
     .evidence-footer {
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 16px 20px;
@@ -743,7 +743,7 @@
 
     .disclaimer-box p {
       font-size: 13.5px;
-      color: #5a3e10;
+      color: var(--aho-accent-tint);
       margin: 0;
       line-height: 1.65;
     }
@@ -829,7 +829,7 @@
     }
 
     .reference-box {
-      background: rgba(115,168,165,0.06);
+      background: rgba(98,170,166,0.06);
       border: 1px solid var(--border-teal);
       border-radius: 8px;
       padding: 18px 22px;
@@ -875,7 +875,7 @@
       transition: background 0.16s;
     }
 
-    .faq-question:hover { background: rgba(115,168,165,0.05); }
+    .faq-question:hover { background: rgba(98,170,166,0.05); }
     .faq-item.open .faq-question { color: var(--teal-deep); }
 
     .faq-chevron {
@@ -923,7 +923,7 @@
     .contact-card-icon {
       width: 38px;
       height: 38px;
-      background: rgba(115,168,165,0.10);
+      background: rgba(98,170,166,0.10);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -1017,7 +1017,7 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(115,168,165,0.12);
+      box-shadow: 0 0 0 3px rgba(98,170,166,0.12);
     }
 
     .form-group textarea { resize: vertical; min-height: 110px; }
@@ -1040,8 +1040,8 @@
       align-items: center;
       gap: 10px;
       padding: 14px 20px;
-      background: rgba(115,168,165,0.10);
-      border: 1px solid rgba(115,168,165,0.3);
+      background: rgba(98,170,166,0.10);
+      border: 1px solid rgba(98,170,166,0.3);
       border-radius: 6px;
       font-size: 13.5px;
       color: var(--teal-deep);
@@ -1057,7 +1057,7 @@
       border-radius: 8px;
       padding: 14px 18px;
       font-size: 13px;
-      color: #5a3e10;
+      color: var(--aho-accent-tint);
       line-height: 1.6;
     }
 
@@ -1134,8 +1134,8 @@
     .icon-sm { width: 16px; height: 16px; }
   /* AHO:NAVCSS:START - generated by scripts/propagate-nav.js, do not edit by hand */
 :root{
-  --gold: var(--aho-gold);
-  --gold-light: var(--aho-gold-light);
+  --gold: var(--aho-accent);
+  --gold-light: var(--aho-accent-light);
   --gold-border: var(--aho-accent-soft);
   --hairline: var(--aho-hair);
   --max: var(--aho-max);
@@ -1157,7 +1157,7 @@
 /* AHO:NAVCSS:END */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=52766ffe">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=a3b90e23">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>
@@ -1205,8 +1205,8 @@
       <!-- Wordmark SVG — geometric A mark -->
       <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect width="32" height="32" rx="4" fill="#253032"/>
-        <path d="M16 6 L26 24 H6 Z" fill="none" stroke="#73a8a5" stroke-width="1.6" stroke-linejoin="round"/>
-        <line x1="10" y1="18" x2="22" y2="18" stroke="#73a8a5" stroke-width="1.2"/>
+        <path d="M16 6 L26 24 H6 Z" fill="none" stroke="#62aaa6" stroke-width="1.6" stroke-linejoin="round"/>
+        <line x1="10" y1="18" x2="22" y2="18" stroke="#62aaa6" stroke-width="1.2"/>
       </svg>
       <div class="logo-text">
         Aho Farms
@@ -1583,7 +1583,7 @@
       <!-- Chronic Pain -->
       <div class="evidence-card">
         <div class="evidence-card-header">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#62aaa6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           <h3>Chronic Pain</h3>
         </div>
         <div class="evidence-card-body">
@@ -1604,7 +1604,7 @@
       <!-- Sleep Disorders -->
       <div class="evidence-card">
         <div class="evidence-card-header">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#62aaa6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
           <h3>Sleep Disorders</h3>
         </div>
         <div class="evidence-card-body">
@@ -1625,7 +1625,7 @@
       <!-- Anxiety -->
       <div class="evidence-card">
         <div class="evidence-card-header">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#73a8a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#62aaa6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <h3>Anxiety</h3>
         </div>
         <div class="evidence-card-body">
