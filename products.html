@@ -1474,8 +1474,6 @@ html.no-video .hero-scroll{opacity:1;}
 .pr-stack li{padding:12px 0;border-top:1px solid rgba(243,241,235,0.16);}
 .pr-stack li{border-bottom:1px solid rgba(243,241,235,0.16);}
 .pr-stack i{display:block;margin-top:4px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--gold-light);}
-.pr-hero-thread{position:absolute;z-index:2;left:0;right:0;bottom:-2px;height:clamp(120px,16vh,200px);}
-.pr-hero-thread svg{position:absolute;inset:0;width:100%;height:100%;}
 
 /* ================================================================
    2 · CURRENT RANGE — flax plate. RĀ is the dominant hero: a tall photo
@@ -1561,7 +1559,7 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* ================================================================
    5 · INDOOR CRAFT — black. Macro left crossing the section top, the
-   restrained copy right. Marked COMING SOON everywhere it matters.
+   restrained copy right.
    ================================================================ */
 .pr-indoor{position:relative;background:#040505;padding:clamp(100px,14vh,190px) 0 clamp(100px,14vh,190px);overflow:hidden;}
 .pr-indoor-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(var(--s5),6vw,var(--s9));align-items:center;}
@@ -1685,7 +1683,6 @@ html.no-video .hero-scroll{opacity:1;}
   .pr-hero-copy{align-self:end;padding:clamp(330px,50svh,470px) var(--s4) var(--s6);max-width:100%;}
   .pr-h1{font-size:clamp(2.6rem,11vw,3.8rem);}
   .pr-stack{margin-top:var(--s5);}
-  .pr-hero-thread{display:none;}
   .pr-range{margin-top:var(--plate-g);padding-top:clamp(var(--s6),9vh,var(--s7));}
   .pr-range-grid{grid-template-columns:1fr;}
   .pr-range-stage{min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:var(--s3);align-items:end;}
@@ -1785,7 +1782,6 @@ html.no-video .hero-scroll{opacity:1;}
       </picture>
     </div>
     <div class="pr-hero-copy">
-      <span class="eyebrow gold cl-eyebrow reveal">01 · MEDICINAL FLOWER</span>
       <h1 class="pr-h1 emerge">Medicinal flower for <em>different market needs.</em></h1>
       <p class="pr-hero-p reveal d1">Aho Farms is developing a portfolio of dried medicinal cannabis flower across greenhouse and indoor cultivation systems in Hawke's Bay.</p>
       <div class="pr-btns reveal d2">
@@ -1795,15 +1791,10 @@ html.no-video .hero-scroll{opacity:1;}
       <span class="pr-rx pr-hero-rx reveal d3">Prescription Medicine — Not for general sale</span>
       <ul class="pr-stack reveal d3">
         <li>Greenhouse<i>Available now</i></li>
-        <li>Indoor craft<i>Coming soon</i></li>
+        <li>Indoor craft<i>Available now</i></li>
       </ul>
     </div>
-    <div class="pr-hero-thread" aria-hidden="true">
-      <svg class="pr-thread" viewBox="0 0 1000 200" preserveAspectRatio="none">
-        <path pathLength="1" d="M 690 0 C 680 70, 620 120, 585 200"/>
-      </svg>
-    </div>
-  </section>
+   </section>
 
   <!-- ================ 2 · CURRENT RANGE · GREENHOUSE GROWN ================ -->
   <!-- Flax plate. RĀ rises above the plate's top edge as the dominant object;
@@ -1860,7 +1851,7 @@ html.no-video .hero-scroll{opacity:1;}
         </div>
         <ul class="pr-rail reveal d1" role="tablist" aria-label="Products" id="prRail">
           <li><button type="button" role="tab" aria-selected="true" data-product="ra">RĀ<small>Greenhouse · available now</small></button></li>
-          <li><button type="button" role="tab" aria-selected="false" data-product="source">SOURCE<small>Indoor craft · coming soon</small></button></li>
+          <li><button type="button" role="tab" aria-selected="false" data-product="source">SOURCE<small>Indoor craft · available now</small></button></li>
           <li><button type="button" disabled aria-disabled="true">Further cultivars<small>In development</small></button></li>
         </ul>
       </div>
@@ -1910,7 +1901,7 @@ html.no-video .hero-scroll{opacity:1;}
           <img src="assets/aho-indoor-cultivation.jpg" alt="An indoor-grown cola under controlled lighting" width="900" height="1200" loading="lazy">
         </div>
         <div class="pr-sys-copy">
-          <span class="pr-tag soon">Coming soon</span>
+          <span class="pr-tag now">Available now</span>
           <h3>Indoor <em>craft</em></h3>
           <p>Developed in a highly controlled environment, the indoor programme is focused on premium flower characteristics, consistency and cultivar expression for the high-end segment of the market.</p>
           <ul class="pr-sys-list"><li>Controlled</li><li>Precise</li><li>Cultivar expression</li><li>Highly controlled craft production</li></ul>
@@ -1923,7 +1914,7 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
   </section>
 
-  <!-- ================ 5 · INDOOR CRAFT · COMING SOON ================ -->
+  <!-- ================ 5 · INDOOR CRAFT ================ -->
   <!-- Black. One macro on the left (placeholder for the trichome still), the
        restrained copy right, SOURCE small and quiet under a rule. Never shown
        as available. -->
@@ -1935,14 +1926,14 @@ html.no-video .hero-scroll{opacity:1;}
           <span class="cl-chip">Macro trichome still · placeholder</span>
         </figure>
         <div class="pr-indoor-copy">
-          <span class="pr-tag soon reveal">Coming soon</span>
+          <span class="pr-tag now reveal">Available now</span>
           <h2 class="emerge" style="margin-top:var(--s4)">The next expression of <em>Aho flower.</em></h2>
           <p class="reveal d1">Developed in a highly controlled environment, the Aho indoor programme is focused on premium flower characteristics, consistency and cultivar expression for the high-end medicinal market.</p>
           <div class="pr-indoor-jar reveal d2">
             <figure><img src="assets/aho-products-source-jar.jpg" alt="The SOURCE jar" width="620" height="730" loading="lazy"></figure>
             <div>
               <b>SOURCE</b>
-              <p>Wake &amp; Cake C30 · indoor craft. Release details will be published to registered prescribers first.</p>
+              <p>Wake &amp; Cake C30 · indoor craft. Available to patients through registered prescribers.</p>
             </div>
           </div>
         </div>
@@ -2207,7 +2198,7 @@ const PRODUCTS={
   },
   source:{
     name:'SOURCE',
-    status:{label:'Coming soon · indoor craft',cls:'soon'},
+    status:{label:'Available now · indoor craft',cls:'now'},
     sub:'A highly controlled indoor expression, focused on consistency and cultivar character for the high-end medicinal market.',
     fields:[
       ['Cultivar','Wake & Cake C30'],
