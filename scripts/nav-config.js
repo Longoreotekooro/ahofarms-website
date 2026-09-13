@@ -28,10 +28,6 @@ const NAV = [
       { en: 'Partnerships', mi: 'Ngā Hoa',           href: 'index.html#portals' },
     ],
   },
-  {
-    en: 'Invest', mi: 'Haumi', href: 'investors.html',
-    children: [],
-  },
 ];
 
 const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: 'contact.html' };
@@ -60,7 +56,6 @@ const CONNECT = [
   { label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true },
   { label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true },
   { label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true },
-  { label: 'Investors',        href: 'investors.html',       note: 'The opportunity and investor materials',            portal: true },
   { label: 'Contact the team', href: 'contact.html',         note: 'General enquiries and media',                       portal: false },
 ];
 
