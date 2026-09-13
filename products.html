@@ -1428,7 +1428,7 @@ html.no-video .hero-scroll{opacity:1;}
 .pr-tag{display:inline-block;padding:7px 12px;border:1px solid var(--gold-border);border-radius:3px;font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);}
 .pr-tag.soon{border-style:dashed;color:rgba(243,241,235,0.7);border-color:rgba(243,241,235,0.28);}
 .pr-tag.now{background:rgba(201,160,106,0.12);}
-.pr-btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(var(--s4),4vh,var(--s5));}
+.pr-btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(var(--s3),3vh,var(--s4));}
 .pr-thread{display:block;width:100%;height:auto;overflow:visible;pointer-events:none;}
 .pr-thread path{fill:none;stroke:var(--gold);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;opacity:0.85;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.6s var(--ease) 0.2s;}
 .pr-thread.in path{stroke-dashoffset:0;}
@@ -1447,26 +1447,33 @@ html.no-video .hero-scroll{opacity:1;}
    1 · HERO — the jars on the stone, full-bleed. Copy left on the dark
    canopy, the status stack bottom-right, the thread leaving the jars.
    ================================================================ */
-.pr-hero{--hh:max(calc(100vh - 72px),660px);position:relative;min-height:var(--hh);display:grid;grid-template-columns:1fr;align-items:end;background:#070907;container-type:inline-size;overflow:hidden;}
-.pr-hero-media{position:absolute;inset:0;overflow:hidden;background:#070907;}
-.pr-hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 62%;transform:scale(1.08);animation:prHeroSettle 9s var(--ease) forwards;}
+.pr-hero{--hh:max(calc(100vh - 72px),700px);position:relative;min-height:var(--hh);display:grid;grid-template-columns:1fr;align-items:center;background:#0a0b0c;container-type:inline-size;overflow:hidden;}
+/* the CEO's macro (1200x1600, frosted cola from above) is HELD WHOLE on the
+   right at the hero's full height over a blurred, darkened field of itself,
+   so nothing of the trichome frost is cropped away and the left stays quiet
+   for the copy. The field is a pre-blurred jpg (cheap), the portrait's left
+   edge is masked into it. */
+.pr-hero-media{position:absolute;inset:0;overflow:hidden;background:#0a0b0c;}
+.pr-hero-field{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:scale(1.06);}
+.pr-hero-cola{position:absolute;top:0;right:0;height:100%;width:auto;max-width:none;aspect-ratio:3/4;object-fit:cover;object-position:50% 50%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.55) 14%,#000 34%);mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.55) 14%,#000 34%);
+  transform:scale(1.06);transform-origin:70% 50%;animation:prHeroSettle 10s var(--ease) forwards;}
 @keyframes prHeroSettle{to{transform:scale(1);}}
 .pr-hero-media::after{content:'';position:absolute;inset:0;background:
-  linear-gradient(to right,rgba(7,9,7,0.86) 0%,rgba(7,9,7,0.62) 28%,rgba(7,9,7,0.12) 52%,rgba(7,9,7,0) 66%),
-  linear-gradient(to bottom,rgba(7,9,7,0.55) 0%,rgba(7,9,7,0) 24%),
-  linear-gradient(to top,rgba(11,11,11,1) 0%,rgba(11,11,11,0.55) 12%,rgba(11,11,11,0) 34%);}
-.pr-hero-copy{position:relative;z-index:2;align-self:center;padding:clamp(96px,12vh,140px) var(--s4) clamp(var(--s6),8vh,var(--s7)) max(var(--s4),calc((100cqw - var(--max))/2 + var(--s4)));max-width:min(100%,calc((100cqw - var(--max))/2 + 58ch));}
-.pr-h1{margin:0;font-size:clamp(3rem,6.4vw,5.8rem);line-height:0.98;letter-spacing:-0.02em;max-width:11ch;}
+  linear-gradient(to right,rgba(10,11,12,0.78) 0%,rgba(10,11,12,0.5) 26%,rgba(10,11,12,0.08) 46%,rgba(10,11,12,0) 60%),
+  linear-gradient(to bottom,rgba(10,11,12,0.72) 0%,rgba(10,11,12,0.3) 12%,rgba(10,11,12,0) 26%),
+  linear-gradient(to top,rgba(11,11,11,1) 0%,rgba(11,11,11,0.5) 10%,rgba(11,11,11,0) 30%);}
+.pr-hero-copy{position:relative;z-index:2;align-self:center;padding:clamp(88px,11vh,112px) var(--s4) clamp(var(--s5),6vh,var(--s6)) max(var(--s4),calc((100cqw - var(--max))/2 + var(--s4)));max-width:min(100%,calc((100cqw - var(--max))/2 + 58ch));}
+.pr-h1{margin:0;font-size:clamp(3rem,6vw,5.2rem);line-height:0.98;letter-spacing:-0.02em;max-width:11ch;}
 .pr-h1 em{font-style:italic;color:var(--gold-light);}
-.pr-hero-p{margin:var(--s4) 0 0;max-width:44ch;font-size:clamp(0.98rem,1.1vw,1.1rem);line-height:1.75;color:rgba(243,241,235,0.84);}
-.pr-hero-rx{margin-top:var(--s4);}
+.pr-hero-p{margin:var(--s3) 0 0;max-width:44ch;font-size:clamp(0.98rem,1.1vw,1.1rem);line-height:1.75;color:rgba(243,241,235,0.84);}
+.pr-hero-rx{margin-top:var(--s3);}
 .pr-hero-aside{position:relative;z-index:2;align-self:end;padding:0 clamp(24px,3vw,56px) clamp(var(--s6),9vh,var(--s8)) var(--s3);}
 .pr-hero-aside::before{content:'';position:absolute;z-index:-1;inset:-64px -40px -24px -96px;pointer-events:none;background:radial-gradient(ellipse at 55% 60%,rgba(7,9,7,0.78),rgba(7,9,7,0.4) 50%,transparent 76%);}
-.pr-stack{margin:clamp(var(--s4),4vh,var(--s5)) 0 0;padding:0;list-style:none;width:min(100%,440px);display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s4);font-size:0.66rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;line-height:1.5;color:rgba(243,241,235,0.92);text-shadow:0 1px 22px rgba(7,9,7,0.95);}
+.pr-stack{margin:clamp(var(--s3),3vh,var(--s4)) 0 0;padding:0;list-style:none;width:min(100%,440px);display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s4);font-size:0.66rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;line-height:1.5;color:rgba(243,241,235,0.92);text-shadow:0 1px 22px rgba(7,9,7,0.95);}
 .pr-stack li{padding:12px 0;border-top:1px solid rgba(243,241,235,0.16);}
 .pr-stack li{border-bottom:1px solid rgba(243,241,235,0.16);}
 .pr-stack i{display:block;margin-top:4px;font-family:var(--font-h);font-style:italic;font-weight:300;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--gold-light);}
-.pr-hero .cl-chip{top:calc(72px + var(--s3));}
 .pr-hero-thread{position:absolute;z-index:2;left:0;right:0;bottom:-2px;height:clamp(120px,16vh,200px);}
 .pr-hero-thread svg{position:absolute;inset:0;width:100%;height:100%;}
 
@@ -1670,11 +1677,11 @@ html.no-video .hero-scroll{opacity:1;}
   .pr-range-main{width:min(66%,420px);}
 }
 @media(max-width:900px){
-  .pr-hero{grid-template-columns:1fr;--hh:max(100svh,820px);}
-  .pr-hero-media{bottom:auto;height:min(62%,560px);}
-  .pr-hero-media img{object-position:56% 40%;}
-  .pr-hero-media::after{background:linear-gradient(to bottom,rgba(7,9,7,0.62) 0%,rgba(7,9,7,0.08) 22%,rgba(7,9,7,0.04) 58%,rgba(11,11,11,0.9) 86%,rgba(11,11,11,1) 100%);}
-  .pr-hero{background:#0b0b0b;}
+  .pr-hero{grid-template-columns:1fr;--hh:max(100svh,820px);background:#0b0b0b;align-items:end;}
+  .pr-hero-media{bottom:auto;height:min(64%,600px);}
+  .pr-hero-field{display:none;}
+  .pr-hero-cola{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-position:50% 45%;-webkit-mask-image:none;mask-image:none;transform-origin:50% 40%;}
+  .pr-hero-media::after{background:linear-gradient(to bottom,rgba(10,11,12,0.6) 0%,rgba(10,11,12,0.06) 22%,rgba(10,11,12,0.04) 56%,rgba(11,11,11,0.9) 84%,rgba(11,11,11,1) 100%);}
   .pr-hero-copy{align-self:end;padding:clamp(330px,50svh,470px) var(--s4) var(--s6);max-width:100%;}
   .pr-h1{font-size:clamp(2.6rem,11vw,3.8rem);}
   .pr-stack{margin-top:var(--s5);}
@@ -1713,7 +1720,7 @@ html.no-video .hero-scroll{opacity:1;}
   .cl-chip{top:var(--s3);right:var(--s3);font-size:0.52rem;}
 }
 @media(prefers-reduced-motion:reduce){
-  .pr-hero-media img{animation:none;transform:none;}
+  .pr-hero-cola,.pr-hero-field{animation:none;transform:none;}
   .pr-photo img,.pr-sys-media img,.pr-indoor-media img,.pr-place-media img{transform:none !important;transition:none;}
   .pr-thread path{transition:none;stroke-dashoffset:0;}
   .pr-thread circle,.pr-station::before{transition:none;opacity:1;transform:none;}
@@ -1770,12 +1777,12 @@ html.no-video .hero-scroll{opacity:1;}
        and SOURCE jars on location, same low key, same left-hand darkness for
        the copy. The product thread leaves the jars here and exits the frame. -->
   <section class="pr-hero" id="products">
-    <div class="pr-hero-media">
+    <div class="pr-hero-media" aria-hidden="false">
+      <img class="pr-hero-field" src="assets/aho-products-hero-field.jpg" alt="" width="1600" height="1000" aria-hidden="true" decoding="async">
       <picture>
-        <source media="(max-width:640px)" srcset="assets/aho-products-hero-jars-mobile.jpg">
-        <img src="assets/aho-products-hero-jars.jpg" alt="RĀ and SOURCE medicinal flower jars standing on a stone beneath a cannabis canopy at dusk" width="1920" height="1346" fetchpriority="high">
+        <source media="(max-width:900px)" srcset="assets/aho-products-hero-cola-mobile.jpg">
+        <img class="pr-hero-cola" src="assets/aho-products-hero-cola.jpg" alt="An Aho cola seen from above, every leaf and calyx frosted with trichomes" width="1200" height="1600" fetchpriority="high">
       </picture>
-      <span class="cl-chip">Reference plate · replace with hi-res location still</span>
     </div>
     <div class="pr-hero-copy">
       <span class="eyebrow gold cl-eyebrow reveal">01 · MEDICINAL FLOWER</span>
@@ -1793,7 +1800,7 @@ html.no-video .hero-scroll{opacity:1;}
     </div>
     <div class="pr-hero-thread" aria-hidden="true">
       <svg class="pr-thread" viewBox="0 0 1000 200" preserveAspectRatio="none">
-        <path pathLength="1" d="M 600 0 C 590 70, 540 120, 505 200"/>
+        <path pathLength="1" d="M 690 0 C 680 70, 620 120, 585 200"/>
       </svg>
     </div>
   </section>
