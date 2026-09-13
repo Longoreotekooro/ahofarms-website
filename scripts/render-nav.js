@@ -26,16 +26,13 @@ function renderNav(currentPage) {
     isActive(p.href, currentPage)
   );
   if (foundIdx !== -1) activeIdx = foundIdx;
-  // NOTE: this used to force childless parents back to Learn, from when a
-  // persistent second bar needed populating with *something*. That bar no
-  // longer exists - each parent's children render inside its own <li> - so
-  // a childless active parent (e.g. Invest) just renders without a caret/
-  // dropdown, which is correct. Do not reintroduce the fallback.
 
   // Each parent's children render as a <ul class="nav-sub"> INSIDE that
   // parent's own <li>, once. This is the single source for both the desktop
-  // click-to-open dropdown panel and the mobile accordion - no second bar,
-  // no runtime cloning. Closed by default; JS toggles the `hidden` attribute.
+  // dropdown panel (closed by default; assets/aho-chrome.js toggles the
+  // `hidden` attribute) and the mobile drawer, where the same list is laid
+  // out flat with the parent as a group label (CEO, 2026-09-14: every page
+  // visible, no accordion).
   const parents = NAV.map((p, i) => {
     const hasKids = p.children.length > 0;
     const caret = hasKids ? '<span class="nav-caret" aria-hidden="true"></span>' : '';
@@ -51,11 +48,23 @@ function renderNav(currentPage) {
            `<a href="${esc(p.href)}" aria-label="${esc(p.en)}"${aExtra}>${label(p)}${caret}</a>${sub}</li>`;
   }).join('\n        ');
 
+  // The drawer's own footer (mobile only, hidden by CSS on desktop): the
+  // social row, then the same wordmark the header uses.
+  const drawerFoot =
+    `<li class="nav-drawer-foot" aria-label="Aho Farms">` +
+    `<ul class="nav-drawer-social" aria-label="Aho Farms on social media">` +
+    SOCIAL.map(s => `<li><a href="${esc(s.href)}" target="_blank" rel="noopener" aria-label="${esc(s.name)}">${s.icon}</a></li>`).join('') +
+    `</ul>` +
+    `<a href="index.html" class="nav-drawer-mark" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>` +
+    `<p class="nav-drawer-line">Hawke&#39;s Bay · Aotearoa New Zealand</p>` +
+    `</li>`;
+
   return `<nav class="nav" id="nav" aria-label="Main">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
       <ul class="nav-links" id="navDrawer">
         ${parents}
+        ${drawerFoot}
       </ul>
       <div class="nav-right">
         <ul class="nav-social" aria-label="Aho Farms on social media">

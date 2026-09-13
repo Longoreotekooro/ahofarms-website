@@ -25,7 +25,41 @@ const assetVersion = (rel) =>
   crypto.createHash('sha1').update(fs.readFileSync(path.join(ROOT, rel))).digest('hex').slice(0, 8);
 const CSS_HREF = `assets/aho-chrome.css?v=${assetVersion('assets/aho-chrome.css')}`;
 const JS_SRC = `assets/aho-chrome.js?v=${assetVersion('assets/aho-chrome.js')}`;
-const PORTALS = new Set(['export-portal.html', 'investors-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
+const PORTALS = new Set(['export-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
+// Palette 2 (teal) is the professional / partner layer (CEO, 2026-09-14);
+// every other page is Palette 1 (earth, the default). Stamped on <html>.
+const TEAL_PAGES = new Set(['prescribers.html', 'pharmacies.html', 'export-partners.html', ...PORTALS]);
+// Pages with no hero to absorb the fixed header get a solid bar and a body
+// offset (html.aho-nav-solid in aho-chrome.css).
+const SOLID_NAV_PAGES = new Set(['404.html', 'contact.html', 'disclaimer.html', 'export-partners.html', 'kaupapa.html',
+  'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', ...PORTALS]);
+// Unlinked pages the CEO wants kept but hidden (2026-09-14): board/business
+// stubs, parked kaupapa/social-impact.
+const NOINDEX_PAGES = new Set(['board.html', 'business.html', 'kaupapa.html', 'social-impact.html']);
+
+// Idempotent attribute/class stamping on the <html> tag.
+function stampHtmlTag(html, file) {
+  return html.replace(/<html\b([^>]*)>/i, (m, attrs) => {
+    let a = attrs;
+    a = a.replace(/\s*data-palette="[^"]*"/, '');
+    if (TEAL_PAGES.has(file)) a += ' data-palette="teal"';
+    const cls = (a.match(/\sclass="([^"]*)"/) || [, ''])[1].split(/\s+/).filter(c => c && c !== 'aho-nav-solid');
+    if (SOLID_NAV_PAGES.has(file)) cls.push('aho-nav-solid');
+    a = a.replace(/\s*class="[^"]*"/, '');
+    if (cls.length) a += ` class="${cls.join(' ')}"`;
+    return `<html${a}>`;
+  });
+}
+function stampNoindex(html, file) {
+  html = html.replace(/\s*<meta name="robots" content="noindex[^"]*">/g, '');
+  if (!NOINDEX_PAGES.has(file)) return html;
+  return html.replace(/<meta charset="[^"]*">/i, m => `${m}\n  <meta name="robots" content="noindex, nofollow">`);
+}
+const SKIP_LINK = '<a class="aho-skip" href="#main">Skip to content</a>';
+function stampSkipLink(html) {
+  if (html.includes('class="aho-skip"')) return html;
+  return html.replace(/<body[^>]*>/, m => `${m}\n${SKIP_LINK}`);
+}
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const escHtml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -126,6 +160,9 @@ function processPage(file) {
   let html = toEOL(raw, '\n');
   const isPortal = PORTALS.has(file);
 
+  html = stampHtmlTag(html, file);
+  html = stampNoindex(html, file);
+  html = stampSkipLink(html);
   html = swapOrInsert(html, S.css, `<link rel="stylesheet" href="${CSS_HREF}">`, [/<\/head>/, /<body[^>]*>/], `${file} chrome css`);
   html = swapOrInsert(html, S.js, `<script src="${JS_SRC}" defer></script>`, /<\/body>/, `${file} chrome js`);
 

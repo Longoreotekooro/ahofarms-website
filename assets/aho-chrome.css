@@ -1,49 +1,144 @@
 /* ====================================================================
-   AHO FARMS · shared chrome
+   AHO FARMS · design system + shared chrome
    One stylesheet linked from every page, loaded AFTER the page's own
-   inline <style> so it wins ties. Carries the things the CEO asked to be
-   identical everywhere (2026-09-10 site-wide feedback): palette tokens,
-   the wordmark header with social icons, full-width dropdowns, the
-   simplified footer, the floating "Connect with us" button, heading
-   line balancing and the sans/serif split.
+   inline <style> so it wins ties. Since the 2026-09-14 design audit
+   (docs/superpowers/specs/2026-09-14-design-system-audit-and-plan.md)
+   this file is the single source for: tokens (colour, type scale,
+   spacing, radii, shadows, layout), base resets, the header + mobile
+   drawer + desktop dropdown, the footer, the floating "Connect with us"
+   button, the plate grammar and the shared components (buttons, cards,
+   eyebrows, stats, fields, notices). Page CSS extends these; it does
+   not redefine them.
 
-   Palette. Two are allowed (Palette A: charcoal · sand · gold, the
-   default; Palette B: charcoal · white · teal). Both share one system;
-   only the accent moves. Switch a page with <html data-palette="teal">.
-   Nothing here redefines a page's own --gold / --teal tokens.
+   Palettes. Two, never mixed in one section (CEO, 2026-09-14):
+     Palette 1 · Earth  — ink / gold / white / flax / tan   (default)
+     Palette 2 · Teal   — teal-night / deep teal / light teal / white
+   A page opts into Palette 2 with <html data-palette="teal">; every
+   accent role below reads --aho-accent so the whole chrome follows.
    ==================================================================== */
+
+/* ---- 1. tokens -------------------------------------------------- */
 :root{
+  /* neutrals */
+  --aho-void:#050505;
   --aho-ink:#0b0d0f;
   --aho-charcoal:#101112;
-  --aho-sand:#e7dcc6;
-  --aho-paper:#f4f2ec;
+  --aho-graphite:#1a1d1f;
   --aho-white:#f3f1eb;
+  --aho-paper:#f4f2ec;
+  --aho-flax:#efe9db;
+  --aho-sand:#e7dcc6;
+  --aho-tan:#ded3bf;
+  --aho-silver:#a8adb3;
+  --aho-muted:#5d574c;          /* body text on light plates, secondary */
+  --aho-ink-soft:#2a2722;       /* body text on light plates */
+  /* palette 1 accent */
   --aho-gold:#c9a06a;
   --aho-gold-light:#e3c894;
+  --aho-gold-deep:#8f6a33;      /* gold that passes contrast on flax */
+  /* palette 2 */
   --aho-teal:#62aaa6;
   --aho-teal-light:#99c5c4;
-  --aho-silver:#a8adb3;
+  --aho-teal-deep:#4a7a78;
+  --aho-teal-night:#1a2426;
+  /* hairlines */
   --aho-hair:rgba(243,241,235,0.1);
+  --aho-hair-strong:rgba(243,241,235,0.18);
+  --aho-hair-light:rgba(21,19,15,0.12);
+  --aho-hair-light-strong:rgba(21,19,15,0.2);
+  /* accent roles (palette 1 defaults) */
   --aho-accent:var(--aho-gold);
+  --aho-accent-light:var(--aho-gold-light);
+  --aho-accent-deep:var(--aho-gold-deep);
   --aho-accent-soft:rgba(201,160,106,0.34);
+  --aho-accent-tint:rgba(201,160,106,0.12);
   --aho-accent-ink:#141210;
-  --aho-font-h:'Cormorant Garamond',Georgia,serif;
-  --aho-font-b:'Inter',system-ui,sans-serif;
-  --aho-ease:cubic-bezier(0.22,1,0.36,1);
+  /* type */
+  --aho-font-h:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --aho-font-b:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --t-xs:0.6875rem;                          /* 11 · eyebrows, meta */
+  --t-sm:0.8125rem;                          /* 13 · captions, buttons, nav */
+  --t-base:1rem;                             /* 16 · body */
+  --t-md:1.125rem;                           /* 18 · lead */
+  --t-lg:clamp(1.25rem,1.6vw,1.5rem);        /* 20–24 · h4 / pull */
+  --t-h3:clamp(1.5rem,2.2vw,1.9rem);         /* 24–30 */
+  --t-h2:clamp(2.2rem,4vw,3.6rem);           /* 35–58 · chapter heads */
+  --t-h1:clamp(2.8rem,5.5vw,4.6rem);         /* 45–74 · page heads */
+  --t-display:clamp(3.4rem,7vw,6.4rem);      /* 54–102 · hero statements */
+  --lh-tight:1.05; --lh-heading:1.15; --lh-body:1.65;
+  --track-caps:0.16em;
+  /* spacing (8px scale) */
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px; --s8:128px; --s9:192px;
+  --sec-y-sm:clamp(48px,6vw,72px);
+  --sec-y:clamp(72px,9vw,120px);
+  --sec-y-lg:clamp(96px,12vw,160px);
+  /* layout */
   --aho-max:1280px;
   --aho-gutter:32px;
+  --max-prose:760px;
+  --max-form:640px;
+  --nav-h:72px;
+  --plate-g:clamp(10px,1.4vw,22px);
+  --plate-r:clamp(16px,2vw,30px);
+  /* radii */
+  --r-ctl:3px;
+  --r-card:8px;
+  --r-img:calc(var(--plate-r)*0.55);
+  --r-pill:999px;
+  /* shadows */
+  --shadow-plate:0 30px 80px rgba(0,0,0,0.45);
+  --shadow-card-light:0 12px 32px rgba(21,19,15,0.08);
+  --shadow-float:0 18px 44px rgba(0,0,0,0.45);
+  /* motion */
+  --aho-ease:cubic-bezier(0.22,1,0.36,1);
 }
 html[data-palette="teal"]{
   --aho-accent:var(--aho-teal);
+  --aho-accent-light:var(--aho-teal-light);
+  --aho-accent-deep:var(--aho-teal-deep);
   --aho-accent-soft:rgba(98,170,166,0.38);
+  --aho-accent-tint:rgba(98,170,166,0.12);
   --aho-accent-ink:#0b1514;
 }
+@media(max-width:900px){:root{--aho-gutter:24px;}}
+@media(max-width:560px){:root{--aho-gutter:20px;}}
 
-/* ---- the wordmark, one asset, any colour --------------------------
+/* ---- 2. base --------------------------------------------------- */
+button,input,select,textarea{font:inherit;letter-spacing:inherit;}
+button{color:inherit;}
+img,video,svg{max-width:100%;}
+img{height:auto;}
+:focus-visible{outline:2px solid var(--aho-accent);outline-offset:3px;}
+.aho-skip{position:absolute;left:var(--aho-gutter);top:-100px;z-index:200;padding:12px 18px;border-radius:var(--r-ctl);
+  background:var(--aho-accent);color:var(--aho-accent-ink);font-family:var(--aho-font-b);font-size:var(--t-sm);font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:top .2s;}
+.aho-skip:focus-visible{top:calc(var(--nav-h) + 12px);}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+}
+
+/* ---- 3. typography roles ------------------------------------------
+   Serif is for feature headings (h1, h2). Everything smaller is sans,
+   as are navigation, buttons and body. Heading lines are balanced so
+   the last line never carries one short word. */
+h3,h4,h5,h6{font-family:var(--aho-font-b);}
+h1,h2,h3{text-wrap:balance;}
+p{text-wrap:pretty;}
+.eyebrow{display:block;font-family:var(--aho-font-b);font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);
+  text-transform:uppercase;color:var(--aho-accent);margin:0 0 12px;}
+.eyebrow--muted{color:var(--aho-silver);}
+.eyebrow--rule::before{content:'';display:inline-block;width:24px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px;opacity:.7;}
+.stat{display:grid;gap:6px;}
+.stat b{display:block;font-family:var(--aho-font-h);font-weight:400;font-size:var(--t-h2);line-height:1;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;}
+.stat span{font-size:var(--t-sm);color:var(--aho-silver);max-width:26ch;line-height:1.5;}
+
+/* ---- 4. the wordmark, one asset, any colour ----------------------
    The mono SVG paints in currentColor with the lighter halves at 0.72
    alpha, so used as a mask it keeps the mark's two-tone split whatever
    colour the element carries. Height sets the size; width follows the
-   mark's own ratio. */
+   mark's own ratio. The coloured (teal) twin is kept for brand uses but
+   is no longer crossfaded in on hover (CEO, 2026-09-14: white mark,
+   accent hovers). */
 .aho-mark{
   display:inline-block;height:1em;aspect-ratio:731.21/250.10;vertical-align:middle;
   background:currentColor;
@@ -53,109 +148,230 @@ html[data-palette="teal"]{
 .aho-mark--colour{-webkit-mask:none;mask:none;
   background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;}
 
-/* ---- header ------------------------------------------------------- */
-.nav-logo{display:inline-flex;align-items:center;color:var(--aho-white);font-size:26px;line-height:1;text-decoration:none;transition:color .3s var(--aho-ease);}
-/* header mark: white at rest, the brand's two-tone teal crossfades in on hover
-   (CEO, 2026-09-11). The teal sits in ::after over the white mask so the two
-   can fade rather than snap. The footer mark stays white. */
-.nav-logo{position:relative;}
-.nav-logo .aho-mark{height:26px;transition:opacity .3s var(--aho-ease);}
-.nav-logo::after{content:'';position:absolute;inset:0;background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;opacity:0;transition:opacity .3s var(--aho-ease);}
-.nav-logo:hover .aho-mark,.nav-logo:focus-visible .aho-mark{opacity:0;}
-.nav-logo:hover::after,.nav-logo:focus-visible::after{opacity:1;}
-.nav-social{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none;}
-.nav-social a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:rgba(243,241,235,0.72);transition:color .25s,background .25s;}
-/* header hovers go to the brand teal (CEO, 2026-09-11) */
-.nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-teal);background:rgba(243,241,235,0.06);}
-.nav-social svg{width:17px;height:17px;fill:currentColor;}
+/* ---- 5. header --------------------------------------------------
+   Transparent over a hero, veiled once scrolled. Pages with no hero to
+   absorb the bar carry <html class="aho-nav-solid"> (stamped by
+   scripts/propagate-chrome.js) and get a solid bar + body offset. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 var(--aho-gutter);font-family:var(--aho-font-b);
+  transition:background .4s var(--aho-ease),border-color .4s var(--aho-ease);}
+.nav *{box-sizing:border-box;}
+.nav.scrolled,html.aho-nav-solid .nav{background:rgba(5,8,12,0.86);border-bottom:1px solid var(--aho-hair);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+html.aho-nav-solid body{padding-top:var(--nav-h);}
+.nav-inner{max-width:var(--aho-max);margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:var(--s3);height:var(--nav-h);}
+.nav-logo{grid-column:1;justify-self:start;display:inline-flex;align-items:center;min-height:44px;padding:0 4px;margin-left:-4px;
+  color:var(--aho-white);font-size:26px;line-height:1;text-decoration:none;transition:color .3s var(--aho-ease);}
+.nav-logo .aho-mark{height:26px;}
+.nav-logo:hover,.nav-logo:focus-visible{color:var(--aho-accent-light);}
+.nav-links{grid-column:2;justify-self:center;display:flex;align-items:center;gap:var(--s4);list-style:none;margin:0;padding:0;}
+.nav-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:var(--s3);}
+.nav-parent > a,.nav-cta-wrap{display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:opacity .2s;}
+/* Bilingual swap. Both labels occupy ONE grid cell sized to the wider
+   of the two, so the bar cannot reflow when the text changes. Hover is
+   scoped to each item's OWN trigger element only. */
+.bil{display:grid;}
+.bil-en,.bil-mi{grid-area:1/1;transition:opacity .32s ease,transform .32s ease;}
+.bil-en{font-size:var(--t-sm);font-weight:500;letter-spacing:0.04em;color:var(--aho-white);}
+.bil-mi{font-size:var(--t-sm);font-weight:400;letter-spacing:0.04em;color:var(--aho-accent-light);font-style:italic;opacity:0;transform:translateY(3px);}
+.nav-parent>a:hover .bil-en,.nav-sub a:hover .bil-en,.nav-cta-wrap:hover .bil-en{opacity:0;transform:translateY(-3px);}
+.nav-parent>a:hover .bil-mi,.nav-sub a:hover .bil-mi,.nav-cta-wrap:hover .bil-mi{opacity:1;transform:translateY(0);}
+.nav-caret{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4px solid currentColor;opacity:.55;transition:transform .2s;color:var(--aho-white);}
+.nav-parent .nav-sub[hidden]{display:none;}
+.nav-parent .nav-sub{list-style:none;margin:0;padding:0;z-index:110;}
+.nav-parent .nav-sub a{display:block;padding:8px 20px;text-decoration:none;white-space:nowrap;}
 .nav-parent.is-active > a .bil-en{color:var(--aho-accent);}
-.nav-cta-wrap{border-color:var(--aho-accent-soft) !important;color:var(--aho-accent) !important;}
-.nav-cta-wrap:hover,.nav-cta-wrap:focus-visible{background:var(--aho-teal) !important;border-color:var(--aho-teal) !important;color:#fff !important;}
-.nav-cta-wrap .bil-mi{color:inherit !important;}
-/* dropdowns run the full width of the site, not the page margins */
+.nav-parent.is-expanded .nav-caret{transform:rotate(180deg);}
+.nav-social{display:flex;align-items:center;gap:2px;margin:0;padding:0;list-style:none;}
+.nav-social a{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:rgba(243,241,235,0.72);transition:color .25s,background .25s;}
+.nav-social a:hover,.nav-social a:focus-visible{color:var(--aho-accent);background:rgba(243,241,235,0.06);}
+.nav-social svg{width:17px;height:17px;fill:currentColor;}
+.nav-cta-wrap{background:transparent;border:1px solid var(--aho-accent-soft);color:var(--aho-accent);padding:0 18px;min-height:40px;border-radius:var(--r-ctl);
+  transition:background .2s,color .2s,border-color .2s;gap:0;justify-content:center;text-align:center;}
+.nav-cta-wrap .bil{justify-items:center;}
+.nav-cta-wrap .bil-en,.nav-cta-wrap .bil-mi{color:inherit;}
+.nav-cta-wrap:hover,.nav-cta-wrap:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-right:-8px;background:none;border:0;cursor:pointer;padding:0;align-items:center;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--aho-white);transition:transform .25s var(--aho-ease),opacity .2s;}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-drawer-foot{display:none;}
+
+/* desktop: full-width dropdown panel below the bar */
 @media(min-width:901px){
   .nav-parent .nav-sub{
-    left:0;right:0;max-width:none;margin:0;border-radius:0;
+    position:absolute;top:100%;left:0;right:0;margin:0;max-width:none;
+    display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;
+    gap:clamp(40px,6vw,112px);
     padding:30px max(var(--aho-gutter),calc((100% - var(--aho-max))/2 + var(--aho-gutter))) 34px;
-    border-bottom:1px solid var(--aho-hair);
-    box-shadow:0 30px 60px rgba(0,0,0,0.42);
+    background:rgba(4,7,11,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--aho-hair);box-shadow:0 30px 60px rgba(0,0,0,0.42);
+    opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);
+    transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s;
   }
-  .nav-parent .nav-sub a::after{background:var(--aho-accent);}
+  .nav-parent .nav-sub[hidden]{display:flex;}
+  .nav-parent .nav-sub.is-open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);transition:opacity .2s ease,transform .2s ease;}
+  .nav-parent .nav-sub:has(li:nth-child(4)){justify-content:space-between;gap:var(--s2);}
+  .nav-parent .nav-sub li{flex:0 1 auto;min-width:0;}
+  .nav-parent .nav-sub a{padding:6px 2px;position:relative;}
+  .nav-parent .nav-sub a::after{content:'';position:absolute;left:2px;right:2px;bottom:-2px;height:1px;background:var(--aho-accent);transform:scaleX(0);transform-origin:left;transition:transform .22s ease;}
+  .nav-parent .nav-sub a:hover::after,.nav-parent .nav-sub a:focus-visible::after{transform:scaleX(1);}
 }
+@media(min-width:901px) and (max-width:1180px){
+  .nav-parent .nav-sub{padding-top:24px;padding-bottom:28px;gap:clamp(18px,2.4vw,40px);}
+  .nav-parent .nav-sub:has(li:nth-child(4)){gap:var(--s1);}
+  .nav-parent .nav-sub .bil-en,.nav-parent .nav-sub .bil-mi{font-size:var(--t-xs);letter-spacing:0.02em;}
+}
+
+/* mobile: one flat list. Every page visible, group labels as eyebrows,
+   sub-pages indented, then the social row and the wordmark as the
+   drawer's own footer (CEO brief, 2026-09-14). No accordion. */
 @media(max-width:900px){
   .nav-social{display:none;}
   .nav-logo .aho-mark{height:22px;}
-  /* The drawer is position:fixed, but .nav carries a backdrop-filter, so
-     .nav (72px tall) is its containing block, not the viewport, and the
-     page's inset:0 rule collapsed it to content height. The header is also
-     a 3-column grid (2026-09-10) whose justify-self:center / align-items:
-     center still apply to an absolutely positioned item, which shrink-
-     wrapped it into a narrow centred column. Size it explicitly from the
-     bar's bottom edge instead; leave bottom/right unset so nothing is
-     over-constrained. */
-  .nav-links{top:72px;bottom:auto;left:0;right:auto;width:100%;height:calc(100vh - 72px);height:calc(100dvh - 72px);
-             justify-self:start;align-self:start;}
-  /* Phone nav is English only (CEO, 2026-09-11): the te reo line is
-     dropped from the drawer and the header Contact pill. The desktop
-     hover swap must not run either - on a phone :hover sticks after a tap
-     and would hide the English label of whatever was last touched. */
+  .nav-burger{display:flex;}
   .nav .bil-mi{display:none;}
   .nav-parent>a:hover .bil-en,.nav-sub a:hover .bil-en,.nav-cta-wrap:hover .bil-en{opacity:1;transform:none;}
-  .nav-cta-wrap{padding:9px 16px;white-space:nowrap;}
+  .nav-cta-wrap{padding:0 16px;min-height:40px;white-space:nowrap;}
+  .nav-links{position:fixed;top:var(--nav-h);left:0;right:auto;bottom:auto;width:100%;height:calc(100vh - var(--nav-h));height:calc(100dvh - var(--nav-h));
+    justify-self:start;align-self:start;background:var(--aho-void);flex-direction:column;align-items:stretch;gap:0;
+    padding:var(--s2) var(--aho-gutter) var(--s5);overflow-y:auto;-webkit-overflow-scrolling:touch;
+    transform:translateX(100%);transition:transform .28s var(--aho-ease),visibility 0s linear .28s;z-index:90;visibility:hidden;}
+  .nav-links.is-open{transform:translateX(0);visibility:visible;transition:transform .28s var(--aho-ease);}
+  .nav-parent{border-bottom:0;padding:var(--s2) 0 var(--s1);}
+  .nav-parent > a{pointer-events:none;padding:0 0 6px;justify-content:flex-start;}
+  .nav-parent > a .bil-en{font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);text-transform:uppercase;color:var(--aho-silver);}
+  .nav-parent.is-active > a .bil-en{color:var(--aho-accent);}
+  .nav-caret{display:none;}
+  .nav-parent .nav-sub,.nav-parent .nav-sub[hidden]{position:static;display:flex;flex-direction:column;flex-wrap:nowrap;transform:none;margin:0;max-width:none;min-width:0;
+    background:none;backdrop-filter:none;border:0;box-shadow:none;border-radius:0;align-items:stretch;justify-content:flex-start;gap:0;padding:0;opacity:1;visibility:visible;pointer-events:auto;}
+  .nav-parent .nav-sub li{border-top:1px solid var(--aho-hair);}
+  .nav-parent .nav-sub a{display:flex;align-items:center;min-height:52px;padding:0 0 0 20px;white-space:normal;border-left:1px solid var(--aho-hair);}
+  .nav-parent .nav-sub a .bil-en{font-size:var(--t-base);font-weight:500;letter-spacing:0;color:var(--aho-white);}
+  .nav-parent .nav-sub a[aria-current="page"] .bil-en{color:var(--aho-accent);}
+  .nav-drawer-foot{display:block;margin-top:auto;padding-top:var(--s5);}
+  .nav-drawer-foot .nav-drawer-social{display:flex;gap:6px;margin:0 0 var(--s4);padding:0;list-style:none;}
+  .nav-drawer-foot .nav-drawer-social a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--aho-hair);color:rgba(243,241,235,0.72);}
+  .nav-drawer-foot .nav-drawer-social a:hover,.nav-drawer-foot .nav-drawer-social a:focus-visible{color:var(--aho-accent);border-color:var(--aho-accent-soft);}
+  .nav-drawer-foot .nav-drawer-social svg{width:16px;height:16px;fill:currentColor;}
+  .nav-drawer-mark{display:inline-flex;align-items:center;color:var(--aho-white);font-size:28px;line-height:1;text-decoration:none;padding:4px 0;}
+  .nav-drawer-mark .aho-mark{height:28px;}
+  .nav-drawer-line{margin:10px 0 0;font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);text-transform:uppercase;color:var(--aho-silver);}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav-parent .nav-sub,.bil-en,.bil-mi,.nav-links{transition:none !important;transform:none !important;}
+  .nav-links:not(.is-open){transform:translateX(100%) !important;}
+  .nav-parent .nav-sub a::after{transition:none !important;}
 }
 
-/* ---- buttons ----------------------------------------------------
-   One primary button everywhere, on the page's accent. Pages keep their
-   own .btn geometry; only the colour roles are pinned here so a gold
-   page never shows a teal primary beside gold labels (60/30/10). */
-.btn-primary{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
-.btn-primary:hover,.btn-primary:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);filter:brightness(1.08);}
-.btn-teal-outline{color:var(--aho-accent);border-color:var(--aho-accent);}
-.btn-teal-outline:hover,.btn-teal-outline:focus-visible{background:var(--aho-accent);color:var(--aho-accent-ink);}
-.btn-gold{color:var(--aho-accent);border-color:var(--aho-accent-soft);}
-.btn-gold:hover,.btn-gold:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
-.btn,.btn-primary,.btn-outline,.btn-gold{font-family:var(--aho-font-b);}
+/* ---- 6. plates & sections -------------------------------------------
+   Inset rounded plates on the void canvas (baseline addendum). Tones
+   are the only allowed light/dark chapter grounds. */
+.aho-wrap{width:100%;max-width:var(--aho-max);margin:0 auto;padding:0 var(--aho-gutter);}
+.aho-prose{max-width:var(--max-prose);}
+.plate{margin:0 var(--plate-g);border-radius:var(--plate-r);overflow:hidden;position:relative;}
+.plate--flax{background:var(--aho-flax);color:var(--aho-ink-soft);}
+.plate--cream{background:var(--aho-paper);color:var(--aho-ink-soft);}
+.plate--earth{background:var(--aho-tan);color:var(--aho-ink-soft);}
+.plate--ink{background:var(--aho-charcoal);color:var(--aho-white);}
+.plate--teal-night{background:var(--aho-teal-night);color:var(--aho-white);}
+.plate--flax .eyebrow,.plate--cream .eyebrow,.plate--earth .eyebrow{color:var(--aho-accent-deep);}
+.plate--flax .stat span,.plate--cream .stat span,.plate--earth .stat span{color:var(--aho-muted);}
+.sec{padding:var(--sec-y) 0;}
+.sec--sm{padding:var(--sec-y-sm) 0;}
+.sec--lg{padding:var(--sec-y-lg) 0;}
+.hairline{border:0;border-top:1px solid var(--aho-hair);margin:var(--s5) 0;}
+.plate--flax .hairline,.plate--cream .hairline,.plate--earth .hairline{border-top-color:var(--aho-hair-light);}
 
-/* ---- typography ------------------------------------------------
-   Serif is for feature headings (h1, h2). Everything smaller is sans,
-   as are navigation, buttons and body. Heading lines are balanced so
-   the last line never carries one short word. */
-h3,h4,h5,h6{font-family:var(--aho-font-b);}
-h1,h2,h3{text-wrap:balance;}
-p{text-wrap:pretty;}
+/* ---- 7. buttons ------------------------------------------------
+   One button family everywhere: 48px, 13px/600 caps, 3px radius.
+   Colour roles read the page accent so a gold page never shows a teal
+   primary beside gold labels. Legacy class names are mapped below so
+   pages keep working while they are migrated. */
+.btn,.btn-primary,.btn-outline,.btn-gold,.btn-teal,.btn-teal-full,.btn-teal-outline,.th-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;
+  border:1px solid transparent;border-radius:var(--r-ctl);
+  font-family:var(--aho-font-b);font-size:var(--t-sm);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;line-height:1;
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background .2s,color .2s,border-color .2s,filter .2s;}
+.btn--sm,.btn-sm{min-height:40px;padding:0 18px;font-size:0.75rem;}
+.btn--lg,.btn-primary-lg{min-height:54px;padding:0 32px;}
+.btn--full,.btn-full,.btn-teal-full{width:100%;}
+.btn--primary,.btn-primary,.btn-teal,.btn-teal-full,.btn-submit{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
+.btn--primary:hover,.btn-primary:hover,.btn-teal:hover,.btn-teal-full:hover,.btn-submit:hover,
+.btn--primary:focus-visible,.btn-primary:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);filter:brightness(1.08);}
+.btn--secondary,.btn-teal-outline,.btn-gold,.th-btn{background:transparent;border-color:var(--aho-accent-soft);color:var(--aho-accent);}
+.btn--secondary:hover,.btn-teal-outline:hover,.btn-gold:hover,.th-btn:hover,
+.btn--secondary:focus-visible,.btn-teal-outline:focus-visible,.btn-gold:focus-visible,.th-btn:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);}
+.btn--ghost,.btn-outline{background:transparent;border-color:var(--aho-hair-strong);color:var(--aho-white);}
+.btn--ghost:hover,.btn-outline:hover,.btn--ghost:focus-visible,.btn-outline:focus-visible{border-color:var(--aho-white);}
+.plate--flax .btn--ghost,.plate--cream .btn--ghost,.plate--earth .btn--ghost{border-color:var(--aho-hair-light-strong);color:var(--aho-ink-soft);}
+.plate--flax .btn--secondary,.plate--cream .btn--secondary,.plate--earth .btn--secondary{color:var(--aho-accent-deep);border-color:var(--aho-accent-deep);}
+.btn--link{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0;background:none;border:0;
+  font-family:var(--aho-font-b);font-size:var(--t-sm);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--aho-accent);text-decoration:none;}
+.btn--link::after{content:'→';transition:transform .2s var(--aho-ease);}
+.btn--link:hover::after{transform:translateX(4px);}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center;}
 
-/* ---- footer ----------------------------------------------------- */
-.aho-footer{position:relative;background:var(--aho-ink);color:var(--aho-white);font-family:var(--aho-font-b);padding:96px 0 40px;overflow:hidden;}
+/* ---- 8. cards, fields, notices -------------------------------------- */
+.card{border:1px solid var(--aho-hair);border-radius:var(--r-card);padding:28px;background:rgba(243,241,235,0.03);display:flex;flex-direction:column;gap:12px;}
+.card > :last-child{margin-bottom:0;}
+.card-cta{margin-top:auto;padding-top:8px;}
+.plate--flax .card,.plate--cream .card,.plate--earth .card,.card--light{background:var(--aho-paper);border-color:var(--aho-hair-light);box-shadow:var(--shadow-card-light);}
+.card h3,.card h4{margin:0;font-size:var(--t-lg);font-weight:500;line-height:1.25;}
+.card p{margin:0;font-size:var(--t-sm);line-height:1.6;color:var(--aho-silver);}
+.plate--flax .card p,.plate--cream .card p,.plate--earth .card p,.card--light p{color:var(--aho-muted);}
+.icon{width:20px;height:20px;stroke:var(--aho-accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;fill:none;flex-shrink:0;}
+.plate--flax .icon,.plate--cream .icon,.plate--earth .icon{stroke:var(--aho-accent-deep);}
+.field{display:grid;gap:8px;}
+.field label{font-size:var(--t-xs);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--aho-silver);}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--aho-hair-strong);border-radius:var(--r-ctl);
+  background:rgba(243,241,235,0.04);color:var(--aho-white);font-size:var(--t-base);}
+.field textarea{min-height:140px;resize:vertical;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--aho-accent);outline-offset:1px;border-color:var(--aho-accent);}
+.field small{font-size:0.75rem;color:var(--aho-silver);}
+.plate--flax .field input,.plate--cream .field input,.plate--earth .field input,
+.plate--flax .field select,.plate--cream .field select,.plate--earth .field select,
+.plate--flax .field textarea,.plate--cream .field textarea,.plate--earth .field textarea{background:#fff;color:var(--aho-ink);border-color:var(--aho-hair-light-strong);}
+.plate--flax .field label,.plate--cream .field label,.plate--earth .field label,.plate--flax .field small,.plate--cream .field small,.plate--earth .field small{color:var(--aho-muted);}
+.notice{border:1px solid var(--aho-accent-soft);border-left-width:3px;border-radius:var(--r-ctl);padding:16px 20px;background:var(--aho-accent-tint);font-size:var(--t-sm);line-height:1.6;}
+.notice b{display:block;font-size:var(--t-xs);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--aho-accent);margin-bottom:6px;}
+.plate--flax .notice b,.plate--cream .notice b,.plate--earth .notice b{color:var(--aho-accent-deep);}
+
+/* ---- 9. starfield (shared decorative canvas) ---------------------- */
+.starfield{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.st{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(243,241,235,0.95) 0%,rgba(243,241,235,0) 70%);
+  animation:twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--td,0s);}
+.st.blue{background:radial-gradient(circle,rgba(141,175,199,0.95) 0%,rgba(141,175,199,0) 70%);}
+@keyframes twinkle{0%,100%{opacity:var(--o1,0.25);}50%{opacity:var(--o2,0.85);}}
+
+/* ---- 10. footer ------------------------------------------------- */
+.aho-footer{position:relative;background:var(--aho-ink);color:var(--aho-white);font-family:var(--aho-font-b);padding:var(--s7) 0 40px;overflow:hidden;}
 .aho-footer *{box-sizing:border-box;}
 .aho-footer a{color:inherit;text-decoration:none;}
 .aho-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--aho-hair) 20%,var(--aho-hair) 80%,transparent);}
-.aho-wrap{width:100%;max-width:var(--aho-max);margin:0 auto;padding:0 var(--aho-gutter);}
-.aho-footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid var(--aho-hair);}
-.aho-footer-logo{display:block;width:max-content;color:var(--aho-white);font-size:30px;line-height:1;margin-bottom:22px;}
-.aho-footer-logo{position:relative;}
-.aho-footer-logo .aho-mark{height:30px;transition:opacity .3s var(--aho-ease);}
-/* same hover as the header: white at rest, the two-tone teal fades in (CEO, 2026-09-11) */
-.aho-footer-logo::after{content:'';position:absolute;inset:0;background:url(brand/aho-wordmark-colour.svg) center/contain no-repeat;opacity:0;transition:opacity .3s var(--aho-ease);}
-.aho-footer-logo:hover .aho-mark,.aho-footer-logo:focus-visible .aho-mark{opacity:0;}
-.aho-footer-logo:hover::after,.aho-footer-logo:focus-visible::after{opacity:1;}
+.aho-footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:var(--s6);padding-bottom:56px;border-bottom:1px solid var(--aho-hair);}
+.aho-footer-logo{display:inline-flex;align-items:center;min-height:44px;color:var(--aho-white);font-size:30px;line-height:1;margin-bottom:14px;transition:color .3s var(--aho-ease);}
+.aho-footer-logo .aho-mark{height:30px;}
+.aho-footer-logo:hover,.aho-footer-logo:focus-visible{color:var(--aho-accent-light);}
 .aho-footer-badge{display:inline-block;font-size:0.625rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--aho-accent);border:1px solid var(--aho-accent-soft);border-radius:2px;padding:5px 10px;margin:0 0 20px;}
 .aho-footer-intro{margin:0 0 24px;max-width:40ch;font-size:0.875rem;line-height:1.7;color:var(--aho-silver);}
 .aho-footer-social{display:flex;gap:6px;margin:0;padding:0;list-style:none;}
-.aho-footer-social a{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--aho-hair);color:rgba(243,241,235,0.72);transition:color .25s,border-color .25s;}
-.aho-footer-social a:hover,.aho-footer-social a:focus-visible{color:var(--aho-teal);border-color:rgba(98,170,166,0.5);}
+.aho-footer-social a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--aho-hair);color:rgba(243,241,235,0.72);transition:color .25s,border-color .25s;}
+.aho-footer-social a:hover,.aho-footer-social a:focus-visible{color:var(--aho-accent);border-color:var(--aho-accent-soft);}
 .aho-footer-social svg{width:16px;height:16px;fill:currentColor;}
-.aho-footer-col h5{margin:0 0 22px;font-family:var(--aho-font-b);font-size:0.6875rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(243,241,235,0.45);}
+.aho-footer-col h5{margin:0 0 18px;font-family:var(--aho-font-b);font-size:var(--t-xs);font-weight:700;letter-spacing:var(--track-caps);text-transform:uppercase;color:rgba(243,241,235,0.45);}
 .aho-footer-col ul{list-style:none;margin:0;padding:0;}
-.aho-footer-col li{margin:0 0 12px;}
-.aho-footer-col li a{font-size:0.8125rem;color:var(--aho-white);transition:color .25s;}
-.aho-footer-col li a:hover,.aho-footer-col li a:focus-visible{color:var(--aho-teal);}
-.aho-footer-col li a:hover small,.aho-footer-col li a:focus-visible small{color:var(--aho-teal-light);}
+.aho-footer-col li{margin:0;}
+.aho-footer-col li a{display:inline-block;padding:8px 0;font-size:0.875rem;color:var(--aho-white);transition:color .25s;}
+.aho-footer-col li a:hover,.aho-footer-col li a:focus-visible{color:var(--aho-accent);}
+.aho-footer-col li a:hover small,.aho-footer-col li a:focus-visible small{color:var(--aho-accent-light);}
 .aho-footer-col li a small{display:block;margin-top:2px;font-size:0.72rem;color:var(--aho-silver);}
 .aho-footer-bottom{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:32px;}
-.aho-footer-copy{font-size:0.75rem;color:rgba(168,173,179,0.6);}
-.aho-footer-copy a{text-decoration:underline;text-underline-offset:3px;}
-.aho-footer-copy a:hover,.aho-footer-copy a:focus-visible{color:var(--aho-teal);}
-.aho-footer-legal{font-size:0.6875rem;line-height:1.6;color:rgba(168,173,179,0.45);max-width:56ch;}
+.aho-footer-copy{font-size:0.75rem;line-height:2.4;color:rgba(168,173,179,0.7);}
+.aho-footer-copy a{display:inline-block;padding:4px 2px;text-decoration:underline;text-underline-offset:3px;}
+.aho-footer-copy a:hover,.aho-footer-copy a:focus-visible{color:var(--aho-accent);}
+.aho-footer-legal{font-size:var(--t-xs);line-height:1.6;color:rgba(168,173,179,0.55);max-width:56ch;}
 @media(max-width:900px){
   .aho-footer{padding:72px 0 36px;}
   .aho-footer-top{grid-template-columns:1fr 1fr;gap:40px;}
@@ -165,20 +381,19 @@ p{text-wrap:pretty;}
   .aho-footer-top{grid-template-columns:1fr;}
 }
 
-/* ---- floating "Connect with us" ------------------------------------
+/* ---- 11. floating "Connect with us" ------------------------------------
    Bottom centre, appears once the visitor has scrolled. Opens a sheet
-   with the five ways in. Sits above the page but below the open nav
-   drawer. */
+   with the ways in. Sits above the page but below the open nav drawer. */
 .aho-connect{position:fixed;left:50%;bottom:22px;z-index:95;transform:translate(-50%,24px);opacity:0;pointer-events:none;
   transition:opacity .4s var(--aho-ease),transform .4s var(--aho-ease);}
 .aho-connect.is-shown{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
-.aho-connect-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px 13px 18px;border-radius:999px;border:1px solid var(--aho-accent-soft);white-space:nowrap;
-  background:rgba(11,13,15,0.82);color:var(--aho-white);font-family:var(--aho-font-b);font-size:0.8125rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
-  cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 44px rgba(0,0,0,0.45);
+.aho-connect-btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px 0 18px;border-radius:var(--r-pill);border:1px solid var(--aho-accent-soft);white-space:nowrap;
+  background:rgba(11,13,15,0.82);color:var(--aho-white);font-family:var(--aho-font-b);font-size:var(--t-sm);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--shadow-float);
   transition:background .25s,border-color .25s,color .25s,transform .25s var(--aho-ease);}
 .aho-connect-btn svg{width:18px;height:18px;fill:none;stroke:var(--aho-accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s;}
-.aho-connect-btn:hover,.aho-connect-btn:focus-visible{background:var(--aho-teal);border-color:var(--aho-teal);color:#0b1514;transform:translateY(-2px);}
-.aho-connect-btn:hover svg,.aho-connect-btn:focus-visible svg{stroke:#0b1514;}
+.aho-connect-btn:hover,.aho-connect-btn:focus-visible{background:var(--aho-accent);border-color:var(--aho-accent);color:var(--aho-accent-ink);transform:translateY(-2px);}
+.aho-connect-btn:hover svg,.aho-connect-btn:focus-visible svg{stroke:var(--aho-accent-ink);}
 .aho-connect-btn:focus-visible{outline:2px solid var(--aho-white);outline-offset:3px;}
 
 .aho-sheet{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;padding:16px;
@@ -192,7 +407,7 @@ p{text-wrap:pretty;}
 .aho-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
 .aho-sheet-eyebrow{display:block;font-size:0.625rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--aho-accent);margin-bottom:8px;}
 .aho-sheet-title{margin:0;font-family:var(--aho-font-h);font-weight:400;font-size:1.75rem;line-height:1.1;letter-spacing:-0.01em;color:var(--aho-white);}
-.aho-sheet-close{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid var(--aho-hair);background:transparent;color:var(--aho-white);cursor:pointer;display:grid;place-items:center;transition:border-color .25s,color .25s;}
+.aho-sheet-close{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1px solid var(--aho-hair);background:transparent;color:var(--aho-white);cursor:pointer;display:grid;place-items:center;transition:border-color .25s,color .25s;}
 .aho-sheet-close:hover,.aho-sheet-close:focus-visible{border-color:var(--aho-accent);color:var(--aho-accent);}
 .aho-sheet-close svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;fill:none;}
 .aho-sheet-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
@@ -209,16 +424,13 @@ p{text-wrap:pretty;}
 @media(min-width:640px){.aho-sheet{place-items:center;}}
 @media(max-width:560px){
   .aho-connect{bottom:14px;}
-  .aho-connect-btn{padding:12px 18px 12px 16px;font-size:0.75rem;}
+  .aho-connect-btn{padding:0 18px 0 16px;font-size:0.75rem;}
   .aho-sheet-panel{padding:22px 18px 16px;border-radius:16px;}
-}
-@media(prefers-reduced-motion:reduce){
-  .aho-connect,.aho-connect-btn,.aho-sheet,.aho-sheet-panel,.aho-sheet-list svg{transition:none !important;}
 }
 body.aho-sheet-open{overflow:hidden;}
 
-/* ---- optional photography treatment ------------------------------
-   The CEO floated black-and-white photography for Palette A pages.
+/* ---- 12. optional photography treatment ------------------------------
+   The CEO floated black-and-white photography for Palette 1 pages.
    Opt in per page with <html class="aho-mono">; colour returns on hover
    so the product is never hidden. Off by default. */
 html.aho-mono img:not(.aho-keep-colour):not([src*="brand/"]):not([src*="partners/"]){filter:grayscale(1);transition:filter .6s var(--aho-ease);}

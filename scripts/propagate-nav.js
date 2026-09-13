@@ -1,14 +1,23 @@
-// Propagates the two-tier nav (Task 1-8) to every page, ports the nav/footer
-// CSS+JS from the v6 donor page (tohu.html) into legacy-vintage pages, and
-// clears related site debt (dead links, footer variants, copyright years).
+// Propagates the two-tier nav markup to every page and keeps the legacy
+// pages' token aliases in step with the shared design system.
 //
-// Idempotent: safe to run repeatedly. All injected blocks are sentinel-
-// delimited so a second run replaces between sentinels instead of
-// duplicating, and every other transform (CSS-rule stripping, JS dead-code
-// removal, link fixes) is naturally a fixed point once applied.
+// Since the 2026-09-14 design audit the nav CSS and JS live in
+// assets/aho-chrome.css / assets/aho-chrome.js (stamped by
+// scripts/propagate-chrome.js), so this script no longer ports anything
+// from a donor page. What it still does, idempotently:
+//   1. stamps the generated <nav> between the AHO:NAV sentinels
+//   2. on legacy (non-v6) pages, keeps a small :root alias block between the
+//      AHO:NAVCSS sentinels so the names their inline CSS uses
+//      (--gold, --s1..--s7, --font-h ...) resolve to the shared --aho-* tokens
+//   3. removes any leftover AHO:NAVJS block (the nav script is shared now)
+//   4. pins the fixed-header portals below the site nav via --nav-h
+//   5. normalises the Google Fonts request and a few stale links
 //
 // Preserves each file's own line-ending convention (index.html is CRLF;
 // every other page in this repo is LF) - never mass-converts.
+//
+// Run order after any nav/footer/social change:
+//   node scripts/propagate-nav.js && node scripts/propagate-chrome.js && node scripts/check-nav.js
 
 const fs = require('fs');
 const path = require('path');
@@ -17,51 +26,38 @@ const { SENTINEL_START, SENTINEL_END } = require('./nav-config');
 
 const ROOT = path.join(__dirname, '..');
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function expect(cond, msg) { if (!cond) throw new Error('propagate-nav: ' + msg); }
 
-// Pages whose own logged-in app-shell chrome (fixed header + sidebar) must
-// stay intact. They still get the sentinel nav (decision: yes, portals keep
-// the public nav - see PORTALS_WITH_OWN_NAV_TAG below for why this is safe
-// now), but shifted above their own header via --nav-h rather than
-// overlapping it.
-const FIXED_HEADER_PORTALS = ['export-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html'];
-const ALL_PORTALS = ['export-portal.html', 'investors-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html'];
-// Pages that get the standard footer (portals keep their own app footer/none).
-const NO_FOOTER_PAGES = new Set(ALL_PORTALS);
-// Pages with no pre-existing <nav> element at all - insert after <body>.
-const NO_NAV_TAG_PAGES = new Set(['404.html', 'investors-portal.html']);
-// DECISION (Finding 1): the three fixed-header portals each have their OWN
-// <nav class="portal-sidebar">/<nav class="sidebar"> for in-page section
-// switching. A previous version of this script located the site nav by
-// matching "the first <nav> in the document", which on these three pages
-// found and destroyed that sidebar (and, via pruneNavFooterCss, its CSS)
-// instead of finding a site header - there never was a second, separate
-// <nav> for the site header to replace.
-//
-// Kept the site nav on portals (consistent cross-site chrome / way back to
-// the public site, same as investors-portal.html already does) rather than
-// dropping it - but insertion must NEVER search-and-replace "a <nav>" on
-// these pages. Treated exactly like NO_NAV_TAG_PAGES: insert the sentinel
-// block right after <body>, leaving the page's own sidebar <nav> completely
-// untouched. This is the explicit skip-list option (as opposed to sniffing
-// an "id=nav/class=nav" signature, which isn't consistent across this
-// repo's legacy vintages - see report). check-nav.js's "every page carries
-// exactly one sentinel block" check needs no change: these pages still get
-// exactly one, just positioned differently.
-const PORTALS_WITH_OWN_NAV_TAG = new Set(FIXED_HEADER_PORTALS);
+// v6 pages carry the design system natively; everything else is "legacy"
+// and gets the alias block.
+const V6_PAGES = new Set(['index.html', 'about.html', 'origins.html', 'team.html', 'tohu.html', 'cultivation.html',
+  'quality.html', 'products.html', 'board.html', 'business.html', 'whats-new.html']);
+// Portals with their own fixed app header, pushed below the site nav.
+const FIXED_HEADER_PORTALS = new Set(['export-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
+// Pages with no site-header <nav> of their own: the sentinel block goes
+// right after <body>. (The three portals have a sidebar <nav> that must
+// never be searched-and-replaced.)
+const INSERT_AFTER_BODY = new Set(['404.html', ...FIXED_HEADER_PORTALS]);
 
 const OWN_SENTINELS = {
   css: ['/* AHO:NAVCSS:START - generated by scripts/propagate-nav.js, do not edit by hand */',
         '/* AHO:NAVCSS:END */'],
   js: ['<!-- AHO:NAVJS:START - generated by scripts/propagate-nav.js, do not edit by hand -->',
        '<!-- AHO:NAVJS:END -->'],
-  footer: ['<!-- AHO:FOOTER:START - generated by scripts/propagate-nav.js, do not edit by hand -->',
-           '<!-- AHO:FOOTER:END -->'],
 };
 
-// ------------------------------------------------------------------
-// Line-ending helpers: every page here is pure LF except index.html
-// (pure CRLF). Detect per-file and never mix.
-// ------------------------------------------------------------------
+// Legacy token names -> shared tokens. Only stamped where the page does not
+// already define the name itself (its own :root wins for anything else).
+const ALIASES = {
+  'gold': 'var(--aho-gold)', 'gold-light': 'var(--aho-gold-light)', 'gold-border': 'var(--aho-accent-soft)',
+  'hairline': 'var(--aho-hair)', 'max': 'var(--aho-max)',
+  's1': 'var(--s1)', 's2': 'var(--s2)', 's3': 'var(--s3)', 's4': 'var(--s4)', 's5': 'var(--s5)', 's6': 'var(--s6)', 's7': 'var(--s7)',
+  'silver': 'var(--aho-silver)', 'starlight': 'var(--aho-white)', 'void': 'var(--aho-void)',
+  'ease': 'var(--aho-ease)', 'font-h': 'var(--aho-font-h)', 'font-b': 'var(--aho-font-b)',
+};
+
+const FONTS_HREF = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap';
+
 function detectEOL(raw) {
   const crlf = (raw.match(/\r\n/g) || []).length;
   const bareLf = (raw.match(/[^\r]\n/g) || []).length;
@@ -72,265 +68,55 @@ function toEOL(text, eol) {
   return eol === '\n' ? normalized : normalized.replace(/\n/g, eol);
 }
 
-// ------------------------------------------------------------------
-// Extract the canonical nav/footer/starfield CSS+JS+HTML from the v6
-// donor page. tohu.html is a content page with no hero machinery -
-// the cleanest source for "just the chrome". Extracted by exact line
-// range (verified against the current file); if tohu.html's structure
-// ever moves, this will throw loudly rather than silently drifting.
-// ------------------------------------------------------------------
-const donorRaw = fs.readFileSync(path.join(ROOT, 'tohu.html'), 'utf8');
-const donorLines = donorRaw.split('\n');
-function sliceLines(a, b) { return donorLines.slice(a - 1, b).join('\n'); }
-
-function expect(cond, msg) { if (!cond) throw new Error('propagate-nav donor extraction failed: ' + msg); }
-expect(donorLines[248].trim().startsWith('/* ==='), 'nav CSS start marker moved');
-expect(donorLines[411].trim() === '}', 'nav CSS end marker moved');
-expect(donorLines[1282].trim().startsWith('/* ==='), 'footer CSS start marker moved');
-expect(donorLines[1333].trim() === '}', 'footer CSS end marker moved');
-// Everything in the BODY shifts when the nav gains or loses an item - and
-// this script stamps its own donor, so that happens on every nav-config.js
-// edit. Pinning body line numbers made the script fail the next time the nav
-// changed size; derive the offset from the footer marker instead. The CSS
-// ranges below live in <head>, ahead of the nav, so they never move.
-const FOOTER_ANCHOR = 1512; // 1-based line of <footer ...> when these ranges were written
-// The donor footer is now the shared aho-footer stamped by
-// scripts/propagate-chrome.js (CEO site-wide feedback, 2026-09-10), whose
-// length differs from the old one - so the footer end and everything after
-// it are located by search, not by pinned offset.
-const footerAt = donorLines.findIndex(l => /<footer class="(?:aho-)?footer" id="contact">/.test(l)) + 1;
-expect(footerAt > 0, 'footer HTML start marker not found in donor');
-const BODY_SHIFT = footerAt - FOOTER_ANCHOR;
-const footerEnd = donorLines.findIndex((l, i) => i >= footerAt - 1 && l.trim() === '</footer>') + 1;
-expect(footerEnd > footerAt, 'footer HTML end marker not found in donor');
-const TAIL_SHIFT = footerEnd - (1562 + BODY_SHIFT);
-function sliceBody(a, b) { return a >= 1563 ? sliceLines(a + BODY_SHIFT + TAIL_SHIFT, b + BODY_SHIFT + TAIL_SHIFT) : sliceLines(a + BODY_SHIFT, b + BODY_SHIFT); }
-
-const NAV_CSS = sliceLines(249, 412);
-const FOOTER_CSS = sliceLines(1283, 1334);
-const STAR_CSS = sliceLines(195, 207);
-const FOOTER_HTML = sliceLines(footerAt, footerEnd); // <footer ...> ... </footer>, no leading comment
-const JS_ENV = sliceBody(1574, 1577);
-const JS_SCROLL = sliceBody(1580, 1582);
-const JS_STARFIELD = sliceBody(1595, 1620);
-const JS_DRAWER = sliceBody(1577, 1614);
-const JS_DROPDOWN = sliceBody(1616, 1721);
-
-// Root tokens the ported CSS needs that legacy pages don't already define.
-// (--teal/--teal-light/--teal-deep/--white are already identical across
-// every vintage in this repo - verified - so they are deliberately NOT
-// redefined here, to avoid touching values the rest of each page depends on.)
-const DONOR_ROOT = sliceLines(25, 76);
-function donorVar(name) {
-  const m = DONOR_ROOT.match(new RegExp('--' + name + ':\\s*([^;]+);'));
-  expect(m, `--${name} not found in donor :root`);
-  return m[1].trim();
-}
-const NEEDED_VARS = ['gold', 'gold-border', 'hairline', 'max', 's1', 's2', 's3', 's4', 's5', 's6', 's7',
-                      'silver', 'starlight', 'void', 'ease', 'font-h', 'font-b'];
-
-const FONTS_HREF = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap';
-
-// ------------------------------------------------------------------
-// CSS-rule pruning: remove legacy nav/footer rules (top-level and
-// inside @media) that would otherwise fight the ported classes.
-// Verified by inspection (scripts/../scratchpad analysis) that every
-// matching selector in this repo's legacy pages is genuinely an old
-// nav/footer rule, with one exception carved out below.
-// ------------------------------------------------------------------
-function findTopLevelRules(css) {
-  const rules = [];
-  let i = 0;
-  while (i < css.length) {
-    while (i < css.length && /\s/.test(css[i])) i++;
-    if (css.slice(i, i + 2) === '/*') { const e = css.indexOf('*/', i + 2); i = e === -1 ? css.length : e + 2; continue; }
-    if (i >= css.length) break;
-    const selStart = i;
-    while (i < css.length && css[i] !== '{') i++;
-    if (i >= css.length) break;
-    const selector = css.slice(selStart, i);
-    const bodyStart = i + 1;
-    let depth = 1; i++;
-    while (i < css.length && depth > 0) {
-      if (css[i] === '{') depth++;
-      else if (css[i] === '}') depth--;
-      i++;
-    }
-    const bodyEnd = i - 1; // index of the closing '}'
-    rules.push({ selStart, selector, bodyStart, bodyEnd });
-  }
-  return rules;
-}
-
-const NAV_FOOTER_RE = /^(?:\.(?:nav|footer)(?:-[\w-]+)?\b|(?:nav|footer)\b)/i;
-function isNavFooterSelector(sel) {
-  const t = sel.trim();
-  if (!t) return false;
-  if (/^\.nav-card/i.test(t)) return false; // 404.html's unrelated "helpful links" cards
-  // .nav-item(...): the portal sidebars' section-switcher item class
-  // (pharmacies-portal.html, prescribers-portal.html). Matches the
-  // NAV_FOOTER_RE prefix by coincidence but has nothing to do with the site
-  // nav being ported in - verified by enumerating every selector this
-  // function matches across all 16 non-v6 pages (see report): .nav-item* is
-  // the only false positive in the current corpus.
-  if (/^\.nav-item\b/i.test(t)) return false;
-  return t.split(',').every(part => NAV_FOOTER_RE.test(part.trim()));
-}
-
-function pruneNavFooterCss(css) {
-  const rules = findTopLevelRules(css);
-  let result = css;
-  for (let k = rules.length - 1; k >= 0; k--) {
-    const r = rules[k];
-    if (/^\s*@media/i.test(r.selector)) {
-      const inner = css.slice(r.bodyStart, r.bodyEnd);
-      const prunedInner = pruneNavFooterCss(inner);
-      if (prunedInner.trim() === '') {
-        result = result.slice(0, r.selStart) + result.slice(r.bodyEnd + 1);
-      } else if (prunedInner !== inner) {
-        result = result.slice(0, r.bodyStart) + prunedInner + result.slice(r.bodyEnd);
-      }
-    } else if (isNavFooterSelector(r.selector)) {
-      result = result.slice(0, r.selStart) + result.slice(r.bodyEnd + 1);
-    }
-  }
-  return result;
-}
-
-// ------------------------------------------------------------------
-// Per-page transforms
-// ------------------------------------------------------------------
-function sentinelSwapOrInsert(html, startTag, endTag, block, insertBeforeRe, label) {
-  const re = new RegExp(esc(startTag) + '[\\s\\S]*?' + esc(endTag));
-  if (re.test(html)) return { html: html.replace(re, startTag + '\n' + block + '\n' + endTag), applied: 'replaced' };
+function sentinelSwapOrInsert(html, [a, b], block, insertBeforeRe, label) {
+  const re = new RegExp(esc(a) + '[\\s\\S]*?' + esc(b));
+  if (re.test(html)) return html.replace(re, a + '\n' + block + '\n' + b);
   const m = html.match(insertBeforeRe);
   expect(m, `nowhere to insert ${label}`);
-  const idx = m.index;
-  return { html: html.slice(0, idx) + startTag + '\n' + block + '\n' + endTag + '\n' + html.slice(idx), applied: 'inserted' };
-}
-
-function stripDeadNavJs(html, file) {
-  // Pages whose entire inline <script> was ONLY the old scroll-shadow toggle.
-  const scrollOnly = /<script>\s*const nav = document\.getElementById\('main-nav'\);\s*window\.addEventListener\('scroll', \(\) => \{\s*nav\.classList\.toggle\('scrolled', window\.scrollY > \d+\);\s*\}\);\s*<\/script>/;
-  html = html.replace(scrollOnly, '');
-
-  // contact.html / news.html: scroll toggle + hamburger toggle share a
-  // <script> with real form/filter logic - remove only the dead lines.
-  // (news.html's scroll listener body spans multiple lines and both pages
-  // carry stray one-line comments above each block - matched independently
-  // so formatting differences between the two donors don't matter.)
-  html = html.replace(/[ \t]*\/\/ Nav scroll\s*\n/, '');
-  html = html.replace(/[ \t]*const nav = document\.getElementById\('nav'\);\s*\n[ \t]*window\.addEventListener\('scroll', \(\) => \{[\s\S]*?\}\);\s*\n/, '');
-  html = html.replace(/[ \t]*\/\/ Mobile nav\s*\n/, '');
-  html = html.replace(/[ \t]*const hamburger = document\.getElementById\('hamburger'\);\s*\n[ \t]*const navLinks = document\.getElementById\('navLinks'\);\s*\n[ \t]*hamburger\.addEventListener\('click', \(\) => \{ navLinks\.classList\.toggle\('open'\); \}\);\s*\n/, '');
-
-  // pharmacies.html / prescribers.html: nav scroll + hamburger IIFE section,
-  // inside a larger IIFE that also holds real form-validation logic (kept).
-  html = html.replace(
-    /[ \t]*\/\* ----- Nav scroll effect ----- \*\/[\s\S]*?hamburger\.addEventListener\('click', function \(\) \{\s*\n\s*var isOpen = mobileMenu\.classList\.toggle\('open'\);\s*\n\s*hamburger\.setAttribute\('aria-expanded', String\(isOpen\)\);\s*\n\s*\}\);\s*\n\s*\n/,
-    ''
-  );
-  return html;
+  return html.slice(0, m.index) + a + '\n' + block + '\n' + b + '\n' + html.slice(m.index);
 }
 
 function processPage(file) {
   const full = path.join(ROOT, file);
   const raw = fs.readFileSync(full, 'utf8');
   const eol = detectEOL(raw);
-  let html = toEOL(raw, '\n'); // work in \n internally, convert back at the end
-  const isPortal = ALL_PORTALS.includes(file);
-  const isFixedHeaderPortal = FIXED_HEADER_PORTALS.includes(file);
+  let html = toEOL(raw, '\n');
 
-  // ---- 1. Nav markup (sentinel-based single source of truth) ----
+  // ---- 1. nav markup ----
   const navBlock = renderNav(file);
   const navRe = new RegExp(esc(SENTINEL_START) + '[\\s\\S]*?' + esc(SENTINEL_END));
-  let navAction;
   if (navRe.test(html)) {
     html = html.replace(navRe, SENTINEL_START + '\n' + navBlock + '\n' + SENTINEL_END);
-    navAction = 'stamped';
-  } else if (NO_NAV_TAG_PAGES.has(file) || PORTALS_WITH_OWN_NAV_TAG.has(file)) {
-    // Either genuinely has no <nav> at all, or has its own sidebar <nav>
-    // that must never be searched-and-replaced (Finding 1). Insert right
-    // after <body> instead - never touches whatever <nav> the page already
-    // has.
+  } else if (INSERT_AFTER_BODY.has(file)) {
     const m = html.match(/<body[^>]*>/);
     expect(m, `${file}: no <body> to insert nav after`);
     const idx = m.index + m[0].length;
     html = html.slice(0, idx) + '\n\n' + SENTINEL_START + '\n' + navBlock + '\n' + SENTINEL_END + html.slice(idx);
-    navAction = 'seeded-no-nav-tag';
   } else {
-    // General fallback for legacy pages not yet catalogued above: locate
-    // the SINGLE <nav> this page has and replace it. Guessing "the first
-    // <nav>" is exactly what destroyed the portal sidebars (Finding 1), so
-    // this must fail safe rather than blindly replace: if there is more
-    // than one <nav>, or the one found looks like an app-shell sidebar
-    // rather than a site header (class mentions "sidebar" / "portal"), skip
-    // this page's nav entirely and warn - do not guess.
     const allNavs = html.match(/<nav[^>]*>/gi) || [];
     const old = html.match(/<nav[\s\S]*?<\/nav>/);
-    const openTag = old && old[0].match(/^<nav[^>]*>/i)[0];
-    const looksLikeSidebar = openTag && /\bclass="[^"]*(sidebar|portal)[^"]*"/i.test(openTag);
-    if (!old || allNavs.length !== 1 || looksLikeSidebar) {
-      console.warn(`WARNING: ${file}: cannot confidently identify a site-header <nav> to replace ` +
-        `(found ${allNavs.length} <nav> tag(s)${looksLikeSidebar ? ', looks like an app sidebar' : ''}). ` +
-        `Skipping nav injection for this page - add it to PORTALS_WITH_OWN_NAV_TAG or NO_NAV_TAG_PAGES ` +
-        `once its structure is understood, rather than guessing.`);
-      return { file, navAction: 'skipped-ambiguous-nav', ported: false };
-    }
+    expect(old && allNavs.length === 1, `${file}: cannot identify a single site <nav> to replace - add it to INSERT_AFTER_BODY`);
     html = html.replace(old[0], SENTINEL_START + '\n' + navBlock + '\n' + SENTINEL_END);
-    navAction = 'seeded';
   }
 
-  // Whether this page already carries the ported CSS/JS (v6 pages do, as
-  // native design system - not a ported sentinel block; detect via a v6
-  // canary selector that is unique to the real nav CSS).
-  const alreadyV6 = /\.nav-parent \.nav-sub\[hidden\]\{display:none;\}/.test(html);
-
-  if (alreadyV6) {
-    // v6 page (index/tohu/origins/team/board/business/cultivation/products/about):
-    // markup already re-stamped above; nothing else to port.
-    fs.writeFileSync(full, toEOL(html, eol));
-    return { file, navAction, ported: false };
+  // ---- 2. legacy alias block ----
+  if (!V6_PAGES.has(file)) {
+    const withoutBlock = html.replace(new RegExp(esc(OWN_SENTINELS.css[0]) + '[\\s\\S]*?' + esc(OWN_SENTINELS.css[1])), '');
+    const rootBlocks = withoutBlock.match(/:root\s*\{[\s\S]*?\}/g) || [];
+    const defined = rootBlocks.join('\n');
+    const decls = Object.entries(ALIASES)
+      .filter(([name]) => !new RegExp('--' + esc(name) + '\\s*:').test(defined))
+      .map(([name, value]) => `  --${name}: ${value};`);
+    if (FIXED_HEADER_PORTALS.has(file)) decls.push('  --nav-h: 72px;');
+    const block = decls.length ? `:root{\n${decls.join('\n')}\n}` : '/* all shared tokens defined by the page */';
+    html = sentinelSwapOrInsert(html, OWN_SENTINELS.css, block, /<\/style>/, 'alias block');
   }
 
-  // ---- 2. Strip superseded old nav/footer CSS rules ----
-  html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/, (m, attrs, css) => {
-    return `<style${attrs}>${pruneNavFooterCss(css)}</style>`;
-  });
+  // ---- 3. drop any leftover ported nav script ----
+  html = html.replace(new RegExp('\\n?' + esc(OWN_SENTINELS.js[0]) + '[\\s\\S]*?' + esc(OWN_SENTINELS.js[1]) + '\\n?'), '\n');
 
-  // ---- 3. Strip dead old nav-toggle JS ----
-  html = stripDeadNavJs(html, file);
-
-  // ---- 4. Inject missing :root tokens + nav/footer/starfield CSS ----
-  const rootBlock = html.match(/:root\s*\{[\s\S]*?\}/);
-  const missing = NEEDED_VARS.filter(v => !new RegExp('--' + v + '\\s*:').test(rootBlock ? rootBlock[0] : html));
-  let extraRootDecls = missing.map(v => `  --${v}: ${donorVar(v)};`).join('\n');
-  if (isFixedHeaderPortal) extraRootDecls += '\n  --nav-h: 73px;';
-  const rootAddition = extraRootDecls
-    ? `:root{\n${extraRootDecls}\n}\n`
-    : (isFixedHeaderPortal ? `:root{\n  --nav-h: 73px;\n}\n` : '');
-
-  const cssBlock = [
-    rootAddition,
-    STAR_CSS,
-    '',
-    NAV_CSS,
-    '',
-    FOOTER_CSS,
-    '',
-    '/* legacy-vintage additions: this page has no hero to absorb the fixed',
-    '   nav\'s height, and its own body background is opaque (not a video),',
-    '   so the nav is pinned permanently "scrolled" rather than transparent. */',
-    '.nav *,.footer *{box-sizing:border-box;}',
-    '.nav{background:rgba(5,8,12,0.92);border-bottom:1px solid var(--hairline);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}',
-    isFixedHeaderPortal ? '' : 'body{padding-top:73px;}',
-  ].filter(Boolean).join('\n');
-
-  let r = sentinelSwapOrInsert(html, OWN_SENTINELS.css[0], OWN_SENTINELS.css[1], cssBlock, /<\/style>/, 'nav CSS');
-  html = r.html;
-
-  // ---- 5. Portal fixed-header offset (push app chrome below the nav) ----
-  if (isFixedHeaderPortal) {
+  // ---- 4. portal offsets (fixed point once applied) ----
+  if (FIXED_HEADER_PORTALS.has(file)) {
     html = html
       .replace(/top:\s*0;\s*left:\s*0;\s*right:\s*0;/, 'top: var(--nav-h); left: 0; right: 0;')
       .replace(/top:\s*var\(--header-h\)/g, 'top: calc(var(--header-h) + var(--nav-h))')
@@ -338,68 +124,18 @@ function processPage(file) {
       .replace(/margin-top:\s*var\(--header-h\)/g, 'margin-top: calc(var(--header-h) + var(--nav-h))')
       .replace(/calc\(100vh - var\(--header-h\)\)/g, 'calc(100vh - var(--header-h) - var(--nav-h))')
       .replace(/calc\(var\(--header-h\) \+ 45px\)/g, 'calc(var(--header-h) + var(--nav-h) + 45px)');
-  } else if (file === 'investors-portal.html') {
-    // sticky (not fixed) header - the universal body{padding-top:73px} above
-    // already reserves the space; nothing further needed.
   }
 
-  // ---- 6. Google Fonts: ensure the weights the ported CSS uses are loaded ----
+  // ---- 5. fonts + stale refs ----
   html = html.replace(/https:\/\/fonts\.googleapis\.com\/css2\?family=Cormorant[^"']+/, FONTS_HREF);
-
-  // ---- 7. Nav JS ----
-  const jsBlock = [
-    '<script>',
-    JS_ENV,
-    '',
-    JS_SCROLL,
-    '',
-    JS_STARFIELD,
-    '',
-    JS_DRAWER,
-    '',
-    JS_DROPDOWN,
-    '</script>',
-  ].join('\n');
-  r = sentinelSwapOrInsert(html, OWN_SENTINELS.js[0], OWN_SENTINELS.js[1], jsBlock, /<\/body>/, 'nav JS');
-  html = r.html;
-
-  // ---- 8. Footer (standard v6 footer; portals keep their own/no footer) ----
-  if (!NO_FOOTER_PAGES.has(file)) {
-    const footerSentinelRe = new RegExp(esc(OWN_SENTINELS.footer[0]) + '[\\s\\S]*?' + esc(OWN_SENTINELS.footer[1]));
-    if (footerSentinelRe.test(html)) {
-      html = html.replace(footerSentinelRe, OWN_SENTINELS.footer[0] + '\n' + FOOTER_HTML + '\n' + OWN_SENTINELS.footer[1]);
-    } else {
-      const oldFooter = html.match(/<footer[\s\S]*?<\/footer>/);
-      const footerLineDiv = !oldFooter && html.match(/<div class="footer-line">[\s\S]*?<\/div>\s*<\/div>/);
-      if (oldFooter) {
-        html = html.replace(oldFooter[0], OWN_SENTINELS.footer[0] + '\n' + FOOTER_HTML + '\n' + OWN_SENTINELS.footer[1]);
-      } else if (file === '404.html') {
-        // 404.html's own markup: <div class="footer-line">...</div> sits
-        // inside the closing </div> of .page - replace just the footer-line.
-        html = html.replace(/<div class="footer-line">[\s\S]*?<\/div>\n/, OWN_SENTINELS.footer[0] + '\n' + FOOTER_HTML + '\n' + OWN_SENTINELS.footer[1] + '\n');
-        // remove the now-redundant top-bar logo (superseded by the real nav)
-        html = html.replace(/\s*<!-- Logo -->\s*\n\s*<div class="top-bar">[\s\S]*?<\/div>\n/, '\n');
-        html = html.replace(/\s*\/\* Top logo bar \*\/[\s\S]*?\.nav-logo span \{ color: var\(--teal\); \}\n/, '\n');
-      } else {
-        expect(false, `${file}: no <footer> to replace`);
-      }
-    }
-  }
-
-  // ---- 9. Dead links / stale refs ----
   html = html.replace(/export\.html/g, 'export-partners.html');
   html = html.replace(/©\s*2025/g, '© 2026');
 
   fs.writeFileSync(full, toEOL(html, eol));
-  return { file, navAction, ported: true };
+  return V6_PAGES.has(file) ? 'v6' : 'legacy';
 }
 
-// ------------------------------------------------------------------
 const pages = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'));
-let stamped = 0, seeded = 0, ported = 0;
-pages.forEach(p => {
-  const res = processPage(p);
-  if (res.navAction === 'stamped') stamped++; else seeded++;
-  if (res.ported) ported++;
-});
-console.log(`stamped ${stamped}, seeded ${seeded}, total ${pages.length}; ported CSS/JS/footer to ${ported} legacy pages`);
+const counts = { v6: 0, legacy: 0 };
+pages.forEach(p => { counts[processPage(p)]++; });
+console.log(`nav stamped on ${pages.length} pages (${counts.v6} v6, ${counts.legacy} legacy with alias block)`);

@@ -524,3 +524,18 @@ existing; P5–P7 are self-contained; P8–P10 close.
 
 Everything not listed here will be decided within the system above and
 flagged in the Round 2 commit messages.
+
+---
+
+## 16 · CEO decisions (returned 2026-09-14)
+
+| # | Decision | Ruling |
+|---|---|---|
+| A | Palette assignment | **Yes** — Palette 2 (teal) = prescribers, pharmacies, export-partners + their portals; everything else Palette 1 (earth) |
+| B | Header states | **Yes to (2)** — white mark; gold hovers/active on Palette 1, teal on Palette 2; the coloured-wordmark crossfade is retired |
+| C | investors.html / investors-portal.html | **Retire, leave no trace** — files deleted, every link and portal reference removed, no redirect |
+| D | board.html / business.html stubs | **Keep hidden** — unlinked + `noindex` |
+| E | What's New | Name **"What's New"** (`whats-new.html`); TikTok not confirmed → omitted until a handle is supplied |
+| F | Instagram feed | **Behold Starter** (US$10/mo); CEO/admin connects @aho_farms_nz once; site reads the public JSON feed URL |
+| G | Team placeholders | **Leave as labelled placeholders** |
+| H | Kaupapa & Social Impact | **Park** — unlinked, `noindex`, receive only the global layer (no rebuild) |
