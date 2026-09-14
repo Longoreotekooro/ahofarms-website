@@ -835,3 +835,8 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .th-principle-rail .th-mark{width:min(72%,240px) !important;margin:var(--s5) auto var(--s3) !important;justify-self:center !important;opacity:1 !important;}
   .th-principle-rail .th-mark-tag{justify-self:center !important;text-align:center !important;max-width:none !important;margin:0 auto !important;}
 }
+@media(max-width:640px){
+  /* about carousels: the caption sits above the arrow bar, never under it */
+  .abx2-carousel figcaption{bottom:66px !important;right:14px !important;}
+  .abx2-car-ui{right:14px !important;bottom:14px !important;}
+}
