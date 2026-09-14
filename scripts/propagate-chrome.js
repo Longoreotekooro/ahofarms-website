@@ -32,7 +32,7 @@ const TEAL_PAGES = new Set(['prescribers.html', 'pharmacies.html', 'export-partn
 // Pages with no hero to absorb the fixed header get a solid bar and a body
 // offset (html.aho-nav-solid in aho-chrome.css).
 const SOLID_NAV_PAGES = new Set(['404.html', 'contact.html', 'disclaimer.html', 'export-partners.html', 'kaupapa.html',
-  'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', ...PORTALS]);
+  'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', 'whats-new.html', ...PORTALS]);
 // Unlinked pages the CEO wants kept but hidden (2026-09-14): board/business
 // stubs, parked kaupapa/social-impact.
 const NOINDEX_PAGES = new Set(['board.html', 'business.html', 'kaupapa.html', 'social-impact.html']);
@@ -55,10 +55,12 @@ function stampNoindex(html, file) {
   if (!NOINDEX_PAGES.has(file)) return html;
   return html.replace(/<meta charset="[^"]*">/i, m => `${m}\n  <meta name="robots" content="noindex, nofollow">`);
 }
-const SKIP_LINK = '<a class="aho-skip" href="#main">Skip to content</a>';
+// The skip link targets the page's own <main> id (journey / main / portalMain).
 function stampSkipLink(html) {
-  if (html.includes('class="aho-skip"')) return html;
-  return html.replace(/<body[^>]*>/, m => `${m}\n${SKIP_LINK}`);
+  const mainId = (html.match(/<main[^>]*\bid="([^"]+)"/) || [, 'main'])[1];
+  const link = `<a class="aho-skip" href="#${mainId}">Skip to content</a>`;
+  if (html.includes('class="aho-skip"')) return html.replace(/<a class="aho-skip" href="#[^"]*">Skip to content<\/a>/, link);
+  return html.replace(/<body[^>]*>/, m => `${m}\n${link}`);
 }
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const escHtml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

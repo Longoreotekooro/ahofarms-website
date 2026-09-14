@@ -19,6 +19,7 @@ const NAV = [
       { en: 'Land & Cultivation', mi: 'Whenua · Māra Hua', href: 'cultivation.html' },
       { en: 'Quality',      mi: 'Te Whakamātau',     href: 'quality.html' },
       { en: 'News',         mi: 'Ngā Kōrero',        href: 'news.html' },
+      { en: "What's New",   mi: 'Ngā Kōrero Hou',    href: 'whats-new.html' },
     ],
   },
   {

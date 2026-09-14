@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" class="aho-nav-solid">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's New — Aho Farms</title>
+  <meta name="description" content="What's new at Aho Farms — the latest from the whenua on Instagram, our channels, and recent news from the team in Hawke's Bay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+/* What's New · Palette 1. Everything structural comes from
+   assets/aho-chrome.css (plates, sections, cards, buttons, eyebrows);
+   this sheet only lays out the page's own components. */
+:root{
+  --gold: var(--aho-accent);
+  --gold-light: var(--aho-accent-light);
+  --white: var(--aho-white);
+  --silver: var(--aho-silver);
+  --font-h: var(--aho-font-h);
+  --font-b: var(--aho-font-b);
+  --ease: var(--aho-ease);
+}
+*{box-sizing:border-box;}
+body{margin:0;color:var(--aho-white);}
+.wn-hero{background:var(--aho-charcoal);}
+.wn-hero .hero-inner{display:grid;gap:var(--s3);}
+.wn-hero h1{margin:0;font-size:var(--t-display);line-height:var(--lh-tight);max-width:12ch;}
+.wn-hero .lede{margin:0;font-family:var(--aho-font-h);font-size:var(--t-lg);line-height:1.4;max-width:44ch;color:var(--aho-silver);}
+.wn-hero .btn-row{margin-top:var(--s2);}
+.wn-head{display:grid;gap:var(--s2);margin-bottom:var(--s5);max-width:var(--max-prose);}
+.wn-head h2{margin:0;font-size:var(--t-h2);line-height:var(--lh-heading);}
+.wn-head p{margin:0;color:var(--aho-muted);max-width:56ch;}
+.wn-ig .wn-head{color:var(--aho-ink-soft);}
+.wn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);}
+.wn-tile{position:relative;display:block;aspect-ratio:1/1;border-radius:var(--r-img);overflow:hidden;background:var(--aho-tan);text-decoration:none;color:var(--aho-white);}
+.wn-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--aho-ease);}
+.wn-tile:hover img{transform:scale(1.03);}
+.wn-tile figcaption{position:absolute;inset:auto 0 0 0;padding:14px 16px;font-size:var(--t-sm);line-height:1.4;
+  background:linear-gradient(to top,rgba(5,5,5,0.78),transparent);opacity:0;transition:opacity .3s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.wn-tile:hover figcaption,.wn-tile:focus-visible figcaption{opacity:1;}
+.wn-tile .wn-video{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;background:rgba(5,5,5,0.6);display:grid;place-items:center;}
+.wn-tile .wn-video svg{width:12px;height:12px;fill:var(--aho-white);}
+.wn-ig-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s2);margin-top:var(--s4);}
+.wn-ig-foot p{margin:0;font-size:var(--t-sm);color:var(--aho-muted);max-width:56ch;}
+.wn-channels{background:var(--aho-void);}
+.wn-channel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);}
+.wn-channel{display:flex;flex-direction:column;gap:var(--s2);}
+.wn-channel .wn-ico{width:44px;height:44px;border-radius:50%;border:1px solid var(--aho-hair);display:grid;place-items:center;color:var(--aho-accent);}
+.wn-channel .wn-ico svg{width:18px;height:18px;fill:currentColor;}
+.wn-channel h3{margin:0;font-size:var(--t-lg);font-weight:500;}
+.wn-channel .wn-handle{font-size:var(--t-sm);color:var(--aho-silver);margin:-8px 0 0;}
+.wn-news-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--aho-hair-light);}
+.wn-news-list li{border-bottom:1px solid var(--aho-hair-light);}
+.wn-news-list a{display:grid;grid-template-columns:120px 1fr auto;gap:var(--s3);align-items:baseline;padding:var(--s3) 0;text-decoration:none;color:var(--aho-ink-soft);}
+.wn-news-list .wn-date{font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);text-transform:uppercase;color:var(--aho-muted);}
+.wn-news-list h3{margin:0;font-family:var(--aho-font-h);font-size:var(--t-h3);font-weight:400;line-height:1.2;transition:color .2s;}
+.wn-news-list a:hover h3{color:var(--aho-accent-deep);}
+.wn-news-list .wn-arrow{color:var(--aho-accent-deep);font-size:var(--t-lg);}
+.wn-news .btn-row{margin-top:var(--s4);}
+.wn-close{text-align:center;padding-top:var(--sec-y-lg);padding-bottom:var(--sec-y-lg);}
+.wn-close h2{margin:0 auto var(--s4);font-size:var(--t-h2);max-width:18ch;}
+.wn-close .btn-row{justify-content:center;}
+@media(max-width:900px){
+  .wn-channel-grid{grid-template-columns:1fr;}
+  .wn-news-list a{grid-template-columns:1fr auto;}
+  .wn-news-list .wn-date{grid-column:1 / -1;}
+}
+@media(max-width:640px){
+  .wn-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .wn-tile figcaption{display:none;}
+}
+  </style>
+<!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
+<link rel="stylesheet" href="assets/aho-chrome.css?v=dc7d5862">
+<!-- AHO:CHROME:CSS:END -->
+</head>
+<body>
+<a class="aho-skip" href="#main">Skip to content</a>
+
+<!-- AHO:NAV:START - generated by scripts/propagate-nav.js, do not edit by hand -->
+<nav class="nav" id="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
+      <ul class="nav-links" id="navDrawer">
+        <li class="nav-parent is-active" data-haskids="1" data-idx="0"><a href="about.html" aria-label="Learn" aria-expanded="false" aria-controls="navSub0"><span class="bil"><span class="bil-en">Learn</span><span class="bil-mi" aria-hidden="true">Ako</span></span><span class="nav-caret" aria-hidden="true"></span></a>
+          <ul class="nav-sub" id="navSub0" hidden>
+            <li><a href="about.html" aria-label="About"><span class="bil"><span class="bil-en">About</span><span class="bil-mi" aria-hidden="true">Mō Mātou</span></span></a></li>
+            <li><a href="origins.html" aria-label="Our Origins"><span class="bil"><span class="bil-en">Our Origins</span><span class="bil-mi" aria-hidden="true">Ō Mātou Takenga</span></span></a></li>
+            <li><a href="team.html" aria-label="Our Team"><span class="bil"><span class="bil-en">Our Team</span><span class="bil-mi" aria-hidden="true">Tō Mātou Tīma</span></span></a></li>
+            <li><a href="tohu.html" aria-label="Logo story"><span class="bil"><span class="bil-en">Logo story</span><span class="bil-mi" aria-hidden="true">Tō Mātou Tohu</span></span></a></li>
+            <li><a href="cultivation.html" aria-label="Land &amp; Cultivation"><span class="bil"><span class="bil-en">Land &amp; Cultivation</span><span class="bil-mi" aria-hidden="true">Whenua · Māra Hua</span></span></a></li>
+            <li><a href="quality.html" aria-label="Quality"><span class="bil"><span class="bil-en">Quality</span><span class="bil-mi" aria-hidden="true">Te Whakamātau</span></span></a></li>
+            <li><a href="news.html" aria-label="News"><span class="bil"><span class="bil-en">News</span><span class="bil-mi" aria-hidden="true">Ngā Kōrero</span></span></a></li>
+            <li><a href="whats-new.html" aria-label="What&#39;s New"><span class="bil"><span class="bil-en">What&#39;s New</span><span class="bil-mi" aria-hidden="true">Ngā Kōrero Hou</span></span></a></li>
+          </ul></li>
+        <li class="nav-parent" data-haskids="1" data-idx="1"><a href="products.html" aria-label="Buy" aria-expanded="false" aria-controls="navSub1"><span class="bil"><span class="bil-en">Buy</span><span class="bil-mi" aria-hidden="true">Hoko</span></span><span class="nav-caret" aria-hidden="true"></span></a>
+          <ul class="nav-sub" id="navSub1" hidden>
+            <li><a href="products.html" aria-label="Products"><span class="bil"><span class="bil-en">Products</span><span class="bil-mi" aria-hidden="true">Ngā Hua</span></span></a></li>
+            <li><a href="index.html#portals" aria-label="Partnerships"><span class="bil"><span class="bil-en">Partnerships</span><span class="bil-mi" aria-hidden="true">Ngā Hoa</span></span></a></li>
+          </ul></li>
+        <li class="nav-drawer-foot" aria-label="Aho Farms"><ul class="nav-drawer-social" aria-label="Aho Farms on social media"><li><a href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li><li><a href="https://www.facebook.com/profile.php?id=61584684134399" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a></li></ul><a href="index.html" class="nav-drawer-mark" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a><p class="nav-drawer-line">Hawke&#39;s Bay · Aotearoa New Zealand</p></li>
+      </ul>
+      <div class="nav-right">
+        <ul class="nav-social" aria-label="Aho Farms on social media">
+          <li><a href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li><li><a href="https://www.facebook.com/profile.php?id=61584684134399" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta-wrap" aria-label="Contact"><span class="bil"><span class="bil-en">Contact</span><span class="bil-mi" aria-hidden="true">Whakapā Mai</span></span></a>
+        <button class="nav-burger" aria-expanded="false" aria-controls="navDrawer" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+<!-- AHO:NAV:END -->
+
+<main id="main">
+
+  <section class="hero wn-hero" id="top">
+    <div class="hero-inner">
+      <span class="eyebrow">Ngā kōrero hou · What's new</span>
+      <h1>What's new at Aho.</h1>
+      <p class="lede">The farm, week by week — from the whenua to the glasshouse — and the latest from the team in Hawke's Bay.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener">Follow on Instagram</a>
+        <a class="btn btn--ghost" href="news.html">Read the news</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="plate plate--flax sec wn-ig" id="instagram" aria-labelledby="wn-ig-title">
+    <div class="aho-wrap">
+      <div class="wn-head">
+        <span class="eyebrow">Instagram · @aho_farms_nz</span>
+        <h2 id="wn-ig-title">From the whenua, as it happens.</h2>
+        <p>Our latest posts appear here automatically. Tap any tile to open it on Instagram.</p>
+      </div>
+      <!-- Live feed: set data-behold-feed to the Behold JSON feed URL
+           (https://feeds.behold.so/…) once @aho_farms_nz is connected in the
+           Behold dashboard (Starter plan, CEO decision F, 2026-09-14). Until
+           then, and whenever the fetch fails, the six tiles below stand in. -->
+      <div class="wn-grid" id="wnFeed" data-behold-feed="">
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-cultivation-hero-flower.jpg" alt="Cannabis flower in the Hawke's Bay sun" loading="lazy"></a>
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-greenhouse-cultivation.jpg" alt="Greenhouse cultivation at Aho Farms" loading="lazy"></a>
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-whanau-site-visit.jpg" alt="Whānau visiting the farm" loading="lazy"></a>
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-outdoor-cultivation.jpg" alt="Outdoor cultivation rows" loading="lazy"></a>
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-weave-macro.jpg" alt="Muka fibre, close" loading="lazy"></a>
+        <a class="wn-tile" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener"><img src="assets/aho-indoor-cultivation.jpg" alt="Indoor cultivation under lights" loading="lazy"></a>
+      </div>
+      <div class="wn-ig-foot">
+        <p>Aho Farms products are prescription medicines. Our channels share the farm, the whenua and the people — not product promotion.</p>
+        <a class="btn btn--secondary" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener">See more on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wn-channels" id="channels" aria-labelledby="wn-ch-title">
+    <div class="aho-wrap">
+      <div class="wn-head">
+        <span class="eyebrow">Tūhono mai · Follow the thread</span>
+        <h2 id="wn-ch-title">Where to find us.</h2>
+      </div>
+      <div class="wn-channel-grid">
+        <div class="card wn-channel">
+          <span class="wn-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></span>
+          <h3>Instagram</h3>
+          <p class="wn-handle">@aho_farms_nz</p>
+          <p>Photos and short films from the whenua, the glasshouse and harvest.</p>
+          <a class="btn--link card-cta" href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener">Follow</a>
+        </div>
+        <div class="card wn-channel">
+          <span class="wn-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+          <h3>LinkedIn</h3>
+          <p class="wn-handle">Aho Farms</p>
+          <p>Company updates, partnerships, licensing milestones and the people behind them.</p>
+          <a class="btn--link card-cta" href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener">Follow</a>
+        </div>
+        <div class="card wn-channel">
+          <span class="wn-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></span>
+          <h3>Facebook</h3>
+          <p class="wn-handle">Aho Farms</p>
+          <p>Community news, whānau days and events on the whenua.</p>
+          <a class="btn--link card-cta" href="https://www.facebook.com/profile.php?id=61584684134399" target="_blank" rel="noopener">Follow</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plate plate--cream sec wn-news" id="news" aria-labelledby="wn-news-title">
+    <div class="aho-wrap">
+      <div class="wn-head">
+        <span class="eyebrow">Ngā kōrero · News</span>
+        <h2 id="wn-news-title">Latest from the team.</h2>
+      </div>
+      <ul class="wn-news-list">
+        <li><a href="news.html"><span class="wn-date">June 2026</span><h3>Aho Farms completes 2026 harvest season in Hawke's Bay</h3><span class="wn-arrow" aria-hidden="true">→</span></a></li>
+        <li><a href="news.html"><span class="wn-date">May 2026</span><h3>Five new whānau members join the Aho Farms team ahead of peak season</h3><span class="wn-arrow" aria-hidden="true">→</span></a></li>
+        <li><a href="news.html"><span class="wn-date">April 2026</span><h3>What the 2025 Medsafe advertising guidance means for NZ medicinal cannabis operators</h3><span class="wn-arrow" aria-hidden="true">→</span></a></li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn--secondary" href="news.html">All news &amp; updates</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wn-close" id="tuhono">
+    <div class="aho-wrap">
+      <span class="eyebrow">Tūhono mai</span>
+      <h2>The thread continues with you.</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="contact.html">Contact the team</a>
+        <a class="btn btn--ghost" href="products.html">Our flower</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- AHO:FOOTER:START - generated by scripts/propagate-nav.js, do not edit by hand -->
+<footer class="aho-footer" id="contact">
+  <div class="aho-wrap">
+    <div class="aho-footer-top">
+      <div>
+        <a href="index.html" class="aho-footer-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
+        <div class="aho-footer-badge">Māori Owned &amp; Operated</div>
+        <p class="aho-footer-intro">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
+        <ul class="aho-footer-social" aria-label="Aho Farms on social media">
+          <li><a href="https://linkedin.com/company/aho-farms" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+          <li><a href="https://www.instagram.com/aho_farms_nz/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61584684134399" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="aho-footer-col">
+        <h5>Portals</h5>
+        <ul>
+          <li><a href="prescribers.html">Prescribers</a></li>
+          <li><a href="pharmacies.html">Pharmacies</a></li>
+          <li><a href="export-partners.html">Export partners</a></li>
+        </ul>
+      </div>
+      <div class="aho-footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="contact.html">Contact the team</a></li>
+          <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
+          <li><a href="contact.html">Hawke's Bay<small>Aotearoa New Zealand</small></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="aho-footer-bottom">
+      <div class="aho-footer-copy">
+        © 2026 Aho Farms Limited ·
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a> ·
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+      <div class="aho-footer-legal">Aho Farms products are prescription medicines. Not for general sale. Licensed medicinal cannabis cultivator under New Zealand law.</div>
+    </div>
+  </div>
+</footer>
+<!-- AHO:FOOTER:END -->
+
+<script>
+/* Instagram feed via Behold (JSON). The grid keeps its static tiles until a
+   feed URL is present AND the fetch succeeds, so the section never renders
+   empty. Behold serves CDN-optimised images and refreshes the Instagram
+   token itself; nothing secret lives here. */
+(function () {
+  var grid = document.getElementById('wnFeed');
+  var url = grid && grid.getAttribute('data-behold-feed');
+  if (!url) return;
+  var esc = function (s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  fetch(url, { mode: 'cors' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+    var posts = (d && (d.posts || d)) || [];
+    if (!posts.length) return;
+    var html = posts.slice(0, 6).map(function (p) {
+      var src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.thumbnailUrl || p.mediaUrl;
+      if (!src) return '';
+      var isVideo = /VIDEO|REEL/i.test(p.mediaType || '');
+      var cap = (p.caption || '').split('\n')[0].slice(0, 140);
+      return '<a class="wn-tile" href="' + esc(p.permalink) + '" target="_blank" rel="noopener">' +
+        '<img src="' + esc(src) + '" alt="' + esc(cap || 'Instagram post from Aho Farms') + '" loading="lazy">' +
+        (isVideo ? '<span class="wn-video" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>' : '') +
+        (cap ? '<figcaption>' + esc(cap) + '</figcaption>' : '') + '</a>';
+    }).join('');
+    if (html) grid.innerHTML = html;
+  }).catch(function () { /* keep the static tiles */ });
+})();
+</script>
+<!-- AHO:CONNECT:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
+<div class="aho-connect">
+  <button class="aho-connect-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ahoConnectSheet">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>
+    Connect with us
+  </button>
+</div>
+<div class="aho-sheet" id="ahoConnectSheet" role="dialog" aria-modal="true" aria-labelledby="ahoConnectTitle" aria-hidden="true">
+  <div class="aho-sheet-panel">
+    <div class="aho-sheet-head">
+      <div>
+        <span class="aho-sheet-eyebrow">Whakapā mai</span>
+        <h2 class="aho-sheet-title" id="ahoConnectTitle">Connect with us</h2>
+      </div>
+      <button class="aho-sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <ul class="aho-sheet-list">
+      <li><a href="prescribers.html"><span><b>Prescribers</b><small>Prescribing information and the prescriber portal</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="pharmacies.html"><span><b>Pharmacies</b><small>Stocking Aho Farms and the pharmacy portal</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="export-partners.html"><span><b>Export partners</b><small>International supply enquiries</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="contact.html"><span><b>Contact the team</b><small>General enquiries and media</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+  </div>
+</div>
+<!-- AHO:CONNECT:END -->
+<!-- AHO:CHROME:JS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
+<script src="assets/aho-chrome.js?v=4c6ab898" defer></script>
+<!-- AHO:CHROME:JS:END -->
+</body>
+</html>
