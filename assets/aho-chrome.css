@@ -891,10 +891,22 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .cl-car-dots button[aria-selected="true"]{background:var(--aho-accent) !important;}
   /* origins photographs: the caption hangs under the frame */
   .og-photo{overflow:visible !important;}
-  .og-photo:has(figcaption){margin-bottom:52px !important;}
+  .og-photo{margin-bottom:60px !important;}
   .og-photo img,.og-photo video{border-radius:var(--r-card,16px);}
   .og-photo figcaption{position:absolute !important;top:calc(100% + 12px) !important;bottom:auto !important;left:0 !important;right:0 !important;
     color:var(--aho-silver) !important;line-height:1.45 !important;text-shadow:none !important;}
   .og-photo figcaption::before{flex:none;}
   .ch-flax .og-photo figcaption{color:var(--aho-ink-soft) !important;}
+  .og-photo figcaption{white-space:normal !important;width:100% !important;flex-wrap:nowrap !important;align-items:flex-start !important;}
+  .og-photo figcaption::before{margin-top:0.55em;}
+  /* origins, the return-home chapter: Safari transferred the video frame's
+     220px minimum height through its 16:9 ratio into a 391px-wide grid
+     track, wider than the phone. On phones the copy and the two frames
+     stack as plain blocks with explicit widths, so nothing is inferred. */
+  .og-home-top,.og-home .og-photo-stack{display:block !important;}
+  .og-home .og-photo-stack{margin-top:var(--s5) !important;}
+  .og-home .og-photo{display:block !important;width:100% !important;max-width:100% !important;min-width:0 !important;min-height:0 !important;height:auto !important;margin:0 0 72px !important;}
+  .og-home .og-photo--loop{aspect-ratio:16/9 !important;}
+  .og-home .og-photo--crop{aspect-ratio:4/3 !important;}
+  .og-home .og-photo img,.og-home .og-photo video{position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;max-height:none !important;object-fit:cover !important;}
 }
