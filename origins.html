@@ -1470,7 +1470,15 @@ html.no-video .hero-scroll{opacity:1;}
 
 /* —— 9 · closing (flax) —— */
 .og-close{padding-bottom:clamp(120px,14vh,180px);}
-.og-close .og-pull{font-size:var(--t-h2);max-width:22ch;}
+/* The closing statement sits on flax, so it reads in ink with the ambition
+   in deep teal; a short teal fibre above it picks the thread up from the
+   chapter before, and the whole line is centred as the page's last word. */
+.og-close .og-pull{font-size:var(--t-h1);line-height:1.1;max-width:20ch;margin:0 auto;padding-top:var(--s5);text-align:center;color:var(--aho-ink);position:relative;}
+.og-close .og-pull::before{content:'';position:absolute;top:0;left:50%;width:1px;height:var(--s4);background:var(--aho-accent-deep);transform:translateX(-50%);}
+.og-close .og-pull em{color:var(--aho-accent-deep);}
+/* the return chapter's pull quote sits on flax too */
+.ch-flax .og-pull{color:var(--aho-ink);}
+.ch-flax .og-pull em{color:var(--aho-accent-deep);}
 /* the four principles on the paper-and-thread canvas (3:1) */
 .og-principles-plate{position:relative;width:100%;aspect-ratio:1672/941;margin-top:clamp(var(--s6),9vh,var(--s8));container-type:inline-size;
   background:#f3eadf url("assets/aho-origin-principles-16x9.jpg") center/cover no-repeat;
