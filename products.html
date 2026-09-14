@@ -1307,6 +1307,19 @@ html.no-video .hero-scroll{opacity:1;}
 .pr-hero-rx{margin-top:var(--s3);}
 .pr-hero-aside{position:relative;z-index:2;align-self:end;padding:0 clamp(24px,3vw,56px) clamp(var(--s6),9vh,var(--s8)) var(--s3);}
 .pr-hero-aside::before{content:'';position:absolute;z-index:-1;inset:-64px -40px -24px -96px;pointer-events:none;background:radial-gradient(ellipse at 55% 60%,rgba(7,9,7,0.78),rgba(7,9,7,0.4) 50%,transparent 76%);}
+/* desktop, CEO 2026-09-14: half and half. The cola fills the right half of
+   the hero edge to edge, its left side dissolving into a plain dark ground
+   that carries the words. No field photograph behind it. */
+@media(min-width:901px){
+  .pr-hero-field{display:none;}
+  .pr-hero-media{background:#0a0b0c;}
+  .pr-hero-cola{width:58%;height:100%;aspect-ratio:auto;object-position:50% 50%;
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.5) 16%,#000 32%);mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.5) 16%,#000 32%);}
+  .pr-hero-media::after{background:
+    linear-gradient(to right,rgba(10,11,12,0.9) 0%,rgba(10,11,12,0.55) 34%,rgba(10,11,12,0.12) 48%,rgba(10,11,12,0) 56%),
+    linear-gradient(to bottom,rgba(10,11,12,0.6) 0%,rgba(10,11,12,0.18) 12%,rgba(10,11,12,0) 24%),
+    linear-gradient(to top,rgba(11,11,11,1) 0%,rgba(11,11,11,0.4) 8%,rgba(11,11,11,0) 22%);}
+}
 
 /* ================================================================
    BELOW THE HERO — the CEO's reference format (2026-09-13), verbatim in
