@@ -325,7 +325,7 @@ html:not(.aho-nav-solid) .hero,.abx2-hero,.og-hero,.tm-hero,.th-hero,.cl-hero,.q
 .hairline{border:0;border-top:1px solid var(--aho-rule);margin:var(--s5) 0;}
 .plate--flax .hairline,.plate--cream .hairline,.plate--earth .hairline{border-top-color:var(--aho-rule-light);}
 /* closing passages sit on the near-black teal ground so the last chapter of every page carries the brand */
-.connect-sec,.abx-tuhono,.qc-close,.th-close,.og-close,.cl-close,.wn-close,.location-section,.compliance-note{background:var(--aho-ink-teal) !important;}
+.connect-sec,.abx-tuhono,.qc-close,.th-close,.cl-close,.wn-close,.location-section,.compliance-note{background:var(--aho-ink-teal) !important;}
 .plate--teal-night{background:var(--aho-teal-night);}
 
 /* ---- 7. buttons ------------------------------------------------
