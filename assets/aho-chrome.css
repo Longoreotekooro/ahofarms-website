@@ -723,3 +723,14 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .og-journey img,.og-journey figure > img{aspect-ratio:auto !important;max-height:none !important;object-fit:contain !important;}
   .og-photo--bleed{width:100% !important;max-width:100% !important;margin:0 !important;}
 }
+@media(max-width:640px){
+  .og-plate-copy,.og-copy{padding-left:0 !important;padding-right:0 !important;max-width:100% !important;}
+  .og-plate{padding:var(--s4) var(--s3) !important;}
+  .og-meet-copy{position:static !important;width:100% !important;max-width:100% !important;padding:var(--s3) var(--aho-gutter) !important;}
+  .og-meet-line{max-width:100% !important;}
+}
+@media(max-width:360px){
+  html.aho-nav-solid :is(.contacts-section,.news-section,.newsletter-section,.form-section,.portal-contents,.access-form-section,.section.why,.section.markets,.section.form-section,.legal-body){padding-left:14px;padding-right:14px;}
+  .card,.contact-card,.news-card,.market-card,.portal-card{padding:18px 16px;}
+  .news-card-body{padding:16px !important;}
+}
