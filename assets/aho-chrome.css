@@ -739,3 +739,9 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .abx-circle img,img[src*="mo-tatou"],img[src*="principles"],img[src*="timeline"],img[src*="globe"]{aspect-ratio:auto !important;max-height:none !important;object-fit:contain !important;width:100% !important;height:auto !important;}
   .abx-circle{width:100%;max-width:100%;margin-left:0;margin-right:0;}
 }
+@media(max-width:640px){
+  /* homepage film hero: give the copy air beneath the header (CEO, 2026-09-15) */
+  .hero#hero{min-height:100svh !important;}
+  .hero#hero .hero-ui-inner{padding-top:calc(var(--nav-h) + 40px) !important;padding-bottom:12svh !important;}
+  .hero#hero .hero-ui{align-items:flex-end;}
+}
