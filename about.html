@@ -1436,12 +1436,16 @@ html.no-video .hero-scroll{opacity:1;}
 .abx2-intro-photo{max-width:420px;justify-self:end;}
 /* whānau carousel — stacked crossfade, quiet dots */
 .abx2-carousel{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:calc(var(--plate-r)*0.55);z-index:3;}
-.abx2-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s var(--ease);filter:saturate(0.92) contrast(1.03);}
+.abx2-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.8s var(--ease);filter:saturate(0.92) contrast(1.03);}
 .abx2-carousel img.on{opacity:1;}
 .abx2-carousel::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(5,8,8,0.6),transparent 42%);}
 .abx2-carousel figcaption{position:absolute;z-index:2;left:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:12px;font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);text-transform:uppercase;color:rgba(243,241,235,0.9);}
 .abx2-carousel figcaption::before{content:'';width:28px;height:1px;background:var(--gold);}
-.abx2-car-dots{position:absolute;z-index:2;right:var(--s3);bottom:var(--s3);display:flex;gap:8px;}
+.abx2-car-ui{position:absolute;z-index:2;right:var(--s3);bottom:var(--s3);display:flex;align-items:center;gap:14px;}
+.abx2-car-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(243,241,235,0.45);background:rgba(11,15,14,0.35);color:#f3f1eb;display:grid;place-items:center;cursor:pointer;padding:0;transition:border-color 0.35s var(--ease),background 0.35s var(--ease);}
+.abx2-car-btn svg{width:15px;height:15px;}
+.abx2-car-btn:hover,.abx2-car-btn:focus-visible{border-color:var(--gold);background:rgba(11,15,14,0.6);}
+.abx2-car-dots{display:flex;gap:8px;}
 .abx2-car-dot{width:6px;height:6px;border-radius:50%;background:rgba(243,241,235,0.35);border:0;padding:0;cursor:pointer;transition:background 0.3s,box-shadow 0.3s;}
 .abx2-car-dot.on{background:var(--gold);box-shadow:0 0 8px rgba(98,170,166,0.7);}
 .abx2-car-43{aspect-ratio:4/3;}
@@ -1504,7 +1508,7 @@ html.no-video .hero-scroll{opacity:1;}
   .abx2-land-pillar + .abx2-land-pillar{padding:var(--s3) 0 0;border-left:0;border-top:1px solid var(--hairline);}
   .abx2-land-pillar-s{max-width:none;}
   .abx2-land-photo figcaption{left:14px;bottom:14px;font-size:var(--t-xs);padding:7px 12px 7px 10px;max-width:calc(100% - 78px);}
-  .abx2-land-photo .abx2-car-dots{right:14px;bottom:19px;}
+  .abx2-land-photo .abx2-car-ui{right:14px;bottom:14px;}
   .abx2-land-duo{grid-template-columns:1fr;}
   .abx2-land-duo > div{padding:0;}
   .abx2-land-duo > div + div{padding:var(--s4) 0 0;margin-top:var(--s4);border-left:0;border-top:1px solid var(--hairline);}
@@ -1703,11 +1707,11 @@ html.no-video .hero-scroll{opacity:1;}
           <img src="assets/whanau-build-2.jpg" alt="A whānau member on site during greenhouse construction" loading="lazy">
           <img src="assets/whanau-build-3.jpg" alt="The crew driving greenhouse foundations into the covered ground" loading="lazy">
           <figcaption>Whānau building the farm · Raupunga</figcaption>
-          <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+          <div class="abx2-car-ui"><button class="abx2-car-btn" type="button" data-dir="-1" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M11.5 6 5.5 12l6 6"/></svg></button><span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
             <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
             <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
             <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
-          </span>
+          </span><button class="abx2-car-btn" type="button" data-dir="1" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></button></div>
         </figure>
       </div>
     </div>
@@ -1728,10 +1732,10 @@ html.no-video .hero-scroll{opacity:1;}
           <img class="on" src="assets/marae-wharenui.jpg" alt="The wharenui — carved tekoteko and maihi framing whānau gathered before it" loading="lazy">
           <img src="assets/marae-whanau.jpg" alt="Four generations of whānau standing together in front of the wharenui" loading="lazy">
           <figcaption>Marae · the places that anchor identity</figcaption>
-          <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+          <div class="abx2-car-ui"><button class="abx2-car-btn" type="button" data-dir="-1" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M11.5 6 5.5 12l6 6"/></svg></button><span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
             <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
             <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
-          </span>
+          </span><button class="abx2-car-btn" type="button" data-dir="1" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></button></div>
         </figure>
         <div class="abx2-city-stat">
           <div class="abx-stat reveal">
@@ -1767,11 +1771,11 @@ html.no-video .hero-scroll{opacity:1;}
         <img src="assets/whenua-work-2.jpg" alt="The levelled cultivation pad above the valley, ready for development" width="1400" height="1050" loading="lazy">
         <img src="assets/whenua-work-3.jpg" alt="The Aho Farms site from the air, greenhouses and the cleared expansion" width="1400" height="1052" loading="lazy">
         <figcaption><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Aho Farms whenua · Hawke's Bay</figcaption>
-        <span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
+        <div class="abx2-car-ui"><button class="abx2-car-btn" type="button" data-dir="-1" aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6M11.5 6 5.5 12l6 6"/></svg></button><span class="abx2-car-dots" role="tablist" aria-label="Choose photo">
           <button class="abx2-car-dot on" type="button" aria-label="Photo 1"></button>
           <button class="abx2-car-dot" type="button" aria-label="Photo 2"></button>
           <button class="abx2-car-dot" type="button" aria-label="Photo 3"></button>
-        </span>
+        </span><button class="abx2-car-btn" type="button" data-dir="1" aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12.5 6 18.5 12l-6 6"/></svg></button></div>
       </figure>
       <div class="abx2-land-bodyblk">
         <div class="abx-copy reveal d1">
@@ -2018,7 +2022,7 @@ const MOBILE=window.matchMedia('(max-width:767px)').matches;
 </script>
 
 <script>
-/* whanau carousel - crossfade every 4.6s, dots to jump, pause on hover;
+/* whanau carousels - crossfade every 3.4s, arrows, dots and swipe to move, pause on hover;
    no auto-advance for reduced-motion users */
 (function(){
   document.querySelectorAll('.abx2-carousel').forEach(function(c){
@@ -2026,8 +2030,12 @@ const MOBILE=window.matchMedia('(max-width:767px)').matches;
   const R=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let i=0,t;
   function show(n){i=n;imgs.forEach((im,k)=>im.classList.toggle('on',k===n));dots.forEach((d,k)=>d.classList.toggle('on',k===n));}
-  function arm(){if(R)return;clearInterval(t);t=setInterval(()=>show((i+1)%imgs.length),4600);}
+  function arm(){if(R)return;clearInterval(t);t=setInterval(()=>show((i+1)%imgs.length),3400);}
   dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);arm();}));
+  c.querySelectorAll('.abx2-car-btn').forEach(b=>b.addEventListener('click',()=>{show((i+(+b.dataset.dir)+imgs.length)%imgs.length);arm();}));
+  let x0=null;
+  c.addEventListener('pointerdown',e=>{x0=e.clientX;},{passive:true});
+  c.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){show((i+(dx<0?1:-1)+imgs.length)%imgs.length);arm();}},{passive:true});
   c.addEventListener('pointerenter',()=>clearInterval(t));
   c.addEventListener('pointerleave',arm);
   arm();
