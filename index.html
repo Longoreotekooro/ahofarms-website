@@ -598,7 +598,7 @@ html.no-video .hero-sound{display:none;}
   font-size:var(--t-md);color:var(--starlight);line-height:1.6;max-width:28ch;
 }
 @media(max-width:900px){
-  .why-layout{grid-template-columns:1fr;grid-template-rows:none;row-gap:var(--s6);}
+  .why-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:none;row-gap:var(--s6);}
   .why-head,.why-copy,.why-visual{grid-column:auto;grid-row:auto;}
   .why-visual{position:static;}
   .why-visual img{aspect-ratio:4/3;}
@@ -648,7 +648,7 @@ html.no-video .hero-sound{display:none;}
 .pstage{position:relative;padding:var(--s5) 0;}
 .pstage-inner{
   max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:center;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s7);align-items:center;
 }
 .pstage-visual{position:relative;display:flex;align-items:center;justify-content:center;}
 /* the product name whispers behind the object — editorial depth */
@@ -712,7 +712,7 @@ html.no-video .hero-sound{display:none;}
   font-size:var(--t-xs);color:rgba(168,173,179,0.55);
 }
 @media(max-width:900px){
-  .pstage-inner{grid-template-columns:1fr;gap:var(--s5);}
+  .pstage-inner{grid-template-columns:minmax(0,1fr);gap:var(--s5);}
   .pstage.alt .pstage-visual{order:-1;}
   .prod-pkg{max-height:320px;}
 }
@@ -746,7 +746,7 @@ html.no-video .hero-sound{display:none;}
    ================================================================ */
 .people-grid{
   max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s7);align-items:center;
+  display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:var(--s7);align-items:center;
 }
 .people-img{position:relative;overflow:hidden;border-radius:var(--r-card);box-shadow:var(--glass-shadow);}
 .people-img::after{
@@ -773,7 +773,7 @@ html.no-video .hero-sound{display:none;}
 .people-quote cite{font-size:var(--t-xs);color:var(--silver);font-style:normal;}
 .people-content > p{color:var(--silver);margin-bottom:var(--s3);max-width:56ch;}
 @media(max-width:900px){
-  .people-grid{grid-template-columns:1fr;gap:var(--s5);}
+  .people-grid{grid-template-columns:minmax(0,1fr);gap:var(--s5);}
 }
 
 /* community impact — each outcome a point of light, held together
@@ -789,7 +789,7 @@ html.no-video .hero-sound{display:none;}
 .impact-hdr{max-width:640px;margin-bottom:var(--s6);}
 .impact-hdr p{color:var(--silver);}
 .impact-facts{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s5);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s5);
 }
 .ifact{border-top:1px solid var(--hairline);padding-top:var(--s3);position:relative;}
 .ifact::before{
@@ -804,7 +804,7 @@ html.no-video .hero-sound{display:none;}
 .ifact-l{font-size:var(--t-sm);color:var(--silver);line-height:1.6;}
 .impact-cta{margin-top:var(--s6);display:flex;gap:12px;flex-wrap:wrap;}
 @media(max-width:900px){
-  .impact-facts{grid-template-columns:repeat(2,1fr);gap:var(--s4);}
+  .impact-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4);}
 }
 
 /* ================================================================
@@ -876,7 +876,7 @@ html.no-video .hero-sound{display:none;}
 .portal-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
 @media(max-width:900px){
   .portal-row{
-    grid-template-columns:1fr;gap:var(--s2);
+    grid-template-columns:minmax(0,1fr);gap:var(--s2);
     padding:var(--s4) var(--s1);
   }
   .portal-row p{max-width:58ch;}
@@ -892,7 +892,7 @@ html.no-video .hero-sound{display:none;}
 }
 .news-grid{
   max-width:var(--max);margin:0 auto;padding:0 var(--s4);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);
 }
 .ncard{display:block;}
 .ncard-img{
@@ -919,7 +919,7 @@ html.no-video .hero-sound{display:none;}
 .ncard:hover h4{color:var(--gold-light);}
 .ncard p{font-size:var(--t-sm);color:var(--silver);line-height:1.6;}
 @media(max-width:900px){
-  .news-grid{grid-template-columns:1fr;}
+  .news-grid{grid-template-columns:minmax(0,1fr);}
 }
 
 /* ================================================================
@@ -1024,7 +1024,7 @@ html.no-video .hero-sound{display:none;}
   background:linear-gradient(to right,transparent,rgba(243,241,235,0.1),transparent);
 }
 .footer-top{
-  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:var(--s6);
+  display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:var(--s6);
   padding-bottom:var(--s6);border-bottom:1px solid var(--hairline);
   position:relative;z-index:1;
 }
@@ -1062,7 +1062,7 @@ html.no-video .hero-sound{display:none;}
 .footer-copy a:hover{color:var(--starlight);}
 .footer-legal{font-size:var(--t-xs);color:rgba(168,173,179,0.4);max-width:52ch;}
 @media(max-width:900px){
-  .footer-top{grid-template-columns:1fr 1fr;gap:var(--s5);}
+  .footer-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s5);}
 }
 
 /* the fibre that leaves the film — it continues out of the hero's
@@ -1409,9 +1409,9 @@ html.no-video .hero-sound{display:none;}
 
 @media(max-width:900px){
   .adv-moment{padding-left:var(--s4);padding-bottom:var(--s7);}
-  .adv-open{grid-template-columns:1fr;row-gap:var(--s5);}
+  .adv-open{grid-template-columns:minmax(0,1fr);row-gap:var(--s5);}
   .adv-macro{margin-right:0;border-radius:var(--r-ctl);border-right-width:1px;}
-  .adv-story-grid{grid-template-columns:1fr;gap:var(--s5);}
+  .adv-story-grid{grid-template-columns:minmax(0,1fr);gap:var(--s5);}
   .adv-story{margin-top:var(--s6);}
   .adv-story-grid{padding:var(--s5) 0;}
   .adv-photo{height:auto;min-height:430px;aspect-ratio:4/5;}
@@ -1421,7 +1421,7 @@ html.no-video .hero-sound{display:none;}
   /* three environments stack into one clean column; the aho rail of
      the moment itself keeps them connected, so the fibres retire */
   .adv-fibres{display:none;}
-  .adv-env-row{grid-template-columns:1fr;}
+  .adv-env-row{grid-template-columns:minmax(0,1fr);}
   .adv-env{margin-top:var(--s5);}
   .adv-env:first-child{margin-top:0;}
   .adv-env .ph{border-right-width:1px;border-radius:var(--r-ctl);}
@@ -1487,7 +1487,7 @@ html.no-video .hero-scroll{opacity:1;}
 /* logo tiles sit calmly on the flax plate */
 </style>
 <!-- AHO:CHROME:CSS:START - generated by scripts/propagate-chrome.js, do not edit by hand -->
-<link rel="stylesheet" href="assets/aho-chrome.css?v=034a2b28">
+<link rel="stylesheet" href="assets/aho-chrome.css?v=b7c88115">
 <!-- AHO:CHROME:CSS:END -->
 </head>
 <body>
