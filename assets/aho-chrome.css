@@ -284,6 +284,17 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
   .nav-parent .nav-sub a::after{transition:none !important;}
 }
 
+
+/* Photo and film heroes carry no teal (CEO, 2026-09-15): over photography
+   the eyebrow, thread line, te reo line, wordmark and outline button read
+   in white so nothing competes with the image. The accent returns from
+   the first chapter down. */
+html:not(.aho-nav-solid) .hero,.abx2-hero,.og-hero,.tm-hero,.th-hero,.cl-hero,.ql-hero,.pr-hero{
+  --aho-accent:var(--aho-white);--aho-accent-light:var(--aho-white);--aho-accent-deep:var(--aho-white);
+  --aho-accent-soft:rgba(243,241,235,0.45);--aho-accent-tint:rgba(243,241,235,0.1);--aho-accent-ink:var(--aho-ink);
+  --gold:var(--aho-white);--gold-light:var(--aho-white);--teal:var(--aho-white);--teal-light:var(--aho-white);--teal-deep:var(--aho-white);
+  --botanical:var(--aho-white);--celestial:var(--aho-white);}
+
 /* ---- 6. plates & sections -------------------------------------------
    Inset rounded plates on the void canvas (baseline addendum). Tones
    are the only allowed light/dark chapter grounds. */
