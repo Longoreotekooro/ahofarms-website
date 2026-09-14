@@ -133,6 +133,8 @@ small,.small{font-size:var(--t-sm);}
 /* statistics: the number carries the teal, the label stays neutral */
 .abx-stat-n,.adv-stat-c,.cl-stat-v,.cl-num,.hero-stat-number,.stat-card-value,.status-value,.portal-card-num,.obligation-number,.commit-num,.ab-impact-cell-num,.num-n{color:var(--aho-accent);}
 .plate--flax .abx-stat-n,.plate--cream .abx-stat-n,.plate--earth .abx-stat-n,.ch-flax .abx-stat-n,.cl-flax .cl-stat-v,.cl-cream .cl-stat-v,.cl-earth .cl-stat-v,.cl-flax .cl-num,.cl-earth .cl-num{color:var(--aho-accent-deep);}
+/* the 78.5% on About's flax chapter reads in ink (CEO, 2026-09-15); its % keeps the accent */
+.abx2-city-stat .abx-stat-n{color:var(--aho-ink);}
 /* rules and text links */
 hr{border:0;border-top:1px solid var(--aho-rule);}
 a:not([class]){color:var(--aho-accent);text-decoration-color:var(--aho-accent-soft);text-underline-offset:3px;transition:text-decoration-color .2s;}
