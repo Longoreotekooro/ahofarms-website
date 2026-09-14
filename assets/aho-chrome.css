@@ -829,3 +829,9 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .og-model-hope{order:3 !important;margin:var(--s6) 0 0 !important;padding:var(--s4) 0 0 !important;border-top:1px solid var(--aho-rule) !important;
     font-size:var(--t-lg) !important;line-height:1.35 !important;max-width:100% !important;text-shadow:none !important;}
 }
+@media(max-width:640px){
+  /* logo story: the mark under the whakapapa definition reads large and
+     centred, its Hawke's Bay line centred beneath it (CEO, 2026-09-15) */
+  .th-principle-rail .th-mark{width:min(72%,240px) !important;margin:var(--s5) auto var(--s3) !important;justify-self:center !important;opacity:1 !important;}
+  .th-principle-rail .th-mark-tag{justify-self:center !important;text-align:center !important;max-width:none !important;margin:0 auto !important;}
+}
