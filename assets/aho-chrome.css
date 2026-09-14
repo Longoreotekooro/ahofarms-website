@@ -687,7 +687,6 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
 }
 @media(max-width:400px){
   :root{--t-h1:clamp(2rem,9vw,2.4rem);--t-display:clamp(2.3rem,10.5vw,2.8rem);--aho-gutter:18px;}
-  .tm-grid{grid-template-columns:minmax(0,1fr) !important;}
   .btn-row .btn,.hero-actions .btn,.abx-tuhono-btns .btn,.pr-btns .btn,.connect-btns .btn{flex-basis:100%;}
   .nav-cta-wrap::after{display:none;}
   .nav-cta-wrap{padding:0 12px;}
@@ -697,4 +696,30 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
 }
 @media(max-width:640px) and (prefers-reduced-motion:no-preference){
   .reveal,.emerge{transition-duration:.5s !important;}
+}
+
+/* ---- 16. mobile fixes from the 2026-09-15 audit --------------------------
+   Layouts that named their columns without "grid" in the class, and copy
+   columns whose max-width is a desktop formula. */
+@media(max-width:900px){
+  .cl-close-copy,.cl-hero-copy,.ql-hero-copy,.pr-hero-copy{max-width:100% !important;padding-left:var(--aho-gutter) !important;padding-right:var(--aho-gutter) !important;}
+}
+@media(max-width:640px){
+  .og-sunrise-ui,.og-home-top,.og-plate,.og-bigger-band,.og-bigger-coda,.og-steps,.og-model-grid,.cl-terroir-media,.qc-two,.cl-split{grid-template-columns:minmax(0,1fr) !important;}
+  .og-bigger-band > *,.og-bigger-coda > *,.og-home-top > *,.og-plate > *{grid-column:1 !important;}
+  .og-bigger-close,.og-lead,.og-copy,.og-pull,.og-plate-copy{max-width:100% !important;}
+  .location-detail{flex-direction:column;align-items:flex-start;}
+  .cl-close{display:block !important;}
+}
+@media(max-width:360px){
+  .tm-grid{grid-template-columns:minmax(0,1fr) !important;}
+}
+@media(min-width:361px) and (max-width:640px){
+  .tm-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+}
+@media(max-width:640px){
+  .og-model-top{display:block !important;width:100% !important;position:static !important;}
+  .og-model-intro,.og-model-head,.og-model-hope,.og-model-cell{max-width:100% !important;width:auto !important;}
+  .og-journey img,.og-journey figure > img{aspect-ratio:auto !important;max-height:none !important;object-fit:contain !important;}
+  .og-photo--bleed{width:100% !important;max-width:100% !important;margin:0 !important;}
 }
