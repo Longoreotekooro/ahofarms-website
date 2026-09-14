@@ -848,8 +848,10 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
    grid-template-columns on the site now uses minmax(0,Xfr); this is the
    belt to that brace. ----------------------------------------------------- */
 @media(max-width:640px){
-  html{overflow-x:clip;}
-  body{overflow-x:clip;max-width:100vw;}
+  /* body only: its clip propagates to the viewport. A clip on html, or a
+     100vw cap on body, makes iOS Safari widen the layout viewport and zoom
+     the page out (black band at the right, 2026-09-14). */
+  body{overflow-x:clip;}
   img,video,svg,picture,iframe,canvas{max-width:100%;}
   .th-principle,.th-principle-top,.th-principle-rail{grid-template-columns:minmax(0,1fr) !important;}
   .th-principle-top > *,.th-principle-rail > *{min-width:0;max-width:100%;}
