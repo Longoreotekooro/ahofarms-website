@@ -52,6 +52,7 @@ function renderNav(currentPage) {
   // social row, then the same wordmark the header uses.
   const drawerFoot =
     `<li class="nav-drawer-foot" aria-label="Aho Farms">` +
+    `<a class="btn btn--primary nav-drawer-cta" href="${esc(CTA.href)}">${esc(CTA.en)} the team</a>` +
     `<ul class="nav-drawer-social" aria-label="Aho Farms on social media">` +
     SOCIAL.map(s => `<li><a href="${esc(s.href)}" target="_blank" rel="noopener" aria-label="${esc(s.name)}">${s.icon}</a></li>`).join('') +
     `</ul>` +

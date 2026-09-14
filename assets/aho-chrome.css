@@ -553,7 +553,9 @@ html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-ca
   .adv-photo{min-height:0;}
 }
 /* touch targets */
-[class*="car-dot"],[class*="-dot"][role="tab"],button[class*="dot"]{padding:14px;margin:-6px;box-sizing:content-box;background-clip:content-box;}
+/* carousel dots keep their 8px look; the hit area is an invisible 40px pseudo */
+[class*="car-dot"],button[class*="dot"]{position:relative;}
+[class*="car-dot"]::after,button[class*="dot"]::after{content:"";position:absolute;inset:-16px;border-radius:50%;}
 .filter-pill,.pr-card-cta,.contact-card-link,.news-card a,.read-more{min-height:44px;display:inline-flex;align-items:center;}
 .btn-logout,.header-logo{min-height:40px;display:inline-flex;align-items:center;}
 .filter-pill{padding:0 14px;}
@@ -578,3 +580,121 @@ html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-ca
    so the product is never hidden. Off by default. */
 html.aho-mono img:not(.aho-keep-colour):not([src*="brand/"]):not([src*="partners/"]){filter:grayscale(1);transition:filter .6s var(--aho-ease);}
 html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
+
+/* ====================================================================
+   15. MOBILE LAYER (CEO brief, 2026-09-15)
+   Phones are their own design: a tighter spacing scale that still
+   breathes, a mobile type scale that keeps hierarchy without desktop
+   sizes, heroes cropped for portrait, photography capped, grids
+   collapsed on purpose, 44px targets, a footer ordered for a thumb,
+   decorative motion switched off. Everything here sits inside media
+   queries so desktop and tablet are untouched.
+   ==================================================================== */
+@media(max-width:640px){
+  :root{
+    --t-xs:0.75rem;                 /* 12 · eyebrows read on a phone */
+    --t-sm:0.8125rem;
+    --t-base:1rem;
+    --t-md:1.0625rem;
+    --t-lg:1.2rem;
+    --t-h3:1.4rem;
+    --t-h2:clamp(1.85rem,7.2vw,2.3rem);
+    --t-h1:clamp(2.2rem,9vw,2.9rem);
+    --t-display:clamp(2.5rem,10.5vw,3.4rem);
+    --track-caps:0.12em;
+    --s5:40px;--s6:48px;--s7:56px;--s8:64px;--s9:80px;
+    --sec-y-sm:40px;--sec-y:56px;--sec-y-lg:72px;
+    --plate-g:8px;--plate-r:16px;
+    --nav-h:64px;
+  }
+  body{line-height:1.6;}
+  h1,h2{line-height:1.08;letter-spacing:-0.015em;max-width:100% !important;}
+  h3{line-height:1.2;}
+  p{max-width:100% !important;}
+  .eyebrow{margin-bottom:10px;}
+  /* --- header ------------------------------------------------- */
+  .nav{padding:0 var(--aho-gutter);}
+  .nav-inner{height:var(--nav-h);column-gap:var(--s2);}
+  .nav-logo .aho-mark{height:20px;}
+  .nav-logo::after{height:20px;}
+  .nav-cta-wrap{min-height:38px;padding:0 12px 0 14px;font-size:0.75rem;}
+  .nav-burger{margin-right:-10px;}
+  .nav-links{padding:var(--s3) var(--aho-gutter) var(--s5);}
+  .nav-parent{padding:var(--s2) 0 var(--s1);}
+  .nav-parent .nav-sub a{min-height:54px;padding-left:18px;}
+  .nav-parent .nav-sub a .bil-en{font-size:1.0625rem;}
+  .nav-parent .nav-sub a:active .bil-en,.nav-parent .nav-sub a[aria-current="page"] .bil-en{color:var(--aho-accent);}
+  .nav-parent .nav-sub a:active{border-left-color:var(--aho-accent);}
+  .nav-drawer-cta{margin:var(--s2) 0 var(--s4);width:100%;}
+  html.aho-nav-solid body{padding-top:var(--nav-h);}
+  /* --- heroes ------------------------------------------------- */
+  html:not(.aho-nav-solid) .hero,.abx2-hero,.og-hero,.tm-hero,.th-hero,.cl-hero,.ql-hero,.pr-hero{min-height:min(88svh,680px) !important;height:auto !important;}
+  .abx2-hero-media,.cl-hero-media img,.ql-hero-media img,.og-hero img,.og-hero video,.tm-hero img,.th-hero img{object-position:50% 35% !important;}
+  .hero-ui > *,.abx2-hero-ui > *,.cl-hero-copy > *,.ql-hero-copy > *,.pr-hero-copy > *,.og-hero-ui > *,.tm-hero-copy > *,.th-hero-copy > *{max-width:100% !important;}
+  html.aho-nav-solid :is(.hero,.legal-hero){padding:var(--s5) var(--aho-gutter) var(--s6);}
+  html.aho-nav-solid :is(.hero,.legal-hero) h1{font-size:var(--t-h1);}
+  /* --- images & photography ------------------------------------- */
+  figure > img,figure > picture img,.adv-photo img,.adv-env-photo img,.og-photo img,.qc-two--photo img,.cl-terroir-media img,.pr-rooted-media img,.wn-tile img{aspect-ratio:4/5;max-height:62vh;object-fit:cover;width:100%;}
+  .og-photo-stack{gap:var(--s2);}
+  .og-photo figcaption,.abx2-carousel figcaption{left:14px !important;right:14px !important;bottom:14px !important;max-width:none;white-space:normal;line-height:1.4;}
+  img.pr-hero-cola{object-position:55% 40%;}
+  .cl-close{min-height:min(86svh,640px) !important;}
+  /* --- plates, sections, rhythm ---------------------------------- */
+  .plate,.cl-plate,.og-plate{margin-left:var(--plate-g);margin-right:var(--plate-g);}
+  .chapter{padding-top:var(--s8);padding-bottom:var(--s8);}
+  html.aho-nav-solid :is(.contacts-section,.news-section,.newsletter-section,.form-section,.portal-contents,.access-form-section,.section.why,.section.markets,.section.form-section,.legal-body,.section-white,.section-offwhite,.sec-white,.sec-offwhite){padding-top:var(--sec-y);padding-bottom:var(--sec-y);}
+  /* --- grids: collapse on purpose ---------------------------------- */
+  [class*="grid"]:not(.wn-grid):not(.nav-inner):not(.aho-footer-top):not(.tm-grid){grid-template-columns:minmax(0,1fr) !important;}
+  .tm-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:var(--s4) var(--s2) !important;}
+  .wn-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .card,.contact-card,.news-card,.market-card,.portal-card{padding:22px 20px;}
+  /* --- buttons & targets ------------------------------------------- */
+  .btn-row,.hero-actions,.abx-tuhono-btns,.pr-btns,.connect-btns{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn-row .btn,.hero-actions .btn,.abx-tuhono-btns .btn,.pr-btns .btn,.connect-btns .btn{flex:1 1 calc(50% - 12px);min-height:50px;padding:0 18px;white-space:normal;text-align:center;}
+  .btn-row .btn:only-child,.hero-actions .btn:only-child{flex:0 1 auto;min-width:200px;}
+  .contact-card a,.contact-card-email a,.legal-content li a,.aho-footer-copy a{display:inline-block;min-height:40px;padding:10px 0;}
+  .nav-cta-wrap{min-height:40px;}
+  .cl-car-btn,.abx2-car-btn,[class*="car-btn"]{width:44px !important;height:44px !important;}
+  .og-photo,.og-photo img,.og-photo video,.og-founder-banner-img,.cl-close-media img{max-height:60vh;}
+  .og-photo img,.og-photo video{object-fit:cover;}
+  .filter-pill{min-height:44px;padding:0 14px;}
+  /* --- forms --------------------------------------------------------- */
+  input,select,textarea,.field input,.field select,.field textarea{min-height:50px;font-size:1rem;}
+  form .btn,form button[type="submit"],.btn-submit,.btn-full{width:100%;}
+  /* --- thread & decoration: shorter, quieter, no overflow ------------ */
+  .drift,.starfield,.page-grain{display:none !important;}
+  .hero-scroll,.hero-scroll-line{display:none !important;}
+  .thread-inflow{height:56px !important;}
+  /* --- footer: ordered for a thumb -------------------------------------- */
+  .aho-footer{padding:var(--s7) 0 calc(var(--s5) + 72px);} /* room for the floating Connect */
+  .aho-footer::after{height:32px;}
+  .aho-footer-top{display:flex;flex-direction:column;gap:0;padding-bottom:var(--s5);}
+  .aho-footer-top > div:first-child{display:contents;}
+  .aho-footer-logo{order:1;margin-bottom:14px;}
+  .aho-footer-badge{order:2;margin-bottom:var(--s4);}
+  .aho-footer-intro{order:3;margin-bottom:var(--s5);}
+  .aho-footer-col{order:4;margin-bottom:var(--s5);}
+  .aho-footer-col:last-of-type{order:5;}
+  .aho-footer-social{order:6;margin:0;}
+  .aho-footer-col ul{display:grid;gap:2px;}
+  .aho-footer-col li a{display:flex;align-items:center;min-height:44px;padding:0;font-size:1rem;}
+  .aho-footer-col li a::after{bottom:8px;}
+  .aho-footer-col li a small{margin-left:8px;display:inline;}
+  .aho-footer-bottom{flex-direction:column;gap:var(--s3);padding-top:var(--s4);}
+  .aho-footer-copy{line-height:2.2;}
+  /* --- the floating Connect stays clear of thumbs -------------------------- */
+  .aho-connect{bottom:16px;}
+}
+@media(max-width:400px){
+  :root{--t-h1:clamp(2rem,9vw,2.4rem);--t-display:clamp(2.3rem,10.5vw,2.8rem);--aho-gutter:18px;}
+  .tm-grid{grid-template-columns:minmax(0,1fr) !important;}
+  .btn-row .btn,.hero-actions .btn,.abx-tuhono-btns .btn,.pr-btns .btn,.connect-btns .btn{flex-basis:100%;}
+  .nav-cta-wrap::after{display:none;}
+  .nav-cta-wrap{padding:0 12px;}
+}
+@media(max-width:640px) and (orientation:landscape){
+  html:not(.aho-nav-solid) .hero,.abx2-hero,.og-hero,.tm-hero,.th-hero,.cl-hero,.ql-hero,.pr-hero{min-height:100svh !important;}
+}
+@media(max-width:640px) and (prefers-reduced-motion:no-preference){
+  .reveal,.emerge{transition-duration:.5s !important;}
+}
