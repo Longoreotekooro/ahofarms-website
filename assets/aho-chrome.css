@@ -858,3 +858,43 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .th-principle-rail .th-mark{width:min(72vw,240px) !important;max-width:100% !important;}
   .th-principle-rail .th-mark-tag{justify-self:stretch !important;width:100% !important;white-space:normal !important;}
 }
+
+/* ---- 19. Phones: captions and controls sit UNDER the photograph (CEO,
+   2026-09-14), never over it. The figure stays the stage; the caption and
+   the arrow bar hang below its frame, and the frame keeps its corners. ---- */
+@media(max-width:640px){
+  /* about carousels */
+  .abx2-carousel{overflow:visible !important;margin-bottom:82px !important;}
+  .abx2-carousel img{border-radius:calc(var(--plate-r)*0.55);}
+  .abx2-carousel::before{display:none !important;}
+  .abx2-carousel figcaption{position:absolute !important;top:calc(100% + 14px) !important;bottom:auto !important;left:0 !important;right:auto !important;
+    max-width:calc(100% - 176px) !important;margin:0 !important;padding:0 !important;background:none !important;border-radius:0 !important;
+    line-height:1.45 !important;color:var(--aho-silver) !important;text-shadow:none !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;}
+  .abx2-carousel figcaption::before{display:none !important;}
+  .abx2-carousel figcaption svg{stroke:var(--aho-accent) !important;}
+  .abx2-car-ui{position:absolute !important;top:calc(100% + 14px) !important;bottom:auto !important;right:0 !important;left:auto !important;}
+  .abx2-car-btn{background:transparent !important;color:var(--aho-silver) !important;border-color:rgba(168,173,179,0.55) !important;}
+  .abx2-car-btn:hover,.abx2-car-btn:focus-visible{border-color:var(--aho-accent) !important;color:var(--aho-accent) !important;}
+  .abx2-car-dot{background:rgba(168,173,179,0.4) !important;}
+  .abx2-car-dot[aria-selected="true"],.abx2-car-dot.on{background:var(--aho-accent) !important;}
+  /* on the cream chapter the caption and controls read in ink */
+  .ch-flax .abx2-carousel figcaption,.ch-flax .abx2-car-btn{color:var(--aho-ink-soft) !important;}
+  .ch-flax .abx2-car-btn{border-color:rgba(42,39,34,0.45) !important;}
+  .ch-flax .abx2-car-dot{background:rgba(42,39,34,0.3) !important;}
+  .ch-flax .abx2-car-dot[aria-selected="true"],.ch-flax .abx2-car-dot.on{background:var(--aho-accent-deep) !important;}
+  /* cultivation carousels: the arrow bar drops under the plate */
+  .cl-carousel,.cl-carousel.unveil{overflow:visible !important;clip-path:none !important;margin-bottom:60px !important;}
+  .cl-carousel .cl-car-slide{border-radius:var(--plate-r);overflow:hidden;}
+  .cl-car-ui{top:calc(100% + 12px) !important;bottom:auto !important;left:0 !important;right:0 !important;padding:0 !important;background:none !important;justify-content:flex-end !important;}
+  .cl-car-btn{background:transparent !important;color:var(--aho-silver) !important;border-color:rgba(168,173,179,0.55) !important;}
+  .cl-car-dots button{background:rgba(168,173,179,0.4) !important;}
+  .cl-car-dots button[aria-selected="true"]{background:var(--aho-accent) !important;}
+  /* origins photographs: the caption hangs under the frame */
+  .og-photo{overflow:visible !important;}
+  .og-photo:has(figcaption){margin-bottom:52px !important;}
+  .og-photo img,.og-photo video{border-radius:var(--r-card,16px);}
+  .og-photo figcaption{position:absolute !important;top:calc(100% + 12px) !important;bottom:auto !important;left:0 !important;right:0 !important;
+    color:var(--aho-silver) !important;line-height:1.45 !important;text-shadow:none !important;}
+  .og-photo figcaption::before{flex:none;}
+  .ch-flax .og-photo figcaption{color:var(--aho-ink-soft) !important;}
+}
