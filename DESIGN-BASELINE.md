@@ -75,6 +75,12 @@ cannabis **and** connection to place — do not hide the product behind cultural
 storytelling. Use 50–100vh visual breaks between heavy sections
 (`[FULL-BLEED … — PLACEHOLDER]`).
 
+**Carousels wait for the reader (CEO, 2026-09-14).** A photo carousel never
+changes frame until it has scrolled into view (IntersectionObserver, 35%
+visible), and it rests again once the reader scrolls past. Arrows, dots and
+swipe still move it at any time; reduced-motion users get no auto-advance.
+Every new carousel must follow this rule (see about.html and cultivation.html).
+
 ## 13 · Placeholder rule
 Never simplify a design because an asset doesn't exist. Insert a labelled
 placeholder stating: asset type, ratio, subject, camera style, intended
