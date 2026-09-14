@@ -1265,18 +1265,11 @@ html.no-video .hero-scroll{opacity:1;}
   background:rgba(14,20,20,0.4) repeating-linear-gradient(135deg,rgba(98,170,166,0.045) 0 1px,transparent 1px 14px);}
 .tm-ph b{font-size:var(--t-xs);font-weight:600;letter-spacing:var(--track-caps);text-transform:uppercase;color:rgba(98,170,166,0.9);}
 .tm-ph span{font-size:var(--t-xs);line-height:1.6;letter-spacing:0.04em;color:rgba(168,173,179,0.7);max-width:30ch;}
-.tm-ph--portrait{aspect-ratio:4/5;}
+.tm-ph--portrait{aspect-ratio:3/4;}
 /* Real portraits: the supplied headshots are circular cut-outs, so they sit as a
    circle inside the same 3:4 cell the placeholders occupy, on the plate tone. */
-/* one frame for every portrait (CEO, 2026-09-14): a 4:5 plate that fills the
-   column. A head-and-shoulders shot fills it; a full-length shot is cropped
-   to head and torso with the face held in the top third. Set --focus on the
-   figure (e.g. style="--focus:50% 30%") when a photograph needs a nudge. */
-.tm-portrait{position:relative;margin:0;width:100%;aspect-ratio:4/5;border-radius:var(--plate-r,16px);overflow:hidden;background:#11161a;
-  box-shadow:0 24px 50px rgba(20,18,12,0.22);}
-.tm-portrait img{width:100%;height:100%;object-fit:cover;object-position:var(--focus,50% 18%);display:block;filter:saturate(0.94) contrast(1.02);}
-.tm-portrait::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(to top,rgba(11,13,15,0.28),rgba(11,13,15,0) 34%);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);}
+.tm-portrait{position:relative;aspect-ratio:3/4;display:grid;place-items:center;}
+.tm-portrait img{width:min(100%,300px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block;box-shadow:0 24px 50px rgba(20,18,12,0.22);}
 .tm-bio{margin:var(--s3) 0 0;font-size:var(--t-sm);line-height:1.6;color:var(--silver);}
 .tm-flax .tm-bio{color:#4d524e;}
 .tm-profile p{margin:0;font-size:var(--t-sm);line-height:1.6;color:var(--silver);}
@@ -1390,7 +1383,7 @@ html.no-video .hero-scroll{opacity:1;}
       </div>
       <div class="tm-grid tm-grid--5">
         <div class="tm-person reveal">
-          <figure class="tm-portrait"><img src="assets/aho-team-david-steele.jpg" alt="David Steele" width="640" height="800" loading="lazy"></figure>
+          <figure class="tm-portrait"><img src="assets/aho-team-david-steele.jpg" alt="David Steele" width="600" height="600" loading="lazy"></figure>
           <h3 class="tm-name">David Steele</h3>
           <p class="tm-role">Director</p>
           <span class="tm-rule" aria-hidden="true"></span>
@@ -1404,7 +1397,7 @@ html.no-video .hero-scroll{opacity:1;}
           </div>
         </div>
         <div class="tm-person reveal d1">
-          <figure class="tm-portrait"><img src="assets/aho-team-toro-waaka.jpg" alt="Toro Waaka" width="640" height="800" loading="lazy"></figure>
+          <figure class="tm-portrait"><img src="assets/aho-team-toro-waaka.jpg" alt="Toro Waaka" width="600" height="600" loading="lazy"></figure>
           <h3 class="tm-name">Toro Waaka</h3>
           <p class="tm-role">Director</p>
           <span class="tm-rule" aria-hidden="true"></span>
@@ -1415,7 +1408,7 @@ html.no-video .hero-scroll{opacity:1;}
           <div class="tm-profile ph-block" id="profile-b2" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d2">
-          <div class="tm-ph tm-ph--portrait"><b>Director portrait 3</b><span>4:5 &middot; head and shoulders or full length &middot; late light</span></div>
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 3</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
           <span class="tm-rule" aria-hidden="true"></span>
@@ -1426,7 +1419,7 @@ html.no-video .hero-scroll{opacity:1;}
           <div class="tm-profile ph-block" id="profile-b3" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d3">
-          <div class="tm-ph tm-ph--portrait"><b>Director portrait 4</b><span>4:5 &middot; head and shoulders or full length &middot; late light</span></div>
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 4</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
           <span class="tm-rule" aria-hidden="true"></span>
@@ -1437,7 +1430,7 @@ html.no-video .hero-scroll{opacity:1;}
           <div class="tm-profile ph-block" id="profile-b4" hidden><p>Full profile to be supplied.</p></div>
         </div>
         <div class="tm-person reveal d4">
-          <div class="tm-ph tm-ph--portrait"><b>Director portrait 5</b><span>4:5 &middot; head and shoulders or full length &middot; late light</span></div>
+          <div class="tm-ph tm-ph--portrait"><b>Director portrait 5</b><span>3:4 &middot; plain background &middot; late light</span></div>
           <h3 class="tm-name tm-ph-line">Director name</h3>
           <p class="tm-role tm-ph-line">Role &middot; iwi / affiliation</p>
           <span class="tm-rule" aria-hidden="true"></span>
