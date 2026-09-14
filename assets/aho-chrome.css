@@ -798,3 +798,15 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   #sites > .cl-split > *{margin-left:var(--plate-g);margin-right:var(--plate-g);}
   #sites > .cl-split > .cl-carousel{aspect-ratio:4/5;max-height:70vh;}
 }
+@media(max-width:900px){
+  /* origins: two journeys meet - the copy sits on the tan beneath a square crop, at phone sizes */
+  .og-journey{padding-bottom:var(--s5) !important;}
+  .og-meet{padding:0 0 var(--s6) !important;}
+  .og-meet-slide{display:flex !important;flex-direction:column !important;}
+  .og-meet-slide img{aspect-ratio:1/1 !important;object-fit:cover !important;width:100% !important;height:auto !important;}
+  .og-meet-copy{position:static !important;transform:none !important;width:100% !important;padding:var(--s5) var(--aho-gutter) 0 !important;}
+  .og-meet-line{font-size:var(--t-h3) !important;line-height:1.25 !important;margin:0 0 var(--s3) !important;max-width:100% !important;}
+  .og-meet-line--alt{margin-bottom:var(--s5) !important;}
+  .og-born{font-size:var(--t-h2) !important;line-height:1 !important;}
+  .og-born::after{width:52px !important;margin-top:var(--s4) !important;}
+}
