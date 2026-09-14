@@ -539,3 +539,23 @@ flagged in the Round 2 commit messages.
 | F | Instagram feed | **Behold Starter** (US$10/mo); CEO/admin connects @aho_farms_nz once; site reads the public JSON feed URL |
 | G | Team placeholders | **Leave as labelled placeholders** |
 | H | Kaupapa & Social Impact | **Park** — unlinked, `noindex`, receive only the global layer (no rebuild) |
+
+---
+
+## 17 · Round 2 status (2026-09-14, all pushed to `main`)
+
+| Phase | Done | Notes |
+|---|---|---|
+| P0 Foundations | ✅ | `assets/aho-chrome.css` is the design-system layer (tokens, resets, nav, plates, components, footer, Connect); nav CSS/JS removed from every page; page `:root` tokens alias to `--aho-*`; skip link + palette/solid-nav/noindex stamping in `propagate-chrome.js`; `propagate-nav.js` no longer ports from a donor. investors.html + portal retired (decision C). |
+| P1 Colour | ✅ | `--gold*`/`--teal*` resolve to the page accent; Palette 2 = prescribers, pharmacies, export-partners + portals; legacy pages retoned; ambers/greens/category colours retired; deep accent inside light chapters. Probe: 0 palette violations on 25 pages × 3 widths. |
+| P2 Typography | ✅ | every `font-size` mapped to the nine-step scale (fluid clamps matched at both ends); Inter 300→400; distinct rendered sizes per page now 5–20 (was up to 88). |
+| P3 Components | ✅ | shared `.btn` family (legacy classes mapped), `.card`, `.eyebrow`, `.stat`, `.field`, `.notice`, `.plate` tones; radii collapsed to `--r-ctl`/`--r-card`. |
+| P4 Legacy pages | ✅ (CSS grammar) | news, contact, prescribers, pharmacies, export-partners, legal ×3, 404 on the plate grammar via the chrome layer; content/markup untouched. kaupapa + social-impact parked (decision H). |
+| P5 Navigation | ✅ | flat mobile drawer (group eyebrows, indented rows, current page marked, social row, wordmark footer); palette-aware desktop states; 44px targets. |
+| P6 Responsive | ◐ | spacing scale contracts at 1100/900; figure photography capped (4:3 tablet, 3:4 mobile); portal overflows fixed; hit areas. **Not done:** per-page two-column tablet layouts for index/about/origins/cultivation (index at 820 px is still taller than at 390). |
+| P7 What's New | ✅ | `whats-new.html` in the Learn group; Behold JSON feed wired (`data-behold-feed` empty until the CEO connects @aho_farms_nz on the Starter plan), six-photo fallback, channel cards, news teasers. TikTok omitted pending a handle. |
+| P8 Polish | ◐ | homepage hero mark/lede and mobile gaps fixed by the global layer. **Not done:** quality page's repeated step-strips, about's short-text plate, homepage news teasers still load external image URLs, `Page — Aho Farms` title pattern. |
+| P9 A11y/perf | ◐ | `<main>` + skip link on every page, export-portal h1, font preconnect, reduced-motion global, focus ring. **Not done:** WebP/srcset image pipeline, video `preload`/poster tuning, form error states. |
+| P10 QA | ✅ | `scripts/audit-probe.js` (paste into DevTools) re-run on 25 × 3: no horizontal overflow, no JS errors, 0 palette violations, `<main>` everywhere, h1 on every public page. |
+
+**Owed by the CEO to finish:** Behold feed URL (paste into `data-behold-feed` in `whats-new.html`), TikTok handle (add to `SOCIAL` in `scripts/nav-config.js`), confirmation of the Facebook URL.

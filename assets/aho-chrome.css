@@ -482,7 +482,7 @@ html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-ca
    real hit areas, app-shell overflows are contained. */
 @media(max-width:1100px){
   :root{--s7:72px;--s8:96px;--s9:128px;}
-  figure > img,figure > picture img,.adv-photo img,.adv-env-photo img{aspect-ratio:4/5;object-fit:cover;max-height:72vh;width:100%;}
+  figure > img,figure > picture img,.adv-photo img,.adv-env-photo img{aspect-ratio:4/3;object-fit:cover;max-height:56vh;width:100%;}
 }
 @media(max-width:900px){
   :root{--s6:48px;--s7:64px;--s8:80px;--s9:96px;}
@@ -494,8 +494,9 @@ html.aho-nav-solid :is(.contact-card-icon,.card-icon,.portal-card-icon,.quick-ca
   .adv-photo{min-height:0;}
 }
 /* touch targets */
-[class*="car-dot"],[class*="-dot"][role="tab"],button[class*="dot"]{padding:8px;box-sizing:content-box;background-clip:content-box;}
+[class*="car-dot"],[class*="-dot"][role="tab"],button[class*="dot"]{padding:14px;margin:-6px;box-sizing:content-box;background-clip:content-box;}
 .filter-pill,.pr-card-cta,.contact-card-link,.news-card a,.read-more{min-height:44px;display:inline-flex;align-items:center;}
+.btn-logout,.header-logo{min-height:40px;display:inline-flex;align-items:center;}
 .filter-pill{padding:0 14px;}
 /* portal shells */
 @media(max-width:900px){
