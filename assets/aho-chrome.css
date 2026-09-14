@@ -914,5 +914,5 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
 /* ---- 20. Logo story, phones: "Every thread carries what came before" sits
    high in the black top-left of the muka photograph (CEO, 2026-09-14). ---- */
 @media(max-width:640px){
-  .th-photo-note{top:var(--s4) !important;left:var(--s4) !important;max-width:19ch !important;}
+  .th-photo-note{top:14px !important;left:var(--s4) !important;max-width:19ch !important;padding-top:10px !important;}
 }
