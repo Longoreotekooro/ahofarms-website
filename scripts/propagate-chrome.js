@@ -26,9 +26,9 @@ const assetVersion = (rel) =>
 const CSS_HREF = `assets/aho-chrome.css?v=${assetVersion('assets/aho-chrome.css')}`;
 const JS_SRC = `assets/aho-chrome.js?v=${assetVersion('assets/aho-chrome.js')}`;
 const PORTALS = new Set(['export-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
-// Palette 2 (teal) is the professional / partner layer (CEO, 2026-09-14);
-// every other page is Palette 1 (earth, the default). Stamped on <html>.
-const TEAL_PAGES = new Set(['prescribers.html', 'pharmacies.html', 'export-partners.html', ...PORTALS]);
+// Teal is the brand accent on every page (CEO, 2026-09-15); the old
+// per-page data-palette split is retired, so the attribute is stripped.
+const TEAL_PAGES = new Set();
 // Pages with no hero to absorb the fixed header get a solid bar and a body
 // offset (html.aho-nav-solid in aho-chrome.css).
 const SOLID_NAV_PAGES = new Set(['404.html', 'contact.html', 'disclaimer.html', 'export-partners.html', 'kaupapa.html',

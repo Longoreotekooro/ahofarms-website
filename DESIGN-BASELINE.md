@@ -136,3 +136,14 @@ Section separation is executed as **inset rounded plates on the void canvas**:
 - Gradient seams are retired — separation comes from air and radius.
 - Page heroes may be inset plates (interior pages) or full-bleed (homepage
   film hero remains the signature exception).
+
+## Addendum · Teal as the brand accent (2026-09-15)
+Premium black / neutral / cream is the foundation, photography the warmth,
+**Aho teal the brand accent and interaction colour on every page**: eyebrows,
+fine rules, links and hover states, statistics (the number, not the label),
+the thread motif, card details, the header (logo crossfades to brand colours
+on hover; nav text goes teal with a thin underline; icons and Contact go teal)
+and the footer (teal rules, hovers, the wordmark with Māori Owned & Operated
+directly beneath). Closing passages sit on near-black teal. Gold is reserved
+for the film hero and occasional editorial italics — never an interaction
+colour. Teal must never overpower photography, flower, whenua, muka or type.
