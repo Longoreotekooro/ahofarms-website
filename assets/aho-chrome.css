@@ -810,3 +810,22 @@ html.aho-mono img:not(.aho-keep-colour):hover{filter:none;}
   .og-born{font-size:var(--t-h2) !important;line-height:1 !important;}
   .og-born::after{width:52px !important;margin-top:var(--s4) !important;}
 }
+@media(max-width:640px){
+  /* origins: from a company to a model, redesigned for phones (CEO, 2026-09-15):
+     copy above, the picture on its own, the five lines as a list beneath it,
+     the hope as a closing quote. Nothing sits on the photograph. */
+  .og-model{padding:0 0 var(--s8) !important;}
+  .og-model-slide{display:flex !important;flex-direction:column !important;justify-content:flex-start !important;gap:0 !important;
+    min-height:0 !important;padding:var(--s5) var(--aho-gutter) 0 !important;background:#050505 !important;}
+  .og-model-slide::before,.og-model-slide::after{display:none !important;}
+  .og-model-top{order:0 !important;}
+  .og-model-intro{font-size:var(--t-md) !important;line-height:1.5 !important;max-width:100% !important;color:var(--aho-silver) !important;}
+  .og-model-head{font-size:var(--t-h2) !important;line-height:1.1 !important;margin:14px 0 0 !important;}
+  .og-model-picture{display:block !important;order:1 !important;width:100% !important;aspect-ratio:4/5 !important;margin:var(--s5) 0 var(--s5) !important;
+    border-radius:var(--plate-r) !important;background:#0c0b09 url("aho-origin-model-bg-mobile.jpg") center 45%/cover no-repeat !important;}
+  .og-model-grid{order:2 !important;display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:var(--s4) !important;padding:0 !important;}
+  .og-model-cell i{width:28px !important;height:1px !important;margin-bottom:12px !important;background:var(--aho-accent) !important;opacity:1 !important;}
+  .og-model-cell p{font-size:var(--t-md) !important;line-height:1.45 !important;color:var(--aho-white) !important;text-shadow:none !important;}
+  .og-model-hope{order:3 !important;margin:var(--s6) 0 0 !important;padding:var(--s4) 0 0 !important;border-top:1px solid var(--aho-rule) !important;
+    font-size:var(--t-lg) !important;line-height:1.35 !important;max-width:100% !important;text-shadow:none !important;}
+}
