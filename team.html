@@ -1246,6 +1246,17 @@ html.no-video .hero-scroll{opacity:1;}
 .tm-head-note .ph-block{margin:0;}
 .tm-head h2.tm-ph-line{font-size:var(--t-h3);align-self:start;justify-self:start;}
 #team .tm-head-note{border-left-color:rgba(243,241,235,0.16);}
+/* Core team header after the CEO's mood board: headline over a long gold rule
+   and an intro on the left; right of the hairline a bordered "United by purpose"
+   panel. Solid hairline on the panel, not dashed - dashed is this site's
+   placeholder language. */
+.tm-head--team{grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);align-items:center;}
+.tm-head-copy{min-width:0;}
+.tm-head-rule{display:block;width:100%;max-width:min(100%,36rem);height:1px;margin:clamp(var(--s3),2.4vh,var(--s4)) 0;background:var(--gold);opacity:0.8;}
+.tm-head-copy p{margin:0;max-width:50ch;font-size:var(--t-base);line-height:1.8;color:var(--silver);}
+.tm-purpose{border:1px solid rgba(243,241,235,0.16);padding:clamp(var(--s4),2.6vw,var(--s5));}
+.tm-purpose .eyebrow{display:block;margin:0 0 var(--s3);}
+.tm-purpose p{max-width:38ch;}
 /* Card: a short gold rule under the role, then the bio, then the profile toggle
    pinned to the bottom so every card in a row ends on the same line. */
 .tm-person{display:flex;flex-direction:column;}
@@ -1458,10 +1469,17 @@ html.no-video .hero-scroll{opacity:1;}
   <section class="tm-sec" id="team">
     <div class="wrap">
       <span class="eyebrow gold tm-eyebrow tm-eyebrow--dash reveal">CORE TEAM</span>
-      <div class="tm-head">
-        <h2 class="emerge tm-ph-line">Core team heading to be supplied.</h2>
-        <div class="tm-head-note reveal d1">
-          <div class="ph-block"><p>Core team introduction to be supplied, one line in the voice of the origins page, then two or three sentences on who does the work and what holds them together.</p></div>
+      <div class="tm-head tm-head--team">
+        <div class="tm-head-copy">
+          <h2 class="emerge">Experienced people.<br>A stronger tomorrow.</h2>
+          <span class="tm-head-rule reveal" aria-hidden="true"></span>
+          <p class="reveal d1">Our leadership team brings together deep experience in cultivation, regulated markets, healthcare, governance and Māori enterprise — with a shared commitment to long-term value.</p>
+        </div>
+        <div class="tm-head-note reveal d2">
+          <div class="tm-purpose">
+            <span class="eyebrow gold">UNITED BY PURPOSE</span>
+            <p>Our core team combines complementary skills and perspectives, grounded in whenua, commercial discipline, and a belief in the positive impact of medicinal cannabis for people and communities.</p>
+          </div>
         </div>
       </div>
       <div class="tm-grid tm-grid--3">
