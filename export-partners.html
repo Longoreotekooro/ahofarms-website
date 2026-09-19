@@ -107,78 +107,6 @@
 
     .btn-full { width: 100%; justify-content: center; font-size: var(--t-base); padding: 16px; }
 
-    /* ── HERO ── */
-    .hero {
-      background: var(--night);
-      padding: 160px 48px 96px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(98,170,166,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero .caption { color: var(--teal); }
-
-    .hero h1 {
-      font-size: var(--t-h2);
-      font-weight: 600;
-      color: var(--white);
-      max-width: 780px;
-      margin-bottom: 24px;
-      line-height: 1.08;
-    }
-
-    .hero-sub {
-      font-size: var(--t-base);
-      color: rgba(255,255,255,0.68);
-      max-width: 580px;
-      line-height: 1.65;
-      margin-bottom: 40px;
-    }
-
-    .badge-strip {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(98,170,166,0.10);
-      border: 1px solid var(--card-border-strong);
-      color: var(--teal-light);
-      padding: 8px 16px;
-      border-radius:var(--r-ctl);
-      font-size: var(--t-xs);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--teal);
-      flex-shrink: 0;
-    }
-
     /* ── WHY AHO FARMS ── */
     .why { background: var(--white); }
 
@@ -375,9 +303,9 @@
     .portal-card-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
 
     /* ── FORM ── */
-    .form-section { background: var(--white); }
+    .form-section { background: var(--white); padding-top: 160px; }
 
-    .form-section h2 {
+    .form-section h1 {
       font-size: var(--t-h3);
       font-weight: 600;
       color: var(--night);
@@ -523,7 +451,7 @@
       
       
       .section { padding: 72px 24px; }
-      .hero { padding: 120px 24px 72px; }
+      .form-section { padding-top: 120px; }
       .why-grid { grid-template-columns: minmax(0,1fr); }
       .why-col { border-right: none; border-bottom: 1px solid var(--card-border); }
       .why-col:last-child { border-bottom: none; }
@@ -601,26 +529,11 @@
 <!-- AHO:NAV:END -->
 <main id="main">
 
-  <!-- ── HERO ── -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-inner">
-      <p class="caption">Export &amp; Distribution Partners</p>
-      <h1 id="hero-heading">Export-ready supply from<br>Aotearoa New Zealand</h1>
-      <p class="hero-sub">Aho Farms is a licensed medicinal cannabis cultivator with export capability. We supply premium medicinal flower to qualified distribution partners internationally.</p>
-      <div class="badge-strip" role="list" aria-label="Credentials">
-        <span class="badge" role="listitem">Licensed Cultivator</span>
-        <span class="badge" role="listitem">IANZ-Accredited Testing</span>
-        <span class="badge" role="listitem">Export-Ready</span>
-      </div>
-      <a href="#register" class="btn">Request Partner Access</a>
-    </div>
-  </section>
-
   <!-- ── ACCESS REQUEST FORM ── -->
   <section class="section form-section" id="register" aria-labelledby="form-heading">
     <div class="container">
       <p class="caption">Register Interest</p>
-      <h2 id="form-heading">Register as a distribution partner</h2>
+      <h1 id="form-heading">Register as a distribution partner</h1>
       <p class="form-intro">We work with licensed distributors, wholesalers, and import licence holders in regulated medicinal cannabis markets. Complete the form below to begin the qualification process.</p>
 
       <form novalidate>

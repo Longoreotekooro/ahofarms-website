@@ -153,66 +153,6 @@
     }
 
     /* ============================================================
-       SECTION 1: HERO
-    ============================================================ */
-    .hero {
-      background: var(--night);
-      padding: 148px 0 96px;
-    }
-
-    .hero-inner {
-      max-width: 760px;
-    }
-
-    .hero h1 {
-      font-family: var(--font-head);
-      font-size: var(--t-h1);
-      font-weight: 400;
-      line-height: 1.08;
-      color: var(--white);
-      margin-bottom: 28px;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-sub {
-      font-size: var(--t-base);
-      font-weight:400;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.68);
-      max-width: 600px;
-      margin-bottom: 56px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-
-    .hero-stat {
-      border-left: 2px solid var(--teal-deep);
-      padding-left: 20px;
-    }
-
-    .hero-stat-number {
-      font-family: var(--font-head);
-      font-size: var(--t-h3);
-      font-weight: 400;
-      color: var(--teal-light);
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-
-    .hero-stat-label {
-      font-size: var(--t-sm);
-      font-weight:400;
-      color: rgba(255,255,255,0.56);
-      line-height: 1.45;
-      max-width: 240px;
-    }
-
-    /* ============================================================
        SECTION 2: PORTAL CONTENTS
     ============================================================ */
     .portal-contents {
@@ -289,11 +229,11 @@
     }
 
     /* ============================================================
-       SECTION 3: ACCESS FORM
+       SECTION 1: ACCESS FORM
     ============================================================ */
     .access-form-section {
       background: var(--off-white);
-      padding: 100px 0 108px;
+      padding: 148px 0 108px;
     }
 
     .access-form-section-header {
@@ -301,7 +241,7 @@
       max-width: 620px;
     }
 
-    .access-form-section h2 {
+    .access-form-section h1 {
       font-family: var(--font-head);
       font-size: var(--t-h2);
       font-weight: 400;
@@ -508,7 +448,7 @@
     }
 
     /* ============================================================
-       SECTION 4: COMPLIANCE NOTE
+       SECTION 3: COMPLIANCE NOTE
     ============================================================ */
     .compliance-note {
       background: var(--night-mid);
@@ -569,25 +509,6 @@
         padding: 0 20px;
       }
 
-      .hero {
-        padding: 120px 0 72px;
-      }
-
-      .hero h1 {
-        font-size: var(--t-h2);
-      }
-
-      .hero-sub {
-        font-size: var(--t-base);
-        margin-bottom: 40px;
-      }
-
-      .hero-stats {
-        flex-direction: column;
-        gap: 28px;
-        margin-bottom: 36px;
-      }
-
       .portal-contents {
         padding: 72px 0 80px;
       }
@@ -602,7 +523,7 @@
       }
 
       .access-form-section {
-        padding: 72px 0 80px;
+        padding: 120px 0 80px;
       }
 
       .form-wrapper {
@@ -622,9 +543,6 @@
     }
 
     @media (max-width: 480px) {
-      .hero h1 {
-        font-size: var(--t-h3);
-      }
 
       .form-wrapper {
         padding: 28px 18px 32px;
@@ -704,39 +622,13 @@
   <main id="main">
 
     <!-- ============================================================
-         SECTION 1: HERO
-    ============================================================ -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="container">
-        <div class="hero-inner">
-          <span class="caption caption--light">Pharmacies &amp; Dispensers</span>
-          <h1 id="hero-heading">Supply information for licensed pharmacies</h1>
-          <p class="hero-sub">A dedicated portal for registered pharmacists and pharmacy dispensers. Formulary information, supply terms, batch documentation, and dispensing guidelines, all in one verified portal.</p>
-
-          <div class="hero-stats" role="list" aria-label="Key statistics">
-            <div class="hero-stat" role="listitem">
-              <div class="hero-stat-number">42</div>
-              <div class="hero-stat-label">licensed medicinal cannabis operators in NZ as of 2025</div>
-            </div>
-            <div class="hero-stat" role="listitem">
-              <div class="hero-stat-number">↑</div>
-              <div class="hero-stat-label">Growing demand for consistent, documented supply from compliant local cultivators</div>
-            </div>
-          </div>
-
-          <a href="#access-form" class="btn btn-primary">Request Pharmacy Access</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         SECTION 2: ACCESS REQUEST FORM
+         SECTION 1: ACCESS REQUEST FORM
     ============================================================ -->
     <section class="access-form-section" id="access-form" aria-labelledby="form-heading">
       <div class="container">
         <div class="access-form-section-header">
           <span class="caption caption--teal">Request Access</span>
-          <h2 id="form-heading">Apply for pharmacy portal access</h2>
+          <h1 id="form-heading">Apply for pharmacy portal access</h1>
           <p class="section-sub">Access is available to registered pharmacists and pharmacy managers in New Zealand. We verify all applications against the Pharmacy Council of New Zealand register.</p>
         </div>
 
@@ -916,7 +808,7 @@
     </section>
 
     <!-- ============================================================
-         SECTION 3: PORTAL CONTENTS
+         SECTION 2: PORTAL CONTENTS
     ============================================================ -->
     <section class="portal-contents" aria-labelledby="portal-heading">
       <div class="container">
@@ -1001,7 +893,7 @@
     
 
     <!-- ============================================================
-         SECTION 4: COMPLIANCE NOTE
+         SECTION 3: COMPLIANCE NOTE
     ============================================================ -->
     <section class="compliance-note" aria-label="Compliance information">
       <div class="container">
