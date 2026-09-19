@@ -616,6 +616,110 @@
     </div>
   </section>
 
+  <!-- ── ACCESS REQUEST FORM ── -->
+  <section class="section form-section" id="register" aria-labelledby="form-heading">
+    <div class="container">
+      <p class="caption">Register Interest</p>
+      <h2 id="form-heading">Register as a distribution partner</h2>
+      <p class="form-intro">We work with licensed distributors, wholesalers, and import licence holders in regulated medicinal cannabis markets. Complete the form below to begin the qualification process.</p>
+
+      <form novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="first-name">First Name <span class="req">*</span></label>
+            <input type="text" id="first-name" name="first_name" required autocomplete="given-name" />
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name <span class="req">*</span></label>
+            <input type="text" id="last-name" name="last_name" required autocomplete="family-name" />
+          </div>
+          <div class="form-group">
+            <label for="company">Company Name <span class="req">*</span></label>
+            <input type="text" id="company" name="company" required autocomplete="organization" />
+          </div>
+          <div class="form-group">
+            <label for="role">Job Title / Role</label>
+            <input type="text" id="role" name="role" autocomplete="organization-title" />
+          </div>
+          <div class="form-group">
+            <label for="email">Business Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="country">Country / Market <span class="req">*</span></label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select market…</option>
+              <option>Australia</option>
+              <option>New Zealand</option>
+              <option>United Kingdom</option>
+              <option>Germany</option>
+              <option>Netherlands</option>
+              <option>Israel</option>
+              <option>Canada</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="company-type">Company Type <span class="req">*</span></label>
+            <select id="company-type" name="company_type" required>
+              <option value="" disabled selected>Select type…</option>
+              <option>Licensed Distributor</option>
+              <option>Wholesale Importer</option>
+              <option>Pharmacy Wholesaler</option>
+              <option>Cannabis Clinic Network</option>
+              <option>Hospital / Institutional Buyer</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="import-licence">Import Licence Held?</label>
+            <select id="import-licence" name="import_licence">
+              <option value="" disabled selected>Select…</option>
+              <option>Yes: active licence</option>
+              <option>Yes: applying</option>
+              <option>No: not required in our market</option>
+              <option>No: seeking guidance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="volume">Annual Volume Requirement (kg)</label>
+            <select id="volume" name="volume">
+              <option value="" disabled selected>Select range…</option>
+              <option>&lt;5 kg</option>
+              <option>5–20 kg</option>
+              <option>20–50 kg</option>
+              <option>50–100 kg</option>
+              <option>100 kg+</option>
+              <option>Not yet determined</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label for="source">How did you hear about Aho Farms?</label>
+            <input type="text" id="source" name="source" />
+          </div>
+          <div class="form-group form-full">
+            <label for="message">About Your Distribution Network</label>
+            <textarea id="message" name="message" placeholder="Tell us about your distribution network and the markets you serve…"></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-checkbox">
+              <input type="checkbox" name="confirm" required />
+              <span>I confirm this enquiry is on behalf of a licensed business entity operating in a regulated market</span>
+            </label>
+          </div>
+          <div class="form-group form-full">
+            <button type="submit" class="btn btn-full">Submit Partner Enquiry</button>
+          </div>
+        </div>
+      </form>
+      <p class="form-below">We review all partner enquiries within 3 business days. Qualified enquiries will be invited to a discovery call with our export team.</p>
+    </div>
+  </section>
+
   <!-- ── WHY AHO FARMS ── -->
   <section class="section why" aria-labelledby="why-heading">
     <div class="container">
@@ -745,109 +849,7 @@
     </div>
   </section>
 
-  <!-- ── ACCESS REQUEST FORM ── -->
-  <section class="section form-section" id="register" aria-labelledby="form-heading">
-    <div class="container">
-      <p class="caption">Register Interest</p>
-      <h2 id="form-heading">Register as a distribution partner</h2>
-      <p class="form-intro">We work with licensed distributors, wholesalers, and import licence holders in regulated medicinal cannabis markets. Complete the form below to begin the qualification process.</p>
-
-      <form novalidate>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="first-name">First Name <span class="req">*</span></label>
-            <input type="text" id="first-name" name="first_name" required autocomplete="given-name" />
-          </div>
-          <div class="form-group">
-            <label for="last-name">Last Name <span class="req">*</span></label>
-            <input type="text" id="last-name" name="last_name" required autocomplete="family-name" />
-          </div>
-          <div class="form-group">
-            <label for="company">Company Name <span class="req">*</span></label>
-            <input type="text" id="company" name="company" required autocomplete="organization" />
-          </div>
-          <div class="form-group">
-            <label for="role">Job Title / Role</label>
-            <input type="text" id="role" name="role" autocomplete="organization-title" />
-          </div>
-          <div class="form-group">
-            <label for="email">Business Email <span class="req">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email" />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel" />
-          </div>
-          <div class="form-group">
-            <label for="country">Country / Market <span class="req">*</span></label>
-            <select id="country" name="country" required>
-              <option value="" disabled selected>Select market…</option>
-              <option>Australia</option>
-              <option>New Zealand</option>
-              <option>United Kingdom</option>
-              <option>Germany</option>
-              <option>Netherlands</option>
-              <option>Israel</option>
-              <option>Canada</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="company-type">Company Type <span class="req">*</span></label>
-            <select id="company-type" name="company_type" required>
-              <option value="" disabled selected>Select type…</option>
-              <option>Licensed Distributor</option>
-              <option>Wholesale Importer</option>
-              <option>Pharmacy Wholesaler</option>
-              <option>Cannabis Clinic Network</option>
-              <option>Hospital / Institutional Buyer</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="import-licence">Import Licence Held?</label>
-            <select id="import-licence" name="import_licence">
-              <option value="" disabled selected>Select…</option>
-              <option>Yes: active licence</option>
-              <option>Yes: applying</option>
-              <option>No: not required in our market</option>
-              <option>No: seeking guidance</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="volume">Annual Volume Requirement (kg)</label>
-            <select id="volume" name="volume">
-              <option value="" disabled selected>Select range…</option>
-              <option>&lt;5 kg</option>
-              <option>5–20 kg</option>
-              <option>20–50 kg</option>
-              <option>50–100 kg</option>
-              <option>100 kg+</option>
-              <option>Not yet determined</option>
-            </select>
-          </div>
-          <div class="form-group form-full">
-            <label for="source">How did you hear about Aho Farms?</label>
-            <input type="text" id="source" name="source" />
-          </div>
-          <div class="form-group form-full">
-            <label for="message">About Your Distribution Network</label>
-            <textarea id="message" name="message" placeholder="Tell us about your distribution network and the markets you serve…"></textarea>
-          </div>
-          <div class="form-group form-full">
-            <label class="form-checkbox">
-              <input type="checkbox" name="confirm" required />
-              <span>I confirm this enquiry is on behalf of a licensed business entity operating in a regulated market</span>
-            </label>
-          </div>
-          <div class="form-group form-full">
-            <button type="submit" class="btn btn-full">Submit Partner Enquiry</button>
-          </div>
-        </div>
-      </form>
-      <p class="form-below">We review all partner enquiries within 3 business days. Qualified enquiries will be invited to a discovery call with our export team.</p>
-    </div>
-  </section>
+  
 
   <!-- ── FOOTER ── -->
   </main>
