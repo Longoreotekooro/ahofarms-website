@@ -290,6 +290,114 @@
     }
   }
 
+  /* ---------- consumer portal: Find a Prescriber directory ---------- */
+  var dir = document.getElementById('csDirectory');
+  if (dir) {
+    var meta = document.getElementById('csMeta');
+    var search = document.getElementById('csSearch');
+    var country = document.getElementById('csCountry');
+    var region = document.getElementById('csRegion');
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.cs-chip[data-filter]'));
+    var regionList = document.getElementById('csRegionList');
+    var data = { providers: [], regions: {}, countries: [] };
+
+    function fillRegions() {
+      var c = country.value;
+      var regs = c ? (data.regions[c] || []) : Object.keys(data.regions).reduce(function (a, k) { return a.concat(data.regions[k]); }, []);
+      var keep = region.value;
+      region.innerHTML = '<option value="">All regions</option>';
+      regs.filter(function (r, i, arr) { return arr.indexOf(r) === i; }).forEach(function (r) { var o = document.createElement('option'); o.value = r; o.textContent = r; region.appendChild(o); });
+      region.value = regs.indexOf(keep) >= 0 ? keep : '';
+    }
+    function ext(a) { a.target = '_blank'; a.rel = 'noopener'; return a; }
+    function providerCard(p) {
+      var c = el('article', 'card');
+      var top = el('div', 'cs-card-top');
+      top.appendChild(el('h3', null, p.name));
+      var chipsEl = el('div', 'cs-card-chips');
+      if (p.telehealth) chipsEl.appendChild(el('span', 'pt-chip', 'Telehealth'));
+      if (p.inPerson) chipsEl.appendChild(el('span', 'pt-chip', 'In person'));
+      if (p.sample) chipsEl.appendChild(el('span', 'pt-chip pt-chip--sample', 'Sample listing'));
+      top.appendChild(chipsEl);
+      c.appendChild(top);
+      var m = el('p', 'cs-card-meta');
+      var place = [p.city, p.region].filter(function (x, i, a) { return x && a.indexOf(x) === i; }).join(', ');
+      m.innerHTML = '<b></b>';
+      m.querySelector('b').textContent = place;
+      m.appendChild(document.createTextNode((place ? ' · ' : '') + (p.country || '') + (p.type === 'prescriber' ? ' · Prescriber' : ' · Clinic')));
+      c.appendChild(m);
+      if (p.description) c.appendChild(el('p', 'cs-card-desc', p.description));
+      var act = el('div', 'cs-card-actions');
+      if (p.booking) { var b = ext(el('a', 'btn btn--primary', 'Book consultation')); b.href = p.booking; act.appendChild(b); }
+      if (p.website) { var w = ext(el('a', 'btn ' + (p.booking ? 'btn--ghost' : 'btn--primary'), 'Visit clinic')); w.href = p.website; act.appendChild(w); }
+      if (p.phone) { var ph = el('a', 'cs-phone', p.phone); ph.href = 'tel:' + p.phone.replace(/[^+\d]/g, ''); act.appendChild(ph); }
+      c.appendChild(act);
+      return c;
+    }
+    function apply() {
+      var q = (search.value || '').trim().toLowerCase();
+      var want = {}; chips.forEach(function (ch) { if (ch.getAttribute('aria-pressed') === 'true') want[ch.dataset.filter] = true; });
+      var list = data.providers.filter(function (p) {
+        if (country.value && p.country !== country.value) return false;
+        if (region.value && p.region !== region.value) return false;
+        if (want.telehealth && !p.telehealth) return false;
+        if (want.inPerson && !p.inPerson) return false;
+        if (q && [p.name, p.city, p.region, p.description].join(' ').toLowerCase().indexOf(q) < 0) return false;
+        return true;
+      });
+      dir.innerHTML = '';
+      if (!list.length) {
+        var e = el('div', 'cs-empty');
+        e.innerHTML = 'No listings match those filters yet. Try widening the region, or <a href="#support">ask us for prescriber options</a> and we will reply by email.';
+        dir.appendChild(e);
+      } else list.forEach(function (p) { dir.appendChild(providerCard(p)); });
+      meta.textContent = list.length === data.providers.length
+        ? data.providers.length + ' listing' + (data.providers.length === 1 ? '' : 's')
+        : list.length + ' of ' + data.providers.length + ' listings';
+      if (data.sample) meta.appendChild(el('span', 'pt-chip pt-chip--muted', 'Sample listings shown until real providers are added'));
+    }
+    api('/api/directory/providers', null, 'GET').then(function (r) {
+      if (!r.ok) { meta.textContent = 'The directory could not be loaded right now. Please try again shortly.'; return; }
+      data = r;
+      (r.countries || []).forEach(function (c) { var o = document.createElement('option'); o.value = c; o.textContent = c; country.appendChild(o); });
+      var have = {}; r.providers.forEach(function (p) { have[p.country] = true; });
+      if (Object.keys(have).length === 1) country.value = Object.keys(have)[0];
+      fillRegions();
+      if (regionList) Object.keys(r.regions).forEach(function (k) { r.regions[k].forEach(function (reg) { var o = document.createElement('option'); o.value = reg; regionList.appendChild(o); }); });
+      apply();
+    });
+    search.addEventListener('input', apply);
+    country.addEventListener('change', function () { fillRegions(); apply(); });
+    region.addEventListener('change', apply);
+    chips.forEach(function (ch) { ch.addEventListener('click', function () { ch.setAttribute('aria-pressed', ch.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); apply(); }); });
+  }
+
+  /* ---------- consumer portal: help me find a prescriber ---------- */
+  var enq = document.getElementById('csEnquiry');
+  if (enq) {
+    var emsg = enq.querySelector('.pt-msg');
+    enq.addEventListener('submit', function (e) {
+      e.preventDefault();
+      show(emsg, '');
+      if (!validate(enq)) return;
+      busy(enq, true, 'Sending');
+      api('/api/consumers/enquiry', formData(enq)).then(function (r) {
+        busy(enq, false);
+        if (r.ok) {
+          var wrap = el('div', 'pt-success');
+          var tick = el('div', 'pt-tick'); tick.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+          wrap.appendChild(tick); wrap.appendChild(el('h2', null, 'Thanks, we have your enquiry.'));
+          wrap.appendChild(el('p', null, r.message));
+          var box = el('div', 'pt-form pt-form--light'); box.appendChild(wrap);
+          enq.replaceWith(box); box.setAttribute('tabindex', '-1'); box.focus();
+          return;
+        }
+        if (r.fields) Object.keys(r.fields).forEach(function (k) { setFieldError(enq, k, r.fields[k]); });
+        show(emsg, r.error || 'We could not send your enquiry. Please try again.', 'error');
+      });
+    });
+  }
+
   /* ---------- hub: point signed-in visitors at their portal ---------- */
   var hub = document.getElementById('ptHubSigned');
   if (hub) {

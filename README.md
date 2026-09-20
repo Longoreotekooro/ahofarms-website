@@ -12,9 +12,11 @@ Open `index.html` in any browser. No server required — self-contained file.
 
 ## Portals (sign-in, protected routes)
 
-Three protected environments live under `/portal/` (Prescribers, Pharmacies,
-Export Partners) with per-portal sign-in, request-access, role-based access
-and a dashboard framework. Design and operations:
+The Portals gateway lives under `/portal/`: a public Consumer Portal
+(access pathway, Find a Prescriber directory, enquiry form) and three
+protected environments (Prescribers, Pharmacies, Export Partners) with
+per-portal sign-in, request-access, role-based access and a dashboard
+framework. Design and operations:
 `docs/superpowers/specs/2026-09-20-portals-auth-design.md`.
 
 Before the portals work on a deployment, set `SESSION_SECRET` (and the

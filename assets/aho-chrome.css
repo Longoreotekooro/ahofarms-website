@@ -237,6 +237,19 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
   .nav-parent .nav-sub a{padding:6px 2px;position:relative;}
   .nav-parent .nav-sub a::after{content:'';position:absolute;left:2px;right:2px;bottom:-2px;height:1px;background:var(--aho-accent);transform:scaleX(0);transform-origin:left;transition:transform .22s ease;}
   .nav-parent .nav-sub a:hover::after,.nav-parent .nav-sub a:focus-visible::after{transform:scaleX(1);}
+  /* described items (Portals): label with its underline, a muted line beneath */
+  .nav-parent .nav-sub--described,.nav-parent .nav-sub--described:has(li:nth-child(4)){align-items:flex-start;justify-content:center;gap:clamp(28px,4vw,72px);}
+  .nav-parent .nav-sub--described li{flex:0 1 240px;}
+  .nav-parent .nav-sub--described a{display:grid;gap:8px;padding:4px 2px;}
+  .nav-parent .nav-sub--described a::after{display:none;}
+  .nav-parent .nav-sub--described a .bil{width:max-content;}
+  .nav-parent .nav-sub--described a:hover .bil::after,.nav-parent .nav-sub--described a:focus-visible .bil::after{transform:scaleX(1);}
+  .nav-sub-desc{display:block;font-size:var(--t-xs);font-weight:400;letter-spacing:0;line-height:1.55;color:var(--aho-silver);white-space:normal;max-width:28ch;}
+}
+@media(min-width:901px) and (max-width:1180px){
+  .nav-parent .nav-sub--described{gap:var(--s3);}
+  .nav-parent .nav-sub--described li{flex-basis:200px;}
+  .nav-sub-desc{font-size:0.6875rem;}
 }
 @media(min-width:901px) and (max-width:1180px){
   .nav-parent .nav-sub{padding-top:24px;padding-bottom:28px;gap:clamp(18px,2.4vw,40px);}
@@ -270,6 +283,7 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
   .nav-parent .nav-sub li{border-top:1px solid var(--aho-hair);}
   .nav-parent .nav-sub a{display:flex;align-items:center;min-height:52px;padding:0 0 0 20px;white-space:normal;border-left:1px solid var(--aho-hair);}
   .nav-parent .nav-sub a .bil-en{font-size:var(--t-base);font-weight:500;letter-spacing:0;color:var(--aho-white);}
+  .nav-sub-desc{display:none;}
   .nav-parent .nav-sub a[aria-current="page"] .bil-en{color:var(--aho-accent);}
   .nav-drawer-foot{display:block;margin-top:auto;padding-top:var(--s5);}
   .nav-drawer-foot .nav-drawer-social{display:flex;gap:6px;margin:0 0 var(--s4);padding:0;list-style:none;}

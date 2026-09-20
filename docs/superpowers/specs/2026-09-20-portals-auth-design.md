@@ -11,6 +11,7 @@ where it lives and how to operate it.
 
 ```
 Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in)
+├─ Consumers       → /portal/consumers/index.html       PUBLIC: access pathway, Find a Prescriber, FAQs, enquiry
 ├─ Prescribers     → /portal/prescriber/login.html      → /portal/prescriber/home.html
 ├─ Pharmacies      → /portal/pharmacy/login.html        → /portal/pharmacy/home.html
 └─ Export Partners → /portal/export-partner/login.html  → /portal/export-partner/home.html
@@ -28,6 +29,8 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 | Auth API | `api/auth/{login,logout,me,forgot,reset,change-password}.js` | Vercel Node |
 | Request access | `api/access/request.js` | Vercel Node |
 | Portal content (dashboard framework) | `api/portal/home.js` + `lib/portal-content.js` | Vercel Node |
+| Consumer Portal: Find a Prescriber directory | `lib/providers.js` (model, regions, samples), `api/directory/providers.js` (public), `api/admin/providers.js` | Vercel Node |
+| Consumer enquiry ("help me find a prescriber") | `api/consumers/enquiry.js` (stored as a request of kind `consumer-enquiry`, emailed) | Vercel Node |
 | Admin | `api/admin/{users,requests}.js` + `scripts/portal-admin.js` | Node |
 | Accounts + requests store | `lib/users.js` (Redis REST adapter, env-JSON fallback) | Node |
 | Password hashing | `lib/password.js` (scrypt, Node built-in) | Node |
@@ -77,6 +80,30 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 Locally: put the same keys in `.env.local` (gitignored) and run the
 `aho-site` preview; `scripts/dev-server.js` runs the middleware and the API
 handlers itself.
+
+## Consumer Portal (2026-09-21)
+
+Public, no account. The order in the dropdown is public access → healthcare
+professional → dispensing → international partner, each item with a one-line
+description (desktop panel only). The consumer journey is: Portals →
+Consumers → understand the pathway → Find a Prescriber (search by name or
+city, filter by country, region, telehealth, in person) → Book consultation
+or Visit clinic, leaving the Aho site. Copy avoids any suggestion that Aho
+Farms prescribes, diagnoses or guarantees a prescription, and product
+information stays high-level.
+
+Directory listings live in the store; until an admin adds one, five
+clearly labelled SAMPLE listings render so the page and filters can be
+seen working. Manage with:
+
+```
+node scripts/portal-admin.js providers
+node scripts/portal-admin.js provider-add name="…" country="New Zealand" region="Auckland" city="…" telehealth=true inPerson=true website=https://… booking=https://… phone="…" description="…"
+node scripts/portal-admin.js provider-set <id> status=hidden
+node scripts/portal-admin.js provider-remove <id>
+```
+Without the Redis store, listings are per-instance memory (or `PORTAL_PROVIDERS`
+JSON in env); the Redis store makes them durable.
 
 ## Operating it
 

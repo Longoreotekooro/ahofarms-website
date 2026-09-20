@@ -298,8 +298,162 @@ ${pwField('confirm', 'Confirm new password', 'new-password')}
   return shell({ depth: 2, title: `${p.name} · Account | Aho Farms`, description: `Your Aho Farms ${p.name} account.`, portalId: p.id, page: 'account', main, noindex: true });
 }
 
-function hubPage(all) {
-  const cards = all.map(p => `    <a class="card" href="/portal/${p.id}/login.html">
+function consumerPage(c, all) {
+  const faq = [
+    ['Do I need a referral to see a prescriber?', 'No. You can book directly with an independent prescriber or clinic. Some clinics ask for a summary from your GP, so it is worth checking when you book.'],
+    ['Will I definitely get a prescription?', 'No. The prescriber assesses your individual circumstances and decides whether medicinal cannabis is appropriate for you. Aho Farms has no part in that decision.'],
+    ['Is medicinal cannabis funded?', 'In New Zealand medicinal cannabis products are generally not funded, so you pay for the consultation and the medicine. Costs vary between clinics and pharmacies; ask before you book.'],
+    ['Can Aho Farms prescribe or supply me directly?', 'No. Aho Farms is a licensed cultivator. Our products are prescription medicines, prescribed by independent healthcare providers and dispensed by pharmacies.'],
+    ['Can I consult by telehealth?', 'Many prescribers offer video or phone consultations. Use the telehealth filter in the directory to find them.'],
+    ['Can I drive after using medicinal cannabis?', 'Driving while impaired is illegal and unsafe. Discuss driving, work and other activities with your prescriber before you start.'],
+  ].map(([q, a]) => `        <details class="cs-faq-item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n');
+  const main = `<section class="pt-plate cs-hero plate--flax" aria-labelledby="ptTitle">
+  <div class="pt-inner cs-hero-grid">
+    <div>
+      <span class="eyebrow eyebrow--rule">Consumers · Patient access</span>
+      <h1 id="ptTitle">Medicinal cannabis, through the right pathway.</h1>
+      <p class="cs-lead">Looking to discuss whether medicinal cannabis may be appropriate for you? Find an independent healthcare provider who can assess your individual circumstances.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#find-a-prescriber">Find a Prescriber</a>
+        <a class="btn btn--ghost" href="#how-it-works">How access works</a>
+      </div>
+    </div>
+    <aside class="cs-hero-note" aria-label="How Aho Farms fits in">
+      <span class="eyebrow">Where we fit</span>
+      <p><b>Aho Farms grows the medicine. We don't prescribe it.</b> Assessment and prescribing are done by independent, registered prescribers. If a product is prescribed, a pharmacy dispenses it.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec pt-sec--ink cs-sec" id="how-it-works" aria-labelledby="csHowTitle">
+  <div class="pt-inner">
+    <div class="cs-sec-head">
+      <span class="eyebrow eyebrow--rule">01 · How access works</span>
+      <h2 id="csHowTitle">Four steps, all with independent healthcare providers.</h2>
+    </div>
+    <ol class="cs-steps">
+      <li><b>Talk to a prescriber</b><p>Book a consultation with an independent doctor, nurse prescriber or clinic. Many offer telehealth, so where you live need not be a barrier.</p></li>
+      <li><b>Assessment</b><p>The prescriber discusses your circumstances, what you have tried, and the possible benefits and risks. They decide whether medicinal cannabis is appropriate for you.</p></li>
+      <li><b>Prescription</b><p>If it is, you receive a prescription for a specific product, dose and duration, and a plan for follow-up.</p></li>
+      <li><b>Pharmacy</b><p>Take the prescription to a pharmacy that stocks the product. The pharmacist dispenses it and can answer questions about taking it.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec plate--flax cs-sec" id="find-a-prescriber" aria-labelledby="csFindTitle">
+  <div class="pt-inner">
+    <div class="cs-sec-head cs-sec-head--wide">
+      <span class="eyebrow eyebrow--rule">02 · Find a Prescriber</span>
+      <h2 id="csFindTitle">Independent clinics and prescribers.</h2>
+      <p>Search or filter, choose a clinic, and book directly with them. Each listing is an independent healthcare provider; Aho Farms lists them and does not assess, prescribe or take bookings.</p>
+    </div>
+    <form class="cs-filters" id="csFilters" role="search" aria-label="Filter prescribers" onsubmit="return false">
+      <div class="field cs-filter-search">
+        <label for="csSearch">Clinic or prescriber name</label>
+        <input id="csSearch" type="search" placeholder="Search by name or city" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="csCountry">Country</label>
+        <select id="csCountry"><option value="">All countries</option></select>
+      </div>
+      <div class="field">
+        <label for="csRegion">Region</label>
+        <select id="csRegion"><option value="">All regions</option></select>
+      </div>
+      <div class="cs-filter-chips" role="group" aria-label="Consultation type">
+        <button type="button" class="cs-chip" data-filter="telehealth" aria-pressed="false">Telehealth</button>
+        <button type="button" class="cs-chip" data-filter="inPerson" aria-pressed="false">In person</button>
+      </div>
+    </form>
+    <p class="cs-results-meta" id="csMeta" aria-live="polite">Loading the directory…</p>
+    <div class="cs-results" id="csDirectory"></div>
+    <p class="cs-fineprint">Listings are provided for convenience and do not constitute a recommendation or referral. Please confirm services, availability and fees with the provider. If you are a clinic or prescriber and would like to be listed, email <a href="mailto:${esc(c.support.email)}">${esc(c.support.email)}</a>.</p>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec pt-sec--ink cs-sec" id="consultation" aria-labelledby="csExpectTitle">
+  <div class="pt-inner">
+    <div class="cs-sec-head">
+      <span class="eyebrow eyebrow--rule">03 · What to expect</span>
+      <h2 id="csExpectTitle">What a consultation usually involves.</h2>
+    </div>
+    <div class="cs-cols">
+      <div class="cs-col"><h3>Before</h3><p>Have your health history to hand: current conditions, medicines and supplements, and what you have already tried. Write down the questions you want answered.</p></div>
+      <div class="cs-col"><h3>During</h3><p>The prescriber talks through your circumstances, the evidence for your situation, possible side effects and interactions, and whether a trial is appropriate. Ask about costs, follow-up and what happens if it does not help.</p></div>
+      <div class="cs-col"><h3>After</h3><p>If a product is prescribed you will usually start low and adjust with your prescriber's guidance, with a follow-up booked. Your pharmacist can help with practical questions about taking it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec plate--cream cs-sec" id="faq" aria-labelledby="csFaqTitle">
+  <div class="pt-inner cs-faq-grid">
+    <div class="cs-sec-head">
+      <span class="eyebrow eyebrow--rule">04 · Questions</span>
+      <h2 id="csFaqTitle">Frequently asked.</h2>
+      <p>General information only. Your prescriber and pharmacist are the right people for advice about you.</p>
+    </div>
+    <div class="cs-faq">
+${faq}
+    </div>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec pt-sec--ink cs-sec" id="about" aria-labelledby="csAboutTitle">
+  <div class="pt-inner">
+    <div class="cs-sec-head">
+      <span class="eyebrow eyebrow--rule">05 · Background</span>
+      <h2 id="csAboutTitle">About medicinal cannabis, and about us.</h2>
+    </div>
+    <div class="cs-cols">
+      <div class="cs-col"><h3>Medicinal cannabis in New Zealand</h3><p>Under the Medicinal Cannabis Scheme, products must meet a minimum quality standard before they can be supplied. They are prescription medicines: a registered prescriber decides whether one is appropriate, and a pharmacy dispenses it. Products come in different forms, including dried flower and oils.</p></div>
+      <div class="cs-col"><h3>Aho Farms products, at a high level</h3><p>Aho Farms is a Māori-owned licensed cultivator in Hawke's Bay. We grow and test dried medicinal cannabis flower, offered to prescribers under the RĀ and SOURCE ranges. Which product, if any, suits you is your prescriber's decision. <a href="/products.html">Read about how we grow</a>.</p></div>
+      <div class="cs-col"><h3>Where products may be available</h3><p>Only by prescription, through pharmacies that stock them. Availability varies by pharmacy and over time; your prescriber or pharmacist can tell you what is currently available.</p></div>
+    </div>
+    <p class="cs-fineprint cs-fineprint--dark">Aho Farms products are prescription medicines. This page is general information, not medical advice and not an advertisement for any product.</p>
+  </div>
+</section>
+
+<section class="pt-plate pt-sec plate--flax cs-sec" id="support" aria-labelledby="csSupportTitle">
+  <div class="pt-inner cs-support-grid">
+    <div>
+      <span class="eyebrow eyebrow--rule">06 · Support</span>
+      <h2 id="csSupportTitle">Need help finding a prescriber?</h2>
+      <p class="cs-lead">Tell us roughly where you are and how you would like to consult, and the Aho Farms team will reply by email with prescriber options in your area. We will not ask for medical details; the prescriber you choose takes those in your consultation.</p>
+      <div class="cs-support-list">
+        <p><b>Patient support</b>Questions about a medicine you have been prescribed? Your pharmacist or prescriber is the right first call. For a side effect that worries you, contact your prescriber, or in an emergency call 111.</p>
+        <p><b>General enquiries</b><a href="mailto:${esc(c.support.email)}">${esc(c.support.email)}</a> · <a href="/contact.html">Contact page</a></p>
+      </div>
+    </div>
+    <form id="csEnquiry" class="pt-form pt-form--light" novalidate>
+      <div class="pt-form-head">
+        <h3 class="pt-form-title">Ask for prescriber options</h3>
+        <p class="pt-form-sub">Fields marked * are required.</p>
+      </div>
+      ${msg()}
+      <div class="pt-fields">
+        <div class="field"><label for="cs-name">Name <span aria-hidden="true">*</span></label><input id="cs-name" name="name" type="text" autocomplete="name" data-required required aria-required="true">${fieldError}</div>
+        <div class="field"><label for="cs-email">Email <span aria-hidden="true">*</span></label><input id="cs-email" name="email" type="email" inputmode="email" autocomplete="email" data-required required aria-required="true">${fieldError}</div>
+        <div class="field"><label for="cs-region">Region <span aria-hidden="true">*</span></label><input id="cs-region" name="region" type="text" list="csRegionList" autocomplete="address-level1" data-required required aria-required="true"><datalist id="csRegionList"></datalist>${fieldError}</div>
+        <div class="field"><label for="cs-consultation">Preferred consultation</label><select id="cs-consultation" name="consultation"><option value="">No preference</option><option>Telehealth</option><option>In person</option><option>Either</option></select>${fieldError}</div>
+        <div class="field field--full"><label for="cs-message">General enquiry</label><textarea id="cs-message" name="message" rows="3"></textarea><small>Please don't include medical details here.</small>${fieldError}</div>
+      </div>
+      <div class="pt-hp" aria-hidden="true"><label for="cs-website">Website</label><input id="cs-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Send enquiry</span></button>
+    </form>
+  </div>
+</section>
+<p class="pt-legal">${LEGAL}</p>`;
+  return shell({ depth: 2, title: 'Consumer Portal · Find a Prescriber | Aho Farms', description: 'Understand how medicinal cannabis access works in New Zealand and find an independent prescriber or clinic to book with.', portalId: c.id, page: 'consumer', main });
+}
+
+function hubPage(all, consumer) {
+  const consumerCard = `    <a class="card" href="/portal/${consumer.id}/index.html">
+      <span class="eyebrow">${esc(consumer.short)} · Public</span>
+      <h2>${esc(consumer.name)}</h2>
+      <p>${esc(consumer.tagline)}</p>
+      <span class="pt-cta">Find a Prescriber</span>
+    </a>\n`;
+  const cards = consumerCard + all.map(p => `    <a class="card" href="/portal/${p.id}/login.html">
       <span class="eyebrow">${esc(p.short)}</span>
       <h2>${esc(p.name)}</h2>
       <p>${esc(p.tagline)}</p>
@@ -309,7 +463,7 @@ function hubPage(all) {
   <div class="pt-hub-head">
     <span class="eyebrow eyebrow--rule">Aho Farms · Portals</span>
     <h1 id="ptTitle">Pick up the thread.</h1>
-    <p class="pt-lead">Three protected environments, one for each kind of partner. Every account is verified by Aho Farms before it is approved, and each portal only opens to the accounts approved for it.</p>
+    <p class="pt-lead">One gateway, four audiences. Consumers can find a prescriber and understand the access pathway without signing in. The three professional portals are protected: every account is verified by Aho Farms before it is approved, and each portal only opens to the accounts approved for it.</p>
   </div>
   <div class="pt-hub-grid">
 ${cards}
@@ -321,9 +475,10 @@ ${cards}
 }
 
 (async () => {
-  const { PORTALS } = await import('../lib/portals.js');
+  const { PORTALS, CONSUMER } = await import('../lib/portals.js');
   const write = (rel, html) => { fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true }); fs.writeFileSync(path.join(ROOT, rel), html); };
-  write('portal/index.html', hubPage(PORTALS));
+  write('portal/index.html', hubPage(PORTALS, CONSUMER));
+  write(`portal/${CONSUMER.id}/index.html`, consumerPage(CONSUMER, PORTALS));
   for (const p of PORTALS) {
     write(`portal/${p.id}/login.html`, loginPage(p, PORTALS));
     write(`portal/${p.id}/request-access.html`, requestPage(p, PORTALS));
@@ -332,5 +487,5 @@ ${cards}
     write(`portal/${p.id}/home.html`, homePage(p));
     write(`portal/${p.id}/account.html`, accountPage(p));
   }
-  console.log(`portal pages built: hub + ${PORTALS.length} portals × 6 pages`);
+  console.log(`portal pages built: hub + consumer portal + ${PORTALS.length} portals × 6 pages`);
 })().catch(e => { console.error(e); process.exit(1); });

@@ -93,6 +93,7 @@ const server = http.createServer(async (req, res) => {
   // vercel.json redirects for the portal directory forms
   if (/^\/portal\/(prescriber|pharmacy|export-partner)\/?$/.test(reqPath)) { res.writeHead(302, { Location: reqPath.replace(/\/?$/, '') + '/home.html' }); res.end(); return; }
   if (reqPath === '/portal' || reqPath === '/portal/') reqPath = '/portal/index.html';
+  if (/^\/portal\/consumers\/?$/.test(reqPath)) reqPath = '/portal/consumers/index.html';
   if (reqPath === '/') reqPath = '/index.html';
 
   let extra = {};

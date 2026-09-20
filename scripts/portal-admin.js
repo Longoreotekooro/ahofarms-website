@@ -15,6 +15,12 @@
 //   node scripts/portal-admin.js decline <request-id>
 //   node scripts/portal-admin.js env-user <email> <role> [name] [org]   print a PORTAL_USERS entry (no store needed)
 //
+// Find a Prescriber directory (Consumer Portal):
+//   node scripts/portal-admin.js providers                  list listings (samples show until a real one is added)
+//   node scripts/portal-admin.js provider-add name="Clinic" country="New Zealand" region="Auckland" city="Auckland" telehealth=true inPerson=true website=https://... booking=https://... phone="09 ..." description="..."
+//   node scripts/portal-admin.js provider-set <id> status=hidden   (any field from provider-add)
+//   node scripts/portal-admin.js provider-remove <id>
+//
 // Roles: prescriber · pharmacy · export_partner · admin
 const fs = require('fs');
 const path = require('path');
@@ -103,6 +109,14 @@ const table = rows => rows.forEach(r => console.log(r.map(String).join('  ')));
       await users.updateAccessRequest(id, { status: 'approved', reviewedAt: new Date().toISOString(), reviewedBy: 'cli' });
       console.log(`approved ${u.email} as ${u.role}. Send them this link (valid 7 days):\n${site}/portal/${portal.id}/reset.html?token=${token}`); break;
     }
+    case 'providers': {
+      const list = await users.listProviders({ includeHidden: true });
+      console.log(list.some(p => p.sample) ? 'showing SAMPLE listings (none stored yet)' : `${list.length} stored listing(s)`);
+      table([['ID', 'NAME', 'COUNTRY', 'REGION', 'TELE', 'IN-PERSON', 'STATUS'], ...list.map(p => [p.id, p.name, p.country, p.region, p.telehealth ? 'yes' : '-', p.inPerson ? 'yes' : '-', p.status])]); break;
+    }
+    case 'provider-add': { const p = await users.saveProvider(kv(args)); console.log(`saved ${p.id}: ${p.name}`); break; }
+    case 'provider-set': { const [id, ...rest] = args; if (!id) throw new Error('usage: provider-set <id> field=value ...'); const p = await users.saveProvider({ id, ...kv(rest) }); console.log(`saved ${p.id}: ${p.name} (${p.status})`); break; }
+    case 'provider-remove': { const [id] = args; if (!id) throw new Error('usage: provider-remove <id>'); await users.removeProvider(id); console.log(`removed ${id}`); break; }
     case 'decline': { const [id] = args; await users.updateAccessRequest(id, { status: 'declined', reviewedAt: new Date().toISOString(), reviewedBy: 'cli' }); console.log('declined'); break; }
     default:
       console.log(fs.readFileSync(__filename, 'utf8').split('\n').filter(l => l.startsWith('//')).map(l => l.slice(3)).join('\n'));

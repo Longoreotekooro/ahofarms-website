@@ -36,12 +36,20 @@ const NAV = [
 // source of truth for ids and names. Keep this list in step with it
 // (check-nav.js verifies). When a visitor is signed in, assets/aho-chrome.js
 // swaps this item for "My Portal" (portal home · account · sign out).
+// Order (CEO, 2026-09-21): public access → healthcare professional →
+// dispensing → international commercial partner. `desc` renders under the
+// label in the desktop panel only.
 const PORTALS_NAV = {
   en: 'Portals', mi: 'Ngā Tomokanga', href: 'portal/index.html', key: 'portals', match: /^portal\//,
   children: [
-    { en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: 'portal/prescriber/login.html' },
-    { en: 'Pharmacies',      mi: 'Ngā Whare Rongoā',   href: 'portal/pharmacy/login.html' },
-    { en: 'Export Partners', mi: 'Ngā Hoa Kaweake',    href: 'portal/export-partner/login.html' },
+    { en: 'Consumers',       mi: 'Ngā Kiritaki',       href: 'portal/consumers/index.html',
+      desc: 'Find a prescriber, understand the access pathway, FAQs and general product information.' },
+    { en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: 'portal/prescriber/login.html',
+      desc: 'Secure portal for clinical product information, CoAs, terpene and cannabinoid profiles, prescribing resources and support.' },
+    { en: 'Pharmacies',      mi: 'Ngā Whare Rongoā',   href: 'portal/pharmacy/login.html',
+      desc: 'Secure portal for product availability, wholesale information, ordering, documentation and supply updates.' },
+    { en: 'Export Partners', mi: 'Ngā Hoa Kaweake',    href: 'portal/export-partner/login.html',
+      desc: 'Secure B2B portal for bulk product information, compliance documentation, supply capacity and due-diligence materials.' },
   ],
 };
 NAV.push(PORTALS_NAV);
@@ -69,6 +77,7 @@ const SOCIAL = [
 // The five ways in, used by the floating "Connect with us" sheet and the
 // footer's Portals column (CEO, 2026-09-10). Order is the CEO's.
 const CONNECT = [
+  { label: 'Consumers',        href: 'portal/consumers/index.html', note: 'Find a prescriber and understand the access pathway', portal: true },
   { label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true, login: 'portal/prescriber/login.html' },
   { label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true, login: 'portal/pharmacy/login.html' },
   { label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true, login: 'portal/export-partner/login.html' },
