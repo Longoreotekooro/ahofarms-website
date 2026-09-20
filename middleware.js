@@ -1,7 +1,9 @@
 // Vercel Edge Middleware: protects everything under /portal/. The logic
 // lives in lib/portal-guard.js; this wrapper loads it lazily so that a
-// failure to load or run it is reported (and logged) instead of surfacing
-// as an opaque MIDDLEWARE_INVOCATION_FAILED.
+// failure to load or run it is logged (Vercel → Logs) and answered with a
+// plain message instead of an opaque MIDDLEWARE_INVOCATION_FAILED. Note:
+// Vercel requires middleware to return a Response even to pass a request
+// through (see next() in lib/portal-guard.js); returning undefined fails.
 export const config = { matcher: ['/portal/:path*'] };
 
 export default async function middleware(request) {
@@ -11,6 +13,6 @@ export default async function middleware(request) {
   } catch (e) {
     const msg = (e && (e.stack || e.message)) || String(e);
     console.error('portal middleware failed:', msg);
-    return new Response('Portal middleware error\n\n' + msg, { status: 500, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' } });
+    return new Response('The portal is temporarily unavailable. Please try again shortly.', { status: 500, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' } });
   }
 }
