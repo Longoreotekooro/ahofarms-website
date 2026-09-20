@@ -12,6 +12,16 @@ function label(item) {
 function isActive(href, currentPage) {
   return href.split('#')[0] === currentPage;
 }
+// Internal hrefs are written relative to the site root; a page nested in a
+// sub-directory (portal/<id>/*.html) gets them prefixed with ../ per level.
+function relativize(html, prefix) {
+  if (!prefix) return html;
+  return html.replace(/(href|src)="(?![a-z][a-z0-9+.-]*:|\/|#|\.\.\/)/g, `$1="${prefix}`);
+}
+function prefixFor(currentPage) {
+  const depth = currentPage.split('/').length - 1;
+  return '../'.repeat(depth);
+}
 
 function renderNav(currentPage) {
   // Which parent owns the current page? Defaults to Learn (index 0).
@@ -22,6 +32,7 @@ function renderNav(currentPage) {
   // claim the active state - the homepage belongs to Learn (index 0) by
   // default, not to whichever parent happens to hold a #section link.
   const foundIdx = NAV.findIndex((p) =>
+    (p.match && p.match.test(currentPage)) ||
     p.children.some(c => isActive(c.href, currentPage) && !c.href.startsWith('index.html#')) ||
     isActive(p.href, currentPage)
   );
@@ -44,7 +55,8 @@ function renderNav(currentPage) {
           `<li><a href="${esc(c.href)}" aria-label="${esc(c.en)}">${label(c)}</a></li>`
         ).join('\n            ')}\n          </ul>`
       : '';
-    return `<li class="nav-parent${i === activeIdx ? ' is-active' : ''}"${hasKidsAttr} data-idx="${i}">` +
+    const keyAttr = p.key ? ` data-key="${esc(p.key)}"` : '';
+    return `<li class="nav-parent${i === activeIdx ? ' is-active' : ''}"${hasKidsAttr}${keyAttr} data-idx="${i}">` +
            `<a href="${esc(p.href)}" aria-label="${esc(p.en)}"${aExtra}>${label(p)}${caret}</a>${sub}</li>`;
   }).join('\n        ');
 
@@ -60,7 +72,7 @@ function renderNav(currentPage) {
     `<p class="nav-drawer-line">Hawke&#39;s Bay · Aotearoa New Zealand</p>` +
     `</li>`;
 
-  return `<nav class="nav" id="nav" aria-label="Main">
+  return relativize(`<nav class="nav" id="nav" aria-label="Main">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
       <ul class="nav-links" id="navDrawer">
@@ -77,7 +89,7 @@ function renderNav(currentPage) {
         </button>
       </div>
     </div>
-  </nav>`;
+  </nav>`, prefixFor(currentPage));
 }
 
-module.exports = { renderNav };
+module.exports = { renderNav, relativize, prefixFor };

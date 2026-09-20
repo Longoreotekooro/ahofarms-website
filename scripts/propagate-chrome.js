@@ -14,6 +14,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { SOCIAL, CONNECT } = require('./nav-config');
+const { relativize, prefixFor } = require('./render-nav');
+const { listPages } = require('./propagate-nav-pages');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -25,14 +27,18 @@ const assetVersion = (rel) =>
   crypto.createHash('sha1').update(fs.readFileSync(path.join(ROOT, rel))).digest('hex').slice(0, 8);
 const CSS_HREF = `assets/aho-chrome.css?v=${assetVersion('assets/aho-chrome.css')}`;
 const JS_SRC = `assets/aho-chrome.js?v=${assetVersion('assets/aho-chrome.js')}`;
-const PORTALS = new Set(['export-portal.html', 'pharmacies-portal.html', 'prescribers-portal.html']);
+// The generated portal pages (portal/index.html, portal/<id>/*.html): full
+// chrome and footer, but no floating "Connect with us" (they have their own
+// contact pathway), and the protected ones are kept out of search.
+const isPortalPage = f => f.startsWith('portal/');
+const PROTECTED_PORTAL_PAGE = /^portal\/[^/]+\/(home|account|reset)\.html$/;
 // Teal is the brand accent on every page (CEO, 2026-09-15); the old
 // per-page data-palette split is retired, so the attribute is stripped.
 const TEAL_PAGES = new Set();
 // Pages with no hero to absorb the fixed header get a solid bar and a body
 // offset (html.aho-nav-solid in aho-chrome.css).
 const SOLID_NAV_PAGES = new Set(['404.html', 'contact.html', 'disclaimer.html', 'export-partners.html', 'kaupapa.html',
-  'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', 'whats-new.html', ...PORTALS]);
+  'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', 'whats-new.html']);
 // Unlinked pages the CEO wants kept but hidden (2026-09-14): board/business
 // stubs, parked kaupapa/social-impact.
 const NOINDEX_PAGES = new Set(['board.html', 'business.html', 'kaupapa.html', 'social-impact.html']);
@@ -44,7 +50,7 @@ function stampHtmlTag(html, file) {
     a = a.replace(/\s*data-palette="[^"]*"/, '');
     if (TEAL_PAGES.has(file)) a += ' data-palette="teal"';
     const cls = (a.match(/\sclass="([^"]*)"/) || [, ''])[1].split(/\s+/).filter(c => c && c !== 'aho-nav-solid');
-    if (SOLID_NAV_PAGES.has(file)) cls.push('aho-nav-solid');
+    if (SOLID_NAV_PAGES.has(file) || isPortalPage(file)) cls.push('aho-nav-solid');
     a = a.replace(/\s*class="[^"]*"/, '');
     if (cls.length) a += ` class="${cls.join(' ')}"`;
     return `<html${a}>`;
@@ -52,7 +58,7 @@ function stampHtmlTag(html, file) {
 }
 function stampNoindex(html, file) {
   html = html.replace(/\s*<meta name="robots" content="noindex[^"]*">/g, '');
-  if (!NOINDEX_PAGES.has(file)) return html;
+  if (!NOINDEX_PAGES.has(file) && !PROTECTED_PORTAL_PAGE.test(file)) return html;
   return html.replace(/<meta charset="[^"]*">/i, m => `${m}\n  <meta name="robots" content="noindex, nofollow">`);
 }
 // The skip link targets the page's own <main> id (journey / main / portalMain).
@@ -160,23 +166,25 @@ function processPage(file) {
   const raw = fs.readFileSync(full, 'utf8');
   const eol = detectEOL(raw);
   let html = toEOL(raw, '\n');
-  const isPortal = PORTALS.has(file);
+  const isPortal = isPortalPage(file);
+  const prefix = prefixFor(file);
 
   html = stampHtmlTag(html, file);
   html = stampNoindex(html, file);
   html = stampSkipLink(html);
-  html = swapOrInsert(html, S.css, `<link rel="stylesheet" href="${CSS_HREF}">`, [/<\/head>/, /<body[^>]*>/], `${file} chrome css`);
-  html = swapOrInsert(html, S.js, `<script src="${JS_SRC}" defer></script>`, /<\/body>/, `${file} chrome js`);
+  html = swapOrInsert(html, S.css, `<link rel="stylesheet" href="${prefix}${CSS_HREF}">`, [/<\/head>/, /<body[^>]*>/], `${file} chrome css`);
+  html = swapOrInsert(html, S.js, `<script src="${prefix}${JS_SRC}" defer></script>`, /<\/body>/, `${file} chrome js`);
 
+  const footer = relativize(FOOTER_HTML, prefix);
+  const footRe = new RegExp(esc(S.footer[0]) + '[\\s\\S]*?' + esc(S.footer[1]));
+  if (footRe.test(html)) {
+    html = html.replace(footRe, S.footer[0] + '\n' + footer + '\n' + S.footer[1]);
+  } else {
+    const old = html.match(/<footer[\s\S]*?<\/footer>/);
+    if (!old) throw new Error(`${file}: no <footer> to replace`);
+    html = html.replace(old[0], S.footer[0] + '\n' + footer + '\n' + S.footer[1]);
+  }
   if (!isPortal) {
-    const footRe = new RegExp(esc(S.footer[0]) + '[\\s\\S]*?' + esc(S.footer[1]));
-    if (footRe.test(html)) {
-      html = html.replace(footRe, S.footer[0] + '\n' + FOOTER_HTML + '\n' + S.footer[1]);
-    } else {
-      const old = html.match(/<footer[\s\S]*?<\/footer>/);
-      if (!old) throw new Error(`${file}: no <footer> to replace`);
-      html = html.replace(old[0], S.footer[0] + '\n' + FOOTER_HTML + '\n' + S.footer[1]);
-    }
     // the connect block sits just before the chrome script
     const conRe = new RegExp(esc(S.connect[0]) + '[\\s\\S]*?' + esc(S.connect[1]));
     if (conRe.test(html)) html = html.replace(conRe, S.connect[0] + '\n' + CONNECT_HTML + '\n' + S.connect[1]);
@@ -187,7 +195,7 @@ function processPage(file) {
   return isPortal ? 'portal' : 'page';
 }
 
-const pages = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'));
+const pages = listPages();
 const counts = { page: 0, portal: 0 };
 pages.forEach(p => { counts[processPage(p)]++; });
-console.log(`chrome stamped on ${pages.length} pages (${counts.page} with footer + connect, ${counts.portal} portals css/js only)`);
+console.log(`chrome stamped on ${pages.length} pages (${counts.page} with footer + connect, ${counts.portal} portal pages with footer, no connect)`);

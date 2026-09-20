@@ -18,6 +18,52 @@
     veil();
   }
 
+  /* ---------- header: signed-in state ----------
+     A visitor with a portal session carries a UI-hint cookie (role only;
+     the real session is HttpOnly and verified server-side). The Portals
+     item becomes "My Portal": portal home, account, sign out. Admins see
+     every portal. Runs before the drawer and dropdown are wired so both
+     pick up the rebuilt list. */
+  if (nav) (function () {
+    var m = document.cookie.match(/(?:^|;\s*)aho_portal_ui=([^;]*)/);
+    var li = nav.querySelector('.nav-parent[data-key="portals"]');
+    if (!m || !li) return;
+    var role = decodeURIComponent(m[1]);
+    var ALL = [['prescriber', 'Prescriber Portal'], ['pharmacy', 'Pharmacy Portal'], ['export-partner', 'Export Partner Portal']];
+    var BY_ROLE = { prescriber: ALL[0], pharmacy: ALL[1], export_partner: ALL[2] };
+    var mine = role === 'admin' ? ALL : (BY_ROLE[role] ? [BY_ROLE[role]] : []);
+    if (!mine.length) return;
+    var a = li.querySelector(':scope > a'), sub = li.querySelector(':scope > .nav-sub');
+    if (!a || !sub) return;
+    function bil(en, mi) { return '<span class="bil"><span class="bil-en">' + en + '</span><span class="bil-mi" aria-hidden="true">' + mi + '</span></span>'; }
+    var caret = a.querySelector('.nav-caret');
+    a.innerHTML = bil('My Portal', 'Tōku Tomokanga') + (caret ? caret.outerHTML : '');
+    a.setAttribute('aria-label', 'My Portal');
+    a.setAttribute('href', '/portal/' + mine[0][0] + '/home.html');
+    var items = mine.map(function (p) { return [mine.length > 1 ? p[1] : 'Portal home', mine.length > 1 ? p[1] : 'Kāinga', '/portal/' + p[0] + '/home.html', '']; });
+    items.push(['Account', 'Pūkete', '/portal/' + mine[0][0] + '/account.html', '']);
+    items.push(['Sign out', 'Puta atu', '/portal/', ' data-signout']);
+    sub.innerHTML = items.map(function (it) {
+      return '<li><a href="' + it[2] + '" aria-label="' + it[0] + '"' + it[3] + '>' + bil(it[0], it[1]) + '</a></li>';
+    }).join('');
+    li.classList.add('is-signed-in');
+  })();
+
+  /* ---------- sign out (header item, portal page buttons) ---------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-signout]') : null;
+    if (!t) return;
+    e.preventDefault();
+    fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' } })
+      .catch(function () {})
+      .then(function () {
+        try { sessionStorage.removeItem('aho:me'); } catch (err) {}
+        var m = location.pathname.match(/^\/portal\/([^/]+)\/(home|account)\.html/);
+        if (m) location.href = '/portal/' + m[1] + '/login.html?notice=signed-out';
+        else location.reload();
+      });
+  });
+
   /* ---------- header: mobile drawer ----------
      One flat list (CEO, 2026-09-14): every sub-page visible, no
      accordion. The drawer only opens and closes. */

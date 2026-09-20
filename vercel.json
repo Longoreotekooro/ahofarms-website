@@ -7,6 +7,18 @@
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
     }
+  ],
+  "redirects": [
+    { "source": "/portal/:id(prescriber|pharmacy|export-partner)", "destination": "/portal/:id/home.html", "permanent": false },
+    { "source": "/prescribers-portal.html", "destination": "/portal/prescriber/login.html", "permanent": true },
+    { "source": "/pharmacies-portal.html", "destination": "/portal/pharmacy/login.html", "permanent": true },
+    { "source": "/export-portal.html", "destination": "/portal/export-partner/login.html", "permanent": true }
   ]
 }

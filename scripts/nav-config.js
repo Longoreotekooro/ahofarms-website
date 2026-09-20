@@ -30,6 +30,22 @@ const NAV = [
   },
 ];
 
+// Portals (CEO brief, 2026-09-20): a third top-level item. Each child opens
+// that portal's own sign-in page; the pages, roles and request forms are
+// generated from lib/portals.js (the portal registry), which is the single
+// source of truth for ids and names. Keep this list in step with it
+// (check-nav.js verifies). When a visitor is signed in, assets/aho-chrome.js
+// swaps this item for "My Portal" (portal home · account · sign out).
+const PORTALS_NAV = {
+  en: 'Portals', mi: 'Ngā Tomokanga', href: 'portal/index.html', key: 'portals', match: /^portal\//,
+  children: [
+    { en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: 'portal/prescriber/login.html' },
+    { en: 'Pharmacies',      mi: 'Ngā Whare Rongoā',   href: 'portal/pharmacy/login.html' },
+    { en: 'Export Partners', mi: 'Ngā Hoa Kaweake',    href: 'portal/export-partner/login.html' },
+  ],
+};
+NAV.push(PORTALS_NAV);
+
 const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: 'contact.html' };
 
 // Social channels, header and footer (CEO, 2026-09-10; Instagram and
@@ -53,9 +69,9 @@ const SOCIAL = [
 // The five ways in, used by the floating "Connect with us" sheet and the
 // footer's Portals column (CEO, 2026-09-10). Order is the CEO's.
 const CONNECT = [
-  { label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true },
-  { label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true },
-  { label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true },
+  { label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true, login: 'portal/prescriber/login.html' },
+  { label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true, login: 'portal/pharmacy/login.html' },
+  { label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true, login: 'portal/export-partner/login.html' },
   { label: 'Contact the team', href: 'contact.html',         note: 'General enquiries and media',                       portal: false },
 ];
 

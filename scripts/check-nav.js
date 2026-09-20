@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { NAV, CTA, SENTINEL_START, SENTINEL_END } = require('./nav-config');
+const { listPages } = require('./propagate-nav-pages');
 
 const ROOT = path.join(__dirname, '..');
 const failures = [];
@@ -24,7 +25,7 @@ allLinks.push(CTA.href);
 });
 
 // 2. Every page carries exactly one sentinel-delimited nav block.
-const pages = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'));
+const pages = listPages();
 pages.forEach(p => {
   const html = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const starts = html.split(SENTINEL_START).length - 1;
@@ -32,13 +33,27 @@ pages.forEach(p => {
   if (starts !== 1 || ends !== 1) fail(`BAD SENTINELS: ${p} (start=${starts} end=${ends}, expected 1/1)`);
 });
 
-// 3. No page links to a file that does not exist.
+// 3. No page links to a file that does not exist. Root-absolute links
+//    (/portal/...) resolve from the site root, relative ones from the page.
 pages.forEach(p => {
   const html = fs.readFileSync(path.join(ROOT, p), 'utf8');
-  const hrefs = [...html.matchAll(/href="([^"#:]+\.html)(?:#[^"]*)?"/g)].map(m => m[1]);
+  const hrefs = [...html.matchAll(/href="([^"#:?]+\.html)(?:[?#][^"]*)?"/g)].map(m => m[1]);
   [...new Set(hrefs)].forEach(h => {
-    if (!fs.existsSync(path.join(ROOT, h))) fail(`DEAD LINK: ${p} -> ${h}`);
+    const full = h.startsWith('/') ? path.join(ROOT, h) : path.resolve(path.join(ROOT, path.dirname(p)), h);
+    if (!full.startsWith(ROOT) || !fs.existsSync(full)) fail(`DEAD LINK: ${p} -> ${h}`);
   });
+});
+
+// 3b. The Portals nav item agrees with the registry in lib/portals.js.
+const portalsNav = NAV.find(p => p.key === 'portals');
+import('../lib/portals.js').then(({ PORTALS }) => {
+  const want = PORTALS.map(p => `portal/${p.id}/login.html`);
+  const have = portalsNav ? portalsNav.children.map(c => c.href) : [];
+  if (JSON.stringify(want) !== JSON.stringify(have)) fail(`PORTALS NAV: nav-config children ${JSON.stringify(have)} != registry ${JSON.stringify(want)}`);
+  PORTALS.forEach(p => ['login', 'request-access', 'forgot', 'reset', 'home', 'account'].forEach(pg => {
+    if (!fs.existsSync(path.join(ROOT, 'portal', p.id, pg + '.html'))) fail(`MISSING PORTAL PAGE: portal/${p.id}/${pg}.html (run scripts/build-portals.js)`);
+  }));
+  finish();
 });
 
 // 4. Active-parent selection: first matching parent must win (regression
@@ -50,6 +65,7 @@ const ACTIVE_PARENT_CASES = [
   ['products.html', 'Buy'],
   ['news.html', 'Learn'],
 ];
+ACTIVE_PARENT_CASES.push(['portal/prescriber/login.html', 'Portals'], ['portal/pharmacy/home.html', 'Portals'], ['portal/index.html', 'Portals']);
 ACTIVE_PARENT_CASES.forEach(([page, expected]) => {
   const html = renderNav(page);
   const activeMatch = html.match(/<li class="nav-parent is-active"[^>]*data-idx="(\d+)"/);
@@ -60,9 +76,11 @@ ACTIVE_PARENT_CASES.forEach(([page, expected]) => {
   }
 });
 
-if (failures.length) {
-  console.error(`FAIL (${failures.length}):`);
-  failures.forEach(f => console.error('  ' + f));
-  process.exit(1);
+function finish() {
+  if (failures.length) {
+    console.error(`FAIL (${failures.length}):`);
+    failures.forEach(f => console.error('  ' + f));
+    process.exit(1);
+  }
+  console.log(`PASS - ${pages.length} pages, ${new Set(allLinks).size} nav targets, all resolve.`);
 }
-console.log(`PASS - ${pages.length} pages, ${new Set(allLinks).size} nav targets, all resolve.`);
