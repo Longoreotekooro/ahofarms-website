@@ -13,17 +13,21 @@ import { getPortal, roleAllows, portalForRole, PUBLIC_PORTAL_PAGES } from './lib
 
 export const config = { matcher: ['/portal/:path*'] };
 
+// Continue to the requested file. Vercel's Edge runtime reads the
+// x-middleware-next marker; any other headers are added to the response.
+const next = (headers = {}) => new Response(null, { headers: { 'x-middleware-next': '1', ...headers } });
+
 export default async function middleware(request) {
   const url = new URL(request.url);
   const parts = url.pathname.replace(/^\/portal\/?/, '').split('/').filter(Boolean);
 
   // /portal or /portal/index.html: the public hub.
-  if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index.html')) return;
+  if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index.html')) return next();
 
   const portal = getPortal(parts[0]);
   if (!portal) return new Response('Not found', { status: 404 });
   const page = parts.slice(1).join('/');
-  if (PUBLIC_PORTAL_PAGES.has(page)) return;
+  if (PUBLIC_PORTAL_PAGES.has(page)) return next();
 
   const session = await verifySession(parseCookies(request.headers.get('cookie'))[SESSION_COOKIE]);
   if (!session) {
@@ -42,6 +46,5 @@ export default async function middleware(request) {
     return Response.redirect(to.toString(), 302);
   }
   // Signed in and permitted: serve the page, but never let a shared cache keep it.
-  const headers = new Headers({ 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' });
-  return new Response(null, { headers: { 'x-middleware-next': '1', ...Object.fromEntries(headers) } });
+  return next({ 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' });
 }
