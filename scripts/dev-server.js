@@ -88,6 +88,9 @@ async function runMiddleware(req, reqPath) {
 const server = http.createServer(async (req, res) => {
   let reqPath = decodeURIComponent(req.url.split('?')[0]);
   if (reqPath.startsWith('/api/')) return handleApi(req, res, reqPath);
+  // vercel.json rewrite: /r/<code> -> the tracked referral hand-off
+  const ref = /^\/r\/([^/]+)$/.exec(reqPath);
+  if (ref) { req.url = '/api/index?route=referral/go&code=' + encodeURIComponent(ref[1]); return handleApi(req, res, '/api/index'); }
 
   // vercel.json redirects for the portal directory forms
   if (/^\/portal\/(prescriber|pharmacy|export-partner)\/?$/.test(reqPath)) { res.writeHead(302, { Location: reqPath.replace(/\/?$/, '') + '/home.html' }); res.end(); return; }

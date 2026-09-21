@@ -13,11 +13,12 @@ const ROUTES = {
   'auth/change-password': () => import('../lib/api/auth/change-password.js'),
   'access/request':       () => import('../lib/api/access/request.js'),
   'portal/home':          () => import('../lib/api/portal/home.js'),
-  'directory/providers':  () => import('../lib/api/directory/providers.js'),
-  'consumers/enquiry':    () => import('../lib/api/consumers/enquiry.js'),
+  'consumers/connect':    () => import('../lib/api/consumers/connect.js'),
+  'referral/go':          () => import('../lib/api/referral/go.js'),
   'admin/users':          () => import('../lib/api/admin/users.js'),
   'admin/requests':       () => import('../lib/api/admin/requests.js'),
-  'admin/providers':      () => import('../lib/api/admin/providers.js'),
+  'admin/partners':       () => import('../lib/api/admin/partners.js'),
+  'admin/leads':          () => import('../lib/api/admin/leads.js'),
 };
 
 export default async function handler(req, res) {

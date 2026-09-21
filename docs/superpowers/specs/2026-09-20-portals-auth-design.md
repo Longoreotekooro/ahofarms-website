@@ -11,7 +11,7 @@ where it lives and how to operate it.
 
 ```
 Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in)
-├─ Consumers       → /portal/consumers/index.html       PUBLIC: access pathway, Find a Prescriber, FAQs, enquiry
+├─ Consumers       → /portal/consumers/index.html       PUBLIC: access pathway, Get Connected (lead capture → partner referral), FAQs
 ├─ Prescribers     → /portal/prescriber/login.html      → /portal/prescriber/home.html
 ├─ Pharmacies      → /portal/pharmacy/login.html        → /portal/pharmacy/home.html
 └─ Export Partners → /portal/export-partner/login.html  → /portal/export-partner/home.html
@@ -30,9 +30,9 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 | Auth API | `lib/api/auth/{login,logout,me,forgot,reset,change-password}.js` | Vercel Node |
 | Request access | `lib/api/access/request.js` | Vercel Node |
 | Portal content (dashboard framework) | `lib/api/portal/home.js` + `lib/portal-content.js` | Vercel Node |
-| Consumer Portal: Find a Prescriber directory | `lib/providers.js` (model, regions, samples), `lib/api/directory/providers.js` (public), `lib/api/admin/providers.js` | Vercel Node |
-| Consumer enquiry ("help me find a prescriber") | `lib/api/consumers/enquiry.js` (stored as a request of kind `consumer-enquiry`, emailed) | Vercel Node |
-| Admin | `lib/api/admin/{users,requests,providers}.js` + `scripts/portal-admin.js` | Node |
+| Consumer lead capture + partner referral | `lib/markets.js` (countries, regions), `lib/partners.js` (partner + lead model, routing, referral codes), `lib/api/consumers/connect.js` (POST), `lib/api/referral/go.js` (GET /r/<code>, tracked hand-off) | Vercel Node |
+| Partner + lead administration | `lib/api/admin/partners.js`, `lib/api/admin/leads.js`, CLI `partners`/`leads` commands | Vercel Node |
+| Admin | `lib/api/admin/{users,requests,partners,leads}.js` + `scripts/portal-admin.js` | Node |
 | Accounts + requests store | `lib/users.js` (Redis REST adapter, env-JSON fallback) | Node |
 | Password hashing | `lib/password.js` (scrypt, Node built-in) | Node |
 | Pages | `scripts/build-portals.js` → `portal/**` | build step |
@@ -82,29 +82,52 @@ Locally: put the same keys in `.env.local` (gitignored) and run the
 `aho-site` preview; `scripts/dev-server.js` runs the middleware and the API
 handlers itself.
 
-## Consumer Portal (2026-09-21)
+## Consumer Portal (rebuilt 2026-09-21 as an Aho-controlled referral funnel)
 
-Public, no account. The order in the dropdown is public access → healthcare
-professional → dispensing → international partner, each item with a one-line
-description (desktop panel only). The consumer journey is: Portals →
-Consumers → understand the pathway → Find a Prescriber (search by name or
-city, filter by country, region, telehealth, in person) → Book consultation
-or Visit clinic, leaving the Aho site. Copy avoids any suggestion that Aho
-Farms prescribes, diagnoses or guarantees a prescription, and product
-information stays high-level.
+Public, no account. Dropdown order is public access → healthcare
+professional → dispensing → international partner, each item with a
+one-line description (desktop panel only).
 
-Directory listings live in the store; until an admin adds one, five
-clearly labelled SAMPLE listings render so the page and filters can be
-seen working. Manage with:
+The consumer pathway is lead capture first. **No directory, partner name,
+booking link or partner detail is shown before the form is submitted**, and
+the partner's own URL is never sent to the browser at all.
+
+Journey: Consumers → How access works → **Get Connected to a Prescriber**
+(name, email, phone where a call is wanted, country, region/state,
+preferred contact method, optional message, required referral consent,
+optional marketing consent) → lead stored with consent → the approved
+partner for the country is assigned (a region-specific partner wins over a
+country-wide one) → the consumer's next step is shown on the page and,
+when mail is configured, emailed:
+
+- partner with a `referralUrl`: a tracked Aho link `/r/<code>` as a button
+  and as a QR code (rendered client-side with the vendored MIT
+  `assets/vendor/qrcode.min.js`). Opening it records the hand-off on the
+  lead (first and last time, count), sets status `handed-off`, and
+  redirects to the partner URL with `?ref=<code>&utm_source=ahofarms`.
+- partner with only a `contactEmail`: Aho emails the partner the lead and
+  tells the consumer the partner will be in touch by their chosen method.
+- no partner for that market yet: status `new`, "the Aho Farms team will be
+  in touch", and the admin notification says NO PARTNER.
+
+Every lead carries a reference code, status (`new` · `referred` ·
+`handed-off` · `contacted` · `closed`), timestamps and consent flags, so
+the journey can be followed up and conversion measured. Lead statuses can
+be updated by admins (`lead-set`). The Aho admin notification and the
+partner/consumer introductions go through `lib/mail.js`.
 
 ```
-node scripts/portal-admin.js providers
-node scripts/portal-admin.js provider-add name="…" country="New Zealand" region="Auckland" city="…" telehealth=true inPerson=true website=https://… booking=https://… phone="…" description="…"
-node scripts/portal-admin.js provider-set <id> status=hidden
-node scripts/portal-admin.js provider-remove <id>
+node scripts/portal-admin.js partners
+node scripts/portal-admin.js partner-add country="New Zealand" name="…" referralUrl=https://… contactEmail=… intro="…" [region="Auckland"]
+node scripts/portal-admin.js partner-set <id> status=inactive
+node scripts/portal-admin.js leads
+node scripts/portal-admin.js lead-set <id> status=contacted
 ```
-Without the Redis store, listings are per-instance memory (or `PORTAL_PROVIDERS`
-JSON in env); the Redis store makes them durable.
+Without the Redis store, partners come from `PORTAL_PARTNERS` (JSON array in
+env) and leads live in per-instance memory only, so the Redis store is
+required in production for leads to be retained. No sample partners are
+shipped: until a partner is added for a market, consumers in that market
+get the "we'll be in touch" outcome.
 
 ## Operating it
 

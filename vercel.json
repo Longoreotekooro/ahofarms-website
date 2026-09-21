@@ -16,7 +16,8 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/:route*", "destination": "/api/index?route=:route*" }
+    { "source": "/api/:route*", "destination": "/api/index?route=:route*" },
+    { "source": "/r/:code", "destination": "/api/index?route=referral/go&code=:code" }
   ],
   "redirects": [
     { "source": "/portal/:id(prescriber|pharmacy|export-partner)", "destination": "/portal/:id/home.html", "permanent": false },

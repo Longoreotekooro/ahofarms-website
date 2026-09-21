@@ -59,7 +59,8 @@
     form.querySelectorAll('[data-required], [type="email"]').forEach(function (input) {
       var v = (input.value || '').trim(), msg = '';
       var label = (form.querySelector('label[for="' + input.id + '"]') || {}).textContent || 'This field';
-      if (input.hasAttribute('data-required') && !v) msg = label.replace(/\s*\*$/, '') + ' is required.';
+      if (input.type === 'checkbox') { if (input.hasAttribute('data-required') && !input.checked) msg = 'This confirmation is required.'; }
+      else if (input.hasAttribute('data-required') && !v) msg = label.replace(/\s*\*$/, '') + ' is required.';
       else if (input.type === 'email' && v && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) msg = 'Enter a valid email address.';
       if (msg) { setFieldError(form, input.name, msg); if (!first) first = input; }
     });
@@ -290,110 +291,99 @@
     }
   }
 
-  /* ---------- consumer portal: Find a Prescriber directory ---------- */
-  var dir = document.getElementById('csDirectory');
-  if (dir) {
-    var meta = document.getElementById('csMeta');
-    var search = document.getElementById('csSearch');
-    var country = document.getElementById('csCountry');
-    var region = document.getElementById('csRegion');
-    var chips = Array.prototype.slice.call(document.querySelectorAll('.cs-chip[data-filter]'));
+  /* ---------- consumer portal: get connected to a prescriber ----------
+     Lead capture first; the partner's next step (tracked link + QR code,
+     or a call-back) is shown only after a successful submission. */
+  var connect = document.getElementById('csConnect');
+  if (connect) {
+    var cmsg = connect.querySelector('.pt-msg');
+    var countrySel = document.getElementById('cs-country');
     var regionList = document.getElementById('csRegionList');
-    var data = { providers: [], regions: {}, countries: [] };
-
+    var REGIONS = {
+      'New Zealand': ['Northland', 'Auckland', 'Waikato', 'Bay of Plenty', 'Gisborne', "Hawke's Bay", 'Taranaki', 'Manawatū-Whanganui', 'Wellington', 'Tasman', 'Nelson', 'Marlborough', 'West Coast', 'Canterbury', 'Otago', 'Southland'],
+      'Australia': ['New South Wales', 'Victoria', 'Queensland', 'Western Australia', 'South Australia', 'Tasmania', 'Australian Capital Territory', 'Northern Territory'],
+      'Germany': ['Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hesse', 'Lower Saxony', 'Mecklenburg-Vorpommern', 'North Rhine-Westphalia', 'Rhineland-Palatinate', 'Saarland', 'Saxony', 'Saxony-Anhalt', 'Schleswig-Holstein', 'Thuringia'],
+      'United Kingdom': ['London', 'South East', 'South West', 'East of England', 'East Midlands', 'West Midlands', 'Yorkshire and the Humber', 'North West', 'North East', 'Scotland', 'Wales', 'Northern Ireland']
+    };
     function fillRegions() {
-      var c = country.value;
-      var regs = c ? (data.regions[c] || []) : Object.keys(data.regions).reduce(function (a, k) { return a.concat(data.regions[k]); }, []);
-      var keep = region.value;
-      region.innerHTML = '<option value="">All regions</option>';
-      regs.filter(function (r, i, arr) { return arr.indexOf(r) === i; }).forEach(function (r) { var o = document.createElement('option'); o.value = r; o.textContent = r; region.appendChild(o); });
-      region.value = regs.indexOf(keep) >= 0 ? keep : '';
+      if (!regionList) return;
+      regionList.innerHTML = '';
+      (REGIONS[countrySel.value] || []).forEach(function (r) { var o = document.createElement('option'); o.value = r; regionList.appendChild(o); });
     }
-    function ext(a) { a.target = '_blank'; a.rel = 'noopener'; return a; }
-    function providerCard(p) {
-      var c = el('article', 'card');
-      var top = el('div', 'cs-card-top');
-      top.appendChild(el('h3', null, p.name));
-      var chipsEl = el('div', 'cs-card-chips');
-      if (p.telehealth) chipsEl.appendChild(el('span', 'pt-chip', 'Telehealth'));
-      if (p.inPerson) chipsEl.appendChild(el('span', 'pt-chip', 'In person'));
-      if (p.sample) chipsEl.appendChild(el('span', 'pt-chip pt-chip--sample', 'Sample listing'));
-      top.appendChild(chipsEl);
-      c.appendChild(top);
-      var m = el('p', 'cs-card-meta');
-      var place = [p.city, p.region].filter(function (x, i, a) { return x && a.indexOf(x) === i; }).join(', ');
-      m.innerHTML = '<b></b>';
-      m.querySelector('b').textContent = place;
-      m.appendChild(document.createTextNode((place ? ' · ' : '') + (p.country || '') + (p.type === 'prescriber' ? ' · Prescriber' : ' · Clinic')));
-      c.appendChild(m);
-      if (p.description) c.appendChild(el('p', 'cs-card-desc', p.description));
-      var act = el('div', 'cs-card-actions');
-      if (p.booking) { var b = ext(el('a', 'btn btn--primary', 'Book consultation')); b.href = p.booking; act.appendChild(b); }
-      if (p.website) { var w = ext(el('a', 'btn ' + (p.booking ? 'btn--ghost' : 'btn--primary'), 'Visit clinic')); w.href = p.website; act.appendChild(w); }
-      if (p.phone) { var ph = el('a', 'cs-phone', p.phone); ph.href = 'tel:' + p.phone.replace(/[^+\d]/g, ''); act.appendChild(ph); }
-      c.appendChild(act);
-      return c;
-    }
-    function apply() {
-      var q = (search.value || '').trim().toLowerCase();
-      var want = {}; chips.forEach(function (ch) { if (ch.getAttribute('aria-pressed') === 'true') want[ch.dataset.filter] = true; });
-      var list = data.providers.filter(function (p) {
-        if (country.value && p.country !== country.value) return false;
-        if (region.value && p.region !== region.value) return false;
-        if (want.telehealth && !p.telehealth) return false;
-        if (want.inPerson && !p.inPerson) return false;
-        if (q && [p.name, p.city, p.region, p.description].join(' ').toLowerCase().indexOf(q) < 0) return false;
-        return true;
-      });
-      dir.innerHTML = '';
-      if (!list.length) {
-        var e = el('div', 'cs-empty');
-        e.innerHTML = 'No listings match those filters yet. Try widening the region, or <a href="#support">ask us for prescriber options</a> and we will reply by email.';
-        dir.appendChild(e);
-      } else list.forEach(function (p) { dir.appendChild(providerCard(p)); });
-      meta.textContent = list.length === data.providers.length
-        ? data.providers.length + ' listing' + (data.providers.length === 1 ? '' : 's')
-        : list.length + ' of ' + data.providers.length + ' listings';
-      if (data.sample) meta.appendChild(el('span', 'pt-chip pt-chip--muted', 'Sample listings shown until real providers are added'));
-    }
-    api('/api/directory/providers', null, 'GET').then(function (r) {
-      if (!r.ok) { meta.textContent = 'The directory could not be loaded right now. Please try again shortly.'; return; }
-      data = r;
-      (r.countries || []).forEach(function (c) { var o = document.createElement('option'); o.value = c; o.textContent = c; country.appendChild(o); });
-      var have = {}; r.providers.forEach(function (p) { have[p.country] = true; });
-      if (Object.keys(have).length === 1) country.value = Object.keys(have)[0];
-      fillRegions();
-      if (regionList) Object.keys(r.regions).forEach(function (k) { r.regions[k].forEach(function (reg) { var o = document.createElement('option'); o.value = reg; regionList.appendChild(o); }); });
-      apply();
-    });
-    search.addEventListener('input', apply);
-    country.addEventListener('change', function () { fillRegions(); apply(); });
-    region.addEventListener('change', apply);
-    chips.forEach(function (ch) { ch.addEventListener('click', function () { ch.setAttribute('aria-pressed', ch.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); apply(); }); });
-  }
+    if (countrySel) { countrySel.addEventListener('change', fillRegions); fillRegions(); }
+    if (params.get('notice') === 'referral-unknown') show(cmsg, 'That referral link was not recognised. Submit the form again and we will give you a fresh one.', 'note');
 
-  /* ---------- consumer portal: help me find a prescriber ---------- */
-  var enq = document.getElementById('csEnquiry');
-  if (enq) {
-    var emsg = enq.querySelector('.pt-msg');
-    enq.addEventListener('submit', function (e) {
-      e.preventDefault();
-      show(emsg, '');
-      if (!validate(enq)) return;
-      busy(enq, true, 'Sending');
-      api('/api/consumers/enquiry', formData(enq)).then(function (r) {
-        busy(enq, false);
-        if (r.ok) {
-          var wrap = el('div', 'pt-success');
-          var tick = el('div', 'pt-tick'); tick.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
-          wrap.appendChild(tick); wrap.appendChild(el('h2', null, 'Thanks, we have your enquiry.'));
-          wrap.appendChild(el('p', null, r.message));
-          var box = el('div', 'pt-form pt-form--light'); box.appendChild(wrap);
-          enq.replaceWith(box); box.setAttribute('tabindex', '-1'); box.focus();
-          return;
+    function qrSvg(text) {
+      try {
+        if (typeof qrcode !== 'function') return null;
+        var q = qrcode(0, 'M'); q.addData(text); q.make();
+        var n = q.getModuleCount(), cell = 4, size = n * cell;
+        var d = '';
+        for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += 'M' + (c * cell) + ' ' + (r * cell) + 'h' + cell + 'v' + cell + 'h-' + cell + 'z';
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size); svg.setAttribute('shape-rendering', 'crispEdges'); svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', 'QR code for your referral link');
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d); path.setAttribute('fill', '#0b0d0f');
+        svg.appendChild(path);
+        return svg;
+      } catch (e) { return null; }
+    }
+    function renderResult(r) {
+      var box = el('div', 'pt-form pt-form--light cs-result');
+      var head = el('div', 'cs-result-head');
+      var tick = el('div', 'pt-tick'); tick.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+      head.appendChild(tick);
+      head.appendChild(el('h3', null, r.referral.status === 'referred' ? "You're connected." : 'Thank you. We have your enquiry.'));
+      head.appendChild(el('p', null, r.message));
+      box.appendChild(head);
+      var ref = r.referral;
+      if (ref.status === 'referred') {
+        var card = el('div', 'cs-result-partner');
+        var left = el('div');
+        left.appendChild(el('span', 'eyebrow', 'Your prescriber partner'));
+        left.appendChild(el('b', null, ref.partnerName));
+        if (ref.intro) left.appendChild(el('p', null, ref.intro));
+        if (ref.link) {
+          var row = el('div', 'btn-row');
+          var go = el('a', 'btn btn--primary', 'Continue to your prescriber');
+          go.href = ref.link; go.target = '_blank'; go.rel = 'noopener';
+          row.appendChild(go); left.appendChild(row);
         }
-        if (r.fields) Object.keys(r.fields).forEach(function (k) { setFieldError(enq, k, r.fields[k]); });
-        show(emsg, r.error || 'We could not send your enquiry. Please try again.', 'error');
+        card.appendChild(left);
+        if (ref.link) {
+          var qrWrap = el('div');
+          var qr = el('div', 'cs-qr');
+          var svg = qrSvg(ref.link);
+          if (svg) qr.appendChild(svg); else qr.appendChild(el('span', null, ref.link));
+          qrWrap.appendChild(qr);
+          qrWrap.appendChild(el('span', 'cs-qr-label', 'Scan on your phone'));
+          card.appendChild(qrWrap);
+        }
+        box.appendChild(card);
+        var refLine = el('p', 'cs-result-ref'); refLine.innerHTML = 'Your reference: <code></code>' + (ref.introEmailed ? ' · A copy has been emailed to you.' : ' · Keep this code; quote it if you contact us.');
+        refLine.querySelector('code').textContent = ref.code;
+        box.appendChild(refLine);
+      }
+      box.appendChild(el('p', null, 'The prescriber decides whether medicinal cannabis is appropriate for you. Aho Farms does not prescribe, diagnose or guarantee a prescription.'));
+      connect.replaceWith(box);
+      box.setAttribute('tabindex', '-1'); box.focus();
+      window.scrollTo({ top: box.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+    }
+    connect.addEventListener('submit', function (e) {
+      e.preventDefault();
+      show(cmsg, '');
+      clearFieldErrors(connect);
+      var ok = validate(connect);
+      var consent = connect.querySelector('[name="consentReferral"]');
+      if (consent && !consent.checked) { setFieldError(connect, 'consentReferral', 'We need your consent to store your details and pass them to a prescriber partner.'); if (ok) consent.focus(); ok = false; }
+      if (!ok) return;
+      var data = formData(connect); data.source = 'consumer-portal';
+      busy(connect, true, 'Connecting you');
+      api('/api/consumers/connect', data).then(function (r) {
+        busy(connect, false);
+        if (r.ok) return renderResult(r);
+        if (r.fields) { Object.keys(r.fields).forEach(function (k) { setFieldError(connect, k, r.fields[k]); }); var f = connect.querySelector('.field.is-invalid input, .field.is-invalid select, .field.is-invalid textarea'); if (f) f.focus(); }
+        show(cmsg, r.error || 'We could not send your enquiry. Please try again.', 'error');
       });
     });
   }

@@ -13,7 +13,7 @@ Open `index.html` in any browser. No server required — self-contained file.
 ## Portals (sign-in, protected routes)
 
 The Portals gateway lives under `/portal/`: a public Consumer Portal
-(access pathway, Find a Prescriber directory, enquiry form) and three
+(access pathway, Get Connected lead capture with country-based prescriber partner referral) and three
 protected environments (Prescribers, Pharmacies, Export Partners) with
 per-portal sign-in, request-access, role-based access and a dashboard
 framework. Design and operations:
