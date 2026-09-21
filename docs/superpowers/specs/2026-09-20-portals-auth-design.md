@@ -26,7 +26,7 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 | Portal registry (ids, roles, copy, request-form fields) | `lib/portals.js` | Edge + Node |
 | Session tokens (HMAC-SHA256, Web Crypto) | `lib/session.js` | Edge + Node |
 | Protected routes | `middleware.js` (matcher `/portal/:path*`) | Vercel Edge |
-| API entry point (one function, routes by path) | `api/[...route].js` → `lib/api/**` | Vercel Node |
+| API entry point (one function, routes by path) | `api/index.js` (via a vercel.json rewrite) → `lib/api/**` | Vercel Node |
 | Auth API | `lib/api/auth/{login,logout,me,forgot,reset,change-password}.js` | Vercel Node |
 | Request access | `lib/api/access/request.js` | Vercel Node |
 | Portal content (dashboard framework) | `lib/api/portal/home.js` + `lib/portal-content.js` | Vercel Node |
@@ -38,7 +38,7 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 | Pages | `scripts/build-portals.js` → `portal/**` | build step |
 | Styling / behaviour | `assets/aho-portal.css`, `assets/aho-portal.js`; header state in `assets/aho-chrome.js` | browser |
 
-`lib/` and `api/` are ES modules. The API is ONE Vercel function (`api/[...route].js`) because the Hobby plan allows at most 12 per deployment; handlers live in `lib/api/`. (their own `package.json` sets `"type":
+`lib/` and `api/` are ES modules. The API is ONE Vercel function (`api/index.js` (via a vercel.json rewrite)) because the Hobby plan allows at most 12 per deployment; handlers live in `lib/api/`. (their own `package.json` sets `"type":
 "module"`); `scripts/` stays CommonJS.
 
 ## Security model

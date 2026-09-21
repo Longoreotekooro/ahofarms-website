@@ -58,7 +58,7 @@ function serveFile(req, res, full, extraHeaders) {
 
 // ---- API: as on Vercel, everything under /api goes to api/[...route].js ----
 async function handleApi(req, res, reqPath) {
-  const file = path.join(ROOT, 'api', '[...route].js');
+  const file = path.join(ROOT, 'api', 'index.js');
   if (!fs.existsSync(file)) { res.writeHead(404, { 'Content-Type': 'application/json' }); res.end('{"ok":false,"error":"Not found"}'); return; }
   try {
     // cache-bust on every request so edits are picked up without a restart

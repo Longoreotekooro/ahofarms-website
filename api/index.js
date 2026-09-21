@@ -1,8 +1,9 @@
-// The single API function. Every /api/<group>/<name> request lands here
-// and is dispatched to its handler in lib/api/<group>/<name>.js. One
-// function keeps the deployment within Vercel's Hobby-plan limit of 12
-// serverless functions and gives every route a warm shared runtime; the
-// handlers themselves are unchanged. Add a route by adding a line here.
+// The single API function. vercel.json rewrites every /api/<group>/<name>
+// request to /api/index?route=<group>/<name>, and this file dispatches to
+// the handler in lib/api/<group>/<name>.js. One function keeps the
+// deployment within Vercel's Hobby-plan limit of 12 serverless functions
+// and gives every route a warm shared runtime; the handlers themselves are
+// unchanged. Add a route by adding a line here.
 const ROUTES = {
   'auth/login':           () => import('../lib/api/auth/login.js'),
   'auth/logout':          () => import('../lib/api/auth/logout.js'),
@@ -20,7 +21,8 @@ const ROUTES = {
 };
 
 export default async function handler(req, res) {
-  const path = new URL(req.url, 'http://x').pathname.replace(/^\/api\/?/, '').replace(/\/+$/, '');
+  const url = new URL(req.url, 'http://x');
+  const path = (url.searchParams.get('route') || url.pathname.replace(/^\/api\/?/, '')).replace(/\/+$/, '');
   const load = ROUTES[path];
   if (!load) {
     res.statusCode = 404;
