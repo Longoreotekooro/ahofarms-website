@@ -26,18 +26,19 @@ Portals ▾            (nav-config.js · PORTALS_NAV; "My Portal" once signed in
 | Portal registry (ids, roles, copy, request-form fields) | `lib/portals.js` | Edge + Node |
 | Session tokens (HMAC-SHA256, Web Crypto) | `lib/session.js` | Edge + Node |
 | Protected routes | `middleware.js` (matcher `/portal/:path*`) | Vercel Edge |
-| Auth API | `api/auth/{login,logout,me,forgot,reset,change-password}.js` | Vercel Node |
-| Request access | `api/access/request.js` | Vercel Node |
-| Portal content (dashboard framework) | `api/portal/home.js` + `lib/portal-content.js` | Vercel Node |
-| Consumer Portal: Find a Prescriber directory | `lib/providers.js` (model, regions, samples), `api/directory/providers.js` (public), `api/admin/providers.js` | Vercel Node |
-| Consumer enquiry ("help me find a prescriber") | `api/consumers/enquiry.js` (stored as a request of kind `consumer-enquiry`, emailed) | Vercel Node |
-| Admin | `api/admin/{users,requests}.js` + `scripts/portal-admin.js` | Node |
+| API entry point (one function, routes by path) | `api/[...route].js` → `lib/api/**` | Vercel Node |
+| Auth API | `lib/api/auth/{login,logout,me,forgot,reset,change-password}.js` | Vercel Node |
+| Request access | `lib/api/access/request.js` | Vercel Node |
+| Portal content (dashboard framework) | `lib/api/portal/home.js` + `lib/portal-content.js` | Vercel Node |
+| Consumer Portal: Find a Prescriber directory | `lib/providers.js` (model, regions, samples), `lib/api/directory/providers.js` (public), `lib/api/admin/providers.js` | Vercel Node |
+| Consumer enquiry ("help me find a prescriber") | `lib/api/consumers/enquiry.js` (stored as a request of kind `consumer-enquiry`, emailed) | Vercel Node |
+| Admin | `lib/api/admin/{users,requests,providers}.js` + `scripts/portal-admin.js` | Node |
 | Accounts + requests store | `lib/users.js` (Redis REST adapter, env-JSON fallback) | Node |
 | Password hashing | `lib/password.js` (scrypt, Node built-in) | Node |
 | Pages | `scripts/build-portals.js` → `portal/**` | build step |
 | Styling / behaviour | `assets/aho-portal.css`, `assets/aho-portal.js`; header state in `assets/aho-chrome.js` | browser |
 
-`lib/` and `api/` are ES modules (their own `package.json` sets `"type":
+`lib/` and `api/` are ES modules. The API is ONE Vercel function (`api/[...route].js`) because the Hobby plan allows at most 12 per deployment; handlers live in `lib/api/`. (their own `package.json` sets `"type":
 "module"`); `scripts/` stays CommonJS.
 
 ## Security model

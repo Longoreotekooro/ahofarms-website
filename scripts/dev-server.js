@@ -56,11 +56,10 @@ function serveFile(req, res, full, extraHeaders) {
   });
 }
 
-// ---- API: api/<segments>.js, ESM default export (req, res) ----
+// ---- API: as on Vercel, everything under /api goes to api/[...route].js ----
 async function handleApi(req, res, reqPath) {
-  const rel = reqPath.replace(/^\/api\//, '').replace(/\/+$/, '');
-  const file = path.join(ROOT, 'api', rel + '.js');
-  if (!file.startsWith(path.join(ROOT, 'api')) || !fs.existsSync(file)) { res.writeHead(404, { 'Content-Type': 'application/json' }); res.end('{"ok":false,"error":"Not found"}'); return; }
+  const file = path.join(ROOT, 'api', '[...route].js');
+  if (!fs.existsSync(file)) { res.writeHead(404, { 'Content-Type': 'application/json' }); res.end('{"ok":false,"error":"Not found"}'); return; }
   try {
     // cache-bust on every request so edits are picked up without a restart
     const mod = await import(pathToFileURL(file).href + '?t=' + fs.statSync(file).mtimeMs);
