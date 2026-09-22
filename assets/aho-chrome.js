@@ -39,9 +39,9 @@
     var caret = a.querySelector('.nav-caret');
     a.innerHTML = bil('My Portal', 'Tōku Tomokanga') + (caret ? caret.outerHTML : '');
     a.setAttribute('aria-label', 'My Portal');
-    a.setAttribute('href', '/portal/' + mine[0][0] + '/home.html');
-    var items = mine.map(function (p) { return [mine.length > 1 ? p[1] : 'Portal home', mine.length > 1 ? p[1] : 'Kāinga', '/portal/' + p[0] + '/home.html', '']; });
-    items.push(['Account', 'Pūkete', '/portal/' + mine[0][0] + '/account.html', '']);
+    a.setAttribute('href', '/portal/' + mine[0][0] + '/home');
+    var items = mine.map(function (p) { return [mine.length > 1 ? p[1] : 'Portal home', mine.length > 1 ? p[1] : 'Kāinga', '/portal/' + p[0] + '/home', '']; });
+    items.push(['Account', 'Pūkete', '/portal/' + mine[0][0] + '/account', '']);
     items.push(['Sign out', 'Puta atu', '/portal/', ' data-signout']);
     sub.innerHTML = items.map(function (it) {
       return '<li><a href="' + it[2] + '" aria-label="' + it[0] + '"' + it[3] + '>' + bil(it[0], it[1]) + '</a></li>';
@@ -58,8 +58,8 @@
       .catch(function () {})
       .then(function () {
         try { sessionStorage.removeItem('aho:me'); } catch (err) {}
-        var m = location.pathname.match(/^\/portal\/([^/]+)\/(home|account)\.html/);
-        if (m) location.href = '/portal/' + m[1] + '/login.html?notice=signed-out';
+        var m = location.pathname.match(/^\/portal\/([^/]+)\/(home|account)(?:\.html)?/);
+        if (m) location.href = '/portal/' + m[1] + '/login?notice=signed-out';
         else location.reload();
       });
   });
@@ -127,7 +127,7 @@
       if (e.key === 'Escape' && links.classList.contains('is-open')) { closeDrawer(); burger.focus(); }
     });
     // Mark the page we are on inside the list.
-    var here = location.pathname.split('/').pop() || 'index.html';
+    var here = location.pathname.split('/').pop() || '';
     links.querySelectorAll('.nav-sub a').forEach(function (a) {
       if (a.getAttribute('href').split('#')[0].split('/').pop() === here) a.setAttribute('aria-current', 'page');
     });
@@ -243,7 +243,7 @@
   update();
 
   // Mark the option that points at the page we are on.
-  var here = location.pathname.split('/').pop() || 'index.html';
+  var here = location.pathname.split('/').pop() || '';
   sheet.querySelectorAll('.aho-sheet-list a').forEach(function (a) {
     if (a.getAttribute('href') === here) a.classList.add('is-current');
   });

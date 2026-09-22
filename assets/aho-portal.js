@@ -105,7 +105,7 @@
         if (r.ok) {
           busy(loginForm, true, 'Opening your portal');
           try { sessionStorage.removeItem('aho:me'); } catch (err) {}
-          location.replace(r.redirect || ('/portal/' + portal + '/home.html'));
+          location.replace(r.redirect || ('/portal/' + portal + '/home'));
           return;
         }
         busy(loginForm, false);
@@ -155,7 +155,7 @@
         if (r.ok) {
           busy(resetForm, true, 'Saved');
           show(rmsg, r.message + ' Taking you to sign in.', 'ok');
-          setTimeout(function () { location.href = r.redirect || ('/portal/' + portal + '/login.html'); }, 1600);
+          setTimeout(function () { location.href = r.redirect || ('/portal/' + portal + '/login'); }, 1600);
           return;
         }
         busy(resetForm, false);
@@ -182,7 +182,7 @@
           wrap.appendChild(tick);
           wrap.appendChild(el('h2', null, 'Request received.'));
           wrap.appendChild(el('p', null, r.message || 'Thank you. Aho Farms will review your request and be in touch by email.'));
-          var p = el('p'); var back = el('a', 'pt-link', 'Back to sign in'); back.href = '/portal/' + portal + '/login.html'; p.appendChild(back); wrap.appendChild(p);
+          var p = el('p'); var back = el('a', 'pt-link', 'Back to sign in'); back.href = '/portal/' + portal + '/login'; p.appendChild(back); wrap.appendChild(p);
           reqForm.replaceWith(wrap);
           wrap.setAttribute('tabindex', '-1'); wrap.focus();
           window.scrollTo({ top: wrap.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
@@ -267,7 +267,7 @@
       var st = el('div', 'pt-state');
       var m = el('p', 'pt-msg pt-msg--' + (r.status === 401 ? 'note' : 'error'), r.error || 'The portal could not be loaded.');
       st.appendChild(m);
-      if (r.status === 401) { var a = el('a', 'pt-link', 'Sign in again'); a.href = '/portal/' + portal + '/login.html?notice=expired'; st.appendChild(a); }
+      if (r.status === 401) { var a = el('a', 'pt-link', 'Sign in again'); a.href = '/portal/' + portal + '/login?notice=expired'; st.appendChild(a); }
       dash.appendChild(st);
     });
   }
@@ -276,7 +276,7 @@
   var acct = document.getElementById('ptAccount');
   if (acct) {
     api('/api/auth/me', null, 'GET').then(function (r) {
-      if (!r.ok || !r.authenticated) { location.replace('/portal/' + portal + '/login.html?notice=expired'); return; }
+      if (!r.ok || !r.authenticated) { location.replace('/portal/' + portal + '/login?notice=expired'); return; }
       var map = { name: r.user.name, email: r.user.email, org: r.user.org || '—', role: r.user.role.replace('_', ' ') };
       Object.keys(map).forEach(function (k) { var t = acct.querySelector('[data-user-' + k + ']'); if (t) t.textContent = map[k]; });
     });
@@ -420,7 +420,7 @@
       var id = ids[role];
       hub.hidden = false;
       var link = hub.querySelector('a');
-      if (id && link) { link.href = '/portal/' + id + '/home.html'; }
+      if (id && link) { link.href = '/portal/' + id + '/home'; }
       else if (link) { link.textContent = 'You are signed in as an administrator: open any portal above.'; link.removeAttribute('href'); }
     }
   }

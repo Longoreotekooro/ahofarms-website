@@ -21,7 +21,10 @@ for (const id of hidden) {
   for (const n of NAMES[id] || []) patterns.push([id, new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')]);
   patterns.push([id, new RegExp(`portal/${id}/`, 'i')]);
 }
-for (const page of hiddenInfo) patterns.push([`info:${page}`, new RegExp(`href="(\\.\\./)*${page.replace('.', '\\.')}`)]);
+for (const page of hiddenInfo) {
+  const route = page.replace(/\.html$/, '');
+  patterns.push([`info:${page}`, new RegExp(`href="(?:\\.\\./)*\\/?${route}(?:\\.html)?(?:[?#"]|$)`)]);
+}
 if (hidden.length) patterns.push(['any-hidden', /Access Portal/]);
 
 // publicly reachable pages

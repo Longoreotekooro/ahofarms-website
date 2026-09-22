@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const { listPages } = require('./propagate-nav-pages');
+const { cleanPathForFile } = require('./url-utils');
 const SITE = require('../site.json');
 const FLAGS = require('../portal-flags.json');
 const ROOT = path.join(__dirname, '..');
@@ -17,7 +18,7 @@ for (const f of listPages()) {
   const html = fs.readFileSync(path.join(ROOT, f), 'utf8');
   if (/name="robots" content="noindex/.test(html)) continue;
   const mtime = fs.statSync(path.join(ROOT, f)).mtime.toISOString().slice(0, 10);
-  urls.push({ loc: SITE.url + '/' + (f === 'index.html' ? '' : f), lastmod: mtime, priority: f === 'index.html' ? '1.0' : f.startsWith('portal/') ? '0.8' : '0.7' });
+  urls.push({ loc: SITE.url + cleanPathForFile(f), lastmod: mtime, priority: f === 'index.html' ? '1.0' : f.startsWith('portal/') ? '0.8' : '0.7' });
 }
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`).join('\n') + '\n</urlset>\n';

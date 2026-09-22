@@ -9,7 +9,6 @@
   "infoPages": {
     "_comment": "Public information pages that talk about a professional portal; gated with the same flag.",
     "prescribers.html": "prescriber",
-    "pharmacies.html": "pharmacy",
-    "export-partners.html": "export-partner"
+    "pharmacies.html": "pharmacy"
   }
 }
