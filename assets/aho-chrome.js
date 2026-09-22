@@ -65,36 +65,60 @@
   });
 
   /* ---------- header: mobile drawer ----------
-     One flat list (CEO, 2026-09-14): every sub-page visible, no
-     accordion. The drawer only opens and closes. */
+     Accordion (CEO, 2026-09-22): the drawer opens on the top-level items
+     only; tapping Learn, Products or Portals expands that group (one open
+     at a time) and tapping again collapses it. The parent keeps its href
+     for no-JS and crawlers; in drawer mode the tap only toggles. */
   if (nav) (function () {
     var burger = nav.querySelector('.nav-burger');
     var links = nav.querySelector('.nav-links');
     if (!burger || !links) return;
+    var parents = Array.prototype.slice.call(nav.querySelectorAll('.nav-parent[data-haskids]'));
     var subs = nav.querySelectorAll('.nav-parent .nav-sub');
 
-    // In drawer mode every panel is part of the list; [hidden] belongs to
-    // the desktop dropdown only.
+    function setExpanded(li, open) {
+      var a = li.querySelector(':scope > a'), sub = li.querySelector(':scope > .nav-sub');
+      if (!a || !sub) return;
+      li.classList.toggle('is-expanded', open);
+      a.setAttribute('aria-expanded', String(open));
+      sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
+    }
+    function collapseAll(except) { parents.forEach(function (li) { if (li !== except) setExpanded(li, false); }); }
+
+    // In drawer mode every panel is part of the list (collapsed until
+    // tapped); [hidden] and inline heights belong to one mode each.
     function syncMode() {
       if (DRAWER_MQ.matches) {
         subs.forEach(function (s) { s.hidden = false; s.classList.remove('is-open'); });
-        nav.querySelectorAll('.nav-parent').forEach(function (li) { li.classList.remove('is-expanded'); });
-        nav.querySelectorAll('.nav-parent > a[aria-expanded]').forEach(function (a) { a.setAttribute('aria-expanded', 'true'); });
+        collapseAll();
       } else {
         closeDrawer();
-        subs.forEach(function (s) { s.hidden = true; s.classList.remove('is-open'); });
-        nav.querySelectorAll('.nav-parent > a[aria-expanded]').forEach(function (a) { a.setAttribute('aria-expanded', 'false'); });
+        subs.forEach(function (s) { s.hidden = true; s.classList.remove('is-open'); s.style.maxHeight = ''; });
+        parents.forEach(function (li) { li.classList.remove('is-expanded'); var a = li.querySelector(':scope > a'); if (a) a.setAttribute('aria-expanded', 'false'); });
       }
     }
     function closeDrawer() {
       links.classList.remove('is-open');
       burger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (DRAWER_MQ.matches) collapseAll();
     }
     burger.addEventListener('click', function () {
       var open = links.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
+      if (!open) collapseAll();
+    });
+    parents.forEach(function (li) {
+      var a = li.querySelector(':scope > a');
+      if (!a) return;
+      a.addEventListener('click', function (e) {
+        if (!DRAWER_MQ.matches) return;
+        e.preventDefault();
+        var open = !li.classList.contains('is-expanded');
+        collapseAll(li);
+        setExpanded(li, open);
+      });
     });
     // Crossing the breakpoint with the drawer open would strand body
     // scroll locked - force it closed and re-sync the panels.
@@ -105,7 +129,7 @@
     // Mark the page we are on inside the list.
     var here = location.pathname.split('/').pop() || 'index.html';
     links.querySelectorAll('.nav-sub a').forEach(function (a) {
-      if (a.getAttribute('href').split('#')[0] === here) a.setAttribute('aria-current', 'page');
+      if (a.getAttribute('href').split('#')[0].split('/').pop() === here) a.setAttribute('aria-current', 'page');
     });
     syncMode();
   })();
