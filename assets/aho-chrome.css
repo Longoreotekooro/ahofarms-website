@@ -511,13 +511,15 @@ html.aho-nav-solid :is(.contacts-section,.news-section,.newsletter-section,.form
   .aho-footer-col li a{display:flex;align-items:center;min-height:44px;padding:0;font-size:var(--t-base);}
   .aho-footer-col li a::after{bottom:8px;}
   .aho-footer-col--connect{grid-column:1 / -1;}
-  .aho-footer-col--connect ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s3);}
-  .aho-footer-social{margin-top:var(--s2);}
+  .aho-footer-col--connect ul:not(.aho-footer-social){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s3);}
+  .aho-footer-social{display:flex;flex-wrap:nowrap;gap:8px;margin:var(--s3) 0 0;padding-top:var(--s3);border-top:1px solid var(--aho-rule);}
+  .aho-footer-social li{flex:0 0 auto;}
+  .aho-footer-social a{width:44px;height:44px;}
   .aho-footer-bottom{flex-direction:column;gap:var(--s2);padding-top:var(--s3);}
   .aho-footer-copy{line-height:2;}
 }
 @media(max-width:400px){
-  .aho-footer-col--connect ul{grid-template-columns:minmax(0,1fr);}
+  .aho-footer-col--connect ul:not(.aho-footer-social){grid-template-columns:minmax(0,1fr);}
 }
 
 /* ---- 11. floating "Connect with us" ------------------------------------
