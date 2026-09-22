@@ -87,6 +87,25 @@ function stampMeta(html, file) {
       `<meta name="twitter:card" content="summary_large_image">`, `<meta name="twitter:title" content="${title}">`, `<meta name="twitter:description" content="${desc}">`,
       `<meta name="twitter:image" content="${SITE.url}/${SITE.defaultImage}">`);
   }
+  // Structured data (SEO brief, 2026-09-22): Organization + WebSite on the
+  // home page, a BreadcrumbList on every other indexable page. Only facts the
+  // site already states are used (name, origin, region, social profiles).
+  const indexable = !NOINDEX_PAGES.has(file) && !PROTECTED_PORTAL_PAGE.test(file) && !HIDDEN_PORTAL_PAGE.test(file) && !/name="robots" content="noindex/i.test(without);
+  if (indexable) {
+    const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
+    if (file === 'index.html') {
+      lines.push(ld({ '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url + '/', logo: `${SITE.url}/favicon.svg`,
+        description: SITE.defaultDescription, address: { '@type': 'PostalAddress', addressRegion: "Hawke's Bay", addressCountry: 'NZ' },
+        sameAs: SOCIAL.map(x => x.href) }));
+      lines.push(ld({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'en-NZ' }));
+    } else {
+      const topic = title.replace(/&amp;/g, '&').split(' | ')[0].split(' — ')[0].trim();
+      const items = [{ name: 'Home', item: SITE.url + '/' }];
+      if (file.startsWith('portal/')) items.push({ name: 'Portals', item: SITE.url + '/portal/index.html' });
+      items.push({ name: topic, item: url });
+      lines.push(ld({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.item })) }));
+    }
+  }
   const block = META_S[0] + '\n' + lines.join('\n') + '\n' + META_S[1];
   // after the page's own description (or the viewport meta) so the head reads naturally
   const anchor = without.match(/<meta name="description"[^>]*>|<meta name="viewport"[^>]*>/i);
@@ -133,7 +152,7 @@ const EXPLORE = learn.children.filter(c => c.en !== 'Logo story');
 const PRODUCT_LINKS = products.children;
 const PORTAL_LINKS = CONNECT.filter(c => c.portal); // live portals only (flags)
 const col = (title, items) => `      <div class="aho-footer-col">
-        <h5>${escHtml(title)}</h5>
+        <h2 class="aho-footer-h">${escHtml(title)}</h2>
         <ul>
 ${items.map(i => `          <li><a href="${escHtml(i.href)}">${escHtml(i.label)}</a></li>`).join('\n')}
         </ul>
@@ -150,7 +169,7 @@ const FOOTER_HTML = `<footer class="aho-footer" id="contact">
 ${col('Explore', EXPLORE.map(c => ({ label: c.en, href: c.href })))}
 ${col('Products', PRODUCT_LINKS.map(c => ({ label: c.en, href: c.href })))}
       <div class="aho-footer-col aho-footer-col--connect">
-        <h5>Connect</h5>
+        <h2 class="aho-footer-h">Connect</h2>
         <ul>
           <li><a href="contact.html">Contact the team</a></li>
           <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
