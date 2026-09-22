@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -30,9 +31,17 @@
     { "source": "/r/:code", "destination": "/api/index?route=referral/go&code=:code" }
   ],
   "redirects": [
-    { "source": "/portal/:id(prescriber|pharmacy|export-partner)", "destination": "/portal/:id/home.html", "permanent": false },
-    { "source": "/prescribers-portal.html", "destination": "/portal/prescriber/login.html", "permanent": true },
-    { "source": "/pharmacies-portal.html", "destination": "/portal/pharmacy/login.html", "permanent": true },
-    { "source": "/export-portal.html", "destination": "/portal/export-partner/login.html", "permanent": true }
+    { "source": "/portal/:id(prescriber|pharmacy|export-partner)", "destination": "/portal/:id/home", "permanent": false },
+    { "source": "/prescribers-portal", "destination": "/portal/prescriber/login", "permanent": true },
+    { "source": "/pharmacies-portal", "destination": "/portal/pharmacy/login", "permanent": true },
+    { "source": "/export-portal", "destination": "/portal/export-partner/login", "permanent": true },
+    { "source": "/product", "destination": "/products", "permanent": true },
+    { "source": "/community", "destination": "/social-impact", "permanent": true },
+    { "source": "/partner", "destination": "/export-partners", "permanent": true },
+    { "source": "/blog", "destination": "/news", "permanent": true },
+    { "source": "/blog/medicinal-cannabis-nz", "destination": "/news/medicinal-cannabis-nz", "permanent": true },
+    { "source": "/blog/kaitiakitanga-land-wellness", "destination": "/news/kaitiakitanga-land-wellness", "permanent": true },
+    { "source": "/blog/sustainable-sun-grown", "destination": "/news/sustainable-sun-grown", "permanent": true },
+    { "source": "/blog/innovation-extraction", "destination": "/news/innovation-extraction", "permanent": true }
   ]
 }

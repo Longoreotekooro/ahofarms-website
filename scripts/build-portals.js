@@ -10,8 +10,7 @@
 // Each page carries empty AHO sentinel blocks; the shared header, footer
 // and chrome are stamped by the usual run afterwards:
 //   node scripts/build-portals.js && node scripts/propagate-nav.js && node scripts/propagate-chrome.js && node scripts/check-nav.js
-// Links inside the pages are absolute (/portal/...) because Vercel serves
-// them at their real paths; the stamped chrome uses relative paths.
+// Links inside the pages use Vercel's clean, extensionless public routes.
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -94,7 +93,7 @@ const pwField = (name, label, ac, hint) => `      <div class="field">
       </div>`;
 
 function switchLine(p, all, text) {
-  const others = all.filter(o => o.id !== p.id).map(o => `<a href="/portal/${o.id}/login.html">${esc(o.name)}</a>`).join('<span>·</span>');
+  const others = all.filter(o => o.id !== p.id).map(o => `<a href="/portal/${o.id}/login">${esc(o.name)}</a>`).join('<span>·</span>');
   return `<p class="pt-switch">${text} ${others}</p>`;
 }
 
@@ -124,10 +123,10 @@ function loginPage(p, all) {
 ${pwField('password', 'Password', 'current-password')}
       <div class="pt-row">
         <label class="pt-check"><input type="checkbox" name="remember"> Keep me signed in</label>
-        <a class="pt-link" href="/portal/${p.id}/forgot.html">Forgot password?</a>
+        <a class="pt-link" href="/portal/${p.id}/forgot">Forgot password?</a>
       </div>
       <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Sign in</span></button>
-      <p class="pt-alt">Don't have an approved account? <a href="/portal/${p.id}/request-access.html">Request access</a></p>
+      <p class="pt-alt">Don't have an approved account? <a href="/portal/${p.id}/request-access">Request access</a></p>
     </form>
   </div>
 </section>
@@ -149,7 +148,7 @@ function requestPage(p, all) {
         <li><span><b>Aho Farms reviews the request</b>We check registration and licensing before any account is approved. Submitting a request does not grant access.</span></li>
         <li><span><b>Set your password and sign in</b>Once approved, you receive an email with a link to choose your password.</span></li>
       </ol>
-      <p class="pt-switch">Already approved? <a href="/portal/${p.id}/login.html">Sign in</a></p>
+      <p class="pt-switch">Already approved? <a href="/portal/${p.id}/login">Sign in</a></p>
     </div>
     <form id="ptRequest" class="pt-form" novalidate>
       <div class="pt-form-head">
@@ -186,7 +185,7 @@ function forgotPage(p) {
         ${fieldError}
       </div>
       <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Send reset link</span></button>
-      <p class="pt-alt"><a href="/portal/${p.id}/login.html">Back to sign in</a></p>
+      <p class="pt-alt"><a href="/portal/${p.id}/login">Back to sign in</a></p>
     </form>
   </div>
 </section>
@@ -207,7 +206,7 @@ function resetPage(p) {
 ${pwField('password', 'New password', 'new-password')}
 ${pwField('confirm', 'Confirm new password', 'new-password')}
       <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Save password</span></button>
-      <p class="pt-alt">Link expired? <a href="/portal/${p.id}/forgot.html">Request a new one</a></p>
+      <p class="pt-alt">Link expired? <a href="/portal/${p.id}/forgot">Request a new one</a></p>
     </form>
   </div>
 </section>`;
@@ -236,7 +235,7 @@ function homePage(p) {
           <dt>Organisation</dt><dd data-user-org>&nbsp;</dd>
         </dl>
         <div class="btn-row">
-          <a class="btn btn--ghost" href="/portal/${p.id}/account.html">Account</a>
+          <a class="btn btn--ghost" href="/portal/${p.id}/account">Account</a>
           <a class="btn btn--ghost" href="/portal/" data-signout>Sign out</a>
         </div>
       </div>
@@ -256,7 +255,7 @@ function homePage(p) {
     </div>
     <div class="btn-row">
       <a class="btn btn--primary" data-support-mail href="mailto:${esc(p.support.email)}">${esc(p.support.email)}</a>
-      <a class="btn btn--ghost" href="/contact.html">Contact page</a>
+      <a class="btn btn--ghost" href="/contact">Contact page</a>
     </div>
   </div>
 </section>
@@ -278,7 +277,7 @@ function accountPage(p) {
         <dt>Access</dt><dd data-user-role>&nbsp;</dd>
       </dl>
       <div class="btn-row" style="margin-top:var(--s4)">
-        <a class="btn btn--ghost" href="/portal/${p.id}/home.html">Portal home</a>
+        <a class="btn btn--ghost" href="/portal/${p.id}/home">Portal home</a>
         <a class="btn btn--ghost" href="/portal/" data-signout>Sign out</a>
       </div>
     </div>
@@ -355,7 +354,7 @@ function consumerPage(c, all, markets) {
         <li><span><b>Tell us how to reach you</b>Name, email and mobile, and how you would like to be contacted. We only collect what is needed to route and support your enquiry, and nothing medical.</span></li>
         <li><span><b>Get your next step</b>A referral link and QR code to your partner, an email introduction, or a call-back, depending on your market.</span></li>
       </ol>
-      <p class="cs-privacy">By submitting you agree to Aho Farms storing your details and sharing them with the approved prescriber partner for your country so they can contact you. We do not sell your information. <a href="/privacy.html">Privacy policy</a>.</p>
+      <p class="cs-privacy">By submitting you agree to Aho Farms storing your details and sharing them with the approved prescriber partner for your country so they can contact you. We do not sell your information. <a href="/privacy">Privacy policy</a>.</p>
     </div>
     <form id="csConnect" class="pt-form pt-form--light" novalidate>
       <div class="pt-form-head">
@@ -424,7 +423,7 @@ ${faq}
     </div>
     <div class="cs-cols">
       <div class="cs-col"><h3>Medicinal cannabis in New Zealand</h3><p>Under the Medicinal Cannabis Scheme, products must meet a minimum quality standard before they can be supplied. They are prescription medicines: a registered prescriber decides whether one is appropriate, and a pharmacy dispenses it. Products come in different forms, including dried flower and oils.</p></div>
-      <div class="cs-col"><h3>Aho Farms products, at a high level</h3><p>Aho Farms is a Māori-owned licensed cultivator in Hawke's Bay. We grow and test dried medicinal cannabis flower, offered to prescribers under the RĀ and SOURCE ranges. Which product, if any, suits you is your prescriber's decision. <a href="/products.html">Read about how we grow</a>.</p></div>
+      <div class="cs-col"><h3>Aho Farms products, at a high level</h3><p>Aho Farms is a Māori-owned licensed cultivator in Hawke's Bay. We grow and test dried medicinal cannabis flower, offered to prescribers under the RĀ and SOURCE ranges. Which product, if any, suits you is your prescriber's decision. <a href="/products">Read about how we grow</a>.</p></div>
       <div class="cs-col"><h3>Markets we currently support</h3><p>We connect consumers with approved prescriber partners in these markets. Availability of products varies by country and pharmacy; your prescriber or pharmacist can tell you what is currently available.</p>
         <ul class="cs-markets" aria-label="Supported markets">
         ${marketChips}
@@ -442,7 +441,7 @@ ${faq}
       <div class="cs-support-list cs-support-list--cols">
         <p><b>Already submitted an enquiry?</b>Your next step was shown on screen and, where a prescriber partner is set up for your market, emailed to you with a reference code. If you cannot find it, email us with your name and country and we will resend it.</p>
         <p><b>Questions about a medicine you have been prescribed?</b>Your pharmacist or prescriber is the right first call. For a side effect that worries you, contact your prescriber; in an emergency call 111 (New Zealand) or your local emergency number.</p>
-        <p><b>General enquiries</b><a href="mailto:${esc(c.support.email)}">${esc(c.support.email)}</a> · <a href="/contact.html">Contact page</a></p>
+        <p><b>General enquiries</b><a href="mailto:${esc(c.support.email)}">${esc(c.support.email)}</a> · <a href="/contact">Contact page</a></p>
       </div>
       <div class="btn-row"><a class="btn btn--primary" href="#get-connected">Get Connected to a Prescriber</a></div>
     </div>
@@ -454,13 +453,13 @@ ${faq}
 
 function hubPage(all, consumer, isPublic) {
   all = all.filter(p => isPublic(p.id));
-  const consumerCard = !isPublic(consumer.id) ? '' : `    <a class="card" href="/portal/${consumer.id}/index.html">
+  const consumerCard = !isPublic(consumer.id) ? '' : `    <a class="card" href="/portal/${consumer.id}">
       <span class="eyebrow">${esc(consumer.short)} · Public</span>
       <h2>${esc(consumer.name)}</h2>
       <p>${esc(consumer.tagline)}</p>
       <span class="pt-cta">Get connected</span>
     </a>\n`;
-  const cards = consumerCard + all.map(p => `    <a class="card" href="/portal/${p.id}/login.html">
+  const cards = consumerCard + all.map(p => `    <a class="card" href="/portal/${p.id}/login">
       <span class="eyebrow">${esc(p.short)}</span>
       <h2>${esc(p.name)}</h2>
       <p>${esc(p.tagline)}</p>

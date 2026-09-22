@@ -15,34 +15,34 @@ const anyProfessionalPublic = ['prescriber', 'pharmacy', 'export-partner'].some(
 
 const NAV = [
   {
-    en: 'Learn', mi: 'Ako', href: 'about.html',
+    en: 'Learn', mi: 'Ako', href: '/about',
     children: [
-      { en: 'About',        mi: 'Mō Mātou',          href: 'about.html' },
-      { en: 'Our Origins',  mi: 'Ō Mātou Takenga',   href: 'origins.html' },
+      { en: 'About',        mi: 'Mō Mātou',          href: '/about' },
+      { en: 'Our Origins',  mi: 'Ō Mātou Takenga',   href: '/origins' },
       // Our Board is deliberately NOT a nav item — the board is being folded
       // into the Our Team page. board.html still exists and still resolves.
-      { en: 'Our Team',     mi: 'Tō Mātou Tīma',     href: 'team.html' },
-      { en: 'Logo story',   mi: 'Tō Mātou Tohu',     href: 'tohu.html' },
+      { en: 'Our Team',     mi: 'Tō Mātou Tīma',     href: '/team' },
+      { en: 'Logo story',   mi: 'Tō Mātou Tohu',     href: '/tohu' },
       // Our Whenua + Cultivation were merged into one item (CEO, 2026-09-08);
       // both lived on cultivation.html. te reo reuses the two existing labels.
-      { en: 'Land & Cultivation', mi: 'Whenua · Māra Hua', href: 'cultivation.html' },
-      { en: 'Quality',      mi: 'Te Whakamātau',     href: 'quality.html' },
-      { en: "What's New",   mi: 'Ngā Kōrero Hou',    href: 'whats-new.html' },
+      { en: 'Land & Cultivation', mi: 'Whenua · Māra Hua', href: '/cultivation' },
+      { en: 'Quality',      mi: 'Te Whakamātau',     href: '/quality' },
+      { en: "What's New",   mi: 'Ngā Kōrero Hou',    href: '/whats-new' },
     ],
   },
   {
     // Products (was "Buy", CEO 2026-09-22): the range and where it comes from.
-    en: 'Products', mi: 'Ngā Hua', href: 'products.html',
+    en: 'Products', mi: 'Ngā Hua', href: '/products',
     children: [
-      { en: 'Our products',     mi: 'Ā Mātou Hua', href: 'products.html',
+      { en: 'Our products',     mi: 'Ā Mātou Hua', href: '/products',
         desc: 'Greenhouse and indoor craft dried-flower ranges, grown for prescribers in New Zealand.' },
-      { en: "Where it's grown", mi: 'Te Whenua',   href: 'products.html#place',
+      { en: "Where it's grown", mi: 'Te Whenua',   href: '/products#place',
         desc: "Rooted in Hawke's Bay: the whenua, soil and sun behind every harvest." },
-      { en: 'How we grow',      mi: 'Māra Hua',    href: 'cultivation.html',
+      { en: 'How we grow',      mi: 'Māra Hua',    href: '/cultivation',
         desc: 'Living soil, glasshouse and outdoor cultivation, and the quality system that releases each batch.' },
       // Partnerships points at the homepage's professional-portal section,
       // which only exists while a professional portal is public.
-      ...(anyProfessionalPublic ? [{ en: 'Partnerships', mi: 'Ngā Hoa',           href: 'index.html#portals' }] : []),
+      ...(anyProfessionalPublic ? [{ en: 'Partnerships', mi: 'Ngā Hoa',           href: '/#portals' }] : []),
     ],
   },
 ];
@@ -57,21 +57,21 @@ const NAV = [
 // dispensing → international commercial partner. `desc` renders under the
 // label in the desktop panel only.
 const PORTALS_NAV = {
-  en: 'Portals', mi: 'Ngā Tomokanga', href: 'portal/index.html', key: 'portals', match: /^portal\//,
+  en: 'Portals', mi: 'Ngā Tomokanga', href: '/portal', key: 'portals', match: /^portal\//,
   children: [
-    { id: 'consumers',      en: 'Customers',       mi: 'Ngā Kiritaki',       href: 'portal/consumers/index.html',
+    { id: 'consumers',      en: 'Customers',       mi: 'Ngā Kiritaki',       href: '/portal/consumers',
       desc: 'Understand the access pathway and get connected to an approved prescriber partner for your country.' },
-    { id: 'prescriber',     en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: 'portal/prescriber/login.html',
+    { id: 'prescriber',     en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: '/portal/prescriber/login',
       desc: 'Secure portal for clinical product information, CoAs, terpene and cannabinoid profiles, prescribing resources and support.' },
-    { id: 'pharmacy',       en: 'Pharmacies',      mi: 'Ngā Whare Rongoā',   href: 'portal/pharmacy/login.html',
+    { id: 'pharmacy',       en: 'Pharmacies',      mi: 'Ngā Whare Rongoā',   href: '/portal/pharmacy/login',
       desc: 'Secure portal for product availability, wholesale information, ordering, documentation and supply updates.' },
-    { id: 'export-partner', en: 'Export Partners', mi: 'Ngā Hoa Kaweake',    href: 'portal/export-partner/login.html',
+    { id: 'export-partner', en: 'Export Partners', mi: 'Ngā Hoa Kaweake',    href: '/portal/export-partner/login',
       desc: 'Secure B2B portal for bulk product information, compliance documentation, supply capacity and due-diligence materials.' },
   ].filter(c => isPublic(c.id)),
 };
 NAV.push(PORTALS_NAV);
 
-const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: 'contact.html' };
+const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: '/contact' };
 
 // Social channels, header and footer (CEO, 2026-09-10; Instagram and
 // Facebook URLs supplied 2026-09-11). Order is the CEO's. The icons render
@@ -94,11 +94,11 @@ const SOCIAL = [
 // The five ways in, used by the floating "Connect with us" sheet and the
 // footer's Portals column (CEO, 2026-09-10). Order is the CEO's.
 const CONNECT = [
-  { id: 'consumers',      label: 'Consumer Portal',  href: 'portal/consumers/index.html', note: 'Understand the access pathway and get connected to a prescriber', portal: true },
-  { id: 'prescriber',     label: 'Prescribers',      href: 'prescribers.html',     note: 'Prescribing information and the prescriber portal', portal: true, login: 'portal/prescriber/login.html' },
-  { id: 'pharmacy',       label: 'Pharmacies',       href: 'pharmacies.html',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true, login: 'portal/pharmacy/login.html' },
-  { id: 'export-partner', label: 'Export partners',  href: 'export-partners.html', note: 'International supply enquiries',                    portal: true, login: 'portal/export-partner/login.html' },
-  { label: 'Contact the team', href: 'contact.html',         note: 'General enquiries and media',                       portal: false },
+  { id: 'consumers',      label: 'Consumer Portal',  href: '/portal/consumers', note: 'Understand the access pathway and get connected to a prescriber', portal: true },
+  { id: 'prescriber',     label: 'Prescribers',      href: '/prescribers',     note: 'Prescribing information and the prescriber portal', portal: true, login: '/portal/prescriber/login' },
+  { id: 'pharmacy',       label: 'Pharmacies',       href: '/pharmacies',      note: 'Stocking Aho Farms and the pharmacy portal',        portal: true, login: '/portal/pharmacy/login' },
+  { id: 'export-partner', label: 'Export partners',  href: '/export-partners', note: 'International supply enquiries',                    portal: true, login: '/portal/export-partner/login' },
+  { label: 'Contact the team', href: '/contact',         note: 'General enquiries and media',                       portal: false },
 ].filter(c => !c.id || isPublic(c.id));
 
 module.exports = { NAV, CTA, SOCIAL, CONNECT, SENTINEL_START, SENTINEL_END, FLAGS, isPublic };

@@ -75,6 +75,11 @@ async function handleApi(req, res, reqPath) {
 async function runMiddleware(req, reqPath) {
   const file = path.join(ROOT, 'middleware.js');
   if (!fs.existsSync(file)) return null;
+  // Avoid loading the ESM middleware module for ordinary static pages. Node
+  // treats the root project as CommonJS, while Vercel loads middleware.js as
+  // an Edge module; only matched paths need that compatibility boundary.
+  const matchesKnownRoute = /^\/portal(?:\/|$)|^\/(?:prescribers|pharmacies)(?:\.html)?$|^\/(?:lib|scripts)\/|^\/portal-flags\.json$/.test(reqPath);
+  if (!matchesKnownRoute) return null;
   const mod = await import(pathToFileURL(file).href + '?t=' + fs.statSync(file).mtimeMs);
   const matcher = (mod.config && mod.config.matcher) || [];
   const matches = [].concat(matcher).some(m => new RegExp('^' + m.replace(/:path\*/g, '.*').replace(/:[a-z]+/g, '[^/]+') + '$').test(reqPath));
@@ -93,10 +98,17 @@ const server = http.createServer(async (req, res) => {
   if (ref) { req.url = '/api/index?route=referral/go&code=' + encodeURIComponent(ref[1]); return handleApi(req, res, '/api/index'); }
 
   // vercel.json redirects for the portal directory forms
-  if (/^\/portal\/(prescriber|pharmacy|export-partner)\/?$/.test(reqPath)) { res.writeHead(302, { Location: reqPath.replace(/\/?$/, '') + '/home.html' }); res.end(); return; }
+  if (/^\/portal\/(prescriber|pharmacy|export-partner)\/?$/.test(reqPath)) { res.writeHead(302, { Location: reqPath.replace(/\/?$/, '') + '/home' }); res.end(); return; }
   if (reqPath === '/portal' || reqPath === '/portal/') reqPath = '/portal/index.html';
   if (/^\/portal\/consumers\/?$/.test(reqPath)) reqPath = '/portal/consumers/index.html';
   if (reqPath === '/') reqPath = '/index.html';
+
+  // Mirror Vercel cleanUrls locally: /about serves about.html and
+  // /portal/pharmacy/login serves portal/pharmacy/login.html.
+  if (!path.extname(reqPath)) {
+    const htmlPath = path.normalize(path.join(ROOT, reqPath + '.html'));
+    if (htmlPath.startsWith(ROOT) && fs.existsSync(htmlPath)) reqPath += '.html';
+  }
 
   let extra = {};
   try {

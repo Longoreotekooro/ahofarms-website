@@ -9,8 +9,11 @@ function label(item) {
          `<span class="bil-mi" aria-hidden="true">${esc(item.mi)}</span></span>`;
 }
 
+function routeKey(value) {
+  return value.split('#')[0].replace(/^\//, '').replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
+}
 function isActive(href, currentPage) {
-  return href.split('#')[0] === currentPage;
+  return routeKey(href) === routeKey(currentPage);
 }
 // Internal hrefs are written relative to the site root; a page nested in a
 // sub-directory (portal/<id>/*.html) gets them prefixed with ../ per level.
@@ -33,7 +36,7 @@ function renderNav(currentPage) {
   // default, not to whichever parent happens to hold a #section link.
   const foundIdx = NAV.findIndex((p) =>
     (p.match && p.match.test(currentPage)) ||
-    p.children.some(c => isActive(c.href, currentPage) && !c.href.startsWith('index.html#')) ||
+    p.children.some(c => isActive(c.href, currentPage) && !c.href.startsWith('/#')) ||
     isActive(p.href, currentPage)
   );
   if (foundIdx !== -1) activeIdx = foundIdx;
@@ -68,13 +71,13 @@ function renderNav(currentPage) {
     `<ul class="nav-drawer-social" aria-label="Aho Farms on social media">` +
     SOCIAL.map(s => `<li><a href="${esc(s.href)}" target="_blank" rel="noopener" aria-label="${esc(s.name)}">${s.icon}</a></li>`).join('') +
     `</ul>` +
-    `<a href="index.html" class="nav-drawer-mark" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>` +
+    `<a href="/" class="nav-drawer-mark" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>` +
     `<p class="nav-drawer-line">Hawke&#39;s Bay · Aotearoa New Zealand</p>` +
     `</li>`;
 
   return relativize(`<nav class="nav" id="nav" aria-label="Main">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
+      <a href="/" class="nav-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
       <ul class="nav-links" id="navDrawer">
         ${parents}
         ${drawerFoot}

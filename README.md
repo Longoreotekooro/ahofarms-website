@@ -1,14 +1,33 @@
-# Aho Farms Website — Prototype
+# Aho Farms Website
 
-**Status:** In review  
-**Branch:** main  
-**Preview:** Download `index.html` and open in browser, or use GitHub Pages.
+**Status:** Pre-launch review
+**Hosting:** Vercel
 
-## Pages Built
-- [x] Homepage (`index.html`) — prototype for review
+## Local preview
 
-## Review Notes
-Open `index.html` in any browser. No server required — self-contained file.
+Run `node scripts/dev-server.js`, then open `http://localhost:8123`. The local
+server mirrors the site's extensionless public routes, including `/news` and
+the article URLs under `/news/`.
+
+## Generated pages and launch checks
+
+After changing shared navigation, portal content or migrated news content, run:
+
+```sh
+node scripts/build-portals.js
+node scripts/build-news.js
+node scripts/propagate-nav.js
+node scripts/propagate-chrome.js
+node scripts/propagate-launch.js
+node scripts/clean-internal-links.js
+node scripts/build-sitemap.js
+node scripts/check-nav.js
+node scripts/check-launch.js
+node scripts/audit-site.js
+```
+
+Vercel serves clean, extensionless URLs through `cleanUrls` in `vercel.json`.
+Legacy launch redirects are version controlled in the same file.
 
 ## Portals (sign-in, protected routes)
 

@@ -1,6 +1,6 @@
 {
-  "_comment": "Public origin of the website, used for canonical URLs, Open Graph URLs, the sitemap and robots.txt. Change this when the custom domain is attached to Vercel, then re-run scripts/propagate-chrome.js and scripts/build-sitemap.js.",
-  "url": "https://ahofarms-website.vercel.app",
+  "_comment": "Production origin of the website, used for canonical URLs, Open Graph URLs, the sitemap and robots.txt.",
+  "url": "https://ahofarms.com",
   "name": "Aho Farms",
   "defaultDescription": "Aho Farms is a Māori-owned licensed medicinal cannabis cultivator in Hawke's Bay, Aotearoa New Zealand. From whenua to wellness.",
   "defaultImage": "assets/aho-thread-poster.jpg"
