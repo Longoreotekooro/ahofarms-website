@@ -34,7 +34,7 @@ const NAV = [
     // Products (was "Buy", CEO 2026-09-22): the range and where it comes from.
     en: 'Products', mi: 'Ngā Hua', href: 'products.html',
     children: [
-      { en: 'Our products',     mi: 'Ā Mātou Hua', href: 'products.html#range',
+      { en: 'Our products',     mi: 'Ā Mātou Hua', href: 'products.html',
         desc: 'Greenhouse and indoor craft dried-flower ranges, grown for prescribers in New Zealand.' },
       { en: "Where it's grown", mi: 'Te Whenua',   href: 'products.html#place',
         desc: "Rooted in Hawke's Bay: the whenua, soil and sun behind every harvest." },
