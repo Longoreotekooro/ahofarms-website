@@ -308,8 +308,8 @@ function consumerPage(c, all, markets) {
     ['How will my details be used?', 'To match you with a prescriber partner in your country, to make the introduction, and to follow up on your enquiry. We share them only with that partner, and only with your consent. See our privacy policy for the detail.'],
     ['Can I drive after using medicinal cannabis?', 'Driving while impaired is illegal and unsafe. Discuss driving, work and other activities with your prescriber before you start.'],
   ].map(([q, a]) => `        <details class="cs-faq-item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n');
-  const countryOptions = markets.COUNTRIES.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join('');
-  const marketChips = markets.COUNTRIES.map(x => `<li>${esc(x)}</li>`).join('\n        ');
+  const countryOptions = markets.CONSUMER_MARKETS.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join('');
+  const marketChips = markets.CONSUMER_MARKETS.map(x => `<li>${esc(x)}</li>`).join('\n        ');
   const main = `<section class="pt-plate cs-hero plate--flax" aria-labelledby="ptTitle">
   <div class="pt-inner cs-hero-grid">
     <div>
@@ -351,33 +351,39 @@ function consumerPage(c, all, markets) {
       <p>Submit your details once. Aho Farms matches you to the approved prescriber partner for your country and gives you your next step straight away.</p>
       <ol class="pt-steps pt-steps--light">
         <li><span><b>Choose your country and region</b>This decides which prescriber partner you are connected with.</span></li>
-        <li><span><b>Tell us how to reach you</b>Email, phone, or either. We only collect what is needed to route and support your enquiry, and nothing medical.</span></li>
+        <li><span><b>Tell us how to reach you</b>Name, email and mobile, and how you would like to be contacted. We only collect what is needed to route and support your enquiry, and nothing medical.</span></li>
         <li><span><b>Get your next step</b>A referral link and QR code to your partner, an email introduction, or a call-back, depending on your market.</span></li>
       </ol>
       <p class="cs-privacy">By submitting you agree to Aho Farms storing your details and sharing them with the approved prescriber partner for your country so they can contact you. We do not sell your information. <a href="/privacy.html">Privacy policy</a>.</p>
     </div>
     <form id="csConnect" class="pt-form pt-form--light" novalidate>
       <div class="pt-form-head">
-        <h3 class="pt-form-title">Get connected</h3>
-        <p class="pt-form-sub">Fields marked * are required.</p>
+        <h3 class="pt-form-title">Start your access enquiry</h3>
+        <p class="pt-form-sub">Fields marked * are required. Takes about a minute.</p>
       </div>
       ${msg()}
       <div class="pt-fields">
-        <div class="field"><label for="cs-name">Full name <span aria-hidden="true">*</span></label><input id="cs-name" name="name" type="text" autocomplete="name" data-required required aria-required="true">${fieldError}</div>
+        <div class="field"><label for="cs-first">First name <span aria-hidden="true">*</span></label><input id="cs-first" name="firstName" type="text" autocomplete="given-name" data-required required aria-required="true">${fieldError}</div>
+        <div class="field"><label for="cs-last">Last name <span aria-hidden="true">*</span></label><input id="cs-last" name="lastName" type="text" autocomplete="family-name" data-required required aria-required="true">${fieldError}</div>
         <div class="field"><label for="cs-email">Email <span aria-hidden="true">*</span></label><input id="cs-email" name="email" type="email" inputmode="email" autocomplete="email" data-required required aria-required="true">${fieldError}</div>
+        <div class="field"><label for="cs-phone">Mobile number <span aria-hidden="true">*</span></label><input id="cs-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-required required aria-required="true">${fieldError}</div>
         <div class="field"><label for="cs-country">Country <span aria-hidden="true">*</span></label><select id="cs-country" name="country" autocomplete="country-name" data-required required aria-required="true"><option value="">Select…</option>${countryOptions}</select>${fieldError}</div>
         <div class="field"><label for="cs-region">Region / state <span aria-hidden="true">*</span></label><input id="cs-region" name="region" type="text" list="csRegionList" autocomplete="address-level1" data-required required aria-required="true"><datalist id="csRegionList"></datalist>${fieldError}</div>
-        <div class="field"><label for="cs-contact">Preferred contact <span aria-hidden="true">*</span></label><select id="cs-contact" name="contactMethod" data-required required aria-required="true"><option value="">Select…</option><option>Email</option><option>Phone</option><option>Either</option></select>${fieldError}</div>
-        <div class="field"><label for="cs-phone">Phone number</label><input id="cs-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"><small>Needed if you would like a call.</small>${fieldError}</div>
-        <div class="field field--full"><label for="cs-message">Anything you'd like us to know</label><textarea id="cs-message" name="message" rows="3"></textarea><small>Optional. Please don't include medical details; your prescriber will take those in your consultation.</small>${fieldError}</div>
+        <div class="field"><label for="cs-contact">Preferred contact</label><select id="cs-contact" name="contactMethod"><option value="">No preference</option><option>Email</option><option>Phone</option><option>Either</option></select>${fieldError}</div>
+        <div class="field"><label for="cs-tele">Consultation preference</label><select id="cs-tele" name="telehealth"><option value="">No preference</option>${markets.TELEHEALTH_PREFS.filter(x => x !== 'No preference').map(x => `<option>${esc(x)}</option>`).join('')}</select>${fieldError}</div>
+        <div class="field"><label for="cs-heard">How did you hear about Aho Farms?</label><select id="cs-heard" name="heardAbout"><option value="">Select…</option>${markets.HEARD_ABOUT.map(x => `<option>${esc(x)}</option>`).join('')}</select>${fieldError}</div>
+        <div class="field"><label for="cs-message">General enquiry</label><textarea id="cs-message" name="message" rows="2"></textarea><small>Optional. Please don't include medical details; your prescriber will take those in your consultation.</small>${fieldError}</div>
         <div class="field field--full cs-consent">
+          <label class="pt-check pt-check--top"><input type="checkbox" name="ageConfirmed" data-required required aria-required="true"><span>I confirm I am 18 years or older and meet the age requirement that applies in my country. <span aria-hidden="true">*</span></span></label>
+          ${fieldError}
           <label class="pt-check pt-check--top"><input type="checkbox" name="consentReferral" data-required required aria-required="true"><span>I agree to Aho Farms storing my details and sharing them with the approved prescriber partner for my country so they can contact me about a consultation. <span aria-hidden="true">*</span></span></label>
           ${fieldError}
           <label class="pt-check pt-check--top"><input type="checkbox" name="consentMarketing"><span>Keep me informed about Aho Farms news and patient information by email.</span></label>
         </div>
       </div>
+      <input type="hidden" name="source" value="consumer-portal"><input type="hidden" name="campaign" value=""><input type="hidden" name="referrer" value="">
       <div class="pt-hp" aria-hidden="true"><label for="cs-website">Website</label><input id="cs-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-      <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Get Connected to a Prescriber</span></button>
+      <button class="btn btn--primary" type="submit"><span class="pt-btn-label">Send my enquiry</span></button>
     </form>
   </div>
 </section>
@@ -445,8 +451,9 @@ ${faq}
   return shell({ depth: 2, title: 'Consumer Portal · Get Connected to a Prescriber | Aho Farms', description: 'Understand how medicinal cannabis access works and get connected to an approved, independent prescriber partner for your country.', portalId: c.id, page: 'consumer', main, scripts: ['assets/vendor/qrcode.min.js'] });
 }
 
-function hubPage(all, consumer) {
-  const consumerCard = `    <a class="card" href="/portal/${consumer.id}/index.html">
+function hubPage(all, consumer, isPublic) {
+  all = all.filter(p => isPublic(p.id));
+  const consumerCard = !isPublic(consumer.id) ? '' : `    <a class="card" href="/portal/${consumer.id}/index.html">
       <span class="eyebrow">${esc(consumer.short)} · Public</span>
       <h2>${esc(consumer.name)}</h2>
       <p>${esc(consumer.tagline)}</p>
@@ -462,7 +469,7 @@ function hubPage(all, consumer) {
   <div class="pt-hub-head">
     <span class="eyebrow eyebrow--rule">Aho Farms · Portals</span>
     <h1 id="ptTitle">Pick up the thread.</h1>
-    <p class="pt-lead">One gateway, four audiences. Consumers can find a prescriber and understand the access pathway without signing in. The three professional portals are protected: every account is verified by Aho Farms before it is approved, and each portal only opens to the accounts approved for it.</p>
+    <p class="pt-lead">${all.length ? 'One gateway for every audience. Consumers can understand the access pathway and get connected to a prescriber partner without signing in. The professional portals are protected: every account is verified by Aho Farms before it is approved, and each portal only opens to the accounts approved for it.' : 'Start here if you are a patient or carer. Understand how medicinal cannabis access works and get connected to an approved, independent prescriber partner for your country.'}</p>
   </div>
   <div class="pt-hub-grid">
 ${cards}
@@ -470,14 +477,18 @@ ${cards}
   <p class="pt-hub-signed" id="ptHubSigned" hidden>You are signed in. <a class="pt-link" href="#">Open My Portal</a></p>
 </section>
 <p class="pt-legal">${LEGAL}</p>`;
-  return shell({ depth: 1, title: 'Portals | Aho Farms', description: 'Sign in to the Aho Farms Prescriber, Pharmacy or Export Partner portal, or request access.', portalId: '', page: 'hub', main });
+  const desc = all.length
+    ? `Aho Farms portals: ${[isPublic(consumer.id) ? 'the Consumer Portal' : null, ...all.map(p => p.name)].filter(Boolean).join(', ')}.`
+    : 'Understand how medicinal cannabis access works and get connected to an approved, independent prescriber partner for your country.';
+  return shell({ depth: 1, title: 'Portals | Aho Farms', description: desc, portalId: '', page: 'hub', main });
 }
 
 (async () => {
   const { PORTALS, CONSUMER } = await import('../lib/portals.js');
   const markets = await import('../lib/markets.js');
   const write = (rel, html) => { fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true }); fs.writeFileSync(path.join(ROOT, rel), html); };
-  write('portal/index.html', hubPage(PORTALS, CONSUMER));
+  const { isPublic } = await import('../lib/flags.js');
+  write('portal/index.html', hubPage(PORTALS, CONSUMER, isPublic));
   write(`portal/${CONSUMER.id}/index.html`, consumerPage(CONSUMER, PORTALS, markets));
   for (const p of PORTALS) {
     write(`portal/${p.id}/login.html`, loginPage(p, PORTALS));

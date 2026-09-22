@@ -225,6 +225,8 @@
 .cs-result-head{display:grid;gap:10px;}
 .cs-result h3{margin:0;font-family:var(--aho-font-h);font-weight:400;font-size:var(--t-h3);line-height:1.15;color:var(--aho-ink);}
 .cs-result p{margin:0;font-size:var(--t-sm);line-height:1.65;color:var(--aho-muted);}
+.cs-result .cs-result-lead{font-size:var(--t-base);color:var(--aho-ink-soft);}
+.cs-result .cs-result-lead b{font-weight:500;color:var(--aho-ink);}
 .cs-result-partner{padding:var(--s3);border:1px solid var(--aho-rule-light);border-radius:var(--r-card);background:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s3);align-items:center;}
 .cs-result-partner .eyebrow{margin-bottom:6px;color:var(--aho-accent-deep);}
 .cs-result-partner b{display:block;font-size:var(--t-lg);font-weight:500;color:var(--aho-ink);line-height:1.25;margin-bottom:6px;}

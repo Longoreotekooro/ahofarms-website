@@ -1,0 +1,15 @@
+{
+  "_comment": "Staged launch of the Portals gateway. `public: true` exposes a portal on the production website (header, footer, Connect sheet, homepage, hub, direct URLs, API). `public: false` removes every public reference and blocks its production URLs, while the code stays in the repo and the portal remains reachable in development and on Vercel preview deployments. Flip a flag, then run: node scripts/build-portals.js && node scripts/propagate-nav.js && node scripts/propagate-chrome.js && node scripts/propagate-launch.js && node scripts/check-nav.js && node scripts/check-launch.js",
+  "portals": {
+    "consumers":      { "public": true },
+    "prescriber":     { "public": false },
+    "pharmacy":       { "public": false },
+    "export-partner": { "public": false }
+  },
+  "infoPages": {
+    "_comment": "Public information pages that talk about a professional portal; gated with the same flag.",
+    "prescribers.html": "prescriber",
+    "pharmacies.html": "pharmacy",
+    "export-partners.html": "export-partner"
+  }
+}

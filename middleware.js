@@ -4,7 +4,7 @@
 // plain message instead of an opaque MIDDLEWARE_INVOCATION_FAILED. Note:
 // Vercel requires middleware to return a Response even to pass a request
 // through (see next() in lib/portal-guard.js); returning undefined fails.
-export const config = { matcher: ['/portal/:path*'] };
+export const config = { matcher: ['/portal/:path*', '/prescribers.html', '/pharmacies.html', '/export-partners.html'] };
 
 export default async function middleware(request) {
   try {

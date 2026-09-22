@@ -46,8 +46,9 @@ pages.forEach(p => {
 
 // 3b. The Portals nav item agrees with the registry in lib/portals.js.
 const portalsNav = NAV.find(p => p.key === 'portals');
+const { isPublic } = require('./nav-config');
 import('../lib/portals.js').then(({ PORTALS, CONSUMER }) => {
-  const want = [`portal/${CONSUMER.id}/index.html`, ...PORTALS.map(p => `portal/${p.id}/login.html`)];
+  const want = [...(isPublic(CONSUMER.id) ? [`portal/${CONSUMER.id}/index.html`] : []), ...PORTALS.filter(p => isPublic(p.id)).map(p => `portal/${p.id}/login.html`)];
   if (!fs.existsSync(path.join(ROOT, 'portal', CONSUMER.id, 'index.html'))) fail(`MISSING PORTAL PAGE: portal/${CONSUMER.id}/index.html (run scripts/build-portals.js)`);
   const have = portalsNav ? portalsNav.children.map(c => c.href) : [];
   if (JSON.stringify(want) !== JSON.stringify(have)) fail(`PORTALS NAV: nav-config children ${JSON.stringify(have)} != registry ${JSON.stringify(want)}`);

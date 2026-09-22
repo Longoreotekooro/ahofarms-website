@@ -41,7 +41,12 @@ const SOLID_NAV_PAGES = new Set(['404.html', 'contact.html', 'disclaimer.html', 
   'news.html', 'pharmacies.html', 'prescribers.html', 'privacy.html', 'social-impact.html', 'terms.html', 'whats-new.html']);
 // Unlinked pages the CEO wants kept but hidden (2026-09-14): board/business
 // stubs, parked kaupapa/social-impact.
-const NOINDEX_PAGES = new Set(['board.html', 'business.html', 'kaupapa.html', 'social-impact.html']);
+const FLAGS = require('../portal-flags.json');
+const flagPublic = id => !!(FLAGS.portals[id] && FLAGS.portals[id].public);
+const NOINDEX_PAGES = new Set(['board.html', 'business.html', 'kaupapa.html', 'social-impact.html',
+  ...Object.entries(FLAGS.infoPages).filter(([k, v]) => k !== '_comment' && !flagPublic(v)).map(([k]) => k)]);
+// pages of an unreleased portal are never indexed
+const HIDDEN_PORTAL_PAGE = new RegExp('^portal/(' + Object.keys(FLAGS.portals).filter(id => !flagPublic(id)).join('|') + ')/');
 
 // Idempotent attribute/class stamping on the <html> tag.
 function stampHtmlTag(html, file) {
@@ -58,7 +63,7 @@ function stampHtmlTag(html, file) {
 }
 function stampNoindex(html, file) {
   html = html.replace(/\s*<meta name="robots" content="noindex[^"]*">/g, '');
-  if (!NOINDEX_PAGES.has(file) && !PROTECTED_PORTAL_PAGE.test(file)) return html;
+  if (!NOINDEX_PAGES.has(file) && !PROTECTED_PORTAL_PAGE.test(file) && !HIDDEN_PORTAL_PAGE.test(file)) return html;
   return html.replace(/<meta charset="[^"]*">/i, m => `${m}\n  <meta name="robots" content="noindex, nofollow">`);
 }
 // The skip link targets the page's own <main> id (journey / main / portalMain).

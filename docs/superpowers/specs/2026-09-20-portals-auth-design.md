@@ -7,6 +7,38 @@ flows, role-based permissions, protected routes, and a dashboard framework
 that can be filled in progressively. This document records what was built,
 where it lives and how to operate it.
 
+## Staged launch (2026-09-22): feature flags
+
+`portal-flags.json` is the single switch for what the public website exposes.
+At launch only `consumers` is public; `prescriber`, `pharmacy` and
+`export-partner` are hidden. A hidden portal:
+
+- has no header, drawer, footer or Connect-sheet entry (`scripts/nav-config.js`
+  filters on the flags; `propagate-nav.js` / `propagate-chrome.js` stamp the
+  result on every page);
+- is absent from the `/portal/` hub and from hand-authored snippets on the
+  homepage, contact, products, 404, privacy, terms and disclaimer pages, which
+  are wrapped in `<!-- AHO:GATE:<id> -->…<!-- /AHO:GATE -->` and folded into a
+  comment by `scripts/propagate-launch.js` (`any-professional` /
+  `consumers-only` gates swap in consumer-facing alternatives);
+- returns a 302 to `/portal/index.html` for every production URL under
+  `/portal/<id>/` and for its public information page (`prescribers.html`,
+  `pharmacies.html`, `export-partners.html`), via `lib/portal-guard.js`;
+- is refused by the API (`login`, `request-access`, `portal/home`, `forgot`)
+  with 404 on production;
+- is `noindex` and never linked, so it cannot be discovered.
+
+"Production" means `VERCEL_ENV=production` (or `PORTAL_ENV=production` to
+rehearse locally, e.g. `PORTAL_ENV=production PORT=8124 node scripts/dev-server.js`).
+In development and on Vercel preview deployments every portal stays
+reachable by direct URL for the team, although the committed navigation is
+always the public shape.
+
+`scripts/check-launch.js` is the launch QA gate: it scans every publicly
+reachable page for a hidden portal's name, path, login link or information
+page and fails the build if any remain. Launch sequence for a portal: set its
+flag to `true`, run the full rebuild line in `portal-flags.json`, review, deploy.
+
 ## Shape
 
 ```
@@ -93,9 +125,12 @@ booking link or partner detail is shown before the form is submitted**, and
 the partner's own URL is never sent to the browser at all.
 
 Journey: Consumers → How access works → **Get Connected to a Prescriber**
-(name, email, phone where a call is wanted, country, region/state,
-preferred contact method, optional message, required referral consent,
-optional marketing consent) → lead stored with consent → the approved
+(first and last name, email, mobile, country from `CONSUMER_MARKETS` in
+`lib/markets.js` (New Zealand and Australia at launch), region/state, required
+age confirmation and referral consent; optional preferred contact method,
+consultation preference, how they heard about Aho Farms, general enquiry,
+marketing consent; acquisition source, campaign and referrer captured from the
+URL) → lead stored with consent → the approved
 partner for the country is assigned (a region-specific partner wins over a
 country-wide one) → the consumer's next step is shown on the page and,
 when mail is configured, emailed:
@@ -110,11 +145,19 @@ when mail is configured, emailed:
 - no partner for that market yet: status `new`, "the Aho Farms team will be
   in touch", and the admin notification says NO PARTNER.
 
-Every lead carries a reference code, status (`new` · `referred` ·
-`handed-off` · `contacted` · `closed`), timestamps and consent flags, so
-the journey can be followed up and conversion measured. Lead statuses can
-be updated by admins (`lead-set`). The Aho admin notification and the
-partner/consumer introductions go through `lib/mail.js`.
+Every lead carries a unique id and reference code, first/last name, email,
+phone, country, region, submission date, acquisition source and campaign,
+assigned partner, referral method (`qr-link` · `email-intro` · `manual`),
+referral date, consent flags and a status through the stages **New →
+Reviewed → Matched → Referred → Completed** (`completed` is set when the
+consumer follows the tracked link). Admins update statuses with `lead-set`.
+Every enquiry emails **korijames@ahofarms.com** (`LEADS_TO`) with the subject
+"New Consumer Portal Enquiry — Country — Name" and the lead's details and
+status; the consumer and partner introductions go through the same
+`lib/mail.js`. **Mail requires `RESEND_API_KEY` + `MAIL_FROM` on Vercel**;
+without them the notification is logged, not sent. The lead store shape is
+flat JSON so a CRM sync can read `listLeads()` later without changes to the
+portal.
 
 ```
 node scripts/portal-admin.js partners

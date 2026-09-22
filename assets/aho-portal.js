@@ -318,6 +318,16 @@
       (REGIONS[countrySel.value] || []).forEach(function (r) { var o = document.createElement('option'); o.value = r; regionList.appendChild(o); });
     }
     if (countrySel) { countrySel.addEventListener('change', fillRegions); fillRegions(); }
+    // Acquisition source: campaign parameters and the referring page, so
+    // the lead records where it came from (QR codes, social, partners, ads).
+    try {
+      var src = params.get('utm_source') || params.get('source') || params.get('ref') || '';
+      var camp = [params.get('utm_campaign'), params.get('utm_medium'), params.get('utm_content')].filter(Boolean).join(' / ');
+      var srcIn = connect.querySelector('[name="source"]'), campIn = connect.querySelector('[name="campaign"]'), refIn = connect.querySelector('[name="referrer"]');
+      if (srcIn && src) srcIn.value = 'consumer-portal · ' + src.slice(0, 60);
+      if (campIn) campIn.value = camp.slice(0, 120);
+      if (refIn && document.referrer && document.referrer.indexOf(location.host) < 0) refIn.value = document.referrer.slice(0, 300);
+    } catch (err) {}
     if (params.get('notice') === 'referral-unknown') show(cmsg, 'That referral link was not recognised. Submit the form again and we will give you a fresh one.', 'note');
 
     function qrSvg(text) {
@@ -340,7 +350,9 @@
       var head = el('div', 'cs-result-head');
       var tick = el('div', 'pt-tick'); tick.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
       head.appendChild(tick);
-      head.appendChild(el('h3', null, r.referral.status === 'referred' ? "You're connected." : 'Thank you. We have your enquiry.'));
+      head.appendChild(el('h3', null, 'Thank you'));
+      var lead = el('p', 'cs-result-lead'); lead.innerHTML = '<b>Your enquiry has been received.</b> We\'ve captured your details and will help connect you with the appropriate independent healthcare pathway for your region.';
+      head.appendChild(lead);
       head.appendChild(el('p', null, r.message));
       box.appendChild(head);
       var ref = r.referral;
@@ -352,7 +364,7 @@
         if (ref.intro) left.appendChild(el('p', null, ref.intro));
         if (ref.link) {
           var row = el('div', 'btn-row');
-          var go = el('a', 'btn btn--primary', 'Continue to your prescriber');
+          var go = el('a', 'btn btn--primary', 'Continue to Prescriber');
           go.href = ref.link; go.target = '_blank'; go.rel = 'noopener';
           row.appendChild(go); left.appendChild(row);
         }
@@ -363,7 +375,7 @@
           var svg = qrSvg(ref.link);
           if (svg) qr.appendChild(svg); else qr.appendChild(el('span', null, ref.link));
           qrWrap.appendChild(qr);
-          qrWrap.appendChild(el('span', 'cs-qr-label', 'Scan on your phone'));
+          qrWrap.appendChild(el('span', 'cs-qr-label', 'Scan to continue'));
           card.appendChild(qrWrap);
         }
         box.appendChild(card);
@@ -371,7 +383,8 @@
         refLine.querySelector('code').textContent = ref.code;
         box.appendChild(refLine);
       }
-      box.appendChild(el('p', null, 'The prescriber decides whether medicinal cannabis is appropriate for you. Aho Farms does not prescribe, diagnose or guarantee a prescription.'));
+      if (ref.status !== 'referred') box.appendChild(el('p', 'cs-result-lead', 'Our team will contact you with the appropriate next step.'));
+      box.appendChild(el('p', null, 'Clinical suitability and prescribing decisions remain with the independent healthcare professional. Aho Farms does not prescribe, diagnose or guarantee access to medicinal cannabis or a prescription.'));
       connect.replaceWith(box);
       box.setAttribute('tabindex', '-1'); box.focus();
       window.scrollTo({ top: box.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
@@ -381,6 +394,8 @@
       show(cmsg, '');
       clearFieldErrors(connect);
       var ok = validate(connect);
+      var age = connect.querySelector('[name="ageConfirmed"]');
+      if (age && !age.checked) { setFieldError(connect, 'ageConfirmed', 'Please confirm you meet the age requirement.'); if (ok) age.focus(); ok = false; }
       var consent = connect.querySelector('[name="consentReferral"]');
       if (consent && !consent.checked) { setFieldError(connect, 'consentReferral', 'We need your consent to store your details and pass them to a prescriber partner.'); if (ok) consent.focus(); ok = false; }
       if (!ok) return;
