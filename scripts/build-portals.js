@@ -309,7 +309,8 @@ function consumerPage(c, all, markets) {
     ['Can I drive after using medicinal cannabis?', 'Driving while impaired is illegal and unsafe. Discuss driving, work and other activities with your prescriber before you start.'],
   ].map(([q, a]) => `        <details class="cs-faq-item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n');
   const countryOptions = markets.CONSUMER_MARKETS.map(x => `<option value="${esc(x)}">${esc(x)}</option>`).join('');
-  const marketChips = markets.CONSUMER_MARKETS.map(x => `<li>${esc(x)}</li>`).join('\n        ');
+  const marketChips = markets.CONSUMER_MARKETS.map(x => `<li>${esc(x)}</li>`)
+    .concat((markets.CONSUMER_MARKETS_COMING || []).map(x => `<li class="is-coming">${esc(x)}<span>Coming soon</span></li>`)).join('\n        ');
   const main = `<section class="pt-plate cs-hero plate--flax" aria-labelledby="ptTitle">
   <div class="pt-inner cs-hero-grid">
     <div>

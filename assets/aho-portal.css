@@ -219,7 +219,9 @@
 .pt-check--top input{margin-top:3px;flex-shrink:0;}
 .pt-form--light .pt-check--top{color:var(--aho-ink-soft);}
 .cs-markets{list-style:none;margin:var(--s2) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
-.cs-markets li{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border:1px solid var(--aho-rule);border-radius:var(--r-pill);font-size:var(--t-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--aho-accent);}
+.cs-markets li{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 12px;border:1px solid var(--aho-rule);border-radius:var(--r-pill);font-size:var(--t-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--aho-accent);}
+.cs-markets li.is-coming{color:var(--aho-muted);border-style:dashed;}
+.cs-markets li.is-coming span{font-weight:500;letter-spacing:0.04em;text-transform:none;color:var(--aho-muted);}
 /* the referral result */
 .cs-result{display:grid;gap:var(--s3);}
 .cs-result-head{display:grid;gap:10px;}
