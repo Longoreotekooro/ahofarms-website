@@ -144,6 +144,19 @@
 .pt-card-icon{width:36px;height:36px;border-radius:var(--r-card);display:grid;place-items:center;background:var(--aho-accent-tint);color:var(--aho-accent);}
 .plate--flax .pt-card-icon{color:var(--aho-accent-deep);}
 .pt-card-icon svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.pt-cards .card--wide{grid-column:1 / -1;}
+.pt-card-meta{font-size:var(--t-xs) !important;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--aho-accent) !important;margin-top:-4px !important;}
+.plate--flax .pt-card-meta{color:var(--aho-accent-deep) !important;}
+.pt-specs{margin:6px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;font-size:var(--t-sm);border-top:1px solid var(--aho-hair);padding-top:14px;}
+.plate--flax .pt-specs{border-top-color:var(--aho-hair-light);}
+.pt-specs dt{font-size:var(--t-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--aho-silver);line-height:1.7;}
+.plate--flax .pt-specs dt{color:var(--aho-muted);}
+.pt-specs dd{margin:0;line-height:1.7;color:inherit;}
+.plate--flax .pt-specs dd{color:var(--aho-ink-soft);}
+.pt-card-action{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:10px;font-size:var(--t-xs);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--aho-accent);}
+.plate--flax .pt-card-action{color:var(--aho-accent-deep);}
+.pt-card-action::after{content:'→';transition:transform .2s var(--aho-ease);}
+.card:hover .pt-card-action::after{transform:translateX(4px);}
 .card.is-coming{opacity:.78;}
 .card.is-coming:hover{opacity:1;}
 .pt-support{background:var(--aho-ink-teal);color:var(--aho-white);padding:var(--sec-y) var(--aho-gutter);}
@@ -312,5 +325,7 @@
   .pt-jump{margin-top:var(--s4);padding:var(--s2) 0;}
   .pt-sec-copy h2{max-width:100%;}
   .pt-cards .card{padding:20px 18px;}
+  .pt-specs{grid-template-columns:minmax(0,1fr);gap:2px 0;}
+  .pt-specs dt{margin-top:8px;}
   .pt-legal{padding-bottom:var(--s4);}
 }

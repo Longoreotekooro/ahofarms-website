@@ -207,15 +207,22 @@
     };
     function card(item) {
       var isLink = item.status === 'available' && item.href;
-      var c = el(isLink ? 'a' : 'div', 'card' + (isLink ? '' : ' is-coming'));
-      if (isLink) c.href = item.href;
+      var c = el(isLink ? 'a' : 'div', 'card' + (isLink ? '' : ' is-coming') + (item.specs ? ' card--wide' : ''));
+      if (isLink) { c.href = item.href; if (/\.pdf(\?|$)/i.test(item.href)) { c.target = '_blank'; c.rel = 'noopener'; } }
       var top = el('div', 'pt-card-top');
       var icon = el('span', 'pt-card-icon'); icon.innerHTML = ICONS[item.kind] || ICONS.document; icon.setAttribute('aria-hidden', 'true');
       top.appendChild(icon);
       top.appendChild(el('span', 'pt-chip' + (isLink ? '' : ' pt-chip--muted'), isLink ? 'Available' : 'Coming soon'));
       c.appendChild(top);
       c.appendChild(el('h3', null, item.title));
+      if (item.meta) c.appendChild(el('p', 'pt-card-meta', item.meta));
       if (item.note) c.appendChild(el('p', null, item.note));
+      if (item.specs && item.specs.length) {
+        var dl = el('dl', 'pt-specs');
+        item.specs.forEach(function (sp) { dl.appendChild(el('dt', null, sp[0])); dl.appendChild(el('dd', null, sp[1])); });
+        c.appendChild(dl);
+      }
+      if (isLink) c.appendChild(el('span', 'pt-card-action', item.action || 'Open'));
       return c;
     }
     function render(d) {
