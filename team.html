@@ -1308,10 +1308,20 @@ html.no-video .hero-scroll{opacity:1;}
   .tm-sec{padding:clamp(72px,10vh,110px) 0;}
   /* the fixed nav is 72px tall on phones too, but the shell pads main to 46px there - start the hero beneath the nav */
   #journey{padding-top:72px;}
-  .tm-hero{grid-template-columns:minmax(0,1fr);min-height:0;}
-  .tm-hero-photo{order:-1;aspect-ratio:4/5;min-height:0;}
-  .tm-hero-photo::before{background:linear-gradient(to top,#0b0b0b,rgba(11,11,11,0) 22%);}
-  .tm-hero-copy{padding:clamp(var(--s5),6vh,var(--s6)) var(--s4) clamp(var(--s6),8vh,var(--s7));}
+  /* Phones (CEO, 2026-09-22): one cohesive hero. The photograph carries the
+     whole section and the eyebrow + headline sit low-left over the dark soil,
+     under a gradient that rises from the bottom edge, clear of the hands
+     and the seedling. No separate black panel. */
+  .tm-hero{display:block;position:relative;}
+  /* the shared phone rule gives every hero min(88svh,680px); the photograph
+     fills all of it (cover, crop the sides, never the hands) */
+  .tm-hero-photo{position:absolute;inset:0;aspect-ratio:auto;min-height:0;}
+  /* the shared phone rule caps figure images at 62vh; this one must fill the hero */
+  .tm-hero-photo img{height:100% !important;max-height:none !important;aspect-ratio:auto !important;object-position:50% 50%;}
+  .tm-hero-photo::before{background:linear-gradient(to top,rgba(11,11,11,0.9) 0%,rgba(11,11,11,0.62) 22%,rgba(11,11,11,0.18) 44%,rgba(11,11,11,0) 60%);}
+  .tm-hero-copy{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 var(--aho-gutter) clamp(28px,7vw,48px);}
+  .tm-hero h1{max-width:9ch;font-size:clamp(2.15rem,9.6vw,2.9rem);line-height:1.06;text-shadow:0 2px 28px rgba(0,0,0,0.5);}
+  .tm-hero .tm-eyebrow{margin-bottom:14px;text-shadow:0 1px 16px rgba(0,0,0,0.6);}
   .tm-head{grid-template-columns:minmax(0,1fr);gap:var(--s4);}
   .tm-head-note{padding-left:0;border-left:0;}
   .tm-grid--5{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
