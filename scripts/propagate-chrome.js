@@ -13,7 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { SOCIAL, CONNECT } = require('./nav-config');
+const { NAV, SOCIAL, CONNECT } = require('./nav-config');
 const { relativize, prefixFor } = require('./render-nav');
 const { listPages } = require('./propagate-nav-pages');
 
@@ -96,28 +96,38 @@ function socialList(cls) {
     '\n</ul>';
 }
 
+// Footer (reworked 2026-09-22): brand column + Explore + Products + Connect,
+// all derived from nav-config.js so the staged-launch flags apply here too.
+const learn = NAV.find(p => p.en === 'Learn');
+const products = NAV.find(p => p.en === 'Products');
+const EXPLORE = learn.children.filter(c => c.en !== 'Logo story');
+const PRODUCT_LINKS = products.children;
+const PORTAL_LINKS = CONNECT.filter(c => c.portal); // live portals only (flags)
+const col = (title, items) => `      <div class="aho-footer-col">
+        <h5>${escHtml(title)}</h5>
+        <ul>
+${items.map(i => `          <li><a href="${escHtml(i.href)}">${escHtml(i.label)}</a></li>`).join('\n')}
+        </ul>
+      </div>`;
 const FOOTER_HTML = `<footer class="aho-footer" id="contact">
   <div class="aho-wrap">
-    <div class="aho-footer-top">
-      <div>
+    <div class="aho-footer-cols">
+      <div class="aho-footer-brand">
         <a href="index.html" class="aho-footer-logo" aria-label="Aho Farms home"><span class="aho-mark" aria-hidden="true"></span></a>
-        <div class="aho-footer-badge">Māori Owned &amp; Operated</div>
         <p class="aho-footer-intro">Cultivating wellness from ancestral lands. Premium medicinal cannabis grown with respect for the whenua and the people.</p>
-        ${socialList('aho-footer-social').replace(/\n/g, '\n        ')}
+        <div class="aho-footer-badge">Māori Owned &amp; Operated</div>
+        <p class="aho-footer-place">Hawke's Bay · Aotearoa New Zealand</p>
       </div>
-      <div class="aho-footer-col">
-        <h5>Portals</h5>
-        <ul>
-${CONNECT.filter(c => c.portal).map(c => `          <li><a href="${escHtml(c.href)}">${escHtml(c.label)}</a></li>`).join('\n')}
-        </ul>
-      </div>
-      <div class="aho-footer-col">
-        <h5>Contact</h5>
+${col('Explore', EXPLORE.map(c => ({ label: c.en, href: c.href })))}
+${col('Products', PRODUCT_LINKS.map(c => ({ label: c.en, href: c.href })))}
+      <div class="aho-footer-col aho-footer-col--connect">
+        <h5>Connect</h5>
         <ul>
           <li><a href="contact.html">Contact the team</a></li>
           <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
-          <li><a href="contact.html">Hawke's Bay<small>Aotearoa New Zealand</small></a></li>
+${PORTAL_LINKS.map(c => `          <li><a href="${escHtml(c.href)}">${escHtml(c.label)}</a></li>`).join('\n')}
         </ul>
+        ${socialList('aho-footer-social').replace(/\n/g, '\n        ')}
       </div>
     </div>
     <div class="aho-footer-bottom">
