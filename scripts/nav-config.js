@@ -31,9 +31,15 @@ const NAV = [
     ],
   },
   {
-    en: 'Buy', mi: 'Hoko', href: 'products.html',
+    // Products (was "Buy", CEO 2026-09-22): the range and where it comes from.
+    en: 'Products', mi: 'Ngā Hua', href: 'products.html',
     children: [
-      { en: 'Products',     mi: 'Ngā Hua',           href: 'products.html' },
+      { en: 'The range',        mi: 'Te Whānui',   href: 'products.html#range',
+        desc: 'Greenhouse and indoor craft dried-flower ranges, grown for prescribers in New Zealand.' },
+      { en: "Where it's grown", mi: 'Te Whenua',   href: 'products.html#place',
+        desc: "Rooted in Hawke's Bay: the whenua, soil and sun behind every harvest." },
+      { en: 'How we grow',      mi: 'Māra Hua',    href: 'cultivation.html',
+        desc: 'Living soil, glasshouse and outdoor cultivation, and the quality system that releases each batch.' },
       // Partnerships points at the homepage's professional-portal section,
       // which only exists while a professional portal is public.
       ...(anyProfessionalPublic ? [{ en: 'Partnerships', mi: 'Ngā Hoa',           href: 'index.html#portals' }] : []),
@@ -53,7 +59,7 @@ const NAV = [
 const PORTALS_NAV = {
   en: 'Portals', mi: 'Ngā Tomokanga', href: 'portal/index.html', key: 'portals', match: /^portal\//,
   children: [
-    { id: 'consumers',      en: 'Consumers',       mi: 'Ngā Kiritaki',       href: 'portal/consumers/index.html',
+    { id: 'consumers',      en: 'Customers',       mi: 'Ngā Kiritaki',       href: 'portal/consumers/index.html',
       desc: 'Understand the access pathway and get connected to an approved prescriber partner for your country.' },
     { id: 'prescriber',     en: 'Prescribers',     mi: 'Ngā Kaitohu Rongoā', href: 'portal/prescriber/login.html',
       desc: 'Secure portal for clinical product information, CoAs, terpene and cannabinoid profiles, prescribing resources and support.' },

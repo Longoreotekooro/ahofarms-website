@@ -64,7 +64,7 @@ const { renderNav } = require('./render-nav');
 const ACTIVE_PARENT_CASES = [
   ['index.html', 'Learn'],
   ['about.html', 'Learn'],
-  ['products.html', 'Buy'],
+  ['products.html', 'Products'],
   ['news.html', 'Learn'],
 ];
 ACTIVE_PARENT_CASES.push(['portal/prescriber/login.html', 'Portals'], ['portal/pharmacy/home.html', 'Portals'], ['portal/index.html', 'Portals']);

@@ -246,6 +246,32 @@ html.aho-nav-solid body{padding-top:var(--nav-h);}
   .nav-parent .nav-sub--described a:hover .bil::after,.nav-parent .nav-sub--described a:focus-visible .bil::after{transform:scaleX(1);}
   .nav-sub-desc{display:block;font-size:var(--t-xs);font-weight:400;letter-spacing:0;line-height:1.55;color:var(--aho-silver);white-space:normal;max-width:28ch;}
 }
+/* compact panels (three items or fewer, e.g. Products and Portals): a
+   panel sized to its content, centred under its own trigger, with each
+   option as a small card. The full-width bar above stays for Learn. */
+@media(min-width:901px){
+  .nav-parent:has(> .nav-sub--compact){position:relative;}
+  .nav-parent .nav-sub--compact,.nav-parent .nav-sub--compact:has(li:nth-child(4)){
+    left:50%;right:auto;top:calc(50% + var(--nav-h) / 2);width:max-content;max-width:min(92vw,760px);
+    transform:translate(-50%,-6px);padding:14px;gap:6px;justify-content:center;align-items:stretch;
+    border:1px solid var(--aho-hair);border-top:0;border-radius:0 0 var(--r-card) var(--r-card);
+    box-shadow:0 30px 60px rgba(0,0,0,0.42);}
+  .nav-parent .nav-sub--compact.is-open{transform:translate(-50%,0);}
+  .nav-parent .nav-sub--compact li{flex:0 1 232px;min-width:200px;}
+  .nav-parent .nav-sub--compact li:only-child{flex-basis:300px;}
+  .nav-parent .nav-sub--compact a{display:grid;gap:8px;padding:18px 20px;border-radius:var(--r-card);border:1px solid transparent;
+    transition:background .2s,border-color .2s;height:100%;}
+  .nav-parent .nav-sub--compact a:hover,.nav-parent .nav-sub--compact a:focus-visible{background:rgba(243,241,235,0.04);border-color:var(--aho-hair);}
+  .nav-parent .nav-sub--compact a::after{display:none;}
+  .nav-parent .nav-sub--compact .bil{width:max-content;}
+  .nav-parent .nav-sub--compact .bil-en{font-size:0.9375rem;font-weight:500;letter-spacing:0.01em;}
+  .nav-parent .nav-sub--compact .bil-mi{font-size:0.9375rem;letter-spacing:0.01em;}
+  .nav-parent .nav-sub--compact .nav-sub-desc{max-width:26ch;}
+  .nav-parent .nav-sub--compact li:only-child .nav-sub-desc{max-width:34ch;}
+  .nav-parent .nav-sub--compact li:only-child a{text-align:center;justify-items:center;padding:22px 26px;}
+  .nav-parent .nav-sub--compact li:only-child .bil{justify-items:center;}
+  .nav-parent .nav-sub--compact li:only-child .bil::after{left:20%;right:20%;}
+}
 @media(min-width:901px) and (max-width:1180px){
   .nav-parent .nav-sub--described{gap:var(--s3);}
   .nav-parent .nav-sub--described li{flex-basis:200px;}

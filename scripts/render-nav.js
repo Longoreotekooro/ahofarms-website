@@ -51,7 +51,7 @@ function renderNav(currentPage) {
     const subId = `navSub${i}`;
     const aExtra = hasKids ? ` aria-expanded="false" aria-controls="${subId}"` : '';
     const sub = hasKids
-      ? `\n          <ul class="nav-sub${p.children.some(c => c.desc) ? ' nav-sub--described' : ''}" id="${subId}" hidden>\n            ${p.children.map(c =>
+      ? `\n          <ul class="nav-sub${p.children.some(c => c.desc) ? ' nav-sub--described' : ''}${p.children.length <= 3 ? ' nav-sub--compact' : ''}" id="${subId}" hidden>\n            ${p.children.map(c =>
           `<li><a href="${esc(c.href)}" aria-label="${esc(c.en)}">${label(c)}${c.desc ? `<small class="nav-sub-desc">${esc(c.desc)}</small>` : ''}</a></li>`
         ).join('\n            ')}\n          </ul>`
       : '';
