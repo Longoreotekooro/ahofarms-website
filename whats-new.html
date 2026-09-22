@@ -59,7 +59,9 @@ body{margin:0;color:var(--aho-white);}
 .wn-ig-foot p{margin:0;font-size:var(--t-sm);color:var(--aho-muted);max-width:56ch;}
 .wn-channels{background:var(--aho-void);}
 .wn-channel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);}
-.wn-channel{display:flex;flex-direction:column;gap:var(--s2);}
+.wn-channel{display:flex;flex-direction:column;align-items:center;gap:var(--s2);text-align:center;}
+.wn-channel > p{max-width:32ch;}
+.wn-channel .card-cta{align-self:center;}
 .wn-channel .wn-ico{width:44px;height:44px;border-radius:50%;border:1px solid var(--aho-hair);display:grid;place-items:center;color:var(--aho-accent);}
 .wn-channel .wn-ico svg{width:18px;height:18px;fill:currentColor;}
 .wn-channel h3{margin:0;font-size:var(--t-lg);font-weight:500;}
