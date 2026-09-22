@@ -513,7 +513,9 @@ html.aho-nav-solid :is(.contacts-section,.news-section,.newsletter-section,.form
   .aho-footer-col ul:not(.aho-footer-social) li a::after{bottom:8px;}
   .aho-footer-col--connect{grid-column:1 / -1;}
   .aho-footer-col--connect ul:not(.aho-footer-social){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s3);}
-  .aho-footer-social{display:flex;flex-wrap:nowrap;gap:8px;margin:var(--s3) 0 0;padding-top:var(--s3);border-top:1px solid var(--aho-rule);}
+  /* the icon row sits centred between its own hairline and the bottom bar's: 24px above, 24px below */
+  .aho-footer-col--connect .aho-footer-social{display:flex;flex-wrap:nowrap;gap:8px;margin:var(--s3) 0 0;padding:var(--s3) 0 0;border-top:1px solid var(--aho-rule);}
+  .aho-footer-cols{padding-bottom:var(--s3);}
   .aho-footer-social li{flex:0 0 auto;}
   .aho-footer-social a{width:44px;height:44px;}
   .aho-footer-bottom{flex-direction:column;gap:var(--s2);padding-top:var(--s3);}
