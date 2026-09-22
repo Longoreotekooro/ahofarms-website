@@ -78,7 +78,7 @@ function stampMeta(html, file) {
   const ownDesc = (without.match(/<meta name="description" content="([^"]*)"/i) || [])[1];
   const desc = escHtml(ownDesc || SITE.defaultDescription);
   const url = SITE.url + '/' + (file === 'index.html' ? '' : file);
-  const lines = [`<link rel="canonical" href="${url}">`];
+  const lines = [`<link rel="canonical" href="${url}">`, `<link rel="icon" type="image/svg+xml" href="${prefixFor(file)}favicon.svg">`];
   if (!ownDesc) lines.push(`<meta name="description" content="${desc}">`);
   if (!/property="og:title"/i.test(without)) {
     lines.push(`<meta property="og:type" content="website">`, `<meta property="og:site_name" content="${escHtml(SITE.name)}">`,
