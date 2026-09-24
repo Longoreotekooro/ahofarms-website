@@ -15,6 +15,7 @@ const ROUTES = {
   'portal/home':          () => import('../lib/api/portal/home.js'),
   'consumers/connect':    () => import('../lib/api/consumers/connect.js'),
   'contact/send':         () => import('../lib/api/contact/send.js'),
+  'enquiry/send':         () => import('../lib/api/enquiry/send.js'),
   'newsletter/subscribe': () => import('../lib/api/newsletter/subscribe.js'),
   'referral/go':          () => import('../lib/api/referral/go.js'),
   'admin/users':          () => import('../lib/api/admin/users.js'),

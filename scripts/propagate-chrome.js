@@ -175,7 +175,7 @@ ${col('Products', PRODUCT_LINKS.map(c => ({ label: c.en, href: c.href })))}
         <h2 class="aho-footer-h">Connect</h2>
         <ul>
           <li><a href="/contact">Contact the team</a></li>
-          <li><a href="mailto:hello@ahofarms.co.nz">hello@ahofarms.co.nz</a></li>
+          <li><a href="mailto:admin@ahofarms.com">admin@ahofarms.com</a></li>
 ${PORTAL_LINKS.map(c => `          <li><a href="${escHtml(c.href)}">${escHtml(c.label)}</a></li>`).join('\n')}
         </ul>
         ${socialList('aho-footer-social').replace(/\n/g, '\n        ')}
