@@ -1417,6 +1417,9 @@ html.no-video .hero-scroll{opacity:1;}
              linear-gradient(to top,rgba(5,8,8,0.92),rgba(5,8,8,0.34) 36%,transparent 62%);}
 .abx2-hero-ui{position:absolute;left:0;right:0;bottom:clamp(56px,11vh,120px);z-index:2;}
 .abx2-hero-ui h1{font-size:var(--t-display);line-height:1.12;letter-spacing:-0.035em;margin:var(--s3) 0 var(--s3);text-shadow:0 2px 44px rgba(2,4,6,0.9);}
+/* one line per span; the third line drops by the descender of "people" (p is ~0.26em deeper than whenua's baseline) so the p-to-f gap matches the whenua-to-l gap */
+.abx2-hero-l{display:block;}
+.abx2-hero-l--after-desc{margin-top:0.26em;}
 .abx2-hero-line{font-family:var(--font-h);font-style:italic;font-weight:400;font-size:var(--t-lg);color:var(--gold-light);text-shadow:0 1px 20px rgba(2,4,6,0.9);}
 .abx2-hero-cue{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:1px;height:clamp(48px,7vh,84px);z-index:2;overflow:hidden;}
 .abx2-hero-cue span{position:absolute;inset:0;background:linear-gradient(to bottom,transparent,var(--gold));animation:abx2cue 2.6s var(--ease) infinite;}
@@ -1694,7 +1697,7 @@ html.no-video .hero-scroll{opacity:1;}
     <div class="abx2-hero-ui">
       <div class="wrap">
         <span class="eyebrow gold reveal">NAU MAI <span>·</span> ABOUT AHO FARMS</span>
-        <h1 class="emerge">Our whenua.<br>Our people.<br>Our future.</h1>
+        <h1 class="emerge"><span class="abx2-hero-l">Our whenua.</span><span class="abx2-hero-l">Our people.</span><span class="abx2-hero-l abx2-hero-l--after-desc">Our future.</span></h1>
         <p class="abx2-hero-line reveal d1">Kia ora. Ko Aho tēnei.</p>
       </div>
     </div>
