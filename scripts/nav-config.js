@@ -69,7 +69,10 @@ const PORTALS_NAV = {
       desc: 'Secure B2B portal for bulk product information, compliance documentation, supply capacity and due-diligence materials.' },
   ].filter(c => isPublic(c.id)),
 };
-NAV.push(PORTALS_NAV);
+// The tab itself can be hidden without touching the portals (CEO,
+// 2026-10-07): portal-flags.json navTab.public.
+const SHOW_PORTALS_TAB = !(FLAGS.navTab && FLAGS.navTab.public === false);
+if (SHOW_PORTALS_TAB) NAV.push(PORTALS_NAV);
 
 const CTA = { en: 'Contact', mi: 'Whakapā Mai', href: '/contact' };
 
@@ -101,4 +104,4 @@ const CONNECT = [
   { label: 'Contact the team', href: '/contact',         note: 'General enquiries and media',                       portal: false },
 ].filter(c => !c.id || isPublic(c.id));
 
-module.exports = { NAV, CTA, SOCIAL, CONNECT, SENTINEL_START, SENTINEL_END, FLAGS, isPublic };
+module.exports = { NAV, PORTALS_NAV, SHOW_PORTALS_TAB, CTA, SOCIAL, CONNECT, SENTINEL_START, SENTINEL_END, FLAGS, isPublic };

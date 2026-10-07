@@ -1,5 +1,9 @@
 {
   "_comment": "Staged launch of the Portals gateway. `public: true` exposes a portal on the production website (header, footer, Connect sheet, homepage, hub, direct URLs, API). `public: false` removes every public reference and blocks its production URLs, while the code stays in the repo and the portal remains reachable in development and on Vercel preview deployments. Flip a flag, then run: node scripts/build-portals.js && node scripts/propagate-nav.js && node scripts/propagate-chrome.js && node scripts/propagate-launch.js && node scripts/check-nav.js && node scripts/check-launch.js",
+  "navTab": {
+    "_comment": "Header Portals tab (CEO, 2026-10-07: hidden). false removes the top-level Portals item from the header and mobile drawer only; the portals themselves, and their links on the homepage, footer and Connect sheet, still follow the flags below. Set true and re-run the propagate scripts to bring the tab back.",
+    "public": false
+  },
   "portals": {
     "consumers":      { "public": true },
     "prescriber":     { "public": false },

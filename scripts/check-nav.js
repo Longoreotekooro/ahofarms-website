@@ -58,7 +58,8 @@ pages.forEach(p => {
 });
 
 // 3b. The Portals nav item agrees with the registry in lib/portals.js.
-const portalsNav = NAV.find(p => p.key === 'portals');
+const { PORTALS_NAV: portalsNav, SHOW_PORTALS_TAB } = require('./nav-config');
+if (!SHOW_PORTALS_TAB && NAV.some(p => p.key === 'portals')) fail('PORTALS NAV: navTab is hidden but the Portals item is still in NAV');
 const { isPublic } = require('./nav-config');
 import('../lib/portals.js').then(({ PORTALS, CONSUMER }) => {
   const want = [...(isPublic(CONSUMER.id) ? [`/portal/${CONSUMER.id}`] : []), ...PORTALS.filter(p => isPublic(p.id)).map(p => `/portal/${p.id}/login`)];
@@ -80,7 +81,7 @@ const ACTIVE_PARENT_CASES = [
   ['products.html', 'Products'],
   ['news.html', 'Learn'],
 ];
-ACTIVE_PARENT_CASES.push(['portal/prescriber/login.html', 'Portals'], ['portal/pharmacy/home.html', 'Portals'], ['portal/index.html', 'Portals']);
+if (SHOW_PORTALS_TAB) ACTIVE_PARENT_CASES.push(['portal/prescriber/login.html', 'Portals'], ['portal/pharmacy/home.html', 'Portals'], ['portal/index.html', 'Portals']);
 ACTIVE_PARENT_CASES.forEach(([page, expected]) => {
   const html = renderNav(page);
   const activeMatch = html.match(/<li class="nav-parent is-active"[^>]*data-idx="(\d+)"/);
