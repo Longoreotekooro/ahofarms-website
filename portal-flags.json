@@ -4,6 +4,14 @@
     "_comment": "Header Portals tab (CEO, 2026-10-07: hidden). false removes the top-level Portals item from the header and mobile drawer only; the portals themselves, and their links on the homepage, footer and Connect sheet, still follow the flags below. Set true and re-run the propagate scripts to bring the tab back.",
     "public": false
   },
+  "connectSheet": {
+    "_comment": "Portal links in the floating Connect with us sheet (CEO, 2026-10-07: hidden). false leaves only the non-portal entries (Contact the team). Set true and re-run the propagate scripts to restore.",
+    "public": false
+  },
+  "footer": {
+    "_comment": "Portal links in the footer's Connect column (CEO, 2026-10-07: hidden). Set true and re-run the propagate scripts to restore.",
+    "public": false
+  },
   "portals": {
     "consumers":      { "public": true },
     "prescriber":     { "public": false },

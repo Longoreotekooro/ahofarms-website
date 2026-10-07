@@ -153,7 +153,11 @@ const learn = NAV.find(p => p.en === 'Learn');
 const products = NAV.find(p => p.en === 'Products');
 const EXPLORE = learn.children.filter(c => c.en !== 'Logo story');
 const PRODUCT_LINKS = products.children;
-const PORTAL_LINKS = CONNECT.filter(c => c.portal); // live portals only (flags)
+// portal-flags.json footer / connectSheet switch the portal links off in
+// each place independently of the portals themselves (CEO, 2026-10-07).
+const surfaceOn = k => !(FLAGS[k] && FLAGS[k].public === false);
+const PORTAL_LINKS = surfaceOn('footer') ? CONNECT.filter(c => c.portal) : []; // live portals only (flags)
+const CONNECT_SHEET = surfaceOn('connectSheet') ? CONNECT : CONNECT.filter(c => !c.portal);
 const col = (title, items) => `      <div class="aho-footer-col">
         <h2 class="aho-footer-h">${escHtml(title)}</h2>
         <ul>
@@ -175,8 +179,8 @@ ${col('Products', PRODUCT_LINKS.map(c => ({ label: c.en, href: c.href })))}
         <h2 class="aho-footer-h">Connect</h2>
         <ul>
           <li><a href="/contact">Contact the team</a></li>
-          <li><a href="mailto:admin@ahofarms.com">admin@ahofarms.com</a></li>
-${PORTAL_LINKS.map(c => `          <li><a href="${escHtml(c.href)}">${escHtml(c.label)}</a></li>`).join('\n')}
+          <li><a href="mailto:admin@ahofarms.com">admin@ahofarms.com</a></li>${PORTAL_LINKS.map(c => `
+          <li><a href="${escHtml(c.href)}">${escHtml(c.label)}</a></li>`).join('')}
         </ul>
         ${socialList('aho-footer-social').replace(/\n/g, '\n        ')}
       </div>
@@ -209,7 +213,7 @@ const CONNECT_HTML = `<div class="aho-connect">
       <button class="aho-sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <ul class="aho-sheet-list">
-${CONNECT.map(c => `      <li><a href="${escHtml(c.href)}"><span><b>${escHtml(c.label)}</b><small>${escHtml(c.note)}</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>`).join('\n')}
+${CONNECT_SHEET.map(c => `      <li><a href="${escHtml(c.href)}"><span><b>${escHtml(c.label)}</b><small>${escHtml(c.note)}</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>`).join('\n')}
     </ul>
   </div>
 </div>`;
