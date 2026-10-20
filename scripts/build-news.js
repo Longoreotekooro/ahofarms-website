@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const SITE = require('../site.json');
+const { stampTemporaryNoindex } = require('./indexing');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'news');
@@ -198,5 +199,6 @@ ${article.body}
 }
 
 fs.mkdirSync(OUT, { recursive: true });
-articles.forEach((article, index) => fs.writeFileSync(path.join(OUT, article.slug + '.html'), page(article, index)));
+articles.forEach((article, index) => fs.writeFileSync(path.join(OUT, article.slug + '.html'),
+  stampTemporaryNoindex(page(article, index), `news/${article.slug}.html`)));
 console.log(`news: ${articles.length} migrated articles written`);

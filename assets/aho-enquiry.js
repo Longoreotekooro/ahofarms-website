@@ -28,9 +28,9 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ form: kind, email: email, fields: fields })
     })
-      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (body) { if (!r.ok) body.ok = false; return body; }); })
       .then(function (r) {
-        if (!r.ok) throw new Error(r.error || 'Something went wrong. Please try again, or email admin@ahofarms.com.');
+        if (!r.ok || r.sent !== true) throw new Error(r.error || 'Your enquiry could not be confirmed. Please try again, or email admin@ahofarms.com.');
         return r;
       }, function () { throw new Error('We could not send your form. Please try again, or email admin@ahofarms.com.'); });
   };

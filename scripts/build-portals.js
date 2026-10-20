@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { stampTemporaryNoindex } = require('./indexing');
 
 const ROOT = path.join(__dirname, '..');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -486,7 +487,7 @@ ${cards}
 (async () => {
   const { PORTALS, CONSUMER } = await import('../lib/portals.js');
   const markets = await import('../lib/markets.js');
-  const write = (rel, html) => { fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true }); fs.writeFileSync(path.join(ROOT, rel), html); };
+  const write = (rel, html) => { fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true }); fs.writeFileSync(path.join(ROOT, rel), stampTemporaryNoindex(html, rel)); };
   const { isPublic } = await import('../lib/flags.js');
   write('portal/index.html', hubPage(PORTALS, CONSUMER, isPublic));
   write(`portal/${CONSUMER.id}/index.html`, consumerPage(CONSUMER, PORTALS, markets));
